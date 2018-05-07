@@ -1,0 +1,1757 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>华为公有云上部署 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../catalog/build-provider.html" />
+    
+    
+    <link rel="prev" href="first-sample.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../catalog/start.html">
+            
+                <a href="../catalog/start.html">
+            
+                    
+                    入门
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="terminology.html">
+            
+                <a href="terminology.html">
+            
+                    
+                    术语表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="architecture.html">
+            
+                <a href="architecture.html">
+            
+                    
+                    微服务系统架构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="development-environment.html">
+            
+                <a href="development-environment.html">
+            
+                    
+                    安装本地开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="first-sample.html">
+            
+                <a href="first-sample.html">
+            
+                    
+                    开发第一个微服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.5" data-path="deployment-on-cloud.html">
+            
+                <a href="deployment-on-cloud.html">
+            
+                    
+                    华为公有云上部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../catalog/build-provider.html">
+            
+                <a href="../catalog/build-provider.html">
+            
+                    
+                    开发服务提供者
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../build-provider/definition/service-definition.html">
+            
+                <a href="../build-provider/definition/service-definition.html">
+            
+                    
+                    服务定义
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../build-provider/define-contract.html">
+            
+                <a href="../build-provider/define-contract.html">
+            
+                    
+                    定义服务契约
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../build-provider/code-first.html">
+            
+                <a href="../build-provider/code-first.html">
+            
+                    
+                    使用隐式契约
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../build-provider/swagger-annotation.html">
+            
+                <a href="../build-provider/swagger-annotation.html">
+            
+                    
+                    使用Swagger注解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../build-provider/springmvc.html">
+            
+                <a href="../build-provider/springmvc.html">
+            
+                    
+                    用SpringMVC开发微服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../build-provider/jaxrs.html">
+            
+                <a href="../build-provider/jaxrs.html">
+            
+                    
+                    用JAX-RS开发微服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../build-provider/transparent-rpc.html">
+            
+                <a href="../build-provider/transparent-rpc.html">
+            
+                    
+                    用透明RPC开发微服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../build-provider/listen-address-and-publish-address.html">
+            
+                <a href="../build-provider/listen-address-and-publish-address.html">
+            
+                    
+                    服务监听地址和发布地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../build-provider/interface-constraints.html">
+            
+                <a href="../build-provider/interface-constraints.html">
+            
+                    
+                    支持的数据类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../build-provider/service-configuration.html">
+            
+                <a href="../build-provider/service-configuration.html">
+            
+                    
+                    服务配置
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.10.1" data-path="../build-provider/configuration/lb-strategy.html">
+            
+                <a href="../build-provider/configuration/lb-strategy.html">
+            
+                    
+                    负载均衡策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10.2" data-path="../build-provider/configuration/ratelimite-strategy.html">
+            
+                <a href="../build-provider/configuration/ratelimite-strategy.html">
+            
+                    
+                    限流策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10.3" data-path="../build-provider/configuration/downgrade-strategy.html">
+            
+                <a href="../build-provider/configuration/downgrade-strategy.html">
+            
+                    
+                    降级策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10.4" data-path="../build-provider/configuration/parameter-validator.html">
+            
+                <a href="../build-provider/configuration/parameter-validator.html">
+            
+                    
+                    参数效验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../build-provider/protocol.html">
+            
+                <a href="../build-provider/protocol.html">
+            
+                    
+                    通信协议
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.11.1" data-path="../build-provider/protocol/thread-model.html">
+            
+                <a href="../build-provider/protocol/thread-model.html">
+            
+                    
+                    线程模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.2" data-path="../build-provider/protocol/rest-over-servlet.html">
+            
+                <a href="../build-provider/protocol/rest-over-servlet.html">
+            
+                    
+                    REST over Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.3" data-path="../build-provider/protocol/rest-over-vertx.html">
+            
+                <a href="../build-provider/protocol/rest-over-vertx.html">
+            
+                    
+                    REST over Vertx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.4" data-path="../build-provider/protocol/highway-rpc.html">
+            
+                <a href="../build-provider/protocol/highway-rpc.html">
+            
+                    
+                    Highway RPC协议
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../build-provider/bootup.html">
+            
+                <a href="../build-provider/bootup.html">
+            
+                    
+                    程序启动逻辑
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../build-provider/definition/heartbeats.html">
+            
+                <a href="../build-provider/definition/heartbeats.html">
+            
+                    
+                    服务心跳
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="../build-provider/definition/isolate-relationship.html">
+            
+                <a href="../build-provider/definition/isolate-relationship.html">
+            
+                    
+                    微服务实例之间的逻辑隔离关系
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="../build-provider/access-log-configuration.html">
+            
+                <a href="../build-provider/access-log-configuration.html">
+            
+                    
+                    Access Log配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../catalog/build-consumer.html">
+            
+                <a href="../catalog/build-consumer.html">
+            
+                    
+                    开发服务消费者
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../build-consumer/using-resttemplate.html">
+            
+                <a href="../build-consumer/using-resttemplate.html">
+            
+                    
+                    使用RestTemplate开发服务消费者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../build-consumer/develop-consumer-using-rpc.html">
+            
+                <a href="../build-consumer/develop-consumer-using-rpc.html">
+            
+                    
+                    使用RPC方式开发服务消费者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../build-consumer/with-contract.html">
+            
+                <a href="../build-consumer/with-contract.html">
+            
+                    
+                    使用服务契约
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../build-consumer/invoke-control.html">
+            
+                <a href="../build-consumer/invoke-control.html">
+            
+                    
+                    调用控制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../build-consumer/dark-launch.html">
+            
+                <a href="../build-consumer/dark-launch.html">
+            
+                    
+                    灰度发布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.2" data-path="../build-consumer/instance-isolation.html">
+            
+                <a href="../build-consumer/instance-isolation.html">
+            
+                    
+                    实例级故障隔离
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.3" data-path="../build-consumer/circuit-breaker.html">
+            
+                <a href="../build-consumer/circuit-breaker.html">
+            
+                    
+                    熔断策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.4" data-path="../build-consumer/flow-control.html">
+            
+                <a href="../build-consumer/flow-control.html">
+            
+                    
+                    限流策略
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4.5" data-path="../build-consumer/fault-injection.html">
+            
+                <a href="../build-consumer/fault-injection.html">
+            
+                    
+                    故障注入
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../catalog/general-develop.html">
+            
+                <a href="../catalog/general-develop.html">
+            
+                    
+                    通用开发
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../general-development/metrics.html">
+            
+                <a href="../general-development/metrics.html">
+            
+                    
+                    应用性能监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../general-development/microservice-invocation-chain.html">
+            
+                <a href="../general-development/microservice-invocation-chain.html">
+            
+                    
+                    微服务调用链
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../general-development/customized-tracing.html">
+            
+                <a href="../general-development/customized-tracing.html">
+            
+                    
+                    自定义调用链打点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../general-development/local-develop-test.html">
+            
+                <a href="../general-development/local-develop-test.html">
+            
+                    
+                    本地开发和测试
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../general-development/unified-config.html">
+            
+                <a href="../general-development/unified-config.html">
+            
+                    
+                    统一配置服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../general-development/visit-sc.html">
+            
+                <a href="../general-development/visit-sc.html">
+            
+                    
+                    访问服务中心
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../general-development/http-filter.html">
+            
+                <a href="../general-development/http-filter.html">
+            
+                    
+                    Http Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../general-development/file-upload.html">
+            
+                <a href="../general-development/file-upload.html">
+            
+                    
+                    文件上传
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../general-development/file-download.html">
+            
+                <a href="../general-development/file-download.html">
+            
+                    
+                    文件下载
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../general-development/reactive.html">
+            
+                <a href="../general-development/reactive.html">
+            
+                    
+                    Reactive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../general-development/dnsconfig.html">
+            
+                <a href="../general-development/dnsconfig.html">
+            
+                    
+                    DNS自定义配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../general-development/dai-li-she-zhi.html">
+            
+                <a href="../general-development/dai-li-she-zhi.html">
+            
+                    
+                    代理设置
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../general-development/report-framework-version.html">
+            
+                <a href="../general-development/report-framework-version.html">
+            
+                    
+                    框架上报版本号
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" >
+            
+                <span>
+            
+                    
+                    文件下载
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../catalog/open-service.html">
+            
+                <a href="../catalog/open-service.html">
+            
+                    
+                    服务能力开放
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../edge/nginx.html">
+            
+                <a href="../edge/nginx.html">
+            
+                    
+                    使用confd和Nginx做边缘服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../edge/zuul.html">
+            
+                <a href="../edge/zuul.html">
+            
+                    
+                    使用zuul做边缘服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../edge/by-servicecomb-sdk.html">
+            
+                <a href="../edge/by-servicecomb-sdk.html">
+            
+                    
+                    使用ServiceComb SDK开发边缘服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../edge/secret-field.html">
+            
+                <a href="../edge/secret-field.html">
+            
+                    
+                    定制序列化和反序列化方法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../catalog/data-conform.html">
+            
+                <a href="../catalog/data-conform.html">
+            
+                    
+                    数据一致性处理
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../data-consistence/tcc-mechanism.html">
+            
+                <a href="../data-consistence/tcc-mechanism.html">
+            
+                    
+                    TCC机制的数据最终一致性处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../data-consistence/2pc.html">
+            
+                <a href="../data-consistence/2pc.html">
+            
+                    
+                    2PC机制的数据强一致性处理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../catalog/service-package-run.html">
+            
+                <a href="../catalog/service-package-run.html">
+            
+                    
+                    服务打包和运行
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../packaging/standalone.html">
+            
+                <a href="../packaging/standalone.html">
+            
+                    
+                    以standalone模式打包
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../packaging/web-container.html">
+            
+                <a href="../packaging/web-container.html">
+            
+                    
+                    以WEB容器模式打包
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../catalog/use-tool.html">
+            
+                <a href="../catalog/use-tool.html">
+            
+                    
+                    工具使用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../tools/contract-tool.html">
+            
+                <a href="../tools/contract-tool.html">
+            
+                    
+                    契约开发工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../tools/maven-piugin.html">
+            
+                <a href="../tools/maven-piugin.html">
+            
+                    
+                    代码生成Maven插件使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../tools/ak-sk-encrypt.html">
+            
+                <a href="../tools/ak-sk-encrypt.html">
+            
+                    
+                    AK/SK加密存储
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../catalog/security.html">
+            
+                <a href="../catalog/security.html">
+            
+                    
+                    微服务安全
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../security/tls.html">
+            
+                <a href="../security/tls.html">
+            
+                    
+                    使用TLS通信
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../security/shi-yong-rsa-ren-zheng.html">
+            
+                <a href="../security/shi-yong-rsa-ren-zheng.html">
+            
+                    
+                    使用RSA认证
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../using-cse-in-spring-boot.html">
+            
+                <a href="../using-cse-in-spring-boot.html">
+            
+                    
+                    在Spring Boot中使用CSE
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../using-cse-in-spring-boot/cse-components-for-spring-boot.html">
+            
+                <a href="../using-cse-in-spring-boot/cse-components-for-spring-boot.html">
+            
+                    
+                    CSE提供的组件说明
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../using-cse-in-spring-boot/java-application.html">
+            
+                <a href="../using-cse-in-spring-boot/java-application.html">
+            
+                    
+                    JAVA应用方式开发步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="../using-cse-in-spring-boot/web-application.html">
+            
+                <a href="../using-cse-in-spring-boot/web-application.html">
+            
+                    
+                    Web开发方式开发步骤
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="../using-cse-in-spring-boot/diff-between-java-web.html">
+            
+                <a href="../using-cse-in-spring-boot/diff-between-java-web.html">
+            
+                    
+                    JAVA应用方式和Web开发方式的区别
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="../using-cse-in-spring-boot/diff-spring-mvc.html">
+            
+                <a href="../using-cse-in-spring-boot/diff-spring-mvc.html">
+            
+                    
+                    Spring MVC模式的差异
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../spring-boot-modify-for-cse.html">
+            
+                <a href="../spring-boot-modify-for-cse.html">
+            
+                    
+                    Spring Cloud应用接入CSE
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../spring-cloudying-yong-jie-ru-cse/quick-start.html">
+            
+                <a href="../spring-cloudying-yong-jie-ru-cse/quick-start.html">
+            
+                    
+                    接入服务中心和配置中心
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="../spring-cloudying-yong-jie-ru-cse/servicecomb-and-rpc.html">
+            
+                <a href="../spring-cloudying-yong-jie-ru-cse/servicecomb-and-rpc.html">
+            
+                    
+                    在Spring Cloud中使用ServiceComb作为RPC框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../featured-topics.html">
+            
+                <a href="../featured-topics.html">
+            
+                    
+                    专题文章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../featured-topics/develope-microservice-using-ces.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces.html">
+            
+                    
+                    使用CSE开发微服务应用
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1.1" data-path="../featured-topics/develope-microservice-using-ces/user-story.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/user-story.html">
+            
+                    
+                    User Story
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.2" data-path="../featured-topics/develope-microservice-using-ces/she-ji-wei-fu-wu.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/she-ji-wei-fu-wu.html">
+            
+                    
+                    设计微服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.3" data-path="../featured-topics/develope-microservice-using-ces/zhun-bei-ben-di-kai-fa-huan-jing.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/zhun-bei-ben-di-kai-fa-huan-jing.html">
+            
+                    
+                    准备本地开发环境
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.4" data-path="../featured-topics/develope-microservice-using-ces/kai-fa-jie976228-porter-website.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/kai-fa-jie976228-porter-website.html">
+            
+                    
+                    开发界面(porter-website)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.5" data-path="../featured-topics/develope-microservice-using-ces/kai-fa-wen-jian-shang-chuan-gong-80fd28-file-service.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/kai-fa-wen-jian-shang-chuan-gong-80fd28-file-service.html">
+            
+                    
+                    开发文件上传功能(file-service)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.6" data-path="../featured-topics/develope-microservice-using-ces/kai-fa-wang-517328-gateway-service.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/kai-fa-wang-517328-gateway-service.html">
+            
+                    
+                    开发网关(gateway-service)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.7" data-path="../featured-topics/develope-microservice-using-ces/shi-yong-mybatis-fang-wen-shu-ju-5e9328-user-service.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/shi-yong-mybatis-fang-wen-shu-ju-5e9328-user-service.html">
+            
+                    
+                    使用MyBatis访问数据库(user-service)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.8" data-path="../featured-topics/develope-microservice-using-ces/jin-xing-ren-zheng-he-jian-quan-she-ji.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/jin-xing-ren-zheng-he-jian-quan-she-ji.html">
+            
+                    
+                    进行认证和鉴权设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.1.9" data-path="../featured-topics/develope-microservice-using-ces/wang-guan-https-an-quan-pei-zhi.html">
+            
+                <a href="../featured-topics/develope-microservice-using-ces/wang-guan-https-an-quan-pei-zhi.html">
+            
+                    
+                    网关HTTPS安全配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../question-and-answer/question_answer.html">
+            
+                <a href="../question-and-answer/question_answer.html">
+            
+                    
+                    常见问题
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../question-and-answer/service-center-error-diagnosis.html">
+            
+                <a href="../question-and-answer/service-center-error-diagnosis.html">
+            
+                    
+                    连接华为公有云服务中心常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../question-and-answer/interface-compatibility.html">
+            
+                <a href="../question-and-answer/interface-compatibility.html">
+            
+                    
+                    微服务接口兼容常见问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >华为公有云上部署</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>&#x672C;&#x7AE0;&#x8282;&#x4E3B;&#x8981;&#x63CF;&#x8FF0;&#x5FAE;&#x670D;&#x52A1;&#x53D1;&#x5E03;&#x5230;&#x534E;&#x4E3A;&#x516C;&#x6709;&#x4E91;&#x4E0A;&#x3002;&#x4E0A;&#x4E91;&#x914D;&#x7F6E;&#x7684;&#x57FA;&#x672C;&#x539F;&#x5219;&#x662F;&#xFF1A;&#x53EA;&#x9700;&#x8981;&#x5BF9;microservice.yaml&#x8FDB;&#x884C;&#x9002;&#x5F53;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x4EE5;&#x53CA;&#x5728;pom&#x4E2D;&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x4F9D;&#x8D56;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x76F8;&#x5173;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<h1 id="&#x4E00;&#x952E;&#x5F0F;&#x914D;&#x7F6E;">&#x4E00;&#x952E;&#x5F0F;&#x914D;&#x7F6E;</h1>
+<p>&#x516C;&#x6709;&#x4E91;&#x7248;&#x672C;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x952E;&#x5F0F;&#x7B80;&#x5316;&#x914D;&#x7F6E;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x8BA9;&#x57FA;&#x4E8E;&#x5F00;&#x6E90;&#x7248;&#x672C;&#x5F00;&#x53D1;&#x7684;&#x5E94;&#x7528;&#x5FEB;&#x901F;&#x5207;&#x6362;&#x4E3A;&#x4E91;&#x4E0A;&#x5E94;&#x7528;&#xFF0C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x516C;&#x6709;&#x4E91;&#x63D0;&#x4F9B;&#x7684;&#x7070;&#x5EA6;&#x53D1;&#x5E03;&#x3001;&#x670D;&#x52A1;&#x6CBB;&#x7406;&#x7B49;&#x529F;&#x80FD;&#x3002;</p>
+<ul>
+<li>&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;(pom.xml)</li>
+</ul>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span> 
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.huawei.paas.cse<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>  
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>cse-solution-service-engine<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span> 
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p>&#x5F00;&#x53D1;&#x8005;&#x53EA;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x5BF9;cse-solution-service-engine&#x4F9D;&#x8D56;&#xFF0C;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x516C;&#x6709;&#x4E91;&#x7684;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x3002;&#x8FD9;&#x4E2A;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x4E3B;&#x8981;&#x7ED9;&#x5F00;&#x53D1;&#x8005;&#x505A;&#x4E86;&#x5982;&#x4E0B;&#x4E8B;&#x60C5;&#xFF1A;</p>
+<ul>
+<li><p>&#x5F15;&#x5165;&#x76F8;&#x5173;&#x4F9D;&#x8D56;&#x7684;&#x7EC4;&#x4EF6;</p>
+</li>
+<li><p>&#x589E;&#x52A0;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x9879;&#x3002;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x5305;&#x542B;&#x4E86;&#x5904;&#x7406;&#x94FE;&#x3001;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;&#x7B49;&#x3002;</p>
+</li>
+</ul>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x67E5;&#x770B;pom&#x5185;&#x5BB9;&#xFF0C;&#x4EE5;&#x53CA;&#x8FD9;&#x4E2A;jar&#x5305;&#x91CC;&#x9762;&#x7684;microservice.yaml&#x6587;&#x4EF6;&#x67E5;&#x770B;&#x5F15;&#x5165;&#x7684;&#x7EC4;&#x4EF6;&#x548C;&#x589E;&#x52A0;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x3002;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x8BE6;&#x7EC6;&#x89E3;&#x91CA;&#x4E0A;&#x4E91;&#x589E;&#x52A0;&#x7684;&#x7EC4;&#x4EF6;&#x4EE5;&#x53CA;&#x4ED6;&#x4EEC;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x8BA9;&#x5F00;&#x53D1;&#x8005;&#x66F4;&#x52A0;&#x6DF1;&#x5165;&#x7684;&#x4E86;&#x89E3;&#x5404;&#x79CD;&#x6280;&#x672F;&#x7EC6;&#x8282;&#x3002;</p>
+<h2 id="&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;">&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5B9E;&#x73B0;&#x6CE8;&#x518C;&#x548C;&#x53D1;&#x73B0;&#xFF0C;&#x5728;FusionStage/ServiceStage&#x67E5;&#x770B;&#x5FAE;&#x670D;&#x52A1;&#x76EE;&#x5F55;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x5FAE;&#x670D;&#x52A1;&#x8FDE;&#x63A5;&#x4E0A;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<ul>
+<li>&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;(pom.xml)</li>
+</ul>
+<p>&#x5982;&#x679C;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x4F7F;&#x7528;https&#x534F;&#x8BAE;/AK/SK&#x8BA4;&#x8BC1;&#xFF0C;&#x8BE5;jar&#x4F9D;&#x8D56;&#x5FC5;&#x9009;&#x3002;&#x5982;&#x679C;&#x662F;http&#x534F;&#x8BAE;&#xFF0C;&#x5E76;&#x4E0D;&#x5305;&#x542B;token&#x9A8C;&#x8BC1;&#xFF0C;&#x5219;&#x65E0;&#x9700;&#x5F15;&#x5165;&#x3002;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span> 
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.huawei.paas.cse<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>  
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>foundation-auth<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span> 
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<ul>
+<li>&#x914D;&#x7F6E;&#x9879;(microservice.yaml&#xFF09;</li>
+</ul>
+<pre><code class="lang-xml">cse:
+ service:
+  registry:
+   address: https://cse.cn-north-1.myhwclouds.com:443    #&#x6839;&#x636E;&#x5B9E;&#x9645;&#x5730;&#x5740;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5730;&#x5740;
+</code></pre>
+<p>&#x8BE5;&#x914D;&#x7F6E;&#x9879;&#x914D;&#x7F6E;&#x4E86;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x7684;&#x5730;&#x5740;&#x3002;&#x5176;&#x4E2D;&#xFF0C;address&#x53EF;&#x4EE5;&#x5728;&#x516C;&#x6709;&#x4E91;&#x201C;&#x5DE5;&#x5177;&#x548C;&#x6848;&#x4F8B;&#x201D;&#x76EE;&#x5F55;&#x4E0B;&#x67E5;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5730;&#x5740;&#xFF0C;&#x4FEE;&#x6539;&#x534F;&#x8BAE;&#xFF08;http/https&#xFF09;&#x3001;&#x4E3B;&#x673A;&#x540D;&#xFF08;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x57DF;&#x540D;&#xFF09;&#x548C;&#x7AEF;&#x53E3;&#x53F7;&#x3002;</p>
+<h2 id="&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;">&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x5B9E;&#x73B0;&#x914D;&#x7F6E;&#x4E0B;&#x53D1;&#xFF0C;&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x662F;&#x4F7F;&#x7528;&#x6CBB;&#x7406;&#x3001;&#x7070;&#x5EA6;&#x53D1;&#x5E03;&#x7B49;&#x529F;&#x80FD;&#x7684;&#x524D;&#x53F0;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<ul>
+<li>&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;(pom.xml)</li>
+</ul>
+<p>&#x5982;&#x679C;&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x4F7F;&#x7528;https&#x534F;&#x8BAE;/AK/SK&#x8BA4;&#x8BC1;&#xFF0C;&#x8BE5;jar&#x4F9D;&#x8D56;&#x5FC5;&#x9009;&#x3002;&#x5982;&#x679C;&#x662F;http&#x534F;&#x8BAE;&#xFF0C;&#x5E76;&#x4E0D;&#x5305;&#x542B;token&#x9A8C;&#x8BC1;&#xFF0C;&#x5219;&#x65E0;&#x9700;&#x5F15;&#x5165;&#x3002;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span> 
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.huawei.paas.cse<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>  
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>foundation-auth<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span> 
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p>&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x8BE5;jar&#x5FC5;&#x9009;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span> 
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.huawei.paas.cse<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>  
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>foundation-config-cc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span> 
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<ul>
+<li>&#x542F;&#x7528;&#x914D;&#x7F6E;(microservice.yaml&#xFF09;</li>
+</ul>
+<pre><code class="lang-yaml"><span class="hljs-attr">cse:</span>
+<span class="hljs-attr"> config:</span>
+<span class="hljs-attr">  client:</span>
+<span class="hljs-attr">   serverUri:</span> https://cse.cn-north<span class="hljs-bullet">-1.</span>myhwclouds.com:<span class="hljs-number">443</span>
+</code></pre>
+<p>&#x8BE5;&#x914D;&#x7F6E;&#x9879;&#x914D;&#x7F6E;&#x4E86;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x7684;&#x5730;&#x5740;&#x3002;&#x5176;&#x4E2D;&#xFF0C;address&#x53EF;&#x4EE5;&#x5728;&#x516C;&#x6709;&#x4E91;&#x201C;&#x5DE5;&#x5177;&#x548C;&#x6848;&#x4F8B;&#x201D;&#x76EE;&#x5F55;&#x4E0B;&#x67E5;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x5730;&#x5740;&#xFF0C;&#x4FEE;&#x6539;&#x534F;&#x8BAE;&#xFF08;http/https&#xFF09;&#x3001;&#x4E3B;&#x673A;&#x540D;&#xFF08;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x57DF;&#x540D;&#xFF09;&#x548C;&#x7AEF;&#x53E3;&#x53F7;&#x3002;</p>
+<h2 id="&#x4F7F;&#x7528;&#x670D;&#x52A1;&#x6CBB;&#x7406;">&#x4F7F;&#x7528;&#x670D;&#x52A1;&#x6CBB;&#x7406;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x670D;&#x52A1;&#x6CBB;&#x7406;&#x4E3B;&#x8981;&#x6D89;&#x53CA;&#x201C;&#x9694;&#x79BB;&#x201D;&#x3001;&#x201C;&#x7194;&#x65AD;&#x201D;&#x3001;&#x201C;&#x5BB9;&#x9519;&#x201D;&#x3001;&#x201C;&#x9650;&#x6D41;&#x201D;&#x3001;&#x201C;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x201D;&#x7B49;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<p>&#x914D;&#x7F6E;&#x9879;(microservice.yaml&#xFF09;</p>
+<p>&#x9700;&#x8981;&#x589E;&#x52A0;&#x4E0B;&#x9762;&#x6CBB;&#x7406;&#x76F8;&#x5173;&#x7684;handler&#xFF0C;&#x624D;&#x80FD;&#x5728;&#x4ECE;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x5B9E;&#x65F6;&#x83B7;&#x53D6;&#x6CBB;&#x7406;&#x6570;&#x636E;&#x3002;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">cse:</span>
+<span class="hljs-attr"> handler:</span>
+<span class="hljs-attr">  chain:</span>
+<span class="hljs-attr">   Provider:</span>
+<span class="hljs-attr">    default:</span> bizkeeper-provider,qps-flowcontrol-provider
+<span class="hljs-attr">   Consumer:</span>
+<span class="hljs-attr">    default:</span> bizkeeper-consumer,loadbalance,qps-flowcontrol-consumer
+</code></pre>
+<h2 id="&#x4F7F;&#x7528;&#x6545;&#x969C;&#x6CE8;&#x5165;">&#x4F7F;&#x7528;&#x6545;&#x969C;&#x6CE8;&#x5165;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x6545;&#x969C;&#x6CE8;&#x5165;&#x4E3B;&#x8981;&#x63D0;&#x4F9B;&#x4E86;&#x5EF6;&#x65F6;&#x3001;&#x9519;&#x8BEF;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x6545;&#x969C;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<p>&#x914D;&#x7F6E;&#x9879;(microservice.yaml&#xFF09;</p>
+<p>&#x9700;&#x8981;&#x589E;&#x52A0;&#x4E0B;&#x9762;&#x6CBB;&#x7406;&#x76F8;&#x5173;&#x7684;handler&#x3002;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">cse:</span>
+<span class="hljs-attr"> handler:</span>
+<span class="hljs-attr">  chain:</span>
+<span class="hljs-attr">   Consumer:</span>
+<span class="hljs-attr">    default:</span> loadbalance,fault-injection-consumer
+</code></pre>
+<h2 id="&#x4F7F;&#x7528;&#x7070;&#x5EA6;&#x53D1;&#x5E03;">&#x4F7F;&#x7528;&#x7070;&#x5EA6;&#x53D1;&#x5E03;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x8BE5;&#x529F;&#x80FD;&#x5BF9;&#x5E94;&#x4E8E;&#x5FAE;&#x670D;&#x52A1;&#x76EE;&#x5F55;&#x7070;&#x5EA6;&#x53D1;&#x5E03;&#x529F;&#x80FD;&#x3002;&#x7BA1;&#x7406;&#x5458;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0B;&#x53D1;&#x89C4;&#x5219;&#xFF0C;&#x5BF9;&#x670D;&#x52A1;&#x8FDB;&#x884C;&#x7070;&#x5EA6;&#x53D1;&#x5E03;&#x7BA1;&#x7406;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<ul>
+<li>&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;(pom.xml)</li>
+</ul>
+<p>&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x7684;jar&#x5305;&#x3002;</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span> 
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.huawei.paas.cse<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>  
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>cse-handler-cloud-extension<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<ul>
+<li>&#x5728;Consumer&#x7AEF;&#x914D;&#x7F6E;&#x8D1F;&#x8F7D;&#x5747;&#x8861;(microservice.yaml&#xFF09;</li>
+</ul>
+<p>&#x5728;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x6A21;&#x5757;&#x542F;&#x7528;&#x4E86;&#x7070;&#x5EA6;&#x53D1;&#x5E03;&#x7684;filter&#x3002;</p>
+<pre><code>cse:
+ loadbalance:
+  serverListFilters: darklaunch
+  serverListFilter:
+    darklaunch:
+      className: com.huawei.paas.darklaunch.DarklaunchServerListFilter
+</code></pre><h2 id="&#x4F7F;&#x7528;&#x8C03;&#x7528;&#x94FE;">&#x4F7F;&#x7528;&#x8C03;&#x7528;&#x94FE;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x534E;&#x4E3A;&#x4E91;&#x63D0;&#x4F9B;&#x4E86;&#x4E1A;&#x52A1;&#x65E0;&#x4FB5;&#x5165;&#x7684;&#x57CB;&#x70B9;&#x529F;&#x80FD;APM&#x3002;&#x53EA;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x534E;&#x4E3A;&#x4E91;&#x90E8;&#x7F72;&#x5BB9;&#x5668;&#x5E94;&#x7528;&#xFF0C;&#x5E76;&#x9009;&#x62E9;&#x542F;&#x7528;&#x8C03;&#x7528;&#x94FE;&#x76D1;&#x63A7;&#x529F;&#x80FD;&#xFF0C;&#x5373;&#x53EF;&#x4F7F;&#x7528;&#x8C03;&#x7528;&#x94FE;&#x670D;&#x52A1;&#x3002;</p>
+<h2 id="&#x5FAE;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#x6570;&#x636E;&#x4E0A;&#x62A5;">&#x5FAE;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#x6570;&#x636E;&#x4E0A;&#x62A5;</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x5FAE;&#x670D;&#x52A1;&#x53EF;&#x4EE5;&#x5C06;&#x81EA;&#x5DF1;&#x7684;&#x8FD0;&#x884C;&#x6570;&#x636E;&#x4E0A;&#x62A5;&#x7ED9;Dashboard&#x670D;&#x52A1;&#xFF0C;&#x5728;&#x516C;&#x6709;&#x4E91;&#x4E0A;&#x67E5;&#x770B;&#x4EEA;&#x8868;&#x76D8;&#x6570;&#x636E;&#x3001;&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;&#x6570;&#x636E;&#x7B49;&#x3002;&#x8BE5;&#x7AE0;&#x8282;&#x662F;&#x63CF;&#x8FF0;&#x5982;&#x4F55;&#x542F;&#x7528;&#x5FAE;&#x670D;&#x52A1;&#x6570;&#x636E;&#x4E0A;&#x62A5;&#x529F;&#x80FD;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<ul>
+<li>&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;(pom.xml)</li>
+</ul>
+<p>&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x7684;jar&#x5305;&#x3002;</p>
+<pre><code>&lt;dependency&gt;
+&#x3000;&#x3000;&lt;groupId&gt;com.huawei.paas.cse&lt;/groupId&gt;
+&#x3000;&#x3000;&lt;artifactId&gt;cse-handler-cloud-extension&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>&#x914D;&#x7F6E;handler</li>
+</ul>
+<p>&#x4EEA;&#x8868;&#x76D8;&#x6570;&#x636E;&#x4F9D;&#x8D56;&#x4E8E;&#x4E24;&#x4E2A;handler&#xFF0C;&#x4E00;&#x4E2A;bizkeeper-provider&#xFF08;&#x5BA2;&#x6237;&#x7AEF;&#x4E3A;bizkeeper-consumer&#xFF09;&#xFF0C;&#x4E00;&#x4E2A;perf-stats&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x5E94;&#x7684;pom&#x4F9D;&#x8D56;&#x9700;&#x8981;&#x5148;&#x5F15;&#x5165;&#x3002;</p>
+<pre><code>cse:  
+  handler:
+    chain:
+      Provider:
+        default: bizkeeper-provider,perf-stats,tracing-provider,sla-provider
+      Consumer:
+        default: bizkeeper-consumer,loadbalance,perf-stats,tracing-consumer,sla-consumer
+</code></pre><ul>
+<li>&#x914D;&#x7F6E;&#x4E0A;&#x62A5;monitor&#x5730;&#x5740;</li>
+</ul>
+<p>TenantLB_ADDRESS&#x4E3A;&#x5171;&#x6709;&#x4E91;&#x79DF;&#x6237;&#x7BA1;&#x7406;&#x9762;&#x63A5;&#x5165;&#x5730;&#x5740;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;100.125.1.34&#x3002;</p>
+<pre><code>cse:
+  service:
+    registry:
+      address: https://${TenantLB_ADDRESS}:30100
+  monitor:
+    client:
+      serverUri: https://${TenantLB_ADDRESS}:30109
+</code></pre><h2 id="&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;-tcc">&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;: TCC</h2>
+<h3 id="&#x529F;&#x80FD;&#x63CF;&#x8FF0;">&#x529F;&#x80FD;&#x63CF;&#x8FF0;</h3>
+<p>&#x4E3B;&#x8981;&#x5B9E;&#x73B0;&#x57FA;&#x4E8E;TCC&#x534F;&#x8BAE;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x670D;&#x52A1;&#x95F4;&#x7684;&#x6700;&#x7EC8;&#x4E00;&#x81F4;&#x6027;&#x65B9;&#x6848;&#xFF0C;&#x4FDD;&#x969C;&#x4E00;&#x822C;&#x573A;&#x666F;&#x4E0B;&#x7684;&#x5E94;&#x7528;&#x4E00;&#x81F4;&#x6027;&#x9700;&#x6C42;&#xFF0C;&#x5E76;&#x53EF;&#x4EE5;&#x5728;FusionStage/ServiceStage&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;&#x754C;&#x9762;&#x67E5;&#x770B;&#x4E8B;&#x52A1;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x53C2;&#x8003;">&#x914D;&#x7F6E;&#x53C2;&#x8003;</h3>
+<ul>
+<li>&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;(pom.xml)</li>
+</ul>
+<p>&#x5F15;&#x5165;&#x5FC5;&#x8981;&#x7684;jar&#x5305;</p>
+<pre><code>&lt;dependency&gt;
+&#x3000;&#x3000;&lt;groupId&gt;com.huawei.paas.cse&lt;/groupId&gt;
+&#x3000;&#x3000;&lt;artifactId&gt;cse-handler-tcc&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>&#x914D;&#x7F6E;&#x9879;&#x53C2;&#x8003;</li>
+</ul>
+<p>&#x9700;&#x8981;&#x589E;&#x52A0;&#x4E0B;&#x9762;&#x4E8B;&#x52A1;&#x76F8;&#x5173;&#x7684;handler&#xFF0C;&#x624D;&#x80FD;&#x5728;&#x4ECE;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x5B9E;&#x65F6;&#x83B7;&#x53D6;&#x6CBB;&#x7406;&#x6570;&#x636E;&#x3002;</p>
+<pre><code>cse:
+ handler:
+  chain:
+   Provider:
+    default: tcc-client,bizkeeper-provider
+   Consumer:
+    default: tcc-server,bizkeeper-consumer,loadbalance
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="first-sample.html" class="navigation navigation-prev " aria-label="Previous page: 开发第一个微服务">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../catalog/build-provider.html" class="navigation navigation-next " aria-label="Next page: 开发服务提供者">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"华为公有云上部署","level":"1.2.5","depth":2,"next":{"title":"开发服务提供者","level":"1.3","depth":1,"path":"catalog/build-provider.md","ref":"catalog/build-provider.md","articles":[{"title":"服务定义","level":"1.3.1","depth":2,"path":"build-provider/definition/service-definition.md","ref":"build-provider/definition/service-definition.md","articles":[]},{"title":"定义服务契约","level":"1.3.2","depth":2,"path":"build-provider/define-contract.md","ref":"build-provider/define-contract.md","articles":[]},{"title":"使用隐式契约","level":"1.3.3","depth":2,"path":"build-provider/code-first.md","ref":"build-provider/code-first.md","articles":[]},{"title":"使用Swagger注解","level":"1.3.4","depth":2,"path":"build-provider/swagger-annotation.md","ref":"build-provider/swagger-annotation.md","articles":[]},{"title":"用SpringMVC开发微服务","level":"1.3.5","depth":2,"path":"build-provider/springmvc.md","ref":"build-provider/springmvc.md","articles":[]},{"title":"用JAX-RS开发微服务","level":"1.3.6","depth":2,"path":"build-provider/jaxrs.md","ref":"build-provider/jaxrs.md","articles":[]},{"title":"用透明RPC开发微服务","level":"1.3.7","depth":2,"path":"build-provider/transparent-rpc.md","ref":"build-provider/transparent-rpc.md","articles":[]},{"title":"服务监听地址和发布地址","level":"1.3.8","depth":2,"path":"build-provider/listen-address-and-publish-address.md","ref":"build-provider/listen-address-and-publish-address.md","articles":[]},{"title":"支持的数据类型","level":"1.3.9","depth":2,"path":"build-provider/interface-constraints.md","ref":"build-provider/interface-constraints.md","articles":[]},{"title":"服务配置","level":"1.3.10","depth":2,"path":"build-provider/service-configuration.md","ref":"build-provider/service-configuration.md","articles":[{"title":"负载均衡策略","level":"1.3.10.1","depth":3,"path":"build-provider/configuration/lb-strategy.md","ref":"build-provider/configuration/lb-strategy.md","articles":[]},{"title":"限流策略","level":"1.3.10.2","depth":3,"path":"build-provider/configuration/ratelimite-strategy.md","ref":"build-provider/configuration/ratelimite-strategy.md","articles":[]},{"title":"降级策略","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},{"title":"参数效验","level":"1.3.10.4","depth":3,"path":"build-provider/configuration/parameter-validator.md","ref":"build-provider/configuration/parameter-validator.md","articles":[]}]},{"title":"通信协议","level":"1.3.11","depth":2,"path":"build-provider/protocol.md","ref":"build-provider/protocol.md","articles":[{"title":"线程模型","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},{"title":"Highway RPC协议","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]}]},{"title":"程序启动逻辑","level":"1.3.12","depth":2,"path":"build-provider/bootup.md","ref":"build-provider/bootup.md","articles":[]},{"title":"服务心跳","level":"1.3.13","depth":2,"path":"build-provider/definition/heartbeats.md","ref":"build-provider/definition/heartbeats.md","articles":[]},{"title":"微服务实例之间的逻辑隔离关系","level":"1.3.14","depth":2,"path":"build-provider/definition/isolate-relationship.md","ref":"build-provider/definition/isolate-relationship.md","articles":[]},{"title":"Access Log配置","level":"1.3.15","depth":2,"path":"build-provider/access-log-configuration.md","ref":"build-provider/access-log-configuration.md","articles":[]}]},"previous":{"title":"开发第一个微服务","level":"1.2.4","depth":2,"path":"start/first-sample.md","ref":"start/first-sample.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"start/deployment-on-cloud.md","mtime":"2018-05-02T09:21:25.763Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-07T09:16:42.692Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
