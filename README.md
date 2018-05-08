@@ -1,7 +1,7 @@
-本项目是servicecomb-java-chassis开发指南。
+## 本项目是servicecomb-java-chassis开发指南。
 
 * 访问地址
-  file:///D:/code/servicecomb-java-chassis-doc/docs/zh_CN/index.html
+  https://huaweicse.github.io/servicecomb-java-chassis-doc/zh_CN/index.html
 
 * 编辑
   1. Fork本项目代码
@@ -14,10 +14,10 @@
   2. cd docs-zh_CN
   3. gitbook build . ../docs/zh_CN
 
-This project is the servicecomb-java-chassis develepers guide
+## This project is the servicecomb-java-chassis develepers guide
 
 * Web address
-  file:///D:/code/servicecomb-java-chassis-doc/docs/en_US/index.html
+  https://huaweicse.github.io/servicecomb-java-chassis-doc/en_US/index.html
 
 * Submit PR
   1. Fork this project
