@@ -135,7 +135,7 @@ serviceComb底层是基于vertx的，vertx生态中有jdbc、mq、zooKeeper等�
   * 当operation返回值为CompletableFuture类型时，默认此operation工作于reactive模式，此时如果需要强制此operation工作于线程池模式，需要在microservice.yaml中明确配置；假设某operation，其schemaId为sid，operationId为asyncQuery，则需要进行以下配置：
 
 ```
-cse:
+servicecomb:
   executors:
     Provider:
       sid.asyncQuery: cse.executor.groupThreadPool

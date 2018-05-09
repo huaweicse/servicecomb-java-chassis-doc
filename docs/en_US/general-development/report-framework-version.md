@@ -4,16 +4,15 @@
 
 ## 示例代码
 
-以CSE集成ServiceComb为例：
 
 步骤1 首先实现开源框架ServiceComb的Versions接口，实现该接口下的loadVersion方法，即可将版本名称和版本号作为键值对返回
 
 ```
-public class CseVersion implements Versions{
+public class MyVersion implements Versions{
   @Override
   public Map<String, String> loadVersion() {
     Map<String, String> map = new HashMap<>();
-    map.put("CSE", this.getClass().getPackage().getImplementationVersion());
+    map.put("My", this.getClass().getPackage().getImplementationVersion());
     return map;
   }
 }
@@ -30,7 +29,7 @@ public class CseVersion implements Versions{
   "registerBy": "SDK",
   "framework": {
     "name": "servicecomb-java-chassis",
-    "version": "CSE:x.x.x;ServiceComb:x.x.x"
+    "version": "My:x.x.x;ServiceComb:x.x.x"
   } 
 }
 ```

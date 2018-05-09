@@ -20,11 +20,11 @@
 
 * spring-boot-starter-provider
 
-在Spring Boot中通过@EnableServiceComb启用CSE的核心功能。这个功能可以用于“JAVA应用方式”和”Web开发方式“。 在”Web开发方式”中，通过spring.main.web-environment=false禁用了Web环境。因此，这个模块主要是解决”JAVA应用方式“的问题。
+在Spring Boot中通过@EnableServiceComb启用java chassis的核心功能。这个功能可以用于“JAVA应用方式”和”Web开发方式“。 在”Web开发方式”中，通过spring.main.web-environment=false禁用了Web环境。因此，这个模块主要是解决”JAVA应用方式“的问题。
 
 
 
 * spring-boot-starter-transport
 
-在Spring Boot中通过@EnableServiceComb启用CSE的核心功能，并启用CSE的RestServlet。用于” Web开发方式“。
+在Spring Boot中通过@EnableServiceComb启用java chassis的核心功能，并启用java chassis的RestServlet。用于” Web开发方式“。
 

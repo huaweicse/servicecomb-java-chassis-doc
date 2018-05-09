@@ -29,11 +29,11 @@
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.config.client.serverUri | [https://100.125.1.34:30103](https://100.125.1.34:30103) | schema://ip:port | 是 | 配置中心的地址，支持多个，用逗号分隔 | 若配置多个地址，则直接使用该配置项地址为config-center集群地址。 |
-| cse.config.client.refreshPort | 30104 | 1024~65536 | 否 | 配置中心动态下发配置端口 |  |
-| cse.config.client.refreshMode | 0 | {0,1} | 否 | 配置动态刷新模式 | 0为configcenter在发生变化时主动推送，1为client端周期拉取，其他值均为非法，不会去连配置中心。 |
-| cse.config.client.refresh\_interval | 10000 | \[0,+∞\) | 否 | 配置动态刷新时间间隔 | refreshMode配置为1时，client端主动从配置中心拉取配置的周期，单位毫秒。 |
-| cse.config.client.tenantName | default |  | 否 | 租户名 |  |
+| servicecomb.config.client.serverUri | [https://100.125.1.34:30103](https://100.125.1.34:30103) | schema://ip:port | 是 | 配置中心的地址，支持多个，用逗号分隔 | 若配置多个地址，则直接使用该配置项地址为config-center集群地址。 |
+| servicecomb.config.client.refreshPort | 30104 | 1024~65536 | 否 | 配置中心动态下发配置端口 |  |
+| servicecomb.config.client.refreshMode | 0 | {0,1} | 否 | 配置动态刷新模式 | 0为configcenter在发生变化时主动推送，1为client端周期拉取，其他值均为非法，不会去连配置中心。 |
+| servicecomb.config.client.refresh\_interval | 10000 | \[0,+∞\) | 否 | 配置动态刷新时间间隔 | refreshMode配置为1时，client端主动从配置中心拉取配置的周期，单位毫秒。 |
+| servicecomb.config.client.tenantName | default |  | 否 | 租户名 |  |
 | service\_description.name | testclient |  | 否 | 应用名 |  |
 
 ## 示例代码
@@ -47,7 +47,7 @@ APPLICATION_ID: test #服务ID
    version: 1.0.0 #服务版本
    description: serverDescription #服务描述
    role: BACK #微服务角色
- cse: 
+ servicecomb: 
   #配置中心配置项
    config: 
      client: 
@@ -79,7 +79,7 @@ ds.addCallback(() -> {
 使用Spring @Value注解的方式，可以直接使用
 
 ```
-@Value("${cse.scope:hispace}")
+@Value("${servicecomb.scope:hispace}")
 private String scope;
 ```
 

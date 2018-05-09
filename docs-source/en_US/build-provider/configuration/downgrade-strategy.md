@@ -27,7 +27,7 @@
 本章节如果没有特殊说明，所有的配置项都支持按照下面的格式进行配置：
 
 ```
-cse.[namespace].[type].[MicroServiceName].[接口名称].[property name]
+servicecomb.[namespace].[type].[MicroServiceName].[接口名称].[property name]
 ```
 
 type指Provider或者Consumser, 针对特定的微服务的配置，需要增加MicroServiceName, 针对接口配置的，需要指定接口名称，接口名称由【x-schema-id + operationId】组成。
@@ -36,46 +36,46 @@ type指Provider或者Consumser, 针对特定的微服务的配置，需要增加
 配置可选配置项格式示例如下：
 
 ```
-cse.isolation.Consumer.timeout.enabled
-cse.isolation.Consumer.DemoService.timeout.enabled
-cse.isolation.Consumer.DemoService.hello.sayHello.timeout.enabled
-cse.isolation.Provider.timeout.enabled
-cse.isolation.Provider.DemoService.timeout.enabled
-cse.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
+servicecomb.isolation.Consumer.timeout.enabled
+servicecomb.isolation.Consumer.DemoService.timeout.enabled
+servicecomb.isolation.Consumer.DemoService.hello.sayHello.timeout.enabled
+servicecomb.isolation.Provider.timeout.enabled
+servicecomb.isolation.Provider.DemoService.timeout.enabled
+servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 ```
 
 ### 配置项列表
 
 注意：在下面的表格里面，全部省略type和MicroServiceName。未特殊说明，配置项都支持Provider和Consumer。
 
-例如：对于服务消费者，需要配置为：cse.isolation.Consumer.timeout.enabled
+例如：对于服务消费者，需要配置为：servicecomb.isolation.Consumer.timeout.enabled
 
-例如：对于服务提供者，需要配置为：cse.isolation.Provider.timeout.enabled
+例如：对于服务提供者，需要配置为：servicecomb.isolation.Provider.timeout.enabled
 
 表1-1降级策略相关配置项说明
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.isolation.timeout.enabled | FALSE | - | 否 | 是否启用超时检测 |  |
-| cse.isolation.timeoutInMilliseconds | 30000 | - | 否 | 超时时间阈值 |  |
-| cse.isolation.maxConcurrentRequests | 10 | - | 否 | 最大并发数阈值 |  |
-| cse.circuitBreaker.enabled | TRUE | - | 否 | 是否启用熔断措施 |  |
-| cse.circuitBreaker.forceOpen | FALSE | - | 否 | 不管失败次数，都进行熔断 |  |
-| cse.circuitBreaker.forceClosed | FALSE | - | 否 | 任何时候都不熔断 | 当与forceOpen同时配置时，forceOpen优先。 |
-| cse.circuitBreaker.sleepWindowInMilliseconds | 15000 | - | 否 | 熔断后，多长时间恢复 | 恢复后，会重新计算失败情况。注意：如果恢复后的调用立即失败，那么会立即重新进入熔断。 |
-| cse.circuitBreaker.requestVolumeThreshold | 20 | - | 否 | 10s内统计错误发生次数阈值，超过阈值则触发熔断 | 由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。 |
-| cse.circuitBreaker.errorThresholdPercentage | 50 | - | 否 | 错误率阈值，达到阈值则触发熔断 |  |
-| cse.fallback.enabled | TRUE | - | 否 | 是否启用出错后的故障处理措施 |  |
-| cse.fallback.maxConcurrentRequests | 10 | - | 否 | 并发调用容错处理措施（cse.fallbackpolicy.policy）的请求数，超过这个值则不再调用处理措施，直接返回异常 |  |
-| cse.fallbackpolicy.policy | throwexception | lreturnnulllthrowexception | 否 | 出错后的处理策略 |  |
+| servicecomb.isolation.timeout.enabled | FALSE | - | 否 | 是否启用超时检测 |  |
+| servicecomb.isolation.timeoutInMilliseconds | 30000 | - | 否 | 超时时间阈值 |  |
+| servicecomb.isolation.maxConcurrentRequests | 10 | - | 否 | 最大并发数阈值 |  |
+| servicecomb.circuitBreaker.enabled | TRUE | - | 否 | 是否启用熔断措施 |  |
+| servicecomb.circuitBreaker.forceOpen | FALSE | - | 否 | 不管失败次数，都进行熔断 |  |
+| servicecomb.circuitBreaker.forceClosed | FALSE | - | 否 | 任何时候都不熔断 | 当与forceOpen同时配置时，forceOpen优先。 |
+| servicecomb.circuitBreaker.sleepWindowInMilliseconds | 15000 | - | 否 | 熔断后，多长时间恢复 | 恢复后，会重新计算失败情况。注意：如果恢复后的调用立即失败，那么会立即重新进入熔断。 |
+| servicecomb.circuitBreaker.requestVolumeThreshold | 20 | - | 否 | 10s内统计错误发生次数阈值，超过阈值则触发熔断 | 由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。 |
+| servicecomb.circuitBreaker.errorThresholdPercentage | 50 | - | 否 | 错误率阈值，达到阈值则触发熔断 |  |
+| servicecomb.fallback.enabled | TRUE | - | 否 | 是否启用出错后的故障处理措施 |  |
+| servicecomb.fallback.maxConcurrentRequests | 10 | - | 否 | 并发调用容错处理措施（servicecomb.fallbackpolicy.policy）的请求数，超过这个值则不再调用处理措施，直接返回异常 |  |
+| servicecomb.fallbackpolicy.policy | throwexception | lreturnnulllthrowexception | 否 | 出错后的处理策略 |  |
 
 > **小心**：  
-> 谨慎使用cse.isolation.timeout.enabled=true。因为系统处理链都是异步执行，中间处理链的返回，会导致后面处理链的逻辑处理效果丢失。尽可能将cse.isolation.timeout.enabled保持默认值false，并且正确设置网络层超时时间cse.request.timeout=30000。
+> 谨慎使用servicecomb.isolation.timeout.enabled=true。因为系统处理链都是异步执行，中间处理链的返回，会导致后面处理链的逻辑处理效果丢失。尽可能将servicecomb.isolation.timeout.enabled保持默认值false，并且正确设置网络层超时时间servicecomb.request.timeout=30000。
 
 ## 示例代码
 
 ```yaml
-cse:
+servicecomb:
   handler:
     chain:
       Consumer:

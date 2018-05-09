@@ -61,10 +61,10 @@ Edge Service的底层是基于netty的vertx，以上约束即是netty的reactive
 ```
 servicecomb:
   executors:
-    default: cse.executor.groupThreadPool
+    default: servicecomb.executor.groupThreadPool
 ```
 
-这里的cse.executor.groupThreadPool是ServiceComb内置的默认线程池对应的spring bean的beanId；业务可以定制自己的线程池，并声明为一个bean，其beanId也可以配置到这里。
+这里的servicecomb.executor.groupThreadPool是ServiceComb内置的默认线程池对应的spring bean的beanId；业务可以定制自己的线程池，并声明为一个bean，其beanId也可以配置到这里。
 
 ![](/assets/threadPool.png)
 
@@ -190,7 +190,7 @@ versionMapper的作用是将v1或是v2这样的串，转为1.0.0-2.0.0或2.0.0-3
 
 **注意：**
 
-接口不兼容会导致非常多的问题。CSE要求高版本服务兼容低版本服务，只允许增加接口不允许删除接口。在增加接口后，必须增加微服务的版本号。在开发阶段，接口变更频繁，开发者往往忘记这个规则。当这个约束被打破的时候，需要清理服务中心微服务的信息，并重启微服务和Edge Service\(以及依赖于该微服务的其他服务\)。否则可能出现请求转发失败等情况。
+接口不兼容会导致非常多的问题。java chassis要求高版本服务兼容低版本服务，只允许增加接口不允许删除接口。在增加接口后，必须增加微服务的版本号。在开发阶段，接口变更频繁，开发者往往忘记这个规则。当这个约束被打破的时候，需要清理服务中心微服务的信息，并重启微服务和Edge Service\(以及依赖于该微服务的其他服务\)。否则可能出现请求转发失败等情况。
 
 ## 4.鉴权
 

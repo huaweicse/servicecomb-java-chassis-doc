@@ -4,25 +4,25 @@ ServiceComb提供了基于Ribbon的负载均衡方案，用户可以通过配置
 
 ## 配置说明
 
-负载均衡策略在mocroservice.yaml文件中配置，配置项为`cse.loadbalance.[MicroServiceName].[property name]`，其中若省略MicroServiceName，则为全局配置；若指定MicroServiceName，则为针对特定微服务的配置。
+负载均衡策略在mocroservice.yaml文件中配置，配置项为`servicecomb.loadbalance.[MicroServiceName].[property name]`，其中若省略MicroServiceName，则为全局配置；若指定MicroServiceName，则为针对特定微服务的配置。
 
 表1-1配置项说明
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.loadbalance.strategy.name | RoundRobin | RoundRobin（轮询）<br/>Random（随机）<br/>WeightedResponse（服务器响应时间权值）<br/>SessionStickiness（会话保持） | 否 | 负载均衡路由策略 | - |
-| cse.loadbalance.SessionStickinessRule.sessionTimeoutInSeconds | 30 | Integer | 否 | 客户端闲置时间，超过限制后选择后面的服务器。 | 暂不支持微服务配置。e.g. cse.loadbalance.SessionStickinessRule.sessionTimeoutInSeconds，不能配置为cse.loadbalance.DemoService.SessionStickinessRule.sessionTimeoutInSeconds |
-| cse.loadbalance.SessionStickinessRule.successiveFailedTimes | 5 | Integer | 否 | 客户端失败次数，超过后会切换服务器 | 暂不支持微服务配置 |
-| cse.loadbalance.retryEnabled | FALSE | Boolean | 否 | 负载均衡捕获到服务调用异常，是否进行重试 | - |
-| cse.loadbalance.retryOnNext | 0 | Integer | 否 | 尝试新的服务器的次数 | - |
-| cse.loadbalance.retryOnSame | 0 | Integer | 否 | 同一个服务器尝试的次数 | - |
-| cse.loadbalance.isolation.enabled | FALSE | Boolean | 否 | 是否开启故障实例隔离功能 | - |
-| cse.loadbalance.isolation.enableRequestThreshold | 20 | Integer | 否 | 当实例的调用总次数达到该值时开始进入隔离逻辑门槛 | - |
-| cse.loadbalance.isolation.continuousFailureThreshold | - | Integer | 否 | 当请求实例连续出错达到此阈值时触发实例隔离 | 若配置了此项则覆盖实例故障百分比的配置，否则按照实例故障百分比触发隔离。<br/>由于按请求错误率触发实例隔离在请求次数较多时不易触发也不易恢复，因此建议使用此配置项代替实例故障百分比配置。<br/>请求实例成功时会将连续错误次数请零以保证实例快速恢复。 |
-| cse.loadbalance.isolation.errorThresholdPercentage | 20 | Integer，区间为\(0,100\] | 否 | 实例故障隔离错误百分比 | - |
-| cse.loadbalance.isolation.singleTestTime | 10000 | Integer | 否 | 故障实例单点测试时间 | 单位为ms |
-| cse.loadbalance.transactionControl.policy | org.apache.servicecomb.loadbalance.filter.SimpleTransactionControlFilter | - | 否 | 动态路由分流策略 | 框架提供了简单的分流机制，开发者也可以实现自定义的分流过滤策略 |
-| cse.loadbalance.transactionControl.options | - | key/value pairs | 否 | 针对SimpleTransactionControlFilter分流策略的配置项，可添加任意项过滤标签 | - |
+| servicecomb.loadbalance.strategy.name | RoundRobin | RoundRobin（轮询）<br/>Random（随机）<br/>WeightedResponse（服务器响应时间权值）<br/>SessionStickiness（会话保持） | 否 | 负载均衡路由策略 | - |
+| servicecomb.loadbalance.SessionStickinessRule.sessionTimeoutInSeconds | 30 | Integer | 否 | 客户端闲置时间，超过限制后选择后面的服务器。 | 暂不支持微服务配置。e.g. servicecomb.loadbalance.SessionStickinessRule.sessionTimeoutInSeconds，不能配置为servicecomb.loadbalance.DemoService.SessionStickinessRule.sessionTimeoutInSeconds |
+| servicecomb.loadbalance.SessionStickinessRule.successiveFailedTimes | 5 | Integer | 否 | 客户端失败次数，超过后会切换服务器 | 暂不支持微服务配置 |
+| servicecomb.loadbalance.retryEnabled | FALSE | Boolean | 否 | 负载均衡捕获到服务调用异常，是否进行重试 | - |
+| servicecomb.loadbalance.retryOnNext | 0 | Integer | 否 | 尝试新的服务器的次数 | - |
+| servicecomb.loadbalance.retryOnSame | 0 | Integer | 否 | 同一个服务器尝试的次数 | - |
+| servicecomb.loadbalance.isolation.enabled | FALSE | Boolean | 否 | 是否开启故障实例隔离功能 | - |
+| servicecomb.loadbalance.isolation.enableRequestThreshold | 20 | Integer | 否 | 当实例的调用总次数达到该值时开始进入隔离逻辑门槛 | - |
+| servicecomb.loadbalance.isolation.continuousFailureThreshold | - | Integer | 否 | 当请求实例连续出错达到此阈值时触发实例隔离 | 若配置了此项则覆盖实例故障百分比的配置，否则按照实例故障百分比触发隔离。<br/>由于按请求错误率触发实例隔离在请求次数较多时不易触发也不易恢复，因此建议使用此配置项代替实例故障百分比配置。<br/>请求实例成功时会将连续错误次数请零以保证实例快速恢复。 |
+| servicecomb.loadbalance.isolation.errorThresholdPercentage | 20 | Integer，区间为\(0,100\] | 否 | 实例故障隔离错误百分比 | - |
+| servicecomb.loadbalance.isolation.singleTestTime | 10000 | Integer | 否 | 故障实例单点测试时间 | 单位为ms |
+| servicecomb.loadbalance.transactionControl.policy | org.apache.servicecomb.loadbalance.filter.SimpleTransactionControlFilter | - | 否 | 动态路由分流策略 | 框架提供了简单的分流机制，开发者也可以实现自定义的分流过滤策略 |
+| servicecomb.loadbalance.transactionControl.options | - | key/value pairs | 否 | 针对SimpleTransactionControlFilter分流策略的配置项，可添加任意项过滤标签 | - |
 
 ## 示例代码
 
@@ -31,7 +31,7 @@ ServiceComb提供了基于Ribbon的负载均衡方案，用户可以通过配置
 配置处理链：
 
 ```yaml
-cse:
+servicecomb:
   # other configurations omitted
   handler:
     chain:
@@ -42,7 +42,7 @@ cse:
 增加路由策略：
 
 ```yaml
-cse:
+servicecomb:
   # other configurations omitted
   loadbalance:
     strategy:
@@ -59,7 +59,7 @@ cse:
 其中，`boolean isSupport(String key, String value)`方法用于确定此工厂是否支持microservice.yaml文件中配置的规则（key值为`Configuration.PROP_RULE_STRATEGY_NAME`，value值为自定义的规则名称）；`IRule createLoadBalancerRule(String ruleName)`方法用于获取对应的规则。具体实现方式参考`org.apache.servicecomb.loadbalance.RuleNameExtentionsFactory`，该实现类需要打上`@Component`注解以保证能够被引用。
 * 通过SDK配置该负载均衡策略，假如是`AbcRule`。则配置如下：<br/>
 ```yaml
-  cse:
+  servicecomb:
     loadbalance:
       strategy:
         name: AbcRule
@@ -81,7 +81,7 @@ handler-loadbalance模块提供了Filter机制，用来过滤选择provider实�
 
 启动两个provider实例，其中一个provider实例的microservice.yaml文件中增加如下配置：
 ```yaml
-cse:
+servicecomb:
   # config region and zone information
   datacenter:
     name: myDC
@@ -93,7 +93,7 @@ cse:
 
 在consumer端的microservice.yaml文件中增加如下配置：
 ```yaml
-cse:
+servicecomb:
   loadbalance:
     # add zone aware filter
     serverListFilters: zoneAware
@@ -169,11 +169,11 @@ cse:
     properties:
       # consumer优先级等级为1，可以调用优先级为0或1的provider实例
       priorityLevel: 1
-  cse:
+  servicecomb:
     loadbalance:
       serverListFilters: priorityFilter # filter名称，可以以','分隔配置多个filter
       serverListFilter:
-        priorityFilter: # 此处配置的filter名称需要与cse.loadbalance.serverListFilters中配置的相符
+        priorityFilter: # 此处配置的filter名称需要与servicecomb.loadbalance.serverListFilters中配置的相符
           className: org.servicecombexam.loadbalance.filter.ExamFilter # 自定义filter的类名
 ```
 

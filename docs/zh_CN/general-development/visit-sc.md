@@ -12,11 +12,11 @@
 
 | 配置项 | 参考/默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.service.registry.address | http://127.0.0.1:30100 |  | 是 | 服务中心的地址信息，可以配置多个，用逗号分隔。 |  |
-| cse.service.registry.instance.watch | true |  | 否 | 是否采用PUSH模式监听实例变化。为false的时候表示使用PULL模式。 |  |
-| cse.service.registry.autodiscovery | false |  | 否 | 是否自动发现服务中心的地址。当需要配置部分地址，其他地址由配置的服务中心实例发现的时候，开启这个配置。 |  |
-| cse.service.registry.instance.healthCheck.interval | 30 |  | 否 | 心跳间隔。 |  |
-| cse.service.registry.instance.healthCheck.times | 3 |  | 否 | 允许的心跳失败次数。interval \* times决定了实例被自动注销的时间。如果服务中心等待这么长的时间没有收取到心跳，会注销实例。 |  |
+| servicecomb.service.registry.address | http://127.0.0.1:30100 |  | 是 | 服务中心的地址信息，可以配置多个，用逗号分隔。 |  |
+| servicecomb.service.registry.instance.watch | true |  | 否 | 是否采用PUSH模式监听实例变化。为false的时候表示使用PULL模式。 |  |
+| servicecomb.service.registry.autodiscovery | false |  | 否 | 是否自动发现服务中心的地址。当需要配置部分地址，其他地址由配置的服务中心实例发现的时候，开启这个配置。 |  |
+| servicecomb.service.registry.instance.healthCheck.interval | 30 |  | 否 | 心跳间隔。 |  |
+| servicecomb.service.registry.instance.healthCheck.times | 3 |  | 否 | 允许的心跳失败次数。interval \* times决定了实例被自动注销的时间。如果服务中心等待这么长的时间没有收取到心跳，会注销实例。 |  |
 
 
 

@@ -26,23 +26,23 @@ REST over Vertx通道在microservice.yaml文件中有以下配置项：
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.rest.address | 0.0.0.0:8080 | - | 否 | 服务监听地址 | 仅服务提供者需要配置 |
-| cse.rest.server.thread-count | 1 | - | 否 | 服务端线程数 | 仅服务提供者需要配置 |
-| cse.rest.server.connection.idleTimeoutInSeconds | 60 | - | 否 | 服务端连接闲置超时时间 | 闲置连接会被回收 |
-| cse.rest.client.thread-count | 1 | - | 否 | 客户端网络线程数 | 仅服务消费者需要配置 |
-| cse.rest.client.connection.maxPoolSize | 5 | - | 否 | 每个连接池的最大连接数 | 连接数=网络线程数\*连接池个数\*连接池连接数 |
-| cse.rest.client.connection.idleTimeoutInSeconds | 30 | - | 否 | 连接闲置时间 | 闲置连接会被回收 |
-| cse.rest.client.connection.keepAlive | true | - | 否 | 是否使用长连接 |  |
-| cse.request.timeout | 30000 | - | 否 | 请求超时时间 |  |
-| cse.references.\[服务名\].transport | rest |  | 否 | 访问的transport类型 | 仅服务消费者需要配置 |
-| cse.references.\[服务名\].version-rule | latest | - | 否 | 访问实例的版本号 | 仅服务消费者需要配置支持latest，1.0.0+，1.0.0-2.0.2，精确版本。详细参考服务中心的接口描述。 |
+| servicecomb.rest.address | 0.0.0.0:8080 | - | 否 | 服务监听地址 | 仅服务提供者需要配置 |
+| servicecomb.rest.server.thread-count | 1 | - | 否 | 服务端线程数 | 仅服务提供者需要配置 |
+| servicecomb.rest.server.connection.idleTimeoutInSeconds | 60 | - | 否 | 服务端连接闲置超时时间 | 闲置连接会被回收 |
+| servicecomb.rest.client.thread-count | 1 | - | 否 | 客户端网络线程数 | 仅服务消费者需要配置 |
+| servicecomb.rest.client.connection.maxPoolSize | 5 | - | 否 | 每个连接池的最大连接数 | 连接数=网络线程数\*连接池个数\*连接池连接数 |
+| servicecomb.rest.client.connection.idleTimeoutInSeconds | 30 | - | 否 | 连接闲置时间 | 闲置连接会被回收 |
+| servicecomb.rest.client.connection.keepAlive | true | - | 否 | 是否使用长连接 |  |
+| servicecomb.request.timeout | 30000 | - | 否 | 请求超时时间 |  |
+| servicecomb.references.\[服务名\].transport | rest |  | 否 | 访问的transport类型 | 仅服务消费者需要配置 |
+| servicecomb.references.\[服务名\].version-rule | latest | - | 否 | 访问实例的版本号 | 仅服务消费者需要配置支持latest，1.0.0+，1.0.0-2.0.2，精确版本。详细参考服务中心的接口描述。 |
 
 ## 示例代码
 
 microservice.yaml文件中的配置示例：
 
 ```yaml
-cse:
+servicecomb:
   rest:
     address: 0.0.0.0:8080
     thread-count: 1

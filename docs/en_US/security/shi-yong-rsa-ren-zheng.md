@@ -18,7 +18,7 @@
 * 在microservice.yaml中添加进处理链
 
   ```
-  cse:
+  servicecomb:
    ......
    handler:
     chain:
@@ -41,7 +41,7 @@
 * 在microservice.yaml中添加进处理链
 
   ```
-  cse:
+  servicecomb:
    ......
    handler:
     chain:

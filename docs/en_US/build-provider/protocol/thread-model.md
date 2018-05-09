@@ -18,7 +18,7 @@ servicecComb微服务的完整线程模型如下图所示：![](/start/完整线
 在microservice.yaml中添加executors配置，为schemaId:operation配置单独的业务线程池：
 
 ```yaml
-cse: 
+servicecomb: 
   executors: 
     Provider: 
       [schemaId].[operation]

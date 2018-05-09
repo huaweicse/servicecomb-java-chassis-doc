@@ -144,7 +144,7 @@ Caused by: java.lang.ClassFormatError: Method "testInherate" in class ? has ille
             $ref: "#/definitions/ReponseImpl"
 ```
 
-# 问题描述：CSE微服务框架服务调用是否使用长连接
+# 问题描述：微服务框架服务调用是否使用长连接
 
 ** 解决方法：**
 
@@ -156,13 +156,13 @@ http使用的是长连接（有超时时间），highway方式使用的是长连
 
 服务中心心跳检测到服务实例不可用，只会移除服务实例信息，服务的静态数据不会移除。
 
-# 问题描述：如果使用tomcat方式集成CSE微服务框架，如何实现服务注册
+# 问题描述：如果使用tomcat方式集成微服务框架，如何实现服务注册
 
 ** 解决方法：**
 
 如果使用cse sdk servlet方式（使用transport-rest-servlet依赖）制作为war包部署到tomcat，需要保证，服务描述文件（microservice.yaml）中rest端口配置和外置容器一致才能实现该服务的正确注册。否则无法感知tomcat开放端口。
 
-# 问题描述：如果使用tomcat方式集成CSE微服务框架，服务注册的时候如何将war包部署的上下文注册到服务中心
+# 问题描述：如果使用tomcat方式集成微服务框架，服务注册的时候如何将war包部署的上下文注册到服务中心
 
 ** 解决方法：**
 
@@ -173,7 +173,7 @@ http使用的是长连接（有超时时间），highway方式使用的是长连
 class ServiceA
 ```
 
-# 问题描述：CSE微服务框架如何实现数据多个微服务间透传
+# 问题描述：微服务框架如何实现数据多个微服务间透传
 
 ** 解决方法：**
 
@@ -198,7 +198,7 @@ public String sayHello(@RequestBody Person person,InvocationContext context){
 }
 ```
 
-# 问题描述：CSE微服务框架服务如何自定义返回状态码
+# 问题描述：微服务框架服务如何自定义返回状态码
 
 ** 解决方法：**
 
@@ -213,7 +213,7 @@ public String sayHello(@RequestBody Person person){
 }
 ```
 
-# 问题描述：CSE body Model部分暴露
+# 问题描述： body Model部分暴露
 
 ** 解决方法：**
 
@@ -223,7 +223,7 @@ public String sayHello(@RequestBody Person person){
 @ApiModelProperty(hidden = true)
 ```
 
-# 问题描述：CSE框架获取远端consumer的地址
+# 问题描述：框架获取远端consumer的地址
 
 ** 解决方法：**
 
@@ -236,27 +236,22 @@ String host = request.getRemoteHost();
 
 实际场景是拿最外层的地址，所以应该是LB传入到edgeservice，edgeService再放到context外下传递。
 
-# 问题描述：CSE不支持泛型
 
-** 解决方法：**
-
-明确不支持，需要修改接口，接口修改后需要修改版本号，以免consumer还是使用旧的版本。
-
-# 问题描述：CSE对handler描述
+# 问题描述：对handler描述
 
 ** 解决方法：**
 
 consumer默认的handler是simpleLB，没有配置的时候handler链会使用这个，如果配置了handler，里面一定要包含lb的handler，否则调用报错，需要在文档里面进行说明。
 
-# 问题描述：CSE日志替换
+# 问题描述：日志替换
 
 ** 解决方法：**
 
-CSE java-chassis日志推荐方式是在启动的时候使用Log4jUtils.init\(\)，直接使用推荐的Log4j来做日志管理，但是有些场景不想用log4j，比如想使用log4j2或者logback，下面以log4j2为例简单介绍下步骤：
+ java-chassis日志推荐方式是在启动的时候使用Log4jUtils.init\(\)，直接使用推荐的Log4j来做日志管理，但是有些场景不想用log4j，比如想使用log4j2或者logback，下面以log4j2为例简单介绍下步骤：
 
 1. 在代码里面不要使用Log4jUtils.init\(\)；
 2. 去掉log4j的配置文件（不删掉也没关系，因为不会使用）；
-3. exclude掉CSE框架引入的log4j，例如：
+3. exclude掉框架引入的log4j，例如：
    ```xml
    <dependency>
        <groupId>org.apache.servicecomb</groupId>
@@ -374,16 +369,16 @@ CSE java-chassis日志推荐方式是在启动的时候使用Log4jUtils.init\(\)
 
 ** 解决方法：**
 
-netty3和netty4是完全不同的三方件，因为坐标跟package都不相同，所以可以共存，但是要注意小版本问题，小版本必须使用CSE的版本。
+netty3和netty4是完全不同的三方件，因为坐标跟package都不相同，所以可以共存，但是要注意小版本问题，小版本必须使用的版本。
 
-# 问题描述：CSE服务超时设置
+# 问题描述：服务超时设置
 
 ** 解决方法：**
 
 在微服务描述文件（microservice.yaml）中添加如下配置：
 
 ```
-cse:
+servicecomb:
   request:
     timeout: 30000
 ```

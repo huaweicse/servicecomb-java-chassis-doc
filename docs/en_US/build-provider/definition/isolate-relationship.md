@@ -20,14 +20,14 @@ ServiceComb支持自定义分层配置，满足用户的实例分层管理需求
 
 * Domain名称
 
-通过cse.config.client.domainName来定义，缺省值为default。作为微服务提供者，用于表明自身所属租户信息。微服务在发现实例的时候，只能被相同租户下的消费者发现。
+通过servicecomb.config.client.domainName来定义，缺省值为default。作为微服务提供者，用于表明自身所属租户信息。微服务在发现实例的时候，只能被相同租户下的消费者发现。
 
 * 数据中心信息
 
-数据中心包括3个属性：cse.datacenter.name， cse.datacenter.region, cse.datacenter.availableZone。数据中心信息不提供隔离能力，微服务可以发现其他数据中心的实例。但是可以通过启用实例亲和性，来优先往指定的区域或者Zone发消息：
+数据中心包括3个属性：servicecomb.datacenter.name， servicecomb.datacenter.region, servicecomb.datacenter.availableZone。数据中心信息不提供隔离能力，微服务可以发现其他数据中心的实例。但是可以通过启用实例亲和性，来优先往指定的区域或者Zone发消息：
 
 ```
-cse:
+servicecomb:
   loadbalance:
     serverListFilters: zoneaware
     serverListFilter:
@@ -45,10 +45,4 @@ cse:
 service_description:
   environment: production
 ```
-
-
-
-# 与华为公有云概念的对应关系
-
-华为公有云有类似的概念，应用、租户、Project、Cluster等，在实际应用的时候，可以分别对应到ServiceComb的应用、租户、Domain、Zone等信息。比如在公有云上如果Cluster共享Project，那么就可以通过zone来对应Cluster，实现集群之间的亲和性访问。
 

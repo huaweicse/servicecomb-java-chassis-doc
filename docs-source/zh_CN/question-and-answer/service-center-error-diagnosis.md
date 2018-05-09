@@ -24,7 +24,7 @@ AK、SK没有正确设置和携带到请求头里面。
 检查microservice.yaml中的ak/sk配置是否正确，accessKey和secretKey是否填写错误，一般secretKey长度比accessKey长。
 
 ```
-cse:
+servicecomb:
   credentials:
     accessKey: your access key
     secretKey: your serect key
@@ -59,7 +59,7 @@ Project名称不正确。
 
 * 排查方法
 
-检查配置项cse.credentials.project的值是否正确，在“我的凭证”里面查询正确的Project名称。如果没有这个配置项，默认会根据服务中心的域名进行判断。当域名也不包含合法的Project名称的时候，需要增加这个配置项，保证其名称是“我的凭证”里面合法的Project名称。
+检查配置项servicecomb.credentials.project的值是否正确，在“我的凭证”里面查询正确的Project名称。如果没有这个配置项，默认会根据服务中心的域名进行判断。当域名也不包含合法的Project名称的时候，需要增加这个配置项，保证其名称是“我的凭证”里面合法的Project名称。
 
 # \#4
 

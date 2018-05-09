@@ -41,7 +41,7 @@ ServiceComb 集成了 Zipkin 提供自动调用链追踪能力，如此一来用
 在microservice.yaml文件中设置追踪处理器和数据收集服务地址
 
 ```yaml
-  cse: 
+  servicecomb: 
     handler: 
       chain: 
         Consumer: 

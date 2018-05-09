@@ -11,7 +11,7 @@
 故障注入配置在microservice.yaml文件中，相关配置项见下表。要开启服务消费者端的故障注入，还需要在处理链中配置消费端故障注入handler，配置示例如下：
 
 ```yaml
-cse:
+servicecomb:
   handler:
     chain:
       Consumer:
@@ -26,23 +26,23 @@ cse:
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].delay.fixedDelay | 无 | \(0,9223372036854775807\]，长整形 | 否 | Consumer端发送延迟注入请求的延迟时间 | 目前时间单位是毫秒 |
-| cse.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].delay.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送延迟注入请求的触发概率 |  |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].delay.fixedDelay | 无 | \(0,9223372036854775807\]，长整形 | 否 | Consumer端发送到对应schema的延迟注入请求的延迟时间 | 支持schema级别的配置 |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].delay.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应schema的延迟注入请求的触发概率 | 支持schema级别的配置 |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].delay.fixedDelay | 无 | \(0,9223372036854775807\]，长整形 | 否 | Consumer端发送到对应operation的延迟注入请求的延迟时间 | 支持operation级别的配置 |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].delay.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应operation的延迟注入请求的触发概率 | 支持operation级别的配置 |
-| cse.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].abort.httpStatus | 无 | \(100,999\]，整形 | 否 | Consumer端发送错误注入请求的http错误码 |  |
-| cse.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].abort.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送错误注入请求的触发概率 |  |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].abort.httpStatus | 无 | \(100,999\]，整形 | 否 | Consumer端发送到对应schema的错误注入请求的http错误码 | 支持schema级别的配置 |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].abort.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应schema的错误注入请求的触发概率 | 支持schema级别的配置 |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].abort.httpStatus | 无 | \(100,999\]，整形 | 否 | Consumer端发送到对应operation的错误注入请求的http错误码 | 支持operation级别的配置 |
-| cse.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].abort.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应operation的错误注入请求的触发概率 | 支持operation级别的配置 |
+| servicecomb.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].delay.fixedDelay | 无 | \(0,9223372036854775807\]，长整形 | 否 | Consumer端发送延迟注入请求的延迟时间 | 目前时间单位是毫秒 |
+| servicecomb.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].delay.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送延迟注入请求的触发概率 |  |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].delay.fixedDelay | 无 | \(0,9223372036854775807\]，长整形 | 否 | Consumer端发送到对应schema的延迟注入请求的延迟时间 | 支持schema级别的配置 |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].delay.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应schema的延迟注入请求的触发概率 | 支持schema级别的配置 |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].delay.fixedDelay | 无 | \(0,9223372036854775807\]，长整形 | 否 | Consumer端发送到对应operation的延迟注入请求的延迟时间 | 支持operation级别的配置 |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].delay.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应operation的延迟注入请求的触发概率 | 支持operation级别的配置 |
+| servicecomb.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].abort.httpStatus | 无 | \(100,999\]，整形 | 否 | Consumer端发送错误注入请求的http错误码 |  |
+| servicecomb.governance.Consumer.\[scope\].policy.fault.protocols.\[protocol\].abort.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送错误注入请求的触发概率 |  |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].abort.httpStatus | 无 | \(100,999\]，整形 | 否 | Consumer端发送到对应schema的错误注入请求的http错误码 | 支持schema级别的配置 |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].policy.fault.protocols.\[protocol\].abort.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应schema的错误注入请求的触发概率 | 支持schema级别的配置 |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].abort.httpStatus | 无 | \(100,999\]，整形 | 否 | Consumer端发送到对应operation的错误注入请求的http错误码 | 支持operation级别的配置 |
+| servicecomb.governance.Consumer.\[ServiceName\].schemas.\[schema\].operations.\[operation\].policy.fault.protocols.\[protocol\].abort.percent | 100 | \(0,100\]，整形 | 否 | Consumer端发送到对应operation的错误注入请求的触发概率 | 支持operation级别的配置 |
 
 ## 示例代码
 
 ```
-cse:
+servicecomb:
   governance:
     Consumer:
       _global:
@@ -56,7 +56,7 @@ cse:
 ```
 
 ```
-cse:
+servicecomb:
   governance:
     Consumer:
       ServerFaultTest:

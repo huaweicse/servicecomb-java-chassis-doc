@@ -98,14 +98,14 @@ REST over Servlet在microservice.yaml文件中的配置项见表3-9。
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.rest.address | 0.0.0.0:8080 | - | 否 | 服务监听地址 | 必须配置为与web容器监听地址相同的地址 |
-| cse.rest.server.timeout | 3000 | - | 否 | 超时时间 | 单位为毫秒 |
+| servicecomb.rest.address | 0.0.0.0:8080 | - | 否 | 服务监听地址 | 必须配置为与web容器监听地址相同的地址 |
+| servicecomb.rest.server.timeout | 3000 | - | 否 | 超时时间 | 单位为毫秒 |
 | servicecomb.rest.servlet.urlPattern | 无 |  | 否 | 用于简化servlet+servlet mapping配置 | 只有在web.xml中未配置servlet+servlet mapping时，才使用此配置项，配置格式为：/\* 或  /path/\*，其中path可以是多次目录 |
 
 microservice.yaml文件中的配置示例如下：
 
 ```yaml
-cse:
+servicecomb:
   rest:
     address: 0.0.0.0:8080
     server:

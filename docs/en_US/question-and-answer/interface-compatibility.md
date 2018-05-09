@@ -1,4 +1,4 @@
-在进行微服务持续迭代开发的过程中，由于新特性在不停的加入，一些过时的特性在不停的修改，接口兼容问题面临巨大的挑战，特别是在运行环境多版本共存（灰度发布）的情况下。本章节主要描述接口兼容管理的一些实践建议，以及在使用CSE过程中碰到了兼容性问题的解决办法。由于微服务一般都通过REST接口对外提供服务，没有特殊说明的情况下，这里的接口都指REST接口。
+在进行微服务持续迭代开发的过程中，由于新特性在不停的加入，一些过时的特性在不停的修改，接口兼容问题面临巨大的挑战，特别是在运行环境多版本共存（灰度发布）的情况下。本章节主要描述接口兼容管理的一些实践建议，以及在使用过程中碰到了兼容性问题的解决办法。由于微服务一般都通过REST接口对外提供服务，没有特殊说明的情况下，这里的接口都指REST接口。
 
 # 保证接口兼容的实践
 
@@ -6,7 +6,7 @@
 
 1. 只增加接口，不修改、不删除接口。
 2. 作为Provider，增加接口的时候，相应的将微服务版本号递增。比如将2.1.2修改为2.1.3。
-3. 作为Consumer，使用Provider的新接口时候，指定Provider的最小版本号。比如：cse.references.\[serviceName\].version-rule=2.1.3+，其中serviceName为Provider的微服务名称。
+3. 作为Consumer，使用Provider的新接口时候，指定Provider的最小版本号。比如：servicecomb.references.\[serviceName\].version-rule=2.1.3+，其中serviceName为Provider的微服务名称。
 4. 在服务中心，定期清理不再使用的老版本的微服务信息。
 
 # 接口兼容常见问题及其解决办法
@@ -29,7 +29,7 @@
 
 # 常见的接口不兼容情况的日志
 
-* consumer method \[com.huawei.paas.cse.demo.CodeFirstPojoIntf:testUserMap\] not exist in swagger
+* consumer method \[Method Name\] not exist in swagger
 
 可能是Provider增加了接口，但是没有更新版本号。需要删除微服务数据或者更新版本号后重新启动Provider，并重启Consumer。
 

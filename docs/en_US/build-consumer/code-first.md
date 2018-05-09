@@ -38,16 +38,3 @@ public static void init() throws Exception {
 ```
 
 在以上代码中，服务消费者已经取得了服务提供者的服务接口Hello，并在代码中声明一个Hello类型的成员。通过在hello上使用RPCReference注解指明微服务名称和schemaId，ServiceComb框架可以在程序启动时从服务中心获取到对应的服务提供者实例信息，并且生成一个代理注入到hello中，用户可以像调用本地类一样调用远程服务。
-
-使用隐式契约仍然需要在microservice.yaml配置文件中指定依赖的服务提供者，示例如下：
-
-```yaml
-cse:
- ......
- references:
- codefirst:
- version-rule: 0.0.1
-```
-
-
-

@@ -8,16 +8,16 @@
 
 | 配置项 | 默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.loadbalance.isolation.enabled | false | Boolean | 否 | 是否开启故障实例隔离功能 | - |
-| cse.loadbalance.isolation.continuousFailureThreshold | - | Integer | 否 | 当请求实例连续出错达到此阈值时触发实例隔离 | 若配置了此项则覆盖实例故障百分比的配置，否则按照实例故障百分比触发隔离。<br/>由于按请求错误率触发实例隔离在请求次数较多时不易触发也不易恢复，因此建议使用此配置项代替实例故障百分比配置。<br/>请求实例成功时会将连续错误次数请零以保证实例快速恢复。 |
-| cse.loadbalance.isolation.enableRequestThreshold | 20 | Integer | 否 | 当实例的调用总次数达到该值时开始进入隔离逻辑门槛 | - |
-| cse.loadbalance.isolation.errorThresholdPercentage | 20 | Integer，区间为\(0,100\] | 否 | 实例故障隔离错误百分比 | - |
-| cse.loadbalance.isolation.singleTestTime | 10000 | Integer | 否 | 故障实例单点测试时间 | - |
+| servicecomb.loadbalance.isolation.enabled | false | Boolean | 否 | 是否开启故障实例隔离功能 | - |
+| servicecomb.loadbalance.isolation.continuousFailureThreshold | - | Integer | 否 | 当请求实例连续出错达到此阈值时触发实例隔离 | 若配置了此项则覆盖实例故障百分比的配置，否则按照实例故障百分比触发隔离。<br/>由于按请求错误率触发实例隔离在请求次数较多时不易触发也不易恢复，因此建议使用此配置项代替实例故障百分比配置。<br/>请求实例成功时会将连续错误次数请零以保证实例快速恢复。 |
+| servicecomb.loadbalance.isolation.enableRequestThreshold | 20 | Integer | 否 | 当实例的调用总次数达到该值时开始进入隔离逻辑门槛 | - |
+| servicecomb.loadbalance.isolation.errorThresholdPercentage | 20 | Integer，区间为\(0,100\] | 否 | 实例故障隔离错误百分比 | - |
+| servicecomb.loadbalance.isolation.singleTestTime | 10000 | Integer | 否 | 故障实例单点测试时间 | - |
 
 ## 示例代码
 
 ```yaml
-cse:
+servicecomb:
   # other configuration omitted
   loadbalance:
     isolation:

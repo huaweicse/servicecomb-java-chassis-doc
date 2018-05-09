@@ -43,10 +43,10 @@
 * 配置项\(microservice.yaml）
 
 ```xml
-cse:
+servicecomb:
  service:
   registry:
-   address: https://cse.cn-north-1.myhwclouds.com:443    #根据实际地址配置服务中心地址
+   address: https://servicecomb.cn-north-1.myhwclouds.com:443    #根据实际地址配置服务中心地址
 ```
 
 该配置项配置了服务中心的地址。其中，address可以在公有云“工具和案例”目录下查到对应的服务中心地址，修改协议（http/https）、主机名（可能使用域名）和端口号。
@@ -82,10 +82,10 @@ cse:
 * 启用配置\(microservice.yaml）
 
 ```yaml
-cse:
+servicecomb:
  config:
   client:
-   serverUri: https://cse.cn-north-1.myhwclouds.com:443
+   serverUri: https://servicecomb.cn-north-1.myhwclouds.com:443
 ```
 
 该配置项配置了配置中心的地址。其中，address可以在公有云“工具和案例”目录下查到对应的配置中心地址，修改协议（http/https）、主机名（可能使用域名）和端口号。
@@ -103,7 +103,7 @@ cse:
 需要增加下面治理相关的handler，才能在从配置中心实时获取治理数据。
 
 ```yaml
-cse:
+servicecomb:
  handler:
   chain:
    Provider:
@@ -125,7 +125,7 @@ cse:
 需要增加下面治理相关的handler。
 
 ```yaml
-cse:
+servicecomb:
  handler:
   chain:
    Consumer:
@@ -156,7 +156,7 @@ cse:
 在负载均衡模块启用了灰度发布的filter。
 
 ```
-cse:
+servicecomb:
  loadbalance:
   serverListFilters: darklaunch
   serverListFilter:
@@ -194,7 +194,7 @@ cse:
 仪表盘数据依赖于两个handler，一个bizkeeper-provider（客户端为bizkeeper-consumer），一个perf-stats，所以对应的pom依赖需要先引入。
 
 ```
-cse:  
+servicecomb:  
   handler:
     chain:
       Provider:
@@ -208,7 +208,7 @@ cse:
 TenantLB\_ADDRESS为共有云租户管理面接入地址，默认是100.125.1.34。
 
 ```
-cse:
+servicecomb:
   service:
     registry:
       address: https://${TenantLB_ADDRESS}:30100
@@ -241,7 +241,7 @@ cse:
 需要增加下面事务相关的handler，才能在从配置中心实时获取治理数据。
 
 ```
-cse:
+servicecomb:
  handler:
   chain:
    Provider:

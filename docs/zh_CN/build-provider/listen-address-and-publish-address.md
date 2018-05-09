@@ -11,8 +11,8 @@
 
 ### 配置说明
 
-服务监听地址的配置项是`cse.rest.address`和`cse.highway.address`，分别对应rest传输方式和highway传输方式的监听地址。两者的配置规则相同，以下仅以`cse.rest.address`作为说明。  
-服务发布地址的配置项是`cse.service.publishAddress`，该地址**可以不配置**。不配置此项时JavaChassis会根据特定的规则选取发布地址。
+服务监听地址的配置项是`servicecomb.rest.address`和`servicecomb.highway.address`，分别对应rest传输方式和highway传输方式的监听地址。两者的配置规则相同，以下仅以`servicecomb.rest.address`作为说明。  
+服务发布地址的配置项是`servicecomb.service.publishAddress`，该地址**可以不配置**。不配置此项时JavaChassis会根据特定的规则选取发布地址。
 
 **表1 服务发布地址生效规则**
 
@@ -33,7 +33,7 @@
 
 microservice.yaml文件的配置示例如下：
 ```yaml
-cse:
+servicecomb:
   service:
     publishAddress: "eth0" # 注册到服务中心的发布地址会是eth0网卡的IP
   rest:

@@ -8,7 +8,7 @@
 
 * 引入依赖
 
-依赖关系中增加spring-boot-starter-provider，即可引入CSE的核心功能。cse-solution-service-engine增加了接入华为公有云相关的认证模块和治理相关模块，并排除了log4j运行时包，防止和spring boot缺省携带的logback冲突。引入hibernate-validator的目的是spring boot会检测validation-api的实现类，检测不到会无法启动。
+依赖关系中增加spring-boot-starter-provider，即可引入java chassis的核心功能。cse-solution-service-engine增加了接入华为公有云相关的认证模块和治理相关模块，并排除了log4j运行时包，防止和spring boot缺省携带的logback冲突。引入hibernate-validator的目的是spring boot会检测validation-api的实现类，检测不到会无法启动。
 
 ```
 <dependencyManagement>
@@ -51,7 +51,7 @@
 
 
 
-* 启用CSE的核心功能
+* 启用java chassis的核心功能
 
 在启动类前面增加@EnableServiceComb即可。
 
@@ -67,7 +67,7 @@ public class WebsiteMain {
 
 
 
-通过以上配置，就可以完整使用CSE提供的所有功能，使用CSE开发REST服务，并开启各种治理功能。
+通过以上配置，就可以完整使用java chassis提供的所有功能，使用java chassis开发REST服务，并开启各种治理功能。
 
 
 
@@ -77,7 +77,7 @@ public class WebsiteMain {
 
 
 
-集成CSE后，可以通过CSE的方式开发REST接口：
+集成java chassis后，可以通过它的方式开发REST接口：
 
 ```
 @RestSchema(schemaId = "hello")

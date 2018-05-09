@@ -14,8 +14,8 @@
 
 | 配置项 | 参考/默认值 | 取值范围 | 是否必选 | 含义 | 注意 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| cse.metrics.enabled | TRUE | {TRUE,FALSE} | 否 | 是否输出性能日志统计 |  |
-| cse.metrics.cycle.ms | 60000 | \[0,+∞\) | 否 | 输出性能日志统计的时间间隔 |  |
+| servicecomb.metrics.enabled | TRUE | {TRUE,FALSE} | 否 | 是否输出性能日志统计 |  |
+| servicecomb.metrics.cycle.ms | 60000 | \[0,+∞\) | 否 | 输出性能日志统计的时间间隔 |  |
 
 ## 示例代码
 
@@ -33,7 +33,7 @@
 * 服务端：
 
 ```yaml
-cse: 
+servicecomb: 
   handler: 
     chain: 
       Provider: 
@@ -48,7 +48,7 @@ cse:
 * 客户端：
 
 ```yaml
-cse: 
+servicecomb: 
   handler: 
     chain:  
       Consumer: 
