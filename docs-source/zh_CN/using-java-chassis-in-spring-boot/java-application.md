@@ -1,25 +1,23 @@
 使用JAVA方式集成，为Spring Boot应用增加了一个高效的HTTP服务器和REST开发框架。这种方式集成非常简单。只需要在项目中引入相关依赖，并且使用@EnableServiceComb标签即可。
 
-项目代码示例参考：
-
-[https://github.com/huawei-microservice-demo/SpringCloudIntegration/blob/master/spring-boot-simple](https://github.com/huawei-microservice-demo/SpringCloudIntegration/blob/master/spring-boot-simple)
+本项目[代码示例](https://github.com/huaweicse/servicecomb-java-chassis-samples/tree/master/spring-boot-simple)
 
 
 
 * 引入依赖
 
-依赖关系中增加spring-boot-starter-provider，即可引入java chassis的核心功能。cse-solution-service-engine增加了接入华为公有云相关的认证模块和治理相关模块，并排除了log4j运行时包，防止和spring boot缺省携带的logback冲突。引入hibernate-validator的目的是spring boot会检测validation-api的实现类，检测不到会无法启动。
+依赖关系中增加spring-boot-starter-provider，即可引入java chassis的核心功能。引入hibernate-validator的目的是spring boot会检测validation-api的实现类，检测不到会无法启动。
 
 ```
 <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>com.huawei.paas.cse</groupId>
-            <artifactId>cse-dependency</artifactId>
-            <version>2.3.12</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+      <dependency>
+        <groupId>org.apache.servicecomb</groupId>
+        <artifactId>java-chassis-dependencies</artifactId>
+        <version>1.0.0-m1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
 </dependencyManagement>
 
@@ -27,16 +25,6 @@
     <dependency>
         <groupId>org.apache.servicecomb</groupId>
         <artifactId>spring-boot-starter-provider</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>com.huawei.paas.cse</groupId>
-        <artifactId>cse-solution-service-engine</artifactId>
-        <exclusions>
-            <exclusion>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-            </exclusion>
-        </exclusions>
     </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>

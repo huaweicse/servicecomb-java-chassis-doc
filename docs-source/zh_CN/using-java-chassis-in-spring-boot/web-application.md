@@ -1,7 +1,7 @@
-Web开发方式和JAVA应用方式的开发步骤基本类似。示例代码参考：
+Web开发方式和JAVA应用方式的开发步骤基本类似。
 
-[https://github.com/huawei-microservice-demo/SpringCloudIntegration/blob/master/spring-boot-web    
-](https://github.com/huawei-microservice-demo/SpringCloudIntegration/blob/master/spring-boot-web)
+本项目[代码示例](https://github.com/huaweicse/servicecomb-java-chassis-samples/tree/master/spring-boot-web)
+
 
 主要有如下区别：
 
@@ -36,7 +36,7 @@ public class HelloService {
 }
 ```
 
-然后可以通过：[http://localhost:9093/servicecomb/rest/hello?name=world](http://localhost:9093/servicecomb/rest/hello?name=world) 来访问。其中/servicecomb/rest是配置文件中指定的URI，可以设置为/。
+然后可以通过：http://localhost:9093/hello?name=world来访问。
 
 可以看到使用的标签和Spring MVC大部分是一样的。但也有少量不一样的地方，比如：
 

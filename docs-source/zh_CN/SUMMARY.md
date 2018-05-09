@@ -63,7 +63,7 @@
   * [使用TLS通信](security/tls.md)
   * [使用RSA认证](security/shi-yong-rsa-ren-zheng.md)
 * [在Spring Boot中使用java chassis](using-java-chassis-in-spring-boot.md)
-  * [提供的组件说明](using-java-chassis-in-spring-boot/cse-components-for-spring-boot.md)
+  * [提供的组件说明](using-java-chassis-in-spring-boot/components-for-spring-boot.md)
   * [JAVA应用方式开发步骤](using-java-chassis-in-spring-boot/java-application.md)
   * [Web开发方式开发步骤](using-java-chassis-in-spring-boot/web-application.md)
   * [JAVA应用方式和Web开发方式的区别](using-java-chassis-in-spring-boot/diff-between-java-web.md)

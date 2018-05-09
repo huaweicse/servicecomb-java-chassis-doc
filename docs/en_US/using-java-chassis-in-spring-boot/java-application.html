@@ -60,7 +60,7 @@
     <link rel="next" href="web-application.html" />
     
     
-    <link rel="prev" href="cse-components-for-spring-boot.html" />
+    <link rel="prev" href="components-for-spring-boot.html" />
     
 
     </head>
@@ -969,9 +969,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.9.1" data-path="cse-components-for-spring-boot.html">
+        <li class="chapter " data-level="1.9.1" data-path="components-for-spring-boot.html">
             
-                <a href="cse-components-for-spring-boot.html">
+                <a href="components-for-spring-boot.html">
             
                     
                     提供的组件说明
@@ -1117,22 +1117,20 @@
                                 <section class="normal markdown-section">
                                 
                                 <p>&#x4F7F;&#x7528;JAVA&#x65B9;&#x5F0F;&#x96C6;&#x6210;&#xFF0C;&#x4E3A;Spring Boot&#x5E94;&#x7528;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x9AD8;&#x6548;&#x7684;HTTP&#x670D;&#x52A1;&#x5668;&#x548C;REST&#x5F00;&#x53D1;&#x6846;&#x67B6;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x96C6;&#x6210;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;&#x53EA;&#x9700;&#x8981;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x5F15;&#x5165;&#x76F8;&#x5173;&#x4F9D;&#x8D56;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;@EnableServiceComb&#x6807;&#x7B7E;&#x5373;&#x53EF;&#x3002;</p>
-<p>&#x9879;&#x76EE;&#x4EE3;&#x7801;&#x793A;&#x4F8B;&#x53C2;&#x8003;&#xFF1A;</p>
-<p><a href="https://github.com/huawei-microservice-demo/SpringCloudIntegration/blob/master/spring-boot-simple" target="_blank">https://github.com/huawei-microservice-demo/SpringCloudIntegration/blob/master/spring-boot-simple
-</a></p>
+<p>&#x672C;&#x9879;&#x76EE;<a href="https://github.com/huaweicse/servicecomb-java-chassis-samples/tree/master/spring-boot-simple" target="_blank">&#x4EE3;&#x7801;&#x793A;&#x4F8B;</a></p>
 <ul>
 <li>&#x5F15;&#x5165;&#x4F9D;&#x8D56;</li>
 </ul>
-<p>&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x4E2D;&#x589E;&#x52A0;spring-boot-starter-provider&#xFF0C;&#x5373;&#x53EF;&#x5F15;&#x5165;java chassis&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x3002;cse-solution-service-engine&#x589E;&#x52A0;&#x4E86;&#x63A5;&#x5165;&#x534E;&#x4E3A;&#x516C;&#x6709;&#x4E91;&#x76F8;&#x5173;&#x7684;&#x8BA4;&#x8BC1;&#x6A21;&#x5757;&#x548C;&#x6CBB;&#x7406;&#x76F8;&#x5173;&#x6A21;&#x5757;&#xFF0C;&#x5E76;&#x6392;&#x9664;&#x4E86;log4j&#x8FD0;&#x884C;&#x65F6;&#x5305;&#xFF0C;&#x9632;&#x6B62;&#x548C;spring boot&#x7F3A;&#x7701;&#x643A;&#x5E26;&#x7684;logback&#x51B2;&#x7A81;&#x3002;&#x5F15;&#x5165;hibernate-validator&#x7684;&#x76EE;&#x7684;&#x662F;spring boot&#x4F1A;&#x68C0;&#x6D4B;validation-api&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x68C0;&#x6D4B;&#x4E0D;&#x5230;&#x4F1A;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#x3002;</p>
+<p>&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x4E2D;&#x589E;&#x52A0;spring-boot-starter-provider&#xFF0C;&#x5373;&#x53EF;&#x5F15;&#x5165;java chassis&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x3002;&#x5F15;&#x5165;hibernate-validator&#x7684;&#x76EE;&#x7684;&#x662F;spring boot&#x4F1A;&#x68C0;&#x6D4B;validation-api&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x68C0;&#x6D4B;&#x4E0D;&#x5230;&#x4F1A;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#x3002;</p>
 <pre><code>&lt;dependencyManagement&gt;
     &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.huawei.paas.cse&lt;/groupId&gt;
-            &lt;artifactId&gt;cse-dependency&lt;/artifactId&gt;
-            &lt;version&gt;2.3.12&lt;/version&gt;
-            &lt;type&gt;pom&lt;/type&gt;
-            &lt;scope&gt;import&lt;/scope&gt;
-        &lt;/dependency&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+        &lt;artifactId&gt;java-chassis-dependencies&lt;/artifactId&gt;
+        &lt;version&gt;1.0.0-m1&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+      &lt;/dependency&gt;
     &lt;/dependencies&gt;
 &lt;/dependencyManagement&gt;
 
@@ -1140,16 +1138,6 @@
     &lt;dependency&gt;
         &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
         &lt;artifactId&gt;spring-boot-starter-provider&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.huawei.paas.cse&lt;/groupId&gt;
-        &lt;artifactId&gt;cse-solution-service-engine&lt;/artifactId&gt;
-        &lt;exclusions&gt;
-            &lt;exclusion&gt;
-                &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-                &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
-            &lt;/exclusion&gt;
-        &lt;/exclusions&gt;
     &lt;/dependency&gt;
     &lt;dependency&gt;
         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
@@ -1213,7 +1201,7 @@ public class HelloService {
 
             
                 
-                <a href="cse-components-for-spring-boot.html" class="navigation navigation-prev " aria-label="Previous page: 提供的组件说明">
+                <a href="components-for-spring-boot.html" class="navigation navigation-prev " aria-label="Previous page: 提供的组件说明">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -1229,7 +1217,7 @@ public class HelloService {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JAVA应用方式开发步骤","level":"1.9.2","depth":2,"next":{"title":"Web开发方式开发步骤","level":"1.9.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},"previous":{"title":"提供的组件说明","level":"1.9.1","depth":2,"path":"using-java-chassis-in-spring-boot/cse-components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/cse-components-for-spring-boot.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/java-application.md","mtime":"2018-05-09T06:42:26.025Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-09T07:59:26.664Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"JAVA应用方式开发步骤","level":"1.9.2","depth":2,"next":{"title":"Web开发方式开发步骤","level":"1.9.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},"previous":{"title":"提供的组件说明","level":"1.9.1","depth":2,"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/java-application.md","mtime":"2018-05-09T09:33:39.159Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-09T09:39:19.646Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
