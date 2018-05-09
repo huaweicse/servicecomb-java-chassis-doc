@@ -1,6 +1,6 @@
 # 目录
 
-* [概述](README.md)
+* [概述](introduction.md)
 * [入门](catalog/start.md)
   * [术语表](start/terminology.md)
   * [微服务系统架构](start/architecture.md)
