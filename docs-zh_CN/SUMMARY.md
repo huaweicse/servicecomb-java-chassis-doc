@@ -1,4 +1,4 @@
-# Summary
+# 目录
 
 * [概述](README.md)
 * [入门](catalog/start.md)
@@ -6,7 +6,6 @@
   * [微服务系统架构](start/architecture.md)
   * [安装本地开发环境](start/development-environment.md)
   * [开发第一个微服务](start/first-sample.md)
-  * [华为公有云上部署](start/deployment-on-cloud.md)
 * [开发服务提供者](catalog/build-provider.md)
   * [服务定义](build-provider/definition/service-definition.md)
   * [定义服务契约](build-provider/define-contract.md)
@@ -83,6 +82,9 @@
 * [Spring Cloud应用接入CSE](spring-boot-modify-for-cse.md)
   * [接入服务中心和配置中心](spring-cloudying-yong-jie-ru-cse/quick-start.md)
   * [在Spring Cloud中使用ServiceComb作为RPC框架](spring-cloudying-yong-jie-ru-cse/servicecomb-and-rpc.md)
+
+* [华为公有云上部署](start/deployment-on-cloud.md)
+
 * [专题文章](featured-topics.md)
   * [使用CSE开发微服务应用](featured-topics/develope-microservice-using-ces.md)
     * [User Story](featured-topics/develope-microservice-using-ces/user-story.md)
@@ -97,4 +99,6 @@
 * [常见问题](question-and-answer/question_answer.md)
   * [连接华为公有云服务中心常见问题](question-and-answer/service-center-error-diagnosis.md)
   * [微服务接口兼容常见问题](question-and-answer/interface-compatibility.md)
+
+
 
