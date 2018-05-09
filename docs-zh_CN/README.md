@@ -1,10 +1,15 @@
-CSE\(Cloud Service Engine\) Java SDK是华为推出的产品级微服务开发框架，已经在华为内部多个大型产品上得到了使用和验证。使用CSE Java SDK开发微服务，可以最大化的简化开发门槛，提升产品上线速度。同时可以获得微服务运行时高可靠性保证、运行时动态治理等一系列开箱即用的能力。
+## 本项目是servicecomb-java-chassis开发指南。
 
-该文档读者是用CSE Java SDK进行微服务开发的开发人员。本文档会涵盖从工具使用到SDK使用到程序打包的全过程，包括所有在开发过程中需要关心的细节和其使用指南。
+* 访问地址  
+  [https://huaweicse.github.io/servicecomb-java-chassis-doc/zh\_CN/index.html](https://huaweicse.github.io/servicecomb-java-chassis-doc/zh_CN/index.html)
 
-如有疑问，可通过访问CSE论坛发帖反馈：
+* 编辑  
+  1. Fork本项目代码  
+  2. 方式一：直接编辑docs-zh\_CN里面的md源码  
+  3. 方式二：下载[GitBook Editor](https://legacy.gitbook.com/editor)编辑  
+  4. 提交PR
 
-[http://forum.huaweicloud.com/forum.php?mod=forumdisplay&fid=622](http://forum.huaweicloud.com/forum.php?mod=forumdisplay&fid=622)
-
-
-
+* 发布  
+  1. 参考[GitBook安装指南](https://github.com/GitbookIO/gitbook/blob/master/docs/setup.md),安装gitbook  
+  2. cd docs-zh\_CN  
+  3. gitbook build . ../docs/zh\_CN
