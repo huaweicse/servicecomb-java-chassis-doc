@@ -13,16 +13,13 @@ servicecComb微服务的完整线程模型如下图所示：![](/start/完整线
   * [REST over Servlet](/build-provider/protocol/rest-over-servlet.md)
   * [REST over Vertx](/build-provider/protocol/rest-over-vertx.md)
   * [Highway RPC协议](/build-provider/protocol/highway-rpc.md)
-* 客户端可配置业务线程池executor，线程粒度可细化至schemaId:operation，配置如下：
+* 服务端可配置业务线程池executor，线程粒度可细化至schemaId:operation，配置如下：
 
 在microservice.yaml中添加executors配置，为schemaId:operation配置单独的业务线程池：
 
 ```yaml
-servicecomb: 
-  executors: 
-    Provider: 
+servicecomb:
+  executors:
+    Provider:
       [schemaId].[operation]
 ```
-
-
-
