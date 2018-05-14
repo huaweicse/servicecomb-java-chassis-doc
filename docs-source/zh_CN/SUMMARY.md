@@ -62,6 +62,7 @@
 * [微服务安全](catalog/security.md)
   * [使用TLS通信](security/tls.md)
   * [使用RSA认证](security/shi-yong-rsa-ren-zheng.md)
+  * [使用HTTP2通信](/security/http2.md)
 * [在Spring Boot中使用java chassis](using-java-chassis-in-spring-boot.md)
   * [提供的组件说明](using-java-chassis-in-spring-boot/components-for-spring-boot.md)
   * [JAVA应用方式开发步骤](using-java-chassis-in-spring-boot/java-application.md)
