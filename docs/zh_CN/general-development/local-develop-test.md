@@ -9,23 +9,53 @@
 * 通过设置环境信息方便本地调试
 
 服务中心是微服务框架中的重要组件，用于服务元数据以及服务实例元数据的管理和处理注册、发现。服务中心与微服务提供/消费者的逻辑关系下图所示：  
-![](/start/本地开发和测试.png)
+![](/start/develop-test.png)
 
 ## 启动本地服务中心
 
-* **步骤 1 **登录华为公有云[https://servicestage.hwclouds.com](https://servicestage.hwclouds.com/)，选择应用开发-&gt;工具和案例，根据开发的操作系统选择下载对应的本地轻量化服务中心工具。
+* **步骤 1 **启动本地服务中心
 
-* **步骤 2 **将下载的localServerCenter-xxx-tar.gz文件解压，window系统下双击运行目录下的start.bat，linux系统下执行start.sh脚本。
+1. 以可执行文件的方式运行
 
-window和linux版本均只支持64位系统，linux下执行start.sh脚本前请赋予文件执行权限：
+   <ul class="nav nav-tabs">
+     <li data-toggle="tab" class="active"><a data-toggle="tab" href="#windows">Windows</a></li>
+     <li data-toggle="tab"><a data-toggle="tab" href="#linux">Linux</a></li>
+   </ul>
+   
+   <div class="tab-content">
+     <div id="windows" class="tab-pane active" markdown="1">
+   1. 下载[服务注册中心可执行文件压缩包](http://apache.org/dyn/closer.cgi/incubator/servicecomb/incubator-servicecomb-service-center/1.0.0-m1/apache-servicecomb-incubating-service-center-1.0.0-m1-windows-amd64.tar.gz)
+   2. 解压缩到当前文件夹
+   3. 进入解压缩后的目录，然后双击运行**start-service-center.bat**文件
+     </div>
+     <div id="linux" class="tab-pane fade" markdown="1">
+   1. 下载服务注册中心可执行文件压缩包并解压缩
+   ```bash
+   wget http://apache.org/dyn/closer.cgi/incubator/servicecomb/incubator-servicecomb-service-center/1.0.0-m1/apache-servicecomb-incubating-service-center-1.0.0-m1-linux-amd64.tar.gz
+   tar xvf apache-servicecomb-incubating-service-center-1.0.0-m1-linux-amd64.tar.gz
+   ```
+   2. 运行服务注册中心
+   ```bash
+   bash apache-servicecomb-incubating-service-center-1.0.0-m1-linux-amd64/start-service-center.sh
+   ```
+   
+    注意：前端（frontend）在Linux环境下默认会绑定ipv6地址，导致浏览器报错，修复办法为：先修改conf/app.conf中的httpaddr为外部可达网卡ip，之后修改app/appList/apiList.js中`ip : 'http://127.0.0.1'`为对应ip，最后重启ServiceCenter即可。
+    {: .notice--warning}
+  
+    </div>
+   </div>
 
+   注意：Window和Linux版本均只支持64位系统。
+   {: .notice--warning}
+
+2. 以Docker的方式运行
+
+```bash
+docker pull servicecomb/service-center
+docker run -d -p 30100:30100 servicecomb/service-center:latest
 ```
-　　chmod -R 550 /../bin
-```
 
-本地服务中心为提高易用性，默认监听本机地址0.0.0.0的30100端口，但从安全性考虑，建议用户自行修改配置监听127.0.0.1。
-
-* **步骤 3 **启动本地轻量服务中心后，在服务提供/消费者的microservice.yaml文件中配置ServerCenter的地址和端口，示例代码：
+* **步骤 2 **启动本地服务中心后，在服务提供/消费者的microservice.yaml文件中配置ServerCenter的地址和端口，示例代码：
 
 ```yaml
 servicecomb:
@@ -36,7 +66,7 @@ http://127.0.0.1:30100
  #服务中心地址及端口
 ```
 
-* **步骤 4 **开发服务提供/消费者，启动微服务进行本地测试。
+* **步骤 3 **开发服务提供/消费者，启动微服务进行本地测试。
 
 **----结束**
 

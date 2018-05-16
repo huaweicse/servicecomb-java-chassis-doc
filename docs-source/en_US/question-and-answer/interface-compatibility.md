@@ -11,7 +11,7 @@
 
 # 接口兼容常见问题及其解决办法
 
-开发阶段，由于存在频繁的接口修改，也不会清理服务中心的数据，容易出现调试的时候接口调用失败的情况。建议开发者可以安装下载一个[服务中心的frontend](https://github.com/apache/incubator-servicecomb-service-center/releases), 可以随时清理服务中心数据。
+开发阶段，由于存在频繁的接口修改，也不会清理服务中心的数据，容易出现调试的时候接口调用失败的情况。建议开发者可以安装下载一个[服务中心的frontend](http://apache.org/dyn/closer.cgi/incubator/servicecomb/incubator-servicecomb-service-center/1.0.0-m1/), 可以随时清理服务中心数据。
 
 如果使用华为公有云在线的服务中心，可以直接登录使用微服务引擎提供的管理功能进行删除。
 
