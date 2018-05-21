@@ -789,6 +789,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.5.13" data-path="cross-app-invocation.html">
+            
+                <a href="cross-app-invocation.html">
+            
+                    
+                    跨应用调用
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -943,6 +956,19 @@
             
                     
                     使用RSA认证
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../security/http2.html">
+            
+                <a href="../security/http2.html">
+            
+                    
+                    使用HTTP2通信
             
                 </a>
             
@@ -1213,7 +1239,7 @@ docker run <span class="hljs-_">-d</span> -p 30100:30100 servicecomb/service-cen
 <h2 id="&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x4FE1;&#x606F;&#x65B9;&#x4FBF;&#x672C;&#x5730;&#x8C03;&#x8BD5;">&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x4FE1;&#x606F;&#x65B9;&#x4FBF;&#x672C;&#x5730;&#x8C03;&#x8BD5;</h2>
 <p>java chassis&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x4E25;&#x683C;&#x4F9D;&#x8D56;&#x4E8E;&#x5951;&#x7EA6;&#xFF0C;&#x6240;&#x4EE5;&#x6B63;&#x5E38;&#x6765;&#x8BF4;&#x5951;&#x7EA6;&#x53D8;&#x4E86;&#x5C31;&#x5FC5;&#x987B;&#x8981;&#x4FEE;&#x6539;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x7248;&#x672C;&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;&#x5F53;&#x524D;&#x8FD8;&#x662F;&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF0C;&#x90A3;&#x4E48;&#x4FEE;&#x6539;&#x63A5;&#x53E3;&#x662F;&#x5F88;&#x6B63;&#x5E38;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x6BCF;&#x6B21;&#x90FD;&#x9700;&#x8981;&#x6539;&#x7248;&#x672C;&#x7684;&#x8BDD;&#xFF0C;&#x5BF9;&#x7528;&#x6237;&#x6765;&#x8BF4;&#x975E;&#x5E38;&#x7684;&#x4E0D;&#x53CB;&#x597D;&#xFF0C;&#x6240;&#x4EE5;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x5FAE;&#x670D;&#x52A1;&#x914D;&#x7F6E;&#x6210;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF0C;&#x63A5;&#x53E3;&#x4FEE;&#x6539;&#x4E86;&#xFF08;schema&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#xFF09;&#xFF0C;&#x91CD;&#x542F;&#x5C31;&#x53EF;&#x4EE5;&#x6CE8;&#x518C;&#x5230;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x4FEE;&#x6539;&#x7248;&#x672C;&#x53F7;&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;&#x6709;consumer&#x5DF2;&#x7ECF;&#x8C03;&#x7528;&#x4E86;&#x91CD;&#x542F;&#x4E4B;&#x524D;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;consumer&#x7AEF;&#x9700;&#x8981;&#x91CD;&#x542F;&#x624D;&#x80FD;&#x83B7;&#x53D6;&#x6700;&#x65B0;&#x7684;schema&#x3002;&#x6BD4;&#x5982;A -&gt; B&#xFF0C;B&#x63A5;&#x53E3;&#x8FDB;&#x884C;&#x4E86;&#x4FEE;&#x6539;&#x5E76;&#x4E14;&#x91CD;&#x542F;&#xFF0C;&#x90A3;&#x4E48;A&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x8FD8;&#x662F;&#x4F7F;&#x7528;B&#x8001;&#x7684;schema&#xFF0C;&#x8C03;&#x7528;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x9519;&#xFF0C;&#x4EE5;&#x514D;&#x51FA;&#x73B0;&#x672A;&#x77E5;&#x5F02;&#x5E38;&#xFF0C;A&#x4E5F;&#x9700;&#x8981;&#x91CD;&#x542F;&#x3002;&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#xFF0C;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;1</p>
 <ul>
-<li><p>&#x65B9;&#x6CD5;1&#xFF1A;&#x901A;&#x8FC7;JVM&#x542F;&#x52A8;&#x53C2;&#x6570;<strong>-Dinstance_description.environment=dev</strong>&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;</p>
+<li><p>&#x65B9;&#x6CD5;1&#xFF1A;&#x901A;&#x8FC7;JVM&#x542F;&#x52A8;&#x53C2;&#x6570;<strong>-Dinstance_description.environment=development</strong>&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;</p>
 </li>
 <li><p>&#x65B9;&#x6CD5;2&#xFF1A;&#x901A;&#x8FC7;microservice.yaml&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6765;&#x6307;&#x5B9A;</p>
 </li>
@@ -1268,7 +1294,7 @@ docker run <span class="hljs-_">-d</span> -p 30100:30100 servicecomb/service-cen
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"本地开发和测试","level":"1.5.4","depth":2,"next":{"title":"访问服务中心","level":"1.5.5","depth":2,"path":"general-development/visit-sc.md","ref":"general-development/visit-sc.md","articles":[]},"previous":{"title":"自定义调用链打点","level":"1.5.3","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"general-development/local-develop-test.md","mtime":"2018-05-16T07:03:29.398Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-16T07:28:04.840Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"本地开发和测试","level":"1.5.4","depth":2,"next":{"title":"访问服务中心","level":"1.5.5","depth":2,"path":"general-development/visit-sc.md","ref":"general-development/visit-sc.md","articles":[]},"previous":{"title":"自定义调用链打点","level":"1.5.3","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"general-development/local-develop-test.md","mtime":"2018-05-21T03:25:07.441Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-21T03:27:23.368Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>

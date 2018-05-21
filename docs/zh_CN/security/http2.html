@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>JAVA应用方式和Web开发方式的区别 · GitBook</title>
+        <title>使用HTTP2通信 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="diff-spring-mvc.html" />
+    <link rel="next" href="../using-java-chassis-in-spring-boot.html" />
     
     
-    <link rel="prev" href="web-application.html" />
+    <link rel="prev" href="shi-yong-rsa-ren-zheng.html" />
     
 
     </head>
@@ -937,9 +937,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.8.1" data-path="../security/tls.html">
+        <li class="chapter " data-level="1.8.1" data-path="tls.html">
             
-                <a href="../security/tls.html">
+                <a href="tls.html">
             
                     
                     使用TLS通信
@@ -950,9 +950,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="../security/shi-yong-rsa-ren-zheng.html">
+        <li class="chapter " data-level="1.8.2" data-path="shi-yong-rsa-ren-zheng.html">
             
-                <a href="../security/shi-yong-rsa-ren-zheng.html">
+                <a href="shi-yong-rsa-ren-zheng.html">
             
                     
                     使用RSA认证
@@ -963,9 +963,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.3" data-path="../security/http2.html">
+        <li class="chapter active" data-level="1.8.3" data-path="http2.html">
             
-                <a href="../security/http2.html">
+                <a href="http2.html">
             
                     
                     使用HTTP2通信
@@ -995,9 +995,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.9.1" data-path="components-for-spring-boot.html">
+        <li class="chapter " data-level="1.9.1" data-path="../using-java-chassis-in-spring-boot/components-for-spring-boot.html">
             
-                <a href="components-for-spring-boot.html">
+                <a href="../using-java-chassis-in-spring-boot/components-for-spring-boot.html">
             
                     
                     提供的组件说明
@@ -1008,9 +1008,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.2" data-path="java-application.html">
+        <li class="chapter " data-level="1.9.2" data-path="../using-java-chassis-in-spring-boot/java-application.html">
             
-                <a href="java-application.html">
+                <a href="../using-java-chassis-in-spring-boot/java-application.html">
             
                     
                     JAVA应用方式开发步骤
@@ -1021,9 +1021,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.3" data-path="web-application.html">
+        <li class="chapter " data-level="1.9.3" data-path="../using-java-chassis-in-spring-boot/web-application.html">
             
-                <a href="web-application.html">
+                <a href="../using-java-chassis-in-spring-boot/web-application.html">
             
                     
                     Web开发方式开发步骤
@@ -1034,9 +1034,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9.4" data-path="diff-between-java-web.html">
+        <li class="chapter " data-level="1.9.4" data-path="../using-java-chassis-in-spring-boot/diff-between-java-web.html">
             
-                <a href="diff-between-java-web.html">
+                <a href="../using-java-chassis-in-spring-boot/diff-between-java-web.html">
             
                     
                     JAVA应用方式和Web开发方式的区别
@@ -1047,9 +1047,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.9.5" data-path="diff-spring-mvc.html">
+        <li class="chapter " data-level="1.9.5" data-path="../using-java-chassis-in-spring-boot/diff-spring-mvc.html">
             
-                <a href="diff-spring-mvc.html">
+                <a href="../using-java-chassis-in-spring-boot/diff-spring-mvc.html">
             
                     
                     Spring MVC模式的差异
@@ -1127,7 +1127,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >JAVA应用方式和Web开发方式的区别</a>
+        <a href=".." >使用HTTP2通信</a>
     </h1>
 </div>
 
@@ -1142,7 +1142,30 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x4E24;&#x79CD;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x90FD;&#x4F1A;&#x542F;&#x7528;java chassis&#x7684;&#x5168;&#x91CF;&#x529F;&#x80FD;&#xFF0C;JAVA&#x5E94;&#x7528;&#x65B9;&#x5F0F;&#x8FD0;&#x884C;&#x4E8E;&#x72EC;&#x7ACB;&#x7684;HTTP&#x670D;&#x52A1;&#x5668;&#xFF08;&#x57FA;&#x4E8E;vert.x&#x6784;&#x5EFA;&#xFF09;&#x4E0A;&#xFF0C;&#x6027;&#x80FD;&#x4E0A;&#x5B58;&#x5728;&#x5F88;&#x5927;&#x7684;&#x4F18;&#x52BF;&#x3002;Web&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x8FD0;&#x884C;&#x4E8E;Tomcat&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5185;&#x7F6E;&#x7684;Web&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x4E0A;&#xFF0C;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;Servlet&#x63A5;&#x6536;&#x8BF7;&#x6C42;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Web&#x5BB9;&#x5668;&#x63D0;&#x4F9B;&#x7684;&#x4E00;&#x4E9B;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x63D0;&#x4F9B;&#x9875;&#x9762;&#x670D;&#x52A1;&#xFF0C;&#x4F7F;&#x7528;Filter&#x7B49;&#x3002;&#x5F53;&#x5E94;&#x7528;&#x53EA;&#x9700;&#x8981;&#x63D0;&#x4F9B;REST&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x5BF9;&#x6027;&#x80FD;&#x8981;&#x6C42;&#x5F88;&#x9AD8;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;JAVA&#x5E94;&#x7528;&#x65B9;&#x5F0F;&#x3002;</p>
+                                <h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
+<p>&#x7528;&#x6237;&#x901A;&#x8FC7;&#x7B80;&#x5355;&#x7684;&#x914D;&#x7F6E;&#x5373;&#x53EF;&#x542F;&#x7528;Http2&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#xFF0C;&#x63D0;&#x9AD8;&#x6027;&#x80FD;&#x3002;</p>
+<h2 id="&#x5916;&#x90E8;&#x670D;&#x52A1;&#x901A;&#x4FE1;&#x914D;&#x7F6E;">&#x5916;&#x90E8;&#x670D;&#x52A1;&#x901A;&#x4FE1;&#x914D;&#x7F6E;</h2>
+<p>&#x4E0E;&#x5916;&#x90E8;&#x670D;&#x52A1;&#x901A;&#x4FE1;&#x76F8;&#x5173;&#x7684;&#x914D;&#x7F6E;&#x5199;&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x3002;</p>
+<ul>
+<li><p>&#x542F;&#x7528;h2(Http2 + TLS)&#x8FDB;&#x884C;&#x901A;&#x4FE1;<br>&#x670D;&#x52A1;&#x7AEF;&#x5728;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x5730;&#x5740;&#x540E;&#x9762;&#x8FFD;&#x52A0;<code>?sslEnabled=true</code>&#x5F00;&#x542F;TLS&#x901A;&#x4FE1;&#xFF0C;&#x5177;&#x4F53;&#x4ECB;&#x7ECD;&#x89C1;<a href="https://huawei-servicecomb.gitbooks.io/developerguide/content/security/tls.html" title="&#x4F7F;&#x7528;TLS&#x901A;&#x4FE1;" target="_blank">&#x4F7F;&#x7528;TLS&#x901A;&#x4FE1;</a>&#x7AE0;&#x8282;&#x3002;&#x7136;&#x540E;&#x518D;&#x8FFD;&#x52A0;<code>&amp;protocol=h2</code>&#x542F;&#x7528;h2&#x901A;&#x4FE1;&#x3002;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  rest:</span>
+<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8080</span>?sslEnabled=<span class="hljs-literal">true</span>&amp;protocol=h2
+<span class="hljs-attr">  highway:</span>
+<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">7070</span>?sslEnabled=<span class="hljs-literal">true</span>&amp;protocol=h2
+</code></pre>
+</li>
+<li><p>&#x542F;&#x7528;h2c(Http2 without TLS)&#x8FDB;&#x884C;&#x901A;&#x4FE1;<br>&#x670D;&#x52A1;&#x7AEF;&#x5728;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x5730;&#x5740;&#x540E;&#x9762;&#x8FFD;&#x52A0;<code>?protocol=h2</code>&#x542F;&#x7528;h2c&#x901A;&#x4FE1;&#x3002;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  rest:</span>
+<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8080</span>?protocol=h2
+<span class="hljs-attr">  highway:</span>
+<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">7070</span>?protocol=h2
+</code></pre>
+</li>
+<li><p>&#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x901A;&#x8FC7;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x8BFB;&#x53D6;&#x670D;&#x52A1;&#x7AEF;&#x5730;&#x5740;&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#x6765;&#x4F7F;&#x7528;http2&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x3002;</p>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -1170,12 +1193,12 @@
 
             
                 
-                <a href="web-application.html" class="navigation navigation-prev " aria-label="Previous page: Web开发方式开发步骤">
+                <a href="shi-yong-rsa-ren-zheng.html" class="navigation navigation-prev " aria-label="Previous page: 使用RSA认证">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="diff-spring-mvc.html" class="navigation navigation-next " aria-label="Next page: Spring MVC模式的差异">
+                <a href="../using-java-chassis-in-spring-boot.html" class="navigation navigation-next " aria-label="Next page: 在Spring Boot中使用java chassis">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1186,7 +1209,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JAVA应用方式和Web开发方式的区别","level":"1.9.4","depth":2,"next":{"title":"Spring MVC模式的差异","level":"1.9.5","depth":2,"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","ref":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","articles":[]},"previous":{"title":"Web开发方式开发步骤","level":"1.9.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/diff-between-java-web.md","mtime":"2018-05-16T08:18:37.647Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-21T03:27:23.368Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"使用HTTP2通信","level":"1.8.3","depth":2,"next":{"title":"在Spring Boot中使用java chassis","level":"1.9","depth":1,"path":"using-java-chassis-in-spring-boot.md","ref":"using-java-chassis-in-spring-boot.md","articles":[{"title":"提供的组件说明","level":"1.9.1","depth":2,"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","articles":[]},{"title":"JAVA应用方式开发步骤","level":"1.9.2","depth":2,"path":"using-java-chassis-in-spring-boot/java-application.md","ref":"using-java-chassis-in-spring-boot/java-application.md","articles":[]},{"title":"Web开发方式开发步骤","level":"1.9.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},{"title":"JAVA应用方式和Web开发方式的区别","level":"1.9.4","depth":2,"path":"using-java-chassis-in-spring-boot/diff-between-java-web.md","ref":"using-java-chassis-in-spring-boot/diff-between-java-web.md","articles":[]},{"title":"Spring MVC模式的差异","level":"1.9.5","depth":2,"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","ref":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","articles":[]}]},"previous":{"title":"使用RSA认证","level":"1.8.2","depth":2,"path":"security/shi-yong-rsa-ren-zheng.md","ref":"security/shi-yong-rsa-ren-zheng.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"security/http2.md","mtime":"2018-05-16T08:18:40.769Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-21T03:27:23.368Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
