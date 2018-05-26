@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>使用ServiceComb SDK开发边缘服务 · GitBook</title>
+        <title>使用Edge Service做边缘服务 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="secret-field.html" />
+    <link rel="next" href="nginx.html" />
     
     
-    <link rel="prev" href="zuul.html" />
+    <link rel="prev" href="open-service.html" />
     
 
     </head>
@@ -815,14 +815,27 @@
             
         </li>
     
+        <li class="chapter " data-level="1.5.14" data-path="../general-development/secret-field.html">
+            
+                <a href="../general-development/secret-field.html">
+            
+                    
+                    定制序列化和反序列化方法
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="../catalog/open-service.html">
+        <li class="chapter " data-level="1.6" data-path="open-service.html">
             
-                <a href="../catalog/open-service.html">
+                <a href="open-service.html">
             
                     
                     服务能力开放
@@ -834,7 +847,20 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="nginx.html">
+        <li class="chapter active" data-level="1.6.1" data-path="by-servicecomb-sdk.html">
+            
+                <a href="by-servicecomb-sdk.html">
+            
+                    
+                    使用Edge Service做边缘服务
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="nginx.html">
             
                 <a href="nginx.html">
             
@@ -847,38 +873,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="zuul.html">
+        <li class="chapter " data-level="1.6.3" data-path="zuul.html">
             
                 <a href="zuul.html">
             
                     
                     使用zuul做边缘服务
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.6.3" data-path="by-servicecomb-sdk.html">
-            
-                <a href="by-servicecomb-sdk.html">
-            
-                    
-                    使用ServiceComb SDK开发边缘服务
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.4" data-path="secret-field.html">
-            
-                <a href="secret-field.html">
-            
-                    
-                    定制序列化和反序列化方法
             
                 </a>
             
@@ -1127,7 +1127,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >使用ServiceComb SDK开发边缘服务</a>
+        <a href=".." >使用Edge Service做边缘服务</a>
     </h1>
 </div>
 
@@ -1142,15 +1142,84 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4E00;&#x3001;&#x529F;&#x80FD;&#x8303;&#x56F4;">&#x4E00;&#x3001;&#x529F;&#x80FD;&#x8303;&#x56F4;</h1>
-<p>Edge Service&#x4F5C;&#x4E3A;&#x6574;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#x7CFB;&#x7EDF;&#x5BF9;&#x5916;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5411;&#x6700;&#x7EC8;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x63A5;&#x5165;RESTful&#x8BF7;&#x6C42;&#xFF0C;&#x8F6C;&#x53D1;&#x7ED9;&#x5185;&#x90E8;&#x5FAE;&#x670D;&#x52A1;&#x3002;Edge Service&#x4EE5;&#x5F00;&#x53D1;&#x6846;&#x67B6;&#x7684;&#x5F62;&#x5F0F;&#x63D0;&#x4F9B;&#xFF0C;&#x5176;&#x4E2D;&#x7684;&#x670D;&#x52A1;&#x6620;&#x5C04;&#x3001;&#x8BF7;&#x6C42;&#x89E3;&#x6790;&#x3001;&#x52A0;&#x5BC6;&#x89E3;&#x5BC6;&#x3001;&#x9274;&#x6743;&#x7B49;&#x903B;&#x8F91;&#x9700;&#x8981;&#x4E1A;&#x52A1;&#x901A;&#x8FC7;&#x6269;&#x5C55;&#x70B9;&#x81EA;&#x884C;&#x5F00;&#x53D1;&#x3002;</p>
-<p>Edge Service&#x672C;&#x8EAB;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x9700;&#x9075;&#x5B88;&#x6240;&#x6709;&#x5FAE;&#x670D;&#x52A1;&#x5F00;&#x53D1;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x5176;&#x672C;&#x8EAB;&#x90E8;&#x7F72;&#x4E3A;&#x591A;&#x5B9E;&#x4F8B;&#xFF0C;&#x524D;&#x7AEF;&#x9700;&#x4F7F;&#x7528;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x88C5;&#x7F6E;&#x8FDB;&#x884C;&#x8D1F;&#x8F7D;&#x5206;&#x53D1;&#x3002;</p>
-<p>&#x9875;&#x9762;&#x5F00;&#x53D1;&#x3001;&#x9875;&#x9762;&#x6A21;&#x677F;&#x7B49;&#x8868;&#x73B0;&#x5C42;&#xFF0C;&#x4E0D;&#x5728;Edge Service&#x6846;&#x67B6;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x4F7F;&#x7528;&#x81EA;&#x884C;&#x4F7F;&#x7528;&#x5408;&#x9002;&#x7684;&#x6280;&#x672F;&#x53BB;&#x627F;&#x8F7D;&#x3002;&#x4F46;&#x662F;Edge Service&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x8DB3;&#x591F;&#x7684;&#x7075;&#x6D3B;&#x6027;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;vertx API&#x5B9E;&#x73B0;&#x975E;ServiceComb SDK&#x5F00;&#x53D1;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x8BF7;&#x6C42;&#x8F6C;&#x53D1;&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x4E13;&#x9898;&#x6587;&#x7AE0;&#x4E2D;&#x793A;&#x4F8B;&#x3002;</p>
-<h1 id="&#x4E8C;&#x3001;&#x7279;&#x6027;">&#x4E8C;&#x3001;&#x7279;&#x6027;</h1>
-<h2 id="1&#x90E8;&#x7F72;&#x3001;&#x542F;&#x52A8;&#x65E0;&#x8026;&#x5408;">1.&#x90E8;&#x7F72;&#x3001;&#x542F;&#x52A8;&#x65E0;&#x8026;&#x5408;</h2>
-<p>Edge Service&#x4E0E;&#x8F6C;&#x53D1;&#x76EE;&#x6807;&#x5FAE;&#x670D;&#x52A1;&#x4E4B;&#x95F4;&#xFF0C;&#x6CA1;&#x6709;&#x90E8;&#x7F72;&#x3001;&#x542F;&#x52A8;&#x987A;&#x5E8F;&#x4E0A;&#x7684;&#x8981;&#x6C42;&#xFF0C;&#x4EC5;&#x4EC5;&#x53EA;&#x8981;&#x6C42;&#x8F6C;&#x53D1;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x76EE;&#x6807;&#x5FAE;&#x670D;&#x52A1;&#x5DF2;&#x7ECF;&#x90E8;&#x7F72;&#xFF0C;&#x5E76;&#x4E14;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x3002;</p>
-<h2 id="2&#x81EA;&#x52A8;&#x6839;&#x636E;&#x80FD;&#x529B;&#x96C6;&#x5408;&#x8FDB;&#x884C;&#x8DEF;&#x7531;">2.&#x81EA;&#x52A8;&#x6839;&#x636E;&#x80FD;&#x529B;&#x96C6;&#x5408;&#x8FDB;&#x884C;&#x8DEF;&#x7531;</h2>
-<p>&#x5047;&#x8BBE;&#x67D0;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x517C;&#x5BB9;&#x89C4;&#x5212;&#x4E3A;&#x6240;&#x6709;&#x9AD8;&#x7248;&#x672C;&#x5FC5;&#x987B;&#x517C;&#x5BB9;&#x4F4E;&#x7248;&#x672C;&#xFF0C;&#x90E8;&#x7F72;&#x4E86;&#x4EE5;&#x4E0B;&#x7248;&#x672C;&#x5B9E;&#x4F8B;&#xFF1A;</p>
+                                <h1 id="&#x4F7F;&#x7528;edge-service&#x505A;&#x8FB9;&#x7F18;&#x670D;&#x52A1;">&#x4F7F;&#x7528;Edge Service&#x505A;&#x8FB9;&#x7F18;&#x670D;&#x52A1;</h1>
+<p>Edge Service&#x662F;ServiceComb&#x63D0;&#x4F9B;&#x7684;JAVA&#x7F51;&#x5173;&#x670D;&#x52A1;&#x3002;Edge Service&#x4F5C;&#x4E3A;&#x6574;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#x7CFB;&#x7EDF;&#x5BF9;&#x5916;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5411;&#x6700;&#x7EC8;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x63A5;&#x5165;RESTful&#x8BF7;&#x6C42;&#xFF0C;&#x8F6C;&#x53D1;&#x7ED9;&#x5185;&#x90E8;&#x5FAE;&#x670D;&#x52A1;&#x3002;Edge Service&#x4EE5;&#x5F00;&#x53D1;&#x6846;&#x67B6;&#x7684;&#x5F62;&#x5F0F;&#x63D0;&#x4F9B;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x7684;&#x642D;&#x5EFA;&#x4E00;&#x4E2A;Edge Service&#x670D;&#x52A1;&#xFF0C;&#x901A;&#x8FC7;&#x7B80;&#x5355;&#x7684;&#x914D;&#x7F6E;&#x5C31;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x8DEF;&#x7531;&#x8F6C;&#x53D1;&#x89C4;&#x5219;&#x3002;&#x540C;&#x65F6;Edge Service&#x652F;&#x6301;&#x5F3A;&#x5927;&#x7684;&#x6269;&#x5C55;&#x80FD;&#x529B;&#xFF0C;&#x670D;&#x52A1;&#x6620;&#x5C04;&#x3001;&#x8BF7;&#x6C42;&#x89E3;&#x6790;&#x3001;&#x52A0;&#x5BC6;&#x89E3;&#x5BC6;&#x3001;&#x9274;&#x6743;&#x7B49;&#x903B;&#x8F91;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6269;&#x5C55;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>Edge Service&#x672C;&#x8EAB;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x9700;&#x9075;&#x5B88;&#x6240;&#x6709;&#x5FAE;&#x670D;&#x52A1;&#x5F00;&#x53D1;&#x7684;&#x89C4;&#x5219;&#x3002;&#x5176;&#x672C;&#x8EAB;&#x53EF;&#x4EE5;&#x90E8;&#x7F72;&#x4E3A;&#x591A;&#x5B9E;&#x4F8B;&#xFF0C;&#x524D;&#x7AEF;&#x4F7F;&#x7528;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x88C5;&#x7F6E;&#x8FDB;&#x884C;&#x8D1F;&#x8F7D;&#x5206;&#x53D1;&#xFF1B;&#x4E5F;&#x53EF;&#x4EE5;&#x90E8;&#x7F72;&#x4E3A;&#x4E3B;&#x5907;&#xFF0C;&#x76F4;&#x63A5;&#x63A5;&#x5165;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x3002;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x6839;&#x636E;Edge Service&#x627F;&#x8F7D;&#x7684;&#x903B;&#x8F91;&#x548C;&#x4E1A;&#x52A1;&#x8BBF;&#x95EE;&#x91CF;&#x3001;&#x7EC4;&#x7F51;&#x60C5;&#x51B5;&#x6765;&#x89C4;&#x5212;&#x3002;</p>
+<h2 id="&#x5F00;&#x53D1;edge-service&#x670D;&#x52A1;">&#x5F00;&#x53D1;Edge Service&#x670D;&#x52A1;</h2>
+<p>&#x5F00;&#x53D1;Edge Service&#x548C;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x6B65;&#x9AA4;&#x5DEE;&#x4E0D;&#x591A;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x4ECE;&#x5BFC;&#x5165;<a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/demo/demo-edge" target="_blank">ServiceComb Edge Service Demo</a>&#x5165;&#x624B;&#x3002;&#x4ECE;&#x5934;&#x642D;&#x5EFA;&#x9879;&#x76EE;&#x5305;&#x542B;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ul>
+<li>&#x914D;&#x7F6E;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;</li>
+</ul>
+<p>&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x52A0;&#x5165;edge-core&#x7684;&#x4F9D;&#x8D56;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x542F;&#x52A8;Edge Service&#x7684;&#x529F;&#x80FD;&#x3002;Edge Service&#x5728;&#x8BF7;&#x6C42;&#x8F6C;&#x53D1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x7ECF;&#x8FC7;&#x5904;&#x7406;&#x94FE;&#xFF0C;&#x56E0;&#x6B64;&#x8FD8;&#x53EF;&#x4EE5;&#x52A0;&#x5165;&#x76F8;&#x5173;&#x7684;&#x5904;&#x7406;&#x94FE;&#x7684;&#x6A21;&#x5757;&#x7684;&#x4F9D;&#x8D56;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x5B9E;&#x4F8B;&#x589E;&#x52A0;&#x7684;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7684;&#x5904;&#x7406;&#x94FE;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x5FC5;&#x987B;&#x7684;&#x3002;</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;edge-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;handler-loadbalance&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><ul>
+<li>&#x5B9A;&#x4E49;&#x542F;&#x52A8;&#x7C7B;</li>
+</ul>
+<p>&#x548C;&#x5F00;&#x53D1;&#x666E;&#x901A;&#x5FAE;&#x670D;&#x52A1;&#x4E00;&#x6837;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x52A0;&#x8F7D;Spring&#x7684;&#x65B9;&#x5F0F;&#x5C06;&#x670D;&#x52A1;&#x62C9;&#x8D77;&#x6765;&#x3002;</p>
+<pre><code>public class EdgeMain {
+  public static void main(String[] args) throws Exception {
+    Log4jUtils.init();
+    BeanUtils.init();
+  }
+}
+</code></pre><ul>
+<li>&#x589E;&#x52A0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;microservie.yaml</li>
+</ul>
+<p>Edge Service&#x672C;&#x8EAB;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x9075;&#x5FAA;&#x5FAE;&#x670D;&#x52A1;&#x67E5;&#x627E;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x81EA;&#x5DF1;&#x4E5F;&#x4F1A;&#x8FDB;&#x884C;&#x6CE8;&#x518C;&#x3002;&#x6CE8;&#x610F;APPLICAIONT_ID&#x4E0E;&#x9700;&#x8981;&#x8F6C;&#x53D1;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x76F8;&#x540C;&#x3002;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x914D;&#x7F6E;&#x4E2D;&#xFF0C;&#x6307;&#x5B9A;&#x4E86;Edge Service&#x76D1;&#x542C;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x5904;&#x7406;&#x94FE;&#x7B49;&#x4FE1;&#x606F;&#x3002;&#x5176;&#x4E2D;auth&#x5904;&#x7406;&#x94FE;&#x662F;DEMO&#x9879;&#x76EE;&#x4E2D;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x5904;&#x7406;&#x94FE;&#xFF0C;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x8BA4;&#x8BC1;&#x3002;&#x540C;&#x65F6;auth&#x670D;&#x52A1;&#x672C;&#x8EAB;&#xFF0C;&#x4E0D;&#x7ECF;&#x8FC7;&#x8FD9;&#x4E2A;&#x5904;&#x7406;&#x94FE;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x4E0D;&#x9274;&#x6743;&#x3002;</p>
+<pre><code>APPLICATION_ID: edge
+service_description:
+  name: edge
+  version: 0.0.1
+servicecomb:
+  service:
+    registry:
+      address: http://127.0.0.1:30100
+  rest:
+    address: 127.0.0.1:18080
+  handler:
+    chain:
+      Consumer:
+        default: auth,loadbalance
+        service:
+          auth: loadbalance
+</code></pre><h2 id="&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;">&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;</h2>
+<p>Edge Service&#x7684;&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF0C;&#x84DD;&#x8272;&#x80CC;&#x666F;&#x90E8;&#x5206;&#x5728;Eventloop&#x7EBF;&#x7A0B;&#x4E2D;&#x6267;&#x884C;&#xFF0C;&#x9EC4;&#x8272;&#x80CC;&#x666F;&#x90E8;&#x5206;&#xFF1A;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x5DE5;&#x4F5C;&#x4E8E;reactive&#x6A21;&#x5F0F;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x5728;Eventloop&#x7EBF;&#x7A0B;&#x6267;&#x884C;</li>
+<li>&#x5982;&#x679C;&#x5DE5;&#x4F5C;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x6A21;&#x5F0F;&#xFF0C;&#x5219;&#x5728;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x6267;&#x884C;
+<img src="../assets/workFlow.png" alt=""></li>
+</ul>
+<h2 id="&#x5B9A;&#x5236;&#x8DEF;&#x7531;&#x89C4;&#x5219;">&#x5B9A;&#x5236;&#x8DEF;&#x7531;&#x89C4;&#x5219;</h2>
+<p>&#x4F7F;&#x7528;Edge Service&#x7684;&#x6838;&#x5FC3;&#x5DE5;&#x4F5C;&#x662F;&#x914D;&#x7F6E;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x3002;&#x573A;&#x666F;&#x4E0D;&#x540C;&#xFF0C;&#x89C4;&#x5219;&#x4E5F;&#x4E0D;&#x540C;&#x3002;
+&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x7531;&#x4E00;&#x7CFB;&#x5217;AbstractEdgeDispatcher&#x7EC4;&#x6210;&#x3002;Edge Service&#x63D0;&#x4F9B;&#x4E86;&#x51E0;&#x4E2A;&#x5E38;&#x89C1;&#x7684;Dispatcher&#xFF0C;&#x901A;&#x8FC7;&#x914D;&#x7F6E;&#x5373;&#x53EF;&#x542F;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E9B;Dispatcher&#x4E0D;&#x6EE1;&#x8DB3;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x9700;&#x8981;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;defaultedgedispatcher">&#x4F7F;&#x7528;DefaultEdgeDispatcher</h3>
+<p>DefaultEdgeDispatcher&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3001;&#x5BB9;&#x6613;&#x7BA1;&#x7406;&#x7684;Dispatcher&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;Dispatcher&#xFF0C;&#x7528;&#x6237;&#x4E0D;&#x7528;&#x52A8;&#x6001;&#x7BA1;&#x7406;&#x8F6C;&#x53D1;&#x89C4;&#x5219;&#xFF0C;&#x5E94;&#x7528;&#x4E8E;&#x5B9E;&#x9645;&#x7684;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E5F;&#x662F;&#x63A8;&#x8350;&#x7684;&#x4E00;&#x79CD;&#x7BA1;&#x7406;&#x673A;&#x5236;&#x3002;&#x5B83;&#x5305;&#x542B;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#xFF1A;</p>
+<pre><code>servicecomb:
+  http:
+    dispatcher:
+      edge:
+        default:
+          enabled: true
+          prefix: rest
+          withVersion: true
+          pathIndex: 2
+</code></pre><p>&#x5E38;&#x89C1;&#x7684;&#x8FD9;&#x4E9B;&#x914D;&#x7F6E;&#x9879;&#x7684;&#x793A;&#x4F8B;&#x53CA;&#x542B;&#x4E49;&#x5982;&#x4E0B;:</p>
+<ul>
+<li>[prefix=rest;withVersion=true;pathIndex=2]&#x5FAE;&#x670D;&#x52A1;xService&#x63D0;&#x4F9B;&#x7684;URL&#x4E3A;: /xService/v1/abc&#xFF0C;&#x901A;&#x8FC7;Edge&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x4E3A;/rest/xService/v1/abc&#xFF0C;&#x8BF7;&#x6C42;&#x53EA;&#x8F6C;&#x53D1;&#x5230;[1.0.0-2.0.0)&#x7248;&#x672C;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>[prefix=rest;withVersion=true;pathIndex=3]&#x5FAE;&#x670D;&#x52A1;xService&#x63D0;&#x4F9B;&#x7684;URL&#x4E3A;: /v1/abc&#xFF0C;&#x901A;&#x8FC7;Edge&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x4E3A;/rest/xService/v1/abc&#xFF0C;&#x8BF7;&#x6C42;&#x53EA;&#x8F6C;&#x53D1;&#x5230;[1.0.0-2.0.0)&#x7248;&#x672C;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>[prefix=rest;withVersion=true;pathIndex=4]&#x5FAE;&#x670D;&#x52A1;xService&#x63D0;&#x4F9B;&#x7684;URL&#x4E3A;: /abc&#xFF0C;&#x901A;&#x8FC7;Edge&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x4E3A;/rest/xService/v1/abc&#xFF0C;&#x8BF7;&#x6C42;&#x53EA;&#x8F6C;&#x53D1;&#x5230;[1.0.0-2.0.0)&#x7248;&#x672C;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>[prefix=rest;withVersion=false;pathIndex=2]&#x5FAE;&#x670D;&#x52A1;xService&#x63D0;&#x4F9B;&#x7684;URL&#x4E3A;: /xService/v1/abc&#xFF0C;&#x901A;&#x8FC7;Edge&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x4E3A;/rest/xService/v1/abc&#xFF0C;&#x8BF7;&#x6C42;&#x53EF;&#x80FD;&#x8F6C;&#x53D1;&#x5230;&#x4EFB;&#x610F;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>[prefix=rest;withVersion=false;pathIndex=3]&#x5FAE;&#x670D;&#x52A1;xService&#x63D0;&#x4F9B;&#x7684;URL&#x4E3A;: /v1/abc&#xFF0C;&#x901A;&#x8FC7;Edge&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x4E3A;/rest/xService/v1/abc&#xFF0C;&#xFF0C;&#x8BF7;&#x6C42;&#x53EF;&#x80FD;&#x8F6C;&#x53D1;&#x5230;&#x4EFB;&#x610F;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+<li>[prefix=rest;withVersion=false;pathIndex=3]&#x5FAE;&#x670D;&#x52A1;xService&#x63D0;&#x4F9B;&#x7684;URL&#x4E3A;: /abc&#xFF0C;&#x901A;&#x8FC7;Edge&#x8BBF;&#x95EE;&#x7684;&#x5730;&#x5740;&#x4E3A;/rest/xService/abc&#xFF0C;&#xFF0C;&#x8BF7;&#x6C42;&#x53EF;&#x80FD;&#x8F6C;&#x53D1;&#x5230;&#x4EFB;&#x610F;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;</li>
+</ul>
+<p>withVersion&#x914D;&#x7F6E;&#x9879;&#x63D0;&#x4F9B;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x7070;&#x5EA6;&#x89C4;&#x5219;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;&#x5BA2;&#x6237;&#x7AEF;&#x6307;&#x5B9A;&#x8BBF;&#x95EE;&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x7248;&#x672C;&#x3002;Edge Service&#x8FD8;&#x5305;&#x542B;&#x6839;&#x636E;&#x63A5;&#x53E3;&#x517C;&#x5BB9;&#x6027;&#x81EA;&#x52A8;&#x8DEF;&#x7531;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x8BF7;&#x6C42;&#x4F1A;&#x8F6C;&#x53D1;&#x5230;&#x5305;&#x542B;&#x4E86;&#x8BE5;&#x63A5;&#x53E3;&#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x5047;&#x8BBE;&#x67D0;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x517C;&#x5BB9;&#x89C4;&#x5212;&#x4E3A;&#x6240;&#x6709;&#x9AD8;&#x7248;&#x672C;&#x5FC5;&#x987B;&#x517C;&#x5BB9;&#x4F4E;&#x7248;&#x672C;&#xFF0C;&#x90E8;&#x7F72;&#x4E86;&#x4EE5;&#x4E0B;&#x7248;&#x672C;&#x5B9E;&#x4F8B;&#xFF1A;</p>
 <ul>
 <li><p>1.0.0&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;operation1</p>
 </li>
@@ -1160,12 +1229,19 @@
 <p>Edge Service&#x5728;&#x8F6C;&#x53D1;operation1&#x65F6;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x4F7F;&#x7528;1.0.0+&#x7684;&#x89C4;&#x5219;&#x6765;&#x8FC7;&#x6EE4;&#x5B9E;&#x4F8B;</p>
 <p>Edge Service&#x5728;&#x8F6C;&#x53D1;operation2&#x65F6;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x4F7F;&#x7528;1.1.0+&#x7684;&#x89C4;&#x5219;&#x6765;&#x8FC7;&#x6EE4;&#x5B9E;&#x4F8B;</p>
 <p>&#x4EE5;&#x4E0A;&#x8FC7;&#x7A0B;&#x7528;&#x6237;&#x4E0D;&#x5FC5;&#x505A;&#x4EFB;&#x4F55;&#x5E72;&#x9884;&#xFF0C;&#x5168;&#x81EA;&#x52A8;&#x5B8C;&#x6210;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x5C06;&#x65B0;&#x7248;&#x672C;&#x7684;operation&#x8F6C;&#x53D1;&#x5230;&#x65E7;&#x7248;&#x672C;&#x7684;&#x5B9E;&#x4F8B;&#x4E2D;&#x53BB;&#x3002;</p>
-<h2 id="3&#x6CBB;&#x7406;">3.&#x6CBB;&#x7406;</h2>
-<p>&#x8DEF;&#x7531;&#x8F6C;&#x53D1;&#x57FA;&#x4E8E;ServiceComb sdk&#xFF0C;&#x662F;&#x6807;&#x51C6;&#x7684;ServiceComb consumer&#x673A;&#x5236;&#xFF0C;&#x81EA;&#x52A8;&#x652F;&#x6301;&#x6240;&#x6709;consumer&#x7AEF;&#x7684;&#x6CBB;&#x7406;&#x529F;&#x80FD;&#x3002;</p>
-<h1 id="&#x4E09;&#x3001;&#x90E8;&#x7F72;&#x793A;&#x4F8B;">&#x4E09;&#x3001;&#x90E8;&#x7F72;&#x793A;&#x4F8B;</h1>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;dispatcher">&#x81EA;&#x5B9A;&#x4E49;Dispatcher</h3>
+<p>&#x81EA;&#x5B9A;&#x4E49;Dispatcher&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x5B9E;&#x73B0;AbstractEdgeDispatcher</li>
+<li>&#x901A;&#x8FC7;SPI&#x53D1;&#x5E03;&#xFF1A;&#x589E;&#x52A0;&#x6587;&#x4EF6;META-INF/services/org.apache.servicecomb.transport.rest.vertx.VertxHttpDispatcher&#xFF0C;&#x5E76;&#x5199;&#x5165;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ol>
+<p>&#x8BE6;&#x7EC6;&#x7684;&#x4EE3;&#x7801;&#x7EC6;&#x8282;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x7684;&#x7AE0;&#x8282;&quot;DEMO&#x529F;&#x80FD;&#x8BF4;&#x660E;&quot;&#x3002;&#x5F00;&#x53D1;&#x8005;&#x4E5F;&#x53EF;&#x4EE5;&#x53C2;&#x8003;DefaultEdgeDispatcher&#x7B49;&#x4EE3;&#x7801;&#x6765;&#x5B9A;&#x4E49;&#x81EA;&#x5DF1;&#x7684;Dispatcher&#x3002;</p>
+<h3 id="&#x8FDB;&#x884C;&#x8BA4;&#x8BC1;&#x9274;&#x6743;&#x548C;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#x5904;&#x7406;">&#x8FDB;&#x884C;&#x8BA4;&#x8BC1;&#x9274;&#x6743;&#x548C;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#x5904;&#x7406;</h3>
+<p>&#x901A;&#x8FC7;Edge Servie&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x591A;&#x79CD;&#x65B9;&#x5F0F;&#x6765;&#x6269;&#x5C55;Edge Service&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5305;&#x62EC;Dispatcher&#x3001;HttpServerFilter&#x3001;Handler&#x3001;HttpClientFilter&#x7B49;&#x3002;&#x6BD4;&#x8F83;&#x5E38;&#x7528;&#x548C;&#x7B80;&#x5355;&#x7684;&#x662F;&#x901A;&#x8FC7;Handler&#x6765;&#x6269;&#x5C55;&#x3002;DEMO&#x91CC;&#x9762;&#x5C55;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x901A;&#x8FC7;Handler&#x6269;&#x5C55;&#x6765;&#x5B9E;&#x73B0;&#x9274;&#x6743;&#x3002;&#x8BE6;&#x7EC6;&#x7684;&#x4EE3;&#x7801;&#x7EC6;&#x8282;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x7684;&#x7AE0;&#x8282;&quot;DEMO&#x529F;&#x80FD;&#x8BF4;&#x660E;&quot;&#x3002;</p>
+<h2 id="&#x90E8;&#x7F72;&#x793A;&#x4F8B;">&#x90E8;&#x7F72;&#x793A;&#x4F8B;</h2>
 <p><img src="../assets/deployment.png" alt=""></p>
-<h1 id="&#x56DB;&#x3001;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;">&#x56DB;&#x3001;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</h1>
-<h2 id="1reactive-&#x9ED8;&#x8BA4;">1.reactive (&#x9ED8;&#x8BA4;)</h2>
+<h2 id="&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;">&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</h2>
+<h3 id="reactive-&#x9ED8;&#x8BA4;">reactive (&#x9ED8;&#x8BA4;)</h3>
 <p>Edge Service&#x9ED8;&#x8BA4;&#x5DE5;&#x4F5C;&#x4E8E;&#x9AD8;&#x6027;&#x80FD;&#x7684;reactive&#x6A21;&#x5F0F;&#xFF0C;&#x6B64;&#x6A21;&#x5F0F;&#x8981;&#x6C42;&#x5DE5;&#x4F5C;&#x4E8E;Edge Service&#x8F6C;&#x53D1;&#x6D41;&#x7A0B;&#x4E2D;&#x7684;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E0D;&#x80FD;&#x6709;&#x4EFB;&#x4F55;&#x7684;&#x963B;&#x585E;&#x64CD;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x4E0D;&#x9650;&#x4E8E;&#xFF1A;</p>
 <ul>
 <li><p>&#x8FDC;&#x7A0B;&#x540C;&#x6B65;&#x8C03;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#x540C;&#x6B65;&#x67E5;&#x8BE2;&#x6570;&#x636E;&#x5E93;&#x3001;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x6216;&#x662F;&#x540C;&#x6B65;&#x67E5;&#x8BE2;&#x8FDC;&#x7A0B;&#x7F13;&#x5B58;&#x7B49;&#x7B49;</p>
@@ -1179,7 +1255,7 @@
 </ul>
 <p>Edge Service&#x7684;&#x5E95;&#x5C42;&#x662F;&#x57FA;&#x4E8E;netty&#x7684;vertx&#xFF0C;&#x4EE5;&#x4E0A;&#x7EA6;&#x675F;&#x5373;&#x662F;netty&#x7684;reactive&#x6A21;&#x5F0F;&#x7EA6;&#x675F;&#x3002;</p>
 <p><img src="../assets/reactive.png" alt=""></p>
-<h2 id="2&#x7EBF;&#x7A0B;&#x6C60;">2.&#x7EBF;&#x7A0B;&#x6C60;</h2>
+<h3 id="&#x7EBF;&#x7A0B;&#x6C60;">&#x7EBF;&#x7A0B;&#x6C60;</h3>
 <p>&#x5982;&#x679C;&#x4E1A;&#x52A1;&#x6A21;&#x578B;&#x65E0;&#x6CD5;&#x6EE1;&#x8DB3;reactive&#x8981;&#x6C42;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x7EBF;&#x7A0B;&#x6C60;&#x6A21;&#x5F0F;&#x3002;</p>
 <p>&#x6B64;&#x65F6;&#x9700;&#x8981;&#x5728;Edge Service&#x7684;microservice.yaml&#x4E2D;&#x914D;&#x7F6E;&#xFF1A;</p>
 <pre><code>servicecomb:
@@ -1187,17 +1263,7 @@
     default: servicecomb.executor.groupThreadPool
 </code></pre><p>&#x8FD9;&#x91CC;&#x7684;servicecomb.executor.groupThreadPool&#x662F;ServiceComb&#x5185;&#x7F6E;&#x7684;&#x9ED8;&#x8BA4;&#x7EBF;&#x7A0B;&#x6C60;&#x5BF9;&#x5E94;&#x7684;spring bean&#x7684;beanId&#xFF1B;&#x4E1A;&#x52A1;&#x53EF;&#x4EE5;&#x5B9A;&#x5236;&#x81EA;&#x5DF1;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x5E76;&#x58F0;&#x660E;&#x4E3A;&#x4E00;&#x4E2A;bean&#xFF0C;&#x5176;beanId&#x4E5F;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x5230;&#x8FD9;&#x91CC;&#x3002;</p>
 <p><img src="../assets/threadPool.png" alt=""></p>
-<h2 id="&#x4E94;&#x3001;&#x8C03;&#x7528;&#x6D41;&#x7A0B;">&#x4E94;&#x3001;&#x8C03;&#x7528;&#x6D41;&#x7A0B;</h2>
-<p>&#x84DD;&#x8272;&#x80CC;&#x666F;&#x90E8;&#x5206;&#x5728;Eventloop&#x7EBF;&#x7A0B;&#x4E2D;&#x6267;&#x884C;</p>
-<p>&#x9EC4;&#x8272;&#x80CC;&#x666F;&#x90E8;&#x5206;&#xFF1A;</p>
-<ul>
-<li><p>&#x5982;&#x679C;&#x5DE5;&#x4F5C;&#x4E8E;reactive&#x6A21;&#x5F0F;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x5728;Eventloop&#x7EBF;&#x7A0B;&#x6267;&#x884C;</p>
-</li>
-<li><p>&#x5982;&#x679C;&#x5DE5;&#x4F5C;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x6A21;&#x5F0F;&#xFF0C;&#x5219;&#x5728;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x6267;&#x884C;</p>
-</li>
-</ul>
-<p><img src="../assets/workFlow.png" alt=""></p>
-<h2 id="&#x516D;&#x3001;&#x5F00;&#x53D1;&#x624B;&#x518C;">&#x516D;&#x3001;&#x5F00;&#x53D1;&#x624B;&#x518C;</h2>
+<h2 id="demo&#x529F;&#x80FD;&#x8BF4;&#x660E;">DEMO&#x529F;&#x80FD;&#x8BF4;&#x660E;</h2>
 <p>&#x8BF7;&#x53C2;&#x8003;github&#x4E0A;&#x7684;edge service demo&#xFF1A;</p>
 <p><a href="https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge" target="_blank">https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge</a></p>
 <p>&#x8BE5;demo&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x5DE5;&#x7A0B;&#xFF1A;</p>
@@ -1211,7 +1277,7 @@
 <li>hiboard-model&#x975E;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E9B;&#x516C;&#x5171;&#x7684;model</li>
 </ul>
 <p>&#x901A;&#x8FC7;edge-service&#x8BBF;&#x95EE;&#x5FAE;&#x670D;&#x52A1;business&#x7684;&#x4E0D;&#x540C;&#x7248;&#x672C;&#xFF0C;&#x5E76;&#x786E;&#x8BA4;&#x662F;&#x7531;&#x6B63;&#x786E;&#x7684;&#x5B9E;&#x4F8B;&#x5904;&#x7406;&#x7684;&#x3002;</p>
-<h2 id="1&#x6CE8;&#x518C;dispatcher">1.&#x6CE8;&#x518C;Dispatcher</h2>
+<h3 id="1&#x6CE8;&#x518C;dispatcher">1.&#x6CE8;&#x518C;Dispatcher</h3>
 <p>&#x5B9E;&#x73B0;&#x63A5;&#x53E3;org.apache.servicecomb.transport.rest.vertx.VertxHttpDispatcher&#xFF0C;&#x6216;&#x4ECE;org.apache.servicecomb.edge.core.AbstractEdgeDispatcher&#x7EE7;&#x627F;&#xFF0C;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;dispatcher&#x529F;&#x80FD;&#x3002;</p>
 <p>&#x5B9E;&#x73B0;&#x7C7B;&#x901A;&#x8FC7;java&#x6807;&#x51C6;&#x7684;SPI&#x673A;&#x5236;&#x6CE8;&#x518C;&#x5230;&#x7CFB;&#x7EDF;&#x4E2D;&#x53BB;&#x3002;</p>
 <p>Dispatcher&#x9700;&#x8981;&#x5B9E;&#x73B0;2&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
@@ -1238,7 +1304,7 @@
 <li><p><em>&#x5982;&#x679C;A&#x5904;&#x7406;&#x5B8C;&#xFF0C;&#x7136;&#x540E;&#x8C03;&#x7528;&#x4E86;RoutingContext.next()&#xFF0C;&#x5219;&#x4F1A;&#x5C06;&#x8BF7;&#x6C42;&#x8F6C;&#x79FB;&#x7ED9;B&#x5904;&#x7406;</em></p>
 </li>
 </ul>
-<h2 id="2&#x8F6C;&#x53D1;&#x8BF7;&#x6C42;">2.&#x8F6C;&#x53D1;&#x8BF7;&#x6C42;</h2>
+<h3 id="2&#x8F6C;&#x53D1;&#x8BF7;&#x6C42;">2.&#x8F6C;&#x53D1;&#x8BF7;&#x6C42;</h3>
 <p>&#x6CE8;&#x518C;&#x8DEF;&#x7531;&#x65F6;&#xFF0C;&#x6307;&#x5B9A;&#x4E86;&#x4F7F;&#x7528;&#x54EA;&#x4E2A;&#x65B9;&#x6CD5;&#x6765;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#xFF08;&#x4E0B;&#x9762;&#x4F7F;&#x7528;onRequest&#x6765;&#x6307;&#x4EE3;&#x8BE5;&#x65B9;&#x6CD5;&#xFF09;&#xFF0C;&#x5728;onRequest&#x4E2D;&#x5B9E;&#x73B0;&#x8F6C;&#x53D1;&#x903B;&#x8F91;&#x3002;</p>
 <p>&#x65B9;&#x6CD5;&#x539F;&#x578B;&#x4E3A;&#xFF1A;</p>
 <pre><code>void onRequest(RoutingContext context)
@@ -1258,7 +1324,7 @@
  edgeInvocation.edgeInvoke();
 </code></pre><p>edgeInvoke&#x8C03;&#x7528;&#x5185;&#x90E8;&#xFF0C;&#x4F1A;&#x4F5C;&#x4E3A;ServiceComb&#x6807;&#x51C6;consumer&#x53BB;&#x8F6C;&#x53D1;&#x8C03;&#x7528;&#x3002;</p>
 <p>&#x4F5C;&#x4E3A;&#x6807;&#x51C6;consumer&#xFF0C;&#x610F;&#x5473;&#x7740;ServiceComb&#x6240;&#x6709;&#x6807;&#x51C6;&#x7684;&#x6CBB;&#x7406;&#x80FD;&#x529B;&#x5728;&#x8FD9;&#x91CC;&#x90FD;&#x662F;&#x751F;&#x6548;&#x7684;&#x3002;</p>
-<h2 id="3&#x8BBE;&#x7F6E;&#x517C;&#x5BB9;&#x89C4;&#x5219;">3.&#x8BBE;&#x7F6E;&#x517C;&#x5BB9;&#x89C4;&#x5219;</h2>
+<h3 id="3&#x8BBE;&#x7F6E;&#x517C;&#x5BB9;&#x89C4;&#x5219;">3.&#x8BBE;&#x7F6E;&#x517C;&#x5BB9;&#x89C4;&#x5219;</h3>
 <p>&#x4E0D;&#x540C;&#x7684;&#x4E1A;&#x52A1;&#x53EF;&#x80FD;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x517C;&#x5BB9;&#x89C4;&#x5212;&#xFF0C;servicecomb&#x9ED8;&#x8BA4;&#x7684;&#x517C;&#x5BB9;&#x89C4;&#x5219;&#xFF0C;&#x8981;&#x6C42;&#x6240;&#x6709;&#x65B0;&#x7248;&#x672C;&#x517C;&#x5BB9;&#x65E7;&#x7248;&#x672C;&#x3002;&#x5982;&#x679C;&#x6EE1;&#x8DB3;&#x8FD9;&#x4E2A;&#x8981;&#x6C42;&#xFF0C;&#x5219;&#x4E0D;&#x5FC5;&#x505A;&#x4EFB;&#x4F55;&#x7279;&#x6B8A;&#x7684;&#x8BBE;&#x7F6E;&#x3002;</p>
 <p>&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x5178;&#x578B;&#x7684;&#x89C4;&#x5212;&#xFF1A;</p>
 <ul>
@@ -1278,7 +1344,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
 </code></pre><p>versionMapper&#x7684;&#x4F5C;&#x7528;&#x662F;&#x5C06;v1&#x6216;&#x662F;v2&#x8FD9;&#x6837;&#x7684;&#x4E32;&#xFF0C;&#x8F6C;&#x4E3A;1.0.0-2.0.0&#x6216;2.0.0-3.0.0&#x8FD9;&#x6837;&#x7684;&#x517C;&#x5BB9;&#x89C4;&#x5219;&#x3002;</p>
 <p><strong>&#x6CE8;&#x610F;&#xFF1A;</strong></p>
 <p>&#x63A5;&#x53E3;&#x4E0D;&#x517C;&#x5BB9;&#x4F1A;&#x5BFC;&#x81F4;&#x975E;&#x5E38;&#x591A;&#x7684;&#x95EE;&#x9898;&#x3002;java chassis&#x8981;&#x6C42;&#x9AD8;&#x7248;&#x672C;&#x670D;&#x52A1;&#x517C;&#x5BB9;&#x4F4E;&#x7248;&#x672C;&#x670D;&#x52A1;&#xFF0C;&#x53EA;&#x5141;&#x8BB8;&#x589E;&#x52A0;&#x63A5;&#x53E3;&#x4E0D;&#x5141;&#x8BB8;&#x5220;&#x9664;&#x63A5;&#x53E3;&#x3002;&#x5728;&#x589E;&#x52A0;&#x63A5;&#x53E3;&#x540E;&#xFF0C;&#x5FC5;&#x987B;&#x589E;&#x52A0;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x7248;&#x672C;&#x53F7;&#x3002;&#x5728;&#x5F00;&#x53D1;&#x9636;&#x6BB5;&#xFF0C;&#x63A5;&#x53E3;&#x53D8;&#x66F4;&#x9891;&#x7E41;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x5F80;&#x5F80;&#x5FD8;&#x8BB0;&#x8FD9;&#x4E2A;&#x89C4;&#x5219;&#x3002;&#x5F53;&#x8FD9;&#x4E2A;&#x7EA6;&#x675F;&#x88AB;&#x6253;&#x7834;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x6E05;&#x7406;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x91CD;&#x542F;&#x5FAE;&#x670D;&#x52A1;&#x548C;Edge Service(&#x4EE5;&#x53CA;&#x4F9D;&#x8D56;&#x4E8E;&#x8BE5;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x5176;&#x4ED6;&#x670D;&#x52A1;)&#x3002;&#x5426;&#x5219;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x8BF7;&#x6C42;&#x8F6C;&#x53D1;&#x5931;&#x8D25;&#x7B49;&#x60C5;&#x51B5;&#x3002;</p>
-<h2 id="4&#x9274;&#x6743;">4.&#x9274;&#x6743;</h2>
+<h3 id="4&#x9274;&#x6743;">4.&#x9274;&#x6743;</h3>
 <p>Edge Service&#x662F;&#x7CFB;&#x7EDF;&#x7684;&#x8FB9;&#x754C;&#xFF0C;&#x5BF9;&#x4E8E;&#x5F88;&#x591A;&#x8BF7;&#x6C42;&#x9700;&#x8981;&#x6267;&#x884C;&#x9274;&#x6743;&#x903B;&#x8F91;&#x3002;</p>
 <p>&#x57FA;&#x4E8E;&#x6807;&#x51C6;&#x7684;ServiceComb&#x673A;&#x5236;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;handler&#x6765;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x3002;</p>
 <p>&#x6700;&#x7B80;&#x5355;&#x7684;&#x793A;&#x610F;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
@@ -1339,12 +1405,12 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
 
             
                 
-                <a href="zuul.html" class="navigation navigation-prev " aria-label="Previous page: 使用zuul做边缘服务">
+                <a href="open-service.html" class="navigation navigation-prev " aria-label="Previous page: 服务能力开放">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="secret-field.html" class="navigation navigation-next " aria-label="Next page: 定制序列化和反序列化方法">
+                <a href="nginx.html" class="navigation navigation-next " aria-label="Next page: 使用confd和Nginx做边缘服务">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1355,7 +1421,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用ServiceComb SDK开发边缘服务","level":"1.6.3","depth":2,"next":{"title":"定制序列化和反序列化方法","level":"1.6.4","depth":2,"path":"edge/secret-field.md","ref":"edge/secret-field.md","articles":[]},"previous":{"title":"使用zuul做边缘服务","level":"1.6.2","depth":2,"path":"edge/zuul.md","ref":"edge/zuul.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"edge/by-servicecomb-sdk.md","mtime":"2018-05-22T03:45:00.408Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-25T06:20:40.055Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"使用Edge Service做边缘服务","level":"1.6.1","depth":2,"next":{"title":"使用confd和Nginx做边缘服务","level":"1.6.2","depth":2,"path":"edge/nginx.md","ref":"edge/nginx.md","articles":[]},"previous":{"title":"服务能力开放","level":"1.6","depth":1,"path":"edge/open-service.md","ref":"edge/open-service.md","articles":[{"title":"使用Edge Service做边缘服务","level":"1.6.1","depth":2,"path":"edge/by-servicecomb-sdk.md","ref":"edge/by-servicecomb-sdk.md","articles":[]},{"title":"使用confd和Nginx做边缘服务","level":"1.6.2","depth":2,"path":"edge/nginx.md","ref":"edge/nginx.md","articles":[]},{"title":"使用zuul做边缘服务","level":"1.6.3","depth":2,"path":"edge/zuul.md","ref":"edge/zuul.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"edge/by-servicecomb-sdk.md","mtime":"2018-05-25T10:35:00.696Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-26T01:40:34.483Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
