@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>支持的数据类型 · GitBook</title>
+        <title>接口定义和数据类型 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="service-configuration.html" />
+    <link rel="next" href="listen-address-and-publish-address.html" />
     
     
-    <link rel="prev" href="listen-address-and-publish-address.html" />
+    <link rel="prev" href="transparent-rpc.html" />
     
 
     </head>
@@ -280,12 +280,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.8" data-path="listen-address-and-publish-address.html">
+        <li class="chapter active" data-level="1.3.8" data-path="interface-constraints.html">
             
-                <a href="listen-address-and-publish-address.html">
+                <a href="interface-constraints.html">
             
                     
-                    服务监听地址和发布地址
+                    接口定义和数据类型
             
                 </a>
             
@@ -293,12 +293,12 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.9" data-path="interface-constraints.html">
+        <li class="chapter " data-level="1.3.9" data-path="listen-address-and-publish-address.html">
             
-                <a href="interface-constraints.html">
+                <a href="listen-address-and-publish-address.html">
             
                     
-                    支持的数据类型
+                    服务监听地址和发布地址
             
                 </a>
             
@@ -830,6 +830,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.5.15" data-path="../general-development/context.html">
+            
+                <a href="../general-development/context.html">
+            
+                    
+                    使用Context传递控制消息
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -1129,7 +1142,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >支持的数据类型</a>
+        <a href=".." >接口定义和数据类型</a>
     </h1>
 </div>
 
@@ -1144,8 +1157,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x63A5;&#x53E3;&#x7EA6;&#x675F;&#x8BF4;&#x660E;">&#x63A5;&#x53E3;&#x7EA6;&#x675F;&#x8BF4;&#x660E;</h2>
-<p>ServiceComb-Java-Chassis&#x5BF9;&#x4E8E;&#x63A5;&#x53E3;&#x7684;&#x4F7F;&#x7528;&#x7EA6;&#x675F;&#x5EFA;&#x7ACB;&#x5728;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x539F;&#x5219;&#x4E0A;&#xFF1A;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x5373;&#x63A5;&#x53E3;&#x4F7F;&#x7528;&#x8BF4;&#x660E;&#xFF0C;&#x4E0D;&#x7528;&#x901A;&#x8FC7;&#x67E5;&#x770B;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#xFF0C;&#x5C31;&#x80FD;&#x8BC6;&#x522B;&#x5982;&#x4F55;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x7AD9;&#x5728;&#x4F7F;&#x7528;&#x8005;&#x8FD9;&#x8FB9;&#x7684;&#xFF0C;&#x4EE5;&#x66F4;&#x5BB9;&#x6613;&#x88AB;&#x4F7F;&#x7528;&#x4F5C;&#x4E3A;&#x53C2;&#x8003;&#x3002;&#x8FD9;&#x4E2A;&#x539F;&#x5219;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x7684;&#x7406;&#x89E3;&#x4E5F;&#x662F;&#x6709;&#x5DEE;&#x5F02;&#x7684;&#x3002;</p>
+                                <h1 id="&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x548C;&#x6570;&#x636E;&#x7C7B;&#x578B;">&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x548C;&#x6570;&#x636E;&#x7C7B;&#x578B;</h1>
+<h2 id="&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x8981;&#x6C42;">&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x8981;&#x6C42;</h2>
+<p>ServiceComb-Java-Chassis&#x5BF9;&#x4E8E;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x8981;&#x6C42;&#x5EFA;&#x7ACB;&#x5728;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x539F;&#x5219;&#x4E0A;&#xFF1A;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x5373;&#x63A5;&#x53E3;&#x4F7F;&#x7528;&#x8BF4;&#x660E;&#xFF0C;&#x4E0D;&#x7528;&#x901A;&#x8FC7;&#x67E5;&#x770B;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#xFF0C;&#x5C31;&#x80FD;&#x8BC6;&#x522B;&#x5982;&#x4F55;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x3002;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x7AD9;&#x5728;&#x4F7F;&#x7528;&#x8005;&#x8FD9;&#x8FB9;&#x7684;&#xFF0C;&#x4EE5;&#x66F4;&#x5BB9;&#x6613;&#x88AB;&#x4F7F;&#x7528;&#x4F5C;&#x4E3A;&#x53C2;&#x8003;&#x3002;</p>
 <p>&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
 <pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> Person <span class="hljs-title">query</span><span class="hljs-params">(String id)</span></span>;
 <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">query</span><span class="hljs-params">(String id)</span></span>;
@@ -1162,7 +1176,7 @@
 <pre><code>@SupportedAnnotations
 ResponseType methodName(RequestType...)
 </code></pre><p>&#x4E0D;&#x80FD;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;&#x3001;&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x5728;&#x63A5;&#x53E3;&#x539F;&#x578B;&#x672A;&#x58F0;&#x660E;&#x7684;&#x9519;&#x8BEF;&#x7801;&#x548C;&#x8F93;&#x51FA;&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x58F0;&#x660E;&#x9519;&#x8BEF;&#x7801;&#xFF0C;&#x7F3A;&#x7701;&#x7684;&#x9519;&#x8BEF;&#x7801;&#x9664;&#x5916;&#xFF0C;&#x6BD4;&#x5982;HTTP &#x7684;200&#xFF09;&#x3002;</p>
-<p>&#x901A;&#x5E38;&#xFF0C;&#x7CFB;&#x7EDF;&#x7EA6;&#x675F;&#x8D8A;&#x591A;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x66F4;&#x52A0;&#x5BB9;&#x6613;&#x5BF9;&#x7CFB;&#x7EDF;&#x8FDB;&#x884C;&#x7EDF;&#x4E00;&#x7684;&#x7BA1;&#x63A7;&#x548C;&#x6CBB;&#x7406;&#xFF1B;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x8D8A;&#x81EA;&#x7531;&#xFF0C;&#x5B9E;&#x73B0;&#x4E1A;&#x52A1;&#x529F;&#x80FD;&#x5219;&#x66F4;&#x52A0;&#x5FEB;&#x901F;&#x3002;&#x9700;&#x8981;&#x5728;&#x8FD9;&#x4E24;&#x65B9;&#x9762;&#x53D6;&#x5F97;&#x4E00;&#x4E9B;&#x5E73;&#x8861;&#x3002;ServiceComb-Java-Chassis&#x662F;&#x6BD4;gRPC&#x8981;&#x7075;&#x6D3B;&#x7684;&#x591A;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x53BB;&#x6389;&#x4E86;Spring MVC&#x7684;&#x4E00;&#x4E9B;&#x4E0D;&#x5E38;&#x7528;&#x7684;&#x6269;&#x5C55;&#x3002;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x5728;ServiceComb-Java-Chassis&#x8BA8;&#x8BBA;&#x533A;&#x53CD;&#x9988;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#x671F;&#x671B;&#x652F;&#x6301;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x66F4;&#x597D;&#x7684;&#x7EF4;&#x62A4;&#x8FD9;&#x4E2A;&#x5E73;&#x8861;&#x3002;&#x671F;&#x671B;&#x8FD9;&#x4E2A;&#x8BA8;&#x8BBA;&#x662F;&#x56F4;&#x7ED5;&#x67D0;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#x6765;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5982;&#x4F55;&#x66F4;&#x597D;&#x7684;&#x8FDB;&#x884C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5177;&#x4F53;&#x7684;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4F7F;&#x7528;Object&#x6765;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#xFF0C;&#x7CFB;&#x7EDF;&#x7EA6;&#x675F;&#x8D8A;&#x591A;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x66F4;&#x52A0;&#x5BB9;&#x6613;&#x5BF9;&#x7CFB;&#x7EDF;&#x8FDB;&#x884C;&#x7EDF;&#x4E00;&#x7684;&#x7BA1;&#x63A7;&#x548C;&#x6CBB;&#x7406;&#xFF1B;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x8D8A;&#x81EA;&#x7531;&#xFF0C;&#x5B9E;&#x73B0;&#x4E1A;&#x52A1;&#x529F;&#x80FD;&#x5219;&#x66F4;&#x52A0;&#x5FEB;&#x901F;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x8FD9;&#x4E24;&#x65B9;&#x9762;&#x53D6;&#x5F97;&#x4E00;&#x4E9B;&#x5E73;&#x8861;&#x3002;ServiceComb-Java-Chassis&#x662F;&#x6BD4;gRPC&#x8981;&#x7075;&#x6D3B;&#x5F88;&#x591A;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x53BB;&#x6389;&#x4E86;Spring MVC&#x7684;&#x4E00;&#x4E9B;&#x4E0D;&#x5E38;&#x7528;&#x7684;&#x6269;&#x5C55;&#x3002;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x4EE5;&#x5728;ServiceComb-Java-Chassis&#x8BA8;&#x8BBA;&#x533A;&#x53CD;&#x9988;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#x671F;&#x671B;&#x652F;&#x6301;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x66F4;&#x597D;&#x7684;&#x7EF4;&#x62A4;&#x8FD9;&#x4E2A;&#x5E73;&#x8861;&#x3002;&#x671F;&#x671B;&#x8FD9;&#x4E2A;&#x8BA8;&#x8BBA;&#x662F;&#x56F4;&#x7ED5;&#x67D0;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#x6765;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5982;&#x4F55;&#x66F4;&#x597D;&#x7684;&#x8FDB;&#x884C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5177;&#x4F53;&#x7684;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4F7F;&#x7528;Object&#x6765;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x3002;</p>
 <h2 id="&#x8BE6;&#x7EC6;&#x7684;&#x7EA6;&#x675F;&#x5217;&#x8868;">&#x8BE6;&#x7EC6;&#x7684;&#x7EA6;&#x675F;&#x5217;&#x8868;</h2>
 <p>&#x5F00;&#x53D1;&#x8005;&#x4E0D;&#x80FD;&#x5728;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x7C7B;&#x578B;&#xFF1A;</p>
 <ul>
@@ -1182,6 +1196,33 @@ ResponseType methodName(RequestType...)
 <p>&#x5F00;&#x53D1;&#x8005;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x8BB0;&#x4E0D;&#x4F4F;&#x8FD9;&#x4E9B;&#x7EA6;&#x675F;&#xFF0C;&#x7A0B;&#x5E8F;&#x4F1A;&#x5728;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x68C0;&#x67E5;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x7ED9;&#x4E0E;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x3002;</p>
 <p>&#x9664;&#x4E86;&#x4E0A;&#x9762;&#x4E00;&#x4E9B;&#x7C7B;&#x578B;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x5C3D;&#x53EF;&#x80FD;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x5305;&#x542B;&#x7279;&#x6B8A;&#x5185;&#x90E8;&#x72B6;&#x6001;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x4E9B;&#x7C7B;&#x578B;&#x4F1A;&#x7ED9;&#x5F00;&#x53D1;&#x8005;&#x4EE3;&#x7801;&#x5F88;&#x5927;&#x7684;&#x56F0;&#x6270;&#x3002;&#x6BD4;&#x5982;java.math.BigDecimal&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x53EF;&#x80FD;&#x4EE5;&#x4E3A;&#x4ED6;&#x4F1A;&#x4EE5;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#x4F20;&#x8F93;&#xFF0C;&#x5B9E;&#x9645;&#x4E0D;&#x7136;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x67D0;&#x4E9B;&#x5185;&#x90E8;&#x72B6;&#x6001;&#x6CA1;&#x6B63;&#x786E;&#x8BA1;&#x7B97;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x5E76;&#x4E0D;&#x662F;&#x7528;&#x6237;&#x9884;&#x671F;&#x7684;&#x503C;&#x3002;</p>
 <p>&#x603B;&#x4E4B;&#xFF0C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x9700;&#x8981;&#x80FD;&#x591F;&#x4F7F;&#x7528;&#x7B80;&#x5355;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x63CF;&#x8FF0;&#xFF0C;&#x4E00;&#x76EE;&#x4E86;&#x7136;&#x5C31;&#x662F;&#x6700;&#x597D;&#x7684;&#x3002;&#x8FD9;&#x4E2A;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x534F;&#x8BAE;&#x91CC;&#x9762;&#x90FD;&#x652F;&#x6301;&#x7684;&#x5F88;&#x597D;&#xFF0C;&#x957F;&#x671F;&#x6765;&#x770B;&#xFF0C;&#x53EF;&#x4EE5;&#x5927;&#x5927;&#x51CF;&#x5C11;&#x5F00;&#x53D1;&#x8005;&#x8054;&#x8C03;&#x6C9F;&#x901A;&#x548C;&#x540E;&#x671F;&#x91CD;&#x6784;&#x7684;&#x6210;&#x672C;&#x3002;</p>
+<h3 id="&#x5173;&#x4E8E;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x63A5;&#x53E3;&#x53D8;&#x66F4;">&#x5173;&#x4E8E;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x63A5;&#x53E3;&#x53D8;&#x66F4;</h3>
+<p>&#x63A5;&#x53E3;&#x540D;&#x79F0;&#x3001;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x3001;&#x53C2;&#x6570;&#x987A;&#x5E8F;&#x3001;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x53D8;&#x66F4;&#x90FD;&#x5C5E;&#x4E8E;&#x63A5;&#x53E3;&#x53D8;&#x66F4;&#x3002;ServiceComb&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x6839;&#x636E;&#x7248;&#x672C;&#x53F7;&#x68C0;&#x6D4B;&#x63A5;&#x53E3;&#x53D8;&#x5316;&#xFF0C;&#x63A5;&#x53E3;&#x53D8;&#x5316;&#x8981;&#x6C42;&#x4FEE;&#x6539;&#x7248;&#x672C;&#x53F7;&#x3002;ServiceComb&#x8BC6;&#x522B;&#x63A5;&#x53E3;&#x662F;&#x5426;&#x53D8;&#x5316;&#x662F;&#x901A;&#x8FC7;&#x4EE3;&#x7801;&#x751F;&#x6210;&#x7684;&#x5951;&#x7EA6;&#x5185;&#x5BB9;&#xFF0C;&#x6709;&#x4E9B;&#x4E0D;&#x89C4;&#x8303;&#x7684;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x5728;&#x4EE3;&#x7801;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x751F;&#x6210;&#x7684;&#x5951;&#x7EA6;&#x4E0D;&#x540C;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>public void get(Person p)
+class Person {
+  private String value;
+  private boolean isOk;
+  public String getName() {return value}
+  public boolean isOk() {return isOK}
+}
+</code></pre><p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x901A;&#x8FC7;access method&#x5B9A;&#x4E49;&#x4E86;&quot;name&quot;&#x548C;&quot;ok&quot;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x548C;&#x5B9E;&#x9645;&#x7684;&#x5B57;&#x6BB5;&quot;value&quot;&#x548C;&quot;isOk&quot;&#x4E0D;&#x540C;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x6BCF;&#x6B21;&#x542F;&#x52A8;&#x751F;&#x6210;&#x7684;&#x5951;&#x7EA6;&#x4E0D;&#x4E00;&#x6837;&#x3002;&#x9700;&#x8981;&#x5C06;&#x4EE3;&#x7801;&#x8C03;&#x6574;&#x4E3A;&#x7B26;&#x5408;JAVA Bean&#x89C4;&#x8303;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
+<pre><code>public void get(Person p)
+class Person {
+  private String name;
+  private boolean ok;
+  public String getName() {return name}
+  public boolean isOk() {return ok}
+}
+</code></pre><p>&#x6216;&#x8005;&#x901A;&#x8FC7;JSON&#x6807;&#x6CE8;&#xFF0C;&#x663E;&#x793A;&#x7684;&#x6307;&#x660E;&#x5B57;&#x6BB5;&#x987A;&#x5E8F;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code>public void get(Person p)
+@JsonPropertyOrder({&quot;name&quot;, &quot;ok&quot;})
+class Person {
+  private String value;
+  private boolean isOk;
+  public String getName() {return value}
+  public boolean isOk() {return isOK}
+}
+</code></pre><p>&#x8003;&#x8651;&#x5230;&#x63A5;&#x53E3;&#x53D8;&#x66F4;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5EFA;&#x8BAE;&#x5728;&#x8FDB;&#x884C;&#x5BF9;&#x5916;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C3D;&#x53EF;&#x80FD;&#x4E0D;&#x8981;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;&#x8F6F;&#x4EF6;&#x63D0;&#x4F9B;&#x7684;&#x7C7B;&#x4F5C;&#x4E3A;&#x63A5;&#x53E3;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;POJO&#x7C7B;&#x3002;&#x4E00;&#x65B9;&#x9762;&#x5347;&#x7EA7;&#x4E09;&#x65B9;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x80FD;&#x611F;&#x77E5;&#x4E0D;&#x5230;&#x63A5;&#x53E3;&#x53D8;&#x5316;&#xFF1B;&#x53E6;&#x5916;&#x4E00;&#x65B9;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF0C;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x7B2C;&#x4E09;&#x65B9;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x89C4;&#x907F;&#x3002;&#x6BD4;&#x5982;&#xFF1A;java.lang.Timestamp, org.joda.time.JodaTime&#x7B49;&#x3002;</p>
 <h2 id="&#x534F;&#x8BAE;&#x4E0A;&#x7684;&#x5DEE;&#x5F02;">&#x534F;&#x8BAE;&#x4E0A;&#x7684;&#x5DEE;&#x5F02;</h2>
 <p>&#x5C3D;&#x7BA1;ServiceComb-Java-Chassis&#x5B9E;&#x73B0;&#x4E86;&#x4E0D;&#x540C;&#x534F;&#x8BAE;&#x4E4B;&#x95F4;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x7684;&#x900F;&#x660E;&#xFF0C;&#x53D7;&#x9650;&#x4E8E;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x7684;&#x9650;&#x5236;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x534F;&#x8BAE;&#x5B58;&#x5728;&#x5C11;&#x91CF;&#x5DEE;&#x5F02;&#x3002;</p>
 <ul>
@@ -1252,12 +1293,12 @@ ResponseType methodName(RequestType...)
 
             
                 
-                <a href="listen-address-and-publish-address.html" class="navigation navigation-prev " aria-label="Previous page: 服务监听地址和发布地址">
+                <a href="transparent-rpc.html" class="navigation navigation-prev " aria-label="Previous page: 用透明RPC开发微服务">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="service-configuration.html" class="navigation navigation-next " aria-label="Next page: 服务配置">
+                <a href="listen-address-and-publish-address.html" class="navigation navigation-next " aria-label="Next page: 服务监听地址和发布地址">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1268,7 +1309,7 @@ ResponseType methodName(RequestType...)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"支持的数据类型","level":"1.3.9","depth":2,"next":{"title":"服务配置","level":"1.3.10","depth":2,"path":"build-provider/service-configuration.md","ref":"build-provider/service-configuration.md","articles":[{"title":"负载均衡策略","level":"1.3.10.1","depth":3,"path":"build-provider/configuration/lb-strategy.md","ref":"build-provider/configuration/lb-strategy.md","articles":[]},{"title":"限流策略","level":"1.3.10.2","depth":3,"path":"build-provider/configuration/ratelimite-strategy.md","ref":"build-provider/configuration/ratelimite-strategy.md","articles":[]},{"title":"降级策略","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},{"title":"参数效验","level":"1.3.10.4","depth":3,"path":"build-provider/configuration/parameter-validator.md","ref":"build-provider/configuration/parameter-validator.md","articles":[]}]},"previous":{"title":"服务监听地址和发布地址","level":"1.3.8","depth":2,"path":"build-provider/listen-address-and-publish-address.md","ref":"build-provider/listen-address-and-publish-address.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-provider/interface-constraints.md","mtime":"2018-05-22T03:45:00.384Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-19T03:29:18.490Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"接口定义和数据类型","level":"1.3.8","depth":2,"next":{"title":"服务监听地址和发布地址","level":"1.3.9","depth":2,"path":"build-provider/listen-address-and-publish-address.md","ref":"build-provider/listen-address-and-publish-address.md","articles":[]},"previous":{"title":"用透明RPC开发微服务","level":"1.3.7","depth":2,"path":"build-provider/transparent-rpc.md","ref":"build-provider/transparent-rpc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-provider/interface-constraints.md","mtime":"2018-06-20T04:08:31.313Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-06-27T06:46:40.062Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
