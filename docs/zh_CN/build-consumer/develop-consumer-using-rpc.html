@@ -62,7 +62,7 @@
     <link rel="next" href="with-contract.html" />
     
     
-    <link rel="prev" href="using-resttemplate.html" />
+    <link rel="prev" href="using-AsyncRestTemplate.html" />
     
 
     </head>
@@ -532,7 +532,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.2" data-path="develop-consumer-using-rpc.html">
+        <li class="chapter " data-level="1.4.2" data-path="using-AsyncRestTemplate.html">
+            
+                <a href="using-AsyncRestTemplate.html">
+            
+                    
+                    使用AsynRestTemplate开发服务消费者
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3" data-path="develop-consumer-using-rpc.html">
             
                 <a href="develop-consumer-using-rpc.html">
             
@@ -545,7 +558,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="with-contract.html">
+        <li class="chapter " data-level="1.4.4" data-path="with-contract.html">
             
                 <a href="with-contract.html">
             
@@ -558,7 +571,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="invoke-control.html">
+        <li class="chapter " data-level="1.4.5" data-path="invoke-control.html">
             
                 <a href="invoke-control.html">
             
@@ -572,7 +585,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.4.1" data-path="instance-isolation.html">
+        <li class="chapter " data-level="1.4.5.1" data-path="instance-isolation.html">
             
                 <a href="instance-isolation.html">
             
@@ -585,7 +598,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4.2" data-path="circuit-breaker.html">
+        <li class="chapter " data-level="1.4.5.2" data-path="circuit-breaker.html">
             
                 <a href="circuit-breaker.html">
             
@@ -598,7 +611,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4.3" data-path="flow-control.html">
+        <li class="chapter " data-level="1.4.5.3" data-path="flow-control.html">
             
                 <a href="flow-control.html">
             
@@ -611,7 +624,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4.4" data-path="fault-injection.html">
+        <li class="chapter " data-level="1.4.5.4" data-path="fault-injection.html">
             
                 <a href="fault-injection.html">
             
@@ -1132,7 +1145,39 @@
             
         </li>
     
-        <li class="chapter " data-level="1.10" data-path="../question-and-answer/question_answer.html">
+        <li class="chapter " data-level="1.10" data-path="../references-handlers/intruduction.html">
+            
+                <a href="../references-handlers/intruduction.html">
+            
+                    
+                    处理链参考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../references-handlers/loadbalance.html">
+            
+                <a href="../references-handlers/loadbalance.html">
+            
+                    
+                    负载均衡
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../question-and-answer/question_answer.html">
             
                 <a href="../question-and-answer/question_answer.html">
             
@@ -1146,7 +1191,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.10.1" data-path="../question-and-answer/interface-compatibility.html">
+        <li class="chapter " data-level="1.11.1" data-path="../question-and-answer/interface-compatibility.html">
             
                 <a href="../question-and-answer/interface-compatibility.html">
             
@@ -1209,13 +1254,50 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
+                                <h1 id="&#x4F7F;&#x7528;rpc&#x65B9;&#x5F0F;&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;">&#x4F7F;&#x7528;RPC&#x65B9;&#x5F0F;&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;</h1>
+<h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
 <p>RPC&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x901A;&#x8FC7;&#x5728;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x4E0A;&#x6807;&#x6CE8;&#x6CE8;&#x89E3;&#x6765;&#x751F;&#x6210;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x4EE3;&#x7406;&#xFF0C;&#x4ECE;&#x800C;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x7684;&#x8C03;&#x7528;&#x3002;</p>
 <h2 id="&#x793A;&#x4F8B;&#x4EE3;&#x7801;">&#x793A;&#x4F8B;&#x4EE3;&#x7801;</h2>
 <p>&#x53EA;&#x9700;&#x8981;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x7C7B;&#x578B;&#x7684;&#x6210;&#x5458;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;@RpcReference&#x6807;&#x6CE8;&#x8BE5;&#x6210;&#x5458;&#xFF0C;&#x58F0;&#x660E;&#x4F9D;&#x8D56;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x53CA;schemaId&#xFF0C;&#x5373;&#x53EF;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x8C03;&#x7528;&#xFF0C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x900F;&#x660E;RPC &#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#x793A;&#x4F8B;</li>
+</ul>
 <pre><code class="lang-java"><span class="hljs-meta">@Component</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CodeFirstConsumerMain</span> </span>{
-    <span class="hljs-meta">@RpcReference</span>(microserviceName = <span class="hljs-string">&quot;codefirst&quot;</span>, schemaId = <span class="hljs-string">&quot;codeFirstHello&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PojoConsumerMain</span> </span>{
+
+  <span class="hljs-meta">@RpcReference</span>(microserviceName = <span class="hljs-string">&quot;hello&quot;</span>, schemaId = <span class="hljs-string">&quot;hello&quot;</span>)
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Hello hello;
+
+  <span class="hljs-meta">@RpcReference</span>(microserviceName = <span class="hljs-string">&quot;hello&quot;</span>, schemaId = <span class="hljs-string">&quot;codeFirstCompute&quot;</span>)
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Compute compute;
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
+      <span class="hljs-keyword">throws</span> Exception </span>{
+    init();
+    System.out.println(hello.sayHi(<span class="hljs-string">&quot;Java Chassis&quot;</span>));
+    Person person = <span class="hljs-keyword">new</span> Person();
+    person.setName(<span class="hljs-string">&quot;ServiceComb/Java Chassis&quot;</span>);
+    System.out.println(hello.sayHello(person));
+    System.out.println(<span class="hljs-string">&quot;a=1, b=2, result=&quot;</span> + compute.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span>
+      <span class="hljs-keyword">throws</span> Exception </span>{
+    Log4jUtils.init();
+    BeanUtils.init();
+  }
+}
+</code></pre>
+<blockquote>
+<p>&#x5728;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x5DF2;&#x7ECF;&#x53D6;&#x5F97;&#x4E86;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x7684;&#x670D;&#x52A1;&#x63A5;&#x53E3;<code>Hello &#x3001;Compute</code>&#xFF0C;&#x5E76;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x58F0;&#x660E;&#x4E00;&#x4E2A;<code>Hello</code>&#x7C7B;&#x578B; &#x548C; Compute &#x7C7B;&#x578B;&#x7684;&#x6210;&#x5458;&#x3002;&#x901A;&#x8FC7;&#x5728;<code>hello &#x548C; compute</code>&#x4E0A;&#x4F7F;&#x7528;<code>@RPCReference</code>&#x6CE8;&#x89E3;&#x6307;&#x660E;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x548C;schemaId&#xFF0C;ServiceComb&#x6846;&#x67B6;&#x53EF;&#x4EE5;&#x5728;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x65F6;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x83B7;&#x53D6;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x4EE3;&#x7406;&#x6CE8;&#x5165;&#x5230;hello&#x548C;compute&#x4E2D;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x50CF;&#x8C03;&#x7528;&#x672C;&#x5730;&#x7C7B;&#x4E00;&#x6837;&#x8C03;&#x7528;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x3002;</p>
+</blockquote>
+<ul>
+<li>JAX-RS &#x5BA2;&#x6237;&#x7AEF;&#x793A;&#x4F8B;&#x4EE3;&#x7801; &#xFF1A;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JaxrsConsumerMain</span> </span>{
+
+    <span class="hljs-meta">@RpcReference</span>(microserviceName = <span class="hljs-string">&quot;jaxrs&quot;</span>, schemaId = <span class="hljs-string">&quot;jaxrsHello&quot;</span>)
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Hello hello;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
@@ -1232,7 +1314,10 @@
     }
 }
 </code></pre>
-<p>&#x5728;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x5DF2;&#x7ECF;&#x53D6;&#x5F97;&#x4E86;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x7684;&#x670D;&#x52A1;&#x63A5;&#x53E3;<code>Hello</code>&#xFF0C;&#x5E76;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x58F0;&#x660E;&#x4E00;&#x4E2A;<code>Hello</code>&#x7C7B;&#x578B;&#x7684;&#x6210;&#x5458;&#x3002;&#x901A;&#x8FC7;&#x5728;<code>hello</code>&#x4E0A;&#x4F7F;&#x7528;<code>@RPCReference</code>&#x6CE8;&#x89E3;&#x6307;&#x660E;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x548C;schemaId&#xFF0C;ServiceComb&#x6846;&#x67B6;&#x53EF;&#x4EE5;&#x5728;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x65F6;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x83B7;&#x53D6;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x4EE3;&#x7406;&#x6CE8;&#x5165;&#x5230;hello&#x4E2D;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x50CF;&#x8C03;&#x7528;&#x672C;&#x5730;&#x7C7B;&#x4E00;&#x6837;&#x8C03;&#x7528;&#x8FDC;&#x7A0B;&#x670D;&#x52A1;&#x3002;</p>
+<blockquote>
+<p>&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x4E0A;&#x8FF0;&#x4EE3;&#x7801;&#xFF0C; <code>JAX-RS</code> &#x5BA2;&#x6237;&#x7AEF;&#x4E5F;&#x662F;&#x4F7F;&#x7528; <code>RPC</code> &#x7684;&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;&#x7684;&#x670D;&#x52A1;&#x7AEF;&#x65B9;&#x6CD5;&#x3002; &#x5176;&#x5B9E;&#x4E0D;&#x7BA1; provider
+&#x662F;&#x4F7F;&#x7528; <code>JAX-RS</code> &#x3001; <code>Spring mvc</code> &#x8FD8;&#x662F; <code>RPC</code>&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;&#x670D;&#x52A1;&#x7AEF;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#x58F0;&#x660E;&#x4E0B; <code>RPC</code> &#x63A5;&#x53E3;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;RPC&#x7684;&#x65B9;&#x5F0F;&#x8FDC;&#x7A0B;&#x8FDC;&#x7A0B;&#x8BBF;&#x95EE;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x662F;&#x5F88;&#x597D;&#x7684;&#x5F00;&#x53D1;&#x5B9E;&#x8DF5;&#x3002;</p>
+</blockquote>
 
                                 
                                 </section>
@@ -1260,7 +1345,7 @@
 
             
                 
-                <a href="using-resttemplate.html" class="navigation navigation-prev " aria-label="Previous page: 使用RestTemplate开发服务消费者">
+                <a href="using-AsyncRestTemplate.html" class="navigation navigation-prev " aria-label="Previous page: 使用AsynRestTemplate开发服务消费者">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -1276,7 +1361,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用RPC方式开发服务消费者","level":"1.4.2","depth":2,"next":{"title":"使用服务契约","level":"1.4.3","depth":2,"path":"build-consumer/with-contract.md","ref":"build-consumer/with-contract.md","articles":[]},"previous":{"title":"使用RestTemplate开发服务消费者","level":"1.4.1","depth":2,"path":"build-consumer/using-resttemplate.md","ref":"build-consumer/using-resttemplate.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-consumer/develop-consumer-using-rpc.md","mtime":"2018-05-22T03:45:00.356Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-05T06:40:28.736Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"使用RPC方式开发服务消费者","level":"1.4.3","depth":2,"next":{"title":"使用服务契约","level":"1.4.4","depth":2,"path":"build-consumer/with-contract.md","ref":"build-consumer/with-contract.md","articles":[]},"previous":{"title":"使用AsynRestTemplate开发服务消费者","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-consumer/develop-consumer-using-rpc.md","mtime":"2018-07-11T09:15:10.189Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-16T08:16:05.733Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
