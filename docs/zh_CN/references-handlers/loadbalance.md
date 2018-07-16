@@ -16,6 +16,14 @@ servicecomb:
         default: loadbalance
 ```
 
+POM依赖：
+```
+ <dependency> 
+  <groupId>org.apache.servicecomb</groupId> 
+  <artifactId>handler-loadbalance</artifactId> 
+  </dependency>
+```
+
 ## 按照数据中心信息进行路由转发
 服务提供者和消费者都可以通过在microservice.yaml中声明自己的服务中心信息：
 ```yaml
@@ -51,7 +59,7 @@ servicecomb:
 ```
 上面的配置表示只访问myservice所有实例中tag属性为mytag的实例。
 
-该规则需要给每个服务单独配置，为配置表示不启用该规则，不支持对于所有服务的全局配置。
+该规则需要给每个服务单独配置，未配置表示不启用该规则，不支持对于所有服务的全局配置。
 
 该规则默认启用，如果不需要使用，可以通过servicecomb.loadbalance.filter.instanceProperty.enabled进行关闭。根据实例属性进行路由转发功能在InstancePropertyDiscoveryFilter实现。
 
@@ -69,6 +77,13 @@ servicecomb:
 ```
 
 隔离的统计周期是1分钟。按照上面的配置，在1分钟内，如果请求总数大于5，并且[1]错误率大于20%或者[2]连续错误超过2次，那么就会将实例隔离。实例隔离的时间是60秒，60秒后会尝试启用实例（还需要根据负载均衡策略确定是否选中）。
+
+需要注意ServiceComb为了检测实例状态，在后台启动类一个线程，每隔10秒检测一次实例状态（如果实例在10秒内有被访问，则不检测），如果检测失败，每次检测会将错误计数加1。这里的计数，也会影响实例隔离。
+
+系统缺省的实例状态检测机制是发送一个telnet指令，参考SimpleMicroserviceInstancePing的实现。如果业务需要覆盖状态检测机制，可以通过如下两个步骤完成：
+
+1. 实现MicroserviceInstancePing接口
+2. 配置SPI：增加META-INF/services/org.apache.servicecomb.serviceregistry.consumer.MicroserviceInstancePing，内容为实现类的全名
 
 开发者可以针对不同的微服务配置不一样的隔离策略。只需要给配置项增加服务名，例如：
 ```
@@ -137,4 +152,16 @@ servicecomb:
 retryOnNext表示失败以后，根据负载均衡策略，重新选择一个实例重试（可能选择到同一个实例）。 retryOnSame表示仍然使用上次失败的实例进行重试。
 
 ## 自定义
-负载均衡模块提供的功能已经非常强大，能够通过配置支持大部分应用场景。同时它也提供了强大的扩展能力，包括DiscoveryFilter、ServerListFilterExt、ExtensionsFactory（扩展IRule，RetryHandler等）。loadbalance模块本身包含了每一个扩展的实现，这里不再详细描述如何扩展。开发者可以自行下载ServiceComb源码进行参考。
+负载均衡模块提供的功能已经非常强大，能够通过配置支持大部分应用场景。同时它也提供了强大的扩展能力，包括DiscoveryFilter、ServerListFilterExt、ExtensionsFactory（扩展IRule，RetryHandler等）。loadbalance模块本身包含了每一个扩展的实现，这里不再详细描述如何扩展，只简单描述步骤。开发者可以自行下载ServiceComb源码进行参考。
+
+* DiscoveryFilter
+  * 实现DiscoveryFilter接口
+  * 配置SPI：增加META-INF/services/org.apache.servicecomb.serviceregistry.discovery.DiscoveryFilter文件，内容为实现类的全名
+
+* ServerListFilterExt
+  * 实现ServerListFilterExt接口
+  * 配置SPI：增加META-INF/services/org.apache.servicecomb.loadbalance.ServerListFilterExt文件，内容为实现类的全名
+  * 注意：这个开发说明适用于1.0.0及其以后的版本，早期的版本开发方式不同。
+
+* ExtensionsFactory
+  * 实现ExtensionsFactory，并使用@Component将其发布为一个spring bean。
