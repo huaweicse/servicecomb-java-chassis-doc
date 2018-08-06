@@ -1306,13 +1306,11 @@ bash apache-servicecomb-incubating-service-center-1.0.0-m1-linux-amd64/start-ser
 ```
 
  &#x6CE8;&#x610F;&#xFF1A;&#x524D;&#x7AEF;&#xFF08;frontend&#xFF09;&#x5728;Linux&#x73AF;&#x5883;&#x4E0B;&#x9ED8;&#x8BA4;&#x4F1A;&#x7ED1;&#x5B9A;ipv6&#x5730;&#x5740;&#xFF0C;&#x5BFC;&#x81F4;&#x6D4F;&#x89C8;&#x5668;&#x62A5;&#x9519;&#xFF0C;&#x4FEE;&#x590D;&#x529E;&#x6CD5;&#x4E3A;&#xFF1A;&#x5148;&#x4FEE;&#x6539;conf/app.conf&#x4E2D;&#x7684;httpaddr&#x4E3A;&#x5916;&#x90E8;&#x53EF;&#x8FBE;&#x7F51;&#x5361;ip&#xFF0C;&#x4E4B;&#x540E;&#x4FEE;&#x6539;app/appList/apiList.js&#x4E2D;`ip : &apos;http://127.0.0.1&apos;`&#x4E3A;&#x5BF9;&#x5E94;ip&#xFF0C;&#x6700;&#x540E;&#x91CD;&#x542F;ServiceCenter&#x5373;&#x53EF;&#x3002;
- {: .notice--warning}
 
  </div>
 </div>
 
-<p>&#x6CE8;&#x610F;&#xFF1A;Window&#x548C;Linux&#x7248;&#x672C;&#x5747;&#x53EA;&#x652F;&#x6301;64&#x4F4D;&#x7CFB;&#x7EDF;&#x3002;
-{: .notice--warning}</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;Window&#x548C;Linux&#x7248;&#x672C;&#x5747;&#x53EA;&#x652F;&#x6301;64&#x4F4D;&#x7CFB;&#x7EDF;&#x3002;</p>
 </li>
 <li><p>&#x4EE5;Docker&#x7684;&#x65B9;&#x5F0F;&#x8FD0;&#x884C;</p>
 </li>
@@ -1324,43 +1322,54 @@ docker run <span class="hljs-_">-d</span> -p 30100:30100 servicecomb/service-cen
 <li><strong>&#x6B65;&#x9AA4; 2 </strong>&#x542F;&#x52A8;&#x672C;&#x5730;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x540E;&#xFF0C;&#x5728;&#x670D;&#x52A1;&#x63D0;&#x4F9B;/&#x6D88;&#x8D39;&#x8005;&#x7684;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;ServerCenter&#x7684;&#x5730;&#x5740;&#x548C;&#x7AEF;&#x53E3;&#xFF0C;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#xFF1A;</li>
 </ul>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
-<span class="hljs-attr"> service:</span>
-<span class="hljs-attr"> registry:</span>
-<span class="hljs-attr"> address:</span> 
-<span class="hljs-attr">http:</span>//<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">30100</span>
- <span class="hljs-comment">#&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5730;&#x5740;&#x53CA;&#x7AEF;&#x53E3;</span>
+<span class="hljs-attr">  service:</span>
+<span class="hljs-attr">    registry:</span>
+<span class="hljs-attr">      address:</span>
+        <span class="hljs-comment"># &#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5730;&#x5740;&#x53CA;&#x7AEF;&#x53E3;</span>
+<span class="hljs-attr">        http:</span>//<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">30100</span>
 </code></pre>
 <ul>
 <li><strong>&#x6B65;&#x9AA4; 3 </strong>&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x63D0;&#x4F9B;/&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x542F;&#x52A8;&#x5FAE;&#x670D;&#x52A1;&#x8FDB;&#x884C;&#x672C;&#x5730;&#x6D4B;&#x8BD5;&#x3002;</li>
 </ul>
 <p><strong>----&#x7ED3;&#x675F;</strong></p>
 <h2 id="mock&#x673A;&#x5236;&#x542F;&#x52A8;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;">Mock&#x673A;&#x5236;&#x542F;&#x52A8;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;</h2>
+<p>&#x5728;&#x672C;&#x8FDB;&#x7A0B;&#x5185;&#x5B58;&#x4E2D;&#x6A21;&#x62DF;&#x4E00;&#x4E2A;&#x53EA;&#x80FD;&#x672C;&#x8FDB;&#x7A0B;&#x4F7F;&#x7528;&#x7684;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#xFF0C;&#x4E00;&#x822C;&#x662F;&#x5728;&#x6D4B;&#x8BD5;&#x573A;&#x666F;&#x4E2D;&#x4F7F;&#x7528;&#x3002;</p>
 <ul>
-<li><strong>&#x6B65;&#x9AA4; 1</strong>&#x65B0;&#x5EFA;&#x672C;&#x5730;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5B9A;&#x4E49;&#x6587;&#x4EF6;registry.yaml&#xFF0C;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</li>
-</ul>
-<pre><code class="lang-yaml"><span class="hljs-attr">springmvctest:</span> 
-<span class="hljs-attr">  - id:</span> <span class="hljs-string">&quot;001&quot;</span>  
-<span class="hljs-attr">    version:</span> <span class="hljs-string">&quot;1.0&quot;</span>  
-<span class="hljs-attr">    appid:</span> myapp <span class="hljs-comment">#&#x8C03;&#x8BD5;&#x7684;&#x670D;&#x52A1;id  </span>
-<span class="hljs-attr">    instances:</span>  
-<span class="hljs-attr">      - endpoints:</span>  
-<span class="hljs-attr">        - rest:</span>//<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8080</span>
+<li><h3 id="&#x8FDB;&#x7A0B;&#x5185;&#x8C03;&#x7528;">&#x8FDB;&#x7A0B;&#x5185;&#x8C03;&#x7528;</h3>
+&#x53EA;&#x9700;&#x8981;&#x5728;&#x542F;&#x52A8;ServiceComb&#x5F15;&#x64CE;&#x4E4B;&#x524D;&#x58F0;&#x660E;&#x4E00;&#x4E0B;&#x5373;&#x53EF;&#x542F;&#x7528;&#xFF1A;<pre><code class="lang-java">System.setProperty(<span class="hljs-string">&quot;local.registry.file&quot;</span>, <span class="hljs-string">&quot;notExistJustForceLocal&quot;</span>);
 </code></pre>
-<h4 id="&#x6CE8;&#x610F;&#xFF1A;mock&#x673A;&#x5236;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x51C6;&#x5907;&#x5951;&#x7EA6;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x524D;&#x53EA;&#x652F;&#x6301;&#x5728;&#x672C;&#x5730;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x7AEF;consumer&#x4FA7;&#x7684;&#x8C03;&#x8BD5;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;provider">&#x6CE8;&#x610F;&#xFF1A;mock&#x673A;&#x5236;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x51C6;&#x5907;&#x5951;&#x7EA6;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x524D;&#x53EA;&#x652F;&#x6301;&#x5728;&#x672C;&#x5730;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x7AEF;(consumer)&#x4FA7;&#x7684;&#x8C03;&#x8BD5;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;(provider)</h4>
-<ul>
-<li><strong>&#x6B65;&#x9AA4; 2</strong>&#x5728;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;Main&#x51FD;&#x6570;&#x9996;&#x672B;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#xFF1A;</li>
+</li>
+<li><h3 id="&#x8DE8;&#x8FDB;&#x7A0B;&#x8C03;&#x7528;">&#x8DE8;&#x8FDB;&#x7A0B;&#x8C03;&#x7528;</h3>
+<p>&#x5982;&#x679C;&#x90E8;&#x7F72;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x5E76;&#x4E14;&#x90E8;&#x7F72;&#x4FE1;&#x606F;&#x662F;&#x9759;&#x6001;&#x7684;&#xFF0C;&#x5373;&#x4F7F;&#x6709;&#x8DE8;&#x8FDB;&#x7A0B;&#x8C03;&#x7528;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x672C;Mock&#x673A;&#x5236;
+producer&#x7AEF;&#x4ECD;&#x7136;&#x50CF;&#x201C;&#x8FDB;&#x7A0B;&#x5185;&#x8C03;&#x7528;&#x201D;&#x4E00;&#x6837;&#x58F0;&#x660E;&#x5373;&#x53EF;
+&#x4F46;&#x662F;&#xFF0C;&#x56E0;&#x4E3A;Mock&#x5E76;&#x4E0D;&#x80FD;&#x8DE8;&#x8FDB;&#x7A0B;&#x751F;&#x6548;&#xFF0C;&#x6240;&#x4EE5;consumer&#x7AEF;&#x7684;Mock&#xFF0C;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x672C;&#x5730;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x63CF;&#x8FF0;&#x8C03;&#x7528;&#x76EE;&#x6807;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x540D;&#x5B57;&#x3001;&#x7248;&#x672C;&#x3001;&#x5730;&#x5740;&#x3001;schema id&#x7B49;&#x7B49;&#x4FE1;&#x606F;
+&#x540C;&#x6837;&#xFF0C;&#x56E0;&#x4E3A;Mock&#x4E0D;&#x80FD;&#x8DE8;&#x8FDB;&#x7A0B;&#xFF0C;consumer&#x4E5F;&#x65E0;&#x6CD5;&#x52A8;&#x6001;&#x53D6;&#x5F97;producer&#x7684;&#x5951;&#x7EA6;&#x4FE1;&#x606F;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x672C;&#x5730;&#x63D0;&#x4F9B;&#x5951;&#x7EA6;&#x6587;&#x4EF6;
+&#xFF08;&#x8FD9;&#x4E2A;&#x573A;&#x666F;&#xFF0C;&#x4F7F;&#x7528;Mock&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#xFF0C;&#x6BD4;&#x4F7F;&#x7528;standalone&#x7684;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#xFF0C;&#x6210;&#x672C;&#x9AD8;&#x5F97;&#x591A;&#x5F97;&#x591A;&#xFF0C;&#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#xFF09;</p>
+</li>
+<li><p><strong>&#x6B65;&#x9AA4; 1</strong>&#x65B0;&#x5EFA;&#x672C;&#x5730;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5B9A;&#x4E49;&#x6587;&#x4EF6;&#xFF0C;&#x5047;&#x8BBE;&#x540D;&#x5B57;&#x4E3A;registry.yaml&#xFF0C;&#x5185;&#x5BB9;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+</li>
 </ul>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">xxxClient</span> </span>{
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-&#x3000;&#x3000;System.setProperty(<span class="hljs-string">&quot;local.registry.file&quot;</span>, <span class="hljs-string">&quot;/path/registry.yaml&quot;</span>);
-    <span class="hljs-comment">// your code</span>
-&#x3000;&#x3000;System.clearProperty(<span class="hljs-string">&quot;local.registry.file&quot;</span>);
-}
+<pre><code class="lang-yaml"><span class="hljs-attr">localserv:</span>
+<span class="hljs-attr">  - id:</span> <span class="hljs-string">&quot;100&quot;</span>
+<span class="hljs-attr">    version:</span> <span class="hljs-string">&quot;0.0.1&quot;</span>
+<span class="hljs-attr">    appid:</span> localservreg
+<span class="hljs-attr">    schemaIds:</span>
+<span class="hljs-bullet">      -</span> hello
+<span class="hljs-attr">    instances:</span>
+<span class="hljs-attr">      - endpoints:</span>
+<span class="hljs-attr">        - rest:</span>//localhost:<span class="hljs-number">8080</span>
+<span class="hljs-attr">        - highway:</span>//localhost:<span class="hljs-number">7070</span>
+</code></pre>
+<ul>
+<li><strong>&#x6B65;&#x9AA4; 2</strong>consumer&#x672C;&#x5730;&#x90E8;&#x7F72;&#x5951;&#x7EA6;&#x6587;&#x4EF6;</li>
+</ul>
+<p>&#x53C2;&#x8003;&#xFF1A;<a href="https://huaweicse.github.io/servicecomb-java-chassis-doc/zh_CN/build-provider/define-contract.html" target="_blank">&#x5B9A;&#x4E49;&#x670D;&#x52A1;&#x5951;&#x7EA6;</a></p>
+<ul>
+<li><strong>&#x6B65;&#x9AA4; 3</strong>&#x5728;consumer main&#x51FD;&#x6570;&#xFF0C;&#x542F;&#x52A8;ServiceComb&#x5F15;&#x64CE;&#x4E4B;&#x524D;&#x58F0;&#x660E;&#xFF1A;</li>
+</ul>
+<pre><code class="lang-java">&#x3000;&#x3000;System.setProperty(<span class="hljs-string">&quot;local.registry.file&quot;</span>, <span class="hljs-string">&quot;/path/registry.yaml&quot;</span>);
 </code></pre>
 <p>setProperty&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x586B;&#x5199;registry.yaml&#x5728;&#x78C1;&#x76D8;&#x4E2D;&#x7684;&#x7CFB;&#x7EDF;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x6CE8;&#x610F;&#x533A;&#x5206;&#x5728;&#x4E0D;&#x540C;&#x7CFB;&#x7EDF;&#x4E0B;&#x4F7F;&#x7528;&#x5BF9;&#x5E94;&#x7684;&#x8DEF;&#x5F84;&#x5206;&#x9694;&#x7B26;&#x3002;</p>
-<ul>
-<li><strong>&#x6B65;&#x9AA4; 3</strong>&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#xFF0C;&#x542F;&#x52A8;&#x5FAE;&#x670D;&#x52A1;&#x8FDB;&#x884C;&#x672C;&#x5730;&#x6D4B;&#x8BD5;&#x3002;</li>
-</ul>
 <h2 id="&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x4FE1;&#x606F;&#x65B9;&#x4FBF;&#x672C;&#x5730;&#x8C03;&#x8BD5;">&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x4FE1;&#x606F;&#x65B9;&#x4FBF;&#x672C;&#x5730;&#x8C03;&#x8BD5;</h2>
 <p>java chassis&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x4E25;&#x683C;&#x4F9D;&#x8D56;&#x4E8E;&#x5951;&#x7EA6;&#xFF0C;&#x6240;&#x4EE5;&#x6B63;&#x5E38;&#x6765;&#x8BF4;&#x5951;&#x7EA6;&#x53D8;&#x4E86;&#x5C31;&#x5FC5;&#x987B;&#x8981;&#x4FEE;&#x6539;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x7248;&#x672C;&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;&#x5F53;&#x524D;&#x8FD8;&#x662F;&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF0C;&#x90A3;&#x4E48;&#x4FEE;&#x6539;&#x63A5;&#x53E3;&#x662F;&#x5F88;&#x6B63;&#x5E38;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x6BCF;&#x6B21;&#x90FD;&#x9700;&#x8981;&#x6539;&#x7248;&#x672C;&#x7684;&#x8BDD;&#xFF0C;&#x5BF9;&#x7528;&#x6237;&#x6765;&#x8BF4;&#x975E;&#x5E38;&#x7684;&#x4E0D;&#x53CB;&#x597D;&#xFF0C;&#x6240;&#x4EE5;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x5FAE;&#x670D;&#x52A1;&#x914D;&#x7F6E;&#x6210;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF0C;&#x63A5;&#x53E3;&#x4FEE;&#x6539;&#x4E86;&#xFF08;schema&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#xFF09;&#xFF0C;&#x91CD;&#x542F;&#x5C31;&#x53EF;&#x4EE5;&#x6CE8;&#x518C;&#x5230;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x4FEE;&#x6539;&#x7248;&#x672C;&#x53F7;&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;&#x6709;consumer&#x5DF2;&#x7ECF;&#x8C03;&#x7528;&#x4E86;&#x91CD;&#x542F;&#x4E4B;&#x524D;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x90A3;&#x4E48;consumer&#x7AEF;&#x9700;&#x8981;&#x91CD;&#x542F;&#x624D;&#x80FD;&#x83B7;&#x53D6;&#x6700;&#x65B0;&#x7684;schema&#x3002;&#x6BD4;&#x5982;A -&gt; B&#xFF0C;B&#x63A5;&#x53E3;&#x8FDB;&#x884C;&#x4E86;&#x4FEE;&#x6539;&#x5E76;&#x4E14;&#x91CD;&#x542F;&#xFF0C;&#x90A3;&#x4E48;A&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x8FD8;&#x662F;&#x4F7F;&#x7528;B&#x8001;&#x7684;schema&#xFF0C;&#x8C03;&#x7528;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x9519;&#xFF0C;&#x4EE5;&#x514D;&#x51FA;&#x73B0;&#x672A;&#x77E5;&#x5F02;&#x5E38;&#xFF0C;A&#x4E5F;&#x9700;&#x8981;&#x91CD;&#x542F;&#x3002;&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#xFF0C;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;1</p>
 <ul>
@@ -1419,7 +1428,7 @@ docker run <span class="hljs-_">-d</span> -p 30100:30100 servicecomb/service-cen
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"本地开发和测试","level":"1.5.6","depth":2,"next":{"title":"Http Filter","level":"1.5.7","depth":2,"path":"general-development/http-filter.md","ref":"general-development/http-filter.md","articles":[]},"previous":{"title":"自定义调用链打点","level":"1.5.5","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"general-development/local-develop-test.md","mtime":"2018-05-22T03:45:00.428Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-16T13:15:29.340Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"本地开发和测试","level":"1.5.6","depth":2,"next":{"title":"Http Filter","level":"1.5.7","depth":2,"path":"general-development/http-filter.md","ref":"general-development/http-filter.md","articles":[]},"previous":{"title":"自定义调用链打点","level":"1.5.5","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"general-development/local-develop-test.md","mtime":"2018-07-30T07:14:20.482Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-06T07:18:50.442Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
