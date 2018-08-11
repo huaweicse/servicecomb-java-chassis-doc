@@ -1358,6 +1358,93 @@
 </tr>
 </tbody>
 </table>
+<h2 id="query&#x53C2;&#x6570;&#x805A;&#x5408;&#x4E3A;pojo&#x5BF9;&#x8C61;">Query&#x53C2;&#x6570;&#x805A;&#x5408;&#x4E3A;POJO&#x5BF9;&#x8C61;</h2>
+<h3 id="&#x4F7F;&#x7528;&#x8BF4;&#x660E;">&#x4F7F;&#x7528;&#x8BF4;&#x660E;</h3>
+<p>SpringBoot&#x652F;&#x6301;&#x5C06;Java&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x591A;&#x4E2A;query&#x53C2;&#x6570;&#x805A;&#x5408;&#x4E3A;&#x4E00;&#x4E2A;POJO&#x7C7B;&#xFF0C;SpringBoot&#x539F;&#x751F;&#x7528;&#x6CD5;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/hello&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloService</span> </span>{
+  <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">&quot;/sayHello&quot;</span>, method = RequestMethod.GET)
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHello</span><span class="hljs-params">(Person person)</span> </span>{
+    System.out.println(<span class="hljs-string">&quot;sayHello is called, person = [&quot;</span> + person + <span class="hljs-string">&quot;]&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, your name is &quot;</span> + person.getName() + <span class="hljs-string">&quot;, and age is &quot;</span> + person.getAge();
+  }
+}
+</code></pre>
+<p>&#x5176;&#x4E2D;&#xFF0C;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x7684;<code>Person</code>&#x7C7B;&#x662F;&#x4E00;&#x4E2A;&#x6807;&#x51C6;&#x7684;JavaBean&#xFF0C;&#x5305;&#x542B;&#x5C5E;&#x6027;<code>name</code>&#x548C;<code>age</code>&#x3002;&#x5F53;&#x670D;&#x52A1;&#x63A5;&#x6536;&#x5230;&#x7684;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;SpringBoot&#x4F1A;&#x5C06;query&#x53C2;&#x6570;<code>name</code>&#x548C;<code>age</code>&#x805A;&#x5408;&#x4E3A;Person&#x5BF9;&#x8C61;&#x4F20;&#x5165;&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x3002;</p>
+<p>ServiceComb&#x7684;SpringMVC&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#x73B0;&#x5728;&#x4E5F;&#x652F;&#x6301;&#x7C7B;&#x4F3C;&#x7684;&#x7528;&#x6CD5;&#xFF0C;&#x8BE5;&#x7528;&#x6CD5;&#x7684;&#x8981;&#x6C42;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ol>
+<li>POJO&#x53C2;&#x6570;&#x4E0A;&#x4E0D;&#x80FD;&#x6709;Spring&#x7684;&#x53C2;&#x6570;&#x6CE8;&#x89E3;&#xFF0C;&#x5426;&#x5219;ServiceComb&#x4E0D;&#x4F1A;&#x5C06;&#x5176;&#x4F5C;&#x4E3A;&#x805A;&#x5408;&#x7684;query&#x53C2;&#x6570;&#x5BF9;&#x8C61;&#x5904;&#x7406;&#x3002;</li>
+<li>&#x4EC5;&#x652F;&#x6301;&#x805A;&#x5408;query&#x53C2;&#x6570;</li>
+<li>POJO&#x53C2;&#x6570;&#x7C7B;&#x4E2D;&#x7684;&#x5C5E;&#x6027;&#x540D;&#x4E0E;query&#x53C2;&#x6570;&#x540D;&#x9700;&#x8981;&#x4FDD;&#x6301;&#x4E00;&#x81F4;</li>
+<li>POJO&#x53C2;&#x6570;&#x4E2D;&#x4E0D;&#x652F;&#x6301;&#x590D;&#x6742;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5982;&#x5176;&#x4ED6;POJO&#x5BF9;&#x8C61;&#x3001;List&#x7B49;&#x3002;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x4E9B;&#x590D;&#x6742;&#x7C7B;&#x578B;&#x6253;&#x4E0A;<code>@JsonIgnore</code>&#x6CE8;&#x89E3;&#x6765;&#x8BA9;ServiceComb&#x5FFD;&#x7565;&#x8FD9;&#x4E9B;&#x590D;&#x6742;&#x5C5E;&#x6027;&#x3002;</li>
+<li>consumer&#x7AEF;&#x4E0D;&#x652F;&#x6301;query&#x53C2;&#x6570;&#x805A;&#x5408;&#x4E3A;POJO&#x5BF9;&#x8C61;&#xFF0C;&#x8C03;&#x7528;&#x670D;&#x52A1;&#x65F6;&#x4F9D;&#x7136;&#x8981;&#x6309;&#x7167;&#x5951;&#x7EA6;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x3002;&#x5373;provider&#x7AEF;&#x88AB;&#x805A;&#x5408;&#x7684;POJO&#x53C2;&#x6570;&#x5728;&#x5951;&#x7EA6;&#x4E2D;&#x4F1A;&#x88AB;&#x5C55;&#x5F00;&#x6210;&#x4E00;&#x7CFB;&#x5217;&#x7684;query&#x53C2;&#x6570;&#xFF0C;consumer&#x7AEF;&#x9700;&#x8981;&#x5728;provider&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x4E2D;&#x4F9D;&#x6B21;&#x5B9A;&#x4E49;&#x8FD9;&#x4E9B;query&#x53C2;&#x6570;&#xFF08;RPC&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF09;&#xFF0C;&#x6216;&#x5728;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x65F6;&#x586B;&#x5165;&#x8FD9;&#x4E9B;query&#x53C2;&#x6570;&#xFF08;RestTemplate&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF09;&#x3002;</li>
+</ol>
+<h3 id="&#x4EE3;&#x7801;&#x793A;&#x4F8B;">&#x4EE3;&#x7801;&#x793A;&#x4F8B;</h3>
+<h4 id="provider&#x7AEF;&#x5F00;&#x53D1;&#x670D;&#x52A1;">Provider&#x7AEF;&#x5F00;&#x53D1;&#x670D;&#x52A1;</h4>
+<ul>
+<li>Provider&#x7AEF;&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x4EE3;&#x7801;&#xFF1A;<pre><code class="lang-java"><span class="hljs-meta">@RestSchema</span>(schemaId = <span class="hljs-string">&quot;helloService&quot;</span>)
+<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/hello&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloService</span> </span>{
+  <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">&quot;/sayHello&quot;</span>, method = RequestMethod.GET)
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHello</span><span class="hljs-params">(Person person)</span> </span>{
+    System.out.println(<span class="hljs-string">&quot;sayHello is called, person = [&quot;</span> + person + <span class="hljs-string">&quot;]&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, your name is &quot;</span> + person.getName() + <span class="hljs-string">&quot;, and age is &quot;</span> + person.getAge();
+  }
+}
+</code></pre>
+</li>
+<li>POJO&#x53C2;&#x6570;&#x5BF9;&#x8C61;&#x5B9A;&#x4E49;&#xFF1A;<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>{
+  <span class="hljs-keyword">private</span> String name;
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+  <span class="hljs-meta">@JsonIgnore</span>  <span class="hljs-comment">// &#x590D;&#x6742;&#x5C5E;&#x6027;&#x9700;&#x8981;&#x6807;&#x8BB0;@JsonIgnore&#xFF0C;&#x5426;&#x5219;&#x542F;&#x52A8;&#x65F6;&#x4F1A;&#x62A5;&#x9519;</span>
+  <span class="hljs-keyword">private</span> List&lt;Person&gt; children;
+}
+</code></pre>
+</li>
+<li>&#x63A5;&#x53E3;&#x5951;&#x7EA6;&#xFF1A;<pre><code class="lang-yaml"><span class="hljs-comment"># &#x5FFD;&#x7565;&#x5951;&#x7EA6;&#x7684;&#x5176;&#x4ED6;&#x90E8;&#x5206;</span>
+<span class="hljs-attr">basePath:</span> <span class="hljs-string">&quot;/hello&quot;</span>
+<span class="hljs-attr">paths:</span>
+/sayHello:
+<span class="hljs-attr">  get:</span>
+<span class="hljs-attr">    operationId:</span> <span class="hljs-string">&quot;sayHello&quot;</span>
+<span class="hljs-attr">    parameters:</span>
+      <span class="hljs-comment"># Person&#x7C7B;&#x7684;name&#x5C5E;&#x6027;&#x548C;age&#x5C5E;&#x6027;&#x4F5C;&#x4E3A;&#x5951;&#x7EA6;&#x4E2D;&#x7684;query&#x53C2;&#x6570;</span>
+<span class="hljs-attr">    - name:</span> <span class="hljs-string">&quot;name&quot;</span>
+<span class="hljs-attr">      in:</span> <span class="hljs-string">&quot;query&quot;</span>
+<span class="hljs-attr">      required:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">      type:</span> <span class="hljs-string">&quot;string&quot;</span>
+<span class="hljs-attr">    - name:</span> <span class="hljs-string">&quot;age&quot;</span>
+<span class="hljs-attr">      in:</span> <span class="hljs-string">&quot;query&quot;</span>
+<span class="hljs-attr">      required:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">      type:</span> <span class="hljs-string">&quot;integer&quot;</span>
+<span class="hljs-attr">      format:</span> <span class="hljs-string">&quot;int32&quot;</span>
+<span class="hljs-attr">    responses:</span>
+      <span class="hljs-number">200</span>:
+<span class="hljs-attr">        description:</span> <span class="hljs-string">&quot;response of 200&quot;</span>
+<span class="hljs-attr">        schema:</span>
+<span class="hljs-attr">          type:</span> <span class="hljs-string">&quot;string&quot;</span>
+</code></pre>
+</li>
+</ul>
+<h4 id="consumer&#x7AEF;&#x8C03;&#x7528;&#x670D;&#x52A1;">Consumer&#x7AEF;&#x8C03;&#x7528;&#x670D;&#x52A1;</h4>
+<ul>
+<li>consumer&#x7AEF;RPC&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF1A;<ul>
+<li>Provider&#x63A5;&#x53E3;&#x5B9A;&#x4E49;<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">HelloServiceIntf</span> </span>{
+  <span class="hljs-function">String <span class="hljs-title">sayHello</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span></span>;
+}
+</code></pre>
+</li>
+<li>&#x8C03;&#x7528;&#x4EE3;&#x7801;<pre><code class="lang-java">String result = helloService.sayHello(<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">22</span>); <span class="hljs-comment">// result&#x7684;&#x503C;&#x4E3A;&quot;Hello, your name is Bob, and age is 22&quot;</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>consumer&#x7AEF;RestTemplate&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF1A;<pre><code class="lang-java">  String result = restTemplate.getForObject(
+    <span class="hljs-string">&quot;cse://provider-service/hello/sayHello?name=Bob&amp;age=22&quot;</span>,
+    String.class); <span class="hljs-comment">// &#x8C03;&#x7528;&#x6548;&#x679C;&#x4E0E;RPC&#x65B9;&#x5F0F;&#x76F8;&#x540C;</span>
+</code></pre>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -1401,7 +1488,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"用SpringMVC开发微服务","level":"1.3.5","depth":2,"next":{"title":"用JAX-RS开发微服务","level":"1.3.6","depth":2,"path":"build-provider/jaxrs.md","ref":"build-provider/jaxrs.md","articles":[]},"previous":{"title":"使用Swagger注解","level":"1.3.4","depth":2,"path":"build-provider/swagger-annotation.md","ref":"build-provider/swagger-annotation.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-provider/springmvc.md","mtime":"2018-07-11T09:15:10.236Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-06T07:18:50.442Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"用SpringMVC开发微服务","level":"1.3.5","depth":2,"next":{"title":"用JAX-RS开发微服务","level":"1.3.6","depth":2,"path":"build-provider/jaxrs.md","ref":"build-provider/jaxrs.md","articles":[]},"previous":{"title":"使用Swagger注解","level":"1.3.4","depth":2,"path":"build-provider/swagger-annotation.md","ref":"build-provider/swagger-annotation.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-provider/springmvc.md","mtime":"2018-08-11T14:10:35.853Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-11T14:11:15.047Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
