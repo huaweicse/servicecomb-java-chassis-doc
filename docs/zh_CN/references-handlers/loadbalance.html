@@ -585,20 +585,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.5.1" data-path="../build-consumer/instance-isolation.html">
-            
-                <a href="../build-consumer/instance-isolation.html">
-            
-                    
-                    实例级故障隔离
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5.2" data-path="../build-consumer/circuit-breaker.html">
+        <li class="chapter " data-level="1.4.5.1" data-path="../build-consumer/circuit-breaker.html">
             
                 <a href="../build-consumer/circuit-breaker.html">
             
@@ -611,7 +598,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.3" data-path="../build-consumer/flow-control.html">
+        <li class="chapter " data-level="1.4.5.2" data-path="../build-consumer/flow-control.html">
             
                 <a href="../build-consumer/flow-control.html">
             
@@ -624,7 +611,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5.4" data-path="../build-consumer/fault-injection.html">
+        <li class="chapter " data-level="1.4.5.3" data-path="../build-consumer/fault-injection.html">
             
                 <a href="../build-consumer/fault-injection.html">
             
@@ -1279,9 +1266,9 @@
       Consumer:
         default: loadbalance
 </code></pre><p>POM&#x4F9D;&#x8D56;&#xFF1A;</p>
-<pre><code> &lt;dependency&gt; 
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
-  &lt;artifactId&gt;handler-loadbalance&lt;/artifactId&gt; 
+<pre><code> &lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;handler-loadbalance&lt;/artifactId&gt;
   &lt;/dependency&gt;
 </code></pre><h2 id="&#x6309;&#x7167;&#x6570;&#x636E;&#x4E2D;&#x5FC3;&#x4FE1;&#x606F;&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#x8F6C;&#x53D1;">&#x6309;&#x7167;&#x6570;&#x636E;&#x4E2D;&#x5FC3;&#x4FE1;&#x606F;&#x8FDB;&#x884C;&#x8DEF;&#x7531;&#x8F6C;&#x53D1;</h2>
 <p>&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x548C;&#x6D88;&#x8D39;&#x8005;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;microservice.yaml&#x4E2D;&#x58F0;&#x660E;&#x81EA;&#x5DF1;&#x7684;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x4FE1;&#x606F;&#xFF1A;</p>
@@ -1315,12 +1302,18 @@
   loadbalance:
     isolation:
       enabled: true
-      errorThresholdPercentage: 20
+      errorThresholdPercentage: 0
       enableRequestThreshold: 5
       singleTestTime: 60000
       continuousFailureThreshold: 2
-</code></pre><p>&#x9694;&#x79BB;&#x7684;&#x7EDF;&#x8BA1;&#x5468;&#x671F;&#x662F;1&#x5206;&#x949F;&#x3002;&#x6309;&#x7167;&#x4E0A;&#x9762;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5728;1&#x5206;&#x949F;&#x5185;&#xFF0C;&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x603B;&#x6570;&#x5927;&#x4E8E;5&#xFF0C;&#x5E76;&#x4E14;[1]&#x9519;&#x8BEF;&#x7387;&#x5927;&#x4E8E;20%&#x6216;&#x8005;[2]&#x8FDE;&#x7EED;&#x9519;&#x8BEF;&#x8D85;&#x8FC7;2&#x6B21;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x5C06;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x3002;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x7684;&#x65F6;&#x95F4;&#x662F;60&#x79D2;&#xFF0C;60&#x79D2;&#x540E;&#x4F1A;&#x5C1D;&#x8BD5;&#x542F;&#x7528;&#x5B9E;&#x4F8B;&#xFF08;&#x8FD8;&#x9700;&#x8981;&#x6839;&#x636E;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x9009;&#x4E2D;&#xFF09;&#x3002;</p>
-<p>&#x9700;&#x8981;&#x6CE8;&#x610F;ServiceComb&#x4E3A;&#x4E86;&#x68C0;&#x6D4B;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#xFF0C;&#x5728;&#x540E;&#x53F0;&#x542F;&#x52A8;&#x7C7B;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x6BCF;&#x9694;10&#x79D2;&#x68C0;&#x6D4B;&#x4E00;&#x6B21;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#xFF08;&#x5982;&#x679C;&#x5B9E;&#x4F8B;&#x5728;10&#x79D2;&#x5185;&#x6709;&#x88AB;&#x8BBF;&#x95EE;&#xFF0C;&#x5219;&#x4E0D;&#x68C0;&#x6D4B;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x68C0;&#x6D4B;&#x5931;&#x8D25;&#xFF0C;&#x6BCF;&#x6B21;&#x68C0;&#x6D4B;&#x4F1A;&#x5C06;&#x9519;&#x8BEF;&#x8BA1;&#x6570;&#x52A0;1&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x8BA1;&#x6570;&#xFF0C;&#x4E5F;&#x4F1A;&#x5F71;&#x54CD;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x3002;</p>
+</code></pre><p>&#x9694;&#x79BB;&#x7684;&#x7EDF;&#x8BA1;&#x5468;&#x671F;&#x662F;1&#x5206;&#x949F;&#x3002;&#x6309;&#x7167;&#x4E0A;&#x9762;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5728;1&#x5206;&#x949F;&#x5185;&#xFF0C;&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x603B;&#x6570;&#x5927;&#x4E8E;5&#xFF0C;&#x5E76;&#x4E14;&#x8FDE;&#x7EED;&#x9519;&#x8BEF;&#x8D85;&#x8FC7;2&#x6B21;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x5C06;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x3002;
+&#x9519;&#x8BEF;&#x7387;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;0&#xFF0C;&#x8868;&#x793A;&#x4E0D;&#x542F;&#x7528;&#xFF0C;&#x53EF;&#x901A;&#x8FC7;&#x914D;&#x7F6E;100&#x4EE5;&#x5185;&#x7684;&#x6574;&#x6570;&#x6765;&#x542F;&#x7528;&#xFF0C;&#x4F8B;&#x5982;&#x914D;&#x7F6E;&#x4E3A;20&#xFF0C;&#x5219;&#x8868;&#x793A;&#xFF0C;&#x5728;1&#x5206;&#x949F;&#x5185;&#xFF0C;&#x5982;&#x679C;&#x8BF7;&#x6C42;&#x603B;&#x6570;&#x5927;&#x4E8E;5&#xFF0C;&#x5E76;&#x4E14;[1]&#x9519;&#x8BEF;&#x7387;&#x5927;&#x4E8E;20%&#x6216;&#x8005;[2]&#x8FDE;&#x7EED;&#x9519;&#x8BEF;&#x8D85;&#x8FC7;2&#x6B21;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x5C06;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x3002;
+&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x7684;&#x65F6;&#x95F4;&#x662F;60&#x79D2;&#xFF0C;60&#x79D2;&#x540E;&#x4F1A;&#x5C1D;&#x8BD5;&#x542F;&#x7528;&#x5B9E;&#x4F8B;&#xFF08;&#x8FD8;&#x9700;&#x8981;&#x6839;&#x636E;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x9009;&#x4E2D;&#xFF09;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#xFF1A;</p>
+<ol>
+<li>&#x5F53;&#x9519;&#x8BEF;&#x7387;&#x8FBE;&#x5230;&#x8BBE;&#x5B9A;&#x503C;&#x5BFC;&#x81F4;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x540E;&#xFF0C;&#x8981;&#x60F3;&#x6062;&#x590D;&#xFF0C;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x9694;&#x79BB;&#x65F6;&#x95F4;&#x7A97;&#x7ED3;&#x675F;&#x540E;&#x7684;&#x7B2C;&#x4E00;&#x6B21;&#x6210;&#x529F;&#x8BF7;&#x6C42;&#x8FDB;&#x884C;&#x5468;&#x671F;&#x6027;&#x7D2F;&#x52A0;&#xFF0C;&#x76F4;&#x5230;&#x603B;&#x7684;&#x9519;&#x8BEF;&#x7387;&#x4E0B;&#x964D;&#x5230;&#x8BBE;&#x5B9A;&#x503C;&#x4EE5;&#x4E0B;&#x624D;&#x884C;&#x3002;&#x7531;&#x4E8E;&#x8BF7;&#x6C42;&#x603B;&#x6570;&#x662F;&#x89E6;&#x53D1;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x7684;&#x95E8;&#x69DB;&#xFF0C;&#x82E5;&#x8BF7;&#x6C42;&#x603B;&#x6570;&#x8FBE;&#x5230;&#x8BBE;&#x5B9A;&#x503C;&#x65F6;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#x7684;&#x9519;&#x8BEF;&#x7387;&#x8FDC;&#x5927;&#x4E8E;&#x8BBE;&#x5B9A;&#x503C;&#xFF0C;&#x8981;&#x60F3;&#x6062;&#x590D;&#x662F;&#x9700;&#x8981;&#x5F88;&#x4E45;&#x7684;&#x3002;</li>
+<li>ServiceComb&#x4E3A;&#x4E86;&#x68C0;&#x6D4B;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#xFF0C;&#x5728;&#x540E;&#x53F0;&#x542F;&#x52A8;&#x7C7B;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x6BCF;&#x9694;10&#x79D2;&#x68C0;&#x6D4B;&#x4E00;&#x6B21;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#xFF08;&#x5982;&#x679C;&#x5B9E;&#x4F8B;&#x5728;10&#x79D2;&#x5185;&#x6709;&#x88AB;&#x8BBF;&#x95EE;&#xFF0C;&#x5219;&#x4E0D;&#x68C0;&#x6D4B;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x68C0;&#x6D4B;&#x5931;&#x8D25;&#xFF0C;&#x6BCF;&#x6B21;&#x68C0;&#x6D4B;&#x4F1A;&#x5C06;&#x9519;&#x8BEF;&#x8BA1;&#x6570;&#x52A0;1&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x8BA1;&#x6570;&#xFF0C;&#x4E5F;&#x4F1A;&#x5F71;&#x54CD;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x3002;</li>
+</ol>
 <p>&#x7CFB;&#x7EDF;&#x7F3A;&#x7701;&#x7684;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#x68C0;&#x6D4B;&#x673A;&#x5236;&#x662F;&#x53D1;&#x9001;&#x4E00;&#x4E2A;telnet&#x6307;&#x4EE4;&#xFF0C;&#x53C2;&#x8003;SimpleMicroserviceInstancePing&#x7684;&#x5B9E;&#x73B0;&#x3002;&#x5982;&#x679C;&#x4E1A;&#x52A1;&#x9700;&#x8981;&#x8986;&#x76D6;&#x72B6;&#x6001;&#x68C0;&#x6D4B;&#x673A;&#x5236;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x6B65;&#x9AA4;&#x5B8C;&#x6210;&#xFF1A;</p>
 <ol>
 <li>&#x5B9E;&#x73B0;MicroserviceInstancePing&#x63A5;&#x53E3;</li>
@@ -1438,7 +1431,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"负载均衡","level":"1.10.1","depth":2,"next":{"title":"公钥认证","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]},"previous":{"title":"处理链参考","level":"1.10","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"负载均衡","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"公钥认证","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"references-handlers/loadbalance.md","mtime":"2018-08-15T10:56:31.232Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-15T10:57:17.822Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"负载均衡","level":"1.10.1","depth":2,"next":{"title":"公钥认证","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]},"previous":{"title":"处理链参考","level":"1.10","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"负载均衡","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"公钥认证","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"references-handlers/loadbalance.md","mtime":"2018-08-15T10:57:13.580Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-15T10:57:52.867Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>
