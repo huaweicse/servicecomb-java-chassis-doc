@@ -1280,26 +1280,27 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>&#x4E00;&#x4E2A;Standalone&#x7684;&#x5BB9;&#x5668;&#xFF0C;&#x4EE5;&#x7B80;&#x5355;&#x7684;Main&#x52A0;&#x8F7D;Spring&#x542F;&#x52A8;&#xFF0C;&#x56E0;&#x4E3A;&#x670D;&#x52A1;&#x901A;&#x5E38;&#x4E0D;&#x9700;&#x8981;Tomcat/JBoss&#x7B49;Web&#x5BB9;&#x5668;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x6CA1;&#x5FC5;&#x8981;&#x7528;Web&#x5BB9;&#x5668;&#x53BB;&#x52A0;&#x8F7D;&#x670D;&#x52A1;&#x3002;&#x5FAE;&#x6846;&#x67B6;&#x63D0;&#x4F9B;&#x4E86;standalone&#x90E8;&#x7F72;&#x8FD0;&#x884C;&#x6A21;&#x5F0F;&#xFF0C;&#x670D;&#x52A1;&#x5BB9;&#x5668;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;Main&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x52A0;&#x8F7D;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;Spring&#x5BB9;&#x5668;&#xFF0C;&#x7528;&#x4E8E;&#x66B4;&#x9732;&#x670D;&#x52A1;&#x3002;</p>
-<h2 id="&#x64CD;&#x4F5C;&#x6B65;&#x9AA4;">&#x64CD;&#x4F5C;&#x6B65;&#x9AA4;</h2>
+                                <h2 id="concept-description">Concept Description</h2>
+<p>A Standalone container that loads Spring with a simple Main, because the service usually does not require the properties of a Web container such as Tomcat/JBoss, and there is no need to use the Web container to load the service. The microframework provides a standalone deployment run mode. The service container is just a simple Main method and loads a simple Spring container to expose the service.</p>
+<h2 id="operation-steps">Operation steps</h2>
 <ul>
-<li><strong>&#x6B65;&#x9AA4;1</strong> &#x7F16;&#x5199;Main&#x51FD;&#x6570;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x65E5;&#x5FD7;&#x548C;&#x52A0;&#x8F7D;&#x670D;&#x52A1;&#x914D;&#x7F6E;&#xFF0C;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</li>
+<li><strong>Step 1</strong> Write the Main function, initialize the log and load the service configuration as follows:</li>
 </ul>
-<pre><code class="lang-java">import com.huawei.paas.foundation.common.utils.BeanUtils;
-import com.huawei.paas.foundation.common.utils.Log4jUtils;
+<pre><code class="lang-java">import org.apache.servicecomb.foundation.common.utils.BeanUtils;
+import org.apache.servicecomb.foundation.common.utils.Log4jUtils;
+
 public class MainServer {
 public static void main(String[] args) throws Exception {
-&#x3000;Log4jUtils.init(); # &#x65E5;&#x5FD7;&#x521D;&#x59CB;&#x5316;
-&#x3000;BeanUtils.init();  # Spring bean&#x521D;&#x59CB;&#x5316;
+&#x3000;Log4jUtils.init(); # Log initialization
+&#x3000;BeanUtils.init();  # Spring bean initialization
  }
 }
 </code></pre>
 <ul>
-<li><strong>&#x6B65;&#x9AA4;2</strong> &#x8FD0;&#x884C;MainServer&#x5373;&#x53EF;&#x542F;&#x52A8;&#x8BE5;&#x5FAE;&#x670D;&#x52A1;&#x8FDB;&#x7A0B;&#xFF0C;&#x5411;&#x5916;&#x66B4;&#x9732;&#x670D;&#x52A1;&#x3002;</li>
+<li><strong>Step 2</strong> Run the MainServer to start the microservice process and expose the service.</li>
 </ul>
-<h2 id="&#x6CE8;&#x610F;&#x4E8B;&#x9879;">&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h2>
-<p>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x7684;&#x662F;rest&#x7F51;&#x7EDC;&#x901A;&#x9053;&#xFF0C;&#x9700;&#x8981;&#x5C06;pom&#x4E2D;&#x7684;transport&#x6539;&#x4E3A;&#x4F7F;&#x7528;cse-transport-rest-vertx&#x5305;</p>
+<h2 id="notes">Notes</h2>
+<p>If you are using the rest network channel, you need to change the transport in the pom to use the cse-transport-rest-vertx package.</p>
 
                                 
                                 </section>
@@ -1343,7 +1344,7 @@ public static void main(String[] args) throws Exception {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"以standalone模式打包","level":"1.7.1","depth":2,"next":{"title":"以WEB容器模式打包","level":"1.7.2","depth":2,"path":"packaging/web-container.md","ref":"packaging/web-container.md","articles":[]},"previous":{"title":"服务打包和运行","level":"1.7","depth":1,"path":"catalog/service-package-run.md","ref":"catalog/service-package-run.md","articles":[{"title":"以standalone模式打包","level":"1.7.1","depth":2,"path":"packaging/standalone.md","ref":"packaging/standalone.md","articles":[]},{"title":"以WEB容器模式打包","level":"1.7.2","depth":2,"path":"packaging/web-container.md","ref":"packaging/web-container.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"packaging/standalone.md","mtime":"2018-08-21T08:25:33.549Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-21T08:26:23.704Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"以standalone模式打包","level":"1.7.1","depth":2,"next":{"title":"以WEB容器模式打包","level":"1.7.2","depth":2,"path":"packaging/web-container.md","ref":"packaging/web-container.md","articles":[]},"previous":{"title":"服务打包和运行","level":"1.7","depth":1,"path":"catalog/service-package-run.md","ref":"catalog/service-package-run.md","articles":[{"title":"以standalone模式打包","level":"1.7.1","depth":2,"path":"packaging/standalone.md","ref":"packaging/standalone.md","articles":[]},{"title":"以WEB容器模式打包","level":"1.7.2","depth":2,"path":"packaging/web-container.md","ref":"packaging/web-container.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"packaging/standalone.md","mtime":"2018-08-21T08:46:26.277Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-21T08:47:25.208Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
