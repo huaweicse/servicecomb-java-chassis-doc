@@ -1,0 +1,358 @@
+
+<!DOCTYPE HTML>
+<html lang="en_US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>TLS · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="api/api.html" />
+    
+    
+    <link rel="prev" href="design.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="design.html">
+            
+                <a href="design.html">
+            
+                    
+                    Design
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="enable_ssl.html">
+            
+                <a href="enable_ssl.html">
+            
+                    
+                    TLS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="api/api.html">
+            
+                <a href="api/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="faq/how_to_use_mysql_as_alpha_backend_database.html">
+            
+                <a href="faq/how_to_use_mysql_as_alpha_backend_database.html">
+            
+                    
+                    Q&A
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >TLS</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="enable-tls-for-omega-alpha-communication">Enable TLS for omega-alpha communication</h1>
+<p>Saga now supports TLS for communication between omega and alpha server. Client side authentication(Mutual authentication) is also supported.</p>
+<h2 id="prepare-certificates">Prepare Certificates</h2>
+<p>You can use the following commands to generate self-signed certificates for testing.</p>
+<p>The client certificates is only needed if you want to use mutual authentication.</p>
+<pre><code># Changes these CN&apos;s to match your hosts in your environment if needed.
+SERVER_CN=localhost
+CLIENT_CN=localhost # Used when doing mutual TLS
+
+echo Generate CA key:
+openssl genrsa -passout pass:1111 -des3 -out ca.key 4096
+echo Generate CA certificate:
+# Generates ca.crt which is the trustCertCollectionFile
+openssl req -passin pass:1111 -new -x509 -days 365 -key ca.key -out ca.crt -subj &quot;/CN=${SERVER_CN}&quot;
+echo Generate server key:
+openssl genrsa -passout pass:1111 -des3 -out server.key 4096
+echo Generate server signing request:
+openssl req -passin pass:1111 -new -key server.key -out server.csr -subj &quot;/CN=${SERVER_CN}&quot;
+echo Self-signed server certificate:
+# Generates server.crt which is the certChainFile for the server
+openssl x509 -req -passin pass:1111 -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt 
+echo Remove passphrase from server key:
+openssl rsa -passin pass:1111 -in server.key -out server.key
+echo Generate client key
+openssl genrsa -passout pass:1111 -des3 -out client.key 4096
+echo Generate client signing request:
+openssl req -passin pass:1111 -new -key client.key -out client.csr -subj &quot;/CN=${CLIENT_CN}&quot;
+echo Self-signed client certificate:
+# Generates client.crt which is the clientCertChainFile for the client (need for mutual TLS only)
+openssl x509 -passin pass:1111 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
+echo Remove passphrase from client key:
+openssl rsa -passin pass:1111 -in client.key -out client.key
+echo Converting the private keys to X.509:
+# Generates client.pem which is the clientPrivateKeyFile for the Client (needed for mutual TLS only)
+openssl pkcs8 -topk8 -nocrypt -in client.key -out client.pem
+# Generates server.pem which is the privateKeyFile for the Server
+openssl pkcs8 -topk8 -nocrypt -in server.key -out server.pem
+</code></pre><h2 id="enable-tls-for-alpha-server">Enable TLS for Alpha Server</h2>
+<ol>
+<li>Edit the application.yaml file for alpha-server, add the ssl configuration under the <code>alpha.server</code> section.</li>
+</ol>
+<pre><code>alpha:
+  server:
+    ssl:
+      enable: true
+      cert: server.crt
+      key: server.pem
+      mutualAuth: true
+      clientCert: client.crt
+</code></pre><ol>
+<li><p>Put the server.crt and server.pem files under the root directory of the alpha-server. If you want to use mutual authentication, Merge all the client certificates into one file client.crt, then put the client.crt under the root directory. </p>
+</li>
+<li><p>Restart alpha-server.</p>
+</li>
+</ol>
+<h2 id="enable-tls-for-omega">Enable TLS for Omega</h2>
+<ol>
+<li><p>Get the CA certificate chain, you may need to merge multiple CA certificates into one file if you are running alpha server in cluster.</p>
+</li>
+<li><p>Edit the application.yaml file for the client application, add the ssl configuration under the <code>alpha.cluster</code> section.</p>
+</li>
+</ol>
+<pre><code>alpha:
+  cluster:
+    address: alpha-server.servicecomb.io:8080
+    ssl:
+      enable: false
+      certChain: ca.crt
+      mutualAuth: false
+      cert: client.crt
+      key: client.pem
+</code></pre><ol>
+<li><p>Put the ca.crt file under the client application root directory. If you want to use mutual authentication, also put the client.crt and client.pem under the root directory.</p>
+</li>
+<li><p>Restart the client application.</p>
+</li>
+</ol>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="design.html" class="navigation navigation-prev " aria-label="Previous page: Design">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="api/api.html" class="navigation navigation-next " aria-label="Next page: API">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"TLS","level":"1.3","depth":1,"next":{"title":"API","level":"1.4","depth":1,"path":"api/api.md","ref":"api/api.md","articles":[]},"previous":{"title":"Design","level":"1.2","depth":1,"path":"design.md","ref":"design.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"user_guide.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"enable_ssl.md","mtime":"2018-08-21T08:14:08.897Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-21T08:15:24.580Z"},"basePath":".","book":{"language":"en_US"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,311 @@
+
+<!DOCTYPE HTML>
+<html lang="en_US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Q&A · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../api/api.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../design.html">
+            
+                <a href="../design.html">
+            
+                    
+                    Design
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../enable_ssl.html">
+            
+                <a href="../enable_ssl.html">
+            
+                    
+                    TLS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../api/api.html">
+            
+                <a href="../api/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="how_to_use_mysql_as_alpha_backend_database.html">
+            
+                <a href="how_to_use_mysql_as_alpha_backend_database.html">
+            
+                    
+                    Q&A
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Q&A</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p><strong>Problem:</strong> How to use MySQL as alpha&apos;s backend database?</p>
+<p><strong>Solution:</strong> To replace the default database from postgreSQL to MySQL:</p>
+<ol>
+<li><p>add dependency of <code>mysql-connector-java</code> in <code>alpha/alpha-server/pom.xml</code></p>
+<pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+</li>
+<li><p>install Saga</p>
+<pre><code class="lang-bash">mvn clean package -Pdocker -DskipTests
+</code></pre>
+<p>After that, you will find the generated docker image <code>alpha-server</code> and executable file <code>alpha/alpha-server/target/saga/alpha-server-${version}-exec.jar</code>.</p>
+<p><strong>Notice</strong>: If you do not want to build the docker image, run <code>mvn clean package -DskipTests</code> is enough.</p>
+<p><strong>Notice</strong>: If you have installed saga with docker before, you need to remove the alpha-server&apos;s docker image first.</p>
+<pre><code class="lang-bash">docker rmi <span class="hljs-_">-f</span> $(docker images | grep alpha-server | awk <span class="hljs-string">&apos;{print $3}&apos;</span>)
+</code></pre>
+</li>
+<li><p>run MySQL</p>
+<pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;MYSQL_ROOT_PASSWORD=password&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;MYSQL_DATABASE=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;MYSQL_USER=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;MYSQL_PASSWORD=password&quot;</span> -p 3306:3306 mysql/mysql-server:5.7
+</code></pre>
+</li>
+<li><p>Run alpha. Please make sure MySQL is up before this step. You can run alpha through docker or executable file.</p>
+<ul>
+<li>via docker<pre><code class="lang-bash"> docker run <span class="hljs-_">-d</span> -p 8080:8080 -p 8090:8090 <span class="hljs-_">-e</span> <span class="hljs-string">&quot;JAVA_OPTS=-Dspring.profiles.active=mysql -Dspring.datasource.url=jdbc:mysql://<span class="hljs-variable">${host_address}</span>:3306/saga?useSSL=false&quot;</span> alpha-server:<span class="hljs-variable">${saga_version}</span>
+</code></pre>
+</li>
+<li>via executable file<pre><code class="lang-bash"> java -Dspring.profiles.active=mysql -D<span class="hljs-string">&quot;spring.datasource.url=jdbc:mysql://<span class="hljs-variable">${host_address}</span>:3306/saga?useSSL=false&quot;</span> -jar alpha-server-<span class="hljs-variable">${saga_version}</span>-exec.jar
+</code></pre>
+</li>
+</ul>
+<p><strong>Notice</strong>: Please change <code>${saga_version}</code> and <code>${host_address}</code> to the actual value before you execute the command.</p>
+</li>
+</ol>
+<p>   <strong>Note</strong>: By default, port 8080 is used to serve omega&apos;s request via gRPC while port 8090 is used to query the events stored in alpha.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../api/api.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: API">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Q&A","level":"1.5","depth":1,"previous":{"title":"API","level":"1.4","depth":1,"path":"api/api.md","ref":"api/api.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"user_guide.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"faq/how_to_use_mysql_as_alpha_backend_database.md","mtime":"2018-08-21T08:14:08.897Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-21T08:15:24.580Z"},"basePath":"..","book":{"language":"en_US"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

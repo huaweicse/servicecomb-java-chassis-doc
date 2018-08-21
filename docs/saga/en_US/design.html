@@ -1,0 +1,312 @@
+
+<!DOCTYPE HTML>
+<html lang="en_US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Design · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="enable_ssl.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="design.html">
+            
+                <a href="design.html">
+            
+                    
+                    Design
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="enable_ssl.html">
+            
+                <a href="enable_ssl.html">
+            
+                    
+                    TLS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="api/api.html">
+            
+                <a href="api/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="faq/how_to_use_mysql_as_alpha_backend_database.html">
+            
+                <a href="faq/how_to_use_mysql_as_alpha_backend_database.html">
+            
+                    
+                    Q&A
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Design</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="saga-pack-design">Saga Pack Design</h1>
+<p><a href="design_zh.md"><img src="https://img.shields.io/badge/document-&#x4E2D;&#x6587;-blue.svg" alt="ZH doc"></a></p>
+<h2 id="overview">Overview</h2>
+<p>Pack contains two components: <em>alpha</em> and <em>omega</em>. Alpha is the pack leader and backed by database to make sure transaction events stored permanently while omega is the pack worker and embedded inside services to intercept transaction invocation and report events to alpha.</p>
+<p><img src="static_files/pack.png" alt="Pack Architecture"></p>
+<h2 id="omega-internal">Omega Internal</h2>
+<p>Omega plays as an embedded agent inside services. When a service request arrives, omega intercepts its header and retrieve the global transaction id as its global transaction id (Saga event id) and retrieve the local transaction id as its parent transaction id. In pre-process phase, a transaction started event will be recorded in alpha. In post-process phase, a transaction ended event will be recorded in alpha to mark the end of the sub-transaction.</p>
+<p><img src="static_files/omega_internal.png" alt="Omega Internal"></p>
+<h2 id="inter-service-communication">Inter-Service Communication</h2>
+<p>The process of Inter-Service Communication is similar to <a href="https://github.com/openzipkin/zipkin" target="_blank">Zipkin</a>&apos;s. In the producer side, omega intercepts the transaction ids from request to retrieve the transaction context. In the consumer side, omega inject the global transaction ids into request to pass the transaction context. Sub-transactions can chain as a single global transaction by co-operating producers and consumers.</p>
+<p><img src="static_files/inter-service_communication.png" alt="Inter-Service Communication"></p>
+<h2 id="workflow-saga">Workflow Saga</h2>
+<p>Saga&#x5904;&#x7406;&#x573A;&#x666F;&#x662F;&#x8981;&#x6C42;&#x76F8;&#x5173;&#x7684;&#x5B50;&#x4E8B;&#x52A1;&#x63D0;&#x4F9B;&#x4E8B;&#x52A1;&#x5904;&#x7406;&#x51FD;&#x6570;&#x540C;&#x65F6;&#x4E5F;&#x63D0;&#x4F9B;&#x8865;&#x507F;&#x51FD;&#x6570;&#x3002;Saga&#x534F;&#x8C03;&#x5668;alpha&#x4F1A;&#x6839;&#x636E;&#x4E8B;&#x52A1;&#x7684;&#x6267;&#x884C;&#x60C5;&#x51B5;&#x5411;omega&#x53D1;&#x9001;&#x76F8;&#x5173;&#x7684;&#x6307;&#x4EE4;&#xFF0C;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x5411;&#x524D;&#x91CD;&#x8BD5;&#x6216;&#x8005;&#x5411;&#x540E;&#x6062;&#x590D;&#x3002;</p>
+<h3 id="successful-scenario">Successful Scenario</h3>
+<p>In a successful scenario, all started events will have a corresponding ended event.</p>
+<p><img src="static_files/successful_scenario.png" alt="Successful Scenario"></p>
+<h3 id="exception-scenario">Exception Scenario</h3>
+<p>In an exception scenario, omega inside the abnormal service will report an aborted event to alpha. Apha will then send compensate commands to the completed events within the global transaction to make sure all sub-transactions are either completed or rollbacked.</p>
+<p><img src="static_files/exception_scenario.png" alt="Exception Scenario"></p>
+<h3 id="timeout-scenario">Timeout Scenario</h3>
+<p>In timeout scenario, timeouted events will be detected by alpha&apos;s period scanner, the corresponding global transaction will be abort at the same time.</p>
+<p><img src="static_files/timeout_scenario.png" alt="Timeout Scenario"></p>
+<h2 id="workflow-tcc">Workflow TCC</h2>
+<p>Comparing Saga, TCC(try-confirm-cancel) just have one more method(try) to check if we have enough resource to finish the transaction.
+ The transaction starter knows all the distributed sub transactions status, so it can work with alpha to confirm or cancel the transactions&#x3002;</p>
+<h3 id="successful-scenario">Successful Scenario</h3>
+<p>In a successful scenario, all try events are confirmed.</p>
+<p><img src="static_files/successful_scenario_TCC.png" alt="Successful Scenario"></p>
+<h3 id="exception-scenario">Exception Scenario</h3>
+<p>In an exception scenario, the starter will send the cancel event to alpha, and alpha could invoke the cancel methods which are registered to the Alpha server to clean up the pre allocated resources.</p>
+<p><img src="static_files/exception_scenario_TCC.png" alt="Exception Scenario"></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Guide">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="enable_ssl.html" class="navigation navigation-next " aria-label="Next page: TLS">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Design","level":"1.2","depth":1,"next":{"title":"TLS","level":"1.3","depth":1,"path":"enable_ssl.md","ref":"enable_ssl.md","articles":[]},"previous":{"title":"Guide","level":"1.1","depth":1,"path":"user_guide.md","ref":"user_guide.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"user_guide.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"design.md","mtime":"2018-08-21T08:14:08.897Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-21T08:15:24.580Z"},"basePath":".","book":{"language":"en_US"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

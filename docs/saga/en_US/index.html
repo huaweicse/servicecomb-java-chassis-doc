@@ -1,0 +1,392 @@
+
+<!DOCTYPE HTML>
+<html lang="en_US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Guide · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="design.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="design.html">
+            
+                <a href="design.html">
+            
+                    
+                    Design
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="enable_ssl.html">
+            
+                <a href="enable_ssl.html">
+            
+                    
+                    TLS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="api/api.html">
+            
+                <a href="api/api.html">
+            
+                    
+                    API
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="faq/how_to_use_mysql_as_alpha_backend_database.html">
+            
+                <a href="faq/how_to_use_mysql_as_alpha_backend_database.html">
+            
+                    
+                    Q&A
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Guide</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="saga-user-guide">Saga User Guide</h1>
+<p><a href="user_guide_zh.md"><img src="https://img.shields.io/badge/document-&#x4E2D;&#x6587;-blue.svg" alt="ZH doc"></a></p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>You will need:</p>
+<ol>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">JDK 1.8</a></li>
+<li><a href="https://maven.apache.org/install.html" target="_blank">Maven 3.x</a></li>
+<li><a href="https://www.docker.com/get-docker" target="_blank">Docker</a></li>
+</ol>
+<h2 id="build">Build</h2>
+<p>Retrieve the source code:</p>
+<pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/apache/incubator-servicecomb-saga.git
+$ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
+</code></pre>
+<p>Saga can be built in either of the following ways.</p>
+<ul>
+<li><p>Only build the executable files.</p>
+<pre><code class="lang-bash"> $ mvn clean install -DskipTests
+</code></pre>
+</li>
+<li><p>build the executable files along with docker image.</p>
+<pre><code class="lang-bash"> $ mvn clean install -DskipTests -Pdocker
+</code></pre>
+</li>
+<li><p>build the executable file and saga-distribution</p>
+<pre><code class="lang-bash">    $ mvn clean install -DskipTests -Prelease
+</code></pre>
+</li>
+</ul>
+<p>After executing either one of the above command, you will find alpha server&apos;s executable file in <code>alpha/alpha-server/target/saga/alpha-server-${version}-exec.jar</code>.</p>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="add-saga-dependencies">Add saga dependencies</h3>
+<pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb.saga<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>omega-spring-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${saga.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb.saga<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>omega-transport-resttemplate<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${saga.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p><strong>Note</strong>: Please change the <code>${saga.version}</code> to the actual version.</p>
+<h3 id="add-saga-annotations-and-corresponding-compensation-methods">Add saga annotations and corresponding compensation methods</h3>
+<p>Take a transfer money application as an example:</p>
+<ol>
+<li><p>add <code>@EnableOmega</code> at application entry to initialize omega configurations and connect to alpha</p>
+<pre><code class="lang-java"><span class="hljs-meta">@SpringBootApplication</span>
+<span class="hljs-meta">@EnableOmega</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+    SpringApplication.run(Application.class, args);
+  }
+}
+</code></pre>
+</li>
+<li><p>add <code>@SagaStart</code> at the starting point of the global transaction</p>
+<pre><code class="lang-java"><span class="hljs-meta">@SagaStart</span>(timeout=<span class="hljs-number">10</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">transferMoney</span><span class="hljs-params">(String from, String to, <span class="hljs-keyword">int</span> amount)</span> </span>{
+  transferOut(from, amount);
+  transferIn(to, amount);
+}
+</code></pre>
+<p><strong>Note:</strong> By default, timeout is disable.</p>
+</li>
+<li><p>add <code>@Compensable</code> at the sub-transaction and specify its corresponding compensation method</p>
+<pre><code class="lang-java"><span class="hljs-meta">@Compensable</span>(timeout=<span class="hljs-number">5</span>, compensationMethod=<span class="hljs-string">&quot;cancel&quot;</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">transferOut</span><span class="hljs-params">(String from, <span class="hljs-keyword">int</span> amount)</span> </span>{
+  repo.reduceBalanceByUsername(from, amount);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(String from, <span class="hljs-keyword">int</span> amount)</span> </span>{
+  repo.addBalanceByUsername(from, amount);
+}
+</code></pre>
+<p><strong>Note</strong> transactions and compensations implemented by services must be idempotent.</p>
+<p><strong>Note:</strong> By default, timeout is disable.</p>
+<p><strong>Note:</strong> If the starting point of global transaction and local transaction overlaps, both <code>@SagaStart</code> and <code>@Compensable</code> are needed.</p>
+</li>
+<li><p>Repeat step 3 for the <code>transferIn</code> service.</p>
+</li>
+<li><p>Since Saga-0.3.0,  you can access the <a href="https://github.com/apache/incubator-servicecomb-saga/blob/master/omega/omega-context/src/main/java/org/apache/servicecomb/saga/omega/context/OmegaContext.java" target="_blank">OmegaContext</a> for the gloableTxId and localTxId in the @Compensable annotated method or the cancel method.</p>
+</li>
+</ol>
+<h2 id="how-to-run">How to run</h2>
+<ol>
+<li><p>run postgreSQL.</p>
+<pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_DB=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_USER=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_PASSWORD=password&quot;</span> -p 5432:5432 postgres
+</code></pre>
+<p>Please check out <a href="https://github.com/apache/incubator-servicecomb-saga/blob/master/docs/faq/en/how_to_use_mysql_as_alpha_backend_database.md" target="_blank">this document</a>, if you want to use the MySQL instead of postgreSQL.</p>
+</li>
+<li><p>run alpha. Before running alpha, please make sure postgreSQL is already up. You can run alpha through docker or executable file.</p>
+<ul>
+<li>Run alpha through docker.<pre><code class="lang-bash"> docker run <span class="hljs-_">-d</span> -p 8080:8080 -p 8090:8090 <span class="hljs-_">-e</span> <span class="hljs-string">&quot;JAVA_OPTS=-Dspring.profiles.active=prd -Dspring.datasource.url=jdbc:postgresql://<span class="hljs-variable">${host_address}</span>:5432/saga?useSSL=false&quot;</span> alpha-server:<span class="hljs-variable">${saga_version}</span>
+</code></pre>
+</li>
+<li>Run alpha through executable file.<pre><code class="lang-bash"> java -Dspring.profiles.active=prd -D<span class="hljs-string">&quot;spring.datasource.url=jdbc:postgresql://<span class="hljs-variable">${host_address}</span>:5432/saga?useSSL=false&quot;</span> -jar alpha-server-<span class="hljs-variable">${saga_version}</span>-exec.jar
+</code></pre>
+</li>
+</ul>
+<p><strong>Note</strong>: Please change <code>${saga_version}</code> and <code>${host_address}</code> to the actual value before you execute the command.</p>
+<p><strong>Note</strong>: By default, port 8080 is used to serve omega&apos;s request via gRPC while port 8090 is used to query the events stored in alpha.</p>
+</li>
+<li><p>setup omega. Configure the following values in <code>application.yaml</code>.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">spring:</span>
+<span class="hljs-attr">  application:</span>
+<span class="hljs-attr">    name:</span> {application.name}
+<span class="hljs-attr">alpha:</span>
+<span class="hljs-attr">  cluster:</span>
+<span class="hljs-attr">    address:</span> {alpha.cluster.addresses}
+</code></pre>
+</li>
+</ol>
+<p>Then you can start your micro-services and access all saga events via <a href="http://${alpha-server:port}/events" target="_blank">http://${alpha-server:port}/events</a>.</p>
+<h2 id="enable-ssl-for-alpha-and-omega">Enable SSL for Alpha and Omega</h2>
+<p>See <a href="enable_ssl.html">Enabling SSL</a> for details.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="design.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Design">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Guide","level":"1.1","depth":1,"next":{"title":"Design","level":"1.2","depth":1,"path":"design.md","ref":"design.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"user_guide.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"user_guide.md","mtime":"2018-08-21T08:14:08.901Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-21T08:15:24.580Z"},"basePath":".","book":{"language":"en_US"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
