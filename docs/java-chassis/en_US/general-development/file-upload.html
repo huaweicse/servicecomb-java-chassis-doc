@@ -1280,53 +1280,52 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#xFF0C;&#x5F53;&#x524D;&#x652F;&#x6301;&#x5728;vertx rest&#x901A;&#x9053;&#x548C;servlet rest&#x4E2D;&#x4F7F;&#x7528;&#x3002;</p>
-<p>&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x4F7F;&#x7528;&#x6807;&#x51C6;&#x7684;http form&#x683C;&#x5F0F;&#xFF0C;&#x53EF;&#x4E0E;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x4E0A;&#x4F20;&#x76F4;&#x63A5;&#x5BF9;&#x63A5;&#x3002;</p>
-<h2 id="producer&#xFF1A;">Producer&#xFF1A;</h2>
-<p>&#x652F;&#x6301;jaxrs&#x548C;springmvc&#x5F00;&#x53D1;&#x6A21;&#x5F0F;</p>
-<p>jaxrs&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF1A;</p>
+                                <p>File upload, currently supported in vertx rest channel and servlet rest.</p>
+<p>File uploads use the standard http form format, which can directly upload the file from the browser.</p>
+<h2 id="producer">Producer:</h2>
+<p>Support jaxrs and springmvc development mode</p>
+<p>Jaxrs development model:</p>
 <ul>
-<li><p>&#x652F;&#x6301;servlet&#x5B9A;&#x4E49;&#x7684;javax.servlet.http.Part&#x7C7B;&#x578B;</p>
+<li><p>javax.servlet.http.Part type that supports servlet definitions</p>
 </li>
-<li><p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;@FormParam&#x4F20;&#x9012;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x53CA;&#x666E;&#x901A;&#x53C2;&#x6570;</p>
+<li><p>You can directly use @FormParam to pass file types and common parameters</p>
 </li>
 </ul>
-<p>springmvc&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF1A;</p>
+<p>Springmvc development mode:</p>
 <ul>
-<li><p>&#x652F;&#x6301;servlet&#x5B9A;&#x4E49;&#x7684;javax.servlet.http.Part&#x7C7B;&#x578B;&#xFF0C;&#x4E5F;&#x652F;&#x6301;org.springframework.web.multipart.MultipartFile&#x7C7B;&#x578B;</p>
+<li><p>Supports servlet-defined javax.servlet.http.Part type, also supports org.springframework.web.multipart.MultipartFile type</p>
 </li>
-<li><p>&#x4E24;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x529F;&#x80FD;&#x662F;&#x4E00;&#x81F4;&#x7684;&#xFF0C;MultipartFile&#x7684;&#x5E95;&#x5C42;&#x4E5F;&#x662F;Part</p>
+<li><p>The two datatype functions are consistent, and the underlying part of MultipartFile is also Part</p>
 </li>
-<li><p>&#x4E24;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x53EF;&#x4EE5;&#x6DF7;&#x5408;&#x4F7F;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;Part&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;MultipartFile</p>
+<li><p>Two data types can be mixed, for example, the first parameter is Part and the second parameter is MultipartFile</p>
 </li>
-<li><p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;@RequestPart&#x4F20;&#x9012;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x53CA;&#x666E;&#x901A;&#x53C2;&#x6570;</p>
+<li><p>You can directly use @RequestPart to pass file types and common parameters</p>
 </li>
 </ul>
-<p>&#x6CE8;&#x610F;&#xFF1A;</p>
+<p>note:</p>
 <ul>
-<li><p>&#x5148;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x4E34;&#x65F6;&#x76EE;&#x5F55;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;null&#x4E0D;&#x652F;&#x6301;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#xFF0C;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x8BF7;&#x6C42;Content-Type&#x5FC5;&#x987B;&#x4E3A;multipart/form-data</p>
+<li><p>First file upload temporary directory, the default is null does not support file upload, file upload request Content-Type must be multipart/form-data</p>
 </li>
-<li><p>&#x540C;&#x540D;&#x53C2;&#x6570;&#x53EA;&#x652F;&#x6301;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;</p>
+<li><p>The same name parameter only supports one file</p>
 </li>
-<li><p>&#x652F;&#x6301;&#x4E00;&#x6B21;&#x4F20;&#x8F93;&#x591A;&#x4E2A;&#x4E0D;&#x540C;&#x53C2;&#x6570;&#x540D;&#x7684;&#x6587;&#x4EF6;</p>
+<li><p>Supports transferring files with multiple different parameter names at one time</p>
 </li>
-<li><p>&#x901A;&#x8FC7;MultipartFile&#x6216;Part&#x6253;&#x5F00;&#x6D41;&#x540E;&#xFF0C;&#x8BB0;&#x5F97;&#x5173;&#x95ED;&#xFF0C;&#x5426;&#x5219;&#x4E0A;&#x4F20;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x4F1A;&#x65E0;&#x6CD5;&#x5220;&#x9664;&#xFF0C;&#x6700;&#x7EC8;&#x5BFC;&#x81F4;&#x4E0A;&#x4F20;&#x4E34;&#x65F6;&#x76EE;&#x5F55;&#x88AB;&#x6491;&#x7206;</p>
+<li><p>After opening the stream through MultipartFile or Part, remember to close it. Otherwise the uploaded temporary file will not be deleted, and eventually, the upload temporary directory will be exploded.</p>
 </li>
 </ul>
-<p>Springmvc&#x6A21;&#x5F0F;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#x6837;&#x4F8B;&#xFF1A;</p>
+<p>Sample code in Springmvc mode:</p>
 <pre><code class="lang-java"><span class="hljs-meta">@PostMapping</span>(path = <span class="hljs-string">&quot;/upload&quot;</span>, consumes = MediaType.MULTIPART_FORM_DATA)
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">fileUpload</span><span class="hljs-params">(@RequestPart(name = <span class="hljs-string">&quot;file1&quot;</span>)</span> MultipartFile file1, @<span class="hljs-title">RequestPart</span><span class="hljs-params">(name = <span class="hljs-string">&quot;file2&quot;</span>)</span> Part file2, @RequestPart String param1) </span>{
-  &#x2026;&#x2026;
+  ......
 }
 </code></pre>
-<h3 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;&#xFF1A;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;&#xFF1A;</h3>
+<h3 id="configuration-instructions">Configuration instructions:</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x914D;&#x7F6E;&#x9879;</th>
-<th style="text-align:left">&#x9ED8;&#x8BA4;&#x503C;</th>
-<th style="text-align:left">&#x53D6;&#x503C;&#x8303;&#x56F4;</th>
-<th style="text-align:left">&#x542B;&#x4E49;</th>
+<th style="text-align:left">Configuration Item</th>
+<th style="text-align:left">Default Value</th>
+<th style="text-align:left">Range of Value</th>
 </tr>
 </thead>
 <tbody>
@@ -1334,18 +1333,18 @@
 <td style="text-align:left">servicecomb.uploads.directory</td>
 <td style="text-align:left">null</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">&#x4E0A;&#x4F20;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x4FDD;&#x5B58;&#x5728;&#x54EA;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;<strong>&#x9ED8;&#x8BA4;&#x503C;null&#x8868;&#x793A;&#x4E0D;&#x652F;&#x6301;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;</strong></td>
+<td style="text-align:left">In which directory the uploaded temporary file is saved, <strong>default value null means file upload is not supported</strong></td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.uploads.maxSize</td>
 <td style="text-align:left">-1</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">http body&#x7684;&#x6700;&#x5927;&#x5141;&#x8BB8;&#x5927;&#x5C0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;-1&#x8868;&#x793A;&#x65E0;&#x9650;&#x5236;</td>
+<td style="text-align:left">The maximum allowable size of http body, the default value of -1 means unlimited</td>
 </tr>
 </tbody>
 </table>
-<h2 id="consumer&#xFF1A;">Consumer&#xFF1A;</h2>
-<p>&#x652F;&#x6301;&#x4EE5;&#x4E0B;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF1A;</p>
+<h2 id="consumer">Consumer:</h2>
+<p>The following data types are supported:</p>
 <ul>
 <li><p>java.io.File</p>
 </li>
@@ -1356,17 +1355,17 @@
 <li><p>org.springframework.core.io.Resource</p>
 </li>
 </ul>
-<p>&#x4F7F;&#x7528;InputStream&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;&#x662F;&#x6D41;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x6B64;&#x65F6;&#x6CA1;&#x6709;&#x5BA2;&#x6237;&#x7AEF;&#x6587;&#x4EF6;&#x540D;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x6240;&#x4EE5;producer&#x83B7;&#x53D6;&#x5BA2;&#x6237;&#x7AEF;&#x6587;&#x4EF6;&#x540D;&#x4F1A;&#x5F97;&#x5230;null</p>
-<p>&#x5982;&#x679C;&#x65E2;&#x8981;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x6570;&#x636E;&#xFF0C;&#x53C8;&#x60F3;&#x8BA9;producer&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5BA2;&#x6237;&#x7AEF;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;resource&#x7C7B;&#x578B;&#xFF0C;&#x7EE7;&#x627F;org.springframework.core.io.ByteArrayResource&#xFF0C;&#x4E14;override getFilename&#x5373;&#x53EF;&#x3002;</p>
-<h3 id="&#x900F;&#x660E;rpc&#x4EE3;&#x7801;&#x6837;&#x4F8B;&#xFF1A;">&#x900F;&#x660E;RPC&#x4EE3;&#x7801;&#x6837;&#x4F8B;&#xFF1A;</h3>
+<p>When using InputStream, because it is a stream, there is no concept of client file name at this time, so the producer will get the client file name will get null.</p>
+<p>If you want to use both memory data and the producer to get the client file name, you can use the resource type, inherit org.springframework.core.io.ByteArrayResource, and override getFilename.</p>
+<h3 id="transparent-rpc-code-sample">Transparent RPC Code Sample:</h3>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UploadIntf</span> </span>{
   <span class="hljs-function">String <span class="hljs-title">upload</span><span class="hljs-params">(File file)</span></span>;
 }
 </code></pre>
-<p>&#x83B7;&#x5F97;&#x63A5;&#x53E3;&#x5F15;&#x7528;&#x540E;&#xFF0C;&#x76F4;&#x63A5;&#x8C03;&#x7528;&#x5373;&#x53EF;&#xFF1A;</p>
+<p>After getting the interface reference, you can call it directly:</p>
 <pre><code class="lang-java">String result = uploadIntf.upload(file);
 </code></pre>
-<h3 id="resttemplate&#x4EE3;&#x7801;&#x6837;&#x4F8B;&#xFF1A;">RestTemplate&#x4EE3;&#x7801;&#x6837;&#x4F8B;&#xFF1A;</h3>
+<h3 id="resttemplate-code-example">RestTemplate code example:</h3>
 <pre><code class="lang-java">Map&lt;String, Object&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
 map.put(<span class="hljs-string">&quot;file&quot;</span>, <span class="hljs-keyword">new</span> FileSystemResource(<span class="hljs-string">&quot;a file path!&quot;</span>));
 map.put(<span class="hljs-string">&quot;param1&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>);
@@ -1422,7 +1421,7 @@ String reseult = template.postForObject(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"文件上传","level":"1.5.8","depth":2,"next":{"title":"文件下载","level":"1.5.9","depth":2,"path":"general-development/file-download.md","ref":"general-development/file-download.md","articles":[]},"previous":{"title":"Http Filter","level":"1.5.7","depth":2,"path":"general-development/http-filter.md","ref":"general-development/http-filter.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/file-upload.md","mtime":"2018-08-23T08:30:07.995Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T08:31:04.696Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"文件上传","level":"1.5.8","depth":2,"next":{"title":"文件下载","level":"1.5.9","depth":2,"path":"general-development/file-download.md","ref":"general-development/file-download.md","articles":[]},"previous":{"title":"Http Filter","level":"1.5.7","depth":2,"path":"general-development/http-filter.md","ref":"general-development/http-filter.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/file-upload.md","mtime":"2018-08-23T08:33:08.895Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T08:33:50.754Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
