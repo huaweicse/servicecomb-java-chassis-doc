@@ -1280,15 +1280,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x516C;&#x94A5;&#x8BA4;&#x8BC1;">&#x516C;&#x94A5;&#x8BA4;&#x8BC1;</h1>
-<h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
-<p>&#x516C;&#x94A5;&#x8BA4;&#x8BC1;&#x662F;ServiceComb&#x63D0;&#x4F9B;&#x7684;&#x4E00;&#x79CD;&#x7B80;&#x5355;&#x9AD8;&#x6548;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x4E4B;&#x95F4;&#x8BA4;&#x8BC1;&#x673A;&#x5236;&#xFF0C;&#x5B83;&#x7684;&#x5B89;&#x5168;&#x6027;&#x5EFA;&#x7ACB;&#x5728;&#x5FAE;&#x670D;&#x52A1;&#x4E0E;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x4E4B;&#x95F4;&#x7684;&#x4EA4;&#x4E92;&#x662F;&#x53EF;&#x4FE1;&#x7684;&#x57FA;&#x7840;&#x4E4B;&#x4E0A;&#xFF0C;&#x5373;&#x5FAE;&#x670D;&#x52A1;&#x548C;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x4E4B;&#x95F4;&#x5FC5;&#x987B;&#x5148;&#x542F;&#x7528;&#x8BA4;&#x8BC1;&#x673A;&#x5236;&#x3002;&#x5B83;&#x7684;&#x57FA;&#x672C;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+                                <h1 id="public-key-authentication">public key authentication</h1>
+<h2 id="scene-description">Scene Description</h2>
+<p>Public key authentication is a simple and efficient authentication mechanism between microservices provided by ServiceComb. Its security is based on the trust between microservices and service centers, namely microservices and service centers. The authentication mechanism must be enabled first. Its basic process is as follows:</p>
 <ol>
-<li>&#x5FAE;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x751F;&#x6210;&#x79D8;&#x94A5;&#x5BF9;&#xFF0C;&#x5E76;&#x5C06;&#x516C;&#x94A5;&#x6CE8;&#x518C;&#x5230;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x3002;</li>
-<li>&#x6D88;&#x8D39;&#x8005;&#x8BBF;&#x95EE;&#x63D0;&#x4F9B;&#x8005;&#x4E4B;&#x524D;&#xFF0C;&#x4F7F;&#x7528;&#x81EA;&#x5DF1;&#x7684;&#x79C1;&#x94A5;&#x5BF9;&#x6D88;&#x606F;&#x8FDB;&#x884C;&#x7B7E;&#x540D;&#x3002;</li>
-<li>&#x63D0;&#x4F9B;&#x8005;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x83B7;&#x53D6;&#x6D88;&#x8D39;&#x8005;&#x516C;&#x94A5;&#xFF0C;&#x5BF9;&#x7B7E;&#x540D;&#x7684;&#x6D88;&#x606F;&#x8FDB;&#x884C;&#x6821;&#x9A8C;&#x3002;</li>
+<li>When the microservice starts, generate a secret key pair and register the public key to the service center.</li>
+<li>The consumer signs the message with his or her private key before accessing the provider.</li>
+<li>The provider obtains the consumer public key from the service center and verifies the signed message.</li>
 </ol>
-<p>&#x516C;&#x94A5;&#x8BA4;&#x8BC1;&#x9700;&#x8981;&#x5728;&#x6D88;&#x8D39;&#x8005;&#x3001;&#x63D0;&#x4F9B;&#x8005;&#x90FD;&#x542F;&#x7528;&#x3002;</p>
+<p>Public key authentication needs to be enabled for both consumers and providers.</p>
 <pre><code>servicecomb:
   handler:
     chain:
@@ -1296,17 +1296,17 @@
         default: auth-consumer
       Provider:
         default: auth-provider
-</code></pre><p>POM&#x4F9D;&#x8D56;&#xFF1A;</p>
+</code></pre><p>POM Dependency:</p>
 <ul>
-<li><p>&#x5728;pom.xml&#x4E2D;&#x589E;&#x52A0;&#x4F9D;&#x8D56;&#xFF1A;</p>
-<pre><code> &lt;dependency&gt; 
-    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
-    &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt; 
+<li><p>Add dependencies in pom.xml:</p>
+<pre><code> &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt;
   &lt;/dependency&gt;
 </code></pre></li>
 </ul>
-<h2 id="&#x914D;&#x7F6E;&#x9ED1;&#x767D;&#x540D;&#x5355;">&#x914D;&#x7F6E;&#x9ED1;&#x767D;&#x540D;&#x5355;</h2>
-<p>&#x57FA;&#x4E8E;&#x516C;&#x94A5;&#x8BA4;&#x8BC1;&#x673A;&#x5236;&#xFF0C;ServiceComb&#x63D0;&#x4F9B;&#x4E86;&#x9ED1;&#x767D;&#x540D;&#x5355;&#x529F;&#x80FD;&#x3002;&#x901A;&#x8FC7;&#x9ED1;&#x767D;&#x540D;&#x5355;&#xFF0C;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x5FAE;&#x670D;&#x52A1;&#x5141;&#x8BB8;&#x5176;&#x4ED6;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x8BBF;&#x95EE;&#x3002;&#x76EE;&#x524D;&#x652F;&#x6301;&#x901A;&#x8FC7;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x5C5E;&#x6027;&#x6765;&#x63A7;&#x5236;&#xFF0C;&#x914D;&#x7F6E;&#x9879;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h2 id="configuring-black-and-white-list">Configuring black and white list</h2>
+<p>Based on the public key authentication mechanism, ServiceComb provides a black and white list function. Through the black and white list, you can control which other services are allowed to be accessed by the microservice. Currently supported by configuring service attributes, the configuration items are as follows:</p>
 <pre><code>servicecomb:
   publicKey:
     accessControl:
@@ -1314,17 +1314,17 @@
         list01:
           category: property ## property, fixed value
           propertyName: serviceName ## property name
-# property value match expression. 
-# only supports prefix match and postfix match and exactly match. 
-# e.g. hacker*, *hacker, hacker
-          rule: hacker 
+# property value matches expression.
+# only supports prefix match and postfix match and exactly match.
+#, e.g., hacker*, *hacker, hacker
+          rule: hacker
       white:
         list02:
           category: property
           propertyName: serviceName
           rule: cust*
-</code></pre><p>&#x4EE5;&#x4E0A;&#x89C4;&#x5219;&#x914D;&#x7F6E;&#x4E86;&#x9ED1;&#x540D;&#x5355;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x4E3A;hacker&#x7684;&#x8BBF;&#x95EE;&#xFF1B;&#x767D;&#x540D;&#x5355;&#xFF0C;&#x5141;&#x8BB8;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x4E3A;cust&#x524D;&#x7F00;&#x7684;&#x670D;&#x52A1;&#x8BBF;&#x95EE;&#x3002;</p>
-<p>ServiceComb&#x63D0;&#x4F9B;&#x4E86;<a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/samples/trust-sample" target="_blank">trust-sample</a>&#x6765;&#x6F14;&#x793A;&#x9ED1;&#x767D;&#x540D;&#x5355;&#x529F;&#x80FD;&#x3002;</p>
+</code></pre><p>The above rules are configured with blacklists, which do not allow microservice names to be accessed by hackers; whitelists allow access to services with microservice names named cust.</p>
+<p>ServiceComb provides [trust-sample] (<a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/samples/trust-sample" target="_blank">https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/samples/trust-sample</a>) to demonstrate the black and white list feature.</p>
 
                                 
                                 </section>
@@ -1368,7 +1368,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"公钥认证","level":"1.10.2","depth":2,"next":{"title":"常见问题","level":"1.11","depth":1,"path":"question-and-answer/question_answer.md","ref":"question-and-answer/question_answer.md","articles":[{"title":"微服务接口兼容常见问题","level":"1.11.1","depth":2,"path":"question-and-answer/interface-compatibility.md","ref":"question-and-answer/interface-compatibility.md","articles":[]}]},"previous":{"title":"负载均衡","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/publickey.md","mtime":"2018-08-22T07:19:36.288Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-22T07:20:17.256Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"公钥认证","level":"1.10.2","depth":2,"next":{"title":"常见问题","level":"1.11","depth":1,"path":"question-and-answer/question_answer.md","ref":"question-and-answer/question_answer.md","articles":[{"title":"微服务接口兼容常见问题","level":"1.11.1","depth":2,"path":"question-and-answer/interface-compatibility.md","ref":"question-and-answer/interface-compatibility.md","articles":[]}]},"previous":{"title":"负载均衡","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/publickey.md","mtime":"2018-08-23T08:29:21.109Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T08:30:23.878Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
