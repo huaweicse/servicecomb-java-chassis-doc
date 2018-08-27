@@ -1280,15 +1280,14 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4F7F;&#x7528;&#x670D;&#x52A1;&#x5951;&#x7EA6;">&#x4F7F;&#x7528;&#x670D;&#x52A1;&#x5951;&#x7EA6;</h1>
-<h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
-<p>&#x5F53;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x8C03;&#x7528;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x7684;&#x670D;&#x52A1;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x518C;&#x670D;&#x52A1;&#x5951;&#x7EA6;&#x3002;&#x6D88;&#x8D39;&#x8005;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x63D0;&#x4F9B;&#x8005;&#x7684;&#x670D;&#x52A1;&#x5951;&#x7EA6;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x4ECE;&#x670D;&#x52A1;&#x7684;&#x63D0;&#x4F9B;&#x65B9;&#x79BB;&#x7EBF;&#x83B7;&#x53D6;&#x5951;&#x7EA6;&#x6587;&#x4EF6;&#xFF0C;&#x624B;&#x5DE5;&#x914D;&#x7F6E;&#x5230;&#x9879;&#x76EE;&#x4E2D;&#xFF1B;&#x53E6;&#x4E00;&#x79CD;&#x662F;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x81EA;&#x52A8;&#x4E0B;&#x8F7D;&#x5951;&#x7EA6;&#x3002;</p>
-<h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
+                                <h1 id="service-using-api-definitions">Service Using API Definitions</h1>
+<h2 id="scenario">Scenario</h2>
+<p>When a consumer calls a service from a provider, you need to register a service API definition. You can obtain service API definition from your provider for your consumer in two ways. One is to obtain the service API definition from the provider off-line and manually configure the API definition to the project. Another is to automatically download the service API definition from the service center.</p>
+<h2 id="configuration">Configuration</h2>
 <blockquote>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x670D;&#x52A1;&#x5951;&#x7EA6;&#x7684;&#x83B7;&#x53D6;&#x65B9;&#x5F0F;&#x4E0E;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x662F;&#x65E0;&#x5173;&#x7684;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x7EC4;&#x5408;&#x4F7F;&#x7528;&#x3002;</p>
+<p>You can obtain service API definition in either way, regardless of the development mode of service consumers.</p>
 </blockquote>
-<h3 id="&#x914D;&#x7F6E;&#x4F9D;&#x8D56;&#x670D;&#x52A1;">&#x914D;&#x7F6E;&#x4F9D;&#x8D56;&#x670D;&#x52A1;</h3>
-<p>&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x9700;&#x8981;&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#x4F9D;&#x8D56;&#x7684;provider&#xFF0C;&#x793A;&#x4F8B;&#x914D;&#x7F6E;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>In the microservice.yaml file, configure a provider for the consumer. The following is an example of the configuration:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
   <span class="hljs-comment"># other configurations omitted</span>
 <span class="hljs-attr">  references:</span>
@@ -1296,28 +1295,29 @@
 <span class="hljs-attr">      version-rule:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.1</span>
 </code></pre>
 <blockquote>
-<p>version-rule&#x662F;&#x7248;&#x672C;&#x5339;&#x914D;&#x89C4;&#x5219;&#xFF0C;&#x6709;&#x56DB;&#x79CD;&#x683C;&#x5F0F;&#xFF1A;</p>
+<p>There are four kind of rule for version-rule:</p>
 <ul>
-<li>&#x7CBE;&#x786E;&#x7248;&#x672C;&#x5339;&#x914D;&#xFF1A;&#x4F8B;&#x5982;<code>version-rule: 0.0.1</code>&#xFF0C;&#x8868;&#x793A;&#x53EA;&#x5339;&#x914D;&#x7248;&#x672C;&#x53F7;&#x4E3A;0.0.1&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;</li>
-<li>&#x540E;&#x7EED;&#x7248;&#x672C;&#x5339;&#x914D;&#xFF1A;&#x4F8B;&#x5982;<code>version-rule: 1.0.0+</code>&#xFF0C;&#x8868;&#x793A;&#x5339;&#x914D;&#x7248;&#x672C;&#x53F7;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;1.0.0&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;</li>
-<li>&#x6700;&#x65B0;&#x7248;&#x672C;&#xFF1A;<code>version-rule: latest</code>&#xFF0C;&#x8868;&#x793A;&#x5339;&#x914D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;</li>
-<li>&#x7248;&#x672C;&#x8303;&#x56F4;&#xFF1A;&#x4F8B;&#x5982;<code>1.0.0-2.0.2</code>&#xFF0C;&#x8868;&#x793A;&#x5339;&#x914D;&#x7248;&#x672C;&#x53F7;&#x5728;1.0.0&#x81F3;2.0.2&#x4E4B;&#x95F4;&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#xFF0C;&#x5305;&#x542B;1.0.0&#x548C;2.0.2</li>
+<li>Accurate Matching Rule: such as <code>version-rule: 0.0.1</code>, it indicates that only those  providers whose version is 0.0.1 can be matched.</li>
+<li>Later Matching Rule: such as <code>version-rule: 1.0.0+</code>, it indicates that those providers whose version is later that 1.0.0 can be matched.</li>
+<li>Latest Matching Rule: such as <code>version-rule: latest</code>, it indicates that only  those providers whose version number is latest can be matched.</li>
+<li>Range Matching Rule: such as<code>1.0.0-2.0.2</code>,  it indicates that those provider whose version number is between 1.0.0 and 2.0.2 can be matched, including 1.0.0 and 2.0.2</li>
 </ul>
-<p>&#x6B64;&#x914D;&#x7F6E;&#x9879;&#x9ED8;&#x8BA4;&#x4E3A;<code>latest</code></p>
+<p>The default version rule of version-rule is <code>latest</code>.</p>
 </blockquote>
-<h3 id="&#x624B;&#x5DE5;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x5951;&#x7EA6;">&#x624B;&#x5DE5;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x5951;&#x7EA6;</h3>
-<p>&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x5F00;&#x53D1;&#x8005;&#x5728;&#x7EBF;&#x4E0B;&#x62FF;&#x5230;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x7684;&#x5951;&#x7EA6;&#xFF0C;&#x914D;&#x7F6E;&#x5230;&#x6D88;&#x8D39;&#x8005;&#x5DE5;&#x7A0B;&#x7684;&#x7279;&#x5B9A;&#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x670D;&#x52A1;&#x5951;&#x7EA6;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x5B58;&#x653E;&#x76EE;&#x5F55;&#x4E0E;<a href="../build-provider/define-contract.html">&#x5B9A;&#x4E49;&#x670D;&#x52A1;&#x5951;&#x7EA6;</a>&#x7684;&#x914D;&#x7F6E;&#x8BF4;&#x660E;&#x90E8;&#x5206;&#x76F8;&#x540C;&#x3002;</p>
-<p>microservice&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x5FAE;&#x670D;&#x52A1;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;yaml&#x6587;&#x4EF6;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;schema&#x5951;&#x7EA6;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x5C31;&#x662F;schemaId&#x3002;applications&#x76EE;&#x5F55;&#x4E0B;&#x5B58;&#x653E;&#x9700;&#x8981;&#x6307;&#x660E;appId&#x7684;&#x670D;&#x52A1;&#x5951;&#x7EA6;&#xFF0C;&#x7528;&#x4E8E;&#x8DE8;app&#x8C03;&#x7528;&#x7B49;&#x573A;&#x666F;&#x3002;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
-<pre><code>resources
+<h3 id="manually-configuring-service-api-definition">Manually Configuring Service API Definition</h3>
+<p>After you obtained the API definition of your consumer from the provider, configure it in a specified directory of the consumer project. The directory is the one mentioned in the configuration description <a href="../users/service-contract">Service Contract</a>.</p>
+<p>Each directory under the microservices directory indecates a microservice, and each .yaml file under the jaxrs directory represents a schema API definition. The file name is the schema ID. The service API definitions whose application IDs need to be specified are stored under the applications directory for cross-application calls. The directory structure is as follows:</p>
+<pre><code class="lang-txt">resources
   - microservices
-      - serviceName            # &#x5FAE;&#x670D;&#x52A1;&#x540D;
-          - schemaId.yaml      # schema&#x63A5;&#x53E3;&#x7684;&#x5951;&#x7EA6;
+      - serviceName            # Microservice name
+          - schemaId.yaml      # Schema API definition
   - applications
-      - appId                  # &#x5E94;&#x7528;ID
-          - serviceName        # &#x5FAE;&#x670D;&#x52A1;&#x540D;
-              - schemaId.yaml  # schema&#x63A5;&#x53E3;&#x7684;&#x5951;&#x7EA6;
-</code></pre><h3 id="&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x81EA;&#x52A8;&#x4E0B;&#x8F7D;&#x5951;&#x7EA6;">&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x81EA;&#x52A8;&#x4E0B;&#x8F7D;&#x5951;&#x7EA6;</h3>
-<p>&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x663E;&#x5F0F;&#x5730;&#x5C06;&#x5951;&#x7EA6;&#x5B58;&#x653E;&#x5728;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x5F53;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x65F6;&#xFF0C;ServiceComb&#x6846;&#x67B6;&#x4F1A;&#x81EA;&#x52A8;&#x6839;&#x636E;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x548C;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x81EA;&#x52A8;&#x4E0B;&#x8F7D;&#x5951;&#x7EA6;&#x4FE1;&#x606F;&#x3002;</p>
+      - appId                  # Application ID
+          - serviceName        # Microservice name
+              - schemaId.yaml  # Schema API definition
+</code></pre>
+<h3 id="automatically-downloading-api-definition-from-service-center">Automatically Downloading API Definition from Service Center</h3>
+<p>If a consumer does not explicitly store the API definition in the project directory, when the application is started, the ServiceComb framework automatically downloads the information about the API definition from the service center based on the provider&apos;s microservices name and version configured in microservice.yaml.</p>
 
                                 
                                 </section>
@@ -1361,7 +1361,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用服务契约","level":"1.4.4","depth":2,"next":{"title":"调用控制","level":"1.4.5","depth":2,"path":"build-consumer/invoke-control.md","ref":"build-consumer/invoke-control.md","articles":[{"title":"熔断策略","level":"1.4.5.1","depth":3,"path":"build-consumer/circuit-breaker.md","ref":"build-consumer/circuit-breaker.md","articles":[]},{"title":"限流策略","level":"1.4.5.2","depth":3,"path":"build-consumer/flow-control.md","ref":"build-consumer/flow-control.md","articles":[]},{"title":"故障注入","level":"1.4.5.3","depth":3,"path":"build-consumer/fault-injection.md","ref":"build-consumer/fault-injection.md","articles":[]}]},"previous":{"title":"使用RPC方式开发服务消费者","level":"1.4.3","depth":2,"path":"build-consumer/develop-consumer-using-rpc.md","ref":"build-consumer/develop-consumer-using-rpc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/with-contract.md","mtime":"2018-08-27T08:55:19.477Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T08:57:00.951Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"使用服务契约","level":"1.4.4","depth":2,"next":{"title":"调用控制","level":"1.4.5","depth":2,"path":"build-consumer/invoke-control.md","ref":"build-consumer/invoke-control.md","articles":[{"title":"熔断策略","level":"1.4.5.1","depth":3,"path":"build-consumer/circuit-breaker.md","ref":"build-consumer/circuit-breaker.md","articles":[]},{"title":"限流策略","level":"1.4.5.2","depth":3,"path":"build-consumer/flow-control.md","ref":"build-consumer/flow-control.md","articles":[]},{"title":"故障注入","level":"1.4.5.3","depth":3,"path":"build-consumer/fault-injection.md","ref":"build-consumer/fault-injection.md","articles":[]}]},"previous":{"title":"使用RPC方式开发服务消费者","level":"1.4.3","depth":2,"path":"build-consumer/develop-consumer-using-rpc.md","ref":"build-consumer/develop-consumer-using-rpc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/with-contract.md","mtime":"2018-08-27T09:02:45.329Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.349Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

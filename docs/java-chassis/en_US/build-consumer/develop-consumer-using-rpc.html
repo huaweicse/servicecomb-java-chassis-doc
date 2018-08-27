@@ -1280,43 +1280,65 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4F7F;&#x7528;&#x900F;&#x660E;rpc&#x65B9;&#x5F0F;&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;">&#x4F7F;&#x7528;&#x900F;&#x660E;RPC&#x65B9;&#x5F0F;&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;</h1>
-<h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>&#x900F;&#x660E;RPC&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x901A;&#x8FC7;&#x7B80;&#x5355;&#x7684;java interface&#x50CF;&#x672C;&#x5730;&#x8C03;&#x7528;&#x4E00;&#x6837;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x8C03;&#x7528;&#x3002;<br>&#x900F;&#x660E;RPC&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x79CD;&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF1A;</p>
-<ul>
-<li>&#x4E0E;&#x4F7F;&#x7528;highway&#x8FD8;&#x662F;RESTful&#x4F20;&#x8F93;&#x6CA1;&#x6709;&#x5173;&#x8054;</li>
-<li>&#x4E0E;producer&#x4F7F;&#x7528;&#x900F;&#x660E;RPC/Jax-RS&#x8FD8;&#x662F;SpringMVC&#x6A21;&#x5F0F;&#x5F00;&#x53D1;&#x6CA1;&#x6709;&#x5173;&#x8054;</li>
-<li>&#x4E5F;&#x4E0E;producer&#x4EE3;&#x7801;&#x662F;&#x5426;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;interface&#x6CA1;&#x6709;&#x5173;&#x8054;&#x3002;  </li>
-</ul>
-<p>&#x900F;&#x660E;RPC&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#x4E0E;spring cloud&#x7684;feign&#x7C7B;&#x4F3C;&#xFF0C;&#x4E0D;&#x8FC7;&#x66F4;&#x7B80;&#x5355;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x5FC5;&#x5728;&#x8FD9;&#x4E2A;interface&#x4E2D;&#x589E;&#x52A0;&#x4EFB;&#x4F55;RESTful annotation&#x3002;</p>
-<h2 id="&#x5728;spring-bean&#x4E2D;&#x901A;&#x8FC7;rpcreference&#x58F0;&#x660E;">&#x5728;spring bean&#x4E2D;&#x901A;&#x8FC7;@RpcReference&#x58F0;&#x660E;</h2>
-<pre><code class="lang-java"><span class="hljs-meta">@Component</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeBean</span> </span>{
-  ......
+                                <h1 id="develop-with-rpc">Develop with RPC</h1>
+<h2 id="concept-description">Concept Description</h2>
+<p>The RPC development mode allows you to add annotations on the microservice APIs to generate the service provider agent. In this case, you can call microservices.</p>
+<h2 id="sample-code">Sample Code</h2>
+<p>To call a microservice, you only need to declare a member of a service API type and add the @RpcReference annotation for the member, the microservice that depends on the declaration, and the schemaID. The sample code is as follows.</p>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
 
-  <span class="hljs-meta">@RpcReference</span>(microserviceName = <span class="hljs-string">&quot;helloService&quot;</span>, schemaId = <span class="hljs-string">&quot;helloSchema&quot;</span>)
-  <span class="hljs-keyword">private</span> Hello hello;
+<span class="hljs-keyword">import</span> org.apache.servicecomb.foundation.common.utils.BeanUtils;
+<span class="hljs-keyword">import</span> org.apache.servicecomb.foundation.common.utils.Log4jUtils;
+<span class="hljs-keyword">import</span> org.apache.servicecomb.provider.pojo.RpcReference;
+<span class="hljs-keyword">import</span> org.apache.servicecomb.samples.common.schema.Hello;
+<span class="hljs-keyword">import</span> org.apache.servicecomb.samples.common.schema.models.Person;
 
-  ......
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CodeFirstConsumerMain</span> </span>{
+    <span class="hljs-meta">@RpcReference</span>(microserviceName = <span class="hljs-string">&quot;codefirst&quot;</span>, schemaId = <span class="hljs-string">&quot;codeFirstHello&quot;</span>)
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Hello hello;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        init();
+        System.out.println(hello.sayHi(<span class="hljs-string">&quot;Java Chassis&quot;</span>));
+        Person person = <span class="hljs-keyword">new</span> Person();
+        person.setName(<span class="hljs-string">&quot;ServiceComb/Java Chassis&quot;</span>);
+        System.out.println(hello.sayHello(person));
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        Log4jUtils.init();
+        BeanUtils.init();
+    }
 }
 </code></pre>
-<h2 id="&#x8131;&#x79BB;spring-bean&#xFF0C;&#x76F4;&#x63A5;&#x901A;&#x8FC7;api&#x58F0;&#x660E;">&#x8131;&#x79BB;spring bean&#xFF0C;&#x76F4;&#x63A5;&#x901A;&#x8FC7;api&#x58F0;&#x660E;</h2>
-<pre><code class="lang-java">Hello hello = Invoker.createProxy(<span class="hljs-string">&quot;helloService&quot;</span>, <span class="hljs-string">&quot;helloSchema&quot;</span>, Hello.class);
+<p>In the preceding code, the microservice consumers have obtained the microservice API Hello of the microservice provider and declared a member of the Hello type. The annotation <code>@RPCReference</code> on <code>Hello</code> specifies the microservice name and schemaId, The ServiceComb framework can obtain information about isntances from a certain provider during program startup and generate an agent to insert to Hello. This allows you to call a remote service in the same way as you call a local class.</p>
+<h3 id="additional-explanation-for-consumer-invocation">Additional explanation for consumer invocation</h3>
+<p>In above example, in order to direct use <code>hello</code> in main function, we mark it as <code>static</code>. As a local field of <code>CodeFirstConsumerMain</code>, we recommend get it use these two way :</p>
+<h4 id="first-way-define-cserpc-reference">First way: define cse:rpc-reference</h4>
+<p>In your bean.xml, add <code>cse:rpc-reference</code> configuration:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">cse:rpc-reference</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span> <span class="hljs-attr">microservice-name</span>=<span class="hljs-string">&quot;codefirst&quot;</span>
+    <span class="hljs-attr">schema-id</span>=<span class="hljs-string">&quot;codeFirstHello&quot;</span> <span class="hljs-attr">interface</span>=<span class="hljs-string">&quot;org.apache.servicecomb.samples.common.schema.Hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">cse:rpc-reference</span>&gt;</span>
 </code></pre>
-<h2 id="reactive">reactive</h2>
-<p>&#x53EA;&#x9700;&#x8981;&#x4F7F;&#x7528;jdk&#x7684;CompletableFuture&#x5BF9;&#x8FD4;&#x56DE;&#x503C;&#x8FDB;&#x884C;&#x5305;&#x88C5;&#x5373;&#x53EF;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Hello</span> </span>{
-  <span class="hljs-function">CompletableFuture&lt;String&gt; <span class="hljs-title">sayHi</span><span class="hljs-params">(String name)</span></span>;
+<p>Then use <code>BeanUtils.getBean</code> to get <code>Hello</code> provider:</p>
+<pre><code class="lang-java">Hello hello = BeanUtils.getBean(<span class="hljs-string">&quot;hello&quot;</span>);
+</code></pre>
+<h4 id="second-way-get-bean-then-use-field">Second way: get Bean, then use field</h4>
+<p>First use <code>BeanUtils.getBean</code> to get Bean of <code>CodeFirstConsumerMain</code>:</p>
+<pre><code class="lang-java"><span class="hljs-comment">//Default instance name of Spring Bean is same as class name with first char low-cased</span>
+CodeFirstConsumerMain consumer = BeanUtils.getBean(<span class="hljs-string">&quot;codeFirstConsumerMain&quot;</span>);
+</code></pre>
+<p>Then get <code>hello</code> via Getter&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> Hello <span class="hljs-title">getHello</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> hello;
 }
 </code></pre>
-<p>&#x540C;&#x4E00;&#x4E2A;interface&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x58F0;&#x660E;&#x540C;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;reactive&#x548C;&#x540C;&#x6B65;&#x539F;&#x578B;<br>&#x56E0;&#x4E3A;&#x8981;&#x6C42;&#x65B9;&#x6CD5;&#x540D;&#x4E0E;&#x5951;&#x7EA6;&#x4E2D;&#x7684;operationId&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#xFF0C;&#x800C;&#x4EC5;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x4E0D;&#x540C;&#xFF0C;&#x5728;java&#x4E2D;&#x662F;&#x975E;&#x6CD5;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x65B9;&#x6CD5;&#x540D;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;swagger annotation&#x6765;&#x58F0;&#x660E;&#x771F;&#x6B63;&#x7684;operationId</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Hello</span> </span>{
-  <span class="hljs-function">String <span class="hljs-title">sayHi</span><span class="hljs-params">(String name)</span></span>;
-
-  <span class="hljs-meta">@ApiOperation</span>(nickname = <span class="hljs-string">&quot;sayHi&quot;</span>, value = <span class="hljs-string">&quot;reactive method for sayHi&quot;</span>)
-  <span class="hljs-function">CompletableFuture&lt;String&gt; <span class="hljs-title">asyncSayHi</span><span class="hljs-params">(String name)</span></span>;
-}
+<pre><code class="lang-java">Hello hello = consumer.getHello()
 </code></pre>
+<blockquote>
+<p>NOTE:
+<code>BeanUtils.getBean</code> has inner lock so performacen is low , we recommend use once and cache return as local field for future use(such as in constructor).</p>
+</blockquote>
 
                                 
                                 </section>
@@ -1360,7 +1382,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用RPC方式开发服务消费者","level":"1.4.3","depth":2,"next":{"title":"使用服务契约","level":"1.4.4","depth":2,"path":"build-consumer/with-contract.md","ref":"build-consumer/with-contract.md","articles":[]},"previous":{"title":"使用AsynRestTemplate开发服务消费者","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/develop-consumer-using-rpc.md","mtime":"2018-08-27T08:55:19.477Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T08:57:00.951Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"使用RPC方式开发服务消费者","level":"1.4.3","depth":2,"next":{"title":"使用服务契约","level":"1.4.4","depth":2,"path":"build-consumer/with-contract.md","ref":"build-consumer/with-contract.md","articles":[]},"previous":{"title":"使用AsynRestTemplate开发服务消费者","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/develop-consumer-using-rpc.md","mtime":"2018-08-27T09:02:45.329Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.349Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

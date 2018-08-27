@@ -1280,28 +1280,29 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
-<p>&#x7528;&#x6237;&#x5728;consumer&#x7AEF;&#x4F7F;&#x7528;&#x9650;&#x6D41;&#x7B56;&#x7565;&#xFF0C;&#x53EF;&#x4EE5;&#x9650;&#x5236;&#x53D1;&#x5F80;&#x6307;&#x5B9A;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x8BF7;&#x6C42;&#x7684;&#x9891;&#x7387;&#x3002;</p>
-<h2 id="&#x6CE8;&#x610F;&#x4E8B;&#x9879;">&#x6CE8;&#x610F;&#x4E8B;&#x9879;</h2>
-<p>&#x53C2;&#x8003;3.7.2-&#x9650;&#x6D41;&#x7B56;&#x7565;&#x3002;</p>
-<h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
-<p>&#x9650;&#x6D41;&#x7B56;&#x7565;&#x914D;&#x7F6E;&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x9879;&#x89C1;&#x4E0B;&#x8868;&#x3002;&#x8981;&#x5F00;&#x542F;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x7AEF;&#x7684;&#x9650;&#x6D41;&#x7B56;&#x7565;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x5728;&#x5904;&#x7406;&#x94FE;&#x4E2D;&#x914D;&#x7F6E;&#x6D88;&#x8D39;&#x7AEF;&#x9650;&#x6D41;handler&#xFF0C;&#x914D;&#x7F6E;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+                                <h2 id="flow-control-policy">Flow Control Policy</h2>
+<h3 id="scenario">Scenario</h3>
+<p>You can limit the frequency of request send to specific microservice when flow control was enables in consumer service. </p>
+<h3 id="precaution">Precaution</h3>
+<p>See detail info at <a href="../users/service-configurations#&#x9650;&#x6D41;&#x7B56;&#x7565;">Service Configurations</a>&#x3002;</p>
+<h3 id="configuration">Configuration</h3>
+<p>Flow control policy configuration is in microservice.yaml file. You need to configure consumer handler in chain of service. See example blow:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  handler:</span>
 <span class="hljs-attr">    chain:</span>
 <span class="hljs-attr">      Consumer:</span>
 <span class="hljs-attr">        default:</span> qps-flowcontrol-consumer
 </code></pre>
-<p>QPS&#x6D41;&#x63A7;&#x914D;&#x7F6E;&#x9879;&#x8BF4;&#x660E;</p>
+<p>Configuration items of QPS:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x914D;&#x7F6E;&#x9879;</th>
-<th style="text-align:left">&#x9ED8;&#x8BA4;&#x503C;</th>
-<th style="text-align:left">&#x53D6;&#x503C;&#x8303;&#x56F4;</th>
-<th style="text-align:left">&#x662F;&#x5426;&#x5FC5;&#x9009;</th>
-<th style="text-align:left">&#x542B;&#x4E49;</th>
-<th style="text-align:left">&#x6CE8;&#x610F;</th>
+<th style="text-align:left">Configuration Item</th>
+<th style="text-align:left">Default Value</th>
+<th style="text-align:left">Value Range</th>
+<th style="text-align:left">Mandatory</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Remark</th>
 </tr>
 </thead>
 <tbody>
@@ -1309,17 +1310,17 @@
 <td style="text-align:left">servicecomb.flowcontrol.Consumer.qps.enabled</td>
 <td style="text-align:left">true</td>
 <td style="text-align:left">Boolean</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x542F;&#x7528;Consumer&#x6D41;&#x63A7;</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Specifies whether consumers flowcontrol enables.</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
 <td style="text-align:left">2147483647  (max int)</td>
-<td style="text-align:left">(0,2147483647]&#xFF0C;&#x6574;&#x5F62;</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x6BCF;&#x79D2;&#x949F;&#x5141;&#x8BB8;&#x7684;&#x8BF7;&#x6C42;&#x6570;</td>
-<td style="text-align:left">&#x652F;&#x6301;microservice&#x3001;schema&#x3001;operation&#x4E09;&#x4E2A;&#x7EA7;&#x522B;&#x7684;&#x914D;&#x7F6E;</td>
+<td style="text-align:left">(0,2147483647], Integer</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Specifies number of requests per second.</td>
+<td style="text-align:left">Support three level configurations: microservice&#x3001;schema&#x3001;operation.</td>
 </tr>
 </tbody>
 </table>
@@ -1366,7 +1367,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"限流策略","level":"1.4.5.2","depth":3,"next":{"title":"故障注入","level":"1.4.5.3","depth":3,"path":"build-consumer/fault-injection.md","ref":"build-consumer/fault-injection.md","articles":[]},"previous":{"title":"熔断策略","level":"1.4.5.1","depth":3,"path":"build-consumer/circuit-breaker.md","ref":"build-consumer/circuit-breaker.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/flow-control.md","mtime":"2018-08-27T08:55:19.477Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T08:57:00.951Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"限流策略","level":"1.4.5.2","depth":3,"next":{"title":"故障注入","level":"1.4.5.3","depth":3,"path":"build-consumer/fault-injection.md","ref":"build-consumer/fault-injection.md","articles":[]},"previous":{"title":"熔断策略","level":"1.4.5.1","depth":3,"path":"build-consumer/circuit-breaker.md","ref":"build-consumer/circuit-breaker.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/flow-control.md","mtime":"2018-08-27T09:02:45.329Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.349Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
