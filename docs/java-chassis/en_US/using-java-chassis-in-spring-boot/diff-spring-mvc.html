@@ -1280,160 +1280,112 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>java chassis&#x652F;&#x6301;&#x4F7F;&#x7528;Spring MVC&#x63D0;&#x4F9B;&#x7684;&#x6807;&#x7B7E;(org.springframework.web.bind.annotation)&#x6765;&#x58F0;&#x660E;REST&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x4E24;&#x8005;&#x662F;&#x72EC;&#x7ACB;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x4E14;&#x6709;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x8BBE;&#x8BA1;&#x76EE;&#x6807;&#x3002;java chassis&#x7684;&#x76EE;&#x6807;&#x662F;&#x63D0;&#x4F9B;&#x8DE8;&#x8BED;&#x8A00;&#x3001;&#x652F;&#x6301;&#x591A;&#x901A;&#x4FE1;&#x534F;&#x8BAE;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x56E0;&#x6B64;&#x53BB;&#x6389;&#x4E86;Spring MVC&#x4E2D;&#x4E00;&#x4E9B;&#x5BF9;&#x8DE8;&#x8BED;&#x8A00;&#x652F;&#x6301;&#x4E0D;&#x662F;&#x5F88;&#x597D;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x4E5F;&#x4E0D;&#x652F;&#x6301;&#x7279;&#x5B9A;&#x8FD0;&#x884C;&#x6846;&#x67B6;&#x5F3A;&#x76F8;&#x5173;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x6BD4;&#x5982;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;Servlet&#x534F;&#x8BAE;&#x5B9A;&#x4E49;&#x7684;HttpServletRequest&#x3002;&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E9B;&#x663E;&#x8457;&#x7684;&#x5DEE;&#x522B;&#x3002;</p>
+                                <p>Java chassis supports the use of the label (org.springframework.web.bind.annotation) provided by Spring MVC to declare the REST interface, but the two are independent implementations and have different design goals. The goal of the java chassis is to provide a cross-language framework that supports multiple communication protocols. Therefore, some features of Spring MVC that are not very good for cross-language support are removed, and features that are strongly related to a specific running framework are not supported, such as direct access to the Servlet protocol definition. HttpServletRequest. Here are some notable differences.</p>
 <ul>
-<li>&#x670D;&#x52A1;&#x58F0;&#x660E;&#x65B9;&#x5F0F;</li>
+<li>Service declaration method</li>
 </ul>
-<p>Spring MVC&#x4F7F;&#x7528;@RestController&#x58F0;&#x660E;&#x670D;&#x52A1;&#xFF0C;&#x800C;java chassis&#x4F7F;&#x7528;@RestSchema&#x58F0;&#x660E;&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x663E;&#x793A;&#x7684;&#x4F7F;&#x7528;@RequestMapping&#x58F0;&#x660E;&#x670D;&#x52A1;&#x8DEF;&#x5F84;&#xFF0C;&#x4EE5;&#x533A;&#x5206;&#x8BE5;&#x670D;&#x52A1;&#x662F;&#x91C7;&#x7528;Spring MVC&#x7684;&#x6807;&#x7B7E;&#x8FD8;&#x662F;&#x4F7F;&#x7528;JAX RS&#x7684;&#x6807;&#x7B7E;&#x3002;</p>
+<p>Spring MVC uses @RestController to declare the service, and java chassis uses @RestSchema to declare the service and needs to display the service path using @RequestMapping to distinguish whether the service uses Spring MVC Annotations or JAX RS Annotations.</p>
 <pre><code>@RestSchema(schemaId = &quot;hello&quot;)
 @RequestMapping(path = &quot;/&quot;)
-</code></pre><p>Schema&#x662F;java chassis&#x7684;&#x670D;&#x52A1;&#x5951;&#x7EA6;&#xFF0C;&#x662F;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#x65F6;&#x7684;&#x57FA;&#x7840;&#xFF0C;&#x670D;&#x52A1;&#x6CBB;&#x7406;&#x3001;&#x7F16;&#x89E3;&#x7801;&#x7B49;&#x90FD;&#x57FA;&#x4E8E;&#x5951;&#x7EA6;&#x8FDB;&#x884C;&#x3002;&#x5728;&#x8DE8;&#x8BED;&#x8A00;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x5951;&#x7EA6;&#x4E5F;&#x5B9A;&#x4E49;&#x4E86;&#x4E0D;&#x540C;&#x8BED;&#x8A00;&#x80FD;&#x591F;&#x540C;&#x65F6;&#x7406;&#x89E3;&#x7684;&#x90E8;&#x5206;&#x3002;</p>
+</code></pre><p>The schema is the service contract of java chassis, which is the basis of service runtime. Service management, codec and so on are all based on contract. In a cross-language scenario, the contract also defines the parts of the language that can be understood simultaneously.</p>
 <ul>
-<li>&#x6570;&#x636E;&#x7C7B;&#x578B;&#x652F;&#x6301;</li>
+<li>Data type support</li>
 </ul>
-<p>&#x91C7;&#x7528;Spring MVC&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x670D;&#x52A1;&#x5B9A;&#x4E49;&#x4E2D;&#x4F7F;&#x7528;&#x591A;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x53EA;&#x8981;&#x8FD9;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x80FD;&#x591F;&#x88AB;json&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
-<pre><code>// &#x62BD;&#x8C61;&#x7C7B;&#x578B;
-public void postData(@RequestBody Object data)
-// &#x63A5;&#x53E3;&#x5B9A;&#x4E49;
-public void postData(@RequestBody IPerson interfaceData)
-// &#x6CA1;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x6CDB;&#x578B;
-public void postData(@RequestBody Map rawData)
-// &#x5177;&#x4F53;&#x534F;&#x8BAE;&#x76F8;&#x5173;&#x7684;&#x7C7B;&#x578B;
-public void postData(HttpServletRequest rquest)
-</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x7C7B;&#x578B;&#x5728;java chassis&#x90FD;&#x4E0D;&#x63D0;&#x4F9B;&#x652F;&#x6301;&#x3002;&#x56E0;&#x4E3A;java chassis&#x4F1A;&#x6839;&#x636E;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x751F;&#x6210;&#x5951;&#x7EA6;&#xFF0C;&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x7ED3;&#x5408;&#x5B9E;&#x9645;&#x7684;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x6216;&#x8005;&#x989D;&#x5916;&#x7684;&#x5F00;&#x53D1;&#x6587;&#x6863;&#x8BF4;&#x660E;&#xFF0C;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x751F;&#x6210;&#x5951;&#x7EA6;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x7AD9;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x7684;REST&#x89C6;&#x89D2;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x5728;body&#x91CC;&#x9762;&#x6784;&#x9020;&#x6D88;&#x606F;&#x5185;&#x5BB9;&#x3002;</p>
-<p>&#x4E3A;&#x4E86;&#x652F;&#x6301;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#xFF0C;java chassis&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x9650;&#x5236;&#x4E5F;&#x5728;&#x4E0D;&#x505C;&#x7684;&#x6269;&#x5145;&#xFF0C;&#x6BD4;&#x5982;&#x652F;&#x6301;HttpServletRequest&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4ED6;&#x4EEC;&#x4E0E;WEB&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BED;&#x4E49;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x6D41;&#x3002;&#x56E0;&#x6B64;&#x5EFA;&#x8BAE;&#x5F00;&#x53D1;&#x8005;&#x5728;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5C3D;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x5951;&#x7EA6;&#x80FD;&#x591F;&#x63CF;&#x8FF0;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x8BA9;&#x4EE3;&#x7801;&#x9605;&#x8BFB;&#x6027;&#x66F4;&#x597D;&#x3002;</p>
-<p>java chassis&#x5728;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7684;&#x652F;&#x6301;&#x65B9;&#x9762;&#x7684;&#x66F4;&#x591A;&#x8BF4;&#x660E;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;&quot;&#x652F;&#x6301;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&quot;&#x7AE0;&#x8282;&#x3002;</p>
+<p>With Spring MVC, you can use multiple data types in a service definition as long as it can be serialized and deserialized by json. Such as:</p>
+<pre><code>// abstract type
+Public void postData(@RequestBody Object data)
+// Interface definition
+Public void postData(@RequestBody IPerson interfaceData)
+//  Generics tpye without specified type
+Public void postData(@RequestBody Map rawData)
+// specific protocol related types
+Public void postData(HttpServletRequest request)
+</code></pre><p>The above types are not supported in the java chassis. Because java chassis will generate contracts according to the interface definition, from the above interface definition, if you do not combine the actual implementation code or additional development documentation, you can not directly generate the contract. That is, standing in the REST perspective of the browser, I don&apos;t know how to construct the message content in the body.</p>
+<p>To support rapid development, the data type restrictions of java chassis are also constantly expanding, such as support for HttpServletRequest, but when they are used, they are different from the semantics of the WEB server, such as the inability to directly manipulate the stream. Therefore, it is recommended that the developer use the type of contract that can be described as much as possible in the usage scenario so that the code is more readable.</p>
+<p>For more information on java chassis support for data types, please refer to the &quot;Supported Data Types&quot; section.</p>
 <ul>
-<li>&#x5E38;&#x7528;&#x6807;&#x7B7E;&#x652F;&#x6301;</li>
+<li>Common Annotation Support</li>
 </ul>
-<p>&#x4E0B;&#x9762;&#x662F;java chassis&#x5BF9;&#x4E8E;Spring MVC&#x5E38;&#x7528;&#x6807;&#x7B7E;&#x7684;&#x652F;&#x6301;&#x60C5;&#x51B5;&#x3002;</p>
+<p>The following is the java chassis support for Spring MVC common annotation.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x6807;&#x7B7E;&#x540D;&#x79F0;</th>
-<th style="text-align:left">&#x662F;&#x5426;&#x652F;&#x6301;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Tag Name</th>
+<th style="text-align:left">Support</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">RequestMapping</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">GetMapping</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PutMapping</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PostMapping</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">DeleteMapping</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PatchMapping</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">RequestParam</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">CookieValue</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PathVariable</td>
-<td style="text-align:left">&#x662F;</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">RequestHeader</td>
-<td style="text-align:left">&#x662F;</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">RequestBody</td>
-<td style="text-align:left">&#x662F;</td>
-<td style="text-align:left">&#x76EE;&#x524D;&#x652F;&#x6301;application/json&#xFF0C;plain/text</td>
-</tr>
-<tr>
-<td style="text-align:left">RequestPart</td>
-<td style="text-align:left">&#x662F;</td>
-<td style="text-align:left">&#x7528;&#x4E8E;&#x6587;&#x4EF6;&#x4E0A;&#x4F20;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;&#x6807;&#x7B7E;&#x8FD8;&#x6709;Part&#x3001;MultipartFile</td>
-</tr>
-<tr>
-<td style="text-align:left">ResponseBody</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;&#x7F3A;&#x7701;&#x90FD;&#x662F;&#x5728;body&#x8FD4;&#x56DE;</td>
-</tr>
-<tr>
-<td style="text-align:left">ResponseStatus</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x53EF;&#x4EE5;&#x901A;&#x8FC7;ApiResponse&#x6307;&#x5B9A;&#x8FD4;&#x56DE;&#x7684;&#x9519;&#x8BEF;&#x7801;</td>
-</tr>
-<tr>
-<td style="text-align:left">RequestAttribute</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">Servlet&#x534F;&#x8BAE;&#x76F8;&#x5173;&#x7684;&#x6807;&#x7B7E;</td>
-</tr>
-<tr>
-<td style="text-align:left">SessionAttribute</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">Servlet&#x534F;&#x8BAE;&#x76F8;&#x5173;&#x7684;&#x6807;&#x7B7E;</td>
-</tr>
-<tr>
-<td style="text-align:left">MatrixVariable</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">ModelAttribute</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">ControllerAdvice</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">CrossOrigin</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">ExceptionHandler</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">InitBinder</td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">Yes</td>
 </tr>
 </tbody>
 </table>
+<p>RequestBody | Yes | Currently supports application/json,plain/text |
+RequestPart | Yes | For file upload scenarios, the corresponding tags are Part, MultipartFile |
+| ResponseBody | No | The return value defaults to the body return |
+| ResponseStatus | No | The error code returned can be specified by ApiResponse |
+RequestAttribute | No | Servlet Protocol Related Tags |
+SessionAttribute | No | Servlet Protocol Related Tags |
+| MatrixVariable | No | |
+| ModelAttribute | No | |
+| ControllerAdvice | No | |
+| CrossOrigin | No | |
+| ExceptionHandler | No | |
+| InitBinder | No | |</p>
 <ul>
-<li>&#x5176;&#x4ED6;</li>
+<li>Other</li>
 </ul>
-<p>&#x4E0D;&#x652F;&#x6301;&#x5728;GET&#x65B9;&#x6CD5;&#x4E2D;&#x4F7F;&#x7528;POJO&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x53C2;&#x6570;&#x6620;&#x5C04;</p>
-<p>&#x6BD4;&#x5982;&#xFF1A;public void getOperation(Person p)</p>
-<p>&#x4E0D;&#x652F;&#x6301;&#x5728;GET&#x65B9;&#x6CD5;&#x4E2D;&#x4F7F;&#x7528;Map&#x6620;&#x5C04;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x53C2;&#x6570;</p>
-<p>&#x6BD4;&#x5982;&#xFF1A;public void getOperation(Map&lt;String,String&gt; p)</p>
+<p>Using POJO objects for parameter mapping in GET methods is not supported.</p>
+<p>For example: public void getOperation(Person p)</p>
+<p>Do not support the use of Map mapping in the GET method for all possible parameters.</p>
+<p>For example: public void getOperation(Map&lt;String,String&gt; p)</p>
 
                                 
                                 </section>
@@ -1477,7 +1429,7 @@ public void postData(HttpServletRequest rquest)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Spring MVC模式的差异","level":"1.9.5","depth":2,"next":{"title":"处理链参考","level":"1.10","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"负载均衡","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"公钥认证","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"previous":{"title":"JAVA应用方式和Web开发方式的区别","level":"1.9.4","depth":2,"path":"using-java-chassis-in-spring-boot/diff-between-java-web.md","ref":"using-java-chassis-in-spring-boot/diff-between-java-web.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","mtime":"2018-08-23T08:33:08.899Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T08:33:50.754Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Spring MVC模式的差异","level":"1.9.5","depth":2,"next":{"title":"处理链参考","level":"1.10","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"负载均衡","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"公钥认证","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"previous":{"title":"JAVA应用方式和Web开发方式的区别","level":"1.9.4","depth":2,"path":"using-java-chassis-in-spring-boot/diff-between-java-web.md","ref":"using-java-chassis-in-spring-boot/diff-between-java-web.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","mtime":"2018-08-27T08:55:19.481Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T08:57:00.951Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

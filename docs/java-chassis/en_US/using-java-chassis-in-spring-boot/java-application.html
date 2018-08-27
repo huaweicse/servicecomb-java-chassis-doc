@@ -1280,12 +1280,12 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x4F7F;&#x7528;JAVA&#x65B9;&#x5F0F;&#x96C6;&#x6210;&#xFF0C;&#x4E3A;Spring Boot&#x5E94;&#x7528;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x9AD8;&#x6548;&#x7684;HTTP&#x670D;&#x52A1;&#x5668;&#x548C;REST&#x5F00;&#x53D1;&#x6846;&#x67B6;&#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x96C6;&#x6210;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;&#x53EA;&#x9700;&#x8981;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x5F15;&#x5165;&#x76F8;&#x5173;&#x4F9D;&#x8D56;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;@EnableServiceComb&#x6807;&#x7B7E;&#x5373;&#x53EF;&#x3002;</p>
-<p>&#x672C;&#x9879;&#x76EE;<a href="https://github.com/huaweicse/servicecomb-java-chassis-samples/tree/master/spring-boot-simple" target="_blank">&#x4EE3;&#x7801;&#x793A;&#x4F8B;</a></p>
+                                <p>Using JAVA integration, an efficient HTTP server and REST development framework has been added for Spring Boot applications. This way of integration is very simple. Just introduce the relevant dependencies into the project and use the @EnableServiceComb annotation.</p>
+<p>This project [code example] (<a href="https://github.com/huaweicse/servicecomb-java-chassis-samples/tree/master/spring-boot-simple" target="_blank">https://github.com/huaweicse/servicecomb-java-chassis-samples/tree/master/spring-boot-simple</a>)</p>
 <ul>
-<li>&#x5F15;&#x5165;&#x4F9D;&#x8D56;</li>
+<li>Introducing dependencies</li>
 </ul>
-<p>&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x4E2D;&#x589E;&#x52A0;spring-boot-starter-provider&#xFF0C;&#x5373;&#x53EF;&#x5F15;&#x5165;java chassis&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x3002;&#x5F15;&#x5165;hibernate-validator&#x7684;&#x76EE;&#x7684;&#x662F;spring boot&#x4F1A;&#x68C0;&#x6D4B;validation-api&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x68C0;&#x6D4B;&#x4E0D;&#x5230;&#x4F1A;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#x3002;</p>
+<p>Add the spring-boot-starter-provider to the dependency to introduce the core functions of the java chassis. The purpose of introducing hibernate-validator is that spring boot will detect the implementation class of validation-api, and it will not start if it is not detected.</p>
 <pre><code>&lt;dependencyManagement&gt;
     &lt;dependencies&gt;
       &lt;dependency&gt;
@@ -1313,9 +1313,9 @@
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </code></pre><ul>
-<li>&#x542F;&#x7528;java chassis&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;</li>
+<li>Enable the core functions of java chassis</li>
 </ul>
-<p>&#x5728;&#x542F;&#x52A8;&#x7C7B;&#x524D;&#x9762;&#x589E;&#x52A0;@EnableServiceComb&#x5373;&#x53EF;&#x3002;</p>
+<p>Add @EnableServiceComb in front of the startup class.</p>
 <pre><code>@SpringBootApplication
 @EnableServiceComb
 public class WebsiteMain {
@@ -1323,12 +1323,12 @@ public class WebsiteMain {
         SpringApplication.run(WebsiteMain.class, args);
     }
 }
-</code></pre><p>&#x901A;&#x8FC7;&#x4EE5;&#x4E0A;&#x914D;&#x7F6E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5B8C;&#x6574;&#x4F7F;&#x7528;java chassis&#x63D0;&#x4F9B;&#x7684;&#x6240;&#x6709;&#x529F;&#x80FD;&#xFF0C;&#x4F7F;&#x7528;java chassis&#x5F00;&#x53D1;REST&#x670D;&#x52A1;&#xFF0C;&#x5E76;&#x5F00;&#x542F;&#x5404;&#x79CD;&#x6CBB;&#x7406;&#x529F;&#x80FD;&#x3002;</p>
+</code></pre><p>With the above configuration, you can fully use all the functions provided by the java chassis, use the java chassis to develop REST services, and open various governance functions.</p>
 <ul>
-<li>&#x914D;&#x7F6E;&#x5FAE;&#x670D;&#x52A1;</li>
+<li>Configure microservices</li>
 </ul>
-<p>&#x901A;&#x8FC7;microservice.yaml&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x5B9A;&#x5236;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x5E94;&#x7528;&#x540D;&#x79F0;&#x3001;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x3001;&#x76D1;&#x542C;&#x7684;&#x5730;&#x5740;&#x548C;&#x7AEF;&#x53E3;&#x7B49;&#x3002;</p>
-<p>&#x96C6;&#x6210;java chassis&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B83;&#x7684;&#x65B9;&#x5F0F;&#x5F00;&#x53D1;REST&#x63A5;&#x53E3;&#xFF1A;</p>
+<p>The microservice.yaml file allows you to customize the microservice information, including the application id, microservice name, listener address and port.</p>
+<p>After integrating java chassis, you can develop REST interface through it:</p>
 <pre><code>@RestSchema(schemaId = &quot;hello&quot;)
 @RequestMapping(path = &quot;/&quot;)
 public class HelloService {
@@ -1337,7 +1337,7 @@ public class HelloService {
         return &quot;Hello &quot; + name;
     }
 }
-</code></pre><p>&#x7136;&#x540E;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#xFF1A;<a href="http://localhost:9093/hello?name=world&#x6765;&#x8BBF;&#x95EE;&#x3002;" target="_blank">http://localhost:9093/hello?name=world&#x6765;&#x8BBF;&#x95EE;&#x3002;</a></p>
+</code></pre><p>Then you can access it by <a href="http://localhost:9093/hello?name=world" target="_blank">http://localhost:9093/hello?name=world</a>.</p>
 
                                 
                                 </section>
@@ -1381,7 +1381,7 @@ public class HelloService {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"JAVA应用方式开发步骤","level":"1.9.2","depth":2,"next":{"title":"Web开发方式开发步骤","level":"1.9.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},"previous":{"title":"提供的组件说明","level":"1.9.1","depth":2,"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/java-application.md","mtime":"2018-08-23T08:33:08.899Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T08:33:50.754Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"JAVA应用方式开发步骤","level":"1.9.2","depth":2,"next":{"title":"Web开发方式开发步骤","level":"1.9.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},"previous":{"title":"提供的组件说明","level":"1.9.1","depth":2,"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/java-application.md","mtime":"2018-08-27T08:55:19.481Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T08:57:00.951Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
