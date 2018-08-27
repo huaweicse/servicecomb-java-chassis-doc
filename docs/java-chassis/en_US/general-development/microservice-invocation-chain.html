@@ -1280,46 +1280,46 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>&#x5FAE;&#x670D;&#x52A1;&#x67B6;&#x6784;&#x89E3;&#x51B3;&#x4E86;&#x5F88;&#x591A;&#x5355;&#x4F53;&#x5E94;&#x7528;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x540C;&#x65F6;&#x4E5F;&#x9700;&#x8981;&#x6211;&#x4EEC;&#x4ED8;&#x51FA;&#x989D;&#x5916;&#x7684;&#x4EE3;&#x4EF7;&#x3002;&#x7531;&#x4E8E;&#x7F51;&#x7EDC;&#x7684;&#x4E0D;&#x7A33;&#x5B9A;&#x6027;&#x5E26;&#x6765;&#x7684;&#x8BF7;&#x6C42;&#x5904;&#x7406;&#x5EF6;&#x8FDF;&#x5C31;&#x662F;&#x4EE3;&#x4EF7;&#x4E4B;&#x4E00;&#x3002;</p>
-<p>&#x5728;&#x5355;&#x4F53;&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x6240;&#x6709;&#x6A21;&#x5757;&#x90FD;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x4E2D;&#x8FD0;&#x884C;&#xFF0C;&#x6240;&#x4EE5;&#x5E76;&#x6CA1;&#x6709;&#x6A21;&#x5757;&#x95F4;&#x4E92;&#x901A;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4F46;&#x5FAE;&#x670D;&#x52A1;&#x67B6;&#x6784;&#x4E2D;&#xFF0C;&#x670D;&#x52A1;&#x95F4;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x6C9F;&#x901A;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x4E0D;&#x5F97;&#x4E0D;&#x5904;&#x7406;&#x548C;&#x7F51;&#x7EDC;&#x6709;&#x5173;&#x7684; &#x95EE;&#x9898;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x5EF6;&#x8FDF;&#x3001;&#x8D85;&#x65F6;&#x3001;&#x7F51;&#x7EDC;&#x5206;&#x533A;&#x7B49;&#x3002;</p>
-<p>&#x53E6;&#x5916;&#xFF0C;&#x968F;&#x7740;&#x4E1A;&#x52A1;&#x7684;&#x6269;&#x5C55;&#x670D;&#x52A1;&#x589E;&#x591A;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x96BE;&#x6D1E;&#x5BDF;&#x6570;&#x636E;&#x5982;&#x4F55;&#x5728;&#x86DB;&#x7F51;&#x822C;&#x590D;&#x6742;&#x7684;&#x670D;&#x52A1;&#x7ED3;&#x6784;&#x4E2D;&#x6D41;&#x8F6C;&#x3002;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x624D;&#x80FD;&#x6709;&#x6548;&#x7684;&#x76D1;&#x63A7;&#x7F51;&#x7EDC;&#x5EF6;&#x8FDF;&#x5E76;&#x4E14;&#x53EF;&#x89C6;&#x5316;&#x670D;&#x52A1;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x6D41;&#x8F6C;&#x5462;&#xFF1F;</p>
-<p><strong>&#x5206;&#x5E03;&#x5F0F;&#x8C03;&#x7528;&#x94FE;&#x8FFD;&#x8E2A;</strong>&#x7528;&#x4E8E;&#x6709;&#x6548;&#x5730;&#x76D1;&#x63A7;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x7F51;&#x7EDC;&#x5EF6;&#x65F6;&#x5E76;&#x53EF;&#x89C6;&#x5316;&#x5FAE;&#x670D;&#x52A1;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x6D41;&#x8F6C;&#x3002;</p>
+                                <h2 id="concept-description">Concept Description</h2>
+<p>The microservices architecture solves the problems of many single applications, but it also requires us to pay extra. Request processing latency due to network instability is one of the costs.</p>
+<p>In a single application, all modules run in the same process, so there is no inter-module interworking problem. However, in the micro-service architecture, services communicate through the network, so we have to deal with network-related issues such as delays, timeouts, network partitions, and so on.</p>
+<p>Also, as the business expands its services, it is difficult to see how data flows through a spider-like complex service structure. How can we effectively monitor network latency and visualize data flow in services?</p>
+<p><strong>Distributed Call Chain Tracking</strong> is used to monitor network latency for microservices effectively and visualize data flow in microservices.</p>
 <h2 id="zipkin">Zipkin</h2>
 <blockquote>
-<p><a href="http://zipkin.io/" target="_blank">Zipkin</a>&#x662F;&#x4E00;&#x4E2A;&#x5206;&#x5E03;&#x5F0F;&#x8C03;&#x7528;&#x94FE;&#x8FFD;&#x8E2A;&#x7CFB;&#x7EDF;&#x3002; &#x5B83;&#x80FD;&#x5E2E;&#x52A9;&#x7528;&#x6237;&#x6536;&#x96C6;&#x65F6;&#x5E8F;&#x6570;&#x636E;&#x7528;&#x4EE5;&#x5B9A;&#x4F4D;&#x5FAE;&#x670D;&#x52A1;&#x4E2D;&#x7684;&#x5EF6;&#x8FDF;&#x95EE;&#x9898;&#xFF0C;&#x5B83;&#x540C;&#x65F6;&#x7BA1;&#x7406;&#x8FFD;&#x8E2A;&#x6570;&#x636E;&#x7684;&#x6536;&#x96C6; &#x548C;&#x67E5;&#x8BE2;&#x3002;Zipkin &#x7684;&#x8BBE;&#x8BA1;&#x57FA;&#x4E8E; Google <a href="http://research.google.com/pubs/pub36356.html" target="_blank">Dapper paper</a>&#x3002;</p>
+<p>[Zipkin] (<a href="http://zipkin.io/" target="_blank">http://zipkin.io/</a>) is a distributed call chain tracking system. It helps users collect time series data to locate latency issues in microservices, and it also manages the collection and query of trace data. Zipkin&apos;s design is based on Google [Dapper paper] (<a href="http://research.google.com/pubs/pub36356.html" target="_blank">http://research.google.com/pubs/pub36356.html</a>).</p>
 </blockquote>
-<p>ServiceComb &#x96C6;&#x6210;&#x4E86; Zipkin &#x63D0;&#x4F9B;&#x81EA;&#x52A8;&#x8C03;&#x7528;&#x94FE;&#x8FFD;&#x8E2A;&#x80FD;&#x529B;&#xFF0C;&#x5982;&#x6B64;&#x4E00;&#x6765;&#x7528;&#x6237;&#x53EA;&#x9700;&#x8981;&#x4E13;&#x6CE8;&#x5B9E;&#x73B0;&#x5176;&#x4E1A;&#x52A1;&#x9700;&#x6C42;&#x3002;</p>
-<h2 id="&#x4F7F;&#x7528;&#x6B65;&#x9AA4;">&#x4F7F;&#x7528;&#x6B65;&#x9AA4;:</h2>
-<h3 id="&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;">&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;</h3>
-<p>&#x57FA;&#x4E8E; ServiceComb Java Chassis &#x7684;&#x5FAE;&#x670D;&#x52A1;&#x53EA;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4F9D;&#x8D56;&#x5230; pom.xml&#xFF1A;</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>   
+<p>ServiceComb integrates Zipkin to provide automatic call chain tracking capabilities so that users only need to focus on their business needs.</p>
+<h2 id="steps-for-usage">Steps for usage:</h2>
+<h3 id="adding-dependencies">Adding dependencies</h3>
+<p>Microservices based on ServiceComb Java Chassis only need to add the following dependency to pom.xml:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>handler-tracing-zipkin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
-<p>&#x5982;&#x679C;&#x5FAE;&#x670D;&#x52A1;&#x662F;&#x57FA;&#x4E8E; Spring Cloud + Zuul &#x7684; API &#x7F51;&#x5173;&#xFF0C;&#x4F8B;&#x5982; workshop demo &#x4E2D;&#x7684; manager service &#xFF0C;&#x6211;&#x4EEC;&#x8FD8;&#x9700;&#x8981;&#x52A0;&#x5165;&#x5982;&#x4E0B;&#x7684;&#x989D;&#x5916;&#x4F9D;&#x8D56;&#xFF1A;</p>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>    
+<p>If the microservice is based on Spring Cloud + Zuul&apos;s API gateway, such as the manager service in the workshop demo, we also need to add the following additional dependencies:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-zuul-zipkin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
-<h3 id="&#x914D;&#x7F6E;&#x8FFD;&#x8E2A;&#x5904;&#x7406;&#x548C;&#x6570;&#x636E;&#x6536;&#x96C6;">&#x914D;&#x7F6E;&#x8FFD;&#x8E2A;&#x5904;&#x7406;&#x548C;&#x6570;&#x636E;&#x6536;&#x96C6; </h3>
-<p>&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x8BBE;&#x7F6E;&#x8FFD;&#x8E2A;&#x5904;&#x7406;&#x5668;&#x548C;&#x6570;&#x636E;&#x6536;&#x96C6;&#x670D;&#x52A1;&#x5730;&#x5740;</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">  servicecomb:</span> 
-<span class="hljs-attr">    handler:</span> 
-<span class="hljs-attr">      chain:</span> 
-<span class="hljs-attr">        Consumer:</span> 
+<h3 id="Configuration Tracking Processing and Data Collection">Configuring Tracking Processing and Data Collection </h3>
+<p>Set the tracking processor and data collection service address in the microservice.yaml file</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">  servicecomb:</span>
+<span class="hljs-attr">    handler:</span>
+<span class="hljs-attr">      chain:</span>
+<span class="hljs-attr">        Consumer:</span>
 <span class="hljs-attr">          default:</span> tracing-consumer
-<span class="hljs-attr">        Provider:</span> 
+<span class="hljs-attr">        Provider:</span>
 <span class="hljs-attr">          default:</span> tracing-provider
-<span class="hljs-attr">  servicecomb:</span> 
-<span class="hljs-attr">    tracing:</span> 
-<span class="hljs-attr">      collector:</span> 
+<span class="hljs-attr">  servicecomb:</span>
+<span class="hljs-attr">    tracing:</span>
+<span class="hljs-attr">      collector:</span>
 <span class="hljs-attr">        address:</span> http://zipkin.servicecomb.io:<span class="hljs-number">9411</span>
 </code></pre>
-<p>&#x5C31;&#x8FD9;&#x6837;&#xFF0C;&#x5728;&#x52A0;&#x4E86;&#x4E24;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x6CA1;&#x6539;&#x52A8;&#x4E00;&#x884C;&#x4EE3;&#x7801;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x542F;&#x52A8;&#x4E86;&#x57FA;&#x4E8E; Zipkin &#x548C; Java chassis &#x7684;&#x5206;&#x5E03;&#x5F0F;&#x8C03;&#x7528;&#x94FE;&#x8FFD;&#x8E2A;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F; </strong>&#x5982;&#x679C;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x5176;&#x4ED6;&#x4F9D;&#x8D56;&#x4E5F;&#x5F15;&#x5165;&#x4E86; zipkin &#xFF08;&#x4F8B;&#x5982; Spring Cloud&#xFF09;&#xFF0C;&#x53EF;&#x80FD;&#x5BFC;&#x81F4; zipkin &#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x800C;&#x8FD0;&#x884C;&#x51FA;&#x9519;&#xFF0C;&#x8FD9;&#x65F6;&#x9700;&#x8981;&#x5728;&#x9879;&#x76EE; pom &#x4E2D;&#x58F0;&#x660E; zipkin &#x7248;&#x672C;&#x3002;</p>
+<p>In this way, with the addition of two configuration items and no changes to one line of code, we started the distributed call chain tracking function based on Zipkin and Java chassis.</p>
+<p><strong>Note </strong>If other dependencies in the project also introduce a zipkin (such as Spring Cloud), which may cause the zipkin version to be inconsistent and run incorrectly, you need to declare the zipkin version in the project pom.</p>
 
                                 
                                 </section>
@@ -1363,7 +1363,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"微服务调用链","level":"1.5.4","depth":2,"next":{"title":"自定义调用链打点","level":"1.5.5","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},"previous":{"title":"应用性能监控","level":"1.5.3","depth":2,"path":"general-development/metrics.md","ref":"general-development/metrics.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/microservice-invocation-chain.md","mtime":"2018-08-27T09:02:45.501Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.349Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"微服务调用链","level":"1.5.4","depth":2,"next":{"title":"自定义调用链打点","level":"1.5.5","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},"previous":{"title":"应用性能监控","level":"1.5.3","depth":2,"path":"general-development/metrics.md","ref":"general-development/metrics.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/microservice-invocation-chain.md","mtime":"2018-08-27T09:02:45.434Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.671Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

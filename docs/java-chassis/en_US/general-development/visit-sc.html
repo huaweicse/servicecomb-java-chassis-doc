@@ -1280,19 +1280,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>&#x7CFB;&#x7EDF;&#x901A;&#x8FC7;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5B9E;&#x73B0;&#x670D;&#x52A1;&#x4E4B;&#x95F4;&#x7684;&#x53D1;&#x73B0;&#x3002;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F1A;&#x5411;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x8FDB;&#x884C;&#x6CE8;&#x518C;&#x3002;&#x5728;&#x8C03;&#x7528;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x4ECE;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x67E5;&#x8BE2;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x7684;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x8BBF;&#x95EE;&#x5730;&#x5740;&#x3001;&#x4F7F;&#x7528;&#x7684;&#x534F;&#x8BAE;&#x4EE5;&#x53CA;&#x5176;&#x4ED6;&#x53C2;&#x6570;&#x3002;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x652F;&#x6301;&#x4F7F;&#x7528;PULL&#x548C;PUSH&#x4E24;&#x79CD;&#x6A21;&#x5F0F;&#x901A;&#x77E5;&#x5B9E;&#x4F8B;&#x53D8;&#x5316;&#x3002;</p>
-<h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
-<h3 id="&#x8868;1-1&#x8BBF;&#x95EE;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x5E38;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x9879;">&#x8868;1-1&#x8BBF;&#x95EE;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x5E38;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x9879;</h3>
+                                <h2 id="concept-description">Concept Description</h2>
+<p>The system realizes the discovery between services through the service center. During the service startup process, the service center is registered. When calling other services, the service center will query the instance information of other services, such as the access address, the protocol used, and other parameters. The service center supports the use of PULL and PUSH modes to notify instance changes.</p>
+<h2 id="configuration-instructions">Configuration instructions</h2>
+<h3 id="table-1-1-accessing-common-configuration-items-in-the-configuration-center">Table 1-1 Accessing Common Configuration Items in the Configuration Center</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x914D;&#x7F6E;&#x9879;</th>
-<th style="text-align:left">&#x53C2;&#x8003;/&#x9ED8;&#x8BA4;&#x503C;</th>
-<th style="text-align:left">&#x53D6;&#x503C;&#x8303;&#x56F4;</th>
-<th style="text-align:left">&#x662F;&#x5426;&#x5FC5;&#x9009;</th>
-<th style="text-align:left">&#x542B;&#x4E49;</th>
-<th style="text-align:left">&#x6CE8;&#x610F;</th>
+<th style="text-align:left">Configuration Item</th>
+<th style="text-align:left">Reference / Default</th>
+<th style="text-align:left">Value Range</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Meaning</th>
 </tr>
 </thead>
 <tbody>
@@ -1300,40 +1299,40 @@
 <td style="text-align:left">servicecomb.service.registry.address</td>
 <td style="text-align:left"><a href="http://127.0.0.1:30100" target="_blank">http://127.0.0.1:30100</a></td>
 <td style="text-align:left"></td>
-<td style="text-align:left">&#x662F;</td>
-<td style="text-align:left">&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x7684;&#x5730;&#x5740;&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x591A;&#x4E2A;&#xFF0C;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Service center address information, you can configure multiple, separated by commas.</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.service.registry.instance.watch</td>
+<td style="text-align:left">servicecomb.service.registry.instance. Watch</td>
 <td style="text-align:left">true</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x91C7;&#x7528;PUSH&#x6A21;&#x5F0F;&#x76D1;&#x542C;&#x5B9E;&#x4F8B;&#x53D8;&#x5316;&#x3002;&#x4E3A;false&#x7684;&#x65F6;&#x5019;&#x8868;&#x793A;&#x4F7F;&#x7528;PULL&#x6A21;&#x5F0F;&#x3002;</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Whether to monitor instance changes in PUSH mode. When it is false, it means using PULL mode.</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.service.registry.autodiscovery</td>
+<td style="text-align:left">servicecomb.service.registry. Autodiscovery</td>
 <td style="text-align:left">false</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x81EA;&#x52A8;&#x53D1;&#x73B0;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x7684;&#x5730;&#x5740;&#x3002;&#x5F53;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x90E8;&#x5206;&#x5730;&#x5740;&#xFF0C;&#x5176;&#x4ED6;&#x5730;&#x5740;&#x7531;&#x914D;&#x7F6E;&#x7684;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x5B9E;&#x4F8B;&#x53D1;&#x73B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5F00;&#x542F;&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#x3002;</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Whether to automatically discover the address of the service center. This configuration is enabled when a partial address needs to be configured, and other addresses are discovered by the configured service center instance.</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.service.registry.instance.healthCheck.interval</td>
 <td style="text-align:left">30</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x5FC3;&#x8DF3;&#x95F4;&#x9694;&#x3002;</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Heartbeat interval.</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.service.registry.instance.healthCheck.times</td>
 <td style="text-align:left">3</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x5141;&#x8BB8;&#x7684;&#x5FC3;&#x8DF3;&#x5931;&#x8D25;&#x6B21;&#x6570;&#x3002;interval * times&#x51B3;&#x5B9A;&#x4E86;&#x5B9E;&#x4F8B;&#x88AB;&#x81EA;&#x52A8;&#x6CE8;&#x9500;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x5982;&#x679C;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x7B49;&#x5F85;&#x8FD9;&#x4E48;&#x957F;&#x7684;&#x65F6;&#x95F4;&#x6CA1;&#x6709;&#x6536;&#x53D6;&#x5230;&#x5FC3;&#x8DF3;&#xFF0C;&#x4F1A;&#x6CE8;&#x9500;&#x5B9E;&#x4F8B;&#x3002;</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Number of allowed heartbeat failures. Interval * times determines when the instance is automatically logged out. If the service center waits for such a long time and does not receive a heartbeat, the instance will be logged off.</td>
 </tr>
 </tbody>
 </table>
@@ -1380,7 +1379,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"访问服务中心","level":"1.5.1","depth":2,"next":{"title":"使用动态配置","level":"1.5.2","depth":2,"path":"general-development/config.md","ref":"general-development/config.md","articles":[]},"previous":{"title":"通用开发","level":"1.5","depth":1,"path":"catalog/general-develop.md","ref":"catalog/general-develop.md","articles":[{"title":"访问服务中心","level":"1.5.1","depth":2,"path":"general-development/visit-sc.md","ref":"general-development/visit-sc.md","articles":[]},{"title":"使用动态配置","level":"1.5.2","depth":2,"path":"general-development/config.md","ref":"general-development/config.md","articles":[]},{"title":"应用性能监控","level":"1.5.3","depth":2,"path":"general-development/metrics.md","ref":"general-development/metrics.md","articles":[]},{"title":"微服务调用链","level":"1.5.4","depth":2,"path":"general-development/microservice-invocation-chain.md","ref":"general-development/microservice-invocation-chain.md","articles":[]},{"title":"自定义调用链打点","level":"1.5.5","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},{"title":"本地开发和测试","level":"1.5.6","depth":2,"path":"general-development/local-develop-test.md","ref":"general-development/local-develop-test.md","articles":[]},{"title":"Http Filter","level":"1.5.7","depth":2,"path":"general-development/http-filter.md","ref":"general-development/http-filter.md","articles":[]},{"title":"文件上传","level":"1.5.8","depth":2,"path":"general-development/file-upload.md","ref":"general-development/file-upload.md","articles":[]},{"title":"文件下载","level":"1.5.9","depth":2,"path":"general-development/file-download.md","ref":"general-development/file-download.md","articles":[]},{"title":"Reactive","level":"1.5.10","depth":2,"path":"general-development/reactive.md","ref":"general-development/reactive.md","articles":[]},{"title":"DNS自定义配置","level":"1.5.11","depth":2,"path":"general-development/dnsconfig.md","ref":"general-development/dnsconfig.md","articles":[]},{"title":"代理设置","level":"1.5.12","depth":2,"path":"general-development/dai-li-she-zhi.md","ref":"general-development/dai-li-she-zhi.md","articles":[]},{"title":"框架上报版本号","level":"1.5.13","depth":2,"path":"general-development/report-framework-version.md","ref":"general-development/report-framework-version.md","articles":[]},{"title":"跨应用调用","level":"1.5.14","depth":2,"path":"general-development/cross-app-invocation.md","ref":"general-development/cross-app-invocation.md","articles":[]},{"title":"定制序列化和反序列化方法","level":"1.5.15","depth":2,"path":"general-development/secret-field.md","ref":"general-development/secret-field.md","articles":[]},{"title":"使用Context传递控制消息","level":"1.5.16","depth":2,"path":"general-development/context.md","ref":"general-development/context.md","articles":[]},{"title":"返回值序列化扩展","level":"1.5.17","depth":2,"path":"general-development/produceprocess.md","ref":"general-development/produceprocess.md","articles":[]},{"title":"CORS机制","level":"1.5.18","depth":2,"path":"general-development/CORS.md","ref":"general-development/CORS.md","articles":[]},{"title":"获取熔断与实例隔离告警事件信息","level":"1.5.19","depth":2,"path":"general-development/AlarmEvent.md","ref":"general-development/AlarmEvent.md","articles":[]},{"title":"Shutdown gracefully","level":"1.5.20","depth":2,"path":"general-development/shutdown.md","ref":"general-development/shutdown.md","articles":[]},{"title":"Handle exceptions","level":"1.5.21","depth":2,"path":"general-development/error-handling.md","ref":"general-development/error-handling.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/visit-sc.md","mtime":"2018-08-27T09:02:45.501Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.349Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"访问服务中心","level":"1.5.1","depth":2,"next":{"title":"使用动态配置","level":"1.5.2","depth":2,"path":"general-development/config.md","ref":"general-development/config.md","articles":[]},"previous":{"title":"通用开发","level":"1.5","depth":1,"path":"catalog/general-develop.md","ref":"catalog/general-develop.md","articles":[{"title":"访问服务中心","level":"1.5.1","depth":2,"path":"general-development/visit-sc.md","ref":"general-development/visit-sc.md","articles":[]},{"title":"使用动态配置","level":"1.5.2","depth":2,"path":"general-development/config.md","ref":"general-development/config.md","articles":[]},{"title":"应用性能监控","level":"1.5.3","depth":2,"path":"general-development/metrics.md","ref":"general-development/metrics.md","articles":[]},{"title":"微服务调用链","level":"1.5.4","depth":2,"path":"general-development/microservice-invocation-chain.md","ref":"general-development/microservice-invocation-chain.md","articles":[]},{"title":"自定义调用链打点","level":"1.5.5","depth":2,"path":"general-development/customized-tracing.md","ref":"general-development/customized-tracing.md","articles":[]},{"title":"本地开发和测试","level":"1.5.6","depth":2,"path":"general-development/local-develop-test.md","ref":"general-development/local-develop-test.md","articles":[]},{"title":"Http Filter","level":"1.5.7","depth":2,"path":"general-development/http-filter.md","ref":"general-development/http-filter.md","articles":[]},{"title":"文件上传","level":"1.5.8","depth":2,"path":"general-development/file-upload.md","ref":"general-development/file-upload.md","articles":[]},{"title":"文件下载","level":"1.5.9","depth":2,"path":"general-development/file-download.md","ref":"general-development/file-download.md","articles":[]},{"title":"Reactive","level":"1.5.10","depth":2,"path":"general-development/reactive.md","ref":"general-development/reactive.md","articles":[]},{"title":"DNS自定义配置","level":"1.5.11","depth":2,"path":"general-development/dnsconfig.md","ref":"general-development/dnsconfig.md","articles":[]},{"title":"代理设置","level":"1.5.12","depth":2,"path":"general-development/dai-li-she-zhi.md","ref":"general-development/dai-li-she-zhi.md","articles":[]},{"title":"框架上报版本号","level":"1.5.13","depth":2,"path":"general-development/report-framework-version.md","ref":"general-development/report-framework-version.md","articles":[]},{"title":"跨应用调用","level":"1.5.14","depth":2,"path":"general-development/cross-app-invocation.md","ref":"general-development/cross-app-invocation.md","articles":[]},{"title":"定制序列化和反序列化方法","level":"1.5.15","depth":2,"path":"general-development/secret-field.md","ref":"general-development/secret-field.md","articles":[]},{"title":"使用Context传递控制消息","level":"1.5.16","depth":2,"path":"general-development/context.md","ref":"general-development/context.md","articles":[]},{"title":"返回值序列化扩展","level":"1.5.17","depth":2,"path":"general-development/produceprocess.md","ref":"general-development/produceprocess.md","articles":[]},{"title":"CORS机制","level":"1.5.18","depth":2,"path":"general-development/CORS.md","ref":"general-development/CORS.md","articles":[]},{"title":"获取熔断与实例隔离告警事件信息","level":"1.5.19","depth":2,"path":"general-development/AlarmEvent.md","ref":"general-development/AlarmEvent.md","articles":[]},{"title":"Shutdown gracefully","level":"1.5.20","depth":2,"path":"general-development/shutdown.md","ref":"general-development/shutdown.md","articles":[]},{"title":"Handle exceptions","level":"1.5.21","depth":2,"path":"general-development/error-handling.md","ref":"general-development/error-handling.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/visit-sc.md","mtime":"2018-08-27T09:02:45.434Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.671Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
