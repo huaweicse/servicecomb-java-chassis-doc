@@ -1280,333 +1280,295 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4F7F;&#x7528;-swagger-&#x6CE8;&#x89E3;">&#x4F7F;&#x7528; Swagger &#x6CE8;&#x89E3;</h1>
-<h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>Swagger&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x5957;&#x6CE8;&#x89E3;&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x63A5;&#x53E3;&#x5951;&#x7EA6;&#xFF0C;&#x7528;&#x6237;&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x589E;&#x52A0;&#x5BF9;&#x4E8E;&#x5951;&#x7EA6;&#x7684;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;&#x3002;ServiceComb&#x652F;&#x6301;&#x5176;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x6CE8;&#x89E3;&#x3002;</p>
-<h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
-<p>&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x63CF;&#x8FF0;&#x63A5;&#x53E3;&#x5951;&#x7EA6;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5229;&#x7528;ServiceComb&#x7684;Swagger&#x5951;&#x7EA6;&#x751F;&#x6210;&#x529F;&#x80FD;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7B26;&#x5408;&#x8981;&#x6C42;&#x7684;&#x5951;&#x7EA6;&#x6587;&#x4EF6;&#xFF0C;&#x800C;&#x65E0;&#x987B;&#x624B;&#x5DE5;&#x7F16;&#x5199;&#x548C;&#x4FEE;&#x6539;&#x5951;&#x7EA6;&#xFF0C;&#x80FD;&#x591F;&#x6709;&#x6548;&#x63D0;&#x9AD8;&#x5F00;&#x53D1;&#x6548;&#x7387;&#x3002;</p>
-<h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
-<p>&#x5173;&#x4E8E;Swagger&#x6CE8;&#x89E3;&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;<a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X" target="_blank">Swagger&#x6CE8;&#x89E3;&#x6587;&#x6863;</a>&#x4E2D;&#x627E;&#x5230;&#x5B98;&#x65B9;&#x8BF4;&#x660E;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x5BF9;&#x7167;&#x8BE5;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x4E0E;&#x672C;&#x8BF4;&#x660E;&#x6765;&#x4E86;&#x89E3;&#x5982;&#x4F55;&#x5728;ServiceComb&#x6846;&#x67B6;&#x4E0B;&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x6307;&#x5B9A;Swagger&#x5951;&#x7EA6;&#x7684;&#x5404;&#x9879;&#x5C5E;&#x6027;&#x3002;</p>
-<p>&#x5728;ServiceComb&#x4E2D;&#xFF0C;Swagger&#x6CE8;&#x89E3;&#x4E0D;&#x662F;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x7684;&#x3002;&#x5F53;&#x7528;&#x6237;&#x4F7F;&#x7528;SpringMVC&#x548C;JAX-RS&#x7684;&#x6CE8;&#x89E3;&#x6765;&#x6807;&#x6CE8;&#x5FAE;&#x670D;&#x52A1;&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;ServiceComb&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x8FD9;&#x4E9B;&#x6CE8;&#x89E3;&#x7684;&#x503C;&#x63A8;&#x65AD;&#x51FA;&#x5404;&#x5FAE;&#x670D;&#x52A1;&#x65B9;&#x6CD5;&#x7684;&#x5951;&#x7EA6;&#x4FE1;&#x606F;&#x3002;</p>
+                                <h1 id="using-swagger-annotations">Using Swagger annotations</h1>
+<h2 id="concept-description">Concept Description</h2>
+<p>Swagger provides a set of annotations for describing interface contracts. Users can use annotations to add descriptions of contracts to their code. ServiceComb supports part of these annotations.</p>
+<h2 id="scene-description">Scene Description</h2>
+<p>By using annotations to describe interface contracts, users can use ServiceComb&apos;s Swagger contract generation function to automatically generate contract documents that meet the requirements without having to manually write and modify contracts, which can effectively improve development efficiency.</p>
+<h2 id="configuration-instructions">Configuration instructions</h2>
+<p>The official description can be found in the [Swagger Annotation Document] (<a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X" target="_blank">https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X</a>). You can refer to the official documentation and this guide to learn how to use annotations to specify the properties of a Swagger contract under the ServiceComb framework.</p>
+<p>In ServiceComb, Swagger annotations are not required. When a user uses SpringMVC and JAX-RS annotations to annotate microservice methods, ServiceComb can infer the contract information for each microservice method based on the values &#x200B;&#x200B;of these annotations.</p>
 <h3 id="api"><code>@Api</code></h3>
 <blockquote>
-<p><code>@Api</code>&#x4F5C;&#x7528;&#x4E8E;&#x7C7B;&#x7EA7;&#x522B;&#xFF0C;&#x5728;Swagger&#x5B98;&#x65B9;&#x63CF;&#x8FF0;&#x4E2D;&#x662F;&#x7528;&#x4E8E;&#x5C06;&#x4E00;&#x4E2A;Class&#x6807;&#x6CE8;&#x4E3A;&#x4E00;&#x4E2A;Swagger&#x8D44;&#x6E90;&#x3002;&#x4F46;&#x8BE5;&#x6CE8;&#x89E3;&#x5728;ServiceComb&#x4E2D;&#x4E0D;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;ServiceComb&#x53EF;&#x4EE5;&#x6839;&#x636E;<code>@RestSchema</code>&#x548C;<code>@RpcSchema</code>&#x786E;&#x5B9A;&#x9700;&#x8981;&#x4ECE;&#x54EA;&#x4E9B;&#x7C7B;&#x4E2D;&#x89E3;&#x6790;&#x51FA;Swagger&#x5951;&#x7EA6;&#x3002;<br>
-ServiceComb&#x5F53;&#x524D;&#x652F;&#x6301;&#x7684;&#x5C5E;&#x6027;&#x53EA;&#x6709;tags&#x3002;</p>
+<p><code>@Api</code> acts at the class level and is used to mark a Class as a Swagger resource in the official Swagger description. However, this annotation is not required in ServiceComb. ServiceComb can determine which classes need to parse the Swagger contract based on <code>@RestSchema</code> and <code>@RpcSchema</code>. The only attributes currently supported by ServiceComb are tags.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">tags</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x8BBE;&#x7F6E;&#x5F53;&#x524D;Class&#x4E0B;&#x5B9A;&#x4E49;&#x7684;operation&#x7684;&#x9ED8;&#x8BA4;tag&#x503C;</td>
+<td style="text-align:left"></td>
 </tr>
 </tbody>
 </table>
+<p>Tags | string | set the default tag value of the operation defined under the current Class |</p>
 <h3 id="swaggerdefinition"><code>@SwaggerDefinition</code></h3>
 <blockquote>
-<p>&#x4F5C;&#x7528;&#x4E8E;&#x7C7B;&#x7EA7;&#x522B;&#xFF0C;&#x7528;&#x4E8E;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;Swagger&#x8D44;&#x6E90;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<p>Acts at the class level to define information in a Swagger resource.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">info.title</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x5951;&#x7EA6;&#x6587;&#x4EF6;&#x6807;&#x9898;</td>
+<td style="text-align:left">Contract Document Title</td>
 </tr>
 <tr>
 <td style="text-align:left">info.description</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x63CF;&#x8FF0;&#x4FE1;&#x606F;</td>
+<td style="text-align:left">Description</td>
 </tr>
 <tr>
 <td style="text-align:left">info.version</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x5951;&#x7EA6;&#x7248;&#x672C;&#x53F7;</td>
+<td style="text-align:left">contract version number</td>
 </tr>
 <tr>
 <td style="text-align:left">info.termsOfService</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x670D;&#x52A1;&#x6761;&#x6B3E;</td>
+<td style="text-align:left">Terms of Service</td>
 </tr>
 <tr>
 <td style="text-align:left">info.contact</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x8054;&#x7CFB;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x542B;name&#x3001;email&#x3001;url&#x5C5E;&#x6027;</td>
+<td style="text-align:left">Contact information, including name, email, url attributes</td>
 </tr>
 <tr>
 <td style="text-align:left">info.license</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x8BB8;&#x53EF;&#x8BC1;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x542B;name&#x3001;url&#x5C5E;&#x6027;</td>
+<td style="text-align:left">License information, including name, url attribute</td>
 </tr>
 <tr>
 <td style="text-align:left">info.extensions</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x6269;&#x5C55;&#x4FE1;&#x606F;</td>
+<td style="text-align:left">Extended Information</td>
 </tr>
 <tr>
 <td style="text-align:left">consumes</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x63A5;&#x6536;&#x7684;&#x8BF7;&#x6C42;&#x683C;&#x5F0F;</td>
+<td style="text-align:left">Receive Request Format</td>
 </tr>
 <tr>
 <td style="text-align:left">produces</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x7684;&#x5E94;&#x7B54;&#x683C;&#x5F0F;</td>
+<td style="text-align:left">returned response format</td>
 </tr>
 <tr>
 <td style="text-align:left">schemes</td>
 <td style="text-align:left">SwaggerDefinition.Scheme</td>
-<td style="text-align:left">&#x53EF;&#x9009;&#x503C;&#x6709;<code>HTTP/HTTPS/WS/WSS/DEFAULT</code></td>
+<td style="text-align:left">Optional values &#x200B;&#x200B;are <code>HTTP/HTTPS/WS/WSS/DEFAULT</code></td>
 </tr>
 <tr>
 <td style="text-align:left">tags</td>
 <td style="text-align:left"><code>@Tag</code></td>
-<td style="text-align:left">Tag&#x5B9A;&#x4E49;&#xFF0C;@Tag&#x5305;&#x542B;name&#x3001;description&#x3001;externalDocs&#x4E09;&#x4E2A;&#x5C5E;&#x6027;</td>
+<td style="text-align:left">Tag definition, @Tag contains three attributes: name, description, externalDocs</td>
 </tr>
 <tr>
 <td style="text-align:left">externalDocs</td>
 <td style="text-align:left"><code>@externalDocs</code></td>
-<td style="text-align:left">&#x5916;&#x90E8;&#x8BF4;&#x660E;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF0C;&#x5305;&#x542B;value&#x3001;url&#x4E24;&#x4E2A;&#x5C5E;&#x6027;</td>
+<td style="text-align:left">External documentation links, including values &#x200B;&#x200B;and urls</td>
 </tr>
 </tbody>
 </table>
 <h3 id="apioperation"><code>@ApiOperation</code></h3>
 <blockquote>
-<p>&#x4F5C;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;&#x7EA7;&#x522B;&#xFF0C;&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x4E00;&#x4E2A;Swagger operation&#x3002;</p>
+<p>Acts at the method level to describe a Swagger operation.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">value</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x65B9;&#x6CD5;&#x7684;&#x7B80;&#x8981;&#x8BF4;&#x660E;&#xFF0C;&#x5BF9;&#x5E94;&#x4E8E;Swagger&#x5951;&#x7EA6;operation&#x7684;<code>summary</code>&#x5B57;&#x6BB5;</td>
+<td style="text-align:left">A brief description of the method, corresponding to the <code>summary</code> field of the Swagger contract operation</td>
 </tr>
 <tr>
 <td style="text-align:left">notes</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x5BF9;&#x5E94;&#x4E8E;Swagger&#x5951;&#x7EA6;operation&#x7684;<code>description</code>&#x5B57;&#x6BB5;</td>
-</tr>
-<tr>
-<td style="text-align:left">tags</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x6807;&#x6CE8;operation&#x7684;&#x6807;&#x7B7E;</td>
-</tr>
-<tr>
-<td style="text-align:left">code</td>
-<td style="text-align:left">int</td>
-<td style="text-align:left">&#x54CD;&#x5E94;&#x6D88;&#x606F;&#x7684;HTTP&#x72B6;&#x6001;&#x7801;</td>
-</tr>
-<tr>
-<td style="text-align:left">response</td>
-<td style="text-align:left">Class&lt;?&gt;</td>
-<td style="text-align:left">&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;</td>
-</tr>
-<tr>
-<td style="text-align:left">responseContainer</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x5305;&#x88C5;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x5BB9;&#x5668;&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x4E3A;<code>List</code>&#x3001;<code>Set</code>&#x3001;<code>Map</code></td>
-</tr>
-<tr>
-<td style="text-align:left">responseHeaders</td>
-<td style="text-align:left"><code>@ResponseHeader</code></td>
-<td style="text-align:left">&#x54CD;&#x5E94;&#x6D88;&#x606F;&#x7684;HTTP&#x5934;&#xFF0C;ServiceComb&#x652F;&#x6301;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x4E3A;<code>name</code>&#x3001;<code>response</code>&#x3001;<code>responseContainer</code></td>
-</tr>
-<tr>
-<td style="text-align:left">consumes</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x6307;&#x5B9A;&#x8BF7;&#x6C42;&#x4F53;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;</td>
-</tr>
-<tr>
-<td style="text-align:left">produces</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x6307;&#x5B9A;&#x54CD;&#x5E94;&#x4F53;&#x7684;&#x6570;&#x636E;&#x683C;&#x5F0F;</td>
-</tr>
-<tr>
-<td style="text-align:left">protocols</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x8BBE;&#x7F6E;&#x53EF;&#x7528;&#x7684;&#x534F;&#x8BAE;&#xFF08;schemes&#xFF09;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x6709;<code>http</code>&#x3001;<code>https</code>&#x3001;<code>ws</code>&#x3001;<code>wss</code>&#xFF0C;&#x9017;&#x53F7;&#x5206;&#x9694;</td>
-</tr>
-<tr>
-<td style="text-align:left">httpMethod</td>
-<td style="text-align:left">string</td>
-<td style="text-align:left">&#x8BBE;&#x7F6E;HTTP&#x65B9;&#x6CD5;</td>
+<td style="text-align:left">Details, corresponding to the <code>description</code> field of the Swagger contract operation</td>
 </tr>
 </tbody>
 </table>
+<p>Tags | string | label operation label |
+| code | int | HTTP status code for response messages |
+| response | Class&lt;?&gt; | Method return value type |
+responseContainer | string | The container type that wraps the return value. The optional values &#x200B;&#x200B;are <code>List</code>, <code>Set</code>, <code>Map</code> |
+| ResponseHeaders | <code>@ ResponseHeader</code> | HTTP response message header, ServiceComb support attribute value of<code>name</code>, <code>response</code>,<code>responseContainer</code> |
+| Consumes | string | specified data format request body |
+| Produces | string | body in response to the data format specified |
+| Protocols | string | the available protocol (schemes), possible values &#x200B;&#x200B;are <code>http</code>,<code>https</code>, <code>ws</code>,<code>wss</code>, separated by commas |
+| httpMethod | string | Set HTTP method |</p>
 <h3 id="apiimplicitparam"><code>@ApiImplicitParam</code></h3>
 <blockquote>
-<p>&#x4F5C;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;&#x7EA7;&#x522B;&#xFF0C;&#x7528;&#x4E8E;&#x8BF4;&#x660E;Swagger&#x6587;&#x6863;&#x4E2D;operation&#x7684;&#x53C2;&#x6570;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
-<p><strong>&#x6CE8;&#x610F;</strong>&#xFF1A;ServiceComb&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4EE3;&#x7801;&#x548C;SpringMVC&#x3001;JAX-RS&#x7684;&#x6CE8;&#x89E3;&#x81EA;&#x52A8;&#x63A8;&#x65AD;&#x51FA;&#x53C2;&#x6570;&#x540D;&#x79F0;&#x3002;&#x5982;&#x679C;<code>@ApiImplicitParam</code>&#x914D;&#x7F6E;&#x7684;&#x53C2;&#x6570;&#x540D;&#x79F0;&#x4E0E;&#x81EA;&#x52A8;&#x63A8;&#x65AD;&#x7684;&#x53C2;&#x6570;&#x540D;&#x4E0D;&#x540C;&#xFF0C;&#x5219;&#x5219;&#x8BE5;&#x6CE8;&#x89E3;&#x914D;&#x7F6E;&#x7684;&#x53C2;&#x6570;&#x5C06;&#x88AB;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x53C2;&#x6570;&#x52A0;&#x5165;&#x5230;&#x6CE8;&#x89E3;&#x6240;&#x5728;&#x7684;operation&#x4E2D;&#xFF1B;&#x5426;&#x5219;&#x5C06;&#x8986;&#x76D6;&#x540C;&#x540D;&#x53C2;&#x6570;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<p>Acts at the method level, which is used to describe the properties of the parameters of the operation in the Swagger document.</p>
+<p><strong>Note</strong>: ServiceComb can automatically infer parameter names based on code and SpringMVC, JAX-RS annotations. If the parameter name of the <code>@ApiImplicitParam</code> configuration is different from the automatically inferred parameter name, then the parameter of the annotation configuration will be added as a new parameter to the operation in which the annotation is located; otherwise, the property of the parameter with the same name will be overwritten.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">name</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;</td>
+<td style="text-align:left">parameter name</td>
 </tr>
 <tr>
 <td style="text-align:left">value</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x8BF4;&#x660E;</td>
+<td style="text-align:left">Parameter Description</td>
 </tr>
 <tr>
 <td style="text-align:left">required</td>
 <td style="text-align:left">boolean</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x662F;&#x5FC5;&#x586B;&#x53C2;&#x6570;</td>
+<td style="text-align:left">Is this a required parameter</td>
 </tr>
 <tr>
 <td style="text-align:left">dataType</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x6570;&#x636E;&#x7C7B;&#x578B;</td>
+<td style="text-align:left">Parameter Data Type</td>
 </tr>
 <tr>
 <td style="text-align:left">paramType</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x4F4D;&#x7F6E;&#xFF0C;&#x6709;&#x6548;&#x7684;&#x53EF;&#x9009;&#x503C;&#x4E3A;path/query/body/header/form</td>
+<td style="text-align:left">parameter location, valid optional value is path/query/body/header/form</td>
 </tr>
 <tr>
-<td style="text-align:left">allowableValues</td>
+<td style="text-align:left">allowableValues &#x200B;&#x200B;</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x7684;&#x6709;&#x6548;&#x503C;&#x8303;&#x56F4;</td>
+<td style="text-align:left">Range of valid values &#x200B;&#x200B;for</td>
 </tr>
 <tr>
 <td style="text-align:left">allowEmptyValue</td>
 <td style="text-align:left">boolean</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x5141;&#x8BB8;&#x7A7A;&#x503C;</td>
+<td style="text-align:left">Whether to allow null values &#x200B;&#x200B;</td>
 </tr>
 <tr>
 <td style="text-align:left">allowMultiple</td>
 <td style="text-align:left">boolean</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x5141;&#x8BB8;&#x591A;&#x4E2A;&#x503C;&#xFF08;&#x82E5;&#x4E3A;true&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5C06;&#x53C2;&#x6570;&#x4F5C;&#x4E3A;&#x6570;&#x7EC4;&#xFF09;</td>
+<td style="text-align:left">Whether to allow multiple values &#x200B;&#x200B;(if true, parameters can be used as an array)</td>
 </tr>
 <tr>
 <td style="text-align:left">collectionFormat</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x4EE5;&#x4F55;&#x79CD;&#x683C;&#x5F0F;&#x6307;&#x5B9A;&#x53C2;&#x6570;&#x6570;&#x7EC4;&#xFF0C;&#x5F53;&#x524D;ServiceComb&#x652F;&#x6301;&#x7684;&#x503C;&#x4E3A;<code>csv/multi</code></td>
+<td style="text-align:left">In which format the parameter array is specified, the current ServiceComb support value is <code>csv/multi</code></td>
 </tr>
 <tr>
 <td style="text-align:left">defaultValue</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x9ED8;&#x8BA4;&#x503C;</td>
+<td style="text-align:left">parameter default</td>
 </tr>
 <tr>
 <td style="text-align:left">example</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x4E00;&#x4E2A;&#x975E;body&#x53C2;&#x6570;&#x7684;&#x793A;&#x4F8B;&#x503C;</td>
+<td style="text-align:left">Example value for a non-body parameter</td>
 </tr>
 <tr>
 <td style="text-align:left">format</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x5141;&#x8BB8;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x683C;&#x5F0F;&#xFF0C;&#x8BE6;&#x60C5;&#x53C2;&#x89C1;Swagger&#x5B98;&#x65B9;&#x6587;&#x6863;</td>
+<td style="text-align:left">Allows users to customize the data format. See the Swagger official documentation for details.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="apiimplicitparams"><code>@ApiImplicitParams</code></h3>
 <blockquote>
-<p><code>@ApiImplicitParams</code>&#x4F5C;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;&#x3001;&#x7C7B;&#x7EA7;&#x522B;&#xFF0C;&#x7528;&#x4E8E;&#x6279;&#x91CF;&#x6307;&#x5B9A;&#x591A;&#x4E2A;<code>@ApiImplicitParam</code>&#x3002;</p>
+<p><code>@ApiImplicitParams</code> acts on methods, class levels, and is used to batch specify multiple <code>@ApiImplicitParam</code>.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">value</td>
 <td style="text-align:left"><code>@ApiImplicitParam</code></td>
-<td style="text-align:left">&#x53C2;&#x6570;&#x5B9A;&#x4E49;</td>
+<td style="text-align:left">Parameter definition</td>
 </tr>
 </tbody>
 </table>
 <h3 id="apiresponse"><code>@ApiResponse</code></h3>
 <blockquote>
-<p>&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#x7684;HTTP&#x72B6;&#x6001;&#x7801;&#x6240;&#x8868;&#x8FBE;&#x7684;&#x542B;&#x4E49;&#x3002;&#x901A;&#x5E38;<code>@ApiOperation</code>&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#x7684;HTTP&#x72B6;&#x6001;&#x7801;&#xFF0C;&#x5176;&#x4ED6;&#x60C5;&#x5F62;&#x4E0B;&#x7684;HTTP&#x72B6;&#x6001;&#x7801;&#x7531;&#x672C;&#x6CE8;&#x89E3;&#x63CF;&#x8FF0;&#x3002;&#x6839;&#x636E;Swagger&#x5B98;&#x65B9;&#x6587;&#x6863;&#x7684;&#x63CF;&#x8FF0;&#xFF0C;&#x672C;&#x6CE8;&#x89E3;&#x4E0D;&#x5E94;&#x8BE5;&#x76F4;&#x63A5;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;&#x7EA7;&#x522B;&#xFF0C;&#x800C;&#x5E94;&#x8BE5;&#x88AB;&#x5305;&#x542B;&#x5728;<code>@ApiResponses</code>&#x4E2D;&#x3002;</p>
+<p>Used to describe the meaning of the HTTP status code of the returned message. Usually <code>@ApiOperation</code> can represent the HTTP status code of a normal return message. In other cases, the HTTP status code is described by this note. According to the Swagger official documentation, this annotation should not be used directly at the method level, but should be included in <code>@ApiResponses</code>.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">code</td>
 <td style="text-align:left">int</td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#x7684;HTTP&#x72B6;&#x6001;&#x7801;</td>
+<td style="text-align:left">Return the HTTP status code of the message</td>
 </tr>
 <tr>
 <td style="text-align:left">message</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x8BF4;&#x660E;&#x4FE1;&#x606F;</td>
+<td style="text-align:left">Description of the return value</td>
 </tr>
 <tr>
 <td style="text-align:left">response</td>
 <td style="text-align:left">Class&lt;?&gt;</td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x7C7B;&#x578B;</td>
+<td style="text-align:left">Type of return value</td>
 </tr>
 <tr>
 <td style="text-align:left">responseContainer</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x5305;&#x88C5;&#x5BB9;&#x5668;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x4E3A;<code>List/Set/Map</code></td>
+<td style="text-align:left">The wrapper for the return value, with an optional value of <code>List/Set/Map</code></td>
 </tr>
 <tr>
 <td style="text-align:left">responseHeaders</td>
 <td style="text-align:left">@ResponseHeader</td>
-<td style="text-align:left">&#x63CF;&#x8FF0;&#x4E00;&#x7EC4;&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#x7684;HTTP&#x5934;&#xFF0C;ServiceComb&#x652F;&#x6301;&#x7684;<code>@ResponseHeader</code>&#x7684;&#x5C5E;&#x6027;&#x6709;<code>name</code>&#x3001;<code>description</code>&#x3001;<code>response</code>&#x3001;<code>responseContainer</code></td>
+<td style="text-align:left">Describes a set of HTTP headers that return messages. The properties of <code>@ResponseHeader</code> supported by ServiceComb are <code>name</code>, <code>description</code>, <code>response</code>, <code>responseContainer</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="apiresponses"><code>@ApiResponses</code></h3>
 <blockquote>
-<p>&#x4F5C;&#x7528;&#x4E8E;&#x65B9;&#x6CD5;&#x3001;&#x7C7B;&#x7EA7;&#x522B;&#xFF0C;&#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x548C;&#x8BF4;&#x660E;&#x4E00;&#x7EC4;&#x8FD4;&#x56DE;&#x503C;&#x3002;</p>
+<p>Acts on methods, class levels, to specify and specify a set of return values.</p>
 </blockquote>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x5C5E;&#x6027;</th>
-<th style="text-align:left">&#x7C7B;&#x578B;</th>
-<th style="text-align:left">&#x8BF4;&#x660E;</th>
+<th style="text-align:left">Attribute</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">value</td>
 <td style="text-align:left"><code>@ApiResponse</code></td>
-<td style="text-align:left">&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#x8BF4;&#x660E;</td>
+<td style="text-align:left">Return to message description</td>
 </tr>
 </tbody>
 </table>
@@ -1653,7 +1615,7 @@ ServiceComb&#x5F53;&#x524D;&#x652F;&#x6301;&#x7684;&#x5C5E;&#x6027;&#x53EA;&#x67
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用Swagger注解","level":"1.3.4","depth":2,"next":{"title":"用SpringMVC开发微服务","level":"1.3.5","depth":2,"path":"build-provider/springmvc.md","ref":"build-provider/springmvc.md","articles":[]},"previous":{"title":"使用隐式契约","level":"1.3.3","depth":2,"path":"build-provider/code-first.md","ref":"build-provider/code-first.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/swagger-annotation.md","mtime":"2018-08-27T09:02:45.430Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.671Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"使用Swagger注解","level":"1.3.4","depth":2,"next":{"title":"用SpringMVC开发微服务","level":"1.3.5","depth":2,"path":"build-provider/springmvc.md","ref":"build-provider/springmvc.md","articles":[]},"previous":{"title":"使用隐式契约","level":"1.3.3","depth":2,"path":"build-provider/code-first.md","ref":"build-provider/code-first.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/swagger-annotation.md","mtime":"2018-08-27T09:04:31.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:05:20.807Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

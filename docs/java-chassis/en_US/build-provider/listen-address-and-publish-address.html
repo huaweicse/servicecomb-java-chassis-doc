@@ -1280,25 +1280,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;&#x548C;&#x53D1;&#x5E03;&#x5730;&#x5740;">&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;&#x548C;&#x53D1;&#x5E03;&#x5730;&#x5740;</h1>
-<h3 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h3>
-<p>&#x5728;JavaChassis&#x4E2D;&#xFF0C;&#x670D;&#x52A1;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;&#x548C;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x662F;&#x4E24;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x53EF;&#x4EE5;&#x72EC;&#x7ACB;&#x914D;&#x7F6E;&#xFF1A;</p>
+                                <h1 id="service-listening-address-and-publishing-address">Service listening address and publishing address</h1>
+<h3 id="concept-description">Concept Description</h3>
+<p>In JavaChassis, the listening address and publishing address of the service are two independent concepts that can be configured independently:</p>
 <ul>
-<li>&#x76D1;&#x542C;&#x5730;&#x5740;&#xFF1A;&#x6307;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x542F;&#x52A8;&#x65F6;&#x76D1;&#x542C;&#x7684;&#x5730;&#x5740;&#x3002;&#x8BE5;&#x914D;&#x7F6E;&#x9879;&#x51B3;&#x5B9A;&#x4E86;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x54EA;&#x4E9B;IP&#x8BBF;&#x95EE;&#x6B64;&#x670D;&#x52A1;&#x3002;</li>
-<li>&#x53D1;&#x5E03;&#x5730;&#x5740;&#xFF1A;&#x6307;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x6CE8;&#x518C;&#x5230;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x7684;&#x5730;&#x5740;&#x3002;&#x5176;&#x4ED6;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x4F1A;&#x901A;&#x8FC7;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x83B7;&#x53D6;&#x6B64;&#x5B9E;&#x4F8B;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x6839;&#x636E;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x8BBF;&#x95EE;&#x6B64;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#xFF0C;&#x6240;&#x4EE5;&#x8BE5;&#x914D;&#x7F6E;&#x9879;&#x51B3;&#x5B9A;&#x4E86;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x5B9E;&#x9645;&#x4E0A;&#x4F1A;&#x4F7F;&#x7528;&#x54EA;&#x4E2A;IP&#x8BBF;&#x95EE;&#x6B64;&#x670D;&#x52A1;&#x3002;</li>
+<li>Listening address: refers to the address that the microservice instance listens to when it starts. This configuration item determines which IPs can be accessed by this IP.</li>
+<li>Publish Address: refers to the address where the microservice instance is registered to the service center. Other microservice instances will obtain information about this instance through the service center and access the service instance based on the publication address, so this configuration item determines which IP other services actually use to access the service.</li>
 </ul>
-<h3 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h3>
-<p>&#x7528;&#x6237;&#x901A;&#x8FC7;&#x914D;&#x7F6E;&#x670D;&#x52A1;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;&#x548C;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x6765;&#x786E;&#x5B9A;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x76D1;&#x542C;&#x7684;IP&#x548C;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x8BBF;&#x95EE;&#x672C;&#x5B9E;&#x4F8B;&#x65F6;&#x8BF7;&#x6C42;&#x7684;IP&#x3002;</p>
-<h3 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h3>
-<p>&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x662F;<code>servicecomb.rest.address</code>&#x548C;<code>servicecomb.highway.address</code>&#xFF0C;&#x5206;&#x522B;&#x5BF9;&#x5E94;rest&#x4F20;&#x8F93;&#x65B9;&#x5F0F;&#x548C;highway&#x4F20;&#x8F93;&#x65B9;&#x5F0F;&#x7684;&#x76D1;&#x542C;&#x5730;&#x5740;&#x3002;&#x4E24;&#x8005;&#x7684;&#x914D;&#x7F6E;&#x89C4;&#x5219;&#x76F8;&#x540C;&#xFF0C;&#x4EE5;&#x4E0B;&#x4EC5;&#x4EE5;<code>servicecomb.rest.address</code>&#x4F5C;&#x4E3A;&#x8BF4;&#x660E;&#x3002;<br>&#x670D;&#x52A1;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x662F;<code>servicecomb.service.publishAddress</code>&#xFF0C;&#x8BE5;&#x5730;&#x5740;<strong>&#x53EF;&#x4EE5;&#x4E0D;&#x914D;&#x7F6E;</strong>&#x3002;&#x4E0D;&#x914D;&#x7F6E;&#x6B64;&#x9879;&#x65F6;JavaChassis&#x4F1A;&#x6839;&#x636E;&#x7279;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#x9009;&#x53D6;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x3002;</p>
-<p><strong>&#x8868;1 &#x670D;&#x52A1;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x751F;&#x6548;&#x89C4;&#x5219;</strong></p>
+<h3 id="scene-description">Scene Description</h3>
+<p>The user determines the IP address that the service instance listens to and the IP address requested by other service instances when accessing the instance by configuring the listening address and the publishing address of the service.</p>
+<h3 id="configuration-instructions">Configuration instructions</h3>
+<p>The configuration items of the service listening address are <code>servicecomb.rest.address</code> and <code>servicecomb.highway.address</code>, which respectively correspond to the listening address of the rest transmission mode and the highway transmission mode. The configuration rules for both are the same. The following only uses <code>servicecomb.rest.address</code> as an explanation.
+The configuration item of the service publishing address is <code>servicecomb.service.publishAddress</code>, which can be configured without **. When this item is not configured, JavaChassis will select the publishing address according to the specific rules.</p>
+<p><strong>Table 1 Service Release Address Effective Rules</strong></p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x89C4;&#x5219;&#x7F16;&#x53F7;</th>
-<th style="text-align:left">&#x76D1;&#x542C;&#x5730;&#x5740;&#x914D;&#x7F6E;</th>
-<th style="text-align:left">&#x53D1;&#x5E03;&#x5730;&#x5740;&#x914D;&#x7F6E;</th>
-<th style="text-align:left">&#x5B9E;&#x9645;&#x751F;&#x6548;&#x7684;&#x53D1;&#x5E03;&#x5730;&#x5740;</th>
+<th style="text-align:left">Rule Number</th>
+<th style="text-align:left">Listening Address Configuration</th>
+<th style="text-align:left">Publishing Address Configuration</th>
+<th style="text-align:left">Effective Delivery Address</th>
 </tr>
 </thead>
 <tbody>
@@ -1312,45 +1313,45 @@
 <td style="text-align:left">2</td>
 <td style="text-align:left">0.0.0.0</td>
 <td style="text-align:left">-</td>
-<td style="text-align:left">&#x9009;&#x53D6;&#x4E00;&#x5F20;&#x7F51;&#x5361;&#x7684;IP&#x5730;&#x5740;&#x4F5C;&#x4E3A;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x3002;<br>&#x8981;&#x6C42;&#x8BE5;&#x5730;&#x5740;&#x4E0D;&#x80FD;&#x662F;&#x901A;&#x914D;&#x7B26;&#x5730;&#x5740;&#x3001;&#x56DE;&#x73AF;&#x5730;&#x5740;&#x6216;&#x5E7F;&#x64AD;&#x5730;&#x5740;</td>
+<td style="text-align:left">Select the IP address of a network card as the publishing address. Require that the address cannot be a wildcard address, loopback address, or broadcast address</td>
 </tr>
 <tr>
 <td style="text-align:left">3</td>
-<td style="text-align:left">&#x5177;&#x4F53;IP</td>
+<td style="text-align:left">Specific IP</td>
 <td style="text-align:left">-</td>
-<td style="text-align:left">&#x4E0E;&#x76D1;&#x542C;&#x5730;&#x5740;&#x4E00;&#x81F4;</td>
+<td style="text-align:left">Consistent with the listening address</td>
 </tr>
 <tr>
 <td style="text-align:left">4</td>
 <td style="text-align:left">*</td>
-<td style="text-align:left">&#x5177;&#x4F53;IP</td>
-<td style="text-align:left">&#x4E0E;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x914D;&#x7F6E;&#x9879;&#x4E00;&#x81F4;</td>
+<td style="text-align:left">Specific IP</td>
+<td style="text-align:left">Consistent with the published address configuration item</td>
 </tr>
 <tr>
 <td style="text-align:left">5</td>
 <td style="text-align:left">*</td>
-<td style="text-align:left">&quot;{&#x7F51;&#x5361;&#x540D;}&quot;</td>
-<td style="text-align:left">&#x6307;&#x5B9A;&#x7F51;&#x5361;&#x540D;&#x7684;IP&#xFF0C;&#x6CE8;&#x610F;&#x9700;&#x8981;&#x52A0;&#x4E0A;&#x5F15;&#x53F7;&#x548C;&#x62EC;&#x53F7;</td>
+<td style="text-align:left">&quot;{NIC name}&quot;</td>
+<td style="text-align:left">Specify the IP of the NIC name, note the need to put quotation marks and brackets</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong>&#x8BF4;&#x660E;&#xFF1A;</strong></p>
+<p><strong>Note: </strong></p>
 <ul>
-<li>&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5B9E;&#x9645;&#x76D1;&#x542C;&#x7684;&#x5730;&#x5740;&#x59CB;&#x7EC8;&#x4E0E;&#x76D1;&#x542C;&#x5730;&#x5740;&#x914D;&#x7F6E;&#x9879;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x3002;</li>
-<li>&#x4F7F;&#x7528;&#x7F51;&#x5361;&#x540D;&#x914D;&#x7F6E;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x65F6;&#xFF0C;&#x8981;&#x6C42;&#x4F7F;&#x7528;&#x53CC;&#x5F15;&#x53F7;&#x5305;&#x88F9;&#x4F4F;&#x7F51;&#x5361;&#x540D;&#x5360;&#x4F4D;&#x7B26;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x9020;&#x6210;&#x89E3;&#x6790;&#x914D;&#x7F6E;&#x62A5;&#x9519;&#x3002;</li>
-<li>&#x7F51;&#x5361;&#x540D;&#x5FC5;&#x987B;&#x662F;&#x4E3B;&#x673A;&#x5B58;&#x5728;&#x7684;&#x7F51;&#x5361;&#x3002;</li>
+<li>The address actually listened to by the service instance is always consistent with the listening address configuration item.</li>
+<li>When using the NIC name to configure the publishing address, you need to use double quotation marks to wrap the NIC name placeholder, otherwise the parsing configuration will be reported.</li>
+<li>The NIC name must be the NIC that the host exists.</li>
 </ul>
 </blockquote>
-<h3 id="&#x793A;&#x4F8B;&#x4EE3;&#x7801;">&#x793A;&#x4F8B;&#x4EE3;&#x7801;</h3>
-<p>microservice.yaml&#x6587;&#x4EF6;&#x7684;&#x914D;&#x7F6E;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h3 id="sample-code">Sample Code</h3>
+<p>An example of the configuration of the microservice.yaml file is as follows:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  service:</span>
-<span class="hljs-attr">    publishAddress:</span> <span class="hljs-string">&quot;{eth0}&quot;</span> <span class="hljs-comment"># &#x6CE8;&#x518C;&#x5230;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x7684;&#x53D1;&#x5E03;&#x5730;&#x5740;&#x4F1A;&#x662F;eth0&#x7F51;&#x5361;&#x7684;IP</span>
+<span class="hljs-attr">    publishAddress:</span> <span class="hljs-string">&quot;{eth0}&quot;</span> <span class="hljs-comment"># The publishing address, registered to the service center, will be the IP of the eth0 network card</span>
 <span class="hljs-attr">  rest:</span>
-<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8080</span> <span class="hljs-comment"># &#x76D1;&#x542C;&#x4E3B;&#x673A;&#x7684;&#x5168;&#x90E8;&#x7F51;&#x5361;IP</span>
+<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8080</span> <span class="hljs-comment"># Monitor all NIC IPs of the hos</span>
 <span class="hljs-attr">  highway:</span>
-<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">7070</span> <span class="hljs-comment"># &#x76D1;&#x542C;&#x4E3B;&#x673A;&#x7684;&#x5168;&#x90E8;&#x7F51;&#x5361;IP</span>
+<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">7070</span> <span class="hljs-comment"># Listen to all NIC IPs of the host</span>
 </code></pre>
 
                                 
@@ -1395,7 +1396,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"服务监听地址和发布地址","level":"1.3.9","depth":2,"next":{"title":"服务配置","level":"1.3.10","depth":2,"path":"build-provider/service-configuration.md","ref":"build-provider/service-configuration.md","articles":[{"title":"负载均衡策略","level":"1.3.10.1","depth":3,"path":"build-provider/configuration/lb-strategy.md","ref":"build-provider/configuration/lb-strategy.md","articles":[]},{"title":"限流策略","level":"1.3.10.2","depth":3,"path":"build-provider/configuration/ratelimite-strategy.md","ref":"build-provider/configuration/ratelimite-strategy.md","articles":[]},{"title":"降级策略","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},{"title":"参数效验","level":"1.3.10.4","depth":3,"path":"build-provider/configuration/parameter-validator.md","ref":"build-provider/configuration/parameter-validator.md","articles":[]}]},"previous":{"title":"接口定义和数据类型","level":"1.3.8","depth":2,"path":"build-provider/interface-constraints.md","ref":"build-provider/interface-constraints.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/listen-address-and-publish-address.md","mtime":"2018-08-27T09:02:45.430Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.671Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"服务监听地址和发布地址","level":"1.3.9","depth":2,"next":{"title":"服务配置","level":"1.3.10","depth":2,"path":"build-provider/service-configuration.md","ref":"build-provider/service-configuration.md","articles":[{"title":"负载均衡策略","level":"1.3.10.1","depth":3,"path":"build-provider/configuration/lb-strategy.md","ref":"build-provider/configuration/lb-strategy.md","articles":[]},{"title":"限流策略","level":"1.3.10.2","depth":3,"path":"build-provider/configuration/ratelimite-strategy.md","ref":"build-provider/configuration/ratelimite-strategy.md","articles":[]},{"title":"降级策略","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},{"title":"参数效验","level":"1.3.10.4","depth":3,"path":"build-provider/configuration/parameter-validator.md","ref":"build-provider/configuration/parameter-validator.md","articles":[]}]},"previous":{"title":"接口定义和数据类型","level":"1.3.8","depth":2,"path":"build-provider/interface-constraints.md","ref":"build-provider/interface-constraints.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/listen-address-and-publish-address.md","mtime":"2018-08-27T09:04:31.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:05:20.807Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

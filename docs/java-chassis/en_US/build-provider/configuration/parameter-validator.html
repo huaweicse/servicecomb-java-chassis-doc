@@ -1280,55 +1280,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
-<p>&#x7528;&#x6237;&#x5728;provider&#x7AEF;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x6548;&#x9A8C;&#xFF0C;&#x53EF;&#x4EE5;&#x5BF9;&#x76F8;&#x5E94;&#x7684;&#x53C2;&#x6570;&#x8F93;&#x5165;&#x8981;&#x6C42;&#x9884;&#x5148;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#xFF0C;&#x5728;&#x63A5;&#x53E3;&#x5B9E;&#x9645;&#x8C03;&#x7528;&#x524D;&#x8FDB;&#x884C;&#x6548;&#x9A8C;&#x5904;&#x7406;&#xFF0C;&#x8FBE;&#x5230;&#x63A7;&#x5236;&#x53C2;&#x6570;&#x8F93;&#x5165;&#x6807;&#x51C6;&#x7684;&#x6548;&#x679C;&#x3002;</p>
-<h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
+                                <h2 id="scene-description">Scene Description</h2>
+<p>The user uses the parameter validation on the provider client, and can set the corresponding parameter input requirements in advance, and perform the effect processing before the interface is actually called to achieve the effect of the control parameter input standard.</p>
+<h2 id="configuration-instructions">Configuration instructions</h2>
 <ul>
-<li><p>&#x6DFB;&#x52A0;swagger-invocation-validator&#x7684;pom&#x4F9D;&#x8D56;&#xFF1A;</p>
+<li><p>Add the pom dependency of swagger-invocation-validator:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>swagger-invocation-validator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 </li>
-<li><p>&#x5728;&#x9700;&#x8981;&#x9A8C;&#x8BC1;&#x7684;&#x4EE3;&#x7801;&#x4E0A;&#x6309;&#x7167;JSR 349&#x89C4;&#x8303;&#x6DFB;&#x52A0;&#x9A8C;&#x8BC1;&#x5668;&#x6CE8;&#x89E3;&#xFF0C;&#x5982;@NotNull&#xFF0C;@Min&#xFF0C;@Max&#x7B49;&#x3002;</p>
+<li><p>Add validator annotations to the code that requires validation according to the JSR 349 specification, such as @NotNull, @Min, @Max, etc.</p>
 </li>
 </ul>
-<h2 id="&#x793A;&#x4F8B;&#x4EE3;&#x7801;">&#x793A;&#x4F8B;&#x4EE3;&#x7801;</h2>
+<h2 id="sample-code">Sample Code</h2>
 <ul>
-<li>&#x63A5;&#x53E3;&#x53C2;&#x6570;&#x9A8C;&#x8BC1;</li>
-</ul>
+<li><p>Interface parameter verification</p>
 <pre><code class="lang-java"><span class="hljs-meta">@RestSchema</span>(schemaId = <span class="hljs-string">&quot;validator&quot;</span>)
 <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/validator&quot;</span>)
 <span class="hljs-meta">@Produces</span>(MediaType.APPLICATION_JSON)
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Validator</span> </span>{
 
-  <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/add&quot;</span>)
-  <span class="hljs-meta">@POST</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(@FormParam(<span class="hljs-string">&quot;a&quot;</span>)</span> <span class="hljs-keyword">int</span> a, @<span class="hljs-title">Min</span><span class="hljs-params">(<span class="hljs-number">20</span>)</span> @<span class="hljs-title">FormParam</span><span class="hljs-params">(<span class="hljs-string">&quot;b&quot;</span>)</span> <span class="hljs-keyword">int</span> b) </span>{
-    <span class="hljs-keyword">return</span> a + b;
-  }
+<span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/add&quot;</span>)
+<span class="hljs-meta">@POST</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(@FormParam(<span class="hljs-string">&quot;a&quot;</span>)</span> <span class="hljs-keyword">int</span> a, @<span class="hljs-title">Min</span><span class="hljs-params">(<span class="hljs-number">20</span>)</span> @<span class="hljs-title">FormParam</span><span class="hljs-params">(<span class="hljs-string">&quot;b&quot;</span>)</span> <span class="hljs-keyword">int</span> b) </span>{
+  <span class="hljs-keyword">return</span> a + b;
+}
 
-  <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/sayhi/{name}&quot;</span>)
-  <span class="hljs-meta">@PUT</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHi</span><span class="hljs-params">(@Length(min = <span class="hljs-number">3</span>)</span> @<span class="hljs-title">PathParam</span><span class="hljs-params">(<span class="hljs-string">&quot;name&quot;</span>)</span> String name) </span>{
-    ContextUtils.getInvocationContext().setStatus(<span class="hljs-number">202</span>);
-    <span class="hljs-keyword">return</span> name + <span class="hljs-string">&quot; sayhi&quot;</span>;
-  }
+<span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/sayhi/{name}&quot;</span>)
+<span class="hljs-meta">@PUT</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHi</span><span class="hljs-params">(@Length(min = <span class="hljs-number">3</span>)</span> @<span class="hljs-title">PathParam</span><span class="hljs-params">(<span class="hljs-string">&quot;name&quot;</span>)</span> String name) </span>{
+  ContextUtils.getInvocationContext().setStatus(<span class="hljs-number">202</span>);
+  <span class="hljs-keyword">return</span> name + <span class="hljs-string">&quot; sayhi&quot;</span>;
+}
 
-  <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/sayhello&quot;</span>)
-  <span class="hljs-meta">@POST</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Student <span class="hljs-title">sayHello</span><span class="hljs-params">(@Valid Student student)</span> </span>{
-    student.setName(<span class="hljs-string">&quot;hello &quot;</span> + student.getName());
-    student.setAge(student.getAge());
-    <span class="hljs-keyword">return</span> student;
-  }
+<span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/sayhello&quot;</span>)
+<span class="hljs-meta">@POST</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Student <span class="hljs-title">sayHello</span><span class="hljs-params">(@Valid Student student)</span> </span>{
+  student.setName(<span class="hljs-string">&quot;hello &quot;</span> + student.getName());
+  student.setAge(student.getAge());
+  <span class="hljs-keyword">return</span> student;
+}
 }
 </code></pre>
-<ul>
-<li>bean&#x7C7B;&#x9A8C;&#x8BC1;</li>
+</li>
+<li><p>bean class validation</p>
+</li>
 </ul>
-<p>&#x9700;&#x8981;&#x5728;&#x4F20;&#x5165;&#x7684;Student&#x5BF9;&#x8C61;&#x524D;&#x52A0;@Valid&#xFF0C;&#x5982;&#x4E0A;&#x56FE;sayHello(@Valid Student student)&#x65B9;&#x6CD5;&#x3002;</p>
+<p>You need to add @Valid in front of the incoming Student object, as shown in the figure above, sayHello(@Valid Student student).</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>{
   <span class="hljs-meta">@NotNull</span>
   <span class="hljs-keyword">private</span> String name;
@@ -1353,36 +1353,37 @@
   }
 }
 </code></pre>
-<h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x8FD4;&#x56DE;&#x5F02;&#x5E38;">&#x81EA;&#x5B9A;&#x4E49;&#x8FD4;&#x56DE;&#x5F02;&#x5E38;</h2>
+<h2 id="custom-return-exception">Custom return exception</h2>
 <ul>
-<li><p>&#x9ED8;&#x8BA4;&#x7684;&#x53C2;&#x6570;&#x6548;&#x9A8C;&#x5668;ParameterValidator&#x5DF2;&#x7ECF;&#x5B9E;&#x73B0;&#x4E86;&#x63A5;&#x53E3;ProducerInvokeExtension&#xFF0C;&#x6309;&#x7167;JSR 349&#x89C4;&#x8303;&#x5904;&#x7406;&#x6240;&#x9700;&#x7684;&#x53C2;&#x6570;&#x9A8C;&#x8BC1;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x4EFB;&#x4F55;&#x53C2;&#x6570;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;&#xFF0C;&#x7F3A;&#x7701;&#x9519;&#x8BEF;&#x662F;BAD_REQUEST(400, &quot;Bad Request&quot;)&#x3002;</p>
-<p>&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x652F;&#x6301;&#x81EA;&#x5B9A;&#x4E49;&#x6269;&#x5C55;&#xFF0C;&#x4F7F;&#x7528;SPI&#x673A;&#x5236;&#x3002;</p>
+<li><p>The default parameter validation parameter ParameterValidator has implemented the interface ProducerInvokeExtension to handle the required parameter validation in accordance with the JSR 349 specification.</p>
+<p> If any parameter validation fails, the default error is BAD_REQUEST(400, &quot;Bad Request&quot;).</p>
+<p> Return error support for custom extensions, using the SPI mechanism.</p>
 </li>
-<li><p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;ExceptionToResponseConverter&#x6765;&#x81EA;&#x5B9A;&#x4E49;&#x8FD4;&#x56DE;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF0C;&#x4EE5;ConstraintViolationExceptionToResponseConverter&#x4E3A;&#x4F8B;&#x3002;</p>
+<li><p>You can customize the returned error information by implementing the interface ExceptionToResponseConverter, taking the ConstraintViolationExceptionToResponseConverter as an example.</p>
 <ol>
-<li><p>&#x5B9E;&#x73B0;ExceptionToResponseConverter&#x63A5;&#x53E3;&#xFF0C;&#x91CD;&#x5199;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x4E2D;getOrder&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x8868;&#x793A;&#x8BE5;&#x9A8C;&#x8BC1;&#x5668;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF0C;&#x503C;&#x8D8A;&#x5C0F;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;&#x3002;</p>
+<li><p>Implement the ExceptionToResponseConverter interface, override the method, where the return result of the getOrder method indicates the priority of the validator. The smaller the value, the higher the priority.</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConstraintViolationExceptionToResponseConverter</span>
-    <span class="hljs-keyword">implements</span> <span class="hljs-title">ExceptionToResponseConverter</span>&lt;<span class="hljs-title">ConstraintViolationException</span>&gt; </span>{
-  <span class="hljs-meta">@Override</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class&lt;ConstraintViolationException&gt; <span class="hljs-title">getExceptionClass</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">return</span> ConstraintViolationException.class;
-  }
+   <span class="hljs-keyword">implements</span> <span class="hljs-title">ExceptionToResponseConverter</span>&lt;<span class="hljs-title">ConstraintViolationException</span>&gt; </span>{
+ <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> Class&lt;ConstraintViolationException&gt; <span class="hljs-title">getExceptionClass</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">return</span> ConstraintViolationException.class;
+ }
 
-  <span class="hljs-meta">@Override</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">convert</span><span class="hljs-params">(SwaggerInvocation swaggerInvocation, ConstraintViolationException e)</span> </span>{
-    <span class="hljs-keyword">return</span> Response.createFail(<span class="hljs-keyword">new</span> InvocationException(Status.BAD_REQUEST, e.getConstraintViolations().toString()));
-  }
+ <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">convert</span><span class="hljs-params">(SwaggerInvocation swaggerInvocation, ConstraintViolationException e)</span> </span>{
+   <span class="hljs-keyword">return</span> Response.createFail(<span class="hljs-keyword">new</span> InvocationException(Status.BAD_REQUEST, e.getConstraintViolations().toString()));
+ }
 
-  <span class="hljs-meta">@Override</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getOrder</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">return</span> -<span class="hljs-number">100</span>;
-  }
+ <span class="hljs-meta">@Override</span>
+ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getOrder</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">return</span> -<span class="hljs-number">100</span>;
+ }
 }
 </code></pre>
 </li>
-<li><p>&#x5728;META-INF&#x4E0B;&#x7684;services&#x6587;&#x4EF6;&#x5939;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x6240;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;x.x.x.ExceptionToResponseConverter(&#x5E26;&#x5305;&#x540D;)&#x4E3A;&#x540D;&#xFF0C;&#x4EE5;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x7C7B;x.x.x.ConstraintViolationExceptionToResponseConverter(&#x5E26;&#x5305;&#x540D;)&#x4E3A;&#x5185;&#x5BB9;&#x3002;</p>
-</li>
+</ol>
+<ol>
+<li>Add a file in the services folder under META-INF, with the implementation interface x.x.x.ExceptionToResponseConverter\ (with package name) as the name, and the concrete implementation class x.x.x.ConstraintViolationExceptionToResponseConverter\ (with package name) as the content.</li>
 </ol>
 </li>
 </ul>
@@ -1429,7 +1430,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"参数效验","level":"1.3.10.4","depth":3,"next":{"title":"通信协议","level":"1.3.11","depth":2,"path":"build-provider/protocol.md","ref":"build-provider/protocol.md","articles":[{"title":"线程模型","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},{"title":"Highway RPC协议","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]},{"title":"使用HTTP2通信","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]}]},"previous":{"title":"降级策略","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/configuration/parameter-validator.md","mtime":"2018-08-27T09:02:45.430Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:03:58.671Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"参数效验","level":"1.3.10.4","depth":3,"next":{"title":"通信协议","level":"1.3.11","depth":2,"path":"build-provider/protocol.md","ref":"build-provider/protocol.md","articles":[{"title":"线程模型","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},{"title":"Highway RPC协议","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]},{"title":"使用HTTP2通信","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]}]},"previous":{"title":"降级策略","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/configuration/parameter-validator.md","mtime":"2018-08-27T09:04:31.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-27T09:05:20.807Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>
