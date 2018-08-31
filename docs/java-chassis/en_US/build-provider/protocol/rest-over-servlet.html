@@ -1280,21 +1280,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="rest-over-servlet">REST over Servlet</h1>
-<p>REST over Servlet&#x5BF9;&#x5E94;&#x4F7F;&#x7528;web&#x5BB9;&#x5668;&#x90E8;&#x7F72;&#x8FD0;&#x884C;&#xFF0C;&#x9700;&#x8981;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;servlet&#x5DE5;&#x7A0B;&#x5C06;&#x5FAE;&#x670D;&#x52A1;&#x5305;&#x88C5;&#x8D77;&#x6765;&#xFF0C;&#x6253;&#x6210;war&#x5305;&#xFF0C;&#x52A0;&#x8F7D;&#x5230;web&#x5BB9;&#x5668;&#x4E2D;&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x3002;</p>
-<h2 id="&#x5BF9;&#x5916;&#x53D1;&#x5E03;&#x7684;path">&#x5BF9;&#x5916;&#x53D1;&#x5E03;&#x7684;Path</h2>
-<p>&#x5F53;&#x5FAE;&#x670D;&#x52A1;&#x90E8;&#x7F72;&#x5230;web&#x5BB9;&#x5668;&#x4E2D;&#x65F6;&#xFF0C;&#x76F8;&#x5BF9;&#x4E8E;&#x72EC;&#x7ACB;&#x8FD0;&#x884C;&#xFF0C;&#x4F1A;&#x6D89;&#x53CA;&#x5230;web root&#x4EE5;&#x53CA;servlet url pattern&#x5BF9;url&#x7684;&#x6539;&#x53D8;&#x3002;<br>&#x5BF9;&#x4E8E;&#x4F20;&#x7EDF;&#x5F00;&#x53D1;&#x6846;&#x67B6;&#x800C;&#x8A00;&#xFF0C;&#x9700;&#x8981;consumer&#x611F;&#x77E5;&#x5BF9;&#x65B9;&#x7684;&#x5B8C;&#x6574;url&#xFF1B;&#x6BD4;&#x5982;web root&#x4E3A;/mywebapp&#xFF0C;url pattern&#x4E3A;/rest&#xFF0C;&#x4E1A;&#x52A1;&#x7EA7;path&#x4E3A;/application&#xFF0C;&#x5219;consumer&#x4EE3;&#x7801;&#x5FC5;&#x987B;&#x901A;&#x8FC7;/mywebapp/rest/application&#x6765;&#x8BBF;&#x95EE;&#x3002;<br>&#x8FD9;&#x5C06;&#x5BFC;&#x81F4;&#x4E00;&#x65E6;&#x90E8;&#x7F72;&#x65B9;&#x5F0F;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x6BD4;&#x5982;&#x4ECE;web&#x5BB9;&#x5668;&#x53D8;&#x6210;standalone&#x8FD0;&#x884C;&#xFF0C;&#x5219;consumer&#x6216;&#x662F;producer&#x5FC5;&#x987B;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#x6765;&#x9002;&#x914D;&#x8FD9;&#x4E2A;&#x53D8;&#x5316;&#x3002;  </p>
-<p>&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;ServiceComb&#x7684;&#x90E8;&#x7F72;&#x89E3;&#x8026;&#x7279;&#x6027;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;consumer&#xFF0C;&#x8FD8;&#x662F;producer&#xFF0C;&#x5728;&#x4EE3;&#x7801;&#x4E2D;&#x90FD;&#x4E0D;&#x8981;&#x611F;&#x77E5;web root&#x4EE5;&#x53CA;url pattern&#xFF0C;&#x8FD9;&#x6837;ServiceComb&#x5728;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x9002;&#x914D;producer&#x5B9E;&#x4F8B;&#x7684;web root&#x4EE5;&#x53CA;url pattern&#x3002;  </p>
-<p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x9057;&#x7559;&#x7CFB;&#x7EDF;&#x6539;&#x9020;&#xFF0C;&#x7528;&#x6237;&#x671F;&#x671B;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;restTemplate.getForObject(&quot;cse://serviceName/mywebapp/rest/application&quot;...)&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#xFF0C;&#x7528;&#x6237;&#x5FC5;&#x987B;&#x5C06;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;path&#x5B9A;&#x4F4D;&#x4E3A;: /mywebapp/rest/application&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
-<pre><code>@RestSchema(schemaId = &quot;test&quot;)
-@RequestMapping(path = &quot;/mywebapp/rest/application&quot;)
-</code></pre><p>&#x5C3D;&#x7BA1;&#x5982;&#x6B64;&#xFF0C;&#x4ECD;&#x7136;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x90E8;&#x7F72;&#x5F62;&#x6001;&#x65E0;&#x5173;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x7F16;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x540E;&#x7EED;&#x7531;&#x4E8E;&#x90E8;&#x7F72;&#x5F62;&#x6001;&#x53D8;&#x5316;&#xFF0C;&#x5E26;&#x6765;&#x7684;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#x95EE;&#x9898;&#x3002;</p>
-<h2 id="maven&#x4F9D;&#x8D56;">maven&#x4F9D;&#x8D56;</h2>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>transport-rest-servlet<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-</code></pre>
+                                <h2 id="rest-over-servlet">REST over Servlet</h2>
 <h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
 <p>&#x4E0E;servlet&#x673A;&#x5236;&#x914D;&#x5408;&#xFF0C;&#x6D89;&#x53CA;&#x5230;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x6982;&#x5FF5;&#xFF1A;</p>
 <ul>
@@ -1438,47 +1424,6 @@ RestServlet&#x5DE5;&#x4F5C;&#x4E8E;&#x5F02;&#x6B65;&#x6A21;&#x5F0F;&#xFF0C;&#x68
 </code></pre>
 </li>
 </ul>
-<h2 id="&#x914D;&#x7F6E;&#x9879;"><strong>&#x914D;&#x7F6E;&#x9879;</strong></h2>
-<p>REST over Servlet&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x89C1;&#x8868;3-9&#x3002;</p>
-<p>&#x8868;1-1 REST over Servlet&#x914D;&#x7F6E;&#x9879;&#x8BF4;&#x660E;</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">&#x914D;&#x7F6E;&#x9879;</th>
-<th style="text-align:left">&#x9ED8;&#x8BA4;&#x503C;</th>
-<th style="text-align:left">&#x53D6;&#x503C;&#x8303;&#x56F4;</th>
-<th style="text-align:left">&#x662F;&#x5426;&#x5FC5;&#x9009;</th>
-<th style="text-align:left">&#x542B;&#x4E49;</th>
-<th style="text-align:left">&#x6CE8;&#x610F;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">servicecomb.rest.address</td>
-<td style="text-align:left">0.0.0.0:8080</td>
-<td style="text-align:left">-</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;</td>
-<td style="text-align:left">&#x5FC5;&#x987B;&#x914D;&#x7F6E;&#x4E3A;&#x4E0E;web&#x5BB9;&#x5668;&#x76D1;&#x542C;&#x5730;&#x5740;&#x76F8;&#x540C;&#x7684;&#x5730;&#x5740;</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.rest.server.timeout</td>
-<td style="text-align:left">3000</td>
-<td style="text-align:left">-</td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x8D85;&#x65F6;&#x65F6;&#x95F4;</td>
-<td style="text-align:left">&#x5355;&#x4F4D;&#x4E3A;&#x6BEB;&#x79D2;</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.rest.servlet.urlPattern</td>
-<td style="text-align:left">&#x65E0;</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x7528;&#x4E8E;&#x7B80;&#x5316;servlet+servlet mapping&#x914D;&#x7F6E;</td>
-<td style="text-align:left">&#x53EA;&#x6709;&#x5728;web.xml&#x4E2D;&#x672A;&#x914D;&#x7F6E;servlet+servlet mapping&#x65F6;&#xFF0C;&#x624D;&#x4F7F;&#x7528;&#x6B64;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x914D;&#x7F6E;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;/* &#x6216;  /path/*&#xFF0C;&#x5176;&#x4E2D;path&#x53EF;&#x4EE5;&#x662F;&#x591A;&#x6B21;&#x76EE;&#x5F55;</td>
-</tr>
-</tbody>
-</table>
 
                                 
                                 </section>
@@ -1522,7 +1467,7 @@ RestServlet&#x5DE5;&#x4F5C;&#x4E8E;&#x5F02;&#x6B65;&#x6A21;&#x5F0F;&#xFF0C;&#x68
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"next":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"previous":{"title":"Thread model","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-servlet.md","mtime":"2018-08-31T08:31:44.614Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T08:32:45.671Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"next":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"previous":{"title":"Thread model","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-servlet.md","mtime":"2018-08-31T08:33:48.211Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T08:35:01.596Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>
