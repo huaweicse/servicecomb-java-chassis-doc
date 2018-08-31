@@ -1317,8 +1317,8 @@ public ResponseEntity&lt;Resource&gt; resource() {
       .body(resource);
 }
 </code></pre><h2 id="4download-inputstream">4.Download InputStream</h2>
-<p>Because InputStream does not necessarily mean file downloading, it needs to be identified by swagger annotation (@ApiResponse). This is a file download scenario.</p>
-<p>In some scenarios, resources are not stored locally, such as in OBS cloud services, and OBS resources are output in InputStream mode.</p>
+<p>Because InputStream does not mean file downloading for sure, it needs to be annotated by &apos;swagger annotation&apos; (@ApiResponse). This is a file download scenario.</p>
+<p>In some scenarios, resources are not stored locally.</p>
 <pre><code>return ResponseEntity
     .ok()
     .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
@@ -1329,7 +1329,7 @@ public ResponseEntity&lt;Resource&gt; resource() {
 <p>As long as the HttpHeaders.CONTENT_TYPE is not set directly via ResponseEntity, ServiceComb will try to automatically determine the file name suffix in File, Part, and Resource.</p>
 <p>ServiceComb uses java&apos;s mime type mechanism for file type determination. If the file suffix in the business scenario cannot be identified, ServiceComb will default to application/octet-stream.</p>
 <p>If this does not meet the requirements, assuming the file suffix is, and the expected file type is application/file-xyz, any of the following methods can be resolved:</p>
-<h3 id="1expanding-through-javas-mime-type-mechanism">1)Expanding through Java&apos;s mime type mechanism</h3>
+<h3 id="1-extend-via-javas-mime-type-mechanism">1) Extend via Java&apos;s mime type mechanism</h3>
 <p>In the META-INF directory, create a mime.  Types file with the contents:</p>
 <pre><code>application/file-xyz xyz
 </code></pre><h3 id="2-specify-by-part-in-the-business-code">2) Specify by Part in the business code</h3>
@@ -1363,7 +1363,7 @@ org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveToFile(String)
 org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveToFile(File, OpenOptions)
 </code></pre><p>note:</p>
 <ul>
-<li><p>When the ReadStreamPart instance is obtained, the file content is not downloaded. The save series method is called to start reading the file data from the network.</p>
+<li><p>When the ReadStreamPart instance is obtained, the file content is not downloaded. The save or other methods is called to start reading the file data from the network.</p>
 </li>
 <li><p>If you use saveAsBytes, saveAsString, the data is directly stored in the memory; if the downloaded file is large, there will be a risk of memory explosion.</p>
 </li>
@@ -1417,7 +1417,7 @@ org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveToFile(File, Ope
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"File Downloading","level":"1.5.9","depth":2,"next":{"title":"Reactive Programing","level":"1.5.10","depth":2,"path":"general-development/reactive.md","ref":"general-development/reactive.md","articles":[]},"previous":{"title":"File Uploading","level":"1.5.8","depth":2,"path":"general-development/file-upload.md","ref":"general-development/file-upload.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/file-download.md","mtime":"2018-08-31T04:02:33.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T04:03:24.974Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"File Downloading","level":"1.5.9","depth":2,"next":{"title":"Reactive Programing","level":"1.5.10","depth":2,"path":"general-development/reactive.md","ref":"general-development/reactive.md","articles":[]},"previous":{"title":"File Uploading","level":"1.5.8","depth":2,"path":"general-development/file-upload.md","ref":"general-development/file-upload.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/file-download.md","mtime":"2018-08-31T05:58:32.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T05:59:10.883Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

@@ -1280,19 +1280,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x8FD4;&#x56DE;&#x503C;&#x5E8F;&#x5217;&#x5316;&#x6269;&#x5C55;">&#x8FD4;&#x56DE;&#x503C;&#x5E8F;&#x5217;&#x5316;&#x6269;&#x5C55;</h1>
-<h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>&#x5F53;&#x524D;REST&#x901A;&#x9053;&#x8FD4;&#x56DE;&#x503C;&#x652F;&#x6301;application/json&#x548C;text/plain&#x4E24;&#x79CD;&#x683C;&#x5F0F;&#xFF0C;&#x652F;&#x6301;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x6269;&#x5C55;&#x548C;&#x91CD;&#x5199;&#xFF0C;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x901A;&#x8FC7;produces&#x58F0;&#x660E;&#x53EF;&#x63D0;&#x4F9B;&#x5E8F;&#x5217;&#x5316;&#x80FD;&#x529B;&#xFF0C;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x901A;&#x8FC7;&#x8BF7;&#x6C42;&#x7684;Accept&#x5934;&#x6307;&#x660E;&#x8FD4;&#x56DE;&#x503C;&#x5E8F;&#x5217;&#x5316;&#x65B9;&#x5F0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x8FD4;&#x56DE;application/json&#x683C;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x3002;</p>
-<h2 id="&#x5F00;&#x53D1;&#x8BF4;&#x660E;">&#x5F00;&#x53D1;&#x8BF4;&#x660E;</h2>
+                                <h1 id="return-value-serialization-extension">return value serialization extension</h1>
+<h2 id="concept-description">Concept Description</h2>
+<p>The current REST channel return value supports both application/json and text/plain formats, supports developer extensions and rewrites, service providers provide serialization capabilities through producer declarations, and service consumers specify return value serialization through the request&apos;s Accept header. By default, the data in application/json format is returned.</p>
+<h2 id="development-instructions">Development Instructions</h2>
 <ul>
-<li><h3 id="&#x6269;&#x5C55;">&#x6269;&#x5C55;</h3>
-<p>&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4E1A;&#x52A1;&#x9700;&#x8981;&#xFF0C;&#x901A;&#x8FC7;&#x7F16;&#x7A0B;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x6269;&#x5C55;&#x8FD4;&#x56DE;&#x503C;&#x5E8F;&#x5217;&#x5316;&#x65B9;&#x5F0F;&#x3002;&#x5B9E;&#x65BD;&#x6B65;&#x9AA4;&#x5982;&#x4E0B;&#xFF0C;&#x4EE5;&#x6269;&#x5C55;&#x652F;&#x6301;application/xml&#x683C;&#x5F0F;&#x4E3A;&#x4F8B;&#xFF1A;</p>
-<p>1.&#x5B9E;&#x73B0;&#x63A5;&#x53E3;<code>ProduceProcessor</code></p>
+<li><h3 id="extension">extension</h3>
+<p>Developers can extend the return value serialization method programmatically based on business needs. The implementation steps are as follows, taking the extended support application/xml format as an example:</p>
+<ol>
+<li>Implement the interface <code>ProduceProcessor</code>.</li>
+</ol>
 <blockquote>
-<p>getName()&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6269;&#x5C55;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x540D;</p>
-<p>getOrder()&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4F18;&#x5148;&#x7EA7;&#xFF0C;&#x6709;&#x591A;&#x4E2A;&#x540C;&#x540D;&#x5B9E;&#x73B0;&#x7C7B;&#x65F6;&#x751F;&#x6548;&#xFF0C;&#x53EA;&#x52A0;&#x8F7D;&#x4F18;&#x5148;&#x7EA7;&#x6700;&#x9AD8;&#x7684;&#xFF0C;&#x6570;&#x5B57;&#x8D8A;&#x5C0F;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;</p>
-<p>doEncodeResponse(OutputStream output, Object result)&#x628A;result&#x5BF9;&#x8C61;&#x7F16;&#x7801;&#x6210;output&#xFF0C;&#x6B64;&#x5904;&#x903B;&#x8F91;&#x9700;&#x8981;&#x81EA;&#x884C;&#x5B9E;&#x73B0;</p>
-<p>doDecodeResponse(InputStream input, JavaType type)&#x628A;input&#x89E3;&#x6790;&#x6210;&#x76F8;&#x5E94;&#x5BF9;&#x8C61;&#xFF0C;&#x6B64;&#x5904;&#x903B;&#x8F91;&#x9700;&#x8981;&#x81EA;&#x884C;&#x5B9E;&#x73B0;</p>
+<p>getName() returns the current extended data type name</p>
+<p>getOrder() returns the current data type priority. It has multiple implementation classes with the same name. It only loads the highest priority. The smaller the number, the higher the priority.</p>
+<p>doEncodeResponse(OutputStream output, Object result) encodes the result object into output, where the logic needs to be implemented by itself.</p>
+<p>doDecodeResponse(InputStream input, JavaType type) parses the input into the corresponding object, where the logic needs to be implemented by itself.</p>
 </blockquote>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProduceAppXmlProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ProduceProcessor</span> </span>{
 
@@ -1317,24 +1319,32 @@
   }
 }
 </code></pre>
-<p>2.&#x6DFB;&#x52A0;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
-<p>&#x5728;resources&#x4E0B;META-INF/services/&#x6587;&#x4EF6;&#x5939;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;xxx.ProduceProcessor&#xFF08;xxx&#x4E3A;&#x63A5;&#x53E3;&#x7684;&#x5305;&#x540D;&#xFF09;&#xFF0C;&#x5185;&#x5BB9;&#x586B;&#x5199;xxx.ProduceAppXmlProcessor&#xFF08;xxx&#x4E3A;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5305;&#x540D;&#xFF09;&#x3002;</p>
+<ol>
+<li>Add a configuration file</li>
+</ol>
+<p>In the META-INF/services/ folder under resources, create a new file xxx.ProduceProcessor (xxx is the package name of the interface), and fill in the content xxx.ProduceAppXmlProcessor (xxx is the package name of the implementation class).</p>
 </li>
-<li><h3 id="&#x91CD;&#x5199;">&#x91CD;&#x5199;</h3>
-<p>&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53EF;&#x4EE5;&#x5BF9;&#x73B0;&#x6709;&#x7684;application/json&#x548C;text/plain&#x4E24;&#x79CD;&#x683C;&#x5F0F;&#x5B9E;&#x73B0;&#x903B;&#x8F91;&#x8FDB;&#x884C;&#x91CD;&#x5199;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5BF9;&#x81EA;&#x884C;&#x6269;&#x5C55;&#x7684;&#x683C;&#x5F0F;&#x8FDB;&#x884C;&#x91CD;&#x5199;&#xFF0C;&#x4EE5;&#x91CD;&#x5199;xml&#x5E8F;&#x5217;&#x5316;&#x65B9;&#x5F0F;&#x4E3A;&#x4F8B;&#xFF1A;</p>
-<p>1.&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540C;&#x540D;&#x7C7B;<code>ProduceAppXmlProcessor</code>&#xFF0C;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;<code>ProduceProcessor</code></p>
-<p>2.&#x91CD;&#x5199;<code>doEncodeResponse</code>&#x548C;<code>doDecodeResponse</code>&#x65B9;&#x6CD5;&#x91CC;&#x7684;&#x7F16;&#x89E3;&#x7801;&#x903B;&#x8F91;</p>
-<p>3.&#x66F4;&#x6539;getOrder&#x65B9;&#x6CD5;&#x91CC;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8981;&#x6BD4;&#x539F;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C0F;&#xFF0C;&#x4F8B;&#x5982;&#x8FD4;&#x56DE;-1&#xFF0C;application/json&#x548C;text/plain&#x7684;&#x539F;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x503C;&#x9ED8;&#x8BA4;&#x90FD;&#x4E3A;0</p>
-<p>4.&#x5728;resources&#x4E0B;META-INF/services/&#x6587;&#x4EF6;&#x5939;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;xxx.ProduceProcessor&#xFF08;xxx&#x4E3A;&#x63A5;&#x53E3;&#x7684;&#x5305;&#x540D;&#xFF09;&#xFF0C;&#x5185;&#x5BB9;&#x586B;&#x5199;xxx.ProduceAppXmlProcessor&#xFF08;xxx&#x4E3A;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5305;&#x540D;&#xFF09;&#x3002;</p>
+<li><h3 id="rewrite">Rewrite</h3>
+<p>Developers can rewrite the existing application/json and text/plain implementation logic, or rewrite the self-extended format to rewrite the xml serialization method as an example:</p>
+<ol>
+<li><p>Create a class named &apos;ProduceAppXmlProcessor<code>with the same name to implement the interface</code>ProduceProcessor`.</p>
 </li>
-<li><h3 id="&#x9A8C;&#x8BC1;">&#x9A8C;&#x8BC1;</h3>
-<p>&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x901A;&#x8FC7;produces&#x58F0;&#x660E;&#x53EF;&#x63D0;&#x4F9B;xml&#x5E8F;&#x5217;&#x5316;&#x80FD;&#x529B;</p>
+<li><p>Rewrite the codec logic in the <code>doEncodeResponse</code> and <code>doDecodeResponse</code> methods</p>
+</li>
+<li><p>Change the return value in the getOrder method, which is smaller than the return value of the original method. For example, return -1, the original method return value of application/json and text/plain defaults to 0.</p>
+</li>
+<li><p>In the META-INF/services/ folder under resources, create a new file xxx.ProduceProcessor (xxx is the package name of the interface), and fill in the content xxx.ProduceAppXmlProcessor (xxx is the package name of the implementation class).</p>
+</li>
+</ol>
+</li>
+<li><h3 id="verification">verification</h3>
+<p>Service providers provide xml serialization capabilities through producer declarations</p>
 <pre><code class="lang-java">  <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/appXml&quot;</span>, method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
   <span class="hljs-function"><span class="hljs-keyword">public</span> JAXBPerson <span class="hljs-title">appXml</span><span class="hljs-params">(@RequestBody JAXBPerson person)</span> </span>{
     <span class="hljs-keyword">return</span> person;
   }
 </code></pre>
-<p>&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x901A;&#x8FC7;&#x8BF7;&#x6C42;&#x7684;Accept&#x5934;&#x6307;&#x660E;&#x8FD4;&#x56DE;&#x503C;xml&#x5E8F;&#x5217;&#x5316;&#x65B9;&#x5F0F;</p>
+<p>The service consumer indicates the return value xml serialization mode through the request&apos;s Accept header.</p>
 <pre><code class="lang-java">  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testCodeFirstAppXml</span><span class="hljs-params">(RestTemplate template, String cseUrlPrefix)</span> </span>{
     JAXBPerson person = <span class="hljs-keyword">new</span> JAXBPerson(<span class="hljs-string">&quot;jake&quot;</span>, <span class="hljs-number">22</span>, <span class="hljs-string">&quot;it&quot;</span>, <span class="hljs-string">&quot;60kg&quot;</span>);
     person.setJob(<span class="hljs-keyword">new</span> JAXBJob(<span class="hljs-string">&quot;developer&quot;</span>, <span class="hljs-string">&quot;coding&quot;</span>));
@@ -1393,7 +1403,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Return value serialization extension","level":"1.5.17","depth":2,"next":{"title":"CORS mechanism","level":"1.5.18","depth":2,"path":"general-development/CORS.md","ref":"general-development/CORS.md","articles":[]},"previous":{"title":"Using Context to pass control messages","level":"1.5.16","depth":2,"path":"general-development/context.md","ref":"general-development/context.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/produceprocess.md","mtime":"2018-08-31T04:02:33.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T04:03:24.974Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Return value serialization extension","level":"1.5.17","depth":2,"next":{"title":"CORS mechanism","level":"1.5.18","depth":2,"path":"general-development/CORS.md","ref":"general-development/CORS.md","articles":[]},"previous":{"title":"Using Context to pass control messages","level":"1.5.16","depth":2,"path":"general-development/context.md","ref":"general-development/context.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/produceprocess.md","mtime":"2018-08-31T05:58:32.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T05:59:10.883Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

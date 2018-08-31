@@ -1280,20 +1280,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x80CC;&#x666F;">&#x80CC;&#x666F;</h2>
-<p>&#x4F5C;&#x4E3A;&#x4E00;&#x540D;&#x5F00;&#x53D1;&#x8005;&#xFF0C;&#x5728;&#x516C;&#x53F8;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x901A;&#x8FC7;&#x516C;&#x53F8;&#x4EE3;&#x7406;&#x7F51;&#x7EDC;&#x63A5;&#x5165;&#x5230;&#x56E0;&#x7279;&#x7F51;&#x3002;&#x5982;&#x679C;&#x8C03;&#x8BD5;&#x670D;&#x52A1;&#x65F6;&#x8FD8;&#x5FC5;&#x987B;&#x4F9D;&#x8D56;&#x7F51;&#x4E0A;&#x8D44;&#x6E90;&#xFF0C;&#x6BD4;&#x5982;&#x76F4;&#x63A5;&#x8FDE;&#x63A5;&#x534E;&#x4E3A;&#x5171;&#x6709;&#x4E91;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x5FC5;&#x987B;&#x914D;&#x7F6E;&#x4EE3;&#x7406;&#x3002;</p>
-<p>&#x914D;&#x7F6E;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x589E;&#x52A0;proxy&#x914D;&#x7F6E;&#xFF1A;</p>
+                                <h2 id="background">background</h2>
+<p>As a developer, in a company development environment, it is possible to access the Internet through a corporate agent network. If debugging services depends on online resources, such as directly connecting to public cloud service center, you must configure the agent.</p>
+<p>Configuration mode, add proxy configuration in microservice.yaml file:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  proxy:</span>
-<span class="hljs-attr">    enable:</span> <span class="hljs-literal">true</span>            <span class="hljs-comment">#&#x662F;&#x5426;&#x5F00;&#x542F;&#x4EE3;&#x7406;</span>
-<span class="hljs-attr">    host:</span> yourproxyaddress  <span class="hljs-comment">#&#x4EE3;&#x7406;&#x5730;&#x5740;</span>
-<span class="hljs-attr">    port:</span> <span class="hljs-number">80</span>                <span class="hljs-comment">#&#x4EE3;&#x7406;&#x7AEF;&#x53E3;</span>
-<span class="hljs-attr">    username:</span> yourname      <span class="hljs-comment">#&#x7528;&#x6237;&#x540D;</span>
-<span class="hljs-attr">    passwd:</span> yourpassword    <span class="hljs-comment">#&#x5BC6;&#x7801;</span>
+<span class="hljs-attr">    enable:</span> <span class="hljs-literal">true</span> <span class="hljs-comment">#Do you want to enable the proxy?</span>
+<span class="hljs-attr">    host:</span> yourproxyaddress <span class="hljs-comment">#proxy address</span>
+<span class="hljs-attr">    port:</span> <span class="hljs-number">80</span> <span class="hljs-comment">#proxy port</span>
+<span class="hljs-attr">    username:</span> yourname <span class="hljs-comment">#username</span>
+<span class="hljs-attr">    passwd:</span> yourpassword <span class="hljs-comment">#password</span>
 </code></pre>
-<p><strong>&#x6CE8;&#x610F;&#xFF1A;&#x5F53;&#x524D;&#x4EC5;&#x652F;&#x6301;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x4E2D;&#x5FC3;&#x3001;&#x914D;&#x7F6E;&#x4E2D;&#x5FC3;&#x3001;&#x670D;&#x52A1;&#x770B;&#x677F;&#x652F;&#x6301;&#x4EE3;&#x7406;&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x63A5;&#x5176;&#x4ED6;&#x4E09;&#x65B9;&#x670D;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x8BFB;&#x53D6;&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#xFF0C;&#x81EA;&#x884C;&#x914D;&#x7F6E;&#x4EE3;&#x7406;&#xFF0C;vertx httpclient&#x652F;&#x6301;&#x4EE3;&#x7406;&#x8BBE;&#x7F6E;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</strong></p>
+<p><strong>Note: Currently only supports connection service center, configuration center support agent. If you connect other three-party services, you can read this configuration, configure the agent yourself, vertx httpclient supports proxy settings, for example: </strong></p>
 <pre><code class="lang-java">    HttpClientOptions httpClientOptions = <span class="hljs-keyword">new</span> HttpClientOptions();
-    <span class="hljs-keyword">if</span> (isProxyEnable()) {
+    If (isProxyEnable()) {
       ProxyOptions proxy = <span class="hljs-keyword">new</span> ProxyOptions();
       proxy.setHost(<span class="hljs-string">&quot;host&quot;</span>);
       proxy.setPort(port);
@@ -1345,7 +1345,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Proxy Settings","level":"1.5.12","depth":2,"next":{"title":"Rport framework version","level":"1.5.13","depth":2,"path":"general-development/report-framework-version.md","ref":"general-development/report-framework-version.md","articles":[]},"previous":{"title":"DNS Custom Configuration","level":"1.5.11","depth":2,"path":"general-development/dnsconfig.md","ref":"general-development/dnsconfig.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/dai-li-she-zhi.md","mtime":"2018-08-31T04:02:33.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T04:03:24.974Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Proxy Settings","level":"1.5.12","depth":2,"next":{"title":"Rport framework version","level":"1.5.13","depth":2,"path":"general-development/report-framework-version.md","ref":"general-development/report-framework-version.md","articles":[]},"previous":{"title":"DNS Custom Configuration","level":"1.5.11","depth":2,"path":"general-development/dnsconfig.md","ref":"general-development/dnsconfig.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/dai-li-she-zhi.md","mtime":"2018-08-31T05:58:32.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T05:59:10.883Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

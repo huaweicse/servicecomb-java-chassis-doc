@@ -1280,22 +1280,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="cors&#x673A;&#x5236;">CORS&#x673A;&#x5236;</h1>
-<h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x5171;&#x4EAB;(CORS, Cross-Origin Resource Sharing)&#x5141;&#x8BB8;Web&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x884C;&#x8DE8;&#x57DF;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x4F7F;&#x6D4F;&#x89C8;&#x5668;&#x53EF;&#x4EE5;&#x66F4;&#x5B89;&#x5168;&#x5730;&#x8FDB;&#x884C;&#x8DE8;&#x57DF;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x3002;</p>
-<h2 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h2>
-<p>&#x5F53;&#x7528;&#x6237;&#x9700;&#x8981;&#x4ECE;&#x6D4F;&#x89C8;&#x5668;&#x4E0A;&#x8DE8;&#x57DF;&#x53D1;&#x9001;REST&#x8BF7;&#x6C42;&#x65F6;&#x5C31;&#x6709;&#x53EF;&#x80FD;&#x8981;&#x7528;&#x5230;CORS&#x673A;&#x5236;&#xFF0C;&#x63A5;&#x6536;&#x8DE8;&#x57DF;&#x8BF7;&#x6C42;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x9700;&#x8981;&#x5F00;&#x542F;CORS&#x652F;&#x6301;&#x3002;</p>
-<h2 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h2>
-<p>CORS&#x529F;&#x80FD;&#x5728;microservice.yaml&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#xFF0C;&#x914D;&#x7F6E;&#x9879;&#x89C1;&#x4E0B;&#x8868;&#x6240;&#x8FF0;&#x3002;</p>
+                                <h1 id="cors-mechanism">CORS mechanism</h1>
+<h2 id="concept-description">Concept Description</h2>
+<p>Cross-Origin Resource Sharing (CORS) allows Web servers to perform cross-domain access, enabling browsers to more securely transfer data across domains.</p>
+<h2 id="scenario">Scenario</h2>
+<p>When the user needs to send REST requests across the origin webserver, the CORS mechanism may be used. The microservices that receive cross-domain requests need to enable CORS support.</p>
+<h2 id="configuration-instructions">Configuration instructions</h2>
+<p>The CORS function is configured in the microservice.yaml file. The configuration items are described in the following table.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">&#x914D;&#x7F6E;&#x9879;</th>
-<th style="text-align:left">&#x9ED8;&#x8BA4;&#x503C;</th>
-<th style="text-align:left">&#x53D6;&#x503C;&#x8303;&#x56F4;</th>
-<th style="text-align:left">&#x662F;&#x5426;&#x5FC5;&#x9009;</th>
-<th style="text-align:left">&#x542B;&#x4E49;</th>
-<th style="text-align:left">&#x6CE8;&#x610F;</th>
+<th style="text-align:left">Configuration Item</th>
+<th style="text-align:left">Default Value</th>
+<th style="text-align:left">Range of Value</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Meaning</th>
 </tr>
 </thead>
 <tbody>
@@ -1303,15 +1302,15 @@
 <td style="text-align:left">servicecomb.cors.enabled</td>
 <td style="text-align:left"><code>false</code></td>
 <td style="text-align:left"><code>true</code>/<code>false</code></td>
-<td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x662F;&#x5426;&#x5F00;&#x542F;CORS&#x529F;&#x80FD;</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Whether to enable CORS function</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.cors.origin</td>
 <td style="text-align:left"><code>*</code></td>
 <td style="text-align:left">-</td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Access-Control-Allow-Origin</td>
 <td style="text-align:left">-</td>
 </tr>
@@ -1319,45 +1318,45 @@
 <td style="text-align:left">servicecomb.cors.allowCredentials</td>
 <td style="text-align:left"><code>false</code></td>
 <td style="text-align:left"><code>true</code>/<code>false</code></td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Access-Control-Allow-Credentials</td>
-<td style="text-align:left">&#x6839;&#x636E;CORS&#x6807;&#x51C6;&#xFF0C;&#x5F53;Access-Control-Allow-Credentials&#x8BBE;&#x7F6E;&#x4E3A;<code>true</code>&#x65F6;&#xFF0C;Access-Control-Allow-Origin&#x4E0D;&#x53EF;&#x8BBE;&#x7F6E;&#x4E3A;&quot;*&quot;&#xFF0C;&#x5426;&#x5219;&#x5C06;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;</td>
+<td style="text-align:left">According to the CORS standard, when Access-Control-Allow-Credentials is set to <code>true</code>, Access- Control-Allow-Origin cannot be set to &quot;*&quot;, otherwise an exception will be thrown</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.cors.allowedHeader</td>
-<td style="text-align:left">&#x65E0;</td>
+<td style="text-align:left">None</td>
 <td style="text-align:left">-</td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Access-Control-Allow-Headers</td>
-<td style="text-align:left">&#x591A;&#x4E2A;&#x503C;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;</td>
+<td style="text-align:left">Multiple values &#x200B;&#x200B;separated by commas</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.cors.allowedMethod</td>
-<td style="text-align:left">&#x65E0;</td>
+<td style="text-align:left">None</td>
 <td style="text-align:left">-</td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Access-Control-Allow-Methods</td>
-<td style="text-align:left">&#x591A;&#x4E2A;&#x503C;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;</td>
+<td style="text-align:left">Multiple values &#x200B;&#x200B;separated by commas</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.cors.exposedHeader</td>
-<td style="text-align:left">&#x65E0;</td>
+<td style="text-align:left">None</td>
 <td style="text-align:left">-</td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Access-Control-Expose-Headers</td>
-<td style="text-align:left">&#x591A;&#x4E2A;&#x503C;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;</td>
+<td style="text-align:left">Multiple values &#x200B;&#x200B;separated by commas</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.cors.maxAge</td>
-<td style="text-align:left">&#x65E0;</td>
-<td style="text-align:left">(0,2147483647]&#xFF0C;&#x6574;&#x578B;</td>
-<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left">(0,2147483647], Integer</td>
+<td style="text-align:left">No</td>
 <td style="text-align:left">Access-Control-Max-Age</td>
-<td style="text-align:left">&#x5355;&#x4F4D;&#x662F;&#x79D2;&#xFF0C;&#x5982;&#x679C;&#x7528;&#x6237;&#x4E0D;&#x914D;&#x7F6E;&#x6B64;&#x9879;&#xFF0C;&#x5219;CORS&#x5E94;&#x7B54;&#x4E2D;&#x6CA1;&#x6709;Access-Control-Max-Age</td>
+<td style="text-align:left">The unit is seconds. If the user does not configure this, there is no Access-Control-Max in the CORS response. Age</td>
 </tr>
 </tbody>
 </table>
-<h2 id="&#x793A;&#x4F8B;&#x4EE3;&#x7801;">&#x793A;&#x4F8B;&#x4EE3;&#x7801;</h2>
+<h2 id="sample-code">Sample Code</h2>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  cors:</span>
 <span class="hljs-attr">    enabled:</span> <span class="hljs-literal">true</span>
@@ -1409,7 +1408,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CORS mechanism","level":"1.5.18","depth":2,"next":{"title":"Get fuse and instance isolation alarm event information","level":"1.5.19","depth":2,"path":"general-development/AlarmEvent.md","ref":"general-development/AlarmEvent.md","articles":[]},"previous":{"title":"Return value serialization extension","level":"1.5.17","depth":2,"path":"general-development/produceprocess.md","ref":"general-development/produceprocess.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/CORS.md","mtime":"2018-08-31T04:02:33.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T04:03:24.974Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"CORS mechanism","level":"1.5.18","depth":2,"next":{"title":"Get fuse and instance isolation alarm event information","level":"1.5.19","depth":2,"path":"general-development/AlarmEvent.md","ref":"general-development/AlarmEvent.md","articles":[]},"previous":{"title":"Return value serialization extension","level":"1.5.17","depth":2,"path":"general-development/produceprocess.md","ref":"general-development/produceprocess.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/CORS.md","mtime":"2018-08-31T05:58:32.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T05:59:10.883Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

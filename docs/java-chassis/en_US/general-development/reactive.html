@@ -1280,20 +1280,20 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#x7B80;&#x5355;&#x540C;&#x6B65;&#x6A21;&#x5F0F;&#x7684;producer&#xFF1A;">&#x7B80;&#x5355;&#x540C;&#x6B65;&#x6A21;&#x5F0F;&#x7684;Producer&#xFF1A;</h2>
-<p>&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#xFF1A;</p>
+                                <h2 id="simple-synchronization-mode-producer">Simple Synchronization Mode Producer:</h2>
+<p>Sample code:</p>
 <pre><code class="lang-java"><span class="hljs-meta">@GetMapping</span>(path = <span class="hljs-string">&quot;/hello/{name}&quot;</span>)
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(@PathVariable(name = <span class="hljs-string">&quot;name&quot;</span>)</span> String name)</span>{
   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello &quot;</span> + name;
 }
 </code></pre>
-<p>&#x4E0E;&#x6B64;&#x5BF9;&#x5E94;&#x7684;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>The corresponding processing flow is as follows:</p>
 <p><img src="../assets/reactive/normalSync.png" alt=""></p>
-<p>&#x8FD9;&#x662F;&#x4F20;&#x7EDF;&#x5178;&#x578B;&#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x578B;&#xFF0C;&#x6838;&#x5FC3;&#x601D;&#x60F3;&#x662F;&#x4E0D;&#x963B;&#x585E;&#x7F51;&#x7EDC;&#x7EBF;&#x7A0B;&#xFF0C;&#x5C06;&#x4E1A;&#x52A1;&#x653E;&#x5728;&#x72EC;&#x7ACB;&#x7684;&#x7EBF;&#x7A0B;&#x4E2D;&#x5904;&#x7406;&#xFF08;&#x4E3A;&#x4E86;&#x7B80;&#x5316;&#x8868;&#x8FBE;&#xFF0C;executor&#x4E2D;&#x53EA;&#x753B;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF09;</p>
-<p>&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6B64;&#x6A21;&#x5F0F;&#x95EE;&#x9898;&#x4E0D;&#x5927;&#x3002;</p>
-<h2 id="&#x5D4C;&#x5957;&#x540C;&#x6B65;&#x8C03;&#x7528;&#xFF1A;">&#x5D4C;&#x5957;&#x540C;&#x6B65;&#x8C03;&#x7528;&#xFF1A;</h2>
-<p>&#x4E0D;&#x662F;&#x6240;&#x6709;&#x7684;&#x4E1A;&#x52A1;&#x90FD;&#x662F;&#x7B80;&#x5355;&#x5904;&#x7406;&#x4E00;&#x4E0B;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5E94;&#x7B54;&#xFF0C;&#x53EF;&#x80FD;&#x8FD8;&#x9700;&#x8981;&#x8C03;&#x7528;&#x5176;&#x4ED6;&#x5FAE;&#x670D;&#x52A1;.</p>
-<p>&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<p>This is the traditional typical working model. The core idea is not to block network threads, and to put the business in a separate thread (to simplify the expression, only one thread is drawn in the executor)</p>
+<p>In general, this mode is not a big problem.</p>
+<h2 id="nested-synchronous-call">Nested synchronous call:</h2>
+<p>Not all services are handled simply, you can respond directly, you may need to call other microservices.</p>
+<p>Sample code:</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Intf</span></span>{
   <span class="hljs-function">String <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span></span>;
 }
@@ -1303,42 +1303,42 @@
   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;from remote: hello &quot;</span> + intf.hello(name);
 }
 </code></pre>
-<p>&#x4E0E;&#x6B64;&#x5BF9;&#x5E94;&#x7684;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>The corresponding processing flow is as follows:</p>
 <p><img src="../assets/reactive/nestedSync.png" alt=""></p>
-<p>&#x6839;&#x636E;&#x8FD9;&#x4E2A;&#x6D41;&#x7A0B;&#x7684;&#x7279;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</p>
+<p>According to the characteristics of this process, you can see the following results:</p>
 <ul>
-<li><p>&#x56E0;&#x4E3A;&#x662F;&#x540C;&#x6B65;&#x8C03;&#x7528;&#xFF0C;&#x5728;&#x201C;Other microservices&#x201D;&#x672A;&#x5E94;&#x7B54;&#x4E4B;&#x524D;&#x201C;Microservice A&#x201D;&#x7684;&#x8C03;&#x7528;&#x7EBF;&#x7A0B;&#x4E00;&#x76F4;&#x5904;&#x4E8E;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#xFF0C;&#x4E0D;&#x5904;&#x7406;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x4E8B;&#x52A1;</p>
+<li><p>Because it is a synchronous call, the calling thread of &quot;Microservice A&quot; is always in the blocking wait state before &quot;Other microservices&quot; is not answered, and does not process any other transactions.</p>
 </li>
-<li><p>&#x5F53;Executor&#x4E2D;&#x6240;&#x6709;&#x7EBF;&#x7A0B;&#x90FD;&#x5728;&#x7B49;&#x5F85;&#x8FDC;&#x7A0B;&#x5E94;&#x7B54;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x65B0;&#x7684;&#x8BF7;&#x6C42;&#x90FD;&#x53EA;&#x80FD;&#x5728;Queue&#x4E2D;&#x6392;&#x961F;&#xFF0C;&#x5F97;&#x4E0D;&#x5230;&#x5904;&#x7406;&#xFF0C;&#x6B64;&#x65F6;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x76F8;&#x5F53;&#x4E8E;&#x505C;&#x6B62;&#x5DE5;&#x4F5C;&#x4E86;</p>
+<li><p>When all threads in the Executor are waiting for a remote response, all new requests can only be queued in the Queue and cannot be processed. At this point, the entire system is equivalent to stop working.</p>
 </li>
-<li><p>&#x8981;&#x589E;&#x52A0;&#x5904;&#x7406;&#x80FD;&#x529B;&#xFF0C;&#x53EA;&#x80FD;&#x589E;&#x52A0;Executor&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x800C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5E76;&#x4E0D;&#x80FD;&#x65E0;&#x9650;&#x5730;&#x589E;&#x52A0;&#x7EBF;&#x7A0B;&#x6570;&#xFF0C;&#x4E8B;&#x5B9E;&#x4E0A;&#x589E;&#x52A0;&#x7EBF;&#x7A0B;&#x6570;&#x5E26;&#x6765;&#x7684;&#x6536;&#x76CA;&#x662F;&#x4E00;&#x4E2A;&#x629B;&#x7269;&#x7EBF;&#x6A21;&#x578B;&#xFF0C;&#x8D85;&#x51FA;&#x4E00;&#x5B9A;&#x7684;&#x4E34;&#x754C;&#x503C;&#x540E;&#xFF0C;&#x7CFB;&#x7EDF;&#x7684;&#x5904;&#x7406;&#x80FD;&#x529B;&#x5176;&#x5B9E;&#x4F1A;&#x4E0B;&#x964D;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x4E34;&#x754C;&#x503C;&#x5E76;&#x4E0D;&#x4F1A;&#x592A;&#x5927;</p>
+<li><p>To increase the processing power, only increase the number of threads in the Executor, and the operating system can not increase the number of threads indefinitely. The benefit of increasing the number of threads is a parabolic model. After a specific critical value, the system handles The ability will drop, and this threshold will not be too big.</p>
 </li>
-<li><p>&#x5F53;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x4E2D;&#xFF0C;&#x9700;&#x8981;&#x591A;&#x6B21;&#x8FDB;&#x884C;&#x8FDC;&#x7A0B;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4F1A;&#x66F4;&#x52A0;&#x6076;&#x5316;&#x8FD9;&#x4E2A;&#x73B0;&#x8C61;</p>
+<li><p>When the remote synchronization operation is required multiple times in the business logic, the problem will be bigger than before.</p>
 </li>
 </ul>
-<h2 id="&#x5D4C;&#x5957;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x7684;&#x9519;&#x8BEF;&#x4F18;&#x5316;&#xFF1A;">&#x5D4C;&#x5957;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x7684;&#x201C;&#x9519;&#x8BEF;&#x201D;&#x4F18;&#x5316;&#xFF1A;</h2>
-<p>&#x9488;&#x5BF9;&#x524D;&#x4E00;&#x573A;&#x666F;&#xFF0C;&#x6709;&#x4EBA;&#x4F1A;&#x8BA4;&#x4E3A;&#x5C06;&#x201C;Invoke producer method&#x201D;&#x4E22;&#x8FDB;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x5305;&#x62EC;&#x4EE5;&#x4E0B;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<h2 id="error-optimization-for-nested-synchronous-calls">&quot;Error&quot; optimization for nested synchronous calls:</h2>
+<p>For the previous scenario, someone would think that throwing the &quot;Invoke producer method&quot; into another thread pool can solve the problem, including the following:</p>
 <ul>
-<li><p>&#x5728;producer method&#x6253;&#x6807;&#x6CE8;@Async&#xFF0C;&#x7531;AOP&#x8D1F;&#x8D23;&#x5C06;&#x5BF9;&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x4E22;&#x8FDB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6C60;&#x53BB;</p>
+<li><p>In the producer method, mark @Async, which is responsible for throwing the call to the method into other thread pools.</p>
 </li>
-<li><p>&#x5728;producer method&#x5185;&#x90E8;&#x901A;&#x8FC7;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x8F6C;&#x79FB;&#x7EBF;&#x7A0B;</p>
+<li><p>Transferring threads through business code inside the producer method</p>
 </li>
 </ul>
-<p>&#x5F62;&#x6210;&#x4EE5;&#x4E0B;&#x6D41;&#x7A0B;&#xFF1A;</p>
+<p>Form the following process:</p>
 <p><img src="../assets/reactive/wrongSyncOptimization.png" alt=""></p>
-<p>&#x6839;&#x636E;&#x8FD9;&#x4E2A;&#x6D41;&#x7A0B;&#x7684;&#x7279;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4F1A;&#x4EA7;&#x751F;&#x4EE5;&#x4E0B;&#x7ED3;&#x679C;&#xFF1A;</p>
+<p>According to the characteristics of this process, you can see the following results:</p>
 <ul>
-<li><p>&#x201C;Invoke producer method&#x201D;&#x5FC5;&#x987B;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x5426;&#x5219;Executor&#x7EBF;&#x7A0B;&#x8FD8;&#x662F;&#x5F97;&#x4E0D;&#x5230;&#x91CA;&#x653E;</p>
+<li><p>&quot;Invoke producer method&quot; must be returned immediately, otherwise, the Executor thread will not be released</p>
 </li>
-<li><p>&#x201C;Invoke producer method&#x201D;&#x5FC5;&#x987B;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x673A;&#x5236;&#x544A;&#x77E5;&#x8C03;&#x7528;&#x6D41;&#x7A0B;&#x81EA;&#x5DF1;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x4E0D;&#x662F;&#x6700;&#x7EC8;&#x8FD4;&#x56DE;&#x503C;&#xFF08;&#x5F53;&#x524D;&#x6CA1;&#x6709;&#x8FD9;&#x4E2A;&#x673A;&#x5236;&#xFF09;</p>
+<li><p>&quot;Invoke producer method&quot; must provide a new mechanism to inform the calling process of its return value, not the final return value (currently no such mechanism)</p>
 </li>
-<li><p>&#x867D;&#x7136;Executor&#x7EBF;&#x7A0B;&#x91CA;&#x653E;&#x4E86;&#xFF0C;&#x4F46;&#x662F;Customer Executor&#xFF0C;&#x5176;&#x5B9E;&#x8FD8;&#x662F;&#x963B;&#x585E;&#x4F4F;&#xFF0C;&#x5728;&#x7B49;&#x5F85;&#x8FDC;&#x7AEF;&#x5E94;&#x7B54;&#xFF0C;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x7684;&#x963B;&#x585E;&#x72B6;&#x6001;&#x5E76;&#x6CA1;&#x6709;&#x5F97;&#x5230;&#x6539;&#x53D8;&#xFF1B;&#x800C;&#x4E14;&#x8FD8;&#x51ED;&#x7A7A;&#x591A;&#x4E86;&#x4E00;&#x6B21;&#x7EBF;&#x7A0B;&#x5207;&#x6362;</p>
+<li><p>Although the Executor thread is released, the Customer Executor is blocked, waiting for the remote response, the blocking state of the entire system has not changed, and there is one more thread switching.</p>
 </li>
-<li><p>&#x8BE5;&#x673A;&#x5236;&#x770B;&#x4E0A;&#x53BB;&#xFF0C;&#x552F;&#x4E00;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x662F;&#x91CA;&#x653E;&#x4E86;executor&#x7EBF;&#x7A0B;&#xFF0C;&#x8BA9;executor&#x7EBF;&#x7A0B;&#x6709;&#x673A;&#x4F1A;&#x5904;&#x7406;&#x5176;&#x4ED6;&#x8BF7;&#x6C42;&#xFF0C;&#x8FD9;&#x76F8;&#x5F53;&#x4E8E;&#x9694;&#x79BB;&#x4ED3;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5904;&#x7406;&#x901F;&#x5EA6;&#x6162;&#x7684;&#x4E1A;&#x52A1;&#x4E0D;&#x8981;&#x5F71;&#x54CD;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#xFF1B;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x6982;&#x5FF5;serviceComb&#x662F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x652F;&#x6301;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x6307;&#x5B9A;&#x7684;&#x4E1A;&#x52A1;&#x65B9;&#x6CD5;&#x72EC;&#x5360;&#x5168;&#x65B0;&#x7684;executor&#xFF0C;&#x8FD9;&#x6837;&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x5C31;&#x8DDF;&#x201C;&#x5D4C;&#x5957;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x201D;&#x5B8C;&#x5168;&#x4E00;&#x6837;&#xFF0C;&#x6D41;&#x7A0B;&#x66F4;&#x7B80;&#x5355;&#xFF0C;&#x800C;&#x4E0D;&#x9700;&#x8981;&#x5728;&#x201C;Invoke producer method&#x201D;&#x5C42;&#x6B21;&#x6765;&#x505A;&#x8FD9;&#x4E2A;&#x4E8B;&#x60C5;</p>
+<li><p>The mechanism seems to have the only effect is to release the executor thread, so that the executor thread has the opportunity to process other requests, which is equivalent to the concept of quarantine, the slow processing of the business does not affect other services; but the concept of serviceComb can be directly Supported, you can configure the specified business method to monopolize the new executor, so that the whole process is the same as the &quot;nested synchronous call&quot;, the process is simpler, and you don&apos;t need to do this at the &quot;Invoke producer method&quot; level.</p>
 </li>
 </ul>
-<h2 id="&#x7EAF;reactive&#x673A;&#x5236;">&#x7EAF;Reactive&#x673A;&#x5236;</h2>
-<p>&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<h2 id="pure-reactive-mechanism">Pure Reactive Mechanism</h2>
+<p>Sample code:</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Intf</span></span>{
   <span class="hljs-function">CompletableFuture&lt;String&gt; <span class="hljs-title">hello</span><span class="hljs-params">(String name)</span></span>;
 }
@@ -1357,40 +1357,40 @@
   <span class="hljs-keyword">return</span> future;
 }
 </code></pre>
-<p>&#x4E0E;&#x6B64;&#x5BF9;&#x5E94;&#x7684;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>The corresponding processing flow is as follows:</p>
 <p><img src="../assets/reactive/pureReactive.png" alt=""></p>
 <ul>
-<li><p>&#x4E0E;&#x4F20;&#x7EDF;&#x6D41;&#x7A0B;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x6240;&#x6709;&#x529F;&#x80FD;&#x90FD;&#x5728;eventloop&#x4E2D;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;&#x7EBF;&#x7A0B;&#x5207;&#x6362;</p>
+<li><p>Unlike traditional processes, all functions are executed in the eventloop and no thread switching is performed.</p>
 </li>
-<li><p>&#x6A59;&#x8272;&#x7BAD;&#x5934;&#x8D70;&#x5B8C;&#x540E;&#xFF0C;&#x5BF9;&#x672C;&#x7EBF;&#x7A0B;&#x7684;&#x5360;&#x7528;&#x5373;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x5E94;&#x7B54;&#xFF0C;&#x8BE5;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x5904;&#x7406;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;</p>
+<li><p>After the orange arrow is finished, the occupation of this thread is completed, and it will not block waiting for response. The thread can handle other tasks.</p>
 </li>
-<li><p>&#x5F53;&#x6536;&#x5230;&#x8FDC;&#x7AEF;&#x5E94;&#x7B54;&#x540E;&#xFF0C;&#x7531;&#x7F51;&#x7EDC;&#x6570;&#x636E;&#x9A71;&#x52A8;&#x5F00;&#x59CB;&#x8D70;&#x7EA2;&#x8272;&#x7BAD;&#x5934;&#x7684;&#x5E94;&#x7B54;&#x6D41;&#x7A0B;</p>
+<li><p>After receiving the remote response, the network data drive starts to take the red arrow response process</p>
 </li>
-<li><p>&#x53EA;&#x8981;&#x6709;&#x4EFB;&#x52A1;&#xFF0C;&#x7EBF;&#x7A0B;&#x5C31;&#x4E0D;&#x4F1A;&#x505C;&#x6B62;&#xFF0C;&#x4F1A;&#x4E00;&#x76F4;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x5145;&#x5206;&#x5229;&#x7528;cpu&#x8D44;&#x6E90;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x4EA7;&#x751F;&#x591A;&#x4F59;&#x7684;&#x7EBF;&#x7A0B;&#x5207;&#x6362;&#xFF0C;&#x53BB;&#x65E0;&#x8C13;&#x5730;&#x6D88;&#x8017;cpu&#x3002;</p>
-</li>
-</ul>
-<p>&#x56E0;&#x4E3A;&#x540C;&#x6B65;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x9700;&#x8981;&#x5927;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#x6765;&#x63D0;&#x5347;&#x5E76;&#x53D1;&#x5EA6;&#xFF0C;&#x800C;&#x5927;&#x91CF;&#x7684;&#x7EBF;&#x7A0B;&#x53C8;&#x5E26;&#x6765;&#x7EBF;&#x7A0B;&#x5207;&#x6362;&#x7684;&#x989D;&#x5916;&#x6D88;&#x8017;&#x3002;</p>
-<p>&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x8868;&#x660E;&#xFF0C;reactive&#x6A21;&#x5F0F;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x6D88;&#x8017;&#x540C;&#x6B65;&#x6A21;&#x5F0F;&#x4E0D;&#x5230;&#x4E00;&#x534A;&#x7684;cpu&#xFF0C;&#x5373;&#x53EF;&#x8FBE;&#x5230;&#x6216;&#x8D85;&#x8FC7;&#x540C;&#x6B65;&#x6A21;&#x5F0F;&#x7684;tps&#xFF0C;&#x5E76;&#x4E14;&#x65F6;&#x5EF6;&#x66F4;&#x4F4E;&#x3002;</p>
-<h2 id="&#x6DF7;&#x5408;reactive&#x673A;&#x5236;">&#x6DF7;&#x5408;Reactive&#x673A;&#x5236;</h2>
-<p>Reactvie&#x8981;&#x6C42;&#xFF1A;&#x6240;&#x6709;&#x5728;eventloop&#x4E2D;&#x6267;&#x884C;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x6709;&#x4EFB;&#x4F55;&#x7684;&#x963B;&#x585E;&#x52A8;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x4E0D;&#x9650;&#x4E8E;wait&#x3001;sleep&#x3001;&#x5DE8;&#x5927;&#x5FAA;&#x73AF;&#x3001;&#x540C;&#x6B65;&#x67E5;&#x8BE2;DB&#x7B49;&#x7B49;&#x3002;</p>
-<p>serviceComb&#x5E95;&#x5C42;&#x662F;&#x57FA;&#x4E8E;vertx&#x7684;&#xFF0C;vertx&#x751F;&#x6001;&#x4E2D;&#x6709;jdbc&#x3001;mq&#x3001;zooKeeper&#x7B49;&#x7B49;&#x5404;&#x79CD;&#x4E30;&#x5BCC;&#x7EC4;&#x4EF6;&#x7684;reactive&#x9A71;&#x52A8;&#xFF0C;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x90FD;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x8981;&#x6C42;&#x3002;</p>
-<p>&#x4F46;&#x662F;&#x6709;&#x7684;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x786E;&#x5B9E;&#x6709;&#x7684;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x65E0;&#x6CD5;&#x907F;&#x514D;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
-<ul>
-<li><p>&#x79C1;&#x6709;&#x7684;&#x5B89;&#x5168;&#x52A0;&#x56FA;&#x7684;redis&#xFF0C;&#x53EA;&#x63D0;&#x4F9B;&#x4E86;&#x540C;&#x6B65;&#x9A71;&#x52A8;</p>
-</li>
-<li><p>&#x8F83;&#x590D;&#x6742;&#x7684;&#x4E1A;&#x52A1;&#x8FD0;&#x7B97;</p>
-</li>
-<li><p>&#x2026;&#x2026;</p>
+<li><p>As long as there are tasks, the thread will not stop, the task will be executed all the time, you can make full use of the cpu resources, and will not generate redundant thread switching, to consume the CPU unnecessarily.</p>
 </li>
 </ul>
-<p>&#x6B64;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x8FD9;&#x4E9B;&#x540C;&#x6B65;&#x7684;&#x903B;&#x8F91;&#x62BD;&#x53D6;&#x51FA;&#x6765;&#x653E;&#x5230;&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x53BB;&#x5904;&#x7406;&#xFF0C;&#x800C;&#x5176;&#x4ED6;&#x90E8;&#x5206;&#x4ECD;&#x7136;&#x4F7F;&#x7528;reactive&#x7684;&#x6D41;&#x7A0B;&#x3002;</p>
-<h2 id="&#x5173;&#x4E8E;reactive&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;&#xFF1A;">&#x5173;&#x4E8E;reactive&#x7684;&#x4E00;&#x4E9B;&#x8BF4;&#x660E;&#xFF1A;</h2>
+<p>Because in synchronous mode, a large number of threads are needed to increase the degree of concurrency, and a large number of threads bring additional consumption of thread switching.</p>
+<p>The test data shows that the reactive mode only needs to consume less than half of the CPU of the synchronous mode. And can reach or exceed the tps of the synchronous mode, and the delay is lower.</p>
+<h2 id="hybrid-reactive-mechanism">Hybrid Reactive Mechanism</h2>
+<p>Reactive requires that all logic executed in the eventloop does not allow any blocking actions, including not limited to wait, sleep, large loops, synchronous query DB, and so on.</p>
+<p>The bottom of serviceComb is based on vertx. The vertx ecosystem has reactive drivers for various rich components such as JDBC, MQ, zooKeeper, etc. Under normal circumstances, it can meet the requirements.</p>
+<p>However, in some scenarios, there are indeed some synchronization operations that cannot be avoided, such as:</p>
 <ul>
-<li><p>Producer&#xFF1A;</p>
-<ul>
-<li><p>producer&#x662F;&#x5426;&#x4F7F;&#x7528;reactive&#x4E0E;consumer&#x5982;&#x4F55;&#x8C03;&#x7528;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x8054;&#x7CFB;</p>
+<li><p>Private security hardened redis, only provides synchronous drive</p>
 </li>
-<li><p>&#x5F53;operation&#x8FD4;&#x56DE;&#x503C;&#x4E3A;CompletableFuture&#x7C7B;&#x578B;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x6B64;operation&#x5DE5;&#x4F5C;&#x4E8E;reactive&#x6A21;&#x5F0F;&#xFF0C;&#x6B64;&#x65F6;&#x5982;&#x679C;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x6B64;operation&#x5DE5;&#x4F5C;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x6A21;&#x5F0F;&#xFF0C;&#x9700;&#x8981;&#x5728;microservice.yaml&#x4E2D;&#x660E;&#x786E;&#x914D;&#x7F6E;&#xFF1B;&#x5047;&#x8BBE;&#x67D0;operation&#xFF0C;&#x5176;schemaId&#x4E3A;sid&#xFF0C;operationId&#x4E3A;asyncQuery&#xFF0C;&#x5219;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x4EE5;&#x4E0B;&#x914D;&#x7F6E;&#xFF1A;</p>
+<li><p>More complex business operations</p>
+</li>
+<li><p>......</p>
+</li>
+</ul>
+<p>At this point, the logic of these synchronizations can be extracted and placed in the thread pool for processing, while other parts still use the reactive process.</p>
+<h2 id="some-notes-about-reactive">Some notes about reactive:</h2>
+<ul>
+<li><p>Producer:</p>
+<ul>
+<li><p>Whether the producer uses reactive and consumer to call, there is no connection</p>
+</li>
+<li><p>When the operation return value is the CompletableFuture type, the default operation is in reactive mode. If you need to force this operation to work in thread pool mode, you need to configure it in microservice.yaml explicitly. If an operation, its schemaId is sid, operationId For asyncQuery, you need to do the following:</p>
 </li>
 </ul>
 </li>
@@ -1399,17 +1399,17 @@
   executors:
     Provider:
       sid.asyncQuery: cse.executor.groupThreadPool
-</code></pre><p>&#x8FD9;&#x91CC;&#x7684;cse.executor.groupThreadPool&#x662F;serviceComb&#x5185;&#x7F6E;&#x7684;&#x9ED8;&#x8BA4;&#x7EBF;&#x7A0B;&#x6C60;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x4EFB;&#x610F;&#x6307;&#x5B9A;&#x4E3A;&#x81EA;&#x5DF1;&#x7684;&#x5B9A;&#x5236;&#x7EBF;&#x7A0B;&#x6C60;&#x3002;</p>
+</code></pre><p>The cse.executor.groupThreadPool here is the default thread pool built into serviceComb, which can be arbitrarily specified by the user as its custom thread pool.</p>
 <ul>
-<li><p>Consumer&#xFF1A;</p>
+<li><p>Consumer:</p>
 <ul>
-<li><p>consumer&#x662F;&#x5426;&#x4F7F;&#x7528;reactive&#x4E0E;producer&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x8054;&#x7CFB;</p>
+<li><p>Whether the consumer uses reactive and producer how to implement, there is no connection</p>
 </li>
-<li><p>&#x5F53;&#x524D;&#x53EA;&#x652F;&#x6301;&#x900F;&#x660E;RPC&#x6A21;&#x5F0F;&#xFF0C;&#x4F7F;&#x7528;JDK&#x539F;&#x751F;&#x7684;CompletableFuture&#x6765;&#x627F;&#x8F7D;&#x6B64;&#x529F;&#x80FD;</p>
-<p>completableFuture&#x7684;when&#x3001;then&#x7B49;&#x7B49;&#x529F;&#x80FD;&#x90FD;&#x53EF;&#x76F4;&#x63A5;&#x4F7F;&#x7528;</p>
-<p>&#x4F46;&#x662F;completableFuture&#x7684;async&#x7CFB;&#x5217;&#x529F;&#x80FD;&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x53E6;&#x5916;&#x542F;&#x7EBF;&#x7A0B;&#x6C60;&#x6765;&#x6267;&#x884C;&#x529F;&#x80FD;&#xFF0C;&#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;</p>
-<p>&#x5173;&#x4E8E;RxJava Observable&#x7684;&#x652F;&#x6301;&#x540E;&#x7EED;&#x4F1A;&#x52A0;&#x5165;</p>
-<p>&#x5173;&#x4E8E;AsyncRestTemplate&#x7684;&#x652F;&#x6301;&#x540E;&#x7EED;&#x4F1A;&#x52A0;&#x5165;</p>
+<li><p>Currently only supports transparent RPC mode, using JDK native CompletableFuture to carry this function</p>
+<p>completableFuture&apos;s when, then, etc. can be used directly</p>
+<p>However, the async series of completableFuture is another thread pool to perform functions. It is not recommended.</p>
+<p>Support for RxJava Observable will be added later.</p>
+<p>Support for AsyncRestTemplate will be added later.</p>
 </li>
 </ul>
 </li>
@@ -1457,7 +1457,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Reactive Programing","level":"1.5.10","depth":2,"next":{"title":"DNS Custom Configuration","level":"1.5.11","depth":2,"path":"general-development/dnsconfig.md","ref":"general-development/dnsconfig.md","articles":[]},"previous":{"title":"File Downloading","level":"1.5.9","depth":2,"path":"general-development/file-download.md","ref":"general-development/file-download.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/reactive.md","mtime":"2018-08-31T04:02:33.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T04:03:24.974Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Reactive Programing","level":"1.5.10","depth":2,"next":{"title":"DNS Custom Configuration","level":"1.5.11","depth":2,"path":"general-development/dnsconfig.md","ref":"general-development/dnsconfig.md","articles":[]},"previous":{"title":"File Downloading","level":"1.5.9","depth":2,"path":"general-development/file-download.md","ref":"general-development/file-download.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/reactive.md","mtime":"2018-08-31T05:58:32.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T05:59:10.883Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

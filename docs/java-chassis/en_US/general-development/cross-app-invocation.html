@@ -1280,23 +1280,24 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h3 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h3>
-<p>&#x5E94;&#x7528;&#x662F;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x9694;&#x79BB;&#x5C42;&#x6B21;&#x4E2D;&#x7684;&#x4E00;&#x5C42;&#xFF0C;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x5305;&#x542B;&#x591A;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EA;&#x5141;&#x8BB8;&#x540C;&#x5E94;&#x7528;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x76F8;&#x4E92;&#x8C03;&#x7528;&#x3002;</p>
-<h3 id="&#x573A;&#x666F;&#x63CF;&#x8FF0;">&#x573A;&#x666F;&#x63CF;&#x8FF0;</h3>
-<p>&#x5F53;&#x7528;&#x6237;&#x9700;&#x8981;&#x4E0D;&#x540C;&#x5E94;&#x7528;&#x95F4;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x76F8;&#x4E92;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5F00;&#x542F;&#x8DE8;&#x5E94;&#x7528;&#x8C03;&#x7528;&#x529F;&#x80FD;&#x3002;</p>
-<h3 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;">&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h3>
-<p>&#x82E5;&#x8981;&#x5F00;&#x542F;&#x8DE8;&#x5E94;&#x7528;&#x8C03;&#x7528;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x5728;provider&#x7AEF;&#x7684;microservice.yaml&#x6587;&#x4EF6;&#x5F00;&#x542F;&#x8DE8;&#x5E94;&#x7528;&#x8C03;&#x7528;&#x914D;&#x7F6E;&#x3002;&#x914D;&#x7F6E;&#x9879;&#x5982;&#x4E0B;&#xFF1A;</p>
+                                <h1 id="cross-app-invocation">Cross App Invocation</h1>
+<h3 id="concept-description">Concept Description</h3>
+<p>An application is a layer in the microservice instance isolation hierarchy, and an application contains multiple microservices. By default, only microservice instances of the same application are allowed to call each other.</p>
+<h3 id="scenario">Scenario</h3>
+<p>When a user needs micro-services between different applications to call each other, it is necessary to enable the cross-application calling function.</p>
+<h3 id="configuration-instructions">Configuration instructions</h3>
+<p>To enable cross-application calls, you first need to enable cross-application call configuration in the microservice.yaml file on the provider side. The configuration items are as follows:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">service_description:</span>
   <span class="hljs-comment"># other configuration omitted</span>
 <span class="hljs-attr">  properties:</span>
-<span class="hljs-attr">    allowCrossApp:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enable cross app invocation</span>
+<span class="hljs-attr">    allowCrossApp:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># enable cross-app invocation</span>
 </code></pre>
-<p>consumer&#x7AEF;&#x6307;&#x5B9A;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x8C03;&#x7528;provider&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x52A0;&#x4E0A;provider&#x6240;&#x5C5E;&#x7684;&#x5E94;&#x7528;ID&#xFF0C;&#x683C;&#x5F0F;&#x53D8;&#x4E3A;<code>[appID]:[microserviceName]</code>&#x3002;</p>
-<h3 id="&#x793A;&#x4F8B;&#x4EE3;&#x7801;">&#x793A;&#x4F8B;&#x4EE3;&#x7801;</h3>
-<p>&#x793A;&#x4F8B;&#x5047;&#x8BBE;provider&#x6240;&#x5C5E;&#x5E94;&#x7528;&#x4E3A;helloApp&#xFF0C;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x4E3A;helloProvider&#xFF1B;consumer&#x6240;&#x5C5E;&#x5E94;&#x7528;&#x4E3A;helloApp2&#xFF0C;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;&#x4E3A;helloConsumer&#x3002;</p>
+<p>When the consumer client specifies the microservice name to call the provider, it needs to add the application ID to which the provider belongs, and the format becomes <code>[appID]:[microserviceName]</code>.</p>
+<h3 id="sample-code">Sample Code</h3>
+<p>The example assumes that the application to which the provider belongs is helloApp, the name of the microservice is helloProvider, the application to which the consumer belongs is helloApp2, and the name of the microservice is helloConsumer.</p>
 <ul>
-<li><p>RestTemplate&#x8C03;&#x7528;&#x65B9;&#x5F0F;</p>
-<p>&#x5F53;consumer&#x7AEF;&#x4EE5;RestTemplate&#x65B9;&#x5F0F;&#x5F00;&#x53D1;&#x5FAE;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x8C03;&#x7528;&#x7684;URL&#x4E2D;&#x5C06;<code>[microserviceName]</code>&#x6539;&#x4E3A;<code>[appID]:[microserviceName]</code>&#xFF0C;&#x4EE3;&#x7801;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<li><p>RestTemplate invocation mode</p>
+<p>When the consumer client develops the microservice consumer in the RestTemplate mode, you need to change <code>[microserviceName]</code> to <code>[appID]:[microserviceName]</code> in the called URL. The code example is as follows:</p>
 <pre><code class="lang-java">  RestTemplate restTemplate = RestTemplateBuilder.create();
 
   ResponseEntity&lt;String&gt; responseEntity = restTemplate
@@ -1304,12 +1305,12 @@
           String.class, <span class="hljs-string">&quot;ServiceComb&quot;</span>);
 </code></pre>
 </li>
-<li><p>RPC&#x8C03;&#x7528;&#x65B9;&#x5F0F;</p>
-<p>&#x5F53;consumer&#x7AEF;&#x4EE5;RPC&#x65B9;&#x5F0F;&#x5F00;&#x53D1;&#x5FAE;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;&#x65F6;&#xFF0C;&#x58F0;&#x660E;&#x7684;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x4EE3;&#x7406;&#x5982;&#x4E0B;&#xFF1A;</p>
+<li><p>RPC invocation mode
+When the consumer client develops a microservice consumer in RPC mode, the declared service provider proxy is as follows:</p>
 <pre><code class="lang-java">  <span class="hljs-meta">@RpcReference</span>(schemaId = <span class="hljs-string">&quot;hello&quot;</span>, microserviceName = <span class="hljs-string">&quot;helloApp:helloProvider&quot;</span>)
   <span class="hljs-keyword">private</span> Hello hello;
 </code></pre>
-<p>&#x8C03;&#x7528;&#x65B9;&#x5F0F;&#x548C;&#x8C03;&#x7528;&#x540C;&#x5E94;&#x7528;&#x4E0B;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x76F8;&#x540C;&#xFF1A;</p>
+<p>Cross-application invocation is the same way as invocate microservices under the same application:</p>
 <pre><code class="lang-java">  hello.sayHello(<span class="hljs-string">&quot;ServiceComb&quot;</span>);
 </code></pre>
 </li>
@@ -1357,7 +1358,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Cross-application invocation","level":"1.5.14","depth":2,"next":{"title":"Customized serialization and deserialization","level":"1.5.15","depth":2,"path":"general-development/secret-field.md","ref":"general-development/secret-field.md","articles":[]},"previous":{"title":"Rport framework version","level":"1.5.13","depth":2,"path":"general-development/report-framework-version.md","ref":"general-development/report-framework-version.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/cross-app-invocation.md","mtime":"2018-08-31T04:02:33.327Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T04:03:24.974Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Cross-application invocation","level":"1.5.14","depth":2,"next":{"title":"Customized serialization and deserialization","level":"1.5.15","depth":2,"path":"general-development/secret-field.md","ref":"general-development/secret-field.md","articles":[]},"previous":{"title":"Rport framework version","level":"1.5.13","depth":2,"path":"general-development/report-framework-version.md","ref":"general-development/report-framework-version.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/cross-app-invocation.md","mtime":"2018-08-31T05:58:32.328Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-31T05:59:10.883Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
