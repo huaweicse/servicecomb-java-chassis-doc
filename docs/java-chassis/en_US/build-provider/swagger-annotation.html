@@ -1290,7 +1290,7 @@
 <p>In ServiceComb, Swagger annotations are not required. When a user uses SpringMVC and JAX-RS annotations to annotate microservice methods, ServiceComb can infer the contract information for each microservice method based on the values &#x200B;&#x200B;of these annotations.</p>
 <h3 id="api"><code>@Api</code></h3>
 <blockquote>
-<p><code>@Api</code> acts at the class level and is used to mark a Class as a Swagger resource in the official Swagger description. However, this annotation is not required in ServiceComb. ServiceComb can determine which classes need to parse the Swagger contract based on <code>@RestSchema</code> and <code>@RpcSchema</code>. The only attributes currently supported by ServiceComb are tags.</p>
+<p><code>@Api</code> acts at the class level and is used to mark a Class as a Swagger resource in the official Swagger description. However, this annotation is not required in ServiceComb. ServiceComb can determine which classes need to parse the Swagger contract based on <code>@RestSchema</code> and <code>@RpcSchema</code>.</p>
 </blockquote>
 <table>
 <thead>
@@ -1302,11 +1302,22 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"></td>
+<td style="text-align:left">Tags</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">set the default tag value of the operation defined under the current Class</td>
+</tr>
+<tr>
+<td style="text-align:left">consumes</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">specify the MIME types of request in schema level, separated by commas</td>
+</tr>
+<tr>
+<td style="text-align:left">produces</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">specify the MIME types of response in schema level, separated by commas</td>
 </tr>
 </tbody>
 </table>
-<p>Tags | string | set the default tag value of the operation defined under the current Class |</p>
 <h3 id="swaggerdefinition"><code>@SwaggerDefinition</code></h3>
 <blockquote>
 <p>Acts at the class level to define information in a Swagger resource.</p>
@@ -1405,17 +1416,58 @@
 <td style="text-align:left">string</td>
 <td style="text-align:left">Details, corresponding to the <code>description</code> field of the Swagger contract operation</td>
 </tr>
+<tr>
+<td style="text-align:left">Tags</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">label operation label</td>
+</tr>
+<tr>
+<td style="text-align:left">code</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">HTTP status code for response messages</td>
+</tr>
+<tr>
+<td style="text-align:left">response</td>
+<td style="text-align:left">Class&lt;?&gt;</td>
+<td style="text-align:left">Method return value type</td>
+</tr>
+<tr>
+<td style="text-align:left">responseContainer</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">The container type that wraps the return value. The optional values &#x200B;&#x200B;are <code>List</code>, <code>Set</code>, <code>Map</code></td>
+</tr>
+<tr>
+<td style="text-align:left">ResponseHeaders</td>
+<td style="text-align:left"><code>@ResponseHeader</code></td>
+<td style="text-align:left">HTTP response message header, ServiceComb support attribute value of<code>name</code>, <code>response</code>,<code>responseContainer</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Consumes</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">specified data format request body</td>
+</tr>
+<tr>
+<td style="text-align:left">Produces</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">body in response to the data format specified</td>
+</tr>
+<tr>
+<td style="text-align:left">Protocols</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">the available protocol (schemes), possible values &#x200B;&#x200B;are <code>http</code>,<code>https</code>, <code>ws</code>,<code>wss</code>, separated by commas</td>
+</tr>
+<tr>
+<td style="text-align:left">httpMethod</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">Set HTTP method</td>
+</tr>
+<tr>
+<td style="text-align:left">hidden</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">Weather to hide this method</td>
+</tr>
 </tbody>
 </table>
-<p>Tags | string | label operation label |
-| code | int | HTTP status code for response messages |
-| response | Class&lt;?&gt; | Method return value type |
-responseContainer | string | The container type that wraps the return value. The optional values &#x200B;&#x200B;are <code>List</code>, <code>Set</code>, <code>Map</code> |
-| ResponseHeaders | <code>@ ResponseHeader</code> | HTTP response message header, ServiceComb support attribute value of<code>name</code>, <code>response</code>,<code>responseContainer</code> |
-| Consumes | string | specified data format request body |
-| Produces | string | body in response to the data format specified |
-| Protocols | string | the available protocol (schemes), possible values &#x200B;&#x200B;are <code>http</code>,<code>https</code>, <code>ws</code>,<code>wss</code>, separated by commas |
-| httpMethod | string | Set HTTP method |</p>
 <h3 id="apiimplicitparam"><code>@ApiImplicitParam</code></h3>
 <blockquote>
 <p>Acts at the method level, which is used to describe the properties of the parameters of the operation in the Swagger document.</p>
@@ -1615,7 +1667,7 @@ responseContainer | string | The container type that wraps the return value. The
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Use Swagger annotations","level":"1.3.4","depth":2,"next":{"title":"Develop with SpringMVC","level":"1.3.5","depth":2,"path":"build-provider/springmvc.md","ref":"build-provider/springmvc.md","articles":[]},"previous":{"title":"Implicit API definition","level":"1.3.3","depth":2,"path":"build-provider/code-first.md","ref":"build-provider/code-first.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/swagger-annotation.md","mtime":"2018-09-04T01:30:42.130Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-04T01:31:37.356Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Use Swagger annotations","level":"1.3.4","depth":2,"next":{"title":"Develop with SpringMVC","level":"1.3.5","depth":2,"path":"build-provider/springmvc.md","ref":"build-provider/springmvc.md","articles":[]},"previous":{"title":"Implicit API definition","level":"1.3.3","depth":2,"path":"build-provider/code-first.md","ref":"build-provider/code-first.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/swagger-annotation.md","mtime":"2018-09-10T06:53:19.570Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-10T06:54:02.896Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
