@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Guide · GitBook</title>
+        <title>Introduction · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="design.html" />
+    <link rel="next" href="user_guide.html" />
     
     
 
@@ -92,6 +92,19 @@
                 <a href="./">
             
                     
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="user_guide.html">
+            
+                <a href="user_guide.html">
+            
+                    
                     Guide
             
                 </a>
@@ -100,7 +113,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="design.html">
+        <li class="chapter " data-level="1.3" data-path="design.html">
             
                 <a href="design.html">
             
@@ -113,7 +126,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="enable_ssl.html">
+        <li class="chapter " data-level="1.4" data-path="enable_ssl.html">
             
                 <a href="enable_ssl.html">
             
@@ -126,7 +139,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="api/api.html">
+        <li class="chapter " data-level="1.5" data-path="api/api.html">
             
                 <a href="api/api.html">
             
@@ -139,7 +152,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="faq/how_to_use_mysql_as_alpha_backend_database.html">
+        <li class="chapter " data-level="1.6" data-path="faq/how_to_use_mysql_as_alpha_backend_database.html">
             
                 <a href="faq/how_to_use_mysql_as_alpha_backend_database.html">
             
@@ -182,7 +195,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Guide</a>
+        <a href="." >Introduction</a>
     </h1>
 </div>
 
@@ -197,122 +210,53 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="saga-user-guide">Saga User Guide</h1>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>You will need:</p>
-<ol>
-<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">JDK 1.8</a></li>
-<li><a href="https://maven.apache.org/install.html" target="_blank">Maven 3.x</a></li>
-<li><a href="https://www.docker.com/get-docker" target="_blank">Docker</a></li>
-</ol>
-<h2 id="build">Build</h2>
-<p>Retrieve the source code:</p>
-<pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/apache/incubator-servicecomb-saga.git
-$ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
-</code></pre>
-<p>Saga can be built in either of the following ways.</p>
+                                <h1 id="saga">Saga</h1>
+<p>Apache ServiceComb (incubating) Saga is an eventually data consistency solution for micro-service applications.</p>
+<h2 id="features">Features</h2>
 <ul>
-<li><p>Only build the executable files.</p>
-<pre><code class="lang-bash"> $ mvn clean install -DskipTests
+<li>High availability. The coordinator is stateless and thus can have multiple instances.</li>
+<li>High reliability. All transaction events are stored in database permanently.</li>
+<li>High performance. Transaction events are reported to coordinator via gRPC and transaction payloads are serialized/deserialized by Kyro.</li>
+<li>Low invasion. All you need to do is add 2-3 annotations and the corresponding compensate methods.</li>
+<li>Easy to deploy. All components can boot via docker.</li>
+<li>Support both forward(retry) and backward(compensate) recovery.</li>
+<li>Easy to extend other coordination protocol which is based on the Pack.</li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<p>Saga Pack is composed of  <strong>alpha</strong> and <strong>omega</strong>.</p>
+<ul>
+<li>The alpha plays as the coordinator. It is responsible for the management of transactions.</li>
+<li>The omega plays as an agent inside the micro-service. It intercepts incoming/outgoing requests and reports transaction events to alpha.</li>
+</ul>
+<p>The following diagram shows the relationships among alpha, omega and services.
+<img src="static_files/pack.png" alt="Saga Pack Architecture"></p>
+<p>In this way, we can implement different coordination protocols, such as saga and TCC. See <a href="design.html">Saga Pack Design</a> for details.</p>
+<p>Now we have different lanaguage implementation of Omega</p>
+<ul>
+<li>Go lang version of Omega here <a href="https://github.com/jeremyxu2010/matrix-saga-go" target="_blank">https://github.com/jeremyxu2010/matrix-saga-go</a></li>
+<li>C# version of Omega here <a href="https://github.com/OpenSagas-csharp/servicecomb-saga-csharp" target="_blank">https://github.com/OpenSagas-csharp/servicecomb-saga-csharp</a></li>
+</ul>
+<h2 id="get-started">Get Started</h2>
+<ul>
+<li>For ServiceComb Java Chassis application, please see <a href="https://github.com/apache/incubator-servicecomb-saga/saga-demo/saga-servicecomb-demo/README.md" target="_blank">Booking Demo</a> for details.</li>
+<li>For Spring applications, please see <a href="https://github.com/apache/incubator-servicecomb-saga/saga-demo/saga-spring-demo/README.md" target="_blank">Booking Demo</a> for details.</li>
+<li>For Dubbo applications, please see <a href="https://github.com/apache/incubator-servicecomb-saga/saga-demo/saga-dubbo-demo/README.md" target="_blank">Dubbo Demo</a> for details.</li>
+<li>For TCC with Spring application, please see <a href="https://github.com/apache/incubator-servicecomb-saga/saga-demo/tcc-spring-demo/README.md" target="_blank">Tcc Demo</a> for details.</li>
+<li>To debug the applications, please see <a href="https://github.com/apache/incubator-servicecomb-saga/saga-demo/saga-spring-demo#debugging" target="_blank">Spring Demo Debugging</a> for details.</li>
+</ul>
+<h2 id="build-and-run-the-tests-from-source">Build and Run the tests from source</h2>
+<ul>
+<li>Build the source code and run the tests<pre><code class="lang-bash">    $ mvn clean install
 </code></pre>
 </li>
-<li><p>build the executable files along with docker image.</p>
-<pre><code class="lang-bash"> $ mvn clean install -DskipTests -Pdocker
+<li>Build the source demo docker images and run the accept tests<pre><code class="lang-bash">    $ mvn clean install -Pdemo,docker
 </code></pre>
 </li>
-<li><p>build the executable file and saga-distribution</p>
-<pre><code class="lang-bash">    $ mvn clean install -DskipTests -Prelease
+<li>Current Saga code supports Spring Boot 1.x and Spring Boot 2.x at the same time, saga uses Spring Boot 1.x by default, you can use <em>-Pspring-boot-2</em> to switch Spring Boot version to 2.x.
+Since Spring Boot supports JDK9 since 2.x, if you want to build and run test the Saga with JDK9 or JDK10, you need to use the spring-boot-2 profile.<pre><code class="lang-bash">    $ mvn clean install -Pdemo,docker,spring-boot-2
 </code></pre>
 </li>
 </ul>
-<p>After executing either one of the above command, you will find alpha server&apos;s executable file in <code>alpha/alpha-server/target/saga/alpha-server-${version}-exec.jar</code>.</p>
-<h2 id="how-to-use">How to use</h2>
-<h3 id="add-saga-dependencies">Add saga dependencies</h3>
-<pre><code class="lang-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb.saga<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>omega-spring-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${saga.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb.saga<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>omega-transport-resttemplate<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${saga.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-</code></pre>
-<p><strong>Note</strong>: Please change the <code>${saga.version}</code> to the actual version.</p>
-<h3 id="add-saga-annotations-and-corresponding-compensation-methods">Add saga annotations and corresponding compensation methods</h3>
-<p>Take a transfer money application as an example:</p>
-<ol>
-<li><p>add <code>@EnableOmega</code> at application entry to initialize omega configurations and connect to alpha</p>
-<pre><code class="lang-java"><span class="hljs-meta">@SpringBootApplication</span>
-<span class="hljs-meta">@EnableOmega</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>{
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-    SpringApplication.run(Application.class, args);
-  }
-}
-</code></pre>
-</li>
-<li><p>add <code>@SagaStart</code> at the starting point of the global transaction</p>
-<pre><code class="lang-java"><span class="hljs-meta">@SagaStart</span>(timeout=<span class="hljs-number">10</span>)
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">transferMoney</span><span class="hljs-params">(String from, String to, <span class="hljs-keyword">int</span> amount)</span> </span>{
-  transferOut(from, amount);
-  transferIn(to, amount);
-}
-</code></pre>
-<p><strong>Note:</strong> By default, timeout is disable.</p>
-</li>
-<li><p>add <code>@Compensable</code> at the sub-transaction and specify its corresponding compensation method</p>
-<pre><code class="lang-java"><span class="hljs-meta">@Compensable</span>(timeout=<span class="hljs-number">5</span>, compensationMethod=<span class="hljs-string">&quot;cancel&quot;</span>)
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">transferOut</span><span class="hljs-params">(String from, <span class="hljs-keyword">int</span> amount)</span> </span>{
-  repo.reduceBalanceByUsername(from, amount);
-}
-
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(String from, <span class="hljs-keyword">int</span> amount)</span> </span>{
-  repo.addBalanceByUsername(from, amount);
-}
-</code></pre>
-<p><strong>Note</strong> transactions and compensations implemented by services must be idempotent.</p>
-<p><strong>Note:</strong> By default, timeout is disable.</p>
-<p><strong>Note:</strong> If the starting point of global transaction and local transaction overlaps, both <code>@SagaStart</code> and <code>@Compensable</code> are needed.</p>
-</li>
-<li><p>Repeat step 3 for the <code>transferIn</code> service.</p>
-</li>
-<li><p>Since Saga-0.3.0,  you can access the <a href="https://github.com/apache/incubator-servicecomb-saga/blob/master/omega/omega-context/src/main/java/org/apache/servicecomb/saga/omega/context/OmegaContext.java" target="_blank">OmegaContext</a> for the gloableTxId and localTxId in the @Compensable annotated method or the cancel method.</p>
-</li>
-</ol>
-<h2 id="how-to-run">How to run</h2>
-<ol>
-<li><p>run postgreSQL.</p>
-<pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_DB=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_USER=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_PASSWORD=password&quot;</span> -p 5432:5432 postgres
-</code></pre>
-<p>Please check out <a href="https://github.com/apache/incubator-servicecomb-saga/blob/master/docs/faq/en/how_to_use_mysql_as_alpha_backend_database.md" target="_blank">this document</a>, if you want to use the MySQL instead of postgreSQL.</p>
-</li>
-<li><p>run alpha. Before running alpha, please make sure postgreSQL is already up. You can run alpha through docker or executable file.</p>
-<ul>
-<li>Run alpha through docker.<pre><code class="lang-bash"> docker run <span class="hljs-_">-d</span> -p 8080:8080 -p 8090:8090 <span class="hljs-_">-e</span> <span class="hljs-string">&quot;JAVA_OPTS=-Dspring.profiles.active=prd -Dspring.datasource.url=jdbc:postgresql://<span class="hljs-variable">${host_address}</span>:5432/saga?useSSL=false&quot;</span> alpha-server:<span class="hljs-variable">${saga_version}</span>
-</code></pre>
-</li>
-<li>Run alpha through executable file.<pre><code class="lang-bash"> java -Dspring.profiles.active=prd -D<span class="hljs-string">&quot;spring.datasource.url=jdbc:postgresql://<span class="hljs-variable">${host_address}</span>:5432/saga?useSSL=false&quot;</span> -jar alpha-server-<span class="hljs-variable">${saga_version}</span>-exec.jar
-</code></pre>
-</li>
-</ul>
-<p><strong>Note</strong>: Please change <code>${saga_version}</code> and <code>${host_address}</code> to the actual value before you execute the command.</p>
-<p><strong>Note</strong>: By default, port 8080 is used to serve omega&apos;s request via gRPC while port 8090 is used to query the events stored in alpha.</p>
-</li>
-<li><p>setup omega. Configure the following values in <code>application.yaml</code>.</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">spring:</span>
-<span class="hljs-attr">  application:</span>
-<span class="hljs-attr">    name:</span> {application.name}
-<span class="hljs-attr">alpha:</span>
-<span class="hljs-attr">  cluster:</span>
-<span class="hljs-attr">    address:</span> {alpha.cluster.addresses}
-</code></pre>
-</li>
-</ol>
-<p>Then you can start your micro-services and access all saga events via <a href="http://${alpha-server:port}/events" target="_blank">http://${alpha-server:port}/events</a>.</p>
-<h2 id="enable-ssl-for-alpha-and-omega">Enable SSL for Alpha and Omega</h2>
-<p>See <a href="enable_ssl.html">Enabling SSL</a> for details.</p>
 
                                 
                                 </section>
@@ -341,7 +285,7 @@ $ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
             
                 
                 
-                <a href="design.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Design">
+                <a href="user_guide.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Guide">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -352,7 +296,7 @@ $ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Guide","level":"1.1","depth":1,"next":{"title":"Design","level":"1.2","depth":1,"path":"design.md","ref":"design.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"user_guide.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"user_guide.md","mtime":"2018-09-15T07:48:52.375Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-15T07:50:09.059Z"},"basePath":".","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Guide","level":"1.2","depth":1,"path":"user_guide.md","ref":"user_guide.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"README.md","mtime":"2018-09-15T10:09:08.918Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-15T10:10:55.072Z"},"basePath":".","book":{"language":"en_US"}});
         });
     </script>
 </div>
