@@ -1281,11 +1281,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="load-balancing">load balancing</h1>
-<h2 id="scene-description">Scene Description</h2>
-<p>ServiceComb provides very powerful load balancing capabilities. Its core consists of two parts. The first part is DiscoveryTree. DiscoveryFilter is its main component by grouping microservice instances according to interface compatibility, data center, instance status, etc. The second part is based on Ribbon&apos;s load balancing scheme, which supports random. Various load balancing routing policies IRule, such as order, response time-based weights, and ServerListFilterExt that can support the Invocation state.</p>
-<p>DiscoveryTree&apos;s logic is more complex. You can understand its processing through the following process.
+<h2 id="scenario">Scenario</h2>
+<p>ServiceComb provides very powerful load balancing capabilities, which consists of two core parts. The first part DiscoveryTree, whose core part is DiscoveryFilter, groups microservice instances by their interface compatibility, data center, status, etc. The second part is the load balancing scheme based on Ribbon, which supports various load balancing policies(IRule) include random, sequential, response time-based weights, and ServerListFilterExt which is based on Invocation state.</p>
+<p>DiscoveryTree&apos;s logic is more complex, its processing progress is as below:
 <img src="../assets/loadbalance-001.png" alt=""></p>
-<p>Load balancing is applied to the Consumer processing chain. The name is loadbalance. The examples are as follows:</p>
+<p>Load balancing can be configured in the Consumer processing chain, the handler name is loadbalance, as follows:</p>
 <pre><code>servicecomb:
   handler:
     chain:
@@ -1296,7 +1296,7 @@
   &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
   &lt;artifactId&gt;handler-loadbalance&lt;/artifactId&gt;
   &lt;/dependency&gt;
-</code></pre><h2 id="routing-and-forwarding-according-to-data-center-information">Routing and forwarding according to data center information</h2>
+</code></pre><h2 id="routing-and-forwarding-by-data-center-information">Routing and forwarding by data center information</h2>
 <p>Service providers and consumers can declare their service center information in microservice.yaml:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  datacenter:</span>
@@ -1304,26 +1304,26 @@
 <span class="hljs-attr">    region:</span> my-Region
 <span class="hljs-attr">    availableZone:</span> my-Zone
 </code></pre>
-<p>Consumers compare their own data center information and provider information, preferentially forward the request to the same instance of region and availableZone; if it does not exist, it forwards to the same instance of the region; if it still does not exist, it forwards to other Example.</p>
-<p>The region and availableZone here are general concepts, and users can determine their business meanings to apply them to resource-isolated scenarios. See [Logical isolation relationships between microservice instances] (/build-provider/definition/isolate-relationship.md) for more isolation and isolation mechanisms.</p>
-<p>This rule is enabled by default. If it is not needed, it can be closed by servicecomb.loadbalance.filter.zoneaware.enabled. Data center information isolation is implemented in ZoneAwareDiscoveryFilter.</p>
-<h2 id="routing-and-forwarding-based-on-instance-attributes">Routing and forwarding based on instance attributes</h2>
-<p>Microservices can specify the properties of an instance. Instance properties can be specified in microservice.yaml or modified through the API of the service center.</p>
+<p>Consumers compare their own data center information and providers&apos; information, preferentially forward the request to the provider instance in the same region and availableZone; if the target instance is not available, it forwards request to the instance in the same region; if the target still does not exist, it forwards requests to other instances.</p>
+<p>The region and availableZone here are general concepts, users can determine their business meanings to apply them to resource-isolated scenarios. See <a href="../build-provider/definition/isolate-relationship.md">Logical isolation relationships between microservice instances</a> for more details of the isolation.</p>
+<p>This rule is enabled by default. If it is not needed, set servicecomb.loadbalance.filter.zoneaware.enabled to false. Data center information isolation is implemented in ZoneAwareDiscoveryFilter.</p>
+<h2 id="routing-and-forwarding-by-instance-attributes">Routing and forwarding by instance attributes</h2>
+<p>Users can specify the properties of microservice instances in microservice.yaml, or by calling service center APIs.</p>
 <pre><code>instance_description:
   properties:
     tag: mytag
-</code></pre><p>Consumers can specify to consume instances with certain attributes without accessing other instances.</p>
+</code></pre><p>Consumers can specify provider instances&apos; attributes to determine which instances to call.</p>
 <pre><code>servicecomb:
   loadbalance:
     myservice:
       transactionControl:
         options:
           tag: mytag
-</code></pre><p>The above configuration means that only instances with the tag attribute mytag in all instances of myservice are accessed.</p>
-<p>This rule needs to be configured separately for each service. Unconfigured means that the rule is not enabled and global configuration for all services is not supported.</p>
-<p>This rule is enabled by default. If it is not needed, it can be closed by servicecomb.loadbalance.filter.instanceProperty.enabled. The route forwarding function based on the instance attribute is implemented in InstancePropertyDiscoveryFilter.</p>
+</code></pre><p>The above configuration shows that only myservice instances with the tag attribute mytag are called.</p>
+<p>This rule needs to be configured separately for each service. Global rule for all services is not supported.</p>
+<p>This rule is enabled by default, it can be disabled by setting servicecomb.loadbalance.filter.instanceProperty.enabled to false. The instance attributes based routing policy is implemented in InstancePropertyDiscoveryFilter.</p>
 <h2 id="instance-isolation">Instance isolation</h2>
-<p>Developers can configure instance-isolated parameters to temporarily mask access to the wrong instance, improving system reliability and performance. Below are its configuration items and default values</p>
+<p>Developers can configure instance-isolated parameters to temporarily drop access to the wrong instance, improving system reliability and performance. Below are the configuration items and default values:</p>
 <pre><code>servicecomb:
   loadbalance:
     isolation:
@@ -1332,12 +1332,18 @@
       enableRequestThreshold: 5
       singleTestTime: 60000
       continuousFailureThreshold: 2
-</code></pre><p>The statistical period of isolation is 1 minute. According to the above configuration, in 1 minute, if the total number of requests is greater than 5, and the [1] error rate is greater than 20% or [2] consecutive errors exceed 2 times, then the instance is isolated. The instance isolation time is 60 seconds. After 60 seconds, the instance will be tried (it needs to be determined according to the load balancing policy).</p>
-<p>Note that ServiceComb starts a thread in the background to detect the instance state, and checks the instance state every 10 seconds (if the instance is accessed within 10 seconds, it is not detected). If the detection fails, each test will count the error. Plus 1. The count here also affects instance isolation.</p>
-<p>The system default instance state detection mechanism is to send a telnet instruction, refer to the implementation of SimpleMicroserviceInstancePing. If the service needs to cover the status detection mechanism, you can complete the following two steps:</p>
+</code></pre><p>The interval of isolation calculation is 1 minute. According to the above configuration, in 1 minute, if the total number of requests is greater than 5, and more than 2 consecutive  errors occur, the instance is isolated. </p>
+<p>The default value of errorThresholdPercentage is 0, indicates that the rule is ommited. The item should be a integer less than 100, for example 20, then within 1 minutes, if the total number of request is greater than 5 and [1] error rate is greater than 20% or [2] more than 2 consecutive  errors occur, is instance is isolated.</p>
+<p>After 60 seconds, the instance will be re-enabled and accessible if it matches the rules of load balancing policy.</p>
+<p>Notes:</p>
+<ol>
+<li>When error rate reaches the threshold, is instance is isolated and the error rate will be calculated again after the interval. Then with the successful accesses, the rate will decrease and become less than the threshold, then instance is available again. Since the rate is calculated by number of requests, if the total requests reaches the threshold and the error rate is much greater than its threshold, the instance would take a long time to recover.</li>
+<li>ServiceComb starts a thread in the background to detect the instance state, and checks the instance state every 10 seconds (if the instance is accessed within 10 seconds, it is not detected). If the detection fails, the error number is accumulated with 1. The count here also affects instance isolation.</li>
+</ol>
+<p>The default instance state detection mechanism is to send a telnet instruction, refer to the implementation of SimpleMicroserviceInstancePing. Users can overwrite the status detection mechanism with the following two steps:</p>
 <ol>
 <li>Implement the MicroserviceInstancePing interface</li>
-<li>Configure SPI: Add META-INF/services/org.apache.servicecomb.serviceregistry.consumer.MicroserviceInstancePing, the full name of the implementation class</li>
+<li>Configure SPI: Add META-INF/services/org.apache.servicecomb.serviceregistry.consumer.MicroserviceInstancePing, the content is the full path of the implementation class</li>
 </ol>
 <p>Developers can configure different isolation policies for different microservices. Just add a service name to the configuration item, for example:</p>
 <pre><code>servicecomb:
@@ -1349,20 +1355,20 @@
         enableRequestThreshold: 5
         singleTestTime: 10000
         continuousFailureThreshold: 2
-</code></pre><p>This rule is enabled by default and can be turned off by servicecomb.loadbalance.filter.isolation.enabled if it is not needed. Data center information isolation is implemented in IsolationDiscoveryFilter.</p>
-<h2 id="configuring-routing-rules">Configuring routing rules</h2>
+</code></pre><p>This rule is enabled by default and can be turned off by setting servicecomb.loadbalance.filter.isolation.enabled to false. Data center information isolation is implemented in IsolationDiscoveryFilter.</p>
+<h2 id="configuring-route-rules">Configuring route rules</h2>
 <p>Developers can specify load balancing policies through configuration items.</p>
 <pre><code>servicecomb:
   loadbalance:
     strategy:
       name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
-</code></pre><p>Developers can configure different policies for different microservices, add a service name to the configuration item, for example:</p>
+</code></pre><p>Developers can configure policies for different microservices by adding a service name, for example:</p>
 <pre><code>servicecomb:
   loadbalance:
     myservice:
       strategy:
         name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
-</code></pre><p>Each policy also has some proprietary configuration items that also support configuration for different microservices.</p>
+</code></pre><p>Each policy has some specific configuration items.</p>
 <ul>
 <li>SessionStickiness</li>
 </ul>
@@ -1372,34 +1378,34 @@
       sessionTimeoutInSeconds: 30 # Client idle time, after the limit is exceeded, select the server behind
       successiveFailedTimes: 5 # The number of client failures will switch after the server is exceeded.
 </code></pre><h2 id="set-retry-strategy">Set retry strategy</h2>
-<p>The load balancing module also supports the policy of configuring failed retry.</p>
+<p>The load balancing module also supports the policy retry.</p>
 <pre><code>servicecomb:
   loadbalance:
     retryEnabled: false
     retryOnNext: 0
     retryOnSame: 0
-</code></pre><p>Retry is not enabled by default. It also supports setting special strategies for different services:</p>
+</code></pre><p>Retry is not enabled by default. Developers can set different strategies for different services:</p>
 <pre><code>servicecomb:
   loadbalance:
     myservice&#xFF1A;
       retryEnabled: true
       retryOnNext: 1
       retryOnSame: 0
-</code></pre><p>retryOnNext indicates that after the failure, according to the load balancing policy, re-select an instance to retry (may choose to the same instance). retryOnSame means that the last failed instance is still used for retry.</p>
+</code></pre><p>retryOnNext indicates that after the failure, according to the load balancing policy, re-select an instance to retry (may choose the same instance), while retryOnSame means that the last failed instance is still used for retry.</p>
 <h2 id="customization">Customization</h2>
-<p>The load balancing module provides powerful functions that can support most application scenarios through configuration. It also provides powerful extension capabilities, including DiscoveryFilter, ServerListFilterExt, ExtensionsFactory (extension IRule, RetryHandler, etc.). The loadbalance module itself contains the implementation of each extension. The extension is not described in detail here. The steps are described simply. Developers can download the ServiceComb source code for reference.</p>
+<p>The load balancing module provides various configurations that can support most application scenarios. It also provides flexible extension capabilities, including DiscoveryFilter, ServerListFilterExt, ExtensionsFactory (extension IRule, RetryHandler, etc.). The loadbalance module itself contains the implementation of each extension. The brief introduction of extending load balancing module is described below. Developers can download the ServiceComb source code to see the details.</p>
 <ul>
 <li><p>DiscoveryFilter</p>
 <ul>
 <li>Implement the DiscoveryFilter interface</li>
-<li>Configure SPI: Add META-INF/services/org.apache.servicecomb.serviceregistry.discovery.DiscoveryFilter file with the full name of the implementation class</li>
+<li>Configure SPI: Add META-INF/services/org.apache.servicecomb.serviceregistry.discovery.DiscoveryFilter file with the full path of the implementation class</li>
 </ul>
 </li>
 <li><p>ServerListFilterExt</p>
 <ul>
 <li>Implement the ServerListFilterExt interface</li>
-<li>Configure SPI: Add META-INF/services/org.apache.servicecomb.loadbalance.ServerListFilterExt file, the content is the full name of the implementation class</li>
-<li>Note: This development note applies to versions 1.0.0 and later. Earlier versions were developed differently.</li>
+<li>Configure SPI: Add META-INF/services/org.apache.servicecomb.loadbalance.ServerListFilterExt file, the content is the full pathof the implementation class</li>
+<li>Note: This instruction applies to version 1.0.0 and later. Earlier versions are extended in a different way.</li>
 </ul>
 </li>
 <li><p>ExtensionsFactory</p>
@@ -1451,7 +1457,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Load Balancing","level":"1.10.1","depth":2,"next":{"title":"Public key authentication","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]},"previous":{"title":"Handlers reference","level":"1.10","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"Load Balancing","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"Public key authentication","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/loadbalance.md","mtime":"2018-09-15T10:20:15.932Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-15T10:21:12.446Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Load Balancing","level":"1.10.1","depth":2,"next":{"title":"Public key authentication","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]},"previous":{"title":"Handlers reference","level":"1.10","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"Load Balancing","level":"1.10.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"Public key authentication","level":"1.10.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/loadbalance.md","mtime":"2018-09-16T13:51:24.992Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-16T13:52:19.891Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

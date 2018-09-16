@@ -1282,7 +1282,7 @@
                                 
                                 <h1 id="parameter-validation">Parameter Validation</h1>
 <h2 id="scenario">Scenario</h2>
-<p>The user uses the parameter validation on the provider client, and can set the corresponding parameter input requirements in advance, and perform the effect processing before the interface is actually called to achieve the effect of the control parameter input standard.</p>
+<p>Users can set parameter validation rules in the provider&apos;s configuration. The rules will validate input parameters when provider APIs are called, so the parameters can be defined in a specific format.</p>
 <h2 id="configuration-instructions">Configuration instructions</h2>
 <ul>
 <li><p>Add the pom dependency of swagger-invocation-validator:</p>
@@ -1292,7 +1292,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
 </li>
-<li><p>Add validator annotations to the code that requires validation according to the JSR 349 specification, such as @NotNull, @Min, @Max, etc.</p>
+<li><p>Add validator annotations to the code that requires validation by the JSR 349 specification, such as @NotNull, @Min, @Max, etc.</p>
 </li>
 </ul>
 <h2 id="sample-code">Sample Code</h2>
@@ -1329,7 +1329,7 @@
 <li><p>bean class validation</p>
 </li>
 </ul>
-<p>You need to add @Valid in front of the incoming Student object, as shown in the figure above, sayHello(@Valid Student student).</p>
+<p>Add @Valid in front of the incoming Student object, like the method sayHello(@Valid Student student) shown above.</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> </span>{
   <span class="hljs-meta">@NotNull</span>
   <span class="hljs-keyword">private</span> String name;
@@ -1356,13 +1356,13 @@
 </code></pre>
 <h2 id="custom-return-exception">Custom return exception</h2>
 <ul>
-<li><p>The default parameter validation parameter ParameterValidator has implemented the interface ProducerInvokeExtension to handle the required parameter validation in accordance with the JSR 349 specification.</p>
+<li><p>The default parameter validator ParameterValidator has implemented the interface ProducerInvokeExtension to handle the required parameter validation with the JSR 349 specification.</p>
 <p> If any parameter validation fails, the default error is BAD_REQUEST(400, &quot;Bad Request&quot;).</p>
-<p> Return error support for custom extensions, using the SPI mechanism.</p>
+<p> Return error can be customized with the SPI mechanism.</p>
 </li>
-<li><p>You can customize the returned error information by implementing the interface ExceptionToResponseConverter, taking the ConstraintViolationExceptionToResponseConverter as an example.</p>
+<li><p>Developer can customize the returned error information by implementing the interface ExceptionToResponseConverter, taking the ConstraintViolationExceptionToResponseConverter as an example.</p>
 <ol>
-<li><p>Implement the ExceptionToResponseConverter interface, override the method, where the return result of the getOrder method indicates the priority of the validator. The smaller the value, the higher the priority.</p>
+<li><p>Implement the ExceptionToResponseConverter interface, override the method, the return value of the getOrder method indicates the priority of the validator. The smaller the value, the higher the priority.</p>
 <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConstraintViolationExceptionToResponseConverter</span>
    <span class="hljs-keyword">implements</span> <span class="hljs-title">ExceptionToResponseConverter</span>&lt;<span class="hljs-title">ConstraintViolationException</span>&gt; </span>{
  <span class="hljs-meta">@Override</span>
@@ -1384,7 +1384,7 @@
 </li>
 </ol>
 <ol>
-<li>Add a file in the services folder under META-INF, with the implementation interface x.x.x.ExceptionToResponseConverter\ (with package name) as the name, and the concrete implementation class x.x.x.ConstraintViolationExceptionToResponseConverter\ (with package name) as the content.</li>
+<li>Add a file in the services folder under META-INF, with the implemented interface x.x.x.ExceptionToResponseConverter(with package name) as the name, and the implementation class x.x.x.ConstraintViolationExceptionToResponseConverter(with package name) as the content.</li>
 </ol>
 </li>
 </ul>
@@ -1431,7 +1431,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Parameter Validator","level":"1.3.10.4","depth":3,"next":{"title":"Communication Protocol","level":"1.3.11","depth":2,"path":"build-provider/protocol.md","ref":"build-provider/protocol.md","articles":[{"title":"Thread model","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},{"title":"Highway RPC Protocol","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]},{"title":"Communicate using HTTP2","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]}]},"previous":{"title":"Fallback Policy","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/configuration/parameter-validator.md","mtime":"2018-09-15T10:20:15.928Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-15T10:21:12.446Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Parameter Validator","level":"1.3.10.4","depth":3,"next":{"title":"Communication Protocol","level":"1.3.11","depth":2,"path":"build-provider/protocol.md","ref":"build-provider/protocol.md","articles":[{"title":"Thread model","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},{"title":"Highway RPC Protocol","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]},{"title":"Communicate using HTTP2","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]}]},"previous":{"title":"Fallback Policy","level":"1.3.10.3","depth":3,"path":"build-provider/configuration/downgrade-strategy.md","ref":"build-provider/configuration/downgrade-strategy.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/configuration/parameter-validator.md","mtime":"2018-09-16T13:51:24.988Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-16T13:52:19.891Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>
