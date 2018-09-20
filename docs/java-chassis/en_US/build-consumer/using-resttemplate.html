@@ -1280,13 +1280,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="develop-with-rest-template">Develop with Rest Template</h1>
-<h2 id="concept-description">Concept Description</h2>
-<p>&#x3000;&#x3000;Rest Template is a RESTful API provide by the Spring framework.  ServiceComb provides the API for service calling</p>
+                                <h1 id="develop-consumer-with-rest-template">Develop consumer with Rest Template</h1>
+<h2 id="concepts">Concepts</h2>
+<p>Rest Template is a RESTful API provided by the Spring framework.  ServiceComb provides the implementation class for service calling</p>
 <h2 id="scenario">Scenario</h2>
-<p>&#x3000;&#x3000;You can call microservices using your customized URL and the RestTemplate instance provided by ServiceComb regardless of the specific address of the service.</p>
+<p>With ServiceComb&apos;s RestTemplate instance, users can call the service with a customized URL without knowing the service&apos;s address.</p>
 <h2 id="sample-code">Sample Code</h2>
-<p>&#x3000;&#x3000;Obtain RestTemplate by calling <code>RestTemplateBuilder.create()</code>. Then, use the instance and the customized URL to call microservices. The code is as follows:</p>
+<p>The RestTemplate instance is created by the static method  <code>RestTemplateBuilder.create()</code>. Then, users can call the microservices with the instance and the customized URL. The code is as follows:</p>
+<ul>
+<li>Sample code for Sprint MVC consumer</li>
+</ul>
 <pre><code class="lang-java"><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;
 <span class="hljs-keyword">import</span> org.springframework.web.client.RestTemplate;
 
@@ -1317,9 +1320,34 @@
     }
 }
 </code></pre>
+<ul>
+<li>Sample code for JAX RS Consumer:</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JaxrsConsumerMain</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        init();
+        <span class="hljs-comment">// The rest is just like the Spring MVC Consumer sample code, notice that if the provider only accepts GET requests, the consumer should use method getForObject()</span>
+        RestTemplate restTemplate = RestTemplateBuilder.create();
+        String result = restTemplate.getForObject(<span class="hljs-string">&quot;cse://jaxrs/jaxrshello/saybye&quot;</span>, String.class);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{
+        Log4jUtils.init();
+        BeanUtils.init();
+    }
+}
+</code></pre>
+<blockquote>
+<p>NOTE:</p>
+<ul>
+<li>The URL should be in format: <code>cse//microserviceName/path?querystring</code>. Taking the provider example from <a href="../java-chassis-reference/en_US/build-provider/springmvc.md">Develop micro service with SpringMVC</a>, the micro service&apos;s name is <code>springmvc</code>, the basePath is <code>/springmvchello</code>, then the microserviceName in the URL is <code>springmvc</code>, the path to call sayhi is <code>springmvchello/sayhi</code>, so the URL for sayhi in the sample is <code>cse://springmvc/springmvchello/sayhi?name=Java Chassis</code>, below is the code for the provider:</li>
+</ul>
+</blockquote>
 <pre><code class="lang-java"><span class="hljs-meta">@RestSchema</span>(schemaId = <span class="hljs-string">&quot;springmvcHello&quot;</span>)
 <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/springmvchello&quot;</span>, produces = MediaType.APPLICATION_JSON)
-<span class="hljs-comment">//Here, springmvchello in path = &quot;/springmvchello&quot; is the above basePath.</span>
+<span class="hljs-comment">//&#x8FD9;&#x91CC; path = &#x201C;/springmvchello&#x201D; &#x4E2D;&#x7684; springmvchello &#x5C31;&#x662F; &#x4E0A;&#x8FF0;&#x7684;basePath</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringmvcHelloImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Hello</span> </span>{
     <span class="hljs-meta">@Override</span>
     <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/sayhi&quot;</span>, method = RequestMethod.POST)
@@ -1335,11 +1363,11 @@
 }
 </code></pre>
 <blockquote>
-<p>The following code is microservice.yaml in the resources directory of the springmvc-provider module of the sample project [Spring MVC] (<a href="https://github.com/apache/incubator-service" target="_blank">https://github.com/apache/incubator-service</a> comb-java-chassis/tree/master/samples/springmvc-sample)</p>
+<p>The following configuration is the file <code>resources/microservice.yaml</code> of the springmvc-provider module in the <a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/samples/springmvc-sample" target="_blank">SpringMVC sample</a>:</p>
 </blockquote>
 <pre><code class="lang-yaml"><span class="hljs-attr">APPLICATION_ID:</span> springmvc-sample
 <span class="hljs-attr">service_description:</span>
-<span class="hljs-attr">  name:</span> springmvc <span class="hljs-comment"># &#x8FD9;&#x91CC;&#x5C31;&#x662F;&#x5B9A;&#x4E49;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x540D;&#x79F0;</span>
+<span class="hljs-attr">  name:</span> springmvc <span class="hljs-comment"># The name of the micro service</span>
 <span class="hljs-attr">  version:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.2</span>
 <span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  service:</span>
@@ -1358,13 +1386,9 @@
 <span class="hljs-attr">    registry:</span>
 <span class="hljs-attr">      address:</span> http://<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">30100</span>        <span class="hljs-comment">#service center address</span>
 </code></pre>
-<blockquote>
-<p>NOTE:</p>
 <ul>
-<li>The URL must be in format of ServiceComb: <code>cse://microserviceName/path?querystring</code>. Use the provider defined in <a href="../users/develop-with-springmvc">Develop Microservice with SpringMVC</a> as an example. The microservice name is <code>springmvc</code>, and its base path is <code>/springmvchello</code>, so you should set microserviceName in the URL to  <code>springmvchello/sayhi</code> when requesting sayhi. Therefore, the URL for requesting sayhi is  <code>cse://springmvc/springmvchello/sayhi?name=Java Chassis</code>.</li>
-<li>During use of this URL format, the ServiceComb framework will perform internal microservice descovery, fallbreak, and fault tolerance and send the requests to the microservice providers.</li>
+<li>With the URL format, ServiceComb framework will perform internal microservice descovery, fallback, fault tolerance and send the requests to the microservice providers.</li>
 </ul>
-</blockquote>
 
                                 
                                 </section>
@@ -1408,7 +1432,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Using Rest Template","level":"1.4.1","depth":2,"next":{"title":"Using AsynRestTemplate","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},"previous":{"title":"Writing Service Consumer","level":"1.4","depth":1,"path":"catalog/build-consumer.md","ref":"catalog/build-consumer.md","articles":[{"title":"Using Rest Template","level":"1.4.1","depth":2,"path":"build-consumer/using-resttemplate.md","ref":"build-consumer/using-resttemplate.md","articles":[]},{"title":"Using AsynRestTemplate","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},{"title":"Using with RPC","level":"1.4.3","depth":2,"path":"build-consumer/develop-consumer-using-rpc.md","ref":"build-consumer/develop-consumer-using-rpc.md","articles":[]},{"title":"Contract","level":"1.4.4","depth":2,"path":"build-consumer/with-contract.md","ref":"build-consumer/with-contract.md","articles":[]},{"title":"Invoke control","level":"1.4.5","depth":2,"path":"build-consumer/invoke-control.md","ref":"build-consumer/invoke-control.md","articles":[{"title":"Circuit Breaker","level":"1.4.5.1","depth":3,"path":"build-consumer/circuit-breaker.md","ref":"build-consumer/circuit-breaker.md","articles":[]},{"title":"Flow Control","level":"1.4.5.2","depth":3,"path":"build-consumer/flow-control.md","ref":"build-consumer/flow-control.md","articles":[]},{"title":"Fault Injection","level":"1.4.5.3","depth":3,"path":"build-consumer/fault-injection.md","ref":"build-consumer/fault-injection.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/using-resttemplate.md","mtime":"2018-09-20T01:52:22.505Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T01:53:23.362Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Using Rest Template","level":"1.4.1","depth":2,"next":{"title":"Using AsynRestTemplate","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},"previous":{"title":"Writing Service Consumer","level":"1.4","depth":1,"path":"catalog/build-consumer.md","ref":"catalog/build-consumer.md","articles":[{"title":"Using Rest Template","level":"1.4.1","depth":2,"path":"build-consumer/using-resttemplate.md","ref":"build-consumer/using-resttemplate.md","articles":[]},{"title":"Using AsynRestTemplate","level":"1.4.2","depth":2,"path":"build-consumer/using-AsyncRestTemplate.md","ref":"build-consumer/using-AsyncRestTemplate.md","articles":[]},{"title":"Using with RPC","level":"1.4.3","depth":2,"path":"build-consumer/develop-consumer-using-rpc.md","ref":"build-consumer/develop-consumer-using-rpc.md","articles":[]},{"title":"Contract","level":"1.4.4","depth":2,"path":"build-consumer/with-contract.md","ref":"build-consumer/with-contract.md","articles":[]},{"title":"Invoke control","level":"1.4.5","depth":2,"path":"build-consumer/invoke-control.md","ref":"build-consumer/invoke-control.md","articles":[{"title":"Circuit Breaker","level":"1.4.5.1","depth":3,"path":"build-consumer/circuit-breaker.md","ref":"build-consumer/circuit-breaker.md","articles":[]},{"title":"Flow Control","level":"1.4.5.2","depth":3,"path":"build-consumer/flow-control.md","ref":"build-consumer/flow-control.md","articles":[]},{"title":"Fault Injection","level":"1.4.5.3","depth":3,"path":"build-consumer/fault-injection.md","ref":"build-consumer/fault-injection.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/using-resttemplate.md","mtime":"2018-09-20T06:03:49.616Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T06:04:41.877Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

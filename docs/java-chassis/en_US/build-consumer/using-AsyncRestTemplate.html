@@ -1280,13 +1280,13 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x4F7F;&#x7528;asynresttemplate&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;">&#x4F7F;&#x7528;AsynRestTemplate&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x6D88;&#x8D39;&#x8005;</h1>
-<h2 id="&#x6982;&#x5FF5;&#x9610;&#x8FF0;">&#x6982;&#x5FF5;&#x9610;&#x8FF0;</h2>
-<p>AsyncRestTemplate &#x5F00;&#x53D1;&#x65B9;&#x5F0F;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x5F02;&#x6B65;&#x7684;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x8C03;&#x7528;&#x3002;&#x5177;&#x4F53;&#x7684;&#x4E1A;&#x52A1;&#x6D41;&#x7A0B;&#x548C; restTemplate &#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x662F;&#x8FD9;&#x91CC;&#x4EE5;&#x5F02;&#x6B65;&#x7684;&#x5F62;&#x5F0F;&#x8FDB;&#x884C;&#x670D;&#x52A1;&#x7684;&#x8C03;&#x7528;&#x3002;</p>
-<h2 id="&#x793A;&#x4F8B;&#x4EE3;&#x7801;">&#x793A;&#x4F8B;&#x4EE3;&#x7801;</h2>
-<p>AsyncRestTemplate &#x5B9E;&#x4F8B;&#x901A;&#x8FC7; new CseAsyncRestTemplate&#xFF08;&#xFF09;&#x6765;&#x521B;&#x5EFA;&#x548C;&#x83B7;&#x53D6;&#xFF0C;&#x518D;&#x4F7F;&#x7528;&#x8BE5;&#x5B9E;&#x4F8B;&#x901A;&#x8FC7;&#x81EA;&#x5B9A;&#x4E49;&#x7684; URL &#x8FDB;&#x884C;&#x670D;&#x52A1;&#x8C03;&#x7528;&#x3002;</p>
+                                <h1 id="develop-consumer-with-asynresttemplate">Develop consumer with AsynRestTemplate</h1>
+<h2 id="concepts">Concepts</h2>
+<p>AsyncRestTemplate allows users to make asynchronous service calls. The logic is similar to restTemplate, except that the service is called asynchronously.</p>
+<h2 id="sample-code">Sample code</h2>
+<p>The AsyncRestTemplate instance is created and retrieved via <code>new CseAsyncRestTemplate()</code>, which is then used to make service calls through a custom URL.</p>
 <ul>
-<li>Spring MVC &#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#x793A;&#x4F8B;</li>
+<li>Spring MVC client sample code</li>
 </ul>
 <pre><code class="lang-java">
 <span class="hljs-meta">@Component</span>
@@ -1309,7 +1309,7 @@
         .exchange(<span class="hljs-string">&quot;cse://springmvc/springmvchello/sayhello&quot;</span>, HttpMethod.POST, entity, String.class);
     <span class="hljs-comment">//    ResponseEntity&lt;String&gt; responseEntity1 = listenableFuture.get();</span>
     <span class="hljs-comment">//    System.out.println(&quot;AsyncRestTemplate Consumer sayHello services: &quot; + responseEntity1.getBody());</span>
-    <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#x51FD;&#x6570;</span>
+    <span class="hljs-comment">// Set the callback function</span>
     listenableFuture.addCallback(
         <span class="hljs-keyword">new</span> ListenableFutureCallback&lt;ResponseEntity&lt;String&gt;&gt;() {
           <span class="hljs-meta">@Override</span>
@@ -1331,10 +1331,10 @@
 }
 </code></pre>
 <blockquote>
-<p>&#x8BF4;&#x660E; &#xFF1A;</p>
+<p>Note</p>
 <ul>
-<li>URL &#x7684;&#x683C;&#x5F0F;&#x548C; RestTemplate &#x4E00;&#x6837;&#xFF0C;&#x5177;&#x4F53;&#x53EF;&#x4EE5;&#x53C2;&#x8003; restTemplate</li>
-<li>&#x8FD9;&#x91CC;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684; ListenableFuture &#x7C7B;&#x6765;&#x4F5C;&#x4E3A;&#x5360;&#x4F4D;&#x7B26;&#xFF0C;&#x83B7;&#x53D6;&#x8FDC;&#x7A0B;&#x8C03;&#x7528;&#x7ED3;&#x675F;&#x540E;&#x53EF;&#x80FD;&#x83B7;&#x53D6;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x540C;&#x65F6;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x5BF9;&#x53EF;&#x80FD;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x5206;&#x6279;&#x5904;&#x7406;&#x3002;</li>
+<li>The URL format is the same with RestTemplate, refer to restTemplate for details</li>
+<li>The custom ListenableFuture class is the placeholder to get the results from the remote call. Users can also customize the callback function to process the return results in batches.</li>
 </ul>
 </blockquote>
 
@@ -1380,7 +1380,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Using AsynRestTemplate","level":"1.4.2","depth":2,"next":{"title":"Using with RPC","level":"1.4.3","depth":2,"path":"build-consumer/develop-consumer-using-rpc.md","ref":"build-consumer/develop-consumer-using-rpc.md","articles":[]},"previous":{"title":"Using Rest Template","level":"1.4.1","depth":2,"path":"build-consumer/using-resttemplate.md","ref":"build-consumer/using-resttemplate.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/using-AsyncRestTemplate.md","mtime":"2018-09-20T01:52:22.505Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T01:53:23.362Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Using AsynRestTemplate","level":"1.4.2","depth":2,"next":{"title":"Using with RPC","level":"1.4.3","depth":2,"path":"build-consumer/develop-consumer-using-rpc.md","ref":"build-consumer/develop-consumer-using-rpc.md","articles":[]},"previous":{"title":"Using Rest Template","level":"1.4.1","depth":2,"path":"build-consumer/using-resttemplate.md","ref":"build-consumer/using-resttemplate.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-consumer/using-AsyncRestTemplate.md","mtime":"2018-09-20T06:03:49.616Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T06:04:41.877Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
