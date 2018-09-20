@@ -1282,32 +1282,32 @@
                                 
                                 <h2 id="rest-over-vertx">REST over Vertx</h2>
 <h3 id="configuration">Configuration</h3>
-<p>The REST over Vertx communication channel uses the standalone running mode that can be started using the main function. In the main function, you need to initialize logs and load service configuration. The code is as follow:</p>
+<p>The REST over Vertx communication channel runs in standalone mode, it can be started in the main function. In the main function, you need to initialize logs and load service configuration. The code is as follow:</p>
 <pre><code class="lang-java"><span class="hljs-keyword">import</span> org.apache.servicecomb.foundation.common.utils.BeanUtils;
 <span class="hljs-keyword">import</span> org.apache.servicecomb.foundation.common.utils.Log4jUtils;
 
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainServer</span> </span>{
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
-  &#x3000;Log4jUtils.init();<span class="hljs-comment">//Log initialization</span>
+  &#x3000;Log4jUtils.init();<span class="hljs-comment">// Log initialization</span>
   &#x3000;BeanUtils.init(); <span class="hljs-comment">// Spring bean initialization</span>
   }
 }
 </code></pre>
-<p>To use the REST over Vertx communication channel, you need to add the following dependencies in the maven pom.xml file:</p>
+<p>To use the REST over Vertx communication channel, add the following dependencies in the maven pom.xml file:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
 &#x3000;&#x3000;<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
 &#x3000;&#x3000;<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>transport-rest-vertx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
-<p>Configuration items that need to be set in the microservice.yaml file are described as follows:</p>
-<p>Table 2 Configuration items of REST over Vertx</p>
+<p>The REST over Vertx related configuration items in the microservice.yaml file are described as follows:</p>
+<p>Table 1-1 Configuration items for REST over Vertx</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:left">Configuration Item</th>
 <th style="text-align:left">Default Value</th>
-<th style="text-align:left">Value Range</th>
-<th style="text-align:left">Mandatory</th>
+<th style="text-align:left">Range</th>
+<th style="text-align:left">Required</th>
 <th style="text-align:left">Description</th>
 <th style="text-align:left">Remark</th>
 </tr>
@@ -1318,61 +1318,93 @@
 <td style="text-align:left">0.0.0.0:8080</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the server listening IP address.</td>
-<td style="text-align:left">Only service providers require this parameter.</td>
+<td style="text-align:left">Service listening address</td>
+<td style="text-align:left">Only for providers</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.rest.server.thread-count</td>
 <td style="text-align:left">1</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the number of server threads.</td>
-<td style="text-align:left">Only service providers require this parameter.</td>
+<td style="text-align:left">Server&apos;s thread number</td>
+<td style="text-align:left">Only for providers</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.rest.server.connection-limit</td>
+<td style="text-align:left">Integer.MAX_VALUE</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Max allowed client connections</td>
+<td style="text-align:left">Only for providers</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.rest.server.connection.idleTimeoutInSeconds</td>
+<td style="text-align:left">60</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Timeout for server&apos;s idle connection</td>
+<td style="text-align:left">The idle connections will be recycled</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.rest.client.thread-count</td>
 <td style="text-align:left">1</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the number of client network threads.</td>
-<td style="text-align:left">Only service consumers require this parameter.</td>
+<td style="text-align:left">Client&apos;s thread number</td>
+<td style="text-align:left">Only for consumers</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.rest.client.connection-pool-per-thread</td>
-<td style="text-align:left">1</td>
+<td style="text-align:left">servicecomb.rest.client.connection.maxPoolSize</td>
+<td style="text-align:left">5</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the number of connection pools in each client thread.</td>
-<td style="text-align:left">Only service consumers require this parameter.</td>
+<td style="text-align:left">Max connection number of each pool</td>
+<td style="text-align:left">connection number = thread number * pool number * pool connection number</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.rest.client.connection.idleTimeoutInSeconds</td>
+<td style="text-align:left">30</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">The timeout of client idle connection</td>
+<td style="text-align:left">The idle connections will be recycled</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.rest.client.connection.keepAlive</td>
+<td style="text-align:left">true</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Use long lived connection or not</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.request.timeout</td>
 <td style="text-align:left">30000</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the request timeout duration.</td>
+<td style="text-align:left">Request timeout</td>
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.references.[&#x670D;&#x52A1;&#x540D;].transport</td>
+<td style="text-align:left">servicecomb.references.[ServiceName].transport</td>
 <td style="text-align:left">rest</td>
 <td style="text-align:left"></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the accessed transport type.</td>
-<td style="text-align:left">Only service consumers require this parameter.</td>
+<td style="text-align:left">The transport type to access</td>
+<td style="text-align:left">Only for consumers</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.references.[&#x670D;&#x52A1;&#x540D;].version-rule</td>
+<td style="text-align:left">servicecomb.references.[ServiceName].version-rule</td>
 <td style="text-align:left">latest</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the version of the accessed instance.</td>
-<td style="text-align:left">Only service consumers require this parameter. You can set it to latest, a version range such as 1.0.0+ or 1.0.0-2.0.2, or a specific version number. For details, see the API description of the service center.</td>
+<td style="text-align:left">The version of instance to access</td>
+<td style="text-align:left">Only for consumers. The supported rules including latest&#xFF0C;1.0.0+&#xFF0C;1.0.0-2.0.2&#xFF0C;or accurate version. For details, please refer to the service center interface description</td>
 </tr>
 </tbody>
 </table>
 <h3 id="sample-code">Sample Code</h3>
-<p>An example of the configuration in the microservice.yaml file for REST over Vertx is as follows:</p>
+<p>An example of the configuration in the microservice.yaml file for REST over Vertx:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  rest:</span>
 <span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8080</span>
@@ -1425,7 +1457,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"next":{"title":"Highway RPC Protocol","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]},"previous":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-vertx.md","mtime":"2018-09-16T13:52:55.626Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-16T13:53:50.682Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"next":{"title":"Highway RPC Protocol","level":"1.3.11.4","depth":3,"path":"build-provider/protocol/highway-rpc.md","ref":"build-provider/protocol/highway-rpc.md","articles":[]},"previous":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"path":"build-provider/protocol/rest-over-servlet.md","ref":"build-provider/protocol/rest-over-servlet.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-vertx.md","mtime":"2018-09-20T01:52:22.505Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T01:53:23.362Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>

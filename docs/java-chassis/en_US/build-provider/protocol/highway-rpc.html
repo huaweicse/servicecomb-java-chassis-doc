@@ -1282,23 +1282,23 @@
                                 
                                 <h2 id="highway-rpc-protocol">Highway RPC Protocol</h2>
 <h3 id="concept-description">Concept Description</h3>
-<p>Highway is a high-performance proprietary protocol of ServiceComb, and you can use it in scenarios having special performance requirements.</p>
+<p>Highway is ServiceComb&apos;s private high-performance protocol, it&apos;s suitable for the performance sensitive scenarios.</p>
 <h3 id="configuration">Configuration</h3>
-<p>To use the Highway communication channel, you need to add the following dependencies in the maven pom.xml file:</p>
+<p>To use the Highway channel, add the following dependencies in the pom.xml file:</p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span> 
   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>  
   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>transport-highway<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span> 
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 </code></pre>
-<p>Configuration items that need to be set in the microservice.yaml file are described as follows:</p>
-<p>Table 3 Configuration items of Highway</p>
+<p>The Highway configuration items in the microservice.yaml file are described below:</p>
+<p>Table 1-1 Highway configuration items</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:left">Configuration Item</th>
 <th style="text-align:left">Default Value</th>
 <th style="text-align:left">Value Range</th>
-<th style="text-align:left">Mandatory</th>
+<th style="text-align:left">Required</th>
 <th style="text-align:left">Description</th>
 <th style="text-align:left">Remark</th>
 </tr>
@@ -1309,7 +1309,7 @@
 <td style="text-align:left">0.0.0.0:7070</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the server listening IP address.</td>
+<td style="text-align:left">The address that the server listens</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
@@ -1317,7 +1317,7 @@
 <td style="text-align:left">1</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the number of server network threads.</td>
+<td style="text-align:left">The number of server network threads</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
@@ -1325,7 +1325,7 @@
 <td style="text-align:left">1</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the number of client network threads.</td>
+<td style="text-align:left">The max number of allowed client connections</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
@@ -1333,7 +1333,7 @@
 <td style="text-align:left">1</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the number of connection pools in each client thread.</td>
+<td style="text-align:left">The number of client network threads</td>
 <td style="text-align:left">-</td>
 </tr>
 <tr>
@@ -1341,29 +1341,29 @@
 <td style="text-align:left">30000</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the request timeout duration.</td>
-<td style="text-align:left">The configuration of this parameter for Highway is the same as that for REST over Vertx.</td>
+<td style="text-align:left">The request timeout duration</td>
+<td style="text-align:left">The same with the configuration of &quot;REST over Vertx&quot;</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.references.[&#x670D;&#x52A1;&#x540D;].transport</td>
+<td style="text-align:left">servicecomb.references.[servicename].transport</td>
 <td style="text-align:left">rest</td>
 <td style="text-align:left"></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the accessed transport type.</td>
-<td style="text-align:left">The configuration of this parameter for Highway is the same as that for REST over Vertx.</td>
+<td style="text-align:left">The transport type of the request</td>
+<td style="text-align:left">The same with the configuration of &quot;REST over Vertx&quot;</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.references.[&#x670D;&#x52A1;&#x540D;].version-rule</td>
+<td style="text-align:left">servicecomb.references.[servicename].version-rule</td>
 <td style="text-align:left">latest</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Specifies the version of the accessed instance.</td>
-<td style="text-align:left">The configuration of this parameter for Highway is the same as that for REST over Vertx.</td>
+<td style="text-align:left">The version of the requested instance.</td>
+<td style="text-align:left">The same with the configuration of &quot;REST over Vertx&quot;</td>
 </tr>
 </tbody>
 </table>
-<h3 id=""> </h3>
-<p>An example of the configuration in the microservice.yaml file for Highway is as follows:</p>
+<h3 id="sample-code">Sample code</h3>
+<p>An example of the Highway configuration in the microservice.yaml:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  highway:</span>
 <span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">7070</span>
@@ -1411,7 +1411,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Highway RPC Protocol","level":"1.3.11.4","depth":3,"next":{"title":"Communicate using HTTP2","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]},"previous":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/highway-rpc.md","mtime":"2018-09-16T13:52:55.626Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-16T13:53:50.682Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Highway RPC Protocol","level":"1.3.11.4","depth":3,"next":{"title":"Communicate using HTTP2","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]},"previous":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/highway-rpc.md","mtime":"2018-09-20T01:52:22.505Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T01:53:23.362Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>
