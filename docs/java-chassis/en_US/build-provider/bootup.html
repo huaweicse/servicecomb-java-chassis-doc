@@ -1281,21 +1281,22 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="application-boot-up-process">Application Boot-up Process</h1>
+<h3 id="concepts">Concepts</h3>
 <p>The startup process of a service provider includes initializing Log4j, loading bean(including its parameters), and registering service.</p>
 <ul>
 <li><p>Initialize Log4j:</p>
-<p> By default, Log4jUtils merges the log4j configurations from classpath*:config/base/log4j.properties and classpath*:config/log4j.properties, then transfer them to log4j&apos;s PropertyConfigurator method to initialize it. If the configuration file with the highest priority is stored on the disk directory with write permission, the combined configuration will be saved to this location to view which parameters take effect during maintenance.</p>
+<p> By default, Log4jUtils merges the log4j configurations from <code>classpath\*:config/base/log4j.properties</code> and <code>classpath\*:config/log4j.properties</code>, then transfer them to log4j&apos;s <code>PropertyConfigurator</code> method to initialize it. If the configuration file with the highest priority is stored on the disk directory with write permission, the combined configuration will be saved to this location to view which parameters take effect during maintenance.</p>
 </li>
 <li><p>Load the bean.</p>
-<p> By default <code>BeanUtils</code>  loads the configuration file from the <code>classpath\*:META-INF/spring/\*.bean.xml</code> Path and transfer the configuration to <code>ClassPathXmlApplicationContext</code> of the Spring framework to load the context. In this process, <code>BeanUtils</code> loads the bean of the foundation-config module.</p>
+<p> By default <code>BeanUtils</code>  loads the configuration file from the <code>classpath\*:META-INF/spring/\*.bean.xml</code> and transfer the configuration to <code>ClassPathXmlApplicationContext</code> of the Spring framework to load the application context. The bean of foundation-config module will be loaded during the process.</p>
 </li>
-<li><p>Register the microservice.</p>
-<p>   When Spring context is loaded, &apos;org.apache.servicecomb.core.CseApplicationListener&apos; will load the handlers configurations and providers&apos; schema info, then register the microservice in the Service Center.</p>
+<li><p>Register the service.</p>
+<p>   When Spring context is loaded, <code>org.apache.servicecomb.core.CseApplicationListener</code> will load the handlers configurations and providers&apos; schema info, then register the microservice in the Service Center.</p>
 </li>
 </ul>
 <blockquote>
-<p><strong>NOTE:</strong>
-ServiceComb have three level of configuration items: configuration center, environment variables, and local files, listed in descending order by priority. If configuration items with the same name exist, the one in the highest level overwrites others. Configuration items stored in the configuration center can be modified during running.</p>
+<p><strong>NOTE:</strong></p>
+<p>ServiceComb has 3 configuration sources: configuration center, environment variables and local files, with priorities from high to low. If there are configuration items with the same name in different sources, then items with lower priority will be overwritten. Configuration items stored in the configuration center can be modified at runtime.</p>
 </blockquote>
 
                                 
@@ -1340,7 +1341,7 @@ ServiceComb have three level of configuration items: configuration center, envir
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Boot-up Process","level":"1.3.12","depth":2,"next":{"title":"Access Log Configuration","level":"1.3.13","depth":2,"path":"build-provider/access-log-configuration.md","ref":"build-provider/access-log-configuration.md","articles":[]},"previous":{"title":"Communicate using HTTP2","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/bootup.md","mtime":"2018-09-20T06:03:49.616Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T06:04:41.877Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Boot-up Process","level":"1.3.12","depth":2,"next":{"title":"Access Log Configuration","level":"1.3.13","depth":2,"path":"build-provider/access-log-configuration.md","ref":"build-provider/access-log-configuration.md","articles":[]},"previous":{"title":"Communicate using HTTP2","level":"1.3.11.5","depth":3,"path":"build-provider/protocol/http2.md","ref":"build-provider/protocol/http2.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/bootup.md","mtime":"2018-09-21T02:00:11.676Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-21T02:01:02.957Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
