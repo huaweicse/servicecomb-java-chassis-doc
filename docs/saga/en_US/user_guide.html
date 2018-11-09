@@ -222,8 +222,8 @@
 </ol>
 <h2 id="build">Build</h2>
 <p>Retrieve the source code:</p>
-<pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/apache/incubator-servicecomb-saga.git
-$ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
+<pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/apache/servicecomb-saga.git
+$ <span class="hljs-built_in">cd</span> servicecomb-saga
 </code></pre>
 <p>Saga can be built in either of the following ways.</p>
 <ul>
@@ -293,7 +293,7 @@ $ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
 </li>
 <li><p>Repeat step 3 for the <code>transferIn</code> service.</p>
 </li>
-<li><p>Since Saga-0.3.0,  you can access the <a href="https://github.com/apache/incubator-servicecomb-saga/blob/master/omega/omega-context/src/main/java/org/apache/servicecomb/saga/omega/context/OmegaContext.java" target="_blank">OmegaContext</a> for the gloableTxId and localTxId in the @Compensable annotated method or the cancel method.</p>
+<li><p>Since Saga-0.3.0,  you can access the <a href="https://github.com/apache/servicecomb-saga/blob/master/omega/omega-context/src/main/java/org/apache/servicecomb/saga/omega/context/OmegaContext.java" target="_blank">OmegaContext</a> for the gloableTxId and localTxId in the @Compensable annotated method or the cancel method.</p>
 </li>
 </ol>
 <h2 id="how-to-run">How to run</h2>
@@ -301,7 +301,7 @@ $ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
 <li><p>run postgreSQL.</p>
 <pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_DB=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_USER=saga&quot;</span> <span class="hljs-_">-e</span> <span class="hljs-string">&quot;POSTGRES_PASSWORD=password&quot;</span> -p 5432:5432 postgres
 </code></pre>
-<p>Please check out <a href="https://github.com/apache/incubator-servicecomb-saga/blob/master/docs/faq/en/how_to_use_mysql_as_alpha_backend_database.md" target="_blank">this document</a>, if you want to use the MySQL instead of postgreSQL.</p>
+<p>Please check out <a href="https://github.com/apache/servicecomb-saga/blob/master/docs/faq/en/how_to_use_mysql_as_alpha_backend_database.md" target="_blank">this document</a>, if you want to use the MySQL instead of postgreSQL.</p>
 </li>
 <li><p>run alpha. Before running alpha, please make sure postgreSQL is already up. You can run alpha through docker or executable file.</p>
 <ul>
@@ -371,7 +371,7 @@ $ <span class="hljs-built_in">cd</span> incubator-servicecomb-saga
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Guide","level":"1.2","depth":1,"next":{"title":"Design","level":"1.3","depth":1,"path":"design.md","ref":"design.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"user_guide.md","mtime":"2018-11-06T06:49:11.741Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-06T06:50:31.648Z"},"basePath":".","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Guide","level":"1.2","depth":1,"next":{"title":"Design","level":"1.3","depth":1,"path":"design.md","ref":"design.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"user_guide.md","mtime":"2018-11-09T01:54:16.207Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-09T01:55:37.253Z"},"basePath":".","book":{"language":"en_US"}});
         });
     </script>
 </div>
