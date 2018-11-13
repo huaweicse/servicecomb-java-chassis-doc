@@ -1296,137 +1296,154 @@
                                 <h1 id="&#x5F02;&#x5E38;&#x5904;&#x7406;">&#x5F02;&#x5E38;&#x5904;&#x7406;</h1>
 <p>ServiceComb&#x5F02;&#x5E38;&#x60C5;&#x51B5;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4E09;&#x7C7B;&#xFF1A;</p>
 <ul>
-<li>&#x4E1A;&#x52A1;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;&#xFF1A;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x7531;&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x3002;&#x7528;&#x6237;&#x5728;&#x83B7;&#x53D6;&#x5230;&#x670D;&#x52A1;swagger&#x5B9A;&#x4E49;&#x5230;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x80FD;&#x591F;&#x4ECE;&#x5B9A;&#x4E49;&#x4E2D;&#x770B;&#x5230;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x5BF9;&#x5E94;&#x7684;&#x9519;&#x8BEF;&#x7801;&#xFF0C;&#x4EE5;&#x53CA;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x3002;</li>
-<li>&#x5904;&#x7406;&#x63A7;&#x5236;&#x5F02;&#x5E38;&#xFF1A;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x901A;&#x5E38;&#x662F;&#x6846;&#x67B6;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E0A;&#x7684;&#x5F02;&#x5E38;&#x3002;&#x6BD4;&#x5982;&#x6D41;&#x63A7;Handler&#x629B;&#x51FA;TOO_MANY_REQUESTS_STATUS&#x5F02;&#x5E38;&#x3002;</li>
+<li><p>&#x4E1A;&#x52A1;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;&#xFF1A;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x7531;&#x4E1A;&#x52A1;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x3002;&#x7528;&#x6237;&#x5728;&#x83B7;&#x53D6;&#x5230;&#x670D;&#x52A1;swagger&#x5B9A;&#x4E49;&#x5230;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x80FD;&#x591F;&#x4ECE;&#x5B9A;&#x4E49;&#x4E2D;&#x770B;&#x5230;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x5BF9;&#x5E94;&#x7684;&#x9519;&#x8BEF;&#x7801;&#xFF0C;&#x4EE5;&#x53CA;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x3002;</p>
+</li>
+<li><p>&#x5904;&#x7406;&#x63A7;&#x5236;&#x5F02;&#x5E38;&#xFF1A;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x901A;&#x5E38;&#x662F;&#x6846;&#x67B6;&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E0A;&#x7684;&#x5F02;&#x5E38;&#x3002;&#x6BD4;&#x5982;&#x6D41;&#x63A7;Handler&#x629B;&#x51FA;TOO_MANY_REQUESTS_STATUS&#x5F02;&#x5E38;&#x3002;</p>
+<pre><code class="lang-java">CommonExceptionData errorData = <span class="hljs-keyword">new</span> CommonExceptionData(<span class="hljs-string">&quot;rejected by qps flowcontrol&quot;</span>);
+asyncResp.producerFail(<span class="hljs-keyword">new</span> InvocationException(QpsConst.TOO_MANY_REQUESTS_STATUS, errorData));
+</code></pre>
+</li>
+<li><p>&#x672A;&#x77E5;&#x5F02;&#x5E38;&#xFF1A;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x53D1;&#x751F;&#x7684;&#x60C5;&#x51B5;&#x4E0D;&#x786E;&#x5B9A;&#x3002;&#x6BD4;&#x5982;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x629B;&#x51FA;NullPointerException&#x7B49;&#x672A;&#x6355;&#x83B7;&#x5F02;&#x5E38;&#x3001;&#x5E95;&#x5C42;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x5F02;&#x5E38;&#x7B49;&#x3002;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x4F1A;&#x7531;ServiceComb&#x5C01;&#x88C5;&#x6210;590&#x6216;&#x8005;490&#x9519;&#x8BEF;&#x8FD4;&#x56DE;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-java">CommonExceptionData errorData = <span class="hljs-keyword">new</span> CommonExceptionData(cause.getMessage());
+asyncResp.producerFail(<span class="hljs-keyword">new</span> InvocationException(<span class="hljs-number">590</span>, errorData)
+</code></pre>
+<p>&#x6216;&#x8005;</p>
+<pre><code class="lang-java">asyncResp.consumerFail(<span class="hljs-keyword">new</span> InvocationException(<span class="hljs-number">490</span>, errorData)
+</code></pre>
+</li>
 </ul>
-<pre><code>CommonExceptionData errorData = new CommonExceptionData(&quot;rejected by qps flowcontrol&quot;);
-asyncResp.producerFail(new InvocationException(QpsConst.TOO_MANY_REQUESTS_STATUS, errorData));
-</code></pre><ul>
-<li>&#x672A;&#x77E5;&#x5F02;&#x5E38;&#xFF1A;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x53D1;&#x751F;&#x7684;&#x60C5;&#x51B5;&#x4E0D;&#x786E;&#x5B9A;&#x3002;&#x6BD4;&#x5982;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x629B;&#x51FA;NullPointerException&#x7B49;&#x672A;&#x6355;&#x83B7;&#x5F02;&#x5E38;&#x3001;&#x5E95;&#x5C42;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x5F02;&#x5E38;&#x7B49;&#x3002;&#x8FD9;&#x7C7B;&#x5F02;&#x5E38;&#x4F1A;&#x7531;ServiceComb&#x5C01;&#x88C5;&#x6210;590&#x6216;&#x8005;490&#x9519;&#x8BEF;&#x8FD4;&#x56DE;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</li>
-</ul>
-<pre><code>CommonExceptionData errorData = new CommonExceptionData(cause.getMessage());
-asyncResp.producerFail(new InvocationException(590, errorData)
-
-&#x6216;&#x8005;
-asyncResp.consumerFail(new InvocationException(490, errorData)
-</code></pre><h2 id="&#x4E1A;&#x52A1;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;">&#x4E1A;&#x52A1;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;</h2>
+<h2 id="&#x4E1A;&#x52A1;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;">&#x4E1A;&#x52A1;&#x5B9A;&#x4E49;&#x5F02;&#x5E38;</h2>
 <p>&#x901A;&#x5E38;&#x4E1A;&#x52A1;&#x5728;&#x5F00;&#x53D1;&#x670D;&#x52A1;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x4F46;&#x6709;&#x4E9B;&#x60C5;&#x51B5;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x89C6;&#x5177;&#x4F53;&#x60C5;&#x51B5;&#x8FD4;&#x56DE;&#x4E0D;&#x540C;&#x7684;&#x6D88;&#x606F;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;@ApiResonse&#x6765;&#x5B9A;&#x4E49;&#x4E0D;&#x540C;&#x9519;&#x8BEF;&#x7801;&#x5BF9;&#x5E94;&#x7684;&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#x3002;&#x4E1A;&#x52A1;&#x5F02;&#x5E38;&#x5177;&#x5907;&#x786E;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x5728;swagger&#x91CC;&#x9762;&#x4F53;&#x73B0;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#x5728;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x80FD;&#x591F;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x5230;&#x9519;&#x8BEF;&#x7C7B;&#x578B;&#x3002;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
-<pre><code>  @Path(&quot;/errorCode&quot;)
-  @POST
-  @ApiResponses({
-      @ApiResponse(code = 200, response = MultiResponse200.class, message = &quot;&quot;),
-      @ApiResponse(code = 400, response = MultiResponse400.class, message = &quot;&quot;),
-      @ApiResponse(code = 500, response = MultiResponse500.class, message = &quot;&quot;)})
-  public MultiResponse200 errorCode(MultiRequest request) {
-    if (request.getCode() == 400) {
-      MultiResponse400 r = new MultiResponse400();
-      r.setCode(400);
-      r.setMessage(&quot;bad request&quot;);
-      throw new InvocationException(javax.ws.rs.core.Response.Status.BAD_REQUEST, r);
-    } else if (request.getCode() == 500) {
-      MultiResponse500 r = new MultiResponse500();
-      r.setCode(500);
-      r.setMessage(&quot;internal error&quot;);
-      throw new InvocationException(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR, r);
-    } else {
-      MultiResponse200 r = new MultiResponse200();
-      r.setCode(200);
-      r.setMessage(&quot;success result&quot;);
-      return r;
+<pre><code class="lang-java">  <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/errorCode&quot;</span>)
+  <span class="hljs-meta">@POST</span>
+  <span class="hljs-meta">@ApiResponses</span>({
+      <span class="hljs-meta">@ApiResponse</span>(code = <span class="hljs-number">200</span>, response = MultiResponse200.class, message = <span class="hljs-string">&quot;&quot;</span>),
+      <span class="hljs-meta">@ApiResponse</span>(code = <span class="hljs-number">400</span>, response = MultiResponse400.class, message = <span class="hljs-string">&quot;&quot;</span>),
+      <span class="hljs-meta">@ApiResponse</span>(code = <span class="hljs-number">500</span>, response = MultiResponse500.class, message = <span class="hljs-string">&quot;&quot;</span>)})
+  <span class="hljs-function"><span class="hljs-keyword">public</span> MultiResponse200 <span class="hljs-title">errorCode</span><span class="hljs-params">(MultiRequest request)</span> </span>{
+    <span class="hljs-keyword">if</span> (request.getCode() == <span class="hljs-number">400</span>) {
+      MultiResponse400 r = <span class="hljs-keyword">new</span> MultiResponse400();
+      r.setCode(<span class="hljs-number">400</span>);
+      r.setMessage(<span class="hljs-string">&quot;bad request&quot;</span>);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvocationException(javax.ws.rs.core.Response.Status.BAD_REQUEST, r);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (request.getCode() == <span class="hljs-number">500</span>) {
+      MultiResponse500 r = <span class="hljs-keyword">new</span> MultiResponse500();
+      r.setCode(<span class="hljs-number">500</span>);
+      r.setMessage(<span class="hljs-string">&quot;internal error&quot;</span>);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvocationException(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR, r);
+    } <span class="hljs-keyword">else</span> {
+      MultiResponse200 r = <span class="hljs-keyword">new</span> MultiResponse200();
+      r.setCode(<span class="hljs-number">200</span>);
+      r.setMessage(<span class="hljs-string">&quot;success result&quot;</span>);
+      <span class="hljs-keyword">return</span> r;
     }
   }
-</code></pre><p>&#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x5982;&#x4E0B;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x3002;&#x5F02;&#x5E38;&#x7684;&#x7C7B;&#x578B;&#x662F;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;cast&#x83B7;&#x53D6;&#x5230;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;</p>
-<pre><code>    MultiRequest request = new MultiRequest();
+</code></pre>
+<p>&#x5BA2;&#x6237;&#x7AEF;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x5982;&#x4E0B;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x3002;&#x5F02;&#x5E38;&#x7684;&#x7C7B;&#x578B;&#x662F;&#x786E;&#x5B9A;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;cast&#x83B7;&#x53D6;&#x5230;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;</p>
+<pre><code class="lang-java">    MultiRequest request = <span class="hljs-keyword">new</span> MultiRequest();
 
-    request.setCode(200);
+    request.setCode(<span class="hljs-number">200</span>);
     ResponseEntity&lt;MultiResponse200&gt; result = template
-        .postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse200.class);
-    TestMgr.check(result.getStatusCode(), 200);
-    TestMgr.check(result.getBody().getMessage(), &quot;success result&quot;);
+        .postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/errorCode&quot;</span>, request, MultiResponse200.class);
+    TestMgr.check(result.getStatusCode(), <span class="hljs-number">200</span>);
+    TestMgr.check(result.getBody().getMessage(), <span class="hljs-string">&quot;success result&quot;</span>);
 
-    request.setCode(400);
-    MultiResponse400 t400 = null;
-    try {
-      template.postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse400.class);
-    } catch (InvocationException e) {
+    request.setCode(<span class="hljs-number">400</span>);
+    MultiResponse400 t400 = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+      template.postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/errorCode&quot;</span>, request, MultiResponse400.class);
+    } <span class="hljs-keyword">catch</span> (InvocationException e) {
       t400 = (MultiResponse400) e.getErrorData();
     }
-    TestMgr.check(t400.getCode(), 400);
-    TestMgr.check(t400.getMessage(), &quot;bad request&quot;);
+    TestMgr.check(t400.getCode(), <span class="hljs-number">400</span>);
+    TestMgr.check(t400.getMessage(), <span class="hljs-string">&quot;bad request&quot;</span>);
 
-    request.setCode(500);
-    MultiResponse500 t500 = null;
-    try {
-      template.postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse400.class);
-    } catch (InvocationException e) {
+    request.setCode(<span class="hljs-number">500</span>);
+    MultiResponse500 t500 = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+      template.postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/errorCode&quot;</span>, request, MultiResponse400.class);
+    } <span class="hljs-keyword">catch</span> (InvocationException e) {
       t500 = (MultiResponse500) e.getErrorData();
     }
-    TestMgr.check(t500.getCode(), 500);
-    TestMgr.check(t500.getMessage(), &quot;internal error&quot;);
-</code></pre><h2 id="&#x63A7;&#x5236;&#x5F02;&#x5E38;">&#x63A7;&#x5236;&#x5F02;&#x5E38;</h2>
+    TestMgr.check(t500.getCode(), <span class="hljs-number">500</span>);
+    TestMgr.check(t500.getMessage(), <span class="hljs-string">&quot;internal error&quot;</span>);
+</code></pre>
+<h2 id="&#x63A7;&#x5236;&#x5F02;&#x5E38;">&#x63A7;&#x5236;&#x5F02;&#x5E38;</h2>
 <p>&#x63A7;&#x5236;&#x5F02;&#x5E38;&#x4E00;&#x822C;&#x5728;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x91CC;&#x9762;&#x6CA1;&#x6709;&#x58F0;&#x660E;&#x3002;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x505A;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x5F31;&#x7C7B;&#x578B;&#x7684;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#x5F02;&#x5E38;&#xFF1A;</p>
-<pre><code>    JsonObject requestJson = new JsonObject();
-    requestJson.put(&quot;code&quot;, 400);
-    requestJson.put(&quot;message&quot;, &quot;test message&quot;);
+<pre><code class="lang-java">    JsonObject requestJson = <span class="hljs-keyword">new</span> JsonObject();
+    requestJson.put(<span class="hljs-string">&quot;code&quot;</span>, <span class="hljs-number">400</span>);
+    requestJson.put(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;test message&quot;</span>);
 
-    try {
+    <span class="hljs-keyword">try</span> {
       template
-          .postForEntity(SERVER + &quot;/MultiErrorCodeService/noClientErrorCode&quot;, requestJson, Object.class);
-    } catch (InvocationException e) {
-      TestMgr.check(e.getStatusCode(), 400);
+          .postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/noClientErrorCode&quot;</span>, requestJson, Object.class);
+    } <span class="hljs-keyword">catch</span> (InvocationException e) {
+      TestMgr.check(e.getStatusCode(), <span class="hljs-number">400</span>);
       mapResult = RestObjectMapperFactory.getRestObjectMapper().convertValue(e.getErrorData(), Map.class);
-      TestMgr.check(mapResult.get(&quot;message&quot;), &quot;test message&quot;);
-      TestMgr.check(mapResult.get(&quot;code&quot;), 400);
-      TestMgr.check(mapResult.get(&quot;t400&quot;), 400);
+      TestMgr.check(mapResult.get(<span class="hljs-string">&quot;message&quot;</span>), <span class="hljs-string">&quot;test message&quot;</span>);
+      TestMgr.check(mapResult.get(<span class="hljs-string">&quot;code&quot;</span>), <span class="hljs-number">400</span>);
+      TestMgr.check(mapResult.get(<span class="hljs-string">&quot;t400&quot;</span>), <span class="hljs-number">400</span>);
     }
-</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5047;&#x8BBE;&#x4E0D;&#x77E5;&#x9053;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#xFF0C;&#x901A;&#x8FC7;API&#x5C06;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x4E3A;Map&#x7C7B;&#x578B;&#xFF0C;&#x7136;&#x540E;&#x4ECE;Map&#x91CC;&#x9762;&#x8BFB;&#x53D6;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;&#x5728;ServiceComb&#x81EA;&#x5DF1;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x4E2D;&#xFF0C;&#x4E00;&#x822C;&#x63A7;&#x5236;&#x5F02;&#x5E38;&#x7684;&#x7C7B;&#x578B;&#x4E5F;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x4E3A;CommonExceptionData&#x3002;</p>
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5047;&#x8BBE;&#x4E0D;&#x77E5;&#x9053;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#xFF0C;&#x901A;&#x8FC7;API&#x5C06;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x4E3A;Map&#x7C7B;&#x578B;&#xFF0C;&#x7136;&#x540E;&#x4ECE;Map&#x91CC;&#x9762;&#x8BFB;&#x53D6;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;&#x5728;ServiceComb&#x81EA;&#x5DF1;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x4E2D;&#xFF0C;&#x4E00;&#x822C;&#x63A7;&#x5236;&#x5F02;&#x5E38;&#x7684;&#x7C7B;&#x578B;&#x4E5F;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF0C;&#x4E3A;CommonExceptionData&#x3002;</p>
 <h2 id="&#x672A;&#x77E5;&#x5F02;&#x5E38;">&#x672A;&#x77E5;&#x5F02;&#x5E38;</h2>
 <p>&#x672A;&#x77E5;&#x5F02;&#x5E38;&#x7EDF;&#x4E00;&#x88AB;&#x5C01;&#x88C5;&#x4E3A;490&#xFF0C; 590&#x9519;&#x8BEF;&#x7801;&#xFF0C;&#x5F02;&#x5E38;&#x6D88;&#x606F;&#x7684;&#x7C7B;&#x578B;&#x56FA;&#x5B9A;&#x4E3A;CommonExceptionData&#x7C7B;&#x578B;&#x3002;</p>
 <h2 id="&#x5F02;&#x5E38;&#x8F6C;&#x6362;&#x548C;&#x5B9A;&#x5236;">&#x5F02;&#x5E38;&#x8F6C;&#x6362;&#x548C;&#x5B9A;&#x5236;</h2>
 <p>&#x6709;&#x65F6;&#x5019;&#xFF0C;&#x4E1A;&#x52A1;&#x9700;&#x8981;&#x5C06;&#x6240;&#x6709;&#x7684;&#x672A;&#x77E5;&#x5F02;&#x5E38;&#x3001;&#x63A7;&#x5236;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x6355;&#x83B7;&#xFF0C;&#x8F6C;&#x6362;&#x4E3A;&#x5BF9;&#x7528;&#x6237;&#x53CB;&#x597D;&#x7684;&#x6D88;&#x606F;&#x3002;&#x6216;&#x8005;&#x5BF9;&#x63A7;&#x5236;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x6355;&#x83B7;&#xFF0C;&#x5C06;&#x6D88;&#x606F;&#x4F53;&#x8F6C;&#x6362;&#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;JSON&#x683C;&#x5F0F;&#x3002;&#x8FD9;&#x91CC;&#x9762;&#x6709;&#x51E0;&#x4E2A;&#x53C2;&#x8003;&#x70B9;&#x3002;</p>
 <ul>
-<li>&#x63A7;&#x5236;&#x6D88;&#x606F;&#x6D88;&#x606F;&#x4F53;&#x5E8F;&#x5217;&#x5316;</li>
-</ul>
+<li><p>&#x63A7;&#x5236;&#x6D88;&#x606F;&#x6D88;&#x606F;&#x4F53;&#x5E8F;&#x5217;&#x5316;</p>
 <p>&#x63A7;&#x5236;&#x6D88;&#x606F;&#x6D88;&#x606F;&#x4F53;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x76EE;&#x7684;&#x662F;&#x7B80;&#x5316;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x903B;&#x8F91;&#xFF0C;&#x4E0D;&#x7528;&#x4F7F;&#x7528;&#x5F31;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;&#x786E;&#x5207;&#x7C7B;&#x578B;&#x3002;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x6CE8;&#x518C;&#x5168;&#x5C40;&#x7684;&#x9519;&#x8BEF;&#x7801;&#x7C7B;&#x578B;&#x3002;
 &#x4E1A;&#x52A1;&#x9700;&#x8981;&#x901A;&#x8FC7;SPI&#x5B9E;&#x73B0;org.apache.servicecomb.swagger.invocation.response.ResponseMetaMapper&#x63A5;&#x53E3;&#x3002;&#x63A5;&#x53E3;&#x7684;&#x6838;&#x5FC3;&#x5185;&#x5BB9;&#x662F;&#x4E3A;&#x6BCF;&#x4E2A;&#x9519;&#x8BEF;&#x7801;&#x5236;&#x5B9A;&#x5E8F;&#x5217;&#x5316;&#x7C7B;&#x578B;&#xFF1A;</p>
-<pre><code>  private final static Map&lt;Integer, ResponseMeta&gt; CODES = new HashMap&lt;&gt;(1);
+<pre><code class="lang-java">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> Map&lt;Integer, ResponseMeta&gt; CODES = <span class="hljs-keyword">new</span> HashMap&lt;&gt;(<span class="hljs-number">1</span>);
 
-  static {
-    ResponseMeta meta = new ResponseMeta();
+  <span class="hljs-keyword">static</span> {
+    ResponseMeta meta = <span class="hljs-keyword">new</span> ResponseMeta();
     meta.setJavaType(SimpleType.constructUnsafe(IllegalStateErrorData.class));
-    CODES.put(500, meta);
+    CODES.put(<span class="hljs-number">500</span>, meta);
   }
 
-  @Override
-  public Map&lt;Integer, ResponseMeta&gt; getMapper() {
-    return CODES;
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Map&lt;Integer, ResponseMeta&gt; <span class="hljs-title">getMapper</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> CODES;
   }
-</code></pre><ul>
-<li>&#x5F02;&#x5E38;&#x8F6C;&#x6362;</li>
+</code></pre>
+</li>
+<li><p>&#x5F02;&#x5E38;&#x8F6C;&#x6362;</p>
+<p>&#x5982;&#x679C;&#x4E1A;&#x52A1;&#x4E0D;&#x5BF9;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#xFF0C;ServiceComb&#x4F1A;&#x5C06;InvocationException&#x4E2D;&#x7684;data&#x76F4;&#x63A5;&#x5E8F;&#x5217;&#x5316;&#x5230;&#x54CD;&#x5E94;&#x6D88;&#x606F;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x662F;InvocationException&#xFF0C;&#x5219;&#x8F6C;&#x6362;&#x4E3A;490&#xFF0C; 590&#xFF0C;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x6D88;&#x606F;&#x4E3A;CommonExceptionData&#x3002;&#x4E1A;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;SPI&#x5B9E;&#x73B0;<code>org.apache.servicecomb.swagger.invocation.exception.ExceptionToProducerResponseConverter</code>&#x5BF9;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x3002;<code>ExceptionToProducerResponseConverter</code>&#x7684;&#x8BF4;&#x660E;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li><code>getExceptionClass()</code>&#x65B9;&#x6CD5;&#x4F1A;&#x8FD4;&#x56DE;converter&#x5B9E;&#x73B0;&#x7C7B;&#x6240;&#x5904;&#x7406;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x3002;&#x5982;&#x679C;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;<code>null</code>&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x6B64;&#x5B9E;&#x73B0;&#x7C7B;&#x4E3A;&#x9ED8;&#x8BA4;converter&#x3002;</li>
+<li><code>Response convert(SwaggerInvocation swaggerInvocation, T e)</code>&#x65B9;&#x6CD5;&#x4E2D;&#x5B9E;&#x73B0;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;<code>Response</code>&#x51B3;&#x5B9A;&#x4E86;ServiceComb&#x5C06;&#x4F1A;&#x8FD4;&#x56DE;&#x4F55;&#x79CD;&#x72B6;&#x6001;&#x7801;&#x3001;&#x4F55;&#x79CD;response body&#x7684;&#x5E94;&#x7B54;&#x3002;</li>
+<li><code>getOrder()</code>&#x65B9;&#x6CD5;&#x7528;&#x4EE5;&#x786E;&#x5B9A;converter&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x503C;&#x8D8A;&#x5C0F;&#xFF0C;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x8986;&#x5199;&#x8BE5;&#x65B9;&#x6CD5;&#x7684;&#x8BDD;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x9ED8;&#x8BA4;&#x4F18;&#x5148;&#x7EA7;<code>0</code>&#x3002;&#x5BF9;&#x4E8E;&#x5904;&#x7406;&#x540C;&#x4E00;&#x5F02;&#x5E38;&#x7C7B;&#x578B;&#x7684;converter&#xFF08;&#x6216;&#x9ED8;&#x8BA4;converter&#xFF09;&#xFF0C;&#x53EA;&#x6709;&#x4F18;&#x5148;&#x7EA7;&#x6700;&#x9AD8;&#x7684;&#x751F;&#x6548;&#x3002;</li>
+<li>&#x5728;&#x4E3A;&#x5F02;&#x5E38;&#x9009;&#x62E9;converter&#x65F6;&#xFF0C;&#x4F1A;&#x4ECE;&#x5F02;&#x5E38;&#x672C;&#x8EAB;&#x7684;&#x7C7B;&#x578B;&#x5F00;&#x59CB;&#x5339;&#x914D;&#xFF0C;&#x5982;&#x679C;&#x627E;&#x4E0D;&#x5230;&#x5BF9;&#x5E94;&#x7684;converter&#x5219;&#x9010;&#x7EA7;&#x5411;&#x4E0A;&#x67E5;&#x627E;&#x7236;&#x7C7B;&#x578B;&#x7684;converter&#x3002;&#x5F53;&#x5339;&#x914D;&#x5230;<code>Throwable</code>&#x4ECD;&#x672A;&#x627E;&#x5230;converter&#x65F6;&#xFF0C;&#x5C06;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;converter&#x5904;&#x7406;&#x5F02;&#x5E38;&#x3002;</li>
 </ul>
-<p>&#x5982;&#x679C;&#x4E1A;&#x52A1;&#x4E0D;&#x5BF9;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#xFF0C;ServiceComb&#x4F1A;&#x5C06;InvocationException&#x4E2D;&#x7684;data&#x76F4;&#x63A5;&#x5E8F;&#x5217;&#x5316;&#x5230;&#x54CD;&#x5E94;&#x6D88;&#x606F;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x662F;InvocationException&#xFF0C;&#x5219;&#x8F6C;&#x6362;&#x4E3A;490&#xFF0C; 590&#xFF0C;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x6D88;&#x606F;&#x4E3A;CommonExceptionData&#x3002;&#x4E1A;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;SPI&#x5B9E;&#x73B0;org.apache.servicecomb.swagger.invocation.exception.ExceptionToResponseConverter&#x5BF9;&#x5F02;&#x5E38;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x3002;&#x8BE5;&#x63A5;&#x53E3;&#x7684;&#x6838;&#x5FC3;&#x662F;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x8F6C;&#x6362;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4EE5;&#x53CA;&#x8F6C;&#x6362;&#x5904;&#x7406;&#x903B;&#x8F91;&#x3002;</p>
-<pre><code>public class CustomExceptionToResponseConverter implements ExceptionToResponseConverter&lt;IllegalStateException&gt; {
-  @Override
-  public Class&lt;IllegalStateException&gt; getExceptionClass() {
-    return IllegalStateException.class;
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomExceptionToProducerResponseConverter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ExceptionToProducerResponseConverter</span>&lt;<span class="hljs-title">IllegalStateException</span>&gt; </span>{
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Class&lt;IllegalStateException&gt; <span class="hljs-title">getExceptionClass</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// &#x8FD4;&#x56DE;IllegalStateException&#x8868;&#x793A;&#x8BE5;converter&#x5904;&#x7406;IllegalStateException&#x7C7B;&#x578B;&#x7684;&#x5F02;&#x5E38;</span>
+    <span class="hljs-keyword">return</span> IllegalStateException.class;
   }
 
-  @Override
-  public int getOrder() {
-    return 100;
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getOrder</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x7684;order&#x503C;&#x8D8A;&#x5C0F;&#xFF0C;&#x4F18;&#x5148;&#x7EA7;&#x8D8A;&#x9AD8;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;
   }
 
-  @Override
-  public Response convert(SwaggerInvocation swaggerInvocation, IllegalStateException e) {
-    IllegalStateErrorData data = new IllegalStateErrorData();
-    data.setId(500);
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">convert</span><span class="hljs-params">(SwaggerInvocation swaggerInvocation, IllegalStateException e)</span> </span>{
+    <span class="hljs-comment">// &#x8FD9;&#x91CC;&#x662F;&#x5904;&#x7406;&#x5F02;&#x5E38;&#x7684;&#x903B;&#x8F91;</span>
+    IllegalStateErrorData data = <span class="hljs-keyword">new</span> IllegalStateErrorData();
+    data.setId(<span class="hljs-number">500</span>);
     data.setMessage(e.getMessage());
     data.setState(e.getMessage());
-    InvocationException state = new InvocationException(Status.INTERNAL_SERVER_ERROR, data);
-    return Response.failResp(state);
+    InvocationException state = <span class="hljs-keyword">new</span> InvocationException(Status.INTERNAL_SERVER_ERROR, data);
+    <span class="hljs-keyword">return</span> Response.failResp(state);
   }
 }
 </code></pre>
+</li>
+</ul>
+
                                 
                                 </section>
                             
@@ -1469,7 +1486,7 @@ asyncResp.consumerFail(new InvocationException(490, errorData)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"异常处理","level":"1.5.21","depth":2,"next":{"title":"微服务实例间多环境隔离","level":"1.5.22","depth":2,"path":"general-development/multienvironment.md","ref":"general-development/multienvironment.md","articles":[]},"previous":{"title":"优雅停机","level":"1.5.20","depth":2,"path":"general-development/shutdown.md","ref":"general-development/shutdown.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"general-development/error-handling.md","mtime":"2018-11-12T08:34:27.068Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-12T08:35:15.797Z"},"basePath":"..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"异常处理","level":"1.5.21","depth":2,"next":{"title":"微服务实例间多环境隔离","level":"1.5.22","depth":2,"path":"general-development/multienvironment.md","ref":"general-development/multienvironment.md","articles":[]},"previous":{"title":"优雅停机","level":"1.5.20","depth":2,"path":"general-development/shutdown.md","ref":"general-development/shutdown.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"general-development/error-handling.md","mtime":"2018-11-13T09:13:22.957Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-13T09:14:09.655Z"},"basePath":"..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>

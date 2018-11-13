@@ -1296,136 +1296,153 @@
                                 <h1 id="handle-exceptions">Handle exceptions</h1>
 <p>ServiceComb has three categories of exceptions&#xFF1A;</p>
 <ul>
-<li>User Defined Exceptions&#xFF1A;Exceptions defined in API. These exceptions are generated to swagger.</li>
-<li>Control Messages Exceptions&#xFF1A;Most of them are thrown by handlers. e.g. Flow control throws TOO_MANY_REQUESTS_STATUS.</li>
+<li><p>User Defined Exceptions&#xFF1A;Exceptions defined in API. These exceptions are generated to swagger.</p>
+</li>
+<li><p>Control Messages Exceptions&#xFF1A;Most of them are thrown by handlers. e.g. Flow control throws TOO_MANY_REQUESTS_STATUS.</p>
+<pre><code class="lang-java">CommonExceptionData errorData = <span class="hljs-keyword">new</span> CommonExceptionData(<span class="hljs-string">&quot;rejected by qps flowcontrol&quot;</span>);
+asyncResp.producerFail(<span class="hljs-keyword">new</span> InvocationException(QpsConst.TOO_MANY_REQUESTS_STATUS, errorData));
+</code></pre>
+</li>
+<li><p>Unknown Exceptions&#xFF1A;Unkown exceptions may throw by service implementation like NullPointerException or network SocketException. These exceptions will be caught by ServiceComb and return 490, 590 like error code. e.g.</p>
+<pre><code class="lang-java">CommonExceptionData errorData = <span class="hljs-keyword">new</span> CommonExceptionData(cause.getMessage());
+asyncResp.producerFail(<span class="hljs-keyword">new</span> InvocationException(<span class="hljs-number">590</span>, errorData)
+</code></pre>
+<p>or</p>
+<pre><code class="lang-java">asyncResp.consumerFail(<span class="hljs-keyword">new</span> InvocationException(<span class="hljs-number">490</span>, errorData)
+</code></pre>
+</li>
 </ul>
-<pre><code>CommonExceptionData errorData = new CommonExceptionData(&quot;rejected by qps flowcontrol&quot;);
-asyncResp.producerFail(new InvocationException(QpsConst.TOO_MANY_REQUESTS_STATUS, errorData));
-</code></pre><ul>
-<li>Unknown Exceptions&#xFF1A;Unkown exceptions may throw by service implementation like NullPointerException or network SocketException. These exceptions will be caught by ServiceComb and return 490, 590 like error code. e.g. </li>
-</ul>
-<pre><code>CommonExceptionData errorData = new CommonExceptionData(cause.getMessage());
-asyncResp.producerFail(new InvocationException(590, errorData)
-
-or
-asyncResp.consumerFail(new InvocationException(490, errorData)
-</code></pre><h2 id="user-defined-exceptions">User Defined Exceptions</h2>
-<p>Users can use @ApiResonse to define different types of exceptions&#x3002;e.g.</p>
-<pre><code>  @Path(&quot;/errorCode&quot;)
-  @POST
-  @ApiResponses({
-      @ApiResponse(code = 200, response = MultiResponse200.class, message = &quot;&quot;),
-      @ApiResponse(code = 400, response = MultiResponse400.class, message = &quot;&quot;),
-      @ApiResponse(code = 500, response = MultiResponse500.class, message = &quot;&quot;)})
-  public MultiResponse200 errorCode(MultiRequest request) {
-    if (request.getCode() == 400) {
-      MultiResponse400 r = new MultiResponse400();
-      r.setCode(400);
-      r.setMessage(&quot;bad request&quot;);
-      throw new InvocationException(javax.ws.rs.core.Response.Status.BAD_REQUEST, r);
-    } else if (request.getCode() == 500) {
-      MultiResponse500 r = new MultiResponse500();
-      r.setCode(500);
-      r.setMessage(&quot;internal error&quot;);
-      throw new InvocationException(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR, r);
-    } else {
-      MultiResponse200 r = new MultiResponse200();
-      r.setCode(200);
-      r.setMessage(&quot;success result&quot;);
-      return r;
+<h2 id="user-defined-exceptions">User Defined Exceptions</h2>
+<p>Users can use @ApiResonse to define different types of exceptions. e.g.</p>
+<pre><code class="lang-java">  <span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;/errorCode&quot;</span>)
+  <span class="hljs-meta">@POST</span>
+  <span class="hljs-meta">@ApiResponses</span>({
+      <span class="hljs-meta">@ApiResponse</span>(code = <span class="hljs-number">200</span>, response = MultiResponse200.class, message = <span class="hljs-string">&quot;&quot;</span>),
+      <span class="hljs-meta">@ApiResponse</span>(code = <span class="hljs-number">400</span>, response = MultiResponse400.class, message = <span class="hljs-string">&quot;&quot;</span>),
+      <span class="hljs-meta">@ApiResponse</span>(code = <span class="hljs-number">500</span>, response = MultiResponse500.class, message = <span class="hljs-string">&quot;&quot;</span>)})
+  <span class="hljs-function"><span class="hljs-keyword">public</span> MultiResponse200 <span class="hljs-title">errorCode</span><span class="hljs-params">(MultiRequest request)</span> </span>{
+    <span class="hljs-keyword">if</span> (request.getCode() == <span class="hljs-number">400</span>) {
+      MultiResponse400 r = <span class="hljs-keyword">new</span> MultiResponse400();
+      r.setCode(<span class="hljs-number">400</span>);
+      r.setMessage(<span class="hljs-string">&quot;bad request&quot;</span>);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvocationException(javax.ws.rs.core.Response.Status.BAD_REQUEST, r);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (request.getCode() == <span class="hljs-number">500</span>) {
+      MultiResponse500 r = <span class="hljs-keyword">new</span> MultiResponse500();
+      r.setCode(<span class="hljs-number">500</span>);
+      r.setMessage(<span class="hljs-string">&quot;internal error&quot;</span>);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvocationException(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR, r);
+    } <span class="hljs-keyword">else</span> {
+      MultiResponse200 r = <span class="hljs-keyword">new</span> MultiResponse200();
+      r.setCode(<span class="hljs-number">200</span>);
+      r.setMessage(<span class="hljs-string">&quot;success result&quot;</span>);
+      <span class="hljs-keyword">return</span> r;
     }
   }
-</code></pre><p>and client code know exception type. </p>
-<pre><code>    MultiRequest request = new MultiRequest();
+</code></pre>
+<p>and client code know exception type.</p>
+<pre><code class="lang-java">    MultiRequest request = <span class="hljs-keyword">new</span> MultiRequest();
 
-    request.setCode(200);
+    request.setCode(<span class="hljs-number">200</span>);
     ResponseEntity&lt;MultiResponse200&gt; result = template
-        .postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse200.class);
-    TestMgr.check(result.getStatusCode(), 200);
-    TestMgr.check(result.getBody().getMessage(), &quot;success result&quot;);
+        .postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/errorCode&quot;</span>, request, MultiResponse200.class);
+    TestMgr.check(result.getStatusCode(), <span class="hljs-number">200</span>);
+    TestMgr.check(result.getBody().getMessage(), <span class="hljs-string">&quot;success result&quot;</span>);
 
-    request.setCode(400);
-    MultiResponse400 t400 = null;
-    try {
-      template.postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse400.class);
-    } catch (InvocationException e) {
+    request.setCode(<span class="hljs-number">400</span>);
+    MultiResponse400 t400 = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+      template.postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/errorCode&quot;</span>, request, MultiResponse400.class);
+    } <span class="hljs-keyword">catch</span> (InvocationException e) {
       t400 = (MultiResponse400) e.getErrorData();
     }
-    TestMgr.check(t400.getCode(), 400);
-    TestMgr.check(t400.getMessage(), &quot;bad request&quot;);
+    TestMgr.check(t400.getCode(), <span class="hljs-number">400</span>);
+    TestMgr.check(t400.getMessage(), <span class="hljs-string">&quot;bad request&quot;</span>);
 
-    request.setCode(500);
-    MultiResponse500 t500 = null;
-    try {
-      template.postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse400.class);
-    } catch (InvocationException e) {
+    request.setCode(<span class="hljs-number">500</span>);
+    MultiResponse500 t500 = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+      template.postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/errorCode&quot;</span>, request, MultiResponse400.class);
+    } <span class="hljs-keyword">catch</span> (InvocationException e) {
       t500 = (MultiResponse500) e.getErrorData();
     }
-    TestMgr.check(t500.getCode(), 500);
-    TestMgr.check(t500.getMessage(), &quot;internal error&quot;);
-</code></pre><h2 id="control-messages-exceptions">Control Messages Exceptions</h2>
+    TestMgr.check(t500.getCode(), <span class="hljs-number">500</span>);
+    TestMgr.check(t500.getMessage(), <span class="hljs-string">&quot;internal error&quot;</span>);
+</code></pre>
+<h2 id="control-messages-exceptions">Control Messages Exceptions</h2>
 <p>Control message exceptions not defined in swagger and the type is unknown for serializers. Client code use raw type to process it.</p>
-<pre><code>    JsonObject requestJson = new JsonObject();
-    requestJson.put(&quot;code&quot;, 400);
-    requestJson.put(&quot;message&quot;, &quot;test message&quot;);
+<pre><code class="lang-java">    JsonObject requestJson = <span class="hljs-keyword">new</span> JsonObject();
+    requestJson.put(<span class="hljs-string">&quot;code&quot;</span>, <span class="hljs-number">400</span>);
+    requestJson.put(<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;test message&quot;</span>);
 
-    try {
+    <span class="hljs-keyword">try</span> {
       template
-          .postForEntity(SERVER + &quot;/MultiErrorCodeService/noClientErrorCode&quot;, requestJson, Object.class);
-    } catch (InvocationException e) {
-      TestMgr.check(e.getStatusCode(), 400);
+          .postForEntity(SERVER + <span class="hljs-string">&quot;/MultiErrorCodeService/noClientErrorCode&quot;</span>, requestJson, Object.class);
+    } <span class="hljs-keyword">catch</span> (InvocationException e) {
+      TestMgr.check(e.getStatusCode(), <span class="hljs-number">400</span>);
       mapResult = RestObjectMapperFactory.getRestObjectMapper().convertValue(e.getErrorData(), Map.class);
-      TestMgr.check(mapResult.get(&quot;message&quot;), &quot;test message&quot;);
-      TestMgr.check(mapResult.get(&quot;code&quot;), 400);
-      TestMgr.check(mapResult.get(&quot;t400&quot;), 400);
+      TestMgr.check(mapResult.get(<span class="hljs-string">&quot;message&quot;</span>), <span class="hljs-string">&quot;test message&quot;</span>);
+      TestMgr.check(mapResult.get(<span class="hljs-string">&quot;code&quot;</span>), <span class="hljs-number">400</span>);
+      TestMgr.check(mapResult.get(<span class="hljs-string">&quot;t400&quot;</span>), <span class="hljs-number">400</span>);
     }
-</code></pre><p>The above code assume the type of exception data is unknown and convert it to map. Usually, ServiceComb throws its control messages exception with CommonExceptionData.</p>
+</code></pre>
+<p>The above code assume the type of exception data is unknown and convert it to map. Usually, ServiceComb throws its control messages exception with CommonExceptionData.</p>
 <h2 id="unknown-exceptions">Unknown Exceptions</h2>
 <p>Unknown exceptions are wrapped to 490 and 590 error code, and type is CommonExceptionData.</p>
 <h2 id="customize-exceptions-type">Customize exceptions type</h2>
-<p>We can define actual types for error code and convert one type of exception to another. </p>
+<p>We can define actual types for error code and convert one type of exception to another.</p>
 <ul>
-<li>define actual types for error code</li>
-</ul>
-<p>Define actual types for error code can make consumer code easier, and do not to use raw types. Users can implement a SPI interface org.apache.servicecomb.swagger.invocation.response.ResponseMetaMapper to specify the target exception type for specific error code. </p>
-<pre><code>  private final static Map&lt;Integer, ResponseMeta&gt; CODES = new HashMap&lt;&gt;(1);
+<li><p>define actual types for error code</p>
+<p>Define actual types for error code can make consumer code easier, and do not to use raw types. Users can implement a SPI interface org.apache.servicecomb.swagger.invocation.response.ResponseMetaMapper to specify the target exception type for specific error code.</p>
+<pre><code class="lang-java">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> Map&lt;Integer, ResponseMeta&gt; CODES = <span class="hljs-keyword">new</span> HashMap&lt;&gt;(<span class="hljs-number">1</span>);
 
-  static {
-    ResponseMeta meta = new ResponseMeta();
+  <span class="hljs-keyword">static</span> {
+    ResponseMeta meta = <span class="hljs-keyword">new</span> ResponseMeta();
     meta.setJavaType(SimpleType.constructUnsafe(IllegalStateErrorData.class));
-    CODES.put(500, meta);
+    CODES.put(<span class="hljs-number">500</span>, meta);
   }
 
-  @Override
-  public Map&lt;Integer, ResponseMeta&gt; getMapper() {
-    return CODES;
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Map&lt;Integer, ResponseMeta&gt; <span class="hljs-title">getMapper</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> CODES;
   }
-</code></pre><ul>
-<li>convert one type of exception to another</li>
+</code></pre>
+</li>
+<li><p>convert one type of exception to another</p>
+<p>ServiceComb will serialize <code>InvocationException</code> data to response, and when the exception type is not <code>InvocationException</code>, a wrapped InvocationException with error code 490, 590 is created. Implement SPI interface <code>org.apache.servicecomb.swagger.invocation.exception.ExceptionToProducerResponseConverter</code> can convert one type of exception to another. Here is the description about <code>ExceptionToProducerResponseConverter</code>:</p>
+<ul>
+<li>the method <code>getExceptionClass()</code> indicates which type of exception this converter handles. The converter whose <code>getExceptionClass()</code> method returns <code>null</code> will be taken as default converter.</li>
+<li>in the method <code>Response convert(SwaggerInvocation swaggerInvocation, T e)</code>, the exception is processed and <code>Response</code> is returned. The returned <code>Response</code> determines the status code, resposne body of the HTTP response.</li>
+<li>the method <code>getOrder()</code> determines the priority of a converter. The less the returned value is, the higher the priority is. If the converter does not implement this method, the default return value is <code>0</code>. For a certain type of exception, only the converter with the highest priority will take effect.</li>
+<li>When an exception comes, the converters will be selected according to its type. If no converter is selected, then the type of its parent class is used to select the converter. Such process will continue until the <code>Throwable</code> type is used to select converter. If there is still no converter for this exception, the default converter will be selected to process this type of exception.</li>
 </ul>
-<p>ServiceComb will serialize InvocationException data to response, and when exception type is not InvocationException&#xFF0C;a wrapped InvocationException with error code 490&#xFF0C; 590 is created&#x3002;Implement SPI interface org.apache.servicecomb.swagger.invocation.exception.ExceptionToResponseConverter can convert from one type of exception to the other.</p>
-<pre><code>public class CustomExceptionToResponseConverter implements ExceptionToResponseConverter&lt;IllegalStateException&gt; {
-  @Override
-  public Class&lt;IllegalStateException&gt; getExceptionClass() {
-    return IllegalStateException.class;
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomExceptionToProducerResponseConverter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ExceptionToProducerResponseConverter</span>&lt;<span class="hljs-title">IllegalStateException</span>&gt; </span>{
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Class&lt;IllegalStateException&gt; <span class="hljs-title">getExceptionClass</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// The return value indicates that this converter handles IllegalStateException</span>
+    <span class="hljs-keyword">return</span> IllegalStateException.class;
   }
 
-  @Override
-  public int getOrder() {
-    return 100;
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getOrder</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// The less the returned value is, the higher the priority is</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">100</span>;
   }
 
-  @Override
-  public Response convert(SwaggerInvocation swaggerInvocation, IllegalStateException e) {
-    IllegalStateErrorData data = new IllegalStateErrorData();
-    data.setId(500);
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">convert</span><span class="hljs-params">(SwaggerInvocation swaggerInvocation, IllegalStateException e)</span> </span>{
+    <span class="hljs-comment">// Here the exception is processed</span>
+    IllegalStateErrorData data = <span class="hljs-keyword">new</span> IllegalStateErrorData();
+    data.setId(<span class="hljs-number">500</span>);
     data.setMessage(e.getMessage());
     data.setState(e.getMessage());
-    InvocationException state = new InvocationException(Status.INTERNAL_SERVER_ERROR, data);
-    return Response.failResp(state);
+    InvocationException state = <span class="hljs-keyword">new</span> InvocationException(Status.INTERNAL_SERVER_ERROR, data);
+    <span class="hljs-keyword">return</span> Response.failResp(state);
   }
 }
 </code></pre>
+</li>
+</ul>
+
                                 
                                 </section>
                             
@@ -1468,7 +1485,7 @@ asyncResp.consumerFail(new InvocationException(490, errorData)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Handling exceptions","level":"1.5.21","depth":2,"next":{"title":"Multi-environment isolation between microservice instances","level":"1.5.22","depth":2,"path":"general-development/multienvironment.md","ref":"general-development/multienvironment.md","articles":[]},"previous":{"title":"Shutdown gracefully","level":"1.5.20","depth":2,"path":"general-development/shutdown.md","ref":"general-development/shutdown.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/error-handling.md","mtime":"2018-11-12T08:34:27.060Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-12T08:35:15.797Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Handling exceptions","level":"1.5.21","depth":2,"next":{"title":"Multi-environment isolation between microservice instances","level":"1.5.22","depth":2,"path":"general-development/multienvironment.md","ref":"general-development/multienvironment.md","articles":[]},"previous":{"title":"Shutdown gracefully","level":"1.5.20","depth":2,"path":"general-development/shutdown.md","ref":"general-development/shutdown.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/error-handling.md","mtime":"2018-11-13T09:13:22.945Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-13T09:14:09.655Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
