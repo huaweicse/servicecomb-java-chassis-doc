@@ -1326,7 +1326,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">listener</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span>
 </code></pre>
-<p>&#x5176;&#x4E2D;classpath<em>:META-INF/spring/</em>.bean.xml&#xFF0C;&#x65E0;&#x8BBA;&#x4EFB;&#x4F55;&#x60C5;&#x51B5;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x4E0D;&#x5728;contextConfigLocation&#x4E2D;&#x914D;&#x7F6E;&#xFF0C;&#x56E0;&#x4E3A;ServiceComb&#x673A;&#x5236;&#x4F1A;&#x786E;&#x4FDD;&#x52A0;&#x8F7D;&#x8DEF;&#x5F84;&#x4E2D;&#x5305;&#x542B;&#x5B83;&#x3002;<br>&#x8FD9;&#x91CC;&#x4EC5;&#x4EC5;&#x662F;&#x4E2A;&#x793A;&#x4F8B;&#xFF0C;&#x8868;&#x793A;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x8005;&#x9700;&#x8981;&#x5B9A;&#x5236;contextConfigLocation&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x3002;  </p>
+<p>&#x5176;&#x4E2D;<code>classpath*:META-INF/spring/*.bean.xml</code>&#xFF0C;&#x65E0;&#x8BBA;&#x4EFB;&#x4F55;&#x60C5;&#x51B5;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x4E0D;&#x5728;contextConfigLocation&#x4E2D;&#x914D;&#x7F6E;&#xFF0C;&#x56E0;&#x4E3A;ServiceComb&#x673A;&#x5236;&#x4F1A;&#x786E;&#x4FDD;&#x52A0;&#x8F7D;&#x8DEF;&#x5F84;&#x4E2D;&#x5305;&#x542B;&#x5B83;&#x3002;<br>&#x8FD9;&#x91CC;&#x4EC5;&#x4EC5;&#x662F;&#x4E2A;&#x793A;&#x4F8B;&#xFF0C;&#x8868;&#x793A;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x8005;&#x9700;&#x8981;&#x5B9A;&#x5236;contextConfigLocation&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x3002;  </p>
 </li>
 <li><p>&#x4F7F;&#x7528;springMVC&#x7684;UI&#x6216;RestController&#xFF0C;&#x4E14;&#x5B58;&#x5728;org.apache.servicecomb.transport.rest.servlet.CseDispatcherServlet  </p>
 <pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
@@ -1353,7 +1353,7 @@ return super.createWebApplicationContext(parent);
 </code></pre></li>
 </ul>
 </li>
-<li>ServiceComb servlet<br>url pattern&#x6839;&#x636E;&#x4E1A;&#x52A1;&#x81EA;&#x8EAB;&#x89C4;&#x5212;&#x8BBE;&#x7F6E;&#x5373;&#x53EF;&#xFF0C;&#x4E0B;&#x9762;&#x7684;/rest/<em>&#x4EC5;&#x4EC5;&#x662F;&#x793A;&#x4F8B;&#xFF0C;&#x4E0D;&#x662F;&#x56FA;&#x5B9A;&#x503C;&#x3002;<br>url pattern&#x5FC5;&#x987B;&#x4EE5;/\</em>&#x7ED3;&#x5C3E;<br>&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x58F0;&#x660E;&#x65B9;&#x5F0F;&#x4E5F;&#x662F;&#x591A;&#x9009;&#x4E00;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4E0D;&#x8981;&#x540C;&#x65F6;&#x4F7F;&#x7528;<ul>
+<li>ServiceComb servlet<br>url pattern&#x6839;&#x636E;&#x4E1A;&#x52A1;&#x81EA;&#x8EAB;&#x89C4;&#x5212;&#x8BBE;&#x7F6E;&#x5373;&#x53EF;&#xFF0C;&#x4E0B;&#x9762;&#x7684;<code>/rest/*</code>&#x4EC5;&#x4EC5;&#x662F;&#x793A;&#x4F8B;&#xFF0C;&#x4E0D;&#x662F;&#x56FA;&#x5B9A;&#x503C;&#x3002;<br>url pattern&#x5FC5;&#x987B;&#x4EE5;<code>/*</code>&#x7ED3;&#x5C3E;<br>&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x58F0;&#x660E;&#x65B9;&#x5F0F;&#x4E5F;&#x662F;&#x591A;&#x9009;&#x4E00;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4E0D;&#x8981;&#x540C;&#x65F6;&#x4F7F;&#x7528;<ul>
 <li>&#x6807;&#x51C6;&#x58F0;&#x660E;<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://java.sun.com/xml/ns/javaee&quot;</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
      <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;</span>
      <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3.0&quot;</span>&gt;</span>
@@ -1459,36 +1459,34 @@ RestServlet&#x5DE5;&#x4F5C;&#x4E8E;&#x5F02;&#x6B65;&#x6A21;&#x5F0F;&#xFF0C;&#x68
 <tr>
 <th style="text-align:left">&#x914D;&#x7F6E;&#x9879;</th>
 <th style="text-align:left">&#x9ED8;&#x8BA4;&#x503C;</th>
-<th style="text-align:left">&#x53D6;&#x503C;&#x8303;&#x56F4;</th>
 <th style="text-align:left">&#x662F;&#x5426;&#x5FC5;&#x9009;</th>
 <th style="text-align:left">&#x542B;&#x4E49;</th>
-<th style="text-align:left">&#x6CE8;&#x610F;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">servicecomb.rest.address</td>
 <td style="text-align:left">0.0.0.0:8080</td>
-<td style="text-align:left">-</td>
 <td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;</td>
-<td style="text-align:left">&#x5FC5;&#x987B;&#x914D;&#x7F6E;&#x4E3A;&#x4E0E;web&#x5BB9;&#x5668;&#x76D1;&#x542C;&#x5730;&#x5740;&#x76F8;&#x540C;&#x7684;&#x5730;&#x5740;</td>
+<td style="text-align:left">&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5730;&#x5740;<br>&#x5FC5;&#x987B;&#x914D;&#x7F6E;&#x4E3A;&#x4E0E;web&#x5BB9;&#x5668;&#x76D1;&#x542C;&#x5730;&#x5740;&#x76F8;&#x540C;&#x7684;&#x5730;&#x5740;</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.rest.server.timeout</td>
-<td style="text-align:left">3000</td>
-<td style="text-align:left">-</td>
+<td style="text-align:left">-1</td>
 <td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x8D85;&#x65F6;&#x65F6;&#x95F4;</td>
-<td style="text-align:left">&#x5355;&#x4F4D;&#x4E3A;&#x6BEB;&#x79D2;</td>
+<td style="text-align:left">&#x5F02;&#x6B65;servlet&#x8D85;&#x65F6;&#x65F6;&#x95F4;, &#x5355;&#x4F4D;&#x4E3A;&#x6BEB;&#x79D2;<br>&#x5EFA;&#x8BAE;&#x4FDD;&#x6301;&#x9ED8;&#x8BA4;&#x503C;</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td style="text-align:left">30000</td>
+<td style="text-align:left">&#x5426;</td>
+<td style="text-align:left">&#x5728;&#x540C;&#x6B65;&#x7EBF;&#x7A0B;&#x4E2D;&#x6392;&#x961F;&#x7B49;&#x5F85;&#x6267;&#x884C;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x4E3A;&#x6BEB;&#x79D2;</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.rest.servlet.urlPattern</td>
 <td style="text-align:left">&#x65E0;</td>
-<td style="text-align:left"></td>
 <td style="text-align:left">&#x5426;</td>
-<td style="text-align:left">&#x7528;&#x4E8E;&#x7B80;&#x5316;servlet+servlet mapping&#x914D;&#x7F6E;</td>
-<td style="text-align:left">&#x53EA;&#x6709;&#x5728;web.xml&#x4E2D;&#x672A;&#x914D;&#x7F6E;servlet+servlet mapping&#x65F6;&#xFF0C;&#x624D;&#x4F7F;&#x7528;&#x6B64;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x914D;&#x7F6E;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;/* &#x6216;  /path/*&#xFF0C;&#x5176;&#x4E2D;path&#x53EF;&#x4EE5;&#x662F;&#x591A;&#x6B21;&#x76EE;&#x5F55;</td>
+<td style="text-align:left">&#x7528;&#x4E8E;&#x7B80;&#x5316;servlet+servlet mapping&#x914D;&#x7F6E;<br>&#x53EA;&#x6709;&#x5728;web.xml&#x4E2D;&#x672A;&#x914D;&#x7F6E;servlet+servlet mapping&#x65F6;&#xFF0C;&#x624D;&#x4F7F;&#x7528;&#x6B64;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x914D;&#x7F6E;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;/* &#x6216;  /path/*&#xFF0C;&#x5176;&#x4E2D;path&#x53EF;&#x4EE5;&#x662F;&#x591A;&#x6B21;&#x76EE;&#x5F55;</td>
 </tr>
 </tbody>
 </table>
@@ -1535,7 +1533,7 @@ RestServlet&#x5DE5;&#x4F5C;&#x4E8E;&#x5F02;&#x6B65;&#x6A21;&#x5F0F;&#xFF0C;&#x68
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"next":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"previous":{"title":"线程模型","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-servlet.md","mtime":"2019-01-04T01:37:50.871Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-04T01:38:40.697Z"},"basePath":"../..","book":{"language":"zh_CN"}});
+            gitbook.page.hasChanged({"page":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"next":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"previous":{"title":"线程模型","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"zh_CN","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-servlet.md","mtime":"2019-01-26T02:40:38.342Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T02:41:27.271Z"},"basePath":"../..","book":{"language":"zh_CN"}});
         });
     </script>
 </div>

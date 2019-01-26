@@ -1329,7 +1329,7 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">listener</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">web-app</span>&gt;</span>
 </code></pre>
-<p>The classpath<em>:META-INF/spring/</em>.bean.xml configured in contextConfigLocation is optional, because the ServiceComb will ensure that it is included in the load path.</p>
+<p>The <code>classpath*:META-INF/spring/*.bean.xml</code> configured in contextConfigLocation is optional, because the ServiceComb will ensure that it is included in the load path.</p>
 <p>This is just an example to indicate that the user can customize the contextConfigLocation.</p>
 <ul>
 <li>Use SpringMVC  UI or RestController, and org.apache.servicecomb.transport.rest.servlet.CseDispatcherServlet exists</li>
@@ -1361,8 +1361,8 @@ protected WebApplicationContext createWebApplicationContext(ApplicationContext p
 }
 </code></pre></li>
 <li><p>ServiceComb servlet  </p>
-<p>The url pattern can be set according to the business logic. The following /rest/* is just an example, not a fixed value.</p>
-<p>Url pattern must end with /*</p>
+<p>The url pattern can be set according to the business logic. The following <code>/rest/*</code> is just an example, not a fixed value.</p>
+<p>Url pattern must end with <code>/*</code></p>
 <p>The following two declarations types can not be used at the same time.</p>
 <ul>
 <li>Standard declaration</li>
@@ -1486,36 +1486,34 @@ web.xml&#xFF1A;</p>
 <tr>
 <th style="text-align:left">Configuration Item</th>
 <th style="text-align:left">Default Value</th>
-<th style="text-align:left">Range</th>
 <th style="text-align:left">Required</th>
 <th style="text-align:left">Description</th>
-<th style="text-align:left">Remarks</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">servicecomb.rest.address</td>
 <td style="text-align:left">0.0.0.0:8080</td>
-<td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">They service listening address</td>
-<td style="text-align:left">Should be the same with the web container&apos;s listening address</td>
+<td style="text-align:left">The service listening address<br>Should be the same with the web container&apos;s listening address</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.rest.server.timeout</td>
-<td style="text-align:left">3000</td>
-<td style="text-align:left">-</td>
+<td style="text-align:left">-1</td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Server timeout</td>
-<td style="text-align:left">In milliseconds</td>
+<td style="text-align:left">Server aync servlet timeout in milliseconds, suggest set to -1</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td style="text-align:left">30000</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">for sync business logic, timeout in milliseconds for waiting in executor queue</td>
 </tr>
 <tr>
 <td style="text-align:left">servicecomb.rest.servlet.urlPattern</td>
 <td style="text-align:left"></td>
-<td style="text-align:left"></td>
 <td style="text-align:left">No</td>
-<td style="text-align:left">Used to simplify servlet+servlet mapping config</td>
-<td style="text-align:left">This item is used only when servlet+servlet mapping is not configured in web.xml.The format is:/* or /path/*, where path can be nested</td>
+<td style="text-align:left">Used to simplify servlet+servlet mapping config<br>This item is used only when servlet+servlet mapping is not configured in web.xml.The format is:/* or /path/*, where path can be nested</td>
 </tr>
 </tbody>
 </table>
@@ -1562,7 +1560,7 @@ web.xml&#xFF1A;</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"next":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"previous":{"title":"Thread model","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-servlet.md","mtime":"2019-01-04T01:37:50.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-04T01:38:40.697Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"REST over Servlet","level":"1.3.11.2","depth":3,"next":{"title":"REST over Vertx","level":"1.3.11.3","depth":3,"path":"build-provider/protocol/rest-over-vertx.md","ref":"build-provider/protocol/rest-over-vertx.md","articles":[]},"previous":{"title":"Thread model","level":"1.3.11.1","depth":3,"path":"build-provider/protocol/thread-model.md","ref":"build-provider/protocol/thread-model.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/protocol/rest-over-servlet.md","mtime":"2019-01-26T02:40:38.330Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-26T02:41:27.271Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>
