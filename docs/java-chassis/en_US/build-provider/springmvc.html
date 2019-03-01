@@ -1353,167 +1353,293 @@
                                 
                                 <h1 id="develop-microservice-with-springmvc">Develop Microservice with SpringMVC</h1>
 <h2 id="concept-description">Concept Description</h2>
-<p>ServiceComb supports Spring MVC remark and allows you to develop microservices in Spring MVC mode.</p>
+<p>ServiceComb supports Spring MVC annotations to define your REST services. The <a href="https://github.com/apache/servicecomb-java-chassis/tree/master/samples/springmvc-sample" target="_blank">samples project</a> has a lot of working examples.</p>
 <h2 id="development-example">Development Example</h2>
+<h3 id="define-the-service-interface-&#xFF08;optional&#xFF09;">Define the service interface &#xFF08;optional&#xFF09;</h3>
+<p>Writing a interface for the REST service make it easy to call the service in client in RPC style.</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Hello</span> </span>{
+    <span class="hljs-function">String <span class="hljs-title">sayHi</span><span class="hljs-params">(String name)</span></span>;
+    <span class="hljs-function">String <span class="hljs-title">sayHello</span><span class="hljs-params">(Person person)</span></span>;
+}
+</code></pre>
 <ul>
-<li><p><strong>Step 1</strong> Import dependencies into your maven project:</p>
-<pre><code class="lang-xml">  <span class="hljs-tag">&lt;<span class="hljs-name">dependencyManagement</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
-     <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>java-chassis-dependencies<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0-m1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>pom<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span>
-       <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>import<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
-     <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-   <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">dependencyManagement</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
-    <span class="hljs-comment">&lt;!--transport can optional import through endpoint setting in microservice.yaml, we import both rest and highway as example--&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>transport-rest-vertx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>transport-highway<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>provider-springmvc<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-log4j12<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
-</code></pre>
-</li>
 <li><p><strong>Step 2</strong> Implement the services. Spring MVC is used to describe the development of service code. The implementation of the Hello service is as follow:</p>
-<pre><code class="lang-java"> <span class="hljs-keyword">import</span> javax.ws.rs.core.MediaType;
- <span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestBody;
- <span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;
- <span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;
- <span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestParam;
- <span class="hljs-keyword">import</span> org.apache.servicecomb.samples.common.schema.models.Person;
+<pre><code class="lang-java"><span class="hljs-meta">@RestSchema</span>(schemaId = <span class="hljs-string">&quot;springmvcHello&quot;</span>)
+<span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/springmvchello&quot;</span>, produces = MediaType.APPLICATION_JSON)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringmvcHelloImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Hello</span> </span>{
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/sayhi&quot;</span>, method = RequestMethod.POST)
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHi</span><span class="hljs-params">(@RequestParam(name = <span class="hljs-string">&quot;name&quot;</span>)</span> String name) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello &quot;</span> + name;
+  }
 
- <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/springmvchello&quot;</span>, produces = MediaType.APPLICATION_JSON)
- <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringmvcHelloImpl</span> </span>{
-   <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/sayhi&quot;</span>, method = RequestMethod.POST)
-   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHi</span><span class="hljs-params">(@RequestParam(name = <span class="hljs-string">&quot;name&quot;</span>)</span> String name) </span>{
- &#x3000;  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello &quot;</span> + name;
-   }
-
-   <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/sayhello&quot;</span>, method = RequestMethod.POST)
-   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHello</span><span class="hljs-params">(@RequestBody Person person)</span> </span>{
- &#x3000;  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello person &quot;</span> + person.getName();
- &#x3000;}
- }
-</code></pre>
-<p> <strong>Note: PLEASE MAKE SURE TO MARK @RequestMapping ON YOUR PRODUCER(SpringmvcHelloImpl), OR THE PATH AND METHOD OF PUBLISHED WILL BE INCORRECT!</strong></p>
-<p> In this sample the Path of sayHi is <code>/springmvchello/sayhi</code>, and the Path of sayHello is <code>/springmvchello/sayhello</code>, if you wish them <code>/sayhi</code> and <code>/sayhello</code>, please change the setting of <code>@RequestMapping</code> on the SpringmvcHelloImpl to <code>@RequestMapping(&quot;/&quot;)</code>.</p>
-</li>
-<li><p><strong>Step 3</strong> Release the service. Add @RestSchema as the annotation of the service implementation class and specify schemaId, which indicates that the implementation is released as a schema of the current microservice. The code is as follows:</p>
-<pre><code class="lang-java"> <span class="hljs-keyword">import</span> org.apache.servicecomb.provider.rest.common.RestSchema;
- <span class="hljs-comment">// other code omitted</span>
- <span class="hljs-meta">@RestSchema</span>(schemaId = <span class="hljs-string">&quot;springmvcHello&quot;</span>)
- <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringmvcHelloImpl</span> </span>{
-   <span class="hljs-comment">// other code omitted</span>
- }
-</code></pre>
-<p> Create the <code>springmvcHello.bean.xml</code>  file(the file name format is *.bean.xml) in the <code>resources/META-INF/spring</code> directory and configure base-package that performs scanning. The content of the file is as follows:</p>
-<pre><code class="lang-xml"> <span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
-
- <span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span>
-        <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-        <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span>
-        <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;</span>&gt;</span>
-
-     <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;org.apache.servicecomb.samples.springmvc.provider&quot;</span>/&gt;</span>
- <span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span>
-</code></pre>
-</li>
-<li><p><strong>Step 4</strong> Add service definition file:</p>
-<p> Add <a href="http://servicecomb.incubator.apache.org/cn/users/service-definition/" target="_blank">microservice.yaml</a> file into resources folder of your project.</p>
-</li>
-<li><p><strong>Step 5</strong> Add Main class:</p>
-<pre><code class="lang-java"> <span class="hljs-keyword">import</span> org.apache.servicecomb.foundation.common.utils.BeanUtils;
- <span class="hljs-keyword">import</span> org.apache.servicecomb.foundation.common.utils.Log4jUtils;
-
- <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>{
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
-      <span class="hljs-comment">//initializing log, loading bean(including its parameters), and registering service, more detail can be found here : http://servicecomb.incubator.apache.org/users/application-boot-process/</span>
-      Log4jUtils.init();
-      BeanUtils.init();
-   }
- }
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-meta">@RequestMapping</span>(path = <span class="hljs-string">&quot;/sayhello&quot;</span>, method = RequestMethod.POST)
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHello</span><span class="hljs-params">(@RequestBody Person person)</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello person &quot;</span> + person.getName();
+  }
+}
 </code></pre>
 </li>
 </ul>
-<h2 id="involved-apis">Involved APIs</h2>
-<p>Currently, the Spring MVC development mode supports the following annotations in the org.springframework.web.bind.annotation package. For details about how to use the annotations, see <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html" target="_blank">Spring MVC official documentation</a>&#x3002;</p>
+<h3 id="add-a-component-scan-&#xFF08;optional&#xFF09;">add a component scan &#xFF08;optional&#xFF09;</h3>
+<p>create <code>resources/META-INF/spring</code> folder and add <code>springmvcprovider.bean.xml</code>, add component-scan to specify the bean package. This step is optional. The package where main class located is automatically added.</p>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span>
+       <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+       <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span>
+       <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;org.apache.servicecomb.samples.springmvc.povider&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span>
+</code></pre>
+<h3 id="wrtie-a-main-class">Wrtie a main class</h3>
+<p>This code using log4j as the logger framework. Users can change it to any other favorite logger framework. </p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringmvcProviderMain</span> </span>{
+
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+    Log4jUtils.init();
+    BeanUtils.init();
+  }
+}
+</code></pre>
+<h2 id="using-pojo-as-query-parameters">Using POJO as query parameters</h2>
+<h3 id="description">Description</h3>
+<p>SpringBoot supports to map a bean parameter to HTTP queries. </p>
+<pre><code class="lang-java"><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/hello&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloService</span> </span>{
+  <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">&quot;/sayHello&quot;</span>, method = RequestMethod.GET)
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHello</span><span class="hljs-params">(Person person)</span> </span>{
+    System.out.println(<span class="hljs-string">&quot;sayHello is called, person = [&quot;</span> + person + <span class="hljs-string">&quot;]&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, your name is &quot;</span> + person.getName() + <span class="hljs-string">&quot;, and age is &quot;</span> + person.getAge();
+  }
+}
+</code></pre>
+<p>ServiceComb supports this usage too, but has following constraints.</p>
+<ol>
+<li>Must not add any mapping annotations, such as @QueryParam</li>
+<li>Only map to query parameters, headers and forms not supported.</li>
+<li>Variables name in POJO definition must be the same as query keys.</li>
+<li>Only primitive and String types supported in POJO, add <code>@JsonIgnore</code> to other types to ignore it.</li>
+<li>In consumer site(e.g RestTemplate), still need to use query parameters, can not use POJO. </li>
+</ol>
+<h3 id="examples">Examples</h3>
+<h4 id="provider">Provider</h4>
+<ul>
+<li>service definition<pre><code class="lang-java"><span class="hljs-meta">@RestSchema</span>(schemaId = <span class="hljs-string">&quot;helloService&quot;</span>)
+<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/hello&quot;</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloService</span> </span>{
+  <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">&quot;/sayHello&quot;</span>, method = RequestMethod.GET)
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sayHello</span><span class="hljs-params">(Person person)</span> </span>{
+    System.out.println(<span class="hljs-string">&quot;sayHello is called, person = [&quot;</span> + person + <span class="hljs-string">&quot;]&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, your name is &quot;</span> + person.getName() + <span class="hljs-string">&quot;, and age is &quot;</span> + person.getAge();
+  }
+}
+</code></pre>
+</li>
+<li>parameters<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>{
+  <span class="hljs-keyword">private</span> String name;
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+  <span class="hljs-meta">@JsonIgnore</span>  <span class="hljs-comment">// add @JsonIgnore to unsupported types</span>
+  <span class="hljs-keyword">private</span> List&lt;Person&gt; children;
+}
+</code></pre>
+</li>
+<li>Schemas
+```yaml</li>
+</ul>
+<p>basePath: &quot;/hello&quot;
+paths:
+  /sayHello:
+    get:
+      operationId: &quot;sayHello&quot;
+      parameters:</p>
+<pre><code>    # name and age is query parameter
+  - name: &quot;name&quot;
+    in: &quot;query&quot;
+    required: false
+    type: &quot;string&quot;
+  - name: &quot;age&quot;
+    in: &quot;query&quot;
+    required: false
+    type: &quot;integer&quot;
+    format: &quot;int32&quot;
+  responses:
+    200:
+      description: &quot;response of 200&quot;
+      schema:
+        type: &quot;string&quot;
+</code></pre><pre><code>
+#### Consumer
+
+- Call using RPC
+  - add an interface
+  ```java
+    public interface HelloServiceIntf {
+      String sayHello(String name, int age);
+    }
+</code></pre><ul>
+<li>call the interface<pre><code class="lang-java">String result = helloService.sayHello(<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">22</span>); <span class="hljs-comment">// result is &quot;Hello, your name is Bob, and age is 22&quot;</span>
+</code></pre>
+<ul>
+<li>Call using RestTemplate<pre><code class="lang-java">String result = restTemplate.getForObject(
+<span class="hljs-string">&quot;cse://provider-service/hello/sayHello?name=Bob&amp;age=22&quot;</span>,
+String.class);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="servicecomb-suppoted-spring-mvc-annotations-and-differences">ServiceComb suppoted Spring MVC annotations and differences</h2>
+<p>ServiceComb supports Spring MVC annotatioins(org.springframework.web.bind.annotation) to define REST interfaces, but they are different. ServiceComb do not support @Controller frameworks and only support @RestController frameworks. </p>
+<ul>
+<li>Differences in supported annotations</li>
+</ul>
+<h3 id="table-1-1-annotations">Table 1-1 annotations</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Remarks</th>
-<th style="text-align:left">Location</th>
-<th style="text-align:left">Description</th>
+<th style="text-align:left">annotation</th>
+<th style="text-align:left">supported</th>
+<th style="text-align:left">notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">RequestMapping</td>
-<td style="text-align:left">schema/operation</td>
-<td style="text-align:left">Data of path, method or produces is allowed. By default, an operation inherits produces from a schema.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Can only have one path, multiple path is not supported.</td>
 </tr>
 <tr>
 <td style="text-align:left">GetMapping</td>
-<td style="text-align:left">schema/operation</td>
-<td style="text-align:left">Data of path or produces is allowed. By default, an operation inherits produces from a schema.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PutMapping</td>
-<td style="text-align:left">schema/operation</td>
-<td style="text-align:left">Data of path or produces is allowed, an operation inherits produces from a schema.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PostMapping</td>
-<td style="text-align:left">schema/operation</td>
-<td style="text-align:left">Data of path or produces is allowed, an operation inherits produces from a schema.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">DeleteMapping</td>
-<td style="text-align:left">schema/operation</td>
-<td style="text-align:left">Data of path or produces is allowed, an operation inherits produces from a schema.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">PatchMapping</td>
-<td style="text-align:left">schema/operation</td>
-<td style="text-align:left">Data of path or produces is allowed, an operation inherits produces from a schema.</td>
-</tr>
-<tr>
-<td style="text-align:left">PathVariable</td>
-<td style="text-align:left">parameter</td>
-<td style="text-align:left">Obtain parameters from path.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">RequestParam</td>
-<td style="text-align:left">parameter</td>
-<td style="text-align:left">Obtain parameters from query.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">CookieValue</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">PathVariable</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">RequestHeader</td>
-<td style="text-align:left">parameter</td>
-<td style="text-align:left">Obtain parameters from header.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left"></td>
 </tr>
 <tr>
 <td style="text-align:left">RequestBody</td>
-<td style="text-align:left">parameter</td>
-<td style="text-align:left">Obtain parameters from body. Each operation can have only one body parameter.</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">supports application/json&#xFF0C;plain/text</td>
+</tr>
+<tr>
+<td style="text-align:left">RequestPart</td>
+<td style="text-align:left">Yes</td>
+<td style="text-align:left">Used in file upload. Using Part&#x3001;MultipartFile annotations.</td>
+</tr>
+<tr>
+<td style="text-align:left">ResponseBody</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">@Controller framework is not supported</td>
+</tr>
+<tr>
+<td style="text-align:left">ResponseStatus</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left">Using ApiResponse to define status code</td>
+</tr>
+<tr>
+<td style="text-align:left">RequestAttribute</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">SessionAttribute</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">MatrixVariable</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">ModelAttribute</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">ControllerAdvice</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">CrossOrigin</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">ExceptionHandler</td>
+<td style="text-align:left">No</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">InitBinder</td>
+<td style="text-align:left">No</td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li>Define a REST service</li>
+</ul>
+<p>Spring MVC using @RestController to define a REST service&#xFF0C;ServiceComb using @RestSchema to define a REST service&#xFF0C;and path value in @RequestMapping is required.</p>
+<pre><code>@RestSchema(schemaId = &quot;hello&quot;)
+@RequestMapping(path = &quot;/&quot;)
+</code></pre><p>@RestController is also supported and equals to @RestSchma(schemaId=&quot;class name&quot;). However we suggest using @RestSchemaand define a schemaId&#xFF0C;it more convenient when used in configurations.  </p>
+<ul>
+<li>Supported data types</li>
+</ul>
+<p>Spring MVC supports almost all java types in service difinition, e.g.</p>
+<pre><code>// abstract class
+public void postData(@RequestBody Object data)
+// interface
+public void postData(@RequestBody IPerson interfaceData)
+// generic without types
+public void postData(@RequestBody Map rawData)
+// servlet types
+public void postData(HttpServletRequest rquest)
+</code></pre><p>ServiceComb need to generate Open API schemas based on definition, and support cross language features, so some of there usage is not supported. </p>
+<p>HttpServletRequest&#xFF0C;Object is supported in latest version, but they are different. We suggest not using there features if possible.</p>
+<p>please refer to <a href="interface-constraints.html">API Constraints</a> for data type supports.</p>
 
                                 
                                 </section>
@@ -1557,7 +1683,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Develop with SpringMVC","level":"1.4.5","depth":2,"next":{"title":"Develop with JAX-RS","level":"1.4.6","depth":2,"path":"build-provider/jaxrs.md","ref":"build-provider/jaxrs.md","articles":[]},"previous":{"title":"Use Swagger annotations","level":"1.4.4","depth":2,"path":"build-provider/swagger-annotation.md","ref":"build-provider/swagger-annotation.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/springmvc.md","mtime":"2019-02-12T02:21:38.518Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-02-12T02:22:25.853Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Develop with SpringMVC","level":"1.4.5","depth":2,"next":{"title":"Develop with JAX-RS","level":"1.4.6","depth":2,"path":"build-provider/jaxrs.md","ref":"build-provider/jaxrs.md","articles":[]},"previous":{"title":"Use Swagger annotations","level":"1.4.4","depth":2,"path":"build-provider/swagger-annotation.md","ref":"build-provider/swagger-annotation.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/springmvc.md","mtime":"2019-03-01T08:21:41.411Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-01T08:22:26.462Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
