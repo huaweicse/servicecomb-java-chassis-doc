@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>General config · GitBook</title>
+        <title>Configuration injection · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="inject-config.html" />
+    <link rel="next" href="../edge/open-service.html" />
     
     
-    <link rel="prev" href="../catalog/config.html" />
+    <link rel="prev" href="general-config.html" />
     
 
     </head>
@@ -998,7 +998,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.8.1" data-path="general-config.html">
+        <li class="chapter " data-level="1.8.1" data-path="general-config.html">
             
                 <a href="general-config.html">
             
@@ -1011,7 +1011,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8.2" data-path="inject-config.html">
+        <li class="chapter active" data-level="1.8.2" data-path="inject-config.html">
             
                 <a href="inject-config.html">
             
@@ -1368,7 +1368,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >General config</a>
+        <a href=".." >Configuration injection</a>
     </h1>
 </div>
 
@@ -1383,100 +1383,87 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="general-configuration-instructions">General configuration instructions</h1>
-<h2 id="configuration-source-hierarchical-relationship">Configuration source hierarchical relationship</h2>
-<p>ServiceComb provides a hierarchical configuration mechanism. According to the priority, it is divided as below(the former is higher):</p>
+                                <h1 id="configuration-injection">Configuration injection</h1>
+<p>ServiceComb provides the ability to inject configuration attributes into Java object fields and wildcard support.</p>
+<p>A Java object can be a Java Bean or a class with a public field.</p>
+<h2 id="configure-injection-objects">Configure injection objects</h2>
+<p>We first design two Java classes to inject configuration attributes to demonstrate scenarios where annotations are not used and where annotations are used.</p>
+<pre><code class="lang-Java"><span class="hljs-comment">/*
+Use ServiceComb annotations
+*/</span>
+<span class="hljs-meta">@InjectProperties</span>(prefix = <span class="hljs-string">&quot;root&quot;</span>) <span class="hljs-comment">//Specify the prefix of the configuration attribute associated with the model</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConfigWithAnnotation</span> </span>{
+
+  <span class="hljs-comment">/*
+  The prefix attribute value &quot;override&quot; here overrides the prefix attribute value &quot;root&quot; labeled in the @InjectProperties annotation of the class definition. The keys attribute can be an array of strings and the lower the subscript of the array element, the higher the priority.
+
+  Configuration attributes are searched by the attribute names in the following order until the configuration attributes that have been configured are found, then the search is stopped:
+    1)override.high
+  2)override.low
+    */</span>
+  <span class="hljs-meta">@InjectProperty</span>(prefix = <span class="hljs-string">&quot;override&quot;</span>, keys = {<span class="hljs-string">&quot;high&quot;</span>, <span class="hljs-string">&quot;low&quot;</span>})
+  <span class="hljs-keyword">public</span> String strValue;
+
+  <span class="hljs-comment">//Keys support wildcards and specify wildcards&apos;input objects when configuration attributes are injected.</span>
+  <span class="hljs-meta">@InjectProperty</span>(keys = <span class="hljs-string">&quot;${key}.value&quot;</span>)
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> intValue;
+
+    <span class="hljs-comment">//The wildcard&apos;s surrogate object can be a list of strings. Priority follows the strategy that the lower the subscript of array elements, the higher the priority.</span>
+    <span class="hljs-meta">@InjectProperty</span>(keys = <span class="hljs-string">&quot;${full-list}&quot;</span>)
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> floatValue;
+
+  <span class="hljs-comment">//The keys attribute also supports multiple wildcards, with priority as follows: first, the priority of wildcards decreases from left to right, and then, if wildcards are substituted into List, the lower the index of elements in List, the higher the priority strategy.</span>
+  <span class="hljs-meta">@InjectProperty</span>(keys = <span class="hljs-string">&quot;${low-list}.a.${high-list}.b&quot;</span>)
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> longValue;
+
+    <span class="hljs-comment">//Default values can be specified by the defaultValue attribute of the annotation. If the field is not associated with any configuration properties, the default values defined will take effect, otherwise the default values will be overwritten.</span>
+  <span class="hljs-meta">@InjectProperty</span>(defaultValue = <span class="hljs-string">&quot;abc&quot;</span>)
+  <span class="hljs-keyword">public</span> String strDef;
+
+}
+</code></pre>
+<pre><code class="lang-Java"><span class="hljs-comment">/*
+not use Service Comb annotations
+*/</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConfigNoAnnotation</span> </span>{
+  <span class="hljs-comment">/*
+  If the @InjectProperties and @InjectProperty annotations are not provided, the field name is used as the configuration property name by default. Note that class names do not function as prefixes.
+
+  Here, the configuration property strValue is bound to the field
+    */</span>
+  <span class="hljs-keyword">public</span> String strValue;
+}
+</code></pre>
+<h2 id="execution-injection">Execution injection</h2>
+<p>We can execute injection with the following sample code&#xFF1A;</p>
+<p>Inject configuration properties into objects without <code>InjectProperties</code> and <code>InjectProperty</code> annotations:</p>
+<pre><code class="lang-Java">ConfigNoAnnotation config = <span class="hljs-keyword">new</span> ConfigObjectFactory().create(ConfigNoAnnotation.class);
+</code></pre>
+<p>Inject configuration properties into objects annotated with <code>InjectProperties</code> and <code>InjectProperty</code>:</p>
 <ul>
-<li>Configuration Center (dynamic configuration)</li>
-<li>Java System Property (-D parameter)</li>
-<li>Environmental variables</li>
-<li>Configuration file</li>
+<li>Inject the configuration property named <code>root.k.value</code> into the intValue field of a ConfigWithAnnotation object</li>
+<li>The <code>longValue</code> field of the <code>ConfigWithAnnotation</code> object is injected by looking up the configured configuration properties in the following order:<ol>
+<li>root.low-1.a.high-1.b</li>
+<li>root.low-1.a.high-2.b</li>
+<li>root.low-2.a.high-1.b</li>
+<li>root.low-2.a.high-2.b</li>
+</ol>
+</li>
+<li>The <code>floatValue</code> field of the <code>ConfigWithAnnotation</code> object is injected by looking up the configured configuration properties in the following order:<ol>
+<li>root.l1-1</li>
+<li>root.l1-2</li>
+</ol>
+</li>
 </ul>
-<h3 id="configuration-file">Configuration file</h3>
-<p>The configuration file is the microservice.yaml file on classpath by default. When the ServiceComb-Java-Chassis is booting up, the microservice.yaml files are loaded from the jar files and the directories on the hard disks. All of the configuration files are merged into a set of valid configurations. The configuration files on the hard disks has higher priority than those in the jar files. The priority can also be specified by the <code>servicecomb-config-order</code> item in the configuration files.</p>
-<blockquote>
-<p>Tips: Since the microservice.yaml file on the hard disk has a higher priority, the <code>.</code> directory can be added into the classpath of the executable jar package, so that a microservice.yaml file can be placed in the directory where the service jar package is located, to overwrite the configuration files in the jar package.</p>
-</blockquote>
-<p>The default name of the configuration files is &quot;microservice.yaml&quot;. The additional configuration files can be added by specifying Java System Property, and the name of the configuration files can be changed in this way, too:</p>
-<table>
-<thead>
-<tr>
-<th>Java System Property Variable Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>servicecomb.configurationSource.additionalUrls</td>
-<td>List of configuration files, multiple full file names can be specified with the &apos;,&apos; as separator</td>
-</tr>
-<tr>
-<td>servicecomb.configurationSource.defaultFileName</td>
-<td>Default configuration file name</td>
-</tr>
-</tbody>
-</table>
-<h3 id="environmental-variables">Environmental variables</h3>
-<p>On Linux, the <code>.</code> charactor cannot be contained into environment variable name. As a result, some configuration items cannot be specified into environment variables directly. As a solution, the <code>.</code> charactor can be replaced by <code>_</code>, and the converted configuration item can be specified as environment variable. ServiceComb-Java-Chassis can map those converted configuration items to the original configuration items.</p>
-<p>For example, for the configration in microservice.yaml file:</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
-<span class="hljs-attr">  rest:</span>
-<span class="hljs-attr">    address:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">8080</span>
+<pre><code class="lang-Java">ConfigWithAnnotation config = <span class="hljs-keyword">new</span> ConfigObjectFactory().create(ConfigWithAnnotation.class,
+        <span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-string">&quot;k&quot;</span>,
+        <span class="hljs-string">&quot;low-list&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;low-1&quot;</span>, <span class="hljs-string">&quot;low-2&quot;</span>),
+        <span class="hljs-string">&quot;high-list&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;high-1&quot;</span>, <span class="hljs-string">&quot;high-2&quot;</span>),
+        <span class="hljs-string">&quot;full-list&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;l1-1&quot;</span>, <span class="hljs-string">&quot;l1-2&quot;</span>)
+        );
 </code></pre>
-<p>We can specify <code>servicecomb_rest_address=0.0.0.0:9090</code> in the environment variable to overwrite the server port as 9090. This mapping mechanism can also applied to other configuration levels.</p>
-<h3 id="configuration-center-dynamic-configuration">Configuration Center (dynamic configuration)</h3>
-<p>The default implementation of the dynamic configuration is the config-cc client, which is connected to the configuration center. The configuration items are as follows:</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>servicecomb.config.client.refreshMode</td>
-<td>Application configuration refresh mode, <code>0</code> is config-center active push, <code>1</code> is client cycle pull, default is <code>0</code></td>
-</tr>
-<tr>
-<td>servicecomb.config.client.refreshPort</td>
-<td>config-center push configured port</td>
-</tr>
-<tr>
-<td>servicecomb.config.client.tenantName</td>
-<td>Application tenant name</td>
-</tr>
-<tr>
-<td>servicecomb.config.client.serverUri</td>
-<td>config-center access address, the format is <code>http(s)://{ip}:{port}</code>, to separate multiple addresses with comma (optional, when cse.config.client.regUri is configured as This configuration item will take effect when empty))</td>
-</tr>
-<tr>
-<td>servicecomb.config.client.refresh_interval</td>
-<td>the configuration refresh interval, the unit is millisecond, default value is 30000</td>
-</tr>
-</tbody>
-</table>
-<h2 id="get-configuration-information-in-the-program">Get configuration information in the program</h2>
-<p>Developers use a consistent API to get the configuration, regardless of the configured storage path:</p>
-<pre><code class="lang-java">DynamicDoubleProperty myprop = DynamicPropertyFactory.getInstance().getDoubleProperty(<span class="hljs-string">&quot;trace.handler.sampler.percent&quot;</span>, <span class="hljs-number">0.1</span>);
-</code></pre>
-<p>The instance above shows a configuration item whose key is <code>trace.handler.sampler.percent</code>, with default value 0.1. Developers can specify the value of this item in the microservice.yaml file, environment variable, Java System Property or Configuration center. <strong>There is no need for the developers to consider where to get the configuration values, Java-Chassis will load the configurations from everywhere, and merge them into one set of configurations according to the priority rule mentioned above.</strong></p>
-<p>For details, please refer to [API DOC] (<a href="https://netflix.github.io/archaius/archaius-core-javadoc/com/netflix/config/DynamicPropertyFactory.html" target="_blank">https://netflix.github.io/archaius/archaius-core-javadoc/com/netflix/config/DynamicPropertyFactory.html</a>)</p>
-<p>You can register for a callback to handle configuration changes:</p>
-<pre><code class="lang-java"> myprop.addCallback(<span class="hljs-keyword">new</span> Runnable() {
-      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">// this method is invoked when the value of this configuration item is modified</span>
-        System.out.println(<span class="hljs-string">&quot;trace.handler.sampler.percent is changed!&quot;</span>);
-      }
-  });
-</code></pre>
-<h2 id="performing-configuration-item-mapping">Performing configuration item mapping</h2>
-<p>In some cases, we want to block the configuration of some of the open source components we use and provide our users with their own configuration items. In this case, you can define the mapping through config.yaml under the classpath:</p>
-<pre><code>registry:
-  client:
-    serviceUrl:
-      defaultZone: eureka.client.serviceUrl.defaultZone
-</code></pre><p>After the mapping is defined, the framework maps by default when the configuration is loaded, and the configuration items defined by us are mapped to the configuration items that the open source component can recognize.</p>
+<h2 id="reference-resources">Reference resources</h2>
+<p>Refer to the sample code&#xFF1A; <a href="https://github.com/apache/servicecomb-java-chassis/blob/master/foundations/foundation-config/src/test/java/org/apache/servicecomb/config/inject/TestConfigObjectFactory.java" target="_blank">https://github.com/apache/servicecomb-java-chassis/blob/master/foundations/foundation-config/src/test/java/org/apache/servicecomb/config/inject/TestConfigObjectFactory.java</a></p>
 
                                 
                                 </section>
@@ -1504,12 +1491,12 @@
 
             
                 
-                <a href="../catalog/config.html" class="navigation navigation-prev " aria-label="Previous page: Configuration">
+                <a href="general-config.html" class="navigation navigation-prev " aria-label="Previous page: General config">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="inject-config.html" class="navigation navigation-next " aria-label="Next page: Configuration injection">
+                <a href="../edge/open-service.html" class="navigation navigation-next " aria-label="Next page: Service Capability Open">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1520,7 +1507,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"General config","level":"1.8.1","depth":2,"next":{"title":"Configuration injection","level":"1.8.2","depth":2,"path":"config/inject-config.md","ref":"config/inject-config.md","articles":[]},"previous":{"title":"Configuration","level":"1.8","depth":1,"path":"catalog/config.md","ref":"catalog/config.md","articles":[{"title":"General config","level":"1.8.1","depth":2,"path":"config/general-config.md","ref":"config/general-config.md","articles":[]},{"title":"Configuration injection","level":"1.8.2","depth":2,"path":"config/inject-config.md","ref":"config/inject-config.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"config/general-config.md","mtime":"2019-03-11T06:45:27.381Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-11T06:46:16.801Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Configuration injection","level":"1.8.2","depth":2,"next":{"title":"Service Capability Open","level":"1.9","depth":1,"path":"edge/open-service.md","ref":"edge/open-service.md","articles":[{"title":"Using Edge Service","level":"1.9.1","depth":2,"path":"edge/by-servicecomb-sdk.md","ref":"edge/by-servicecomb-sdk.md","articles":[]},{"title":"Using confd and Nginx as edge services","level":"1.9.2","depth":2,"path":"edge/nginx.md","ref":"edge/nginx.md","articles":[]},{"title":"Use zuul as edge services","level":"1.9.3","depth":2,"path":"edge/zuul.md","ref":"edge/zuul.md","articles":[]}]},"previous":{"title":"General config","level":"1.8.1","depth":2,"path":"config/general-config.md","ref":"config/general-config.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"config/inject-config.md","mtime":"2019-03-11T06:45:27.381Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-11T06:46:16.801Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
