@@ -7,3 +7,17 @@ table {
     display:block;
     overflow-x: auto;
 }
+
+.metrics-cfg+table, .metrics-table {
+    border-width: 1px;
+    font-size: 12px;
+    table-layout: auto;
+}
+
+.metrics-table th, .metrics-table td {
+    white-space: nowrap;
+}
+
+.metrics-table td:last-child{
+    white-space: normal;
+}
