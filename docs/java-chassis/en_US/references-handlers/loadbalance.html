@@ -1389,17 +1389,19 @@
 <p>DiscoveryTree&apos;s logic is more complex, its processing progress is as below:
 <img src="../assets/loadbalance-001.png" alt=""></p>
 <p>Load balancing can be configured in the Consumer processing chain, the handler name is loadbalance, as follows:</p>
-<pre><code>servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: loadbalance
-</code></pre><p>POM dependence:</p>
-<pre><code> &lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;handler-loadbalance&lt;/artifactId&gt;
-  &lt;/dependency&gt;
-</code></pre><h2 id="routing-and-forwarding-by-data-center-information">Routing and forwarding by data center information</h2>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  handler:</span>
+<span class="hljs-attr">    chain:</span>
+<span class="hljs-attr">      Consumer:</span>
+<span class="hljs-attr">        default:</span> loadbalance
+</code></pre>
+<p>POM dependence:</p>
+<pre><code class="lang-xml"> <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.servicecomb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>handler-loadbalance<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="routing-and-forwarding-by-data-center-information">Routing and forwarding by data center information</h2>
 <p>Service providers and consumers can declare their service center information in microservice.yaml:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
 <span class="hljs-attr">  datacenter:</span>
@@ -1412,30 +1414,37 @@
 <p>This rule is enabled by default. If it is not needed, set servicecomb.loadbalance.filter.zoneaware.enabled to false. Data center information isolation is implemented in ZoneAwareDiscoveryFilter.</p>
 <h2 id="routing-and-forwarding-by-instance-attributes">Routing and forwarding by instance attributes</h2>
 <p>Users can specify the properties of microservice instances in microservice.yaml, or by calling service center APIs.</p>
-<pre><code>instance_description:
-  properties:
-    tag: mytag
-</code></pre><p>Consumers can specify provider instances&apos; attributes to determine which instances to call.</p>
-<pre><code>servicecomb:
-  loadbalance:
-    myservice:
-      transactionControl:
-        options:
-          tag: mytag
-</code></pre><p>The above configuration shows that only myservice instances with the tag attribute mytag are called.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">instance_description:</span>
+<span class="hljs-attr">  properties:</span>
+<span class="hljs-attr">    tags:</span>
+<span class="hljs-attr">      tag_key:</span> tag_value
+</code></pre>
+<p>Consumers can specify provider instances&apos; attributes to determine which instances to call.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+    <span class="hljs-comment"># Here the &quot;provider&quot; means the config items below only take effect on the service named &quot;provider&quot;</span>
+    <span class="hljs-comment"># In cross-app invocation, the AppID should be prefixed, like &quot;AppIDOfProvider:provider&quot;</span>
+<span class="hljs-attr">    provider:</span>
+<span class="hljs-attr">      transactionControl:</span>
+<span class="hljs-attr">        options:</span>
+<span class="hljs-attr">          tags:</span>
+<span class="hljs-attr">            tag_key:</span> expected_tag_value
+</code></pre>
+<p>The above configuration shows that only the instances of &quot;provider&quot; with the tag attribute <code>tag_key:expected_tag_value</code> are called.</p>
 <p>This rule needs to be configured separately for each service. Global rule for all services is not supported.</p>
-<p>This rule is enabled by default, it can be disabled by setting servicecomb.loadbalance.filter.instanceProperty.enabled to false. The instance attributes based routing policy is implemented in InstancePropertyDiscoveryFilter.</p>
+<p>This rule is enabled by default, it can be disabled by setting <code>servicecomb.loadbalance.filter.instanceProperty.enabled</code> to false. The instance attributes based routing policy is implemented in <code>InstancePropertyDiscoveryFilter</code>.</p>
 <h2 id="instance-isolation">Instance isolation</h2>
 <p>Developers can configure instance-isolated parameters to temporarily drop access to the wrong instance, improving system reliability and performance. Below are the configuration items and default values:</p>
-<pre><code>servicecomb:
-  loadbalance:
-    isolation:
-      enabled: true
-      errorThresholdPercentage: 0
-      enableRequestThreshold: 5
-      singleTestTime: 60000
-      continuousFailureThreshold: 2
-</code></pre><p>The interval of isolation calculation is 1 minute. According to the above configuration, in 1 minute, if the total number of requests is greater than 5, and more than 2 consecutive  errors occur, the instance is isolated. </p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+<span class="hljs-attr">    isolation:</span>
+<span class="hljs-attr">      enabled:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">      errorThresholdPercentage:</span> <span class="hljs-number">0</span>
+<span class="hljs-attr">      enableRequestThreshold:</span> <span class="hljs-number">5</span>
+<span class="hljs-attr">      singleTestTime:</span> <span class="hljs-number">60000</span>
+<span class="hljs-attr">      continuousFailureThreshold:</span> <span class="hljs-number">5</span>
+</code></pre>
+<p>The interval of isolation calculation is 1 minute. According to the above configuration, in 1 minute, if the total number of requests is greater than 5, and more than 2 consecutive  errors occur, the instance is isolated.</p>
 <p>The default value of errorThresholdPercentage is 0, indicates that the rule is ommited. The item should be a integer less than 100, for example 20, then within 1 minutes, if the total number of request is greater than 5 and [1] error rate is greater than 20% or [2] more than 2 consecutive  errors occur, is instance is isolated.</p>
 <p>After 60 seconds, the instance will be re-enabled and accessible if it matches the rules of load balancing policy.</p>
 <p>Notes:</p>
@@ -1449,52 +1458,58 @@
 <li>Configure SPI: Add META-INF/services/org.apache.servicecomb.serviceregistry.consumer.MicroserviceInstancePing, the content is the full path of the implementation class</li>
 </ol>
 <p>Developers can configure different isolation policies for different microservices. Just add a service name to the configuration item, for example:</p>
-<pre><code>servicecomb:
-  loadbalance:
-    myservice:
-      isolation:
-        enabled: true
-        errorThresholdPercentage: 20
-        enableRequestThreshold: 5
-        singleTestTime: 10000
-        continuousFailureThreshold: 2
-</code></pre><p>This rule is enabled by default and can be turned off by setting servicecomb.loadbalance.filter.isolation.enabled to false. Data center information isolation is implemented in IsolationDiscoveryFilter.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+<span class="hljs-attr">    myservice:</span>
+<span class="hljs-attr">      isolation:</span>
+<span class="hljs-attr">        enabled:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">        errorThresholdPercentage:</span> <span class="hljs-number">20</span>
+<span class="hljs-attr">        enableRequestThreshold:</span> <span class="hljs-number">5</span>
+<span class="hljs-attr">        singleTestTime:</span> <span class="hljs-number">10000</span>
+<span class="hljs-attr">        continuousFailureThreshold:</span> <span class="hljs-number">2</span>
+</code></pre>
+<p>This rule is enabled by default and can be turned off by setting servicecomb.loadbalance.filter.isolation.enabled to false. Data center information isolation is implemented in IsolationDiscoveryFilter.</p>
 <h2 id="configuring-route-rules">Configuring route rules</h2>
 <p>Developers can specify load balancing policies through configuration items.</p>
-<pre><code>servicecomb:
-  loadbalance:
-    strategy:
-      name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
-</code></pre><p>Developers can configure policies for different microservices by adding a service name, for example:</p>
-<pre><code>servicecomb:
-  loadbalance:
-    myservice:
-      strategy:
-        name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
-</code></pre><p>Each policy has some specific configuration items.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+<span class="hljs-attr">    strategy:</span>
+<span class="hljs-attr">      name:</span> RoundRobin <span class="hljs-comment"># Support RoundRobin,Random,WeightedResponse,SessionStickiness</span>
+</code></pre>
+<p>Developers can configure policies for different microservices by adding a service name, for example:</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+<span class="hljs-attr">    myservice:</span>
+<span class="hljs-attr">      strategy:</span>
+<span class="hljs-attr">        name:</span> RoundRobin <span class="hljs-comment"># Support RoundRobin,Random,WeightedResponse,SessionStickiness</span>
+</code></pre>
+<p>Each policy has some specific configuration items.</p>
 <ul>
 <li>SessionStickiness</li>
 </ul>
-<pre><code>servicecomb:
-  loadbalance:
-    SessionStickinessRule:
-      sessionTimeoutInSeconds: 30 # Client idle time, after the limit is exceeded, select the server behind
-      successiveFailedTimes: 5 # The number of client failures will switch after the server is exceeded.
-</code></pre><h2 id="set-retry-strategy">Set retry strategy</h2>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+<span class="hljs-attr">    SessionStickinessRule:</span>
+<span class="hljs-attr">      sessionTimeoutInSeconds:</span> <span class="hljs-number">30</span> <span class="hljs-comment"># Client idle time, after the limit is exceeded, select the server behind</span>
+<span class="hljs-attr">      successiveFailedTimes:</span> <span class="hljs-number">5</span> <span class="hljs-comment"># The number of client failures will switch after the server is exceeded.</span>
+</code></pre>
+<h2 id="set-retry-strategy">Set retry strategy</h2>
 <p>The load balancing module also supports the policy retry.</p>
-<pre><code>servicecomb:
-  loadbalance:
-    retryEnabled: false
-    retryOnNext: 0
-    retryOnSame: 0
-</code></pre><p>Retry is not enabled by default. Developers can set different strategies for different services:</p>
-<pre><code>servicecomb:
-  loadbalance:
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
+<span class="hljs-attr">    retryEnabled:</span> <span class="hljs-literal">false</span>
+<span class="hljs-attr">    retryOnNext:</span> <span class="hljs-number">0</span>
+<span class="hljs-attr">    retryOnSame:</span> <span class="hljs-number">0</span>
+</code></pre>
+<p>Retry is not enabled by default. Developers can set different strategies for different services:</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">servicecomb:</span>
+<span class="hljs-attr">  loadbalance:</span>
     myservice&#xFF1A;
-      retryEnabled: true
-      retryOnNext: 1
-      retryOnSame: 0
-</code></pre><p>retryOnNext indicates that after the failure, according to the load balancing policy, re-select an instance to retry (may choose the same instance), while retryOnSame means that the last failed instance is still used for retry.</p>
+<span class="hljs-attr">      retryEnabled:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">      retryOnNext:</span> <span class="hljs-number">1</span>
+<span class="hljs-attr">      retryOnSame:</span> <span class="hljs-number">0</span>
+</code></pre>
+<p>retryOnNext indicates that after the failure, according to the load balancing policy, re-select an instance to retry (may choose the same instance), while retryOnSame means that the last failed instance is still used for retry.</p>
 <h2 id="customization">Customization</h2>
 <p>The load balancing module provides various configurations that can support most application scenarios. It also provides flexible extension capabilities, including DiscoveryFilter, ServerListFilterExt, ExtensionsFactory (extension IRule, RetryHandler, etc.). The loadbalance module itself contains the implementation of each extension. The brief introduction of extending load balancing module is described below. Developers can download the ServiceComb source code to see the details.</p>
 <ul>
@@ -1560,7 +1575,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Load Balancing","level":"1.13.1","depth":2,"next":{"title":"Public key authentication","level":"1.13.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]},"previous":{"title":"Handlers reference","level":"1.13","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"Load Balancing","level":"1.13.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"Public key authentication","level":"1.13.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/loadbalance.md","mtime":"2019-05-09T06:42:13.157Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-09T06:43:01.642Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Load Balancing","level":"1.13.1","depth":2,"next":{"title":"Public key authentication","level":"1.13.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]},"previous":{"title":"Handlers reference","level":"1.13","depth":1,"path":"references-handlers/intruduction.md","ref":"references-handlers/intruduction.md","articles":[{"title":"Load Balancing","level":"1.13.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},{"title":"Public key authentication","level":"1.13.2","depth":2,"path":"references-handlers/publickey.md","ref":"references-handlers/publickey.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/loadbalance.md","mtime":"2019-05-26T04:10:33.690Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-26T04:11:23.204Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>

@@ -1385,65 +1385,14 @@
                                 
                                 <h2 id="handlers-reference">Handlers Reference</h2>
 <p>Handlers are the core components of ServiceComb, which form the basis of service operation and control. ServiceComb handles load balancing, fuse tolerance, flow control, and more through the Handlers.</p>
-<h3 id="enable-handlers">Enable Handlers</h3>
-<p>There are Consumer Handlers and Provider Handlers. Enable handlers in microservice.yaml:</p>
-<pre><code>servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: qps-flowcontrol-consumer,loadbalance
-      Provider: 
-        default: qps-flowcontrol-provider
-</code></pre><p>We can also enable different handlers for each microservice, </p>
-<pre><code>servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: auth,qps-flowcontrol-consumer,loadbalance
-        service:
-          authentication-server: qps-flowcontrol-consumer,loadbalance
-</code></pre><p>Requests to authentication-server, auth handler is enabled, and others not. </p>
-<h3 id="development-handlers">Development Handlers</h3>
+<h2 id="development-handlers">Development Handlers</h2>
 <p>The developer&apos;s custom handlers consists of the following steps. Since the core component of ServiceComb is the handlers, developers can refer to the implementation of the handlers directory to learn more about the Handlers. Here are a few key steps to summarize:</p>
 <ul>
 <li>Implement Handler interface</li>
-</ul>
-<pre><code>public class AuthHandler implements Handler {
-  @Override
-  public void handle(Invocation invocation, AsyncResponse asyncResponse) throws Exception {
-    String token = invocation.getContext(Constants.CONTEXT_HEADER_AUTHORIZATION);
-    if (token == null) {
-      asyncResponse.consumerFail(new InvocationException(403, &quot;forbidden&quot;, &quot;not authenticated&quot;));
-      return;
-    }
-    Jwt jwt = JwtHelper.decode(token);
-    try {
-      jwt.verifySignature(BeanUtils.getBean(&quot;authSigner&quot;));
-    } catch (InvalidSignatureException e) {
-      asyncResponse.consumerFail(new InvocationException(403, &quot;forbidden&quot;, &quot;not authenticated&quot;));
-      return;
-    }
-    invocation.next(asyncResponse);
-  }
-}
-</code></pre><ul>
 <li>Add *.handler.xml file, give handler a name</li>
-</ul>
-<pre><code>&lt;config&gt;
-  &lt;handler id=&quot;auth&quot;
-    class=&quot;org.apache.servicecomb.authentication.gateway.AuthHandler&quot; /&gt;
-&lt;/config&gt;
-</code></pre><ul>
 <li>Enable the newly added Handlers in microservice.yaml</li>
 </ul>
-<pre><code>servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: auth,loadbalance
-        service:
-          authentication-server: loadbalance
-</code></pre>
+
                                 
                                 </section>
                             
@@ -1486,7 +1435,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Handlers reference","level":"1.13","depth":1,"next":{"title":"Load Balancing","level":"1.13.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},"previous":{"title":"The difference in Spring MVC mode","level":"1.12.5","depth":2,"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","ref":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/intruduction.md","mtime":"2019-05-09T06:42:13.157Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-09T06:43:01.642Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Handlers reference","level":"1.13","depth":1,"next":{"title":"Load Balancing","level":"1.13.1","depth":2,"path":"references-handlers/loadbalance.md","ref":"references-handlers/loadbalance.md","articles":[]},"previous":{"title":"The difference in Spring MVC mode","level":"1.12.5","depth":2,"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","ref":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"references-handlers/intruduction.md","mtime":"2019-05-26T04:10:33.690Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-26T04:11:23.204Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
