@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Provided component description · GitBook</title>
+        <title>spring boot starter for java-chassis · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -1196,7 +1196,7 @@
                 <a href="components-for-spring-boot.html">
             
                     
-                    Provided component description
+                    spring boot starter for java-chassis
             
                 </a>
             
@@ -1368,7 +1368,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Provided component description</a>
+        <a href=".." >spring boot starter for java-chassis</a>
     </h1>
 </div>
 
@@ -1383,28 +1383,120 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>For Spring Boot, Spring Cloud, the following components are provided:</p>
+                                <h1 id="spring-boot-starter-for-java-chassis">spring boot starter for java-chassis</h1>
+<p>java-chassis provide different starters for spring boot. </p>
+<h2 id="java-chassis-200-and-above-with-spring-boot-20-and-above-example">java-chassis 2.0.0 and above with spring boot 2.0 and above <a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/metrics-extend-healthcheck" target="_blank">example</a></h2>
 <ul>
-<li>spring-boot-starter-configuration</li>
+<li>java-chassis-spring-boot-starter-standalone</li>
 </ul>
-<p>Access the configuration center. When you need to use the Configuration Center as a dynamic configuration management tool in Spring Boot and Spring Cloud applications, you need dependence of them.</p>
+<p>For standalone applications:</p>
+<p>POM dependency&#xFF1A;</p>
+<pre><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;java-chassis-spring-boot-starter-standalone&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><ul>
+<li>java-chassis-spring-boot-starter-servlet</li>
+</ul>
+<p>For web applications:</p>
+<p>POM dependency&#xFF1A;</p>
+<pre><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;java-chassis-spring-boot-starter-servlet&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><p>dependency management for applications&#xFF1A;</p>
+<pre><code>  &lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+        &lt;artifactId&gt;java-chassis-dependencies&lt;/artifactId&gt;
+        &lt;version&gt;2.0.0-SNAPSHOT&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/dependencyManagement&gt;
+</code></pre><h2 id="java-chassis-130-and-above-with-spring-boot-20-and-above-example">java-chassis 1.3.0 and above with spring boot 2.0 and above <a href="https://github.com/apache/servicecomb-samples/tree/1.3.0/dependency_management/springboot2" target="_blank">example</a></h2>
 <ul>
-<li>spring-boot-starter-registry</li>
+<li>spring-boot2-starter-standalone</li>
 </ul>
-<p>Access to the service center. When you need to use the service center as a service registration and discovery management tool in Spring Boot and Spring Cloud applications, you need dependence of them.</p>
-<ul>
-<li>spring-boot-starter-discovery</li>
+<p>For standalone applications:</p>
+<p>POM dependency&#xFF1A;</p>
+<pre><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot2-starter-standalone&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><ul>
+<li>spring-boot2-starter-servlet</li>
 </ul>
-<p>Adapt to the Spring Cloud&apos;s DiscoveryClient interface. When using @EnableDiscoveryClient in Spring Cloud, you need dependence of them.</p>
+<p>For web applications:</p>
+<p>POM dependency&#xFF1A;</p>
+<pre><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot2-starter-servlet&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><p>dependency management for applications&#xFF1A;</p>
+<pre><code>  &lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+        &lt;artifactId&gt;java-chassis-dependencies-springboot2&lt;/artifactId&gt;
+        &lt;version&gt;1.3.0&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/dependencyManagement&gt;
+</code></pre><h2 id="java-chassis-130-and-above-with-spring-boot-10-and-above-example">java-chassis 1.3.0 and above with spring boot 1.0 and above <a href="https://github.com/apache/servicecomb-samples/tree/1.3.0/dependency_management/springboot1" target="_blank">example</a></h2>
 <ul>
 <li>spring-boot-starter-provider</li>
 </ul>
-<p>Enable the core functionality of java chassis via @EnableServiceComb in Spring Boot. This feature can be used for &quot;JAVA application mode&quot; and &quot;Web development mode&quot;. In the &quot;Web development mode&quot;, the web environment is disabled by spring.main.web-environment=false. Therefore, this module is mainly to solve the problem of &quot;JAVA application mode&quot;.</p>
-<ul>
+<p>For standalone applications:</p>
+<p>POM dependency&#xFF1A;</p>
+<pre><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-provider&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><ul>
 <li>spring-boot-starter-transport</li>
 </ul>
-<p>Enable the core functionality of the java chassis via @EnableServiceComb in Spring Boot and enable the RestServlet for the java chassis. Used in &quot;Web development mode&quot;.</p>
-
+<p>For web applications:</p>
+<p>POM dependency&#xFF1A;</p>
+<pre><code>  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-transport&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+</code></pre><p>dependency management for applications&#xFF1A;</p>
+<pre><code>  &lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+        &lt;artifactId&gt;java-chassis-dependencies-springboot1&lt;/artifactId&gt;
+        &lt;version&gt;1.3.0&lt;/version&gt;
+        &lt;type&gt;pom&lt;/type&gt;
+        &lt;scope&gt;import&lt;/scope&gt;
+      &lt;/dependency&gt;
+      &lt;!-- spring boot 1.5.14.RELEASE use a low version of validation-api, must override it --&gt;
+      &lt;dependency&gt;
+        &lt;groupId&gt;javax.validation&lt;/groupId&gt;
+        &lt;artifactId&gt;validation-api&lt;/artifactId&gt;
+        &lt;version&gt;2.0.0.Final&lt;/version&gt;
+      &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+  &lt;/dependencyManagement&gt;
+</code></pre>
                                 
                                 </section>
                             
@@ -1447,7 +1539,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Provided component description","level":"1.12.1","depth":2,"next":{"title":"JAVA application development","level":"1.12.2","depth":2,"path":"using-java-chassis-in-spring-boot/java-application.md","ref":"using-java-chassis-in-spring-boot/java-application.md","articles":[]},"previous":{"title":"Using java chassis in Spring Boot","level":"1.12","depth":1,"path":"using-java-chassis-in-spring-boot.md","ref":"using-java-chassis-in-spring-boot.md","articles":[{"title":"Provided component description","level":"1.12.1","depth":2,"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","articles":[]},{"title":"JAVA application development","level":"1.12.2","depth":2,"path":"using-java-chassis-in-spring-boot/java-application.md","ref":"using-java-chassis-in-spring-boot/java-application.md","articles":[]},{"title":"Web development method development","level":"1.12.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},{"title":"The difference between JAVA application method and Web development method","level":"1.12.4","depth":2,"path":"using-java-chassis-in-spring-boot/diff-between-java-web.md","ref":"using-java-chassis-in-spring-boot/diff-between-java-web.md","articles":[]},{"title":"The difference in Spring MVC mode","level":"1.12.5","depth":2,"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","ref":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","mtime":"2019-09-06T16:30:36.284Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-09-06T16:31:28.119Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"spring boot starter for java-chassis","level":"1.12.1","depth":2,"next":{"title":"JAVA application development","level":"1.12.2","depth":2,"path":"using-java-chassis-in-spring-boot/java-application.md","ref":"using-java-chassis-in-spring-boot/java-application.md","articles":[]},"previous":{"title":"Using java chassis in Spring Boot","level":"1.12","depth":1,"path":"using-java-chassis-in-spring-boot.md","ref":"using-java-chassis-in-spring-boot.md","articles":[{"title":"spring boot starter for java-chassis","level":"1.12.1","depth":2,"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","ref":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","articles":[]},{"title":"JAVA application development","level":"1.12.2","depth":2,"path":"using-java-chassis-in-spring-boot/java-application.md","ref":"using-java-chassis-in-spring-boot/java-application.md","articles":[]},{"title":"Web development method development","level":"1.12.3","depth":2,"path":"using-java-chassis-in-spring-boot/web-application.md","ref":"using-java-chassis-in-spring-boot/web-application.md","articles":[]},{"title":"The difference between JAVA application method and Web development method","level":"1.12.4","depth":2,"path":"using-java-chassis-in-spring-boot/diff-between-java-web.md","ref":"using-java-chassis-in-spring-boot/diff-between-java-web.md","articles":[]},{"title":"The difference in Spring MVC mode","level":"1.12.5","depth":2,"path":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","ref":"using-java-chassis-in-spring-boot/diff-spring-mvc.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"using-java-chassis-in-spring-boot/components-for-spring-boot.md","mtime":"2019-12-06T10:02:23.544Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-06T10:03:08.695Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
