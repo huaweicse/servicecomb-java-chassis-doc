@@ -1396,7 +1396,203 @@
 </ol>
 </li>
 </ol>
-<h1 id="second-the-summary-of-statistical-items">Second, the summary of statistical items</h1>
+<h1 id="second-how-to-use">Second, how to use.</h1>
+<h3 id="1maven-dependence">1.Maven dependence.</h3>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;metrics-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>If integrate with prometheus, also need to add dependencies.</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;metrics-prometheus&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p><em>Note: Please change the version field to the actual version number; if the version number has been declared in the dependencyManagement, then you do not have to write the version number here</em></p>
+<h3 id="2-configuration-instructions">2. Configuration instructions</h3>
+<div class="metrics-cfg"></div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Configuration Item</th>
+<th style="text-align:left">Default</th>
+<th style="text-align:left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">servicecomb.metrics.window_time</td>
+<td style="text-align:left">60000</td>
+<td style="text-align:left">Statistical period, in milliseconds<br>TPS, delay, etc. Periodic data, updated once per cycle, the value obtained in the cycle, actually the value of the previous cycle</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics<br>.invocation.latencyDistribution</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">The latency distribution time period definition in milliseconds<br>for example:0,1,10,100,1000<br>indicates that the following latency scopes are defined: [0, 1),[1, 10),[10, 100),[100, 1000),[1000, )</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics<br>.Consumer.invocation.slow.enabled</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">Whether to enable slow call detection on the Consumer side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics<br>.Consumer.invocation.slow.msTime</td>
+<td style="text-align:left">1000</td>
+<td style="text-align:left">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics<br>.Provider.invocation.slow.enabled</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">Whether to enable slow call detection on the Provider side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics<br>.Provider.invocation.slow.msTime</td>
+<td style="text-align:left">1000</td>
+<td style="text-align:left">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics<br>.prometheus.address</td>
+<td style="text-align:left">0.0.0.0:9696</td>
+<td style="text-align:left">prometheus listen address</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics.publisher.defaultLog<br>.enabled</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">Whether to output the default statistics log</td>
+</tr>
+<tr>
+<td style="text-align:left">servicecomb.metrics.publisher.defaultLog<br>.endpoints.client.detail.enabled</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">Whether to output each client endpoint statistics log, because it is related to the target ip:port number, there may be a lot of data, so the default is not output</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-slow-call-detection">3. Slow call detection</h3>
+<p>  After slow call detection is enabled, if there is a slow call, the corresponding log will be output immediately:</p>
+<pre><code>2019-04-02 23:01:09,103[WARN][pool-7-thread-74][5ca37935c00ff2c7-350076] - slow(40 ms) invocation, CONSUMER highway perf1.impl.syncQuery
+  http method: GET
+  url        : /v1/syncQuery/{id}/
+  server     : highway://192.168.0.152:7070?login=true
+  status code: 200
+  total      : 50.760 ms
+    prepare                : 0.0 ms
+    handlers request       : 0.0 ms
+    client filters request : 0.0 ms
+    send request           : 0.5 ms
+    get connection         : 0.0 ms
+    write to buf           : 0.5 ms
+    wait response          : 50.727 ms
+    wake consumer          : 0.23 ms
+    client filters response: 0.2 ms
+    handlers response      : 0.0 ms (SlowInvocationLogger.java:121)
+</code></pre><p>  Where 5ca37935c00ff2c7-350076 is the structure of ${traceId}-${invocationId}, referenced by %marker in the output format of log4j2 or logback</p>
+<h3 id="4-access-via-restful">4. Access via RESTful</h3>
+<p>As long as the microservices open the rest port, use a browser to access <a href="http://ip:port/metrics" target="_blank">http://ip:port/metrics</a>.
+will get json data in the following format:</p>
+<pre><code>{
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=connectCount,type=client)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=disconnectCount,type=client)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=connections,type=client)&quot;: 1.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=bytesRead,type=client)&quot;: 508011.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=bytesWritten,type=client)&quot;: 542163.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=queueCount,type=client)&quot;: 0.0,
+
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=connectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=disconnectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=connections,type=server)&quot;: 1.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=bytesRead,type=server)&quot;: 542163.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=bytesWritten,type=server)&quot;: 508011.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=rejectByConnectionLimit,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=connectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=disconnectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=connections,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=bytesRead,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=bytesWritten,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=rejectByConnectionLimit,type=server)&quot;: 0.0,
+
+  &quot;threadpool.completedTaskCount(id=cse.executor.groupThreadPool-group0)&quot;: 4320.0,
+  &quot;threadpool.rejectedCount(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
+  &quot;threadpool.taskCount(id=cse.executor.groupThreadPool-group0)&quot;: 4320.0,
+  &quot;threadpool.currentThreadsBusy(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
+  &quot;threadpool.poolSize(id=cse.executor.groupThreadPool-group0)&quot;: 4.0,
+  &quot;threadpool.maxThreads(id=cse.executor.groupThreadPool-group0)&quot;: 10.0,
+  &quot;threadpool.queueSize(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
+  &quot;threadpool.corePoolSize(id=cse.executor.groupThreadPool-group0)&quot;: 4.0,
+
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[0,1),status=200,transport=highway,type=latencyDistribution)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[1,3),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[3,10),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[10,100),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[100,),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[0,1),status=200,transport=highway,type=latencyDistribution)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[1,3),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[3,10),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[10,100),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[100,),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.25269420000000004,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.7110000000000003E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0079627,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.74E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0060666,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.08E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.016679600000000003,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.68E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.08155480000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.1470000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0098285,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.3100000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0170669,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.6400000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0196985,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.8100000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0880885,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.049E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.9796976000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=max,status=200,transport=highway,type=stage)&quot;: 6.720000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.012601500000000002,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.5000000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0066785,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.21E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.010363800000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.85E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0060282,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 9.2E-6,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.099984,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.1740000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.006916800000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=max,status=200,transport=highway,type=stage)&quot;: 5.83E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0930672,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.1580000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.7654931,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 5.547E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0502085,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.7370000000000003E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0227188,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.0E-5
+}
+</code></pre><h1 id="third-the-summary-of-statistical-items">Third, the summary of statistical items</h1>
 <h3 id="1-cpu">1. CPU</h3>
 <table class="metrics-table">
   <tr>
@@ -1697,7 +1893,7 @@
   </tr>
 </table>
 
-<h3 id="7-invocation-producer-stage&#x65F6;&#x5EF6;">7. invocation producer stage&#x65F6;&#x5EF6;</h3>
+<h3 id="7-invocation-producer-stage-latency">7. invocation producer stage latency</h3>
 <table class="metrics-table">
   <tr>
     <th>Name</th>
@@ -1950,205 +2146,7 @@
   </tr>
 </table>
 
-<h1 id="third-how-to-use">Third, how to use.</h1>
-<h3 id="1maven-dependence">1.Maven dependence.</h3>
-<pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;metrics-core&lt;/artifactId&gt;
-  &lt;version&gt;1.2.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p>If integrate with prometheus, also need to add dependencies.</p>
-<pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;metrics-prometheus&lt;/artifactId&gt;
-  &lt;version&gt;1.2.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p><em>Note: Please change the version field to the actual version number; if the version number has been declared in the dependencyManagement, then you do not have to write the version number here</em></p>
-<h3 id="2-configuration-instructions">2. Configuration instructions</h3>
-<div class="metrics-cfg"></div>
-
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Configuration Item</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">servicecomb.metrics.window_time</td>
-<td style="text-align:left">60000</td>
-<td style="text-align:left">Statistical period, in milliseconds<br>TPS, delay, etc. Periodic data, updated once per cycle, the value obtained in the cycle, actually the value of the previous cycle</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics<br>.invocation.latencyDistribution</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">The latency distribution time period definition in milliseconds<br>for example:0,1,10,100,1000<br>indicates that the following latency scopes are defined: [0, 1),[1, 10),[10, 100),[100, 1000),[1000, )</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics<br>.Consumer.invocation.slow.enabled</td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether to enable slow call detection on the Consumer side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics<br>.Consumer.invocation.slow.msTime</td>
-<td style="text-align:left">1000</td>
-<td style="text-align:left">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics<br>.Provider.invocation.slow.enabled</td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether to enable slow call detection on the Provider side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics<br>.Provider.invocation.slow.msTime</td>
-<td style="text-align:left">1000</td>
-<td style="text-align:left">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics<br>.prometheus.address</td>
-<td style="text-align:left">0.0.0.0:9696</td>
-<td style="text-align:left">prometheus listen address</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics.publisher.defaultLog<br>.enabled</td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether to output the default statistics log</td>
-</tr>
-<tr>
-<td style="text-align:left">servicecomb.metrics.publisher.defaultLog<br>.endpoints.client.detail.enabled</td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether to output each client endpoint statistics log, because it is related to the target ip:port number, there may be a lot of data, so the default is not output</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3&#x6162;&#x8C03;&#x7528;&#x68C0;&#x6D4B;">3.&#x6162;&#x8C03;&#x7528;&#x68C0;&#x6D4B;</h3>
-<p>  After slow call detection is enabled, if there is a slow call, the corresponding log will be output immediately:</p>
-<pre><code>2019-04-02 23:01:09,103[WARN][pool-7-thread-74][5ca37935c00ff2c7-350076] - slow(40 ms) invocation, CONSUMER highway perf1.impl.syncQuery
-  http method: GET
-  url        : /v1/syncQuery/{id}/
-  server     : highway://192.168.0.152:7070?login=true
-  status code: 200
-  total      : 50.760 ms
-    prepare                : 0.0 ms
-    handlers request       : 0.0 ms
-    client filters request : 0.0 ms
-    send request           : 0.5 ms
-    get connection         : 0.0 ms
-    write to buf           : 0.5 ms
-    wait response          : 50.727 ms
-    wake consumer          : 0.23 ms
-    client filters response: 0.2 ms
-    handlers response      : 0.0 ms (SlowInvocationLogger.java:121)
-</code></pre><p>  Where 5ca37935c00ff2c7-350076 is the structure of ${traceId}-${invocationId}, referenced by %marker in the output format of log4j2 or logback</p>
-<h3 id="4-access-via-restful">4. Access via RESTful</h3>
-<p>As long as the microservices open the rest port, use a browser to access <a href="http://ip:port/metrics" target="_blank">http://ip:port/metrics</a>.
-will get json data in the following format:</p>
-<pre><code>{
-  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=connectCount,type=client)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=disconnectCount,type=client)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=connections,type=client)&quot;: 1.0,
-  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=bytesRead,type=client)&quot;: 508011.0,
-  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=bytesWritten,type=client)&quot;: 542163.0,
-  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=queueCount,type=client)&quot;: 0.0,
-
-  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=connectCount,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=disconnectCount,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=connections,type=server)&quot;: 1.0,
-  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=bytesRead,type=server)&quot;: 542163.0,
-  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=bytesWritten,type=server)&quot;: 508011.0,
-  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=rejectByConnectionLimit,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=connectCount,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=disconnectCount,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=connections,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=bytesRead,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=bytesWritten,type=server)&quot;: 0.0,
-  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=rejectByConnectionLimit,type=server)&quot;: 0.0,
-
-  &quot;threadpool.completedTaskCount(id=cse.executor.groupThreadPool-group0)&quot;: 4320.0,
-  &quot;threadpool.rejectedCount(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
-  &quot;threadpool.taskCount(id=cse.executor.groupThreadPool-group0)&quot;: 4320.0,
-  &quot;threadpool.currentThreadsBusy(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
-  &quot;threadpool.poolSize(id=cse.executor.groupThreadPool-group0)&quot;: 4.0,
-  &quot;threadpool.maxThreads(id=cse.executor.groupThreadPool-group0)&quot;: 10.0,
-  &quot;threadpool.queueSize(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
-  &quot;threadpool.corePoolSize(id=cse.executor.groupThreadPool-group0)&quot;: 4.0,
-
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[0,1),status=200,transport=highway,type=latencyDistribution)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[1,3),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[3,10),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[10,100),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[100,),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[0,1),status=200,transport=highway,type=latencyDistribution)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[1,3),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[3,10),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[10,100),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[100,),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
-
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.25269420000000004,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.7110000000000003E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0079627,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.74E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0060666,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.08E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.016679600000000003,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.68E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.08155480000000001,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.1470000000000001E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0098285,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.3100000000000004E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0170669,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.6400000000000004E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0196985,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.8100000000000004E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0880885,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.049E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.9796976000000001,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=max,status=200,transport=highway,type=stage)&quot;: 6.720000000000001E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.012601500000000002,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.5000000000000004E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0066785,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.21E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.010363800000000001,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.85E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0060282,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 9.2E-6,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.099984,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.1740000000000001E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.006916800000000001,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=max,status=200,transport=highway,type=stage)&quot;: 5.83E-5,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0930672,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.1580000000000001E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.7654931,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 5.547E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0502085,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.7370000000000003E-4,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0227188,
-  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.0E-5
-}
-</code></pre><h1 id="fourth-business-customization">Fourth, business customization</h1>
+<h1 id="fourth-business-customization">Fourth, business customization</h1>
 <p>Because ServiceComb has initialized the registry&apos;s registry, the business no longer has to create a registry.</p>
 <p>Implement the MetricsInitializer interface, define the business-level Meters, or implement a custom Publisher, and then declare your implementation through the SPI mechanism.</p>
 <h3 id="1meters">1.Meters:</h3>
@@ -2199,7 +2197,7 @@ Non-periodic output scenarios, such as access through the RESTful interface, the
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.7.2","depth":2,"next":{"title":"Microservice invocation chain","level":"1.7.3","depth":2,"path":"general-development/microservice-invocation-chain.md","ref":"general-development/microservice-invocation-chain.md","articles":[]},"previous":{"title":"Access Service Center","level":"1.7.1","depth":2,"path":"general-development/visit-sc.md","ref":"general-development/visit-sc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/metrics.md","mtime":"2019-12-06T10:02:23.540Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-06T10:03:08.695Z"},"basePath":"..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.7.2","depth":2,"next":{"title":"Microservice invocation chain","level":"1.7.3","depth":2,"path":"general-development/microservice-invocation-chain.md","ref":"general-development/microservice-invocation-chain.md","articles":[]},"previous":{"title":"Access Service Center","level":"1.7.1","depth":2,"path":"general-development/visit-sc.md","ref":"general-development/visit-sc.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"general-development/metrics.md","mtime":"2020-02-03T01:54:42.828Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-03T01:55:21.742Z"},"basePath":"..","book":{"language":"en_US"}});
         });
     </script>
 </div>
