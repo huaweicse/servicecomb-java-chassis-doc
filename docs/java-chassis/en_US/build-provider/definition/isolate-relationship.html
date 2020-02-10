@@ -1,0 +1,1397 @@
+
+<!DOCTYPE HTML>
+<html lang="en_US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Logical isolation between microservice instances · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../access-log-configuration.html" />
+    
+    
+    <link rel="prev" href="../bootup.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../catalog/start.html">
+            
+                <a href="../../catalog/start.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../../start/terminology.html">
+            
+                <a href="../../start/terminology.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../../start/architecture.html">
+            
+                <a href="../../start/architecture.html">
+            
+                    
+                    Architecture
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../../start/development-environment.html">
+            
+                <a href="../../start/development-environment.html">
+            
+                    
+                    Development environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../../start/first-sample.html">
+            
+                <a href="../../start/first-sample.html">
+            
+                    
+                    Develop the first microservice
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../catalog/build-provider.html">
+            
+                <a href="../../catalog/build-provider.html">
+            
+                    
+                    Development Service Provider
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="service-definition.html">
+            
+                <a href="service-definition.html">
+            
+                    
+                    Service definition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../define-contract.html">
+            
+                <a href="../define-contract.html">
+            
+                    
+                    Service contract definition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../code-first.html">
+            
+                <a href="../code-first.html">
+            
+                    
+                    Implicit API definition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../swagger-annotation.html">
+            
+                <a href="../swagger-annotation.html">
+            
+                    
+                    Use Swagger annotations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../springmvc.html">
+            
+                <a href="../springmvc.html">
+            
+                    
+                    Develop with SpringMVC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../jaxrs.html">
+            
+                <a href="../jaxrs.html">
+            
+                    
+                    Develop with JAX-RS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../transparent-rpc.html">
+            
+                <a href="../transparent-rpc.html">
+            
+                    
+                    Develop with Transparent RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../interface-constraints.html">
+            
+                <a href="../interface-constraints.html">
+            
+                    
+                    Interface definition and data type
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../listen-address-and-publish-address.html">
+            
+                <a href="../listen-address-and-publish-address.html">
+            
+                    
+                    Service listening address and publishing address
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../service-configuration.html">
+            
+                <a href="../service-configuration.html">
+            
+                    
+                    Service Configuration
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.10.1" data-path="../configuration/lb-strategy.html">
+            
+                <a href="../configuration/lb-strategy.html">
+            
+                    
+                    Load Balancing Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10.2" data-path="../configuration/ratelimite-strategy.html">
+            
+                <a href="../configuration/ratelimite-strategy.html">
+            
+                    
+                    Rate Limiting Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10.3" data-path="../configuration/downgrade-strategy.html">
+            
+                <a href="../configuration/downgrade-strategy.html">
+            
+                    
+                    Fallback Policy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10.4" data-path="../configuration/parameter-validator.html">
+            
+                <a href="../configuration/parameter-validator.html">
+            
+                    
+                    Parameter Validator
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../protocol.html">
+            
+                <a href="../protocol.html">
+            
+                    
+                    Communication Protocol
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.11.1" data-path="../protocol/thread-model.html">
+            
+                <a href="../protocol/thread-model.html">
+            
+                    
+                    Thread model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.2" data-path="../protocol/rest-over-servlet.html">
+            
+                <a href="../protocol/rest-over-servlet.html">
+            
+                    
+                    REST over Servlet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.3" data-path="../protocol/rest-over-vertx.html">
+            
+                <a href="../protocol/rest-over-vertx.html">
+            
+                    
+                    REST over Vertx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.4" data-path="../protocol/highway-rpc.html">
+            
+                <a href="../protocol/highway-rpc.html">
+            
+                    
+                    Highway RPC Protocol
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11.5" data-path="../protocol/http2.html">
+            
+                <a href="../protocol/http2.html">
+            
+                    
+                    Communicate using HTTP2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../bootup.html">
+            
+                <a href="../bootup.html">
+            
+                    
+                    Boot-up Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.13" data-path="isolate-relationship.html">
+            
+                <a href="isolate-relationship.html">
+            
+                    
+                    Logical isolation between microservice instances
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="../access-log-configuration.html">
+            
+                <a href="../access-log-configuration.html">
+            
+                    
+                    Access Log Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../catalog/build-consumer.html">
+            
+                <a href="../../catalog/build-consumer.html">
+            
+                    
+                    Writing Service Consumer
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../build-consumer/using-resttemplate.html">
+            
+                <a href="../../build-consumer/using-resttemplate.html">
+            
+                    
+                    Using Rest Template
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../../build-consumer/using-AsyncRestTemplate.html">
+            
+                <a href="../../build-consumer/using-AsyncRestTemplate.html">
+            
+                    
+                    Using AsynRestTemplate
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../../build-consumer/develop-consumer-using-rpc.html">
+            
+                <a href="../../build-consumer/develop-consumer-using-rpc.html">
+            
+                    
+                    Using with RPC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../../build-consumer/with-contract.html">
+            
+                <a href="../../build-consumer/with-contract.html">
+            
+                    
+                    Contract
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../../build-consumer/invoke-control.html">
+            
+                <a href="../../build-consumer/invoke-control.html">
+            
+                    
+                    Invoke control
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../build-consumer/circuit-breaker.html">
+            
+                <a href="../../build-consumer/circuit-breaker.html">
+            
+                    
+                    Circuit Breaker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="../../build-consumer/flow-control.html">
+            
+                <a href="../../build-consumer/flow-control.html">
+            
+                    
+                    Flow Control
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="../../build-consumer/fault-injection.html">
+            
+                <a href="../../build-consumer/fault-injection.html">
+            
+                    
+                    Fault Injection
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../catalog/general-develop.html">
+            
+                <a href="../../catalog/general-develop.html">
+            
+                    
+                    General Development
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../general-development/visit-sc.html">
+            
+                <a href="../../general-development/visit-sc.html">
+            
+                    
+                    Access Service Center
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../general-development/config.html">
+            
+                <a href="../../general-development/config.html">
+            
+                    
+                    Using Dynamic Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../general-development/metrics.html">
+            
+                <a href="../../general-development/metrics.html">
+            
+                    
+                    Metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../../general-development/microservice-invocation-chain.html">
+            
+                <a href="../../general-development/microservice-invocation-chain.html">
+            
+                    
+                    Microservice invocation chain
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../../general-development/customized-tracing.html">
+            
+                <a href="../../general-development/customized-tracing.html">
+            
+                    
+                    Customized-Tracing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../../general-development/local-develop-test.html">
+            
+                <a href="../../general-development/local-develop-test.html">
+            
+                    
+                    Local development and testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../../general-development/http-filter.html">
+            
+                <a href="../../general-development/http-filter.html">
+            
+                    
+                    Http Filter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="../../general-development/file-upload.html">
+            
+                <a href="../../general-development/file-upload.html">
+            
+                    
+                    File Uploading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="../../general-development/file-download.html">
+            
+                <a href="../../general-development/file-download.html">
+            
+                    
+                    File Downloading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="../../general-development/reactive.html">
+            
+                <a href="../../general-development/reactive.html">
+            
+                    
+                    Reactive Programing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="../../general-development/dnsconfig.html">
+            
+                <a href="../../general-development/dnsconfig.html">
+            
+                    
+                    DNS Custom Configuration
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="../../general-development/dai-li-she-zhi.html">
+            
+                <a href="../../general-development/dai-li-she-zhi.html">
+            
+                    
+                    Proxy Settings
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="../../general-development/report-framework-version.html">
+            
+                <a href="../../general-development/report-framework-version.html">
+            
+                    
+                    Report framework version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="../../general-development/cross-app-invocation.html">
+            
+                <a href="../../general-development/cross-app-invocation.html">
+            
+                    
+                    Cross-application invocation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="../../general-development/secret-field.html">
+            
+                <a href="../../general-development/secret-field.html">
+            
+                    
+                    Customized serialization and deserialization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.16" data-path="../../general-development/context.html">
+            
+                <a href="../../general-development/context.html">
+            
+                    
+                    Using Context to pass control messages
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.17" data-path="../../general-development/produceprocess.html">
+            
+                <a href="../../general-development/produceprocess.html">
+            
+                    
+                    Return value serialization extension
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.18" data-path="../../general-development/CORS.html">
+            
+                <a href="../../general-development/CORS.html">
+            
+                    
+                    CORS mechanism
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.19" data-path="../../general-development/AlarmEvent.html">
+            
+                <a href="../../general-development/AlarmEvent.html">
+            
+                    
+                    Get fuse and instance isolation alarm event information
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.20" data-path="../../general-development/shutdown.html">
+            
+                <a href="../../general-development/shutdown.html">
+            
+                    
+                    Shutdown gracefully
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.21" data-path="../../general-development/error-handling.html">
+            
+                <a href="../../general-development/error-handling.html">
+            
+                    
+                    Handling exceptions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../edge/open-service.html">
+            
+                <a href="../../edge/open-service.html">
+            
+                    
+                    Service Capability Open
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../edge/by-servicecomb-sdk.html">
+            
+                <a href="../../edge/by-servicecomb-sdk.html">
+            
+                    
+                    Using Edge Service
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../edge/nginx.html">
+            
+                <a href="../../edge/nginx.html">
+            
+                    
+                    Using confd and Nginx as edge services
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../edge/zuul.html">
+            
+                <a href="../../edge/zuul.html">
+            
+                    
+                    Use zuul as edge services
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../../catalog/service-package-run.html">
+            
+                <a href="../../catalog/service-package-run.html">
+            
+                    
+                    Service Packing and Running
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../packaging/standalone.html">
+            
+                <a href="../../packaging/standalone.html">
+            
+                    
+                    Standalone mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../packaging/web-container.html">
+            
+                <a href="../../packaging/web-container.html">
+            
+                    
+                    WEB container mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../../catalog/security.html">
+            
+                <a href="../../catalog/security.html">
+            
+                    
+                    Micro Service Security
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../security/tls.html">
+            
+                <a href="../../security/tls.html">
+            
+                    
+                    Using TLS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../security/rsa.html">
+            
+                <a href="../../security/rsa.html">
+            
+                    
+                    Using RSA certification
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../../using-java-chassis-in-spring-boot.html">
+            
+                <a href="../../using-java-chassis-in-spring-boot.html">
+            
+                    
+                    Using java chassis in Spring Boot
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../using-java-chassis-in-spring-boot/components-for-spring-boot.html">
+            
+                <a href="../../using-java-chassis-in-spring-boot/components-for-spring-boot.html">
+            
+                    
+                    Provided component description
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../using-java-chassis-in-spring-boot/java-application.html">
+            
+                <a href="../../using-java-chassis-in-spring-boot/java-application.html">
+            
+                    
+                    JAVA application development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../../using-java-chassis-in-spring-boot/web-application.html">
+            
+                <a href="../../using-java-chassis-in-spring-boot/web-application.html">
+            
+                    
+                    Web development method development
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../../using-java-chassis-in-spring-boot/diff-between-java-web.html">
+            
+                <a href="../../using-java-chassis-in-spring-boot/diff-between-java-web.html">
+            
+                    
+                    The difference between JAVA application method and Web development method
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../../using-java-chassis-in-spring-boot/diff-spring-mvc.html">
+            
+                <a href="../../using-java-chassis-in-spring-boot/diff-spring-mvc.html">
+            
+                    
+                    The difference in Spring MVC mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../../references-handlers/intruduction.html">
+            
+                <a href="../../references-handlers/intruduction.html">
+            
+                    
+                    Handlers reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../references-handlers/loadbalance.html">
+            
+                <a href="../../references-handlers/loadbalance.html">
+            
+                    
+                    Load Balancing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../../references-handlers/publickey.html">
+            
+                <a href="../../references-handlers/publickey.html">
+            
+                    
+                    Public key authentication
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../../question-and-answer/question_answer.html">
+            
+                <a href="../../question-and-answer/question_answer.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../question-and-answer/interface-compatibility.html">
+            
+                <a href="../../question-and-answer/interface-compatibility.html">
+            
+                    
+                    Micro Service Interface Compatibility FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Logical isolation between microservice instances</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="scene-description">Scene Description</h2>
+<p>When doing service discovery, developers need to understand that the microservice can discover instances of those other services. ServiceComb provides hierarchical instance isolation.</p>
+<h1 id="microservices-instance-hierarchical-management">Microservices instance hierarchical management</h1>
+<p>To understand the isolation level between instances, you first need to understand a well-established microservice system structure defined by ServiceComb:</p>
+<p><img src="../../assets/sc-meta.png" alt=""></p>
+<p>In the microservice system structure, the top layer is the &#x201C;project&#x201D;, which is divided into multiple tenants under the project. The tenant contains multiple applications, and each application contains multiple environments, that is, the test and production environments can be separated.
+In a particular environment of a particular application, there are multiple microservices, and one microservice can have multiple versions at the same time.
+The above is the scope of all static metadata. A specific version of a particular service contains multiple microservice instances registered at runtime, because the information of the service instance is dynamic at runtime because of system scaling, failure, etc. The change, so the routing information of the service instance is again dynamic data.
+By hierarchically managing these data for microservices, this is natural to achieve logical isolation between instances.</p>
+<h1 id="isolation-level-description">isolation level description</h1>
+<p>ServiceComb supports custom hierarchical configuration to meet the hierarchical management requirements of users. The following is the specific configuration instructions.</p>
+<ul>
+<li>Application ID</li>
+</ul>
+<p>Defined by APPLICATIOIN_ID, the default value is &apos;default&apos;. When a microservice discovers an instance, it can only be discovered by consumers under the same APPLICATIOIN_ID by default.</p>
+<ul>
+<li>Domain name</li>
+</ul>
+<p>Defined by servicecomb.config.client.domainName, the default value is &apos;default&apos;. As a micro service provider, it is used to indicate the tenant information that it belongs to. When a microservice finds an instance, it can only be discovered by consumers under the same tenant.</p>
+<ul>
+<li>Data Center Information</li>
+</ul>
+<p>The data center consists of three attributes: servicecomb.datacenter.name, servicecomb.datacenter.region, servicecomb.datacenter.availableZone. Data center information does not provide isolation capabilities, and microservices can discover instances of other data centers. However, you can prioritize sending messages to a specified zone or zone by enabling instance affinity:</p>
+<pre><code>servicecomb:
+  datacenter:
+    name: mydatacenter
+    region: my-Region
+    availableZone: my-Zone
+</code></pre><p>After this configuration, when the client routes, it will forward the request to the same instance with the same zone/region. Then, if the instances with the same region but different zones are different, select one according to the routing rule. Affinity is not logical isolation. As long as the network between the instances is connected, it is possible to access it; if the network is unreachable, the access will fail.</p>
+<ul>
+<li>Environmental information</li>
+</ul>
+<p>It is configured in the yaml file by &apos;service_description.environment&apos;. It is also supported by the environment variable &apos;SERVICECOMB_ENV&apos;. It only supports the following enumeration : &apos;development&apos;, &apos;testing&apos;, &apos;acceptance&apos;, &apos;production&apos;. The default value is &quot;&quot;(empty). When a microservice discovers an instance, it can only be discovered by consumers under the same environment by default.</p>
+<pre><code>service_description:
+  environment: production
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../bootup.html" class="navigation navigation-prev " aria-label="Previous page: Boot-up Process">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../access-log-configuration.html" class="navigation navigation-next " aria-label="Next page: Access Log Configuration">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Logical isolation between microservice instances","level":"1.3.13","depth":2,"next":{"title":"Access Log Configuration","level":"1.3.14","depth":2,"path":"build-provider/access-log-configuration.md","ref":"build-provider/access-log-configuration.md","articles":[]},"previous":{"title":"Boot-up Process","level":"1.3.12","depth":2,"path":"build-provider/bootup.md","ref":"build-provider/bootup.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/definition/isolate-relationship.md","mtime":"2018-09-10T06:53:19.570Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-10T06:54:02.896Z"},"basePath":"../..","book":{"language":"en_US"}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../../gitbook/gitbook.js"></script>
+    <script src="../../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
