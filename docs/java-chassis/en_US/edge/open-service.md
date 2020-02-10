@@ -1,0 +1,5 @@
+# Open service capacity
+
+A large number of micro-service capabilities need to be opened to users and other external systems through the gateway. On the one hand, the gateway plays the role of collecting user requests, and also plays the role of authentication, authentication, flow control, and anti-attack. At the same time, because the gateway is a convergence point, it is easy to form a bottleneck of the service. Usually, a multi-level gateway mechanism is adopted. The external gateway provides the master and backup as well as the simple request forwarding function, and the middle layer implements authentication and other functions. Deploy. Common technologies and services that can be used for gateways include LVS, Nginx, Zuul, and others.
+
+ServiceComb also provides its gateway service, Edge Service. The Edge Service has built-in powerful routing policies, supports interface-level compatibility forwarding (grayscale publishing), embedded ServiceComb governance capabilities, and supports very flexible extension mechanisms.
