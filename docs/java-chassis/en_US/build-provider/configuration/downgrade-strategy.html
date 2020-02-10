@@ -1413,7 +1413,6 @@ servicecomb.isolation.Provider.timeout.enabled
 servicecomb.isolation.Provider.DemoService.timeout.enabled
 servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 </code></pre><h3 id="configuration-items">Configuration Items</h3>
-<p>Tips: the items&apos; type&apos; field is omitted in the following table, while items can be applied to both Provider and Consumer.</p>
 <p>For Providers, the configuration item should be: servicecomb.isolation.Consumer.timeout.enabled</p>
 <p>For Consumers, the conriguration item should be servicecomb.isolation.Provider.timeout.enabled</p>
 <p><strong>Table 1-1 The fallback policy config items</strong></p>
@@ -1430,7 +1429,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">servicecomb.isolation.timeout.enabled</td>
+<td style="text-align:left">servicecomb.isolation.[type].timeout.enabled</td>
 <td style="text-align:left">FALSE</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1438,7 +1437,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.isolation.timeoutInMilliseconds</td>
+<td style="text-align:left">servicecomb.isolation.[type].timeoutInMilliseconds</td>
 <td style="text-align:left">30000</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1446,7 +1445,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.isolation.maxConcurrentRequests</td>
+<td style="text-align:left">servicecomb.isolation.[type].maxConcurrentRequests</td>
 <td style="text-align:left">10</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1454,7 +1453,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.circuitBreaker.enabled</td>
+<td style="text-align:left">servicecomb.circuitBreaker.[type].enabled</td>
 <td style="text-align:left">TRUE</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1462,7 +1461,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.circuitBreaker.forceOpen</td>
+<td style="text-align:left">servicecomb.circuitBreaker.[type].forceOpen</td>
 <td style="text-align:left">FALSE</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1470,7 +1469,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.circuitBreaker.forceClosed</td>
+<td style="text-align:left">servicecomb.circuitBreaker.[type].forceClosed</td>
 <td style="text-align:left">FALSE</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1478,7 +1477,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left">When forceOpen and forceClose are set at the same time, forceOpen will take effect.</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.circuitBreaker.sleepWindowInMilliseconds</td>
+<td style="text-align:left">servicecomb.circuitBreaker.[type].sleepWindowInMilliseconds</td>
 <td style="text-align:left">15000</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1486,7 +1485,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left">After the recovery, the number of failures will be reset. Note: If the call fails immediately after a recover, the circuit breaker is triggered immediately again.</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.circuitBreaker.requestVolumeThreshold</td>
+<td style="text-align:left">servicecomb.circuitBreaker.[type].requestVolumeThreshold</td>
 <td style="text-align:left">20</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1494,7 +1493,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left">The 10 seconds duration is splitted evenly into 10 segments for error calculation. The calculation will start after 1 second. So circuit breakers are triggered after at least 1 second.</td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.circuitBreaker.errorThresholdPercentage</td>
+<td style="text-align:left">servicecomb.circuitBreaker.[type].errorThresholdPercentage</td>
 <td style="text-align:left">50</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1502,7 +1501,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.fallback.enabled</td>
+<td style="text-align:left">servicecomb.fallback.[type].enabled</td>
 <td style="text-align:left">TRUE</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1510,7 +1509,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.fallback.maxConcurrentRequests</td>
+<td style="text-align:left">servicecomb.fallback.[type].maxConcurrentRequests</td>
 <td style="text-align:left">10</td>
 <td style="text-align:left">-</td>
 <td style="text-align:left">No</td>
@@ -1518,7 +1517,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td style="text-align:left"></td>
 </tr>
 <tr>
-<td style="text-align:left">servicecomb.fallbackpolicy.policy</td>
+<td style="text-align:left">servicecomb.fallbackpolicy.[type].policy</td>
 <td style="text-align:left">throwexception</td>
 <td style="text-align:left">returnnulll \</td>
 <td style="text-align:left">throwexception</td>
@@ -1597,7 +1596,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Fallback Policy","level":"1.4.11.3","depth":3,"next":{"title":"Parameter Validator","level":"1.4.11.4","depth":3,"path":"build-provider/configuration/parameter-validator.md","ref":"build-provider/configuration/parameter-validator.md","articles":[]},"previous":{"title":"Rate Limiting Policy","level":"1.4.11.2","depth":3,"path":"build-provider/configuration/ratelimite-strategy.md","ref":"build-provider/configuration/ratelimite-strategy.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/configuration/downgrade-strategy.md","mtime":"2020-02-03T01:54:42.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-03T01:55:21.742Z"},"basePath":"../..","book":{"language":"en_US"}});
+            gitbook.page.hasChanged({"page":{"title":"Fallback Policy","level":"1.4.11.3","depth":3,"next":{"title":"Parameter Validator","level":"1.4.11.4","depth":3,"path":"build-provider/configuration/parameter-validator.md","ref":"build-provider/configuration/parameter-validator.md","articles":[]},"previous":{"title":"Rate Limiting Policy","level":"1.4.11.2","depth":3,"path":"build-provider/configuration/ratelimite-strategy.md","ref":"build-provider/configuration/ratelimite-strategy.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"introduction.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"en_US","gitbook":"*"},"file":{"path":"build-provider/configuration/downgrade-strategy.md","mtime":"2020-02-10T01:40:55.249Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-10T01:41:36.493Z"},"basePath":"../..","book":{"language":"en_US"}});
         });
     </script>
 </div>
