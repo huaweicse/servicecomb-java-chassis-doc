@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>应用性能监控 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u5e94\u7528\u6027\u80fd\u76d1\u63a7";
+    var mkdocs_page_input_path = "general-development/metrics.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-provider/definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/jaxrs/">用JAX-RS开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/thread-pool/">线程池</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/downgrade-strategy/">降级策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../visit-sc/">访问服务中心</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">应用性能监控</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#metrics">一、Metrics介绍</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_1">二、使用方法</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#1maven">1.Maven依赖</a></li>
+        
+            <li><a class="toctree-l4" href="#2">2.配置说明</a></li>
+        
+            <li><a class="toctree-l4" href="#3">3.慢调用检测</a></li>
+        
+            <li><a class="toctree-l4" href="#4restful">4.通过RESTful访问</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#_2">三、统计项汇总</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#1-cpu">1. CPU</a></li>
+        
+            <li><a class="toctree-l4" href="#2-net">2. NET</a></li>
+        
+            <li><a class="toctree-l4" href="#3-vertx-client-endpoints">3. vertx client endpoints</a></li>
+        
+            <li><a class="toctree-l4" href="#4-vertx-server-endpoints">4. vertx server endpoints</a></li>
+        
+            <li><a class="toctree-l4" href="#5-invocation">5. invocation 时延分布</a></li>
+        
+            <li><a class="toctree-l4" href="#6-invocation-consumer-stage">6. invocation consumer stage时延</a></li>
+        
+            <li><a class="toctree-l4" href="#7-invocation-producer-stage">7. invocation producer stage时延</a></li>
+        
+            <li><a class="toctree-l4" href="#8-invocation-edge-stage">8. invocation edge stage时延</a></li>
+        
+            <li><a class="toctree-l4" href="#9-threadpool">9. threadpool</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#_3">四、业务定制</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#1meters">1.Meters:</a></li>
+        
+            <li><a class="toctree-l4" href="#2publisher">2.Publisher:</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file-upload/">文件上传</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file-download/">文件下载</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../shutdown/">优雅停机</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../error-handling/">异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../upgrading/1_to_2/">1.x迁移2.x指南</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>通用开发 &raquo;</li>
+        
+      
+    
+    <li>应用性能监控</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="metrics">一、Metrics介绍</h1>
+<p><img alt="" src="/assets/metrics/logicDiagram.png" /></p>
+<ol>
+<li>基于<a href="https://github.com/Netflix/spectator">netflix spectator</a></li>
+<li>Foundation-metrics通过SPI机制加载所有MetricsInitializer实现，实现者可以通过MetricsInitializer中的getOrder规划执行顺序，order数字越小，越先执行。</li>
+<li>Metrics-core实现3类MetricsInitializer：</li>
+<li>DefaultRegistryInitializer: 实例化并注册spectator-reg-servo，设置较小的order，保证比下面2类MetricsInitializer先执行</li>
+<li>Meters Initializer: 实现TPS、时延、线程池、jvm资源等等数据的统计</li>
+<li>Publisher: 输出统计结果，内置了日志输出，以及通过RESTful接口输出</li>
+<li>Metrics-prometheus提供与prometheus对接的能力</li>
+</ol>
+<h1 id="_1">二、使用方法</h1>
+<h3 id="1maven">1.Maven依赖</h3>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;metrics-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>如果与prometheus集成，则还需要加入依赖</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;metrics-prometheus&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p><em>注：请将version字段修改为实际版本号；如果版本号已经在dependencyManagement中声明，则这里不必写版本号</em>  </p>
+<h3 id="2">2.配置说明</h3>
+<div class="metrics-cfg"></div>
+
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.metrics.window_time</td>
+<td align="left">60000</td>
+<td align="left">统计周期，单位为毫秒<br>TPS、时延等等周期性的数据，每周期更新一次，在周期内获取到的值，实际是上一周期的值</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics<br>.invocation.latencyDistribution</td>
+<td align="left"></td>
+<td align="left">时延分布时间段定义，单位为毫秒<br>例如：0,1,10,100,1000<br>表示定义了下列时延段[0, 1),[1, 10),[10, 100),[100, 1000),[1000, )</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics<br>.Consumer.invocation.slow.enabled</td>
+<td align="left">false</td>
+<td align="left">是否开启Consumer端的慢调用检测<br>通过增加后缀.${service}.${schema}.${operation}，可以支持4级优先级定义</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics<br>.Consumer.invocation.slow.msTime</td>
+<td align="left">1000</td>
+<td align="left">时延超过配置值，则会立即输出日志，记录本次调用的stage耗时信息<br>通过增加后缀.${service}.${schema}.${operation}，可以支持4级优先级定义</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics<br>.Provider.invocation.slow.enabled</td>
+<td align="left">false</td>
+<td align="left">是否开启Provide端的慢调用检测<br>通过增加后缀.${service}.${schema}.${operation}，可以支持4级优先级定义</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics<br>.Provider.invocation.slow.msTime</td>
+<td align="left">1000</td>
+<td align="left">时延超过配置值，则会立即输出日志，记录本次调用的stage耗时信息<br>通过增加后缀.${service}.${schema}.${operation}，可以支持4级优先级定义</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics<br>.prometheus.address</td>
+<td align="left">0.0.0.0:9696</td>
+<td align="left">prometheus监听地址</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics.publisher.defaultLog<br>.enabled</td>
+<td align="left">false</td>
+<td align="left">是否输出默认的统计日志</td>
+</tr>
+<tr>
+<td align="left">servicecomb.metrics.publisher.defaultLog<br>.endpoints.client.detail.enabled</td>
+<td align="left">false</td>
+<td align="left">是否输出每一条client endpoint统计日志，因为跟目标的ip:port数有关，可能会有很多数据，所以默认不输出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3">3.慢调用检测</h3>
+<p>开启慢调用检测后，如果存在慢调用，则会立即输出相应日志：</p>
+<pre><code>2019-04-02 23:01:09,103[WARN][pool-7-thread-74][5ca37935c00ff2c7-350076] - slow(40 ms) invocation, CONSUMER highway perf1.impl.syncQuery
+  http method: GET
+  url        : /v1/syncQuery/{id}/
+  server     : highway://192.168.0.152:7070?login=true
+  status code: 200
+  total      : 50.760 ms
+    prepare                : 0.0 ms
+    handlers request       : 0.0 ms
+    client filters request : 0.0 ms
+    send request           : 0.5 ms
+    get connection         : 0.0 ms
+    write to buf           : 0.5 ms
+    wait response          : 50.727 ms
+    wake consumer          : 0.23 ms
+    client filters response: 0.2 ms
+    handlers response      : 0.0 ms (SlowInvocationLogger.java:121)
+</code></pre>
+
+<p>其中5ca37935c00ff2c7-350076是${traceId}-${invocationId}的结构，在log4j2或logback的输出格式中通过%marker引用</p>
+<h3 id="4restful">4.通过RESTful访问</h3>
+<p>只要微服务开放了rest端口，则使用浏览器访问http://ip:port/metrics 即可，
+将会得到类似下面格式的json数据：</p>
+<pre><code>{
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=connectCount,type=client)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=disconnectCount,type=client)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=connections,type=client)&quot;: 1.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=bytesRead,type=client)&quot;: 508011.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=bytesWritten,type=client)&quot;: 542163.0,
+  &quot;servicecomb.vertx.endpoints(address=192.168.0.124:7070,statistic=queueCount,type=client)&quot;: 0.0,
+
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=connectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=disconnectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=connections,type=server)&quot;: 1.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=bytesRead,type=server)&quot;: 542163.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=bytesWritten,type=server)&quot;: 508011.0,
+  &quot;servicecomb.vertx.endpoints(address=0.0.0.0:7070,statistic=rejectByConnectionLimit,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=connectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=disconnectCount,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=connections,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=bytesRead,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=bytesWritten,type=server)&quot;: 0.0,
+  &quot;servicecomb.vertx.endpoints(address=localhost:8080,statistic=rejectByConnectionLimit,type=server)&quot;: 0.0,
+
+  &quot;threadpool.completedTaskCount(id=cse.executor.groupThreadPool-group0)&quot;: 4320.0,
+  &quot;threadpool.rejectedCount(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
+  &quot;threadpool.taskCount(id=cse.executor.groupThreadPool-group0)&quot;: 4320.0,
+  &quot;threadpool.currentThreadsBusy(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
+  &quot;threadpool.poolSize(id=cse.executor.groupThreadPool-group0)&quot;: 4.0,
+  &quot;threadpool.maxThreads(id=cse.executor.groupThreadPool-group0)&quot;: 10.0,
+  &quot;threadpool.queueSize(id=cse.executor.groupThreadPool-group0)&quot;: 0.0,
+  &quot;threadpool.corePoolSize(id=cse.executor.groupThreadPool-group0)&quot;: 4.0,
+
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[0,1),status=200,transport=highway,type=latencyDistribution)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[1,3),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[3,10),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[10,100),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,scope=[100,),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[0,1),status=200,transport=highway,type=latencyDistribution)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[1,3),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[3,10),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[10,100),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,scope=[100,),status=200,transport=highway,type=latencyDistribution)&quot;: 0.0,
+
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.25269420000000004,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=total,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.7110000000000003E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0079627,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.74E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0060666,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=handlers_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.08E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.016679600000000003,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=prepare,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.68E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.08155480000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=queue,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.1470000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0098285,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=execution,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.3100000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0170669,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.6400000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0196985,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=server_filters_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.8100000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0880885,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=PRODUCER,stage=producer_send_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.049E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.9796976000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=total,statistic=max,status=200,transport=highway,type=stage)&quot;: 6.720000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.012601500000000002,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.5000000000000004E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0066785,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=handlers_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.21E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.010363800000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=prepare,statistic=max,status=200,transport=highway,type=stage)&quot;: 2.85E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0060282,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 9.2E-6,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.099984,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_send_request,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.1740000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.006916800000000001,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_get_connection,statistic=max,status=200,transport=highway,type=stage)&quot;: 5.83E-5,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0930672,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_write_to_buf,statistic=max,status=200,transport=highway,type=stage)&quot;: 1.1580000000000001E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.7654931,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wait_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 5.547E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0502085,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=consumer_wake_consumer,statistic=max,status=200,transport=highway,type=stage)&quot;: 3.7370000000000003E-4,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=count,status=200,transport=highway,type=stage)&quot;: 4269.0,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=totalTime,status=200,transport=highway,type=stage)&quot;: 0.0227188,
+  &quot;servicecomb.invocation(operation=perf1.impl.syncQuery,role=CONSUMER,stage=client_filters_response,statistic=max,status=200,transport=highway,type=stage)&quot;: 4.0E-5
+}
+</code></pre>
+
+<h1 id="_2">三、统计项汇总</h1>
+<h3 id="1-cpu">1. CPU</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="2">os</td>
+    <td rowspan="2">type</td>
+    <td>cpu</td>
+    <td>当前周期内系统CPU使用率，Solaris模式</td>
+  </tr>
+  <tr>
+    <td>processCpu</td>
+    <td>当前周期内微服务进程CPU使用率，IRIX模式<br>
+        processCpu除以cpu近似等于系统CPU数</td>
+  </tr>
+</table></p>
+<h3 id="2-net">2. NET</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="6">os</td>
+    <td>type</td>
+    <td>net</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="4">statistic</td>
+    <td>send</td>
+    <td>当前周期内平均每秒发送的字节数(Bps)</td>
+  </tr>
+  <tr>
+    <td>receive</td>
+    <td>当前周期内平均每秒接收的字节数(Bps)</td>
+  </tr>
+  <tr>
+    <td>sendPackets</td>
+    <td>当前周期内平均每秒发送的包数(pps)</td>
+  </tr>
+  <tr>
+    <td>receivePackets</td>
+    <td>当前周期内平均每秒接收的包数(pps)</td>
+  </tr>
+  <tr>
+    <td>interface</td>
+    <td></td>
+    <td>网卡设备名</td>
+  </tr>
+</table></p>
+<h3 id="3-vertx-client-endpoints">3. vertx client endpoints</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="8">servicecomb<br>.vertx<br>.endpoints</td>
+    <td>type</td>
+    <td>client</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>address</td>
+    <td>${ip}:${port}</td>
+    <td>服务端的ip:port</td>
+  </tr>
+  <tr>
+    <td rowspan="6">statistic</td>
+    <td>connectCount</td>
+    <td>当前周期内共发起多少次连接</td>
+  </tr>
+  <tr>
+    <td>disconnectCount</td>
+    <td>当前周期内断连的次数</td>
+  </tr>
+  <tr>
+    <td>queueCount</td>
+    <td>http连接池中正在等待获取连接的请求数</td>
+  </tr>
+  <tr>
+    <td>connections</td>
+    <td>当前时刻的连接数</td>
+  </tr>
+  <tr>
+    <td>bytesRead</td>
+    <td>当前周期内平均每秒发送的字节数(Bps)<br>
+        业务层的统计，相对从网卡获取的数据，这里的数据不包括包头的大小<br>
+        对于http消息，不包括http header大小</td>
+  </tr>
+  <tr>
+    <td>bytesWritten</td>
+    <td>当前周期内平均每秒接收的字节数(Bps)<br>
+        业务层的统计，相对从网卡获取的数据，这里的数据不包括包头的大小<br>
+        对于http消息，不包括http header大小</td>
+  </tr>
+</table></p>
+<h3 id="4-vertx-server-endpoints">4. vertx server endpoints</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="8">servicecomb<br>.vertx<br>.endpoints</td>
+    <td>type</td>
+    <td>server</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>address</td>
+    <td>${ip}:${port}</td>
+    <td>监听的ip:port</td>
+  </tr>
+  <tr>
+    <td rowspan="6">statistic</td>
+    <td>connectCount</td>
+    <td>当前周期内共接入多少次连接</td>
+  </tr>
+  <tr>
+    <td>disconnectCount</td>
+    <td>当前周期内断连的次数</td>
+  </tr>
+  <tr>
+    <td>rejectByConnectionLimit</td>
+    <td>当前周期内因超出连接数限制而主动断连的次数</td>
+  </tr>
+  <tr>
+    <td>connections</td>
+    <td>当前时刻的连接数</td>
+  </tr>
+  <tr>
+    <td>bytesRead</td>
+    <td>当前周期内平均每秒发送的字节数(Bps)<br>
+        业务层的统计，相对从网卡获取的数据，这里的数据不包括包头的大小<br>
+        对于http消息，不包括http header大小</td>
+  </tr>
+  <tr>
+    <td>bytesWritten</td>
+    <td>当前周期内平均每秒接收的字节数(Bps)<br>
+        业务层的统计，相对从网卡获取的数据，这里的数据不包括包头的大小<br>
+        对于http消息，不包括http header大小</td>
+  </tr>
+</table></p>
+<h3 id="5-invocation">5. invocation 时延分布</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="11">servicecomb<br>.invocation</td>
+    <td>role</td>
+    <td>CONSUMER、PRODUCER、EDGE</td>
+    <td>是CONSUMER、PRODUCER还是EDGE端的统计</td>
+  </tr>
+  <tr>
+    <td>operation</td>
+    <td>${microserviceName}<br>.${schemaId}<br>.${operationName}</td>
+    <td>调用的方法名</td>
+  </tr>
+  <tr>
+    <td>transport</td>
+    <td>highway或rest</td>
+    <td>调用是在哪个传输通道上发生的</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>http status code</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>latencyDistribution</td>
+    <td>调用时延分布</td>
+  </tr>
+  <tr>
+    <td>scope</td>
+    <td>[${min}, ${max})</td>
+    <td>当前周期内调用时延大于等于min，小于max的次数<br>
+        [${min},)表示max为无限大</td>
+  </tr>
+</table></p>
+<h3 id="6-invocation-consumer-stage">6. invocation consumer stage时延</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="19">servicecomb<br>.invocation</td>
+    <td>role</td>
+    <td>CONSUMER</td>
+    <td>CONSUMER端的统计</td>
+  </tr>
+  <tr>
+    <td>operation</td>
+    <td>${microserviceName}<br>.${schemaId}<br>.${operationName}</td>
+    <td>调用的方法名</td>
+  </tr>
+  <tr>
+    <td>transport</td>
+    <td>highway或rest</td>
+    <td>调用是在哪个传输通道上发生的</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>http status code</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>stage</td>
+    <td>stage时延</td>
+  </tr>
+  <tr>
+    <td rowspan="11">stage</td>
+    <td>total</td>
+    <td>全流程</td>
+  </tr>
+  <tr>
+    <td>prepare</td>
+    <td>初始化</td>
+  </tr>
+  <tr>
+    <td>handlers_request</td>
+    <td>handler链请求流程</td>
+  </tr>
+  <tr>
+    <td>client_filters_request</td>
+    <td>http client filter链请求流程<br>
+        只有走rest transport才有本阶段</td>
+  </tr>
+  <tr>
+    <td>consumer_send_request</td>
+    <td>发送请求阶段，包括consumer_get_connection和consumer_write_to_buf</td>
+  </tr>
+  <tr>
+    <td>consumer_get_connection</td>
+    <td>从连接池获取连接</td>
+  </tr>
+  <tr>
+    <td>consumer_write_to_buf</td>
+    <td>向网络缓冲区写数据</td>
+  </tr>
+  <tr>
+    <td>consumer_wait_response</td>
+    <td>等待服务端应答</td>
+  </tr>
+  <tr>
+    <td>consumer_wake_consumer</td>
+    <td>同步流程中，收到应答后，从唤醒等待线程，到等待线程开始处理应答的耗时</td>
+  </tr>
+  <tr>
+    <td>client_filters_response</td>
+    <td>http client filter链应答流程</td>
+  </tr>
+  <tr>
+    <td>handlers_response</td>
+    <td>handler链应答流程</td>
+  </tr>
+  <tr>
+    <td rowspan="3">statistic</td>
+    <td>count</td>
+    <td>平均每秒调用次数，即TPS<br>
+        count=统计周期内的调用次数/周期（秒）</td>
+  </tr>
+  <tr>
+    <td>totalTime</td>
+    <td>单位为秒<br>
+        totalTime=当前周期内的调用耗时总时长/周期（秒）<br>
+        totalTime除以count即可得到平均时延</td>
+  </tr>
+  <tr>
+    <td>max</td>
+    <td>单位为秒<br>
+        当前周期内最大耗时</td>
+  </tr>
+</table></p>
+<h3 id="7-invocation-producer-stage">7. invocation producer stage时延</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="17">servicecomb<br>.invocation</td>
+    <td>role</td>
+    <td>PRODUCER</td>
+    <td>PRODUCER端的统计</td>
+  </tr>
+  <tr>
+    <td>operation</td>
+    <td>${microserviceName}<br>.${schemaId}<br>.${operationName}</td>
+    <td>调用的方法名</td>
+  </tr>
+  <tr>
+    <td>transport</td>
+    <td>highway或rest</td>
+    <td>调用是在哪个传输通道上发生的</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>http status code</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>stage</td>
+    <td>stage时延</td>
+  </tr>
+  <tr>
+    <td rowspan="9">stage</td>
+    <td>total</td>
+    <td>全流程</td>
+  </tr>
+  <tr>
+    <td>prepare</td>
+    <td>初始化</td>
+  </tr>
+  <tr>
+    <td>queue</td>
+    <td>仅在使用线程池时有意义<br>
+        表示调用在线程池中排队的时长</td>
+  </tr>
+  <tr>
+    <td>server_filters_request</td>
+    <td>http server filter链请求流程<br>
+        只有走rest transport才有本阶段</td>
+  </tr>
+  <tr>
+    <td>handlers_request</td>
+    <td>handler链请求流程</td>
+  </tr>
+  <tr>
+    <td>execution</td>
+    <td>业务方法</td>
+  </tr>
+  <tr>
+    <td>handlers_response</td>
+    <td>handler链应答流程</td>
+  </tr>
+  <tr>
+    <td>server_filters_response</td>
+    <td>http server filter链应答流程</td>
+  </tr>
+  <tr>
+    <td>producer_send_response</td>
+    <td>发送应答</td>
+  </tr>
+  <tr>
+    <td rowspan="3">statistic</td>
+    <td>count</td>
+    <td>平均每秒调用次数，即TPS<br>
+        count=统计周期内的调用次数/周期（秒）</td>
+  </tr>
+  <tr>
+    <td>totalTime</td>
+    <td>单位为秒<br>
+        totalTime=当前周期内的调用耗时总时长/周期（秒）<br>
+        totalTime除以count即可得到平均时延</td>
+  </tr>
+  <tr>
+    <td>max</td>
+    <td>单位为秒<br>
+        当前周期内最大耗时</td>
+  </tr>
+</table></p>
+<h3 id="8-invocation-edge-stage">8. invocation edge stage时延</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td rowspan="23">servicecomb<br>.invocation</td>
+    <td>role</td>
+    <td>EDGE</td>
+    <td>EDGE的统计</td>
+  </tr>
+  <tr>
+    <td>operation</td>
+    <td>${microserviceName}<br>.${schemaId}<br>.${operationName}</td>
+    <td>调用的方法名</td>
+  </tr>
+  <tr>
+    <td>transport</td>
+    <td>highway或rest</td>
+    <td>调用是在哪个传输通道上发生的</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>http status code</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>stage</td>
+    <td>stage时延</td>
+  </tr>
+  <tr>
+    <td rowspan="15">stage</td>
+    <td>total</td>
+    <td>全流程</td>
+  </tr>
+  <tr>
+    <td>prepare</td>
+    <td>初始化</td>
+  </tr>
+  <tr>
+    <td>queue</td>
+    <td>仅在使用线程池时有意义<br>
+        表示调用在线程池中排队的时长</td>
+  </tr>
+  <tr>
+    <td>server_filters_request</td>
+    <td>http server filter链请求流程</td>
+  </tr>
+  <tr>
+    <td>handlers_request</td>
+    <td>handler链请求流程</td>
+  </tr>
+  <tr>
+    <td>client_filters_request</td>
+    <td>http client filter链请求流程</td>
+  </tr>
+  <tr>
+    <td>consumer_send_request</td>
+    <td>发送请求阶段，包括consumer_get_connection和consumer_write_to_buf</td>
+  </tr>
+  <tr>
+    <td>consumer_get_connection</td>
+    <td>从连接池获取连接</td>
+  </tr>
+  <tr>
+    <td>consumer_write_to_buf</td>
+    <td>向网络缓冲区写数据</td>
+  </tr>
+  <tr>
+    <td>consumer_wait_response</td>
+    <td>等待服务端应答</td>
+  </tr>
+  <tr>
+    <td>consumer_wake_consumer</td>
+    <td>同步流程中，收到应答后，从唤醒等待线程，到等待线程开始处理应答的耗时</td>
+  </tr>
+  <tr>
+    <td>client_filters_response</td>
+    <td>http client filter链应答流程</td>
+  </tr>
+  <tr>
+    <td>handlers_response</td>
+    <td>handler链应答流程</td>
+  </tr>
+  <tr>
+    <td>server_filters_response</td>
+    <td>http server filter链应答流程</td>
+  </tr>
+  <tr>
+    <td>producer_send_response</td>
+    <td>发送应答</td>
+  </tr>
+  <tr>
+    <td rowspan="3">statistic</td>
+    <td>count</td>
+    <td>平均每秒调用次数，即TPS<br>
+        count=统计周期内的调用次数/周期（秒）</td>
+  </tr>
+  <tr>
+    <td>totalTime</td>
+    <td>单位为秒<br>
+        totalTime=当前周期内的调用耗时总时长/周期（秒）<br>
+        totalTime除以count即可得到平均时延</td>
+  </tr>
+  <tr>
+    <td>max</td>
+    <td>单位为秒<br>
+        当前周期内最大耗时</td>
+  </tr>
+</table></p>
+<h3 id="9-threadpool">9. threadpool</h3>
+<p><table class="metrics-table">
+  <tr>
+    <th>Name</th>
+    <th>Tag keys</th>
+    <th>Tag values</th>
+    <th>含义</th>
+  </tr>
+  <tr>
+    <td>threadpool.corePoolSize  </td>
+    <td rowspan="8">id</td>
+    <td rowspan="8">${threadPoolName}</td>
+    <td>最小线程数</td>
+  </tr>
+  <tr>
+    <td>threadpool.maxThreads </td>
+    <td>最大允许的线程数</td>
+  </tr>
+  <tr>
+    <td>threadpool.poolSize </td>
+    <td>当前实际线程数</td>
+  </tr>
+  <tr>
+    <td>threadpool.currentThreadsBusy </td>
+    <td>当前的活动线程数，即当前正在执行的任务数</td>
+  </tr>
+  <tr>
+    <td>threadpool.queueSize </td>
+    <td>当前正在排队的任务数</td>
+  </tr>
+  <tr>
+    <td>threadpool.rejectedCount </td>
+    <td>当前周期内平均每秒被拒绝的任务数</td>
+  </tr>
+  <tr>
+    <td>threadpool.taskCount</td>
+    <td>统计周期内平均每秒提交的任务数<br>taskCount=（completed + queue + active）/周期（秒）</td>
+  </tr>
+  <tr>
+    <td>threadpool.completedTaskCount </td>
+    <td>统计周期内平均每秒完成的任务数<br>completedTaskCount=completed/周期（秒）</td>
+  </tr>
+</table></p>
+<h1 id="_3">四、业务定制</h1>
+<p>因为ServiceComb已经初始化了servo的registry，所以业务不必再创建registry</p>
+<p>实现MetricsInitializer接口，定义业务级的Meters，或实现定制的Publisher，再通过SPI机制声明自己的实现即可。</p>
+<h3 id="1meters">1.Meters:</h3>
+<p>创建Meters能力均由spectator提供，可查阅<a href="https://github.com/Netflix/spectator">netflix spectator</a>文档</p>
+<h3 id="2publisher">2.Publisher:</h3>
+<p>周期性输出的场景，比如日志场景，通过eventBus订阅org.apache.servicecomb.foundation.metrics.PolledEvent，PolledEvent.getMeters()即是本周期的统计结果
+非周期性输出的场景，比如通过RESTful接口访问，通过globalRegistry.iterator()即可得到本周期的统计结果</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../microservice-invocation-chain/" class="btn btn-neutral float-right" title="微服务调用链">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../visit-sc/" class="btn btn-neutral" title="访问服务中心"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../visit-sc/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../microservice-invocation-chain/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+
+</body>
+</html>

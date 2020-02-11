@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>异常处理 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u5f02\u5e38\u5904\u7406";
+    var mkdocs_page_input_path = "general-development/error-handling.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-provider/definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/jaxrs/">用JAX-RS开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/thread-pool/">线程池</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/downgrade-strategy/">降级策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../visit-sc/">访问服务中心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../metrics/">应用性能监控</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file-upload/">文件上传</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file-download/">文件下载</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../shutdown/">优雅停机</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">异常处理</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">异常处理</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_2">业务定义异常</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">控制异常</a></li>
+        
+            <li><a class="toctree-l4" href="#_4">未知异常</a></li>
+        
+            <li><a class="toctree-l4" href="#_5">异常转换和定制</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../upgrading/1_to_2/">1.x迁移2.x指南</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>通用开发 &raquo;</li>
+        
+      
+    
+    <li>异常处理</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">异常处理</h1>
+<p>ServiceComb异常情况可以分为三类：
+* 业务定义异常：这类异常由业务接口定义。用户在获取到服务swagger定义到时候，就能够从定义中看到这类异常对应的错误码，以及返回值类型。</p>
+<ul>
+<li>处理控制异常：这类异常通常是框架处理流程上的异常。比如流控Handler抛出TOO_MANY_REQUESTS_STATUS异常。</li>
+</ul>
+<p><code>java
+  CommonExceptionData errorData = new CommonExceptionData("rejected by qps flowcontrol");
+  asyncResp.producerFail(new InvocationException(QpsConst.TOO_MANY_REQUESTS_STATUS, errorData));</code></p>
+<ul>
+<li>未知异常：这类异常发生的情况不确定。比如业务代码实现的时候，抛出NullPointerException等未捕获异常、底层的网络连接超时异常等。这类异常会由ServiceComb封装成590或者490错误返回。比如：</li>
+</ul>
+<p><code>java
+  CommonExceptionData errorData = new CommonExceptionData(cause.getMessage());
+  asyncResp.producerFail(new InvocationException(590, errorData)</code>
+  或者
+  <code>java
+  asyncResp.consumerFail(new InvocationException(490, errorData)</code></p>
+<h2 id="_2">业务定义异常</h2>
+<p>通常业务在开发服务代码的时候，只有一个返回值，但有些情况，也需要视具体情况返回不同的消息。可以通过@ApiResonse来定义不同错误码对应的返回消息。业务异常具备确定的数据类型，并且会在swagger里面体现，客户端代码在处理异常的时候，能够直接获取到错误类型。比如下面的代码：</p>
+<pre><code class="java">  @Path(&quot;/errorCode&quot;)
+  @POST
+  @ApiResponses({
+      @ApiResponse(code = 200, response = MultiResponse200.class, message = &quot;&quot;),
+      @ApiResponse(code = 400, response = MultiResponse400.class, message = &quot;&quot;),
+      @ApiResponse(code = 500, response = MultiResponse500.class, message = &quot;&quot;)})
+  public MultiResponse200 errorCode(MultiRequest request) {
+    if (request.getCode() == 400) {
+      MultiResponse400 r = new MultiResponse400();
+      r.setCode(400);
+      r.setMessage(&quot;bad request&quot;);
+      throw new InvocationException(javax.ws.rs.core.Response.Status.BAD_REQUEST, r);
+    } else if (request.getCode() == 500) {
+      MultiResponse500 r = new MultiResponse500();
+      r.setCode(500);
+      r.setMessage(&quot;internal error&quot;);
+      throw new InvocationException(javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR, r);
+    } else {
+      MultiResponse200 r = new MultiResponse200();
+      r.setCode(200);
+      r.setMessage(&quot;success result&quot;);
+      return r;
+    }
+  }
+</code></pre>
+
+<p>客户端代码可以按照如下方式处理异常。异常的类型是确定的，可以通过cast获取到异常类型。</p>
+<pre><code class="java">    MultiRequest request = new MultiRequest();
+
+    request.setCode(200);
+    ResponseEntity&lt;MultiResponse200&gt; result = template
+        .postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse200.class);
+    TestMgr.check(result.getStatusCode(), 200);
+    TestMgr.check(result.getBody().getMessage(), &quot;success result&quot;);
+
+    request.setCode(400);
+    MultiResponse400 t400 = null;
+    try {
+      template.postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse400.class);
+    } catch (InvocationException e) {
+      t400 = (MultiResponse400) e.getErrorData();
+    }
+    TestMgr.check(t400.getCode(), 400);
+    TestMgr.check(t400.getMessage(), &quot;bad request&quot;);
+
+    request.setCode(500);
+    MultiResponse500 t500 = null;
+    try {
+      template.postForEntity(SERVER + &quot;/MultiErrorCodeService/errorCode&quot;, request, MultiResponse400.class);
+    } catch (InvocationException e) {
+      t500 = (MultiResponse500) e.getErrorData();
+    }
+    TestMgr.check(t500.getCode(), 500);
+    TestMgr.check(t500.getMessage(), &quot;internal error&quot;);
+</code></pre>
+
+<h2 id="_3">控制异常</h2>
+<p>控制异常一般在接口定义里面没有声明。客户端在做异常处理的时候，不知道异常类型。可以采用弱类型的方式处理异常：</p>
+<pre><code class="java">    JsonObject requestJson = new JsonObject();
+    requestJson.put(&quot;code&quot;, 400);
+    requestJson.put(&quot;message&quot;, &quot;test message&quot;);
+
+    try {
+      template
+          .postForEntity(SERVER + &quot;/MultiErrorCodeService/noClientErrorCode&quot;, requestJson, Object.class);
+    } catch (InvocationException e) {
+      TestMgr.check(e.getStatusCode(), 400);
+      mapResult = RestObjectMapperFactory.getRestObjectMapper().convertValue(e.getErrorData(), Map.class);
+      TestMgr.check(mapResult.get(&quot;message&quot;), &quot;test message&quot;);
+      TestMgr.check(mapResult.get(&quot;code&quot;), 400);
+      TestMgr.check(mapResult.get(&quot;t400&quot;), 400);
+    }
+</code></pre>
+
+<p>上面的代码假设不知道异常类型，通过API将异常类型转换为Map类型，然后从Map里面读取异常类型。在ServiceComb自己抛出的异常类型中，一般控制异常的类型也是固定的，为CommonExceptionData。</p>
+<h2 id="_4">未知异常</h2>
+<p>未知异常统一被封装为490， 590错误码，异常消息的类型固定为CommonExceptionData类型。</p>
+<h2 id="_5">异常转换和定制</h2>
+<p>有时候，业务需要将所有的未知异常、控制异常进行捕获，转换为对用户友好的消息。或者对控制异常进行捕获，将消息体转换为自定义的JSON格式。这里面有几个参考点。</p>
+<ul>
+<li>控制消息消息体序列化</li>
+</ul>
+<p>控制消息消息体序列化的目的是简化消费者的异常处理逻辑，不用使用弱类型，而是使用确切类型。可以采用注册全局的错误码类型。
+  业务需要通过SPI实现org.apache.servicecomb.swagger.invocation.response.ResponseMetaMapper接口。接口的核心内容是为每个错误码制定序列化类型：
+  ```java
+    private final static Map<Integer, ResponseMeta> CODES = new HashMap&lt;&gt;(1);</p>
+<pre><code>static {
+  ResponseMeta meta = new ResponseMeta();
+  meta.setJavaType(SimpleType.constructUnsafe(IllegalStateErrorData.class));
+  CODES.put(500, meta);
+}
+
+@Override
+public Map&lt;Integer, ResponseMeta&gt; getMapper() {
+  return CODES;
+}
+</code></pre>
+<p>```</p>
+<ul>
+<li>异常转换</li>
+</ul>
+<p>如果业务不对异常进行转换，ServiceComb会将InvocationException中的data直接序列化到响应消息中。如果不是InvocationException，则转换为490， 590，序列化的消息为CommonExceptionData。业务可以通过SPI实现<code>org.apache.servicecomb.swagger.invocation.exception.ExceptionToProducerResponseConverter</code>对异常进行转换。<code>ExceptionToProducerResponseConverter</code>的说明如下：
+    - <code>getExceptionClass()</code>方法会返回converter实现类所处理的异常类型。如果该方法返回<code>null</code>，则说明此实现类为默认converter。
+    - <code>Response convert(SwaggerInvocation swaggerInvocation, T e)</code>方法中实现处理异常的逻辑，该方法返回的<code>Response</code>决定了ServiceComb将会返回何种状态码、何种response body的应答。
+    - <code>getOrder()</code>方法用以确定converter实现类的优先级，该方法返回的值越小，优先级越高，如果不覆写该方法的话，则返回默认优先级<code>0</code>。对于处理同一异常类型的converter（或默认converter），只有优先级最高的生效。
+    - 在为异常选择converter时，会从异常本身的类型开始匹配，如果找不到对应的converter则逐级向上查找父类型的converter。当匹配到<code>Throwable</code>仍未找到converter时，将使用默认converter处理异常。</p>
+<p>```java
+  public class CustomExceptionToProducerResponseConverter implements ExceptionToProducerResponseConverter<IllegalStateException> {
+    @Override
+    public Class<IllegalStateException> getExceptionClass() {
+      // 返回IllegalStateException表示该converter处理IllegalStateException类型的异常
+      return IllegalStateException.class;
+    }</p>
+<pre><code>@Override
+public int getOrder() {
+  // 返回的order值越小，优先级越高
+  return 100;
+}
+
+@Override
+public Response convert(SwaggerInvocation swaggerInvocation, IllegalStateException e) {
+  // 这里是处理异常的逻辑
+  IllegalStateErrorData data = new IllegalStateErrorData();
+  data.setId(500);
+  data.setMessage(e.getMessage());
+  data.setState(e.getMessage());
+  InvocationException state = new InvocationException(Status.INTERNAL_SERVER_ERROR, data);
+  return Response.failResp(state);
+}
+</code></pre>
+<p>}
+  ```</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../multienvironment/" class="btn btn-neutral float-right" title="微服务实例间多环境隔离">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../shutdown/" class="btn btn-neutral" title="优雅停机"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../shutdown/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../multienvironment/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+
+</body>
+</html>

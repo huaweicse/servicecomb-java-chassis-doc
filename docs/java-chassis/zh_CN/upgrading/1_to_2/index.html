@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>1.x迁移2.x指南 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "1.x\u8fc1\u79fb2.x\u6307\u5357";
+    var mkdocs_page_input_path = "upgrading/1_to_2.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-provider/definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/jaxrs/">用JAX-RS开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/thread-pool/">线程池</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/downgrade-strategy/">降级策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../general-development/visit-sc/">访问服务中心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/metrics/">应用性能监控</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/file-upload/">文件上传</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/file-download/">文件下载</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/shutdown/">优雅停机</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/error-handling/">异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">1.x迁移2.x指南</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#1x2x">1.x迁移2.x指南</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_1">变更点说明</a></li>
+        
+            <li><a class="toctree-l3" href="#_2">常见问题</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>1.x迁移2.x指南</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="1x2x">1.x迁移2.x指南</h1>
+<h2 id="_1">变更点说明</h2>
+<ul>
+<li>
+<p>Highway通信协议的变更
+Highway通信协议是2.x的变更是最大的。如果业务采用了Highway通信协议，需要确保所有相关的consumer和provider都必须升级，低版本的consumer和高版本的provider之间无法直接通信。此外，从代码风格的层面，还有如下一些变更。</p>
+</li>
+<li>
+<p>空字符串和null的传输：由于protobuffer协议对于空字符串和null在序列化的时候，都是为空，反序列化的结果都是null。 因此应用程序的业务逻辑不应该通过空字符串和null表达不一样的语义。尽管对于REST，程序底层支持这样的区分，仍然不建议将业务逻辑构筑在这个假设之上，从而避免很多的陷阱。 </p>
+</li>
+<li>
+<p>如果请求参数或者返回值是一个POJO，假设Person，REST可以返回null，但是HIGHWAY始终会创建一个Person对象返回。导致这个差异是REST和HIGHWAY序列化流程差异导致的。因此业务逻辑也尽可能不要依赖于null对象提供语义。</p>
+</li>
+<li>
+<p>在contrast first编程模式情况下，用户先写契约，然后通过契约生成代码，并将契约文件放到microservices/{microservice name}/{schema id}.yaml文件中，这种情况下不会通过代码生成契约。通常通过工具生成代码，工具生成的数据类型和契约的数据类型匹配，但是如果这种场景的代码经过修改，并且yaml中的数据类型是number，而代码中的类型是Integer，在HIGHWAY通信模式下会报告错误。 protobuffer不支持将Integer类型采用Double的方式序列化。在contract first编程模式下，建议通过生成工具生成代码，这样用户就不用了解swagger数据类型和JAVA数据类型映射的细节，避免一些陷阱。</p>
+</li>
+<li>
+<p>HIGWHAY的数据类型定义不支持一些特殊字符串，比如 "H.264"和"MPEG-2"在OPEN API里面是合法的参数名称，但是在protobuffer里面是不合法的参数名称。带有"."和"-"的参数名字不能用于HIGHWAY。如果存在，第一次访问这个接口的时候，会报告: "io.protostuff.compiler.parser.ParserException: Could not parse syntax"异常。 </p>
+</li>
+<li>
+<p>对于ENUM的使用一个需要特别注意的地方，protobuffer采用int来序列化ENUN，int的默认值(即0）不会序列化，那么反序列化的时候，ENUM的缺省值必须为第一个值。应用程序需要将null和第一个缺省值当成一样的语义对待。比较好的做法是在程序里面显示的给ENUM字段赋缺省值。</p>
+</li>
+<li>
+<p>HIGHWAY不支持数组参数存在null值的情况。比如如果一个接口的参数是String[]，那么里面的元素不能为null，否则序列化和反序列化会失败。</p>
+</li>
+<li>
+<p>对于primitive类型，并且接口声明为@Required，由于HIGHWAY并不会序列化缺省值，比如0等，在Consumer端传递的参数值为0的时候，Provider端并不能区分这个值是传递了0，还是没有传递。因此HIGHWAY会忽略@Required声明，使用缺省值0。</p>
+</li>
+<li>
+<p>如果一个属性的名称采用一个小写字母开头，并且只有一个小写字母，即使生成的getter/setter是合法的， swagger生成的属性名称还是会出现错误。应该尽可能避免使用这样的属性名称。必须使用的场景，需要显示的使用@JsonProperty声明。</p>
+</li>
+</ul>
+<pre><code>public class SpecialNameModel {
+  // names starts with only one lower case , although getter/setter generated by IDE is correct,
+  // will cause jackson generate incorrect swagger names.
+  // @JsonProperty must be used to make json work in a predictable way.
+  @JsonProperty(&quot;aIntName&quot;)
+  private int aIntName;
+
+  public int getaIntName() {
+    return aIntName;
+  }
+
+  public void setaIntName(int aIntName) {
+    this.aIntName = aIntName;
+  }
+}
+</code></pre>
+
+<p><strong><em>优秀实践</em></strong>:</p>
+<ol>
+<li>一个@RpcSchema或者@RestSchema定义的所有接口，如果部分接口HIGHWAY不支持，并且用户可能将部分接口作为HIGHWAY发布，建议将这些接口放到独立的类里面，使用不一样的Schema ID进行区分，比如"MySchemaHighwayOnly", "MySchemaRestOnly", "MySchema"。</li>
+</ol>
+<p>比如：</p>
+<pre><code>public enum Media {
+  @JsonProperty(&quot;AAC&quot;)
+  AAC,
+  @JsonProperty
+  FLAC,
+  @JsonProperty(&quot;H.264&quot;)
+  H_264,
+  @JsonProperty(&quot;MPEG-2&quot;)
+  MPEG_2,
+  WMV
+}
+</code></pre>
+
+<p>因为protobuffer的IDL文件不支持 ., -等字符，所以上述例子中的H.264和MPEG-2名称不能够用于HIGHWAY的ENUM类型。</p>
+<ul>
+<li>RestTemplate的使用</li>
+</ul>
+<p>对于下面的consumer和provider代码：</p>
+<pre><code>// provider
+
+  @PostMapping(path = &quot;/object&quot;)
+  public Object testObject(@RequestBody Object input) 
+
+// consumer
+  Object result = restTemplate.postForObject(prefix + &quot;/object&quot;, new EmptyObject(), EmptyObject.class);
+</code></pre>
+
+<p>1.x版本返回的result类型为Map。 2.x版本返回的类型和postForObject指定的类型一致，上面的示例中，结果为EmptyObject类似。</p>
+<p>下面的代码，1.x和2.x版本运行的结果是一样的：</p>
+<pre><code>List&lt;GenericObjectParam&lt;List&lt;RecursiveObjectParam&gt;&gt;&gt; response = consumers.getSCBRestTemplate()
+   postForObject(&quot;/testListObjectParam&quot;, request, List.class);
+</code></pre>
+
+<p>前提条件是GenericObjectParam和RecursiveObjectParam在consumer的classpath中存在对应的类，并且package和服务端定义的类一样。如果不一样response类型为List<Map>，上面的代码会抛出类型转换异常。</p>
+<p>2.x版本在保持兼容的情况下，支持下面的用法：</p>
+<pre><code>HttpEntity&lt;SpringmvcBasicRequestModel&gt; requestEntity = new HttpEntity&lt;&gt;(requestModel, null);
+List&lt;SpringmvcBasicResponseModel&gt; responseModelList = 
+    consumers.getSCBRestTemplate().exchange(&quot;/postListObject&quot;, HttpMethod.POST, requestEntity,
+        new ParameterizedTypeReference&lt;List&lt;SpringmvcBasicResponseModel&gt;&gt;() {
+        }).getBody();
+</code></pre>
+
+<p>这种方式的语义根据清晰，在使用泛型的时候，建议采用这种用法。</p>
+<p>可以看出java-chassis对于RestTemplate使用的语义在2.x和Spring MVC保持了一致，同时兼容了1.x的用法。细心的开发者可能注意到了1.x的运行结果Spring MVC是得不到的，这是因为1.x版本可以根据契约类型反序列化对象。2.x也支持这种方式，新增了"调用类型"覆盖"契约类型"的方式，这种方式根据对于consumer和provider之间的编译依赖更小。</p>
+<ul>
+<li>AsyncRestTemplate的使用</li>
+</ul>
+<p>1.x 和 2.x 中AsyncRestTemplate的使用方式一样，没有变化。但是由于2.x只支持spring 5版本，而spring 5将AsyncRestTemplate标记为废弃状态，开发者在后续开发过程中尽可能不要使用AsyncRestTemplate。可以使用CompletableFuture来替代，可以参考这个<a href="https://github.com/apache/servicecomb-samples/pull/41/files">例子</a>。</p>
+<h2 id="_2">常见问题</h2>
+<h3 id="_3">运行错误</h3>
+<ul>
+<li>java-chassis运行时依赖于接口定义里面的名字</li>
+</ul>
+<p>为了更好的基于swagger对服务进行治理，以及提高客户端代码书写的灵活性，java-chassis要求书写的接口定义代码在编译的时候，带上参数名称信息，否则会报告如下错误：</p>
+<pre><code>Caused by: java.lang.IllegalStateException: parameter name is not present, method=org.apache.servicecomb.samples.porter.file.api.InternalAccessEndpoint:localAccess
+solution:
+  change pom.xml, add compiler argument: -parameters, for example:
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+      &lt;configuration&gt;
+        &lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+</code></pre>
+
+<p>解决该问题可以通过配置maven compiler plugin， 加上-parameters参数。如果在IDE下面运行，需要设置 build -&gt; java compilers 在编译参数里面增加-parameters。</p>
+<ul>
+<li>spring 5变更</li>
+</ul>
+<p>cse.bean.xml文件如果采用了classpath查找定义文件</p>
+<pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+    xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+    xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;&gt;
+</code></pre>
+
+<p>会报告下面的错误：</p>
+<pre><code>[main][WARN][org.springframework.beans.factory.xml.XmlBeanDefinitionReader:48] Ignored XML validation warning
+org.xml.sax.SAXParseException: schema_reference.4: 无法读取方案文档 'classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd', 原因为 1) 无法找到文档; 2) 无法读取文档; 3) 文档的根元素不是 &lt;xsd:schema&gt;。
+    at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203) ~[?:1.8.0_131]
+    at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.warning(ErrorHandlerWrapper.java:99) [?:1.8.0_131]
+    at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:392) [?:1.8.0_131]
+</code></pre>
+
+<p>修改为:</p>
+<pre><code>&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+  xsi:schemaLocation=&quot;
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+</code></pre>
+
+<ul>
+<li>SCBEngine使用时机</li>
+</ul>
+<p>代码</p>
+<pre><code>@RestSchema(schemaId = &quot;inspector&quot;)
+@Path(&quot;/inspector&quot;)
+public class InspectorEndpoint {
+  private InspectorConfig inspectorConfig;
+
+  public InspectorEndpoint() {
+    this.inspectorConfig = SCBEngine.getInstance().getPriorityPropertyManager().createConfigObject(InspectorConfig.class);
+  }
+</code></pre>
+
+<pre><code>Caused by: java.lang.NullPointerException
+    at org.apache.servicecomb.core.SCBEngine.&lt;init&gt;(SCBEngine.java:126)
+    at org.apache.servicecomb.core.SCBEngine.getInstance(SCBEngine.java:159)
+    at org.apache.servicecomb.samples.porter.file.api.InspectorEndpoint.&lt;init&gt;(InspectorEndpoint.java:82)
+    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+    at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+</code></pre>
+
+<p>不能够在bean的初始化里面使用SCBEngine的实例。这个实例业务需要在事件AFTER_REGISTRY等处理函数中使用。</p>
+<h3 id="_4">编译错误</h3>
+<p>2.x相对于1.x升级了大量三方件，包括netty, vert.x, spring, spring boot等，直接引用这些组件的代码可能编译失败。同时还对代码进行了一定重构，有些代码使用了java-chassis未公开接口，使用这些接口可能编译失败。下面是一些常见的问题。下面一些PR的修改可以参考：</p>
+<ul>
+<li><a href="https://github.com/apache/servicecomb-java-chassis/pull/1394">升级netty&amp;vertx</a></li>
+<li><a href="https://github.com/apache/servicecomb-java-chassis/pull/1381">升级jackson</a></li>
+<li><a href="https://github.com/apache/servicecomb-java-chassis/pull/1415">删除spring 4和spring boot 1的支持</a></li>
+<li><a href="https://github.com/apache/servicecomb-java-chassis/pull/1439">调整2.x版本spring boot starter名字</a></li>
+</ul>
+<p>下面是一些场景的问题：</p>
+<ul>
+<li>
+<p>CseContext.getInstance().getTransportManager().findTransport(Const.RESTFUL)编译失败，修改为SCBEngine.getInstance().getTransportManager().findTransport(Const.RESTFUL)</p>
+</li>
+<li>
+<p>router.routeWithRegex(regex).handler(CookieHandler.create()) 提示CookieHandler deprecated，删除这行代码即可，新版本的vert.x已经默认提供了cookie处理。</p>
+</li>
+<li>
+<p>Warning:(25, 24) java: io.vertx.ext.web中的io.vertx.ext.web.Cookie已过时， 修改为io.vertx.core.http.Cookie</p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../question-and-answer/question_answer/" class="btn btn-neutral float-right" title="Q & A">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../references-handlers/publickey/" class="btn btn-neutral" title="公钥认证"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../references-handlers/publickey/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../question-and-answer/question_answer/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>降级策略 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u964d\u7ea7\u7b56\u7565";
+    var mkdocs_page_input_path = "build-provider/configuration/downgrade-strategy.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../jaxrs/">用JAX-RS开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../thread-pool/">线程池</a>
+                </li>
+                <li class=" current">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3 current">
+                    
+    <a class="current" href="./">降级策略</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l4"><a href="#_1">概念阐述</a></li>
+    
+
+    <li class="toctree-l4"><a href="#_2">场景描述</a></li>
+    
+
+    <li class="toctree-l4"><a href="#_3">配置说明</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l5" href="#_4">配置项生效范围</a></li>
+        
+            <li><a class="toctree-l5" href="#_5">配置项列表</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l4"><a href="#_6">示例代码</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../general-development/visit-sc/">访问服务中心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/metrics/">应用性能监控</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/file-upload/">文件上传</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/file-download/">文件下载</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/shutdown/">优雅停机</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/error-handling/">异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../general-development/thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../upgrading/1_to_2/">1.x迁移2.x指南</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>服务配置 &raquo;</li>
+        
+      
+        
+          <li>开发服务提供者 &raquo;</li>
+        
+      
+    
+    <li>降级策略</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="_1">概念阐述</h2>
+<p>降级策略是当服务请求异常时，微服务所采用的异常处理策略。</p>
+<p>降级策略有三个相关的技术概念：“隔离”、“熔断”、“容错”：</p>
+<ul>
+<li>“隔离”是一种异常检测机制，常用的检测方法是请求超时、流量过大等。一般的设置参数包括超时时间、同时并发请求个数等。</li>
+<li>“熔断”是一种异常反应机制，“熔断”依赖于“隔离”。熔断通常基于错误率来实现。一般的设置参数包括统计请求的个数、错误率等。</li>
+<li>“容错”是一种异常处理机制，“容错”依赖于“熔断”。熔断以后，会调用“容错”的方法。一般的设置参数包括调用容错方法的次数等。</li>
+</ul>
+<p>把这些概念联系起来：当"隔离"措施检测到N次请求中共有M次错误的时候，"熔断"不再发送后续请求，调用"容错"处理函数。这个技术上的定义，是和Netflix Hystrix一致的，通过这个定义，非常容易理解它提供的配置项，参考：<a href="https://github.com/Netflix/Hystrix/wiki/Configuration">https://github.com/Netflix/Hystrix/wiki/Configuration</a>。当前ServiceComb提供两种容错方式，分别为返回null值和抛出异常。</p>
+<h2 id="_2">场景描述</h2>
+<p>用户通过配置降级策略，可以设置微服务的异常处理策略。</p>
+<h2 id="_3">配置说明</h2>
+<p>配置项支持对所有接口生效，或者对某个微服务的某个具体方法生效。</p>
+<h3 id="_4">配置项生效范围</h3>
+<ul>
+<li>
+<p>按照类型(type)：配置项能够针对Provider, Consumer进行配置</p>
+</li>
+<li>
+<p>按照范围(scope)：配置项能够针对MicroService进行配置, 也可以针对【x-schema-id + operationId】进行配置</p>
+</li>
+</ul>
+<p>本章节如果没有特殊说明，所有的配置项都支持按照下面的格式进行配置：</p>
+<pre><code>servicecomb.[namespace].[type].[MicroServiceName].[接口名称].[property name]
+</code></pre>
+
+<p>type指Provider或者Consumser, 针对特定的微服务的配置，需要增加MicroServiceName, 针对接口配置的，需要指定接口名称，接口名称由【x-schema-id + operationId】组成。</p>
+<p>隔离<br />
+配置可选配置项格式示例如下：</p>
+<pre><code>servicecomb.isolation.Consumer.timeout.enabled
+servicecomb.isolation.Consumer.DemoService.timeout.enabled
+servicecomb.isolation.Consumer.DemoService.hello.sayHello.timeout.enabled
+servicecomb.isolation.Provider.timeout.enabled
+servicecomb.isolation.Provider.DemoService.timeout.enabled
+servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
+</code></pre>
+
+<h3 id="_5">配置项列表</h3>
+<p>注意：在下面的表格里面，全部省略MicroServiceName。未特殊说明，配置项都支持Provider和Consumer。</p>
+<p>例如：对于服务消费者，需要配置为：servicecomb.isolation.Consumer.timeout.enabled</p>
+<p>例如：对于服务提供者，需要配置为：servicecomb.isolation.Provider.timeout.enabled</p>
+<p>表1-1降级策略相关配置项说明</p>
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">取值范围</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+<th align="left">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.isolation.[type].timeout.enabled</td>
+<td align="left">FALSE</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">是否启用超时检测</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.isolation.[type].timeoutInMilliseconds</td>
+<td align="left">30000</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">超时时间阈值</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.isolation.[type].maxConcurrentRequests</td>
+<td align="left">10</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">最大并发数阈值</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.circuitBreaker.[type].enabled</td>
+<td align="left">TRUE</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">是否启用熔断措施</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.circuitBreaker.[type].forceOpen</td>
+<td align="left">FALSE</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">不管失败次数，都进行熔断</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.circuitBreaker.[type].forceClosed</td>
+<td align="left">FALSE</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">任何时候都不熔断</td>
+<td align="left">当与forceOpen同时配置时，forceOpen优先。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.circuitBreaker.[type].sleepWindowInMilliseconds</td>
+<td align="left">15000</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">熔断后，多长时间恢复</td>
+<td align="left">恢复后，会重新计算失败情况。注意：如果恢复后的调用立即失败，那么会立即重新进入熔断。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.circuitBreaker.[type].requestVolumeThreshold</td>
+<td align="left">20</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">10s内统计错误发生次数阈值，超过阈值则触发熔断</td>
+<td align="left">由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.circuitBreaker.[type].errorThresholdPercentage</td>
+<td align="left">50</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">错误率阈值，达到阈值则触发熔断</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.fallback.[type].enabled</td>
+<td align="left">TRUE</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">是否启用出错后的故障处理措施</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.fallback.[type].maxConcurrentRequests</td>
+<td align="left">10</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">并发调用容错处理措施（servicecomb.fallbackpolicy.policy）的请求数，超过这个值则不再调用处理措施，直接返回异常</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">servicecomb.fallbackpolicy.[type].policy</td>
+<td align="left">throwexception</td>
+<td align="left">returnull | throwexception</td>
+<td align="left">否</td>
+<td align="left">出错后的处理策略</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>小心</strong>：<br />
+谨慎使用servicecomb.isolation.timeout.enabled=true。因为系统处理链都是异步执行，中间处理链的返回，会导致后面处理链的逻辑处理效果丢失。尽可能将servicecomb.isolation.timeout.enabled保持默认值false，并且正确设置网络层超时时间servicecomb.request.timeout=30000。</p>
+</blockquote>
+<h2 id="_6">示例代码</h2>
+<pre><code class="yaml">servicecomb:
+  handler:
+    chain:
+      Consumer:
+        default: bizkeeper-consumer
+  isolation:
+    Consumer:
+      timeout:
+        enabled: true
+      timeoutInMilliseconds: 30000
+  circuitBreaker:
+    Consumer:
+      enabled: true
+      sleepWindowInMilliseconds: 15000
+      requestVolumeThreshold: 20
+  fallback:
+    Consumer:
+      enabled: true
+  fallbackpolicy:
+    Consumer:
+      policy: throwexception
+</code></pre>
+
+<blockquote>
+<p><strong>说明：</strong><br />
+降级策略需要启用服务治理能力，对应的服务提供者的handler是<code>bizkeeper-provider</code>，服务消费者的handler是<code>bizkeeper-consumer</code>。</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../parameter-validator/" class="btn btn-neutral float-right" title="参数效验">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../ratelimite-strategy/" class="btn btn-neutral" title="限流策略"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../ratelimite-strategy/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../parameter-validator/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js" defer></script>
+
+</body>
+</html>

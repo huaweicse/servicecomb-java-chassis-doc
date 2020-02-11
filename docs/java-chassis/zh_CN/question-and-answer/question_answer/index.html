@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Q & A - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Q & A";
+    var mkdocs_page_input_path = "question-and-answer/question_answer.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-provider/definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/jaxrs/">用JAX-RS开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/thread-pool/">线程池</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/downgrade-strategy/">降级策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../general-development/visit-sc/">访问服务中心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/metrics/">应用性能监控</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/file-upload/">文件上传</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/file-download/">文件下载</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/shutdown/">优雅停机</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/error-handling/">异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../upgrading/1_to_2/">1.x迁移2.x指南</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Q & A</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#javaresthttp-status-code">问题描述：如何自定义某个Java方法对应的REST接口里的HTTP Status Code？</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_1">问题描述： 如何定制自己微服务的日志配置</a></li>
+    
+
+    <li class="toctree-l3"><a href="#transporttransport">问题描述： 当服务配置了多个transport的时候，在运行时是怎么选择使用哪个transport的？</a></li>
+    
+
+    <li class="toctree-l3"><a href="#swagger-body">问题描述： swagger body参数类型定义错误，导致服务中心注册的内容没有类型信息</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_2">问题描述：微服务框架服务调用是否使用长连接</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_3">问题描述：服务断连服务中心注册信息是否自动删除</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_4">问题描述：微服务框架如何实现数据多个微服务间透传</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_5">问题描述：微服务框架服务如何自定义返回状态码</a></li>
+    
+
+    <li class="toctree-l3"><a href="#body-model">问题描述： body Model部分暴露</a></li>
+    
+
+    <li class="toctree-l3"><a href="#consumer">问题描述：框架获取远端consumer的地址</a></li>
+    
+
+    <li class="toctree-l3"><a href="#handler">问题描述：对handler描述</a></li>
+    
+
+    <li class="toctree-l3"><a href="#netty">问题描述：netty版本问题</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_6">问题描述：服务超时设置</a></li>
+    
+
+    <li class="toctree-l3"><a href="#_7">问题描述：服务治理的处理链顺序是否有要求？</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>常见问题 &raquo;</li>
+        
+      
+    
+    <li>Q & A</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="javaresthttp-status-code">问题描述：如何自定义某个Java方法对应的REST接口里的HTTP Status Code？</h1>
+<p><strong> 解决方法：</strong></p>
+<p>对于正常的返回值，可以通过SwaggerAnnotation实现，例如：</p>
+<pre><code class="java">@ApiResponse(code = 300, response = String.class, message = &quot;&quot;)
+public int test(int x) {
+  return 100;
+}
+</code></pre>
+
+<p>对于异常的返回值，可以通过抛出自定义的InvocationException实现，例如：、</p>
+<pre><code class="java">    public String testException(int code) {
+        String strCode = String.valueOf(code);
+        switch (code) {
+            case 200:
+                return strCode;
+            case 456:
+                throw new InvocationException(code, strCode, strCode + &quot; error&quot;);
+            case 556:
+                throw new InvocationException(code, strCode, Arrays.asList(strCode + &quot; error&quot;));
+            case 557:
+                throw new InvocationException(code, strCode, Arrays.asList(Arrays.asList(strCode + &quot; error&quot;)));
+            default:
+                break;
+        }
+
+        return &quot;not expected&quot;;
+    }
+</code></pre>
+
+<h1 id="_1">问题描述： 如何定制自己微服务的日志配置</h1>
+<p><strong> 解决方法：</strong><br />
+ServiceComb不绑定日志器，只是使用了slf4j，用户可以自由选择log4j/log4j2/logback等等。ServiceComb提供了一个log4j的扩展，在标准log4j的基础上，支持log4j的properties文件的增量配置。</p>
+<ul>
+<li>默认以规则："classpath*:config/log4j.properties"加载配置文件</li>
+<li>实际会搜索出classpath中所有的<code>config/log4j.properties和config/log4j.*.properties</code>, 从搜索出的文件中切出<code>\*</code>的部分，进行alpha排序，然后按顺序加载，最后合成的文件作为log4j的配置文件。</li>
+<li>如果要使用ServiceComb的log4j扩展，则需要调用Log4jUtils.init，否则完全按标准的日志器的规则使用。</li>
+</ul>
+<h1 id="transporttransport">问题描述： 当服务配置了多个transport的时候，在运行时是怎么选择使用哪个transport的？</h1>
+<p><strong> 解决方法：</strong></p>
+<ul>
+<li>
+<p>ServiceComb的consumer、transport、handler、producer之间是解耦的，各功能之间通过契约定义联合在一起工作的，即：<br />
+  consumer使用透明rpc，还是springmvc开发与使用highway，还是RESTful在网络上传输没有关系与producer是使用透明rpc，还是jaxrs，或者是springmvc开发，也没有关系handler也不感知，业务开发方式以及传输方式</p>
+</li>
+<li>
+<p>consumer访问producer，在运行时的transport选择上，总规则为：<br />
+  consumer的transport与producer的endpoint取交集，如果交集后，还有多个transport可选择，则轮流使用</p>
+</li>
+</ul>
+<p>分解开来，存在以下场景：</p>
+<ul>
+<li>当一个微服务producer同时开放了highway以及RESTful的endpoint</li>
+<li>consumer进程中只部署了highway transport jar，则只会访问producer的highway endpoint</li>
+<li>consumer进程中只部署了RESTful transport jar，则只会访问producer的RESTful endpoint</li>
+<li>consumer进程中，同时部署了highway和RESTful transport jar，则会轮流访问producer的highway、RESTful endpoint</li>
+</ul>
+<p>如果，此时consumer想固定使用某个transport访问producer，可以在consumer进程的microservice.yaml中配置，指定transport的名称:</p>
+<pre><code>servicecomb:
+  references:
+    &lt;service_name&gt;:
+      transport: highway
+</code></pre>
+
+<ul>
+<li>
+<p>当一个微服务producer只开放了highway的endpoint</p>
+</li>
+<li>
+<p>consumer进程只部署了highway transport jar，则正常使用higway访问</p>
+</li>
+<li>consumer进程只部署了RESTful transport jar，则无法访问</li>
+<li>
+<p>consumer进程同时部署了highway和RESTful transport jar，则正常使用highway访问</p>
+</li>
+<li>
+<p>当一个微服务producer只开放了RESTful的endpoint</p>
+</li>
+<li>
+<p>consumer进程只部署了highway transport jar，则无法访问</p>
+</li>
+<li>consumer进程只部署了RESTful transport jar，则正常使用RESTful访问</li>
+<li>consumer进程同时部署了highway和RESTful transport jar，则正常使用RESTful访问</li>
+</ul>
+<h1 id="swagger-body">问题描述： swagger body参数类型定义错误，导致服务中心注册的内容没有类型信息</h1>
+<p><strong>现象描述:</strong></p>
+<p>定义如下接口，将参数放到body传递</p>
+<pre><code>/testInherate:
+    post:
+      operationId: &quot;testInherate&quot;
+      parameters:
+      - in: &quot;body&quot;
+        name: &quot;xxxxx&quot;
+        required: false
+        type: string
+      responses:
+        200:
+          description: &quot;response of 200&quot;
+          schema:
+            $ref: &quot;#/definitions/ReponseImpl&quot;
+</code></pre>
+
+<p>采用上面方式定义接口。在服务注册以后，从服务中心查询下来的接口type: string 丢失，变成了：</p>
+<pre><code>/testInherate:
+    post:
+      operationId: &quot;testInherate&quot;
+      parameters:
+      - in: &quot;body&quot;
+        name: &quot;xxxxx&quot;
+        required: false
+      responses:
+        200:
+          description: &quot;response of 200&quot;
+          schema:
+            $ref: &quot;#/definitions/ReponseImpl&quot;
+</code></pre>
+
+<p>如果客户端没有放置swagger，还会报告如下异常：</p>
+<p>Caused by: java.lang.ClassFormatError: Method "testInherate" in class ? has illegal signature "</p>
+<p><strong>解决方法：</strong></p>
+<p>定义body参数的类型的时候，需要使用schema，不能直接使用type。</p>
+<pre><code>/testInherate:
+    post:
+      operationId: &quot;testInherate&quot;
+      parameters:
+      - in: &quot;body&quot;
+        name: &quot;request&quot;
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: &quot;response of 200&quot;
+          schema:
+            $ref: &quot;#/definitions/ReponseImpl&quot;
+</code></pre>
+
+<h1 id="_2">问题描述：微服务框架服务调用是否使用长连接</h1>
+<p><strong> 解决方法：</strong></p>
+<p>http使用的是长连接（有超时时间），highway方式使用的是长连接（一直保持）。</p>
+<h1 id="_3">问题描述：服务断连服务中心注册信息是否自动删除</h1>
+<p><strong> 解决方法：</strong></p>
+<p>服务中心心跳检测到服务实例不可用，只会移除服务实例信息，服务的静态数据不会移除。</p>
+<h1 id="_4">问题描述：微服务框架如何实现数据多个微服务间透传</h1>
+<p><strong> 解决方法：</strong></p>
+<p>透传数据塞入：</p>
+<pre><code class="java">CseHttpEntity&lt;xxxx.class&gt; httpEntity = new CseHttpEntity&lt;&gt;(xxx);
+//透传内容
+httpEntity.addContext(&quot;contextKey&quot;,&quot;contextValue&quot;);
+ResponseEntity&lt;String&gt; responseEntity = RestTemplateBuilder.create().exchange(&quot;cse://springmvc/springmvchello/sayhello&quot;,HttpMethod.POST,httpEntity,String.class);
+</code></pre>
+
+<p>透传数据获取：</p>
+<pre><code class="java">@Override
+@RequestMapping(path=&quot;/sayhello&quot;,method = RequestMethod.POST)
+public String sayHello(@RequestBody Person person,InvocationContext context){
+    //透传数据获取
+    context.getContext();
+    return &quot;Hello person &quot; + person.getName();
+}
+</code></pre>
+
+<h1 id="_5">问题描述：微服务框架服务如何自定义返回状态码</h1>
+<p><strong> 解决方法：</strong></p>
+<pre><code class="java">@Override
+@RequestMapping(path = &quot;/sayhello&quot;,method = RequestMethod.POST)
+public String sayHello(@RequestBody Person person){
+    InvocationContext context = ContextUtils.getInvocationContext();
+    //自定义状态码
+    context.setStatus(Status.CREATED);
+    return &quot;Hello person &quot;+person.getName();
+}
+</code></pre>
+
+<h1 id="body-model">问题描述： body Model部分暴露</h1>
+<p><strong> 解决方法：</strong></p>
+<p>一个接口对应的body对象中，可能有一些属性是内部的，不想开放出去，生成schema的时候不要带出去，使用：</p>
+<pre><code class="java">@ApiModelProperty(hidden = true)
+</code></pre>
+
+<h1 id="consumer">问题描述：框架获取远端consumer的地址</h1>
+<p><strong> 解决方法：</strong></p>
+<p>如果使用http rest方式（使用transport-rest-vertx依赖）可以用下面这种方式获取：</p>
+<pre><code class="java">HttpServletRequest request = (HttpServletRequest) invocation.getHandlerContext().get(RestConst.REST_REQUEST);
+String host = request.getRemoteHost();
+</code></pre>
+
+<p>实际场景是拿最外层的地址，所以应该是LB传入到edgeservice，edgeService再放到context外下传递。</p>
+<h1 id="handler">问题描述：对handler描述</h1>
+<p><strong> 解决方法：</strong></p>
+<p>consumer默认的handler是simpleLB，没有配置的时候handler链会使用这个，如果配置了handler，里面一定要包含lb的handler，否则调用报错，需要在文档里面进行说明。</p>
+<h1 id="netty">问题描述：netty版本问题</h1>
+<p><strong> 解决方法：</strong></p>
+<p>netty3和netty4是完全不同的三方件，因为坐标跟package都不相同，所以可以共存，但是要注意小版本问题，小版本必须使用的版本。</p>
+<h1 id="_6">问题描述：服务超时设置</h1>
+<p><strong> 解决方法：</strong></p>
+<p>在微服务描述文件（microservice.yaml）中添加如下配置：</p>
+<pre><code>servicecomb:
+  request:
+    timeout: 30000
+</code></pre>
+
+<h1 id="_7">问题描述：服务治理的处理链顺序是否有要求？</h1>
+<p><strong>解决方法：</strong></p>
+<p>处理链的顺序不同，那么系统工作行为也不同。 下面列举一下常见问题。</p>
+<p>1、loadbalance和bizkeeper-consumer</p>
+<p>这两个顺序可以随机组合。但是行为是不一样的。</p>
+<p>当loadbalance在前面的时候，那么loadbalance提供的重试功能会在bizkeeper-consumer抛出异常时发生，比如超时等。但是如果已经做了fallbackpolicy配置，比如returnnull，那么loadbalance则不会重试。</p>
+<p>如果loadbalance在后面，那么loadbalance的重试会延长超时时间，即使重试成功，如果bizkeeper-consumer设置的超时时间不够，那么最终的调用结果也是失败。</p>
+<p>2、tracing-consumer，sla-consumer，tracing-provider，sla-provider</p>
+<p>这些处理链建议放到处理链的最开始位置，保证成功、失败的情况都可以记录日志（由于记录日志需要IP等信息，对于消费者，只能放到loadbalance后面）。</p>
+<p>如果不需要记录客户端返回的异常，则可以放到末尾，只关注网络层返回的错误。但是如果bizkeeper-consumer等超时提前返回的话，则可能不会记录日志。</p>
+<p>3、建议的顺序</p>
+<p>Consumer: loadbalance, tracing-consumer, sla-consumer, bizkeeper-consumer</p>
+<p>Provider: tracing-provider, sla-provider, bizkeeper-provider</p>
+<p>这种顺序能够满足大多数场景，并且不容易出现不可理解的错误。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../faq/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../upgrading/1_to_2/" class="btn btn-neutral" title="1.x迁移2.x指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../upgrading/1_to_2/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../faq/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+
+</body>
+</html>

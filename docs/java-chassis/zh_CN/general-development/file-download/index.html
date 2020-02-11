@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>文件下载 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u6587\u4ef6\u4e0b\u8f7d";
+    var mkdocs_page_input_path = "general-development/file-download.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-provider/definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/jaxrs/">用JAX-RS开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/thread-pool/">线程池</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/downgrade-strategy/">降级策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-provider/configuration/parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-provider/access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../visit-sc/">访问服务中心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../metrics/">应用性能监控</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file-upload/">文件上传</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">文件下载</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#producer">一、Producer</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#1">1.下载普通文件</a></li>
+        
+            <li><a class="toctree-l4" href="#2">2.下载临时文件</a></li>
+        
+            <li><a class="toctree-l4" href="#3orgspringframeworkcoreioresource">3.下载org.springframework.core.io.Resource</a></li>
+        
+            <li><a class="toctree-l4" href="#4inputstream">4.下载InputStream</a></li>
+        
+            <li><a class="toctree-l4" href="#5">5.文件类型判定</a></li>
+        
+            <li><a class="toctree-l4" href="#6">6.文件名</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#consumer">二、Consumer</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#1rpc">1.透明RPC</a></li>
+        
+            <li><a class="toctree-l4" href="#2resttemplate">2.RestTemplate</a></li>
+        
+            <li><a class="toctree-l4" href="#3readstreampart">3.从ReadStreamPart读取数据</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../shutdown/">优雅停机</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../error-handling/">异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../upgrading/1_to_2/">1.x迁移2.x指南</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>通用开发 &raquo;</li>
+        
+      
+    
+    <li>文件下载</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>文件下载，当前在vertx rest通道和servlet rest中可用。</p>
+<h1 id="producer">一、Producer</h1>
+<h2 id="1">1.下载普通文件</h2>
+<pre><code>return new File(......);
+</code></pre>
+
+<h2 id="2">2.下载临时文件</h2>
+<p>本场景下，需要根据请求参数动态创建临时文件，下载完成后，需要将临时文件删除</p>
+<pre><code>return new FilePart(file).setDeleteAfterFinished(true);
+</code></pre>
+
+<h2 id="3orgspringframeworkcoreioresource">3.下载org.springframework.core.io.Resource</h2>
+<p>因为resource不一定表示文件下载，所以需要通过swagger annotation（@ApiResponse）标识这是一个文件下载场景</p>
+<p>以ByteArrayResource为例说明：</p>
+<pre><code>@GetMapping(path = &quot;/resource&quot;)
+@ApiResponses({
+  @ApiResponse(code = 200, response = File.class, message = &quot;&quot;)
+})
+public Resource resource() {
+  ……
+  return new ByteArrayResource(bytes) {
+    @Override
+    public String getFilename() {
+      return &quot;resource.txt&quot;;
+    }
+  };
+}
+</code></pre>
+
+<p>上例中，因为ByteArrayResource没有文件名的概念，所以需要实现Resource的getFilename方法，也可以通过ResponseEntity进行包装：</p>
+<pre><code>@GetMapping(path = &quot;/resource&quot;)
+@ApiResponses({
+  @ApiResponse(code = 200, response = File.class, message = &quot;&quot;)
+})
+public ResponseEntity&lt;Resource&gt; resource() {
+  ……
+  return ResponseEntity
+      .ok()
+      .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+      .header(HttpHeaders.CONTENT_DISPOSITION, &quot;attachment;filename=resource.txt&quot;)
+      .body(resource);
+}
+</code></pre>
+
+<h2 id="4inputstream">4.下载InputStream</h2>
+<p>因为InputStream不一定表示文件下载，所以需要通过swagger annotation（@ApiResponse）标识这是一个文件下载场景</p>
+<p>有的场景下，资源并不保存在本地</p>
+<pre><code>return ResponseEntity
+    .ok()
+    .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+    .header(HttpHeaders.CONTENT_DISPOSITION, &quot;attachment;filename=resource.txt&quot;)
+    .body(stream);
+</code></pre>
+
+<p>在下载完成后，ServiceComb会自动关闭stream，开发人员不必再关注</p>
+<h2 id="5">5.文件类型判定</h2>
+<p>只要没有通过ResponseEntity直接设置HttpHeaders.CONTENT_TYPE，ServiceComb都会尝试通过File、Part、Resource中的文件名后缀进行自动判定。</p>
+<p>ServiceComb使用java的mime type机制进行文件类型判定，如果业务场景中的文件后缀无法被识别，ServiceComb会默认处理为application/octet-stream</p>
+<p>如果这不满足要求，假设文件后缀为xyz，期望文件类型为application/file-xyz，以下方式任选一种均可解决：</p>
+<h3 id="1javamime-type">1）通过Java的mime type机制扩展</h3>
+<p>在META-INF目录下，创建mime.types文件，其内容为：</p>
+<pre><code>application/file-xyz xyz
+</code></pre>
+
+<h3 id="2part">2）在业务代码中通过Part指定</h3>
+<pre><code>return new FilePart(null, file).contentType(&quot;application/file-xyz&quot;);
+</code></pre>
+
+<h3 id="3responseentity">3）在业务代码中通过ResponseEntity指定</h3>
+<pre><code>return ResponseEntity
+    .ok()
+    .header(HttpHeaders.CONTENT_TYPE, &quot;application/file-xyz&quot;)
+    .body(……);
+</code></pre>
+
+<h2 id="6">6.文件名</h2>
+<p>只要没有通过ResponseEntity直接设置HttpHeaders.CONTENT_DISPOSITION，ServiceComb都会尝试通过File、Part、Resource中的文件名生成HttpHeaders.CONTENT_DISPOSITION，假设文件名为file.txt，则生成的数据如下：</p>
+<pre><code>Content-Disposition: attachment;filename=file.txt;filename*=utf-8’’file.txt
+</code></pre>
+
+<p>不仅仅生成filename，还生成了filename*，这是因为如果文件名中出现了中文、空格，并且filename正确地做了encode，ie、chrome都没有问题，但是firefox直接将encode后的串当作文件名直接使用了。firefox按照<a href="https://tools.ietf.org/html/rtf6266">https://tools.ietf.org/html/rtf6266</a>，只对filename*进行解码。</p>
+<p>如果业务代码中直接设置Content-Disposition，需要自行处理多浏览器支持的问题。</p>
+<h1 id="consumer">二、Consumer</h1>
+<p>消费端统一使用org.apache.servicecomb.foundation.vertx.http.ReadStreamPart处理文件下载。</p>
+<h2 id="1rpc">1.透明RPC</h2>
+<pre><code>public interface ……{
+  ReadStreamPart download1(……);
+  ReadStreamPart download2(……);
+}
+</code></pre>
+
+<h2 id="2resttemplate">2.RestTemplate</h2>
+<p>以get为例：</p>
+<pre><code>ReadStreamPart part = restTemplate.getForObject(url, ReadStreamPart.class);
+</code></pre>
+
+<h2 id="3readstreampart">3.从ReadStreamPart读取数据</h2>
+<p>ReadStreamPart提供了一系列方法，将数据流保存为本地数据：</p>
+<pre><code>org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveAsBytes()
+org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveAsString()
+org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveToFile(String)
+org.apache.servicecomb.foundation.vertx.http.ReadStreamPart.saveToFile(File, OpenOptions)
+</code></pre>
+
+<p>注意：</p>
+<ul>
+<li>
+<p>在得到ReadStreamPart实例时，并没有完成文件内容的下载，调用save系列方法才开始真正从网络上读取文件数据。</p>
+</li>
+<li>
+<p>如果使用saveAsBytes、saveAsString，数据是直接保存在内存中的，如果下载的文件很大，会内存撑爆的风险。</p>
+</li>
+<li>
+<p>save系列方法，返回的都是CompletableFuture对象：</p>
+</li>
+<li>
+<p>如果要阻塞等待下载完成，通过future.get()即可</p>
+</li>
+<li>如果通过future.whenComplete进行异步回调处理，要注意回调是发生在网络线程中的，此时需要遵守reactive的线程规则。</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../reactive/" class="btn btn-neutral float-right" title="Reactive">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../file-upload/" class="btn btn-neutral" title="文件上传"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../file-upload/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../reactive/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+
+</body>
+</html>

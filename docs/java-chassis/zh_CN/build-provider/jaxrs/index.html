@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>用JAX-RS开发微服务 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u7528JAX-RS\u5f00\u53d1\u5fae\u670d\u52a1";
+    var mkdocs_page_input_path = "build-provider/jaxrs.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">入门</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../start/terminology/">术语表</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/architecture/">微服务系统架构</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/development-environment/">安装本地开发环境</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../start/first-sample/">开发第一个微服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务提供者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../definition/service-definition/">服务定义</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../define-contract/">定义服务契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../code-first/">使用隐式契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swagger-annotation/">使用Swagger注解</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../springmvc/">用SpringMVC开发微服务</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">用JAX-RS开发微服务</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#jax-rs">用JAX-RS开发微服务</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_1">概念阐述</a></li>
+        
+            <li><a class="toctree-l4" href="#_2">开发示例</a></li>
+        
+            <li><a class="toctree-l4" href="#api">涉及API</a></li>
+        
+            <li><a class="toctree-l4" href="#beanparam">使用@BeanParam聚合参数</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../transparent-rpc/">用透明RPC开发微服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../interface-constraints/">接口定义和数据类型</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../listen-address-and-publish-address/">服务监听地址和发布地址</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../thread-pool/">线程池</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">服务配置</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../configuration/ratelimite-strategy/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../configuration/downgrade-strategy/">降级策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../configuration/parameter-validator/">参数效验</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../bootup/">程序启动逻辑</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../access-log-configuration/">Access Log配置</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">开发服务消费者</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/common-configuration/">消费者通用配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/with-contract/">使用服务契约</a>
+                </li>
+                <li class="">
+                    
+    <span class="caption-text">调用控制</span>
+    <ul class="subnav">
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/circuit-breaker/">熔断策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/flow-control/">限流策略</a>
+                </li>
+                <li class="toctree-l3">
+                    
+    <a class="" href="../../build-consumer/fault-injection/">故障注入</a>
+                </li>
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../build-consumer/3rd-party-service-invoke/">调用第三方REST服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">通用开发</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../general-development/visit-sc/">访问服务中心</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/metrics/">应用性能监控</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/microservice-invocation-chain/">微服务调用链</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/customized-tracing/">自定义调用链打点</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/local-develop-test/">本地开发和测试</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/http-filter/">Http Filter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/file-upload/">文件上传</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/file-download/">文件下载</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/reactive/">Reactive</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/dnsconfig/">DNS自定义配置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/dai-li-she-zhi/">代理设置</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/report-framework-version/">框架上报版本号</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/cross-app-invocation/">跨应用调用</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/secret-field/">定制序列化和反序列化方法</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/context/">使用Context传递控制消息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/produceprocess/">返回值序列化扩展</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/CORS/">CORS机制</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/AlarmEvent/">获取熔断与实例隔离告警事件信息</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/shutdown/">优雅停机</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/error-handling/">异常处理</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/multienvironment/">微服务实例间多环境隔离</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../general-development/thread-model/">线程模型</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入说明</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">提供的spring boot starter说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA应用方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web开发方式开发步骤</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../upgrading/1_to_2/">1.x迁移2.x指南</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>开发服务提供者 &raquo;</li>
+        
+      
+    
+    <li>用JAX-RS开发微服务</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="jax-rs">用JAX-RS开发微服务</h1>
+<h2 id="_1">概念阐述</h2>
+<p>ServiceComb支持开发者使用JAX-RS注解，使用<a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/samples/jaxrs-sample">JAX-RS</a>模式开发服务。</p>
+<h2 id="_2">开发示例</h2>
+<h3 id="1">步骤 1定义服务接口。</h3>
+<p>根据开发之前定义好的契约，编写Java业务接口，代码如下。定义接口不是必须的，但是 一个好习惯，可以简化客户端使用RPC方式编写代码。</p>
+<pre><code class="java">public interface Hello {
+    String sayHi(String name);
+    String sayHello(Person person);
+}
+</code></pre>
+
+<h3 id="2">步骤 2实现服务。</h3>
+<p>使用JAX-RS注解开发业务代码，Hello的服务实现如下：</p>
+<pre><code class="java">@RestSchema(schemaId = &quot;jaxrsHello&quot;)
+@Path(&quot;/jaxrshello&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+public class JaxrsHelloImpl implements Hello {
+    @Path(&quot;/sayhi&quot;)
+    @POST
+    @Override
+    public String sayHi(String name) {
+        return &quot;Hello &quot; + name;
+    }
+
+    @Path(&quot;/sayhello&quot;)
+    @POST
+    @Override
+    public String sayHello(Person person) {
+        return &quot;Hello person &quot; + person.getName();
+    }
+    /**
+    * 这个方法是实现类特有的,因此对它的远程调用会有所不同.
+    * 具体可以参考 jaxrs-consumer
+    */
+    @Path(&quot;/saybye&quot;)
+    @GET
+    public String sayBye() {
+       return &quot;Bye !&quot;;
+    }
+}
+</code></pre>
+
+<h3 id="3">步骤 3发布服务。</h3>
+<p>在resources/META-INF/spring目录下创建jaxrsHello.bean.xml文件，配置spring进行服务扫描的base-package，文件内容如下。（注意修改package名称为正确名称）</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot; http://www.springframework.org/schema/beans &quot; xmlns:xsi=&quot; http://www.w3.org/2001/XMLSchema-instance &quot;
+       xmlns:p=&quot; http://www.springframework.org/schema/p &quot; xmlns:util=&quot; http://www.springframework.org/schema/util &quot;
+       xmlns:cse=&quot; http://www.huawei.com/schema/paas/cse/rpc &quot;
+       xmlns:context=&quot; http://www.springframework.org/schema/context &quot;
+       xsi:schemaLocation=&quot; http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.huawei.com/schema/paas/cse/rpc classpath:META-INF/spring/spring-paas-cse-rpc.xsd&quot;&gt;
+
+    &lt;context:component-scan base-package=&quot;org.apache.servicecomb.samples.jaxrs.provider&quot;/&gt;
+&lt;/beans&gt;
+</code></pre>
+
+<h3 id="4">步骤 4启动服务。</h3>
+<pre><code>public class JaxrsProviderMain{
+
+  public static void main(String[] args) throws Exception {
+    Log4jUtils.init();
+    BeanUtils.init();
+  }
+}
+</code></pre>
+
+<h2 id="api">涉及API</h2>
+<p>JAX-RS开发模式当前支持如下注解，所有注解的使用方法参考<a href="https://jax-rs-spec.java.net/nonav/2.0-rev-a/apidocs/index.html">JAX-RS官方文档</a>。</p>
+<h3 id="1-1jax-rs">表1-1JAX-RS注解支持汇总</h3>
+<table>
+<thead>
+<tr>
+<th align="left">注解</th>
+<th align="left">位置</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">javax.ws.rs.Path</td>
+<td align="left">schema/operation</td>
+<td align="left">URL路径</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.Produces</td>
+<td align="left">schema/operation</td>
+<td align="left">方法支持的编解码能力</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.DELETE</td>
+<td align="left">operation</td>
+<td align="left">http method</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.GET</td>
+<td align="left">operation</td>
+<td align="left">http method</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.POST</td>
+<td align="left">operation</td>
+<td align="left">http method</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.PUT</td>
+<td align="left">operation</td>
+<td align="left">http method</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.QueryParam</td>
+<td align="left">parameter</td>
+<td align="left">从query string中获取参数</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.PathParam</td>
+<td align="left">parameter</td>
+<td align="left">从path中获取参数，必须在path中定义该参数</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.HeaderParam</td>
+<td align="left">parameter</td>
+<td align="left">从header中获取参数</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.CookieParam</td>
+<td align="left">parameter</td>
+<td align="left">从cookie中获取参数</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.FormParam</td>
+<td align="left">parameter</td>
+<td align="left">从form中获取参数</td>
+</tr>
+<tr>
+<td align="left">javax.ws.rs.BeanParam</td>
+<td align="left">parameter</td>
+<td align="left">用于参数聚合，允许在一个JavaBean的属性上打上参数标记以将多个参数聚合为一个JavaBean</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>说明:</strong></p>
+<ul>
+<li>当方法参数没有注解，且不为<code>HttpServletRequest</code>、<code>InvocationContext</code>类型参数时，默认为body类型参数，一个方法最多只支持一个body类型参数。</li>
+</ul>
+</blockquote>
+<h2 id="beanparam">使用@BeanParam聚合参数</h2>
+<h3 id="_3">使用说明</h3>
+<p>用户可以使用@BeanParam注解将多个参数聚合到一个JavaBean中，通过将@QueryParam等参数注解打在此JavaBean的属性或setter方法上来声明参数，从而简化业务接口的参数表。可以参考JAX-RS的官方说明：https://docs.oracle.com/javaee/7/api/javax/ws/rs/BeanParam.html</p>
+<p>ServiceComb现在也支持类似的用法，该用法的要求如下：
+1. 聚合参数所用的类型必须是标准的JavaBean，即类型的属性与getter、setter方法名称匹配，setter方法的返回类型为<code>void</code>
+2. 参数注解可以打在JavaBean的属性或setter方法上
+3. 允许通过@FormParam将多个上传文件参数聚合到JavaBean中
+4. 作为BeanParam的JavaBean内部如果有多余的属性，需要打上<code>@JsonIgnore</code>忽略掉
+5. body参数无法聚合进BeanParam
+6. Consumer端不支持将参数聚合为JavaBean发送，即仍然需要按照接口契约单独填写各个参数</p>
+<h3 id="_4">代码示例</h3>
+<h4 id="provider">Provider端开发服务</h4>
+<ul>
+<li>Provider端业务接口代码：</li>
+</ul>
+<pre><code class="java">  @RestSchema(schemaId = &quot;helloService&quot;)
+  @Path(&quot;/hello&quot;)
+  public class HelloService {
+    @Path(&quot;/sayHello/{name}&quot;)
+    @GET
+    public String sayHello(@BeanParam Person person) {
+      System.out.println(&quot;sayHello is called, person = [&quot; + person + &quot;]&quot;);
+      return &quot;Hello, your name is &quot; + person.getName() + &quot;, and age is &quot; + person.getAge();
+    }
+  }
+</code></pre>
+
+<ul>
+<li>BeanParam参数定义：</li>
+</ul>
+<pre><code class="java">  public class Person {
+    private String name;
+    @QueryParam(&quot;age&quot;)
+    private int age;
+    @PathParam(&quot;name&quot;)
+    public void setName(String name) {
+      this.name = name;
+    }
+    @JsonIgnore // 忽略复杂属性
+    private List&lt;Person&gt; children;
+
+    // 其他方法忽略
+  }
+</code></pre>
+
+<ul>
+<li>接口契约：</li>
+</ul>
+<pre><code class="yaml"># 忽略契约的其他部分
+basePath: &quot;/hello&quot;
+paths:
+  /sayHello/{name}:
+    get:
+      operationId: &quot;sayHello&quot;
+      parameters:
+      - name: &quot;name&quot;
+        in: &quot;path&quot;
+        required: true
+        type: &quot;string&quot;
+      - name: &quot;age&quot;
+        in: &quot;query&quot;
+        required: false
+        type: &quot;integer&quot;
+        format: &quot;int32&quot;
+      responses:
+        200:
+          description: &quot;response of 200&quot;
+          schema:
+            type: &quot;string&quot;
+</code></pre>
+
+<h4 id="consumer">Consumer端调用服务</h4>
+<ul>
+<li>consumer端RPC开发模式：</li>
+<li>Provider接口定义
+  <code>java
+    public interface HelloServiceIntf {
+      String sayHello(String name, int age);
+    }</code></li>
+<li>调用代码
+  <code>java
+    String result = helloService.sayHello("Bob", 22); // result的值为"Hello, your name is Bob, and age is 22"</code></li>
+<li>consumer端RestTemplate开发模式：
+  <code>java
+    String result = restTemplate.getForObject(
+      "cse://provider-service/hello/sayHello/Bob?age=22",
+      String.class); // 调用效果与RPC方式相同</code></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../transparent-rpc/" class="btn btn-neutral float-right" title="用透明RPC开发微服务">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../springmvc/" class="btn btn-neutral" title="用SpringMVC开发微服务"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../springmvc/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../transparent-rpc/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+
+</body>
+</html>
