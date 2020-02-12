@@ -344,6 +344,10 @@
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../../edge/open-service/">介绍</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
                 </li>
                 <li class="">
@@ -519,7 +523,7 @@
 <h2 id="servicecomb">ServiceComb内置线程池</h2>
 <p>一般的线程池都是所有线程共享一个任务队列，在这种情况下，所有网络线程需要向同一个队列申请请求入队，线程池中的所有线程需要从同一个队列中抢任务执行，对于高吞吐的场景，这会导致竞争冲突，形成性能瓶颈<br />
 所以，为了提升性能，ServiceComb内置线程池实际是真正线程池的包装，允许在其内部配置多组线程池，且每个网络线程绑定一组线程池，以减小竞争冲突<br />
-<img alt="" src="/assets/producer-default-executor.png" /></p>
+<img alt="" src="../../assets/producer-default-executor.png" /></p>
 <ul>
 <li>1.2.0之前的版本</li>
 </ul>

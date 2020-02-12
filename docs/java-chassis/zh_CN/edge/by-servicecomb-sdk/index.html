@@ -326,6 +326,10 @@
 		
     <span class="caption-text">服务能力开放</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../open-service/">介绍</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">使用Edge Service做边缘服务</a>
@@ -556,7 +560,7 @@ servicecomb:
 <p>Edge Service的工作流程如下，蓝色背景部分在Eventloop线程中执行，黄色背景部分：
   * 如果工作于reactive模式，则直接在Eventloop线程执行
   * 如果工作于线程池模式，则在线程池的线程中执行
-<img alt="" src="/assets/workFlow.png" /></p>
+<img alt="" src="../../assets/workFlow.png" /></p>
 <h2 id="_2">定制路由规则</h2>
 <p>使用Edge Service的核心工作是配置路由规则。场景不同，规则也不同。
 路由规则由一系列AbstractEdgeDispatcher组成。Edge Service提供了几个常见的Dispatcher，通过配置即可启用，如果这些Dispatcher不满足业务场景需要，还可以自定义。</p>
@@ -625,7 +629,7 @@ servicecomb:
 <h3 id="_3">进行认证鉴权和其他业务处理</h3>
 <p>通过Edge Servie工作流程可以看出，可以通过多种方式来扩展Edge Service的功能，包括Dispatcher、HttpServerFilter、Handler、HttpClientFilter等。比较常用和简单的是通过Handler来扩展。DEMO里面展示了如何通过Handler扩展来实现鉴权。详细的代码细节可以参考下面的章节"DEMO功能说明"。</p>
 <h2 id="_4">部署示例</h2>
-<p><img alt="" src="/assets/deployment.png" /></p>
+<p><img alt="" src="../../assets/deployment.png" /></p>
 <h2 id="_5">工作模式</h2>
 <h3 id="reactive-4041">reactive (默认)</h3>
 <p>Edge Service默认工作于高性能的reactive模式，此模式要求工作于Edge Service转发流程中的业务代码不能有任何的阻塞操作，包括不限于：</p>
@@ -644,7 +648,7 @@ servicecomb:
 </li>
 </ul>
 <p>Edge Service的底层是基于netty的vertx，以上约束即是netty的reactive模式约束。</p>
-<p><img alt="" src="/assets/reactive.png" /></p>
+<p><img alt="" src="../../assets/reactive.png" /></p>
 <h3 id="_6">线程池</h3>
 <p>如果业务模型无法满足reactive要求，则需要使用线程池模式。</p>
 <p>此时需要在Edge Service的microservice.yaml中配置：</p>
@@ -654,7 +658,7 @@ servicecomb:
 </code></pre>
 
 <p>这里的servicecomb.executor.groupThreadPool是ServiceComb内置的默认线程池对应的spring bean的beanId；业务可以定制自己的线程池，并声明为一个bean，其beanId也可以配置到这里。</p>
-<p><img alt="" src="/assets/threadPool.png" /></p>
+<p><img alt="" src="../../assets/threadPool.png" /></p>
 <h2 id="demo">DEMO功能说明</h2>
 <p>请参考github上的edge service demo：</p>
 <p><a href="https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge">https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge</a></p>
@@ -800,7 +804,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
         <a href="../nginx/" class="btn btn-neutral float-right" title="使用confd和Nginx做边缘服务">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../config/inject-config/" class="btn btn-neutral" title="配置注入说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../open-service/" class="btn btn-neutral" title="介绍"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -826,7 +830,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../config/inject-config/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../open-service/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../nginx/" style="color: #fcfcfc">Next &raquo;</a></span>

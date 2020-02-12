@@ -330,6 +330,10 @@
 		
     <span class="caption-text">Service Capability Open</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../open-service/">Intruductions</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">Using Edge Service</a>
@@ -559,7 +563,7 @@ servicecomb:
 <p>The workflow of the Edge Service is as follows, the blue background part is executed in the Eventloop thread, and the yellow background part:
    * If working in reactive mode, execute directly in the Eventloop thread
    * If working in thread pool mode, execute in the thread pool thread
-<img alt="" src="/assets/workFlow.png" /></p>
+<img alt="" src="../../assets/workFlow.png" /></p>
 <h2 id="custom-routing-rules">Custom routing rules</h2>
 <p>The core job of using the Edge Service is to configure routing rules. The rules are different, and the rules are different.
 A routing rule consists of a series of AbstractEdgeDispatchers. The Edge Service provides several common Dispatchers that can be enabled through configuration. If these Dispatchers do not meet the needs of the business scenario, they can be customized.</p>
@@ -628,7 +632,7 @@ A routing rule consists of a series of AbstractEdgeDispatchers. The Edge Service
 <h3 id="perform-authentication-and-other-business-processing">Perform authentication and other business processing</h3>
 <p>Through the Edge Service workflow, you can see that the Edge Service features can be extended in a variety of ways, including Dispatcher, HttpServerFilter, Handler, HttpClientFilter, and more. More common and straightforward is to extend through Handler. DEMO shows how to implement authentication through Handler extensions. Detailed code details can be found in the following section "DEMO Functional Description".<Paste></p>
 <h2 id="deployment-example">Deployment example</h2>
-<p><img alt="" src="/assets/deployment.png" /></p>
+<p><img alt="" src="../../assets/deployment.png" /></p>
 <h2 id="operating-mode">Operating mode</h2>
 <h3 id="reactive-40default41">reactive (default)</h3>
 <p>The Edge Service works by default in the high-performance reactive mode. This mode requires that the business code working in the Edge Service forwarding process cannot have any blocking operations, including:</p>
@@ -647,7 +651,7 @@ A routing rule consists of a series of AbstractEdgeDispatchers. The Edge Service
 </li>
 </ul>
 <p>The underlying Edge Service is based on netty's vertx. The above constraint is netty's reactive mode constraint.</p>
-<p><img alt="" src="/assets/reactive.png" /></p>
+<p><img alt="" src="../../assets/reactive.png" /></p>
 <h3 id="thread-pool">Thread Pool</h3>
 <p>If the business model cannot meet the reactive requirements, you need to use the thread pool mode.</p>
 <p>In this case, you need to configure it in the microservice.yaml of the Edge Service:</p>
@@ -657,7 +661,7 @@ A routing rule consists of a series of AbstractEdgeDispatchers. The Edge Service
 </code></pre>
 
 <p>Here servicecomb.executor.groupThreadPool is the beanId of the spring bean corresponding to the default thread pool built into ServiceComb; the service can customize its thread pool and declare it as a bean whose beanId can also be configured here.</p>
-<p><img alt="" src="/assets/threadPool.png" /></p>
+<p><img alt="" src="../../assets/threadPool.png" /></p>
 <h2 id="demo-function-description">DEMO Function Description</h2>
 <p>Please refer to the edge service demo on GitHub:</p>
 <p><a href="https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge">https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge</a></p>
@@ -803,7 +807,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
         <a href="../nginx/" class="btn btn-neutral float-right" title="Using confd and Nginx as edge services">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../config/inject-config/" class="btn btn-neutral" title="Configuration injection"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../open-service/" class="btn btn-neutral" title="Intruductions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -829,7 +833,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../config/inject-config/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../open-service/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../nginx/" style="color: #fcfcfc">Next &raquo;</a></span>

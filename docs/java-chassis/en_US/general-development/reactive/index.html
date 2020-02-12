@@ -353,6 +353,10 @@
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../../edge/open-service/">Intruductions</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../edge/by-servicecomb-sdk/">Using Edge Service</a>
                 </li>
                 <li class="">
@@ -510,7 +514,7 @@ public String hello(@PathVariable(name = &quot;name&quot;) String name){
 </code></pre>
 
 <p>The corresponding processing flow is as follows:</p>
-<p><img alt="" src="/assets/reactive/normalSync.png" /></p>
+<p><img alt="" src="../../assets/reactive/normalSync.png" /></p>
 <p>This is the traditional typical working model. The core idea is not to block network threads, and to put the business in a separate thread (to simplify the expression, only one thread is drawn in the executor)</p>
 <p>In general, this mode is not a big problem.</p>
 <h2 id="nested-synchronous-call">Nested synchronous call:</h2>
@@ -527,7 +531,7 @@ public String hello(@PathVariable(name = &quot;name&quot;) String name){
 </code></pre>
 
 <p>The corresponding processing flow is as follows:</p>
-<p><img alt="" src="/assets/reactive/nestedSync.png" /></p>
+<p><img alt="" src="../../assets/reactive/nestedSync.png" /></p>
 <p>According to the characteristics of this process, you can see the following results:</p>
 <ul>
 <li>
@@ -554,7 +558,7 @@ public String hello(@PathVariable(name = &quot;name&quot;) String name){
 </li>
 </ul>
 <p>Form the following process:</p>
-<p><img alt="" src="/assets/reactive/wrongSyncOptimization.png" /></p>
+<p><img alt="" src="../../assets/reactive/wrongSyncOptimization.png" /></p>
 <p>According to the characteristics of this process, you can see the following results:</p>
 <ul>
 <li>
@@ -592,7 +596,7 @@ public CompletableFuture&lt;String&gt; hello(@PathVariable(name = &quot;name&quo
 </code></pre>
 
 <p>The corresponding processing flow is as follows:</p>
-<p><img alt="" src="/assets/reactive/pureReactive.png" /></p>
+<p><img alt="" src="../../assets/reactive/pureReactive.png" /></p>
 <ul>
 <li>
 <p>Unlike traditional processes, all functions are executed in the eventloop and no thread switching is performed.</p>
