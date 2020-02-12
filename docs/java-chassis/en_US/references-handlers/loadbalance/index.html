@@ -538,7 +538,7 @@
 </code></pre>
 
 <p>Consumers compare their own data center information and providers' information, preferentially forward the request to the provider instance in the same region and availableZone; if the target instance is not available, it forwards request to the instance in the same region; if the target still does not exist, it forwards requests to other instances.</p>
-<p>The region and availableZone here are general concepts, users can determine their business meanings to apply them to resource-isolated scenarios. See <a href="/build-provider/definition/isolate-relationship.md">Logical isolation relationships between microservice instances</a> for more details of the isolation.</p>
+<p>The region and availableZone here are general concepts, users can determine their business meanings to apply them to resource-isolated scenarios. See <a href="../build-provider/definition/isolate-relationship.md">Logical isolation relationships between microservice instances</a> for more details of the isolation.</p>
 <p>This rule is enabled by default. If it is not needed, set servicecomb.loadbalance.filter.zoneaware.enabled to false. Data center information isolation is implemented in ZoneAwareDiscoveryFilter.</p>
 <h2 id="routing-and-forwarding-by-instance-attributes">Routing and forwarding by instance attributes</h2>
 <p>Users can specify the properties of microservice instances in microservice.yaml, or by calling service center APIs.</p>
