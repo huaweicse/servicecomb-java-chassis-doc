@@ -474,6 +474,9 @@
     <li class="toctree-l3"><a href="#_7">问题描述：服务治理的处理链顺序是否有要求？</a></li>
     
 
+    <li class="toctree-l3"><a href="#_8">问题描述： 文件上传中配置项最大请求大小的含义</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -738,6 +741,9 @@ String host = request.getRemoteHost();
 <p>Consumer: loadbalance, tracing-consumer, sla-consumer, bizkeeper-consumer</p>
 <p>Provider: tracing-provider, sla-provider, bizkeeper-provider</p>
 <p>这种顺序能够满足大多数场景，并且不容易出现不可理解的错误。</p>
+<h1 id="_8">问题描述： 文件上传中配置项最大请求大小的含义</h1>
+<p>配置项： servicecomb.uploads.maxSize</p>
+<p>含义： 请求体中允许的最大字节数，默认值为-1，表示没有限制。</p>
               
             </div>
           </div>
