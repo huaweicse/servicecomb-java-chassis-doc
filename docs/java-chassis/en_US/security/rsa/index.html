@@ -508,38 +508,41 @@
 <ul>
 <li>Add dependencies in pom.xml:</li>
 </ul>
-<p><code>&lt;dependency&gt;
+<pre><code>   &lt;dependency&gt;
       &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
       &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt;
-    &lt;/dependency&gt;</code></p>
+    &lt;/dependency&gt;
+</code></pre>
+
 <ul>
 <li>Added to the processing chain in microservice.yaml</li>
 </ul>
-<p><code>servicecomb:
-   ......
-   handler:
+<pre><code>servicecomb:
+  handler:
     chain:
-     Consumer:
-      default: auth-consumer
-   ......</code></p>
+      Consumer:
+        default: auth-consumer
+</code></pre>
+
 <h2 id="provider-configuration">Provider Configuration</h2>
 <ul>
 <li>Add dependencies in pom.xml:</li>
 </ul>
-<p><code>&lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt;
-    &lt;/dependency&gt;</code></p>
+<pre><code>&lt;dependency&gt; 
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
+  &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt; 
+&lt;/dependency&gt;
+</code></pre>
+
 <ul>
 <li>Added to the processing chain in microservice.yaml</li>
 </ul>
-<p><code>servicecomb:
-   ......
-   handler:
+<pre><code>servicecomb:
+  handler:
     chain:
-     Provider:
-      default: auth-provider
-   ......</code></p>
+      Provider:
+        default: auth-provider
+</code></pre>
               
             </div>
           </div>
