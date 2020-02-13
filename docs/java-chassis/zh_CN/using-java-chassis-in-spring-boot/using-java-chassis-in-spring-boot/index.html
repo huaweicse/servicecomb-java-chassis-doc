@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>介绍 - ServiceComb Java Chassis 开发指南</title>
+  <title>在Spring Boot中使用java chassis - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4ecb\u7ecd";
+    var mkdocs_page_name = "\u5728Spring Boot\u4e2d\u4f7f\u7528java chassis";
     var mkdocs_page_input_path = "using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.md";
     var mkdocs_page_url = null;
   </script>
@@ -381,41 +381,21 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">在Spring Boot中使用java chassis</span>
+    <span class="caption-text">专题文章</span>
     <ul class="subnav">
                 <li class=" current">
                     
-    <a class="current" href="./">介绍</a>
+    <a class="current" href="./">在Spring Boot中使用java chassis</a>
     <ul class="subnav">
             
     <li class="toctree-l3"><a href="#spring-bootjava-chassis">在Spring Boot中使用java chassis</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#java-chassis-spring-boot">java-chassis 集成 spring boot的方式</a></li>
-        
-            <li><a class="toctree-l4" href="#_1">两种集成方式的区别</a></li>
-        
-        </ul>
     
 
     </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../components-for-spring-boot/">提供的spring boot starter说明</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../java-application/">JAVA应用方式开发步骤</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../web-application/">Web开发方式开发步骤</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../diff-spring-mvc/">Spring MVC开发习惯的差异</a>
+    <a class="" href="../../featured-topics/using-inspector/">使用 inspector 模块查看契约</a>
                 </li>
     </ul>
 	    </li>
@@ -485,11 +465,11 @@
     
       
         
-          <li>在Spring Boot中使用java chassis &raquo;</li>
+          <li>专题文章 &raquo;</li>
         
       
     
-    <li>介绍</li>
+    <li>在Spring Boot中使用java chassis</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -500,42 +480,14 @@
             <div class="section">
               
                 <h1 id="spring-bootjava-chassis">在Spring Boot中使用java chassis</h1>
-<p><a href="https://projects.spring.io/spring-boot/">Spring Boot</a>可以让开发者能够更加快速的构建Spring应用。主要提供了如下功能：</p>
-<ol>
-<li>
-<p>创建独立可执行的Spring应用。通过将应用程序打包为jar，就可以通过java -jar来执行应用程序。</p>
-</li>
-<li>
-<p>内嵌Tomcat, Jetty等WEB服务器，而不需要开发者打包war。</p>
-</li>
-<li>
-<p>提供starter简化maven依赖关系配置。</p>
-</li>
-</ol>
-<p>将Spring Boot用于微服务开发，可以极大的简化开发者配置和部署。java-chassis提供了完善的的服务治理能力、良好的跨语言特性和高效的异步通信能力，通过使用java chassis，可以快速启用各种满足商业运维需要的功能。</p>
-<p>本文将介绍如何在Spring Boot中集成和使用。开发者通常会以如下几种方式使用Spring Boot：</p>
-<ol>
-<li>
-<p>JAVA应用方式：引入spring-boot-starter，开发普通JAVA应用，该应用不会启动WEB服务器。</p>
-</li>
-<li>
-<p>Web开发方式：引入spring-boot-starter-web，开发Web应用，该应用会包含一个内嵌的Tomcat或者Jetty服务器，并且使用The Spring Web MVC framework（简称Spring MVC）开发REST接口。</p>
-</li>
-</ol>
-<h2 id="java-chassis-spring-boot">java-chassis 集成 spring boot的方式</h2>
-<p>在两种情况下，都可以集成java chassis，原理图如下：</p>
+<p>本文将介绍如何在Spring Boot中集成和使用 java-chassis ， 包括如下内容：</p>
 <ul>
-<li>JAVA应用方式</li>
+<li><a href="../introduction/">java chassis 与 Spring Boot 集成介绍</a></li>
+<li><a href="../components-for-spring-boot/">java chassis spring boot starter说明</a></li>
+<li><a href="../java-application/">JAVA应用方式开发步骤</a></li>
+<li><a href="../web-application/">Web开发方式开发步骤</a></li>
+<li><a href="../diff-spring-mvc/">与原生 Spring MVC 开发习惯的差异</a></li>
 </ul>
-<p><img alt="" src="../../assets/using-java-chassis-in-spring-boot-002.png" /></p>
-<p>这种集成方式相对简单，相当于直接将java-chassis通过Spring Boot应用拉起，通过java-chassis 提供REST/RPC服务。</p>
-<ul>
-<li>Web开发方式</li>
-</ul>
-<p><img alt="" src="../../assets/using-java-chassis-in-spring-boot-001.png" /></p>
-<p>该集成方式的本质是将Spring MVC的DispatcherServlet替换为java chassis的RestServlet，通过java-chassis提供REST/RPC服务。</p>
-<h2 id="_1">两种集成方式的区别</h2>
-<p>两种开发方式都会启用java chassis的全量功能，JAVA应用方式运行于独立的HTTP服务器（基于vert.x构建）上，性能上存在很大的优势。Web开发方式运行于Tomcat或者其他内置的Web服务器之上，作为一个Servlet接收请求，因此在开发过程中，可以使用Web容器提供的一些功能，比如提供页面服务，使用Filter等。当应用只需要提供REST服务，并且对性能要求很高的场景，建议使用JAVA应用方式。</p>
               
             </div>
           </div>
@@ -543,7 +495,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../components-for-spring-boot/" class="btn btn-neutral float-right" title="提供的spring boot starter说明">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../featured-topics/using-inspector/" class="btn btn-neutral float-right" title="使用 inspector 模块查看契约">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../security/shi-yong-rsa-ren-zheng/" class="btn btn-neutral" title="使用RSA认证"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -575,7 +527,7 @@
         <span><a href="../../security/shi-yong-rsa-ren-zheng/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../components-for-spring-boot/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../featured-topics/using-inspector/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

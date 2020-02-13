@@ -425,6 +425,8 @@
         
             <li><a class="toctree-l4" href="#enable-handlers">Enable Handlers</a></li>
         
+            <li><a class="toctree-l4" href="#development-handlers">Development Handlers</a></li>
+        
         </ul>
     
 
@@ -507,72 +509,64 @@
         default: qps-flowcontrol-consumer,loadbalance
       Provider: 
         default: qps-flowcontrol-provider
- ```
-
-We can also enable different handlers for each microservice, 
-
 </code></pre>
 
-<p>servicecomb:
+<p>We can also enable different handlers for each microservice, </p>
+<pre><code>servicecomb:
   handler:
     chain:
       Consumer:
         default: auth,qps-flowcontrol-consumer,loadbalance
         service:
-          authentication-server: qps-flowcontrol-consumer,loadbalance</p>
-<pre><code>
-Requests to authentication-server, auth handler is enabled, and others not. 
-
-### Development Handlers
-The developer's custom handlers consists of the following steps. Since the core component of ServiceComb is the handlers, developers can refer to the implementation of the handlers directory to learn more about the Handlers. Here are a few key steps to summarize:
-
-* Implement Handler interface
-
+          authentication-server: qps-flowcontrol-consumer,loadbalance
 </code></pre>
 
-<p>public class AuthHandler implements Handler {
+<p>Requests to authentication-server, auth handler is enabled, and others not. </p>
+<h3 id="development-handlers">Development Handlers</h3>
+<p>The developer's custom handlers consists of the following steps. Since the core component of ServiceComb is the handlers, developers can refer to the implementation of the handlers directory to learn more about the Handlers. Here are a few key steps to summarize:</p>
+<ul>
+<li>Implement Handler interface</li>
+</ul>
+<pre><code>public class AuthHandler implements Handler {
   @Override
   public void handle(Invocation invocation, AsyncResponse asyncResponse) throws Exception {
     String token = invocation.getContext(Constants.CONTEXT_HEADER_AUTHORIZATION);
     if (token == null) {
-      asyncResponse.consumerFail(new InvocationException(403, "forbidden", "not authenticated"));
+      asyncResponse.consumerFail(new InvocationException(403, &quot;forbidden&quot;, &quot;not authenticated&quot;));
       return;
     }
     Jwt jwt = JwtHelper.decode(token);
     try {
-      jwt.verifySignature(BeanUtils.getBean("authSigner"));
+      jwt.verifySignature(BeanUtils.getBean(&quot;authSigner&quot;));
     } catch (InvalidSignatureException e) {
-      asyncResponse.consumerFail(new InvocationException(403, "forbidden", "not authenticated"));
+      asyncResponse.consumerFail(new InvocationException(403, &quot;forbidden&quot;, &quot;not authenticated&quot;));
       return;
     }
     invocation.next(asyncResponse);
   }
-}</p>
-<pre><code>
-* Add *.handler.xml file, give handler a name
-
-
+}
 </code></pre>
 
-<p><config>
-  <handler id="auth"
-    class="org.apache.servicecomb.authentication.gateway.AuthHandler" />
-</config></p>
-<pre><code>
-
-* Enable the newly added Handlers in microservice.yaml
-
-
+<ul>
+<li>Add *.handler.xml file, give handler a name</li>
+</ul>
+<pre><code>&lt;config&gt;
+  &lt;handler id=&quot;auth&quot;
+    class=&quot;org.apache.servicecomb.authentication.gateway.AuthHandler&quot; /&gt;
+&lt;/config&gt;
 </code></pre>
 
-<p>servicecomb:
+<ul>
+<li>Enable the newly added Handlers in microservice.yaml</li>
+</ul>
+<pre><code>servicecomb:
   handler:
     chain:
       Consumer:
         default: auth,loadbalance
         service:
           authentication-server: loadbalance
-```</p>
+</code></pre>
               
             </div>
           </div>
