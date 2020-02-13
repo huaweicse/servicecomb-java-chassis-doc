@@ -250,11 +250,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../general-development/file-upload/">文件上传</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/file-download/">文件下载</a>
+    <a class="" href="../../general-development/upload-download/">文件上传下载</a>
                 </li>
                 <li class="">
                     
@@ -507,11 +503,13 @@
               
                 <h1 id="_1">通用配置说明</h1>
 <h2 id="_2">配置源层级</h2>
-<p>ServiceComb提供了分层次的配置机制。按照优先级从高到低，分为：
-* 配置中心（动态配置）
-* Java System Property（-D参数）
-* 环境变量
-* 配置文件</p>
+<p>ServiceComb提供了分层次的配置机制。按照优先级从高到低，分为：</p>
+<ul>
+<li>配置中心（动态配置）</li>
+<li>Java System Property（-D参数）</li>
+<li>环境变量</li>
+<li>配置文件</li>
+</ul>
 <h3 id="_3">配置文件</h3>
 <p>配置文件默认是classpath下的microservice.yaml文件。ServiceComb-Java-Chassis启动时会从classpath的各个jar包、磁盘目录中加载microservice.yaml文件，并将这些文件合并为一份microservice.yaml配置。位于磁盘上的microservice.yaml文件优先级高于jar包中的microservice.yaml文件，用户还可以通过在配置文件中指定<code>servicecomb-config-order</code>来指定优先级。</p>
 <blockquote>

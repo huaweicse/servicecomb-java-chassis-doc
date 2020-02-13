@@ -502,11 +502,13 @@
               
                 <h1 id="general-configuration-instructions">General configuration instructions</h1>
 <h2 id="configuration-source-hierarchical-relationship">Configuration source hierarchical relationship</h2>
-<p>ServiceComb provides a hierarchical configuration mechanism. According to the priority, it is divided as below(the former is higher):
-* Configuration Center (dynamic configuration)
-* Java System Property (-D parameter)
-* Environmental variables
-* Configuration file</p>
+<p>ServiceComb provides a hierarchical configuration mechanism. According to the priority, it is divided as below(the former is higher):</p>
+<ul>
+<li>Configuration Center (dynamic configuration)</li>
+<li>Java System Property (-D parameter)</li>
+<li>Environmental variables</li>
+<li>Configuration file</li>
+</ul>
 <h3 id="configuration-file">Configuration file</h3>
 <p>The configuration file is the microservice.yaml file on classpath by default. When the ServiceComb-Java-Chassis is booting up, the microservice.yaml files are loaded from the jar files and the directories on the hard disks. All of the configuration files are merged into a set of valid configurations. The configuration files on the hard disks has higher priority than those in the jar files. The priority can also be specified by the <code>servicecomb-config-order</code> item in the configuration files.</p>
 <blockquote>

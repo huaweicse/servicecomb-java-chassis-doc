@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>文件上传 - ServiceComb Java Chassis 开发指南</title>
+  <title>文件上传开发指导 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u6587\u4ef6\u4e0a\u4f20";
+    var mkdocs_page_name = "\u6587\u4ef6\u4e0a\u4f20\u5f00\u53d1\u6307\u5bfc";
     var mkdocs_page_input_path = "general-development/file-upload.md";
     var mkdocs_page_url = null;
   </script>
@@ -248,36 +248,9 @@
                     
     <a class="" href="../http-filter/">Http Filter</a>
                 </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">文件上传</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#producer">Producer：</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#_1">配置说明：</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#consumer">Consumer：</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#rpc">透明RPC代码样例：</a></li>
-        
-            <li><a class="toctree-l4" href="#resttemplate">RestTemplate代码样例：</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
                 <li class="">
                     
-    <a class="" href="../file-download/">文件下载</a>
+    <a class="" href="../upload-download/">文件上传下载</a>
                 </li>
                 <li class="">
                     
@@ -497,12 +470,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>通用开发 &raquo;</li>
-        
-      
     
-    <li>文件上传</li>
+    <li>文件上传开发指导</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -512,53 +481,151 @@
           <div role="main">
             <div class="section">
               
-                <p>文件上传，当前支持在vertx rest通道和servlet rest中使用。</p>
-<p>文件上传使用标准的http form格式，可与浏览器的上传直接对接。</p>
-<h2 id="producer">Producer：</h2>
-<p>支持jaxrs和springmvc开发模式</p>
-<p>jaxrs开发模式：
-* 支持servlet定义的javax.servlet.http.Part类型</p>
+                <h1 id="_1">文件上传开发指导</h1>
+<h2 id="_2">服务提供者开发</h2>
+<p>服务提供者可以采用Spring MVC 或者 Jax RS定义上传接口。</p>
 <ul>
-<li>可以直接使用@FormParam传递文件类型及普通参数</li>
+<li>采用Spring MVC</li>
 </ul>
-<p>springmvc开发模式：</p>
-<ul>
-<li>
-<p>支持servlet定义的javax.servlet.http.Part类型，也支持org.springframework.web.multipart.MultipartFile类型</p>
-</li>
-<li>
-<p>两种数据类型功能是一致的，MultipartFile的底层也是Part</p>
-</li>
-<li>
-<p>两种数据类型可以混合使用，比如第一个参数是Part，第二个参数是MultipartFile</p>
-</li>
-<li>
-<p>可以直接使用@RequestPart传递文件类型及普通参数</p>
-</li>
-</ul>
-<p>注意：</p>
-<ul>
-<li>
-<p>先配置文件上传临时目录，默认为null不支持文件上传，文件上传请求Content-Type必须为multipart/form-data</p>
-</li>
-<li>
-<p>同名参数只支持一个文件</p>
-</li>
-<li>
-<p>支持一次传输多个不同参数名的文件</p>
-</li>
-<li>
-<p>通过MultipartFile或Part打开流后，记得关闭，否则上传的临时文件会无法删除，最终导致上传临时目录被撑爆</p>
-</li>
-</ul>
-<p>Springmvc模式下的代码样例：</p>
-<pre><code class="java">@PostMapping(path = &quot;/upload&quot;, consumes = MediaType.MULTIPART_FORM_DATA)
-public String fileUpload(@RequestPart(name = &quot;file1&quot;) MultipartFile file1, @RequestPart(name = &quot;file2&quot;) Part file2, @RequestPart String param1) {
-  ……
-}
+<pre><code class="java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
+  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String fileUpload(@RequestPart(name = &quot;file&quot;) MultipartFile file)
+
+@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
+  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String fileUpload(@RequestPart(name = &quot;file&quot;) Part file)
 </code></pre>
 
-<h3 id="_1">配置说明：</h3>
+<p>文件上传需要通过 @RequestPart 声明参数，参数类型支持 servlet 定义的 javax.servlet.http.Part 类型，也支持
+org.springframework.web.multipart.MultipartFile 类型，两种数据类型功能是一致的，MultipartFile 的底
+层也是Part。  两种数据类型可以混合使用，比如第一个参数是Part，第二个参数是MultipartFile。 除了通过
+定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
+<pre><code class="java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
+  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;MultipartFile&gt; files)
+
+@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
+  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String fileUpload(@RequestPart(name = &quot;files&quot;) MultipartFile[] files)
+</code></pre>
+
+<p>可以通过@RequestAttribute获取其他额外信息。</p>
+<pre><code class="java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
+  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;MultipartFile&gt; files,
+     @RequestAttribute(&quot;message&quot;) String message)
+</code></pre>
+
+<p>Spring MVC方式定义上传接口还有其他很多方式，可以下载java-chassis源码，并查看UploadSpringmvcSchema里面的示例。</p>
+<ul>
+<li>采用Jax RS</li>
+</ul>
+<pre><code class="java">@Path(&quot;/fileUpload&quot;)
+@POST
+@Produces(MediaType.TEXT_PLAIN)
+public String fileUpload(@FormParam(name = &quot;file&quot;) Part file)
+</code></pre>
+
+<p>文件上传需要通过 @FormParam 声明参数，参数类型支持servlet定义的javax.servlet.http.Part类型。除了通过
+定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
+<pre><code class="java">@Path(&quot;/fileUpload&quot;)
+@POST
+@Produces(MediaType.TEXT_PLAIN)
+public String fileUpload(@FormParam(name = &quot;files&quot;) List&lt;Part&gt; files)
+
+@Path(&quot;/fileUpload&quot;)
+@POST
+@Produces(MediaType.TEXT_PLAIN)
+public String fileUpload(@FormParam(name = &quot;files&quot;) Part[] files)
+</code></pre>
+
+<p>可以通过@FormParam获取其他额外信息。</p>
+<pre><code class="java">@Path(&quot;/fileUpload&quot;)
+@POST
+@Produces(MediaType.TEXT_PLAIN)
+public String fileUpload(@FormParam(name = &quot;files&quot;) List&lt;Part&gt; files,
+    @FormParam(&quot;message&quot;) String message)
+</code></pre>
+
+<p>Jax RS 方式定义上传接口还有其他很多方式，可以下载java-chassis源码，并查看 UploadJaxrsSchema 里面的示例。</p>
+<ul>
+<li>业务开发注意事项</li>
+</ul>
+<p>通过MultipartFile或Part打开流后，记得关闭，否则上传的临时文件会无法删除，导致资源泄露和磁盘空间耗尽。</p>
+<h2 id="_3">开发服务消费者</h2>
+<p>可以使用透明 RPC </p>
+<pre><code class="java"> interface UploadIntf {
+   String upload(File file);
+ }
+
+ @RpcReference(microserviceName = &quot;name&quot;, schemaId = &quot;schema&quot;)
+ UploadIntf uploadIntf;
+
+ String result = uploadIntf.upload(file);
+</code></pre>
+
+<p>或者 RestTemplate 进行文件上传。 </p>
+<pre><code class="java">Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+map.put(&quot;file&quot;, new FileSystemResource(&quot;a file path!&quot;));
+map.put(&quot;param1&quot;, &quot;test&quot;);
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(org.springframework.http.MediaType.MULTIPART_FORM_DATA);
+HttpEntity&lt;Map&lt;String, Object&gt;&gt; entity = new HttpEntity&lt;&gt;(map, headers);
+
+String reseult = template.postForObject(url, entity, String.class);
+</code></pre>
+
+<p>服务消费者不区分服务提供者是 Spring MVC 或者 Jax RS。 在使用透明 RPC 或者 RestTemplate 的时候， 可以使用如下类型
+与服务提供者的文件对应： </p>
+<ul>
+<li>java.io.File</li>
+<li>javax.servlet.http.Part</li>
+<li>java.io.InputStream</li>
+<li>org.springframework.core.io.Resource</li>
+</ul>
+<p>使用InputStream时，因为是流的方式，此时没有客户端文件名的概念，服务提供者获取到的文件名为null。 
+如果既要使用内存数据，又想让producer可以获取客户端文件名，可以使用resource类型，继承
+org.springframework.core.io.ByteArrayResource，且需要实现 getFilename 方法。</p>
+<p>一样的，服务消费者还有其他灵活的使用方式，可以下载 java-chassis 代码查看调用示例。</p>
+<h2 id="_4">使用浏览器上传文件</h2>
+<p>浏览器通过Form的方式上传文件，下面是一个简单的HTML 和 JS 示例</p>
+<pre><code class="html">&lt;form id=&quot;upload_form&quot; method=&quot;POST&quot;&gt;
+    &lt;p&gt;
+        File Name: &lt;input type=&quot;file&quot; name=&quot;fileName&quot;/&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;input type=&quot;button&quot; value=&quot;Upload&quot; onclick=&quot;uploadAction()&quot;&gt;
+    &lt;/p&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>事件处理：</p>
+<pre><code>function uploadAction() {
+     var formData = new FormData(document.getElementById(&quot;upload_form&quot;));
+
+     $.ajax({
+        type: 'POST',
+        url: &quot;/api/file-service/upload&quot;,
+        data: formData,
+        processData:false,
+        contentType:false,
+        success: function (data) {
+            console.log(data);
+            var error = document.getElementById(&quot;error&quot;);
+            error.textContent=&quot;Upload Successfully, file id=&quot; + data;
+            error.hidden=false;
+        },
+        error: function(data) {
+            console.log(data);
+            var error = document.getElementById(&quot;error&quot;);
+            error.textContent=&quot;Upload failed&quot;;
+            error.hidden=false;
+        },
+        async: true
+    });
+</code></pre>
+
+<h2 id="_5">配置参数说明</h2>
 <table>
 <thead>
 <tr>
@@ -583,60 +650,10 @@ public String fileUpload(@RequestPart(name = &quot;file1&quot;) MultipartFile fi
 </tr>
 </tbody>
 </table>
-<h2 id="consumer">Consumer：</h2>
-<p>支持以下数据类型：</p>
-<ul>
-<li>
-<p>java.io.File</p>
-</li>
-<li>
-<p>javax.servlet.http.Part</p>
-</li>
-<li>
-<p>java.io.InputStream</p>
-</li>
-<li>
-<p>org.springframework.core.io.Resource</p>
-</li>
-</ul>
-<p>使用InputStream时，因为是流的方式，此时没有客户端文件名的概念，所以producer获取客户端文件名会得到null</p>
-<p>如果既要使用内存数据，又想让producer可以获取客户端文件名，可以使用resource类型，继承org.springframework.core.io.ByteArrayResource，且override getFilename即可。</p>
-<h3 id="rpc">透明RPC代码样例：</h3>
-<pre><code class="java">interface UploadIntf {
-  String upload(File file);
-}
-</code></pre>
-
-<p>获得接口引用后，直接调用即可：</p>
-<pre><code class="java">String result = uploadIntf.upload(file);
-</code></pre>
-
-<h3 id="resttemplate">RestTemplate代码样例：</h3>
-<pre><code class="java">Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
-map.put(&quot;file&quot;, new FileSystemResource(&quot;a file path!&quot;));
-map.put(&quot;param1&quot;, &quot;test&quot;);
-HttpHeaders headers = new HttpHeaders();
-headers.setContentType(org.springframework.http.MediaType.MULTIPART_FORM_DATA);
-HttpEntity&lt;Map&lt;String, Object&gt;&gt; entry = new HttpEntity&lt;&gt;(map, headers);
-
-String reseult = template.postForObject(
-    url,
-    entry,
-    String.class);
-</code></pre>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../file-download/" class="btn btn-neutral float-right" title="文件下载">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../http-filter/" class="btn btn-neutral" title="Http Filter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -660,10 +677,6 @@ String reseult = template.postForObject(
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../http-filter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../file-download/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
