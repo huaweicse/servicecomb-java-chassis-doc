@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>配置注入说明 - ServiceComb Java Chassis 开发指南</title>
+  <title>配置注入机制 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u914d\u7f6e\u6ce8\u5165\u8bf4\u660e";
+    var mkdocs_page_name = "\u914d\u7f6e\u6ce8\u5165\u673a\u5236";
     var mkdocs_page_input_path = "config/inject-config.md";
     var mkdocs_page_url = null;
   </script>
@@ -318,7 +318,7 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">配置</span>
+    <span class="caption-text">管理服务配置</span>
     <ul class="subnav">
                 <li class="">
                     
@@ -326,18 +326,16 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">配置注入说明</a>
+    <a class="current" href="./">配置注入机制</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#_1">配置注入</a></li>
+    <li class="toctree-l3"><a href="#_1">配置注入机制</a></li>
     
         <ul>
         
             <li><a class="toctree-l4" href="#_2">配置注入对象</a></li>
         
             <li><a class="toctree-l4" href="#_3">执行注入</a></li>
-        
-            <li><a class="toctree-l4" href="#_4">参考</a></li>
         
         </ul>
     
@@ -480,11 +478,11 @@
     
       
         
-          <li>配置 &raquo;</li>
+          <li>管理服务配置 &raquo;</li>
         
       
     
-    <li>配置注入说明</li>
+    <li>配置注入机制</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -494,9 +492,12 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">配置注入</h1>
-<p>ServiceComb提供将配置属性注入到Java对象字段的特性，并提供通配符支持。
-Java对象可以是一个Java Bean，或是一个拥有public字段的类。</p>
+                <h1 id="_1">配置注入机制</h1>
+<p>配置注入提供了一种简单的管理大量复杂配置的机制，开发者不需要使用 DynamicPropertyFactory 逐个读取配置项，增加配置监听，
+而是定义一个简单的 JAVA Bean， 定义这个 Bean 的属性对应的配置项， 当配置信息变化的时候， Bean 的属性会自动刷新，极大
+的简化了用户管理大量复杂配置的复杂度。 </p>
+<p>Bean 属性对应的配置项名称支持通配符， 一个属性可以关联若干配置项，可以声明这些配置项的优先级。 Java对象可以是一个
+Java Bean，或是一个拥有public字段的类。</p>
 <h2 id="_2">配置注入对象</h2>
 <p>我们首先设计两个Java类用于注入配置属性，分别用来演示不使用注解和使用注解的场景。</p>
 <pre><code class="Java">/*
@@ -553,17 +554,26 @@ public class ConfigNoAnnotation {
 
 <p>将配置属性注入到有<code>@InjectProperties</code>和<code>@InjectProperty</code>注解的对象上：</p>
 <ul>
-<li>将名称为root.k.value的配置属性注入到一个ConfigWithAnnotation对象的intValue字段</li>
-<li>ConfigWithAnnotation对象的longValue字段按以下顺序查找已配置的配置属性进行注入:</li>
+<li>
+<p>将名称为root.k.value的配置属性注入到一个ConfigWithAnnotation对象的intValue字段</p>
+</li>
+<li>
+<p>ConfigWithAnnotation对象的longValue字段按以下顺序查找已配置的配置属性进行注入:</p>
+</li>
 <li>root.low-1.a.high-1.b</li>
 <li>root.low-1.a.high-2.b</li>
 <li>root.low-2.a.high-1.b</li>
-<li>root.low-2.a.high-2.b</li>
-<li>ConfigWithAnnotation对象的floatValue字段按以下顺序查找已配置的配置属性进行注入:</li>
+<li>
+<p>root.low-2.a.high-2.b</p>
+</li>
+<li>
+<p>ConfigWithAnnotation对象的floatValue字段按以下顺序查找已配置的配置属性进行注入:</p>
+</li>
 <li>root.l1-1</li>
 <li>root.l1-2</li>
 </ul>
-<pre><code class="Java">ConfigWithAnnotation config = SCBEngine.getInstance().getPriorityPropertyManager().createConfigObject(ConfigWithAnnotation.class,
+<pre><code class="Java">ConfigWithAnnotation config = SCBEngine.getInstance().getPriorityPropertyManager()
+  .createConfigObject(ConfigWithAnnotation.class,
         &quot;key&quot;, &quot;k&quot;,
         &quot;low-list&quot;, Arrays.asList(&quot;low-1&quot;, &quot;low-2&quot;),
         &quot;high-list&quot;, Arrays.asList(&quot;high-1&quot;, &quot;high-2&quot;),
@@ -571,12 +581,11 @@ public class ConfigNoAnnotation {
         );
 </code></pre>
 
-<p>最后不管是有无注解的属性注入，都要显式地回收配置注入对象</p>
+<p>如果配置实例是临时的，需要显式地回收配置注入对象。 </p>
 <pre><code class="Java">priorityPropertyManager.unregisterConfigObject(config)
 </code></pre>
 
-<h2 id="_4">参考</h2>
-<p>示例代码请参考： https://github.com/apache/servicecomb-java-chassis/blob/master/foundations/foundation-config/src/test/java/org/apache/servicecomb/config/inject/TestConfigObjectFactory.java</p>
+<p>更多关于配置注入的用法，建议下载 java-chassis 的源码， 查看 TestConfigObjectFactory 类里面的示例。</p>
               
             </div>
           </div>
