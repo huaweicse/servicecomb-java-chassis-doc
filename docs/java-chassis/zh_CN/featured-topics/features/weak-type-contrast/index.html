@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>开发界面 - ServiceComb Java Chassis 开发指南</title>
+  <title>2.0.0 新特性介绍： 弱类型契约 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u5f00\u53d1\u754c\u9762";
-    var mkdocs_page_input_path = "featured-topics/application-porter/porter-website.md";
+    var mkdocs_page_name = "2.0.0 \u65b0\u7279\u6027\u4ecb\u7ecd\uff1a \u5f31\u7c7b\u578b\u5951\u7ea6";
+    var mkdocs_page_input_path = "featured-topics/features/weak-type-contrast.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -79,7 +79,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../">完整例子-porter应用</a>
+    <a class="" href="../../application-porter/">完整例子-porter应用</a>
                 </li>
     </ul>
 	    </li>
@@ -402,7 +402,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../features/">新功能介绍系列文章</a>
+    <a class="" href="../">新功能介绍系列文章</a>
                 </li>
     </ul>
 	    </li>
@@ -472,7 +472,7 @@
     
       
     
-    <li>开发界面</li>
+    <li>2.0.0 新特性介绍： 弱类型契约</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -482,106 +482,175 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">开发界面</h1>
-<p>在技术选择上，界面完全由html+js+css等静态网页技术构成，不采用动态页面技术。采用静态页面技术构建界面，使得整个微服务系统更加具备弹性，能够非常容易的进行扩容，相关开发成果也能够更好的被其他应用继承。</p>
-<p>采用静态页面技术，也使得界面服务部署更加灵活多样：</p>
-<ul>
-<li>将静态页面部署到nginx，nginx将REST请求转发到gateway-service。</li>
-<li>将静态页面直接部署到gateway-service。</li>
-<li>静态页面通过Tomcat、Spring Boot等Web服务器部署，并注册到服务中心，gateway-service将请求转发到对应的应用服务器上。</li>
-<li>静态页面由第三方开发，第三方直接通过gateway-service访问REST接口。由第三方选择界面的开发技术。</li>
-</ul>
-<p>这几种方式都被广泛使用。</p>
-<h2 id="gateway-service">将静态页面直接部署到gateway-service</h2>
-<p>在<a href="https://github.com/apache/servicecomb-samples/tree/master/porter_lightweight">porter_lightweight</a>项目中，采用了将静态页面直接部署到gateway-service的方式，这种方式简洁高效。这种方式的核心代码是StaticWebpageDispatcher。它采用vert.x提供的静态页面功能，直接挂载了静态页面服务。</p>
-<pre><code>public class StaticWebpageDispatcher implements VertxHttpDispatcher {
-  private static final Logger LOGGER = LoggerFactory.getLogger(StaticWebpageDispatcher.class);
+                <h1 id="200">2.0.0 新特性介绍： 弱类型契约</h1>
+<p>"以契约为中心" 是 Java Chassis 的核心设计理念。  “契约” 扮演着用户与开发者，开发者与开发者之间的沟通桥梁。
+举几个简单的例子。</p>
+<p>开发者发布了一个微服务A，同时发布了一份契约文件：</p>
+<pre><code class="yaml">swagger: '2.0'
+info:
+  title: rest api
+  version: 1.0.0
 
-  private static final String WEB_ROOT = DynamicPropertyFactory.getInstance()
-      .getStringProperty(&quot;gateway.webroot&quot;, &quot;/var/static&quot;)
-      .get();
+basePath: /controller
+produces:
+  - application/json
 
-  @Override
-  public int getOrder() {
-    return Integer.MAX_VALUE;
+paths:
+  /add:
+    get:
+      operationId: add
+      parameters:
+        - name: a
+          in: query
+          required: true
+          type: integer
+          format: int32
+        - name: b
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses: 
+        &quot;200&quot;:
+          description: add numer
+          schema: 
+            type: integer
+            format: int32
+</code></pre>
+
+<p>微服务A的用户可以基于这份契约，使用浏览器访问<code>add</code>接口，也可以在自己的微服务B中，使用<code>RestTemplate</code>
+调用<code>add</code>接口，用户不需要知道微服务A的实现细节，也不需要依赖任何微服务A提供的接口，微服务B保持完全
+与微服务A独立。只要契约不变，微服务B就可以保持不变。</p>
+<p>作为微服务A的其他开发者，可以基于契约开发治理功能，不需要知道<code>add</code>接口的实现细节。比如可以给<code>add</code>
+接口增加流量控制 <code>servicecomb.flowcontrol.Provider.qps.limit.[ServiceA].[Controller].[add]=1000</code>，
+限制其流量为1000 TPS；还可以基于 <code>add</code> 接口的参数做灰度发布，在灰度发布代码里面可能会存在下面的代码片段：
+<code>invocation.getSwaggerArgument("a")</code> 来获取参数值。</p>
+<p>"以契约为中心"是保持微服务"独立性"非常重要的手段，“独立开发、独立交付”是微服务被引入，提升软件工程能力
+最重要的价值。</p>
+<p>本文重点介绍2.0.0版本引入的“弱类型契约”，以及它与之前“强类型契约”之间的差别与联系。</p>
+<h2 id="vs">弱类型契约 vs 强类型契约</h2>
+<p>弱类型契约和强类型契约的共同点都是"以契约为中心"，因此弱类型契约并没有改变 Java Chassis 的整体设计理念，
+而是在实现层面发生了一些变化，进而影响到部分开发体验。2.0.0之前的版本是强类型契约。产生强类型契约和一些技术背景
+有关系，讨论的起点可以从 Java Chassis Highway 的 ProtoBuffer 讲起。 </p>
+<p>熟悉 ProtoBuffer 的开发者都知道， ProtoBuffer 主要被用于 gRPC， 其他处理 ProtoBuffer 编解码的库还有 ProtoStuff。
+gRPC 需要写 IDL 文件， 然后根据 IDL 生成运行时的代码，在gRPC的运行过程中，处理编解码的类在编译时间就已经确定，无法
+更改。ProtoStuff 提供的类库比 gRPC 更加灵活，对于同样的 IDL 文件，可以在运行时指定不同的类进行序列化和反序列化。
+无论如何，在一个微服务里面，如果存在一个契约（IDL文件），那么必须在编译时就确定这个契约对应的类是什么。这个类可以
+有一个，也可以有多个，但是必须在编译的时候确定类的类型。</p>
+<p>强类型契约可以定义为：在一个微服务里面，契约必须存在一个或者多个编译时确定的类型与它对应。在2.0.0版本之前，这个对应
+的类型是在契约文件里面指定的，比如<code>x-java-interface: org.apache.servicecomb.demo.controller.Controller</code> 。 开发者
+可能注意到在消费端代码，可以不依赖任何提供端的类，这是因为消费端的代码会根据契约描述，采用 <code>javassist</code> 工具动态生成
+一个类型与契约对应，不同版本的契约需要生成不一样的类型，如果灰度环境版本过多，就可能导致内存过大的问题，特别是在边缘
+(Edge Service）服务里面。</p>
+<p>强类型契约的一个外在体现就是下面的代码：</p>
+<pre><code class="java">Person result = restTemplate.postForObject(&quot;/getPerson&quot;, null, Person.class);
+</code></pre>
+
+<p>可能抛出 <code>ClassCastException</code> 异常。 因为 <code>getPerson</code> 的返回值的类型在编译时已经确定， 如果返回值 Person 类型
+与编译时的类型不一样，就会报告 <code>ClassCastException</code> 异常。</p>
+<p>了解了强类型契约后，弱类型契约的定义就很明显了： 在一个微服务里面，契约可以存在一个或者多个编译时确定的类型与它对应，
+也可以不存在编译时确定的类型与它对应。 引入弱类型契约后，下面的代码：</p>
+<pre><code class="java">Person1 result = restTemplate.postForObject(&quot;/getPerson&quot;, null, Person1.class);
+Person2 result = restTemplate.postForObject(&quot;/getPerson&quot;, null, Person2.class);
+</code></pre>
+
+<p>都不会报告 <code>ClassCastException</code> 异常，只需要 <code>Person1</code> 和 <code>Person2</code> 的定义都能够和契约对应。 由此可以看出，弱类型
+契约在使用方式上更加灵活，去掉了动态创建类的过程，降低了内存占用，缩短了微服务启动时间。</p>
+<h2 id="_1">利用弱类型契约增强写代码的灵活性</h2>
+<p>弱类型契约不要求提供者与消费者使用一样的类型，在代码书写上提供了很大的方便。比如提供者有如下接口：</p>
+<pre><code class="java">@RestSchema(schemaId = &quot;weakSpringmvc&quot;)
+@RequestMapping(path = &quot;/weakSpringmvc&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+public class WeakSpringmvc {
+  @GetMapping(path = &quot;/diffNames&quot;)
+  @ApiOperation(value = &quot;differentName&quot;, nickname = &quot;differentName&quot;)
+  public int diffNames(@RequestParam(&quot;x&quot;) int a, @RequestParam(&quot;y&quot;) int b) {
+    return a * 2 + b;
   }
 
-  @Override
-  public void init(Router router) {
-    String regex = &quot;/ui/(.*)&quot;;
-    StaticHandler webpageHandler = StaticHandler.create();
-    webpageHandler.setWebRoot(WEB_ROOT);
-    LOGGER.info(&quot;server static web page for WEB_ROOT={}&quot;, WEB_ROOT);
-    router.routeWithRegex(regex).failureHandler((context) -&gt; {
-      LOGGER.error(&quot;&quot;, context.failure());
-    }).handler(webpageHandler);
+  @GetMapping(path = &quot;/genericParams&quot;)
+  @ApiOperation(value = &quot;genericParams&quot;, nickname = &quot;genericParams&quot;)
+  public List&lt;List&lt;String&gt;&gt; genericParams(@RequestParam(&quot;code&quot;) int code, @RequestBody List&lt;List&lt;String&gt;&gt; names) {
+    return names;
   }
 
+  @GetMapping(path = &quot;/genericParamsModel&quot;)
+  @ApiOperation(value = &quot;genericParamsModel&quot;, nickname = &quot;genericParamsModel&quot;)
+  public GenericsModel genericParamsModel(@RequestParam(&quot;code&quot;) int code, @RequestBody GenericsModel model) {
+    return model;
+  }
+
+  @GetMapping(path = &quot;/specialNameModel&quot;)
+  @ApiOperation(value = &quot;specialNameModel&quot;, nickname = &quot;specialNameModel&quot;)
+  public SpecialNameModel specialNameModel(@RequestParam(&quot;code&quot;) int code, @RequestBody SpecialNameModel model) {
+    return model;
+  }
 }
 </code></pre>
 
-<h2 id="tomcatspring-bootweb">静态页面通过Tomcat、Spring Boot等Web容器部署，并注册</h2>
-<p>在架构图中，界面的请求需要被网关转发，并且需要支持多实例部署，因此界面服务需要增加的功能是服务注册和发现。有两种方法集成和使用J2EE：</p>
-<ol>
-<li>
-<p>运行于独立的web服务器中，如tomcat等。</p>
-</li>
-<li>
-<p>运行于Spring Boot的Embedded Tomcat中。</p>
-</li>
-</ol>
-<p>在Spring Boot中提供静态页面服务，核心问题是解决服务注册、发现能力。在Spring Boot的Embeded Tomcat中使用ServiceComb的服务注册发现，需要完成如下步骤：</p>
-<ul>
-<li>增加依赖关系</li>
-</ul>
-<p>依赖关系定义了对于Spring Boot的依赖和java-chassis的依赖。</p>
-<pre><code>&lt;dependency&gt;
-
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-
-  &lt;artifactId&gt;java-chassis-spring-boot-starter-servlet&lt;/artifactId&gt;
-
-&lt;/dependency&gt;
-</code></pre>
-
-<ul>
-<li>配置微服务信息(microservice.yaml)</li>
-</ul>
-<p>需要注意配置项servicecomb.rest.address的端口与application.yml的server.port保持一致。application.yml是Spring Boot的配置文件，用于指定Embeded Tomcat的监听端口。microservice.yam的信息用于服务注册。另外也需要注意一下配置项servicecomb.rest.servlet.urlPattern，当使用@EnableServiceComb时，会加载REST框架org.apache.servicecomb.transport.rest.servlet. RestServlet，而且默认接管了/*的请求。在我们的场景下，仅仅需要提供web页面，不需要提供REST服务，这个配置项的含义就是将它的路径改为一个和静态页面不冲突的路径，以保证静态页面能够被正常访问。</p>
-<pre><code>APPLICATION_ID: porter
-service_description:
-  name: porter-website
-  version: 0.0.1
-
-servicecomb:
-  rest:
-    address: 0.0.0.0:9093
-    servlet:
-      urlPattern: /servicecomb/rest/*
-</code></pre>
-
-<ul>
-<li>增加静态页面</li>
-</ul>
-<p>按照Spring Boot的惯例，静态页面需要放到源代码的resources/static目录。项目开始前，增加了如下静态页面和目录：</p>
-<pre><code>css
-js
-index.html
-</code></pre>
-
-<ul>
-<li>使用@EnableServiceComb启用注册发现</li>
-</ul>
-<pre><code>@SpringBootApplication
-@EnableServiceComb
-public class WebsiteMain {
-    public static void main(final String[] args) {
-        SpringApplication.run(WebsiteMain.class, args);
-    }
+<p>而消费者只需要访问其中一个接口diffNames，只需要定义一个非常简单的接口：</p>
+<pre><code class="java">interface DiffNames {
+  int differentName(int x, int y);
 }
+
+@RpcReference(microserviceName = &quot;springmvc&quot;, schemaId = &quot;weakSpringmvc&quot;)
+private DiffNames diffNames;
 </code></pre>
 
-<p>经过以上的步骤，界面服务就开发完成了。通过运行WebsiteMain，就可以通过<a href="http://localhost:9093">http://localhost:9093</a> 来访问。</p>
+<p>其中接口名称是和契约里面的接口名称一致 <code>differentName</code>， 而不是和服务端的代码一致 <code>diffNames</code>。 契约包含 <code>x</code> 和
+<code>y</code> 两个参数， 并且契约的参数是顺序无关的， 下面的代码也是可以访问同一个接口的：</p>
+<pre><code class="java">interface DiffNames2 {
+  int differentName(int y, int x);
+}
+
+@RpcReference(microserviceName = &quot;springmvc&quot;, schemaId = &quot;weakSpringmvc&quot;)
+private DiffNames2 diffNames2;
+</code></pre>
+
+<p>需要注意的是，2.0.0 版本要求保留参数名称， 在编译代码的时候，需要加上 -parameters 编译参数。</p>
+<p>开发者还可以通过 RestTemplate 调用这个接口：</p>
+<pre><code class="java">restTemplate.getForObject(&quot;cse://springmvc/weakSpringmvc/diffNames?x=2&amp;y=3&quot;, Integer.class)
+</code></pre>
+
+<p>或者采用 <code>InvokerUtils</code> 调用： </p>
+<pre><code class="java">Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
+args.put(&quot;x&quot;, 2);
+args.put(&quot;y&quot;, 3);
+InvokerUtils.syncInvoke(&quot;springmvc&quot;, &quot;weakSpringmvc&quot;, &quot;differentName&quot;, args);
+</code></pre>
+
+<h2 id="_2">弱类型契约的治理功能</h2>
+<p>弱类型契约在 <code>Invocation</code> 里面提供了独立的方法，让开发者开发治理功能更加容易。 </p>
+<pre><code class="java">  public Map&lt;String, Object&gt; getInvocationArguments() {
+    return this.invocationArguments;
+  }
+
+  public Map&lt;String, Object&gt; getSwaggerArguments() {
+    return this.swaggerArguments;
+  }
+
+  public Object getInvocationArgument(String name) {
+    return this.invocationArguments.get(name);
+  }
+
+  public Object getSwaggerArgument(String name) {
+    return this.swaggerArguments.get(name);
+  }
+</code></pre>
+
+<p><code>getSwaggerArguments</code> 始终获取的是和契约对应的参数，如果契约为 <code>x</code> 和 <code>y</code> 两个 query 参数， 那么得到的参数就是
+包含  <code>x</code> 和 <code>y</code> 的 Map 。 <code>getInvocationArgument</code> 获取的是实际类型参数， 在服务提供者，这个参数列表的个数和类型
+和实际的 Method 的列表对应， 比如可能包含 <code>InvocationContext</code> , <code>HttpServletRequest</code> 等注入参数。 还有很多情况，
+契约参数和类型参数不对应，比如聚合参数的情况，契约参数是多个 query 参数， 而类型参数是一个 POJO； 再比如 POJO 接口
+定义的时候， 类型参数可能是多个， 而契约参数只有一个 body 参数。 在服务消费者，如果用户采用 POJO 方式调用服务提供者，
+两个接口的返回的值与服务提供者类似，存在语义差别；如果采用 RestTemplate 或者 InvokerUtils 调用， 那么两个接口返回的
+内容一样，都是契约参数。在边缘服务， 两个接口返回的都是契约参数。 这种行为体现了弱类型契约的语义： 是否存在编译时
+类型与契约对应。</p>
+<h2 id="_3">弱类型契约带来的一些变更</h2>
+<p>总体而言，对于 <code>REST</code> 通信模式， 弱类型契约不仅增强了写代码的灵活性， 还完整保留了强类型契约的写代码方式，几乎不
+存在用户需要感知的变更。 对于 <code>HIGHWAY</code> 通信模式， 由于底层采用 ProtoBuffer 编码， 而 ProtoBuffer 天然就是一种
+强类型契约的编解码过程， java-chassis 为了支持弱类型契约， 做了大量努力， 在一些边界条件处理上与弱类型契约存在
+变更，两个版本的编解码是不兼容的，需要同时升级提供者和消费者。 在编码方式上，差异主要体现在对于缺省值的处理，对于
+<code>null</code> 的处理等问题上， 详细参考<a href="../../../upgrading/1_to_2/">1.x迁移2.x指南</a> 。</p>
               
             </div>
           </div>

@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>JAVA应用方式开发步骤 - ServiceComb Java Chassis 开发指南</title>
+  <title>新功能介绍系列文章 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "JAVA\u5e94\u7528\u65b9\u5f0f\u5f00\u53d1\u6b65\u9aa4";
-    var mkdocs_page_input_path = "using-java-chassis-in-spring-boot/java-application.md";
+    var mkdocs_page_name = "\u65b0\u529f\u80fd\u4ecb\u7ecd\u7cfb\u5217\u6587\u7ae0";
+    var mkdocs_page_input_path = "featured-topics/features.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -75,11 +75,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/application-bmi/">完整例子-bmi应用</a>
+    <a class="" href="../application-bmi/">完整例子-bmi应用</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/application-porter/">完整例子-porter应用</a>
+    <a class="" href="../application-porter/">完整例子-porter应用</a>
                 </li>
     </ul>
 	    </li>
@@ -394,15 +394,21 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/using-inspector/">使用 inspector 模块查看契约</a>
+    <a class="" href="../using-inspector/">使用 inspector 模块查看契约</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
+    <a class="current" href="./">新功能介绍系列文章</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">新功能介绍系列文章</a></li>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -471,8 +477,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>专题文章 &raquo;</li>
+        
+      
     
-    <li>JAVA应用方式开发步骤</li>
+    <li>新功能介绍系列文章</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -482,46 +492,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="java">JAVA应用方式开发步骤</h1>
-<p>使用JAVA方式集成，为Spring Boot应用增加了一个高效的HTTP服务器和REST开发框架。这种方式集成非常简单。只需要在项目中引入相关依赖，并且使用@EnableServiceComb注解即可。</p>
+                <h1 id="_1">新功能介绍系列文章</h1>
 <ul>
-<li>引入依赖</li>
+<li><a href="weak-type-contrast/">2.0.0 新特性介绍： 弱类型契约</a></li>
 </ul>
-<p>参考<a href="../components-for-spring-boot/">java-chassis 提供的spring boot starter说明</a>，注意区分使用的java-chassis版本和spring boot版本。</p>
-<ul>
-<li>启用java chassis的核心功能</li>
-</ul>
-<p>在启动类前面增加@EnableServiceComb。</p>
-<pre><code>@SpringBootApplication
-@EnableServiceComb
-public class WebsiteMain {
-    public static void main(final String[] args) {
-        SpringApplication.run(WebsiteMain.class, args);
-    }
-}
-</code></pre>
-
-<p>通过以上配置，就可以完整使用java chassis提供的所有功能，使用java chassis开发REST服务，并开启各种治理功能。</p>
-<ul>
-<li>配置微服务</li>
-</ul>
-<p>集成以后，可以在microservice.yaml中增加应用配置，也可以使用spring boot的application.yml增加配置，application.yml的配置优先级高于microservice.yaml。 为了保持spring boot的开发习惯，建议开发者配置文件使用application.yml, 可以在application.yml中定制微服务的信息，包括应用名称、微服务名称、监听的地址和端口等。</p>
-<p>集成java chassis后，可以通过它的方式开发REST接口：</p>
-<pre><code>@RestSchema(schemaId = &quot;hello&quot;)
-@RequestMapping(path = &quot;/&quot;)
-public class HelloService {
-    @RequestMapping(path = &quot;hello&quot;, method = RequestMethod.GET)
-    public String sayHello(@RequestParam(name=&quot;name&quot;) String name) {
-        return &quot;Hello &quot; + name;
-    }
-}
-</code></pre>
-
-<p>然后可以通过：http://localhost:9093/hello?name=world来访问。</p>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../references-handlers/intruduction/" class="btn btn-neutral float-right" title="处理链介绍">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../using-inspector/" class="btn btn-neutral" title="使用 inspector 模块查看契约"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -545,6 +532,10 @@ public class HelloService {
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../using-inspector/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../references-handlers/intruduction/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
