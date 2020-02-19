@@ -493,7 +493,7 @@
 </code></pre>
 
 <ul>
-<li>在 <em>体质指数计算器</em> 的 <code>microservice.yaml</code> 文件中指明使用流量控制的处理链及指定流控策略：</li>
+<li>在 <em>体质指数计算器</em> 的 <code>application.yml</code> 文件中指明使用流量控制的处理链及指定流控策略：</li>
 </ul>
 <pre><code class="yaml">servicecomb:
  handler:
@@ -507,8 +507,8 @@
          gateway: 1
 </code></pre>
 
-<p>体质指数应用中已配置好了上述配置项，您只需关闭之前运行的 <strong>体质指数计算器</strong>，然后再用以下指令重新运行即可：</p>
-<pre><code class="bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dcse.handler.chain.Provider.default=qps-flowcontrol-provider -Dcse.flowcontrol.Provider.qps.limit.gateway=1&quot;
+<p>也可以通过环境变量的方式动态修改配置文件的值，比如采用以下指令重新运行即可：</p>
+<pre><code class="bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.handler.chain.Provider.default=qps-flowcontrol-provider -Dservicecomb.flowcontrol.Provider.qps.limit.gateway=1&quot;
 </code></pre>
 
 <h2 id="_4">验证</h2>
