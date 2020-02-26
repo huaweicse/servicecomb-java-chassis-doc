@@ -418,6 +418,10 @@
                     
     <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../../featured-topics/upgrading/">升级指导系列文章</a>
+                </li>
     </ul>
 	    </li>
           
@@ -438,11 +442,6 @@
     <a class="" href="../../references-handlers/publickey/">公钥认证</a>
                 </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../upgrading/1_to_2/">1.x迁移2.x指南</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -608,12 +607,12 @@
 </table>
 <h3 id="_2">补充说明</h3>
 <ul>
-<li>极限连接数计算<br />
-  假设:  </li>
-<li>servicecomb.rest.client.thread-count配置为8</li>
-<li>servicecomb.rest.client.connection.maxPoolSize配置为5</li>
-<li>微服务A有10个实例  </li>
+<li>极限连接数计算 </li>
 </ul>
+<p>假设:<br />
+  * servicecomb.rest.client.verticle-count配置为8
+  * servicecomb.rest.client.connection.maxPoolSize配置为5
+  * 微服务A有10个实例  </p>
 <p>站在client的角度，在极限情况下：
   * 一个client调用微服务A，最多会建立400条连接。（<code>8 * 5 * 10 = 400</code>）<br />
   * 假设该client还需要调用微服务B，微服务B，也有10个实例，则最多再建立400条连接，共800条连接</p>
