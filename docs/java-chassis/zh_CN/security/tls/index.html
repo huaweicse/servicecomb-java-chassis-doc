@@ -292,27 +292,29 @@
 <h2 id="_2">外部服务通信配置</h2>
 <p>与外部服务通信相关的配置写在microservice.yaml文件中。</p>
 <ul>
-<li>服务中心、配置中心TLS通信配置<br />
-  微服务与服务中心、配置中心的连接可以通过将http改为https启用TLS通信，配置示例如下：</li>
+<li>
+<p>服务中心、配置中心TLS通信配置<br />
+  微服务与服务中心、配置中心的连接可以通过将http改为https启用TLS通信，配置示例如下：</p>
+<pre><code>servicecomb:
+  service:
+    registry:
+      address: https://127.0.0.1:30100
+  config:
+    client:
+      serverUri: https://127.0.0.1:30103
+</code></pre>
+</li>
+<li>
+<p>服务提供者启用TLS通信<br />
+  服务提供者在配置服务监听地址时，可以通过在地址后面追加<code>?sslEnabled=true</code>开启TLS通信，示例如下：</p>
+<pre><code>servicecomb:
+  rest:
+    address: 0.0.0.0:8080?sslEnabled=true
+  highway:
+    address: 0.0.0.0:7070?sslEnabled=true
+</code></pre>
+</li>
 </ul>
-<p><code>yaml
-  servicecomb:
-    service:
-      registry:
-        address: https://127.0.0.1:30100
-    config:
-      client:
-        serverUri: https://127.0.0.1:30103</code></p>
-<ul>
-<li>服务提供者启用TLS通信<br />
-  服务提供者在配置服务监听地址时，可以通过在地址后面追加<code>?sslEnabled=true</code>开启TLS通信，示例如下：</li>
-</ul>
-<p><code>yaml
-  servicecomb:
-    rest:
-      address: 0.0.0.0:8080?sslEnabled=true
-    highway:
-      address: 0.0.0.0:7070?sslEnabled=true</code></p>
 <h2 id="_3">证书配置</h2>
 <p>证书配置项写在microservice.yaml文件中，支持统一制定证书，也可以添加tag进行更细粒度的配置，有tag的配置会覆盖全局配置，配置格式如下：</p>
 <pre><code>ssl.[tag].[property]

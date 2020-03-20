@@ -296,25 +296,26 @@
 <h2 id="_2">外部服务通信配置</h2>
 <p>与外部服务通信相关的配置写在microservice.yaml文件中。</p>
 <ul>
-<li>启用h2(Http2 + TLS)进行通信<br />
-  服务端在配置服务监听地址时，可以通过在地址后面追加<code>sslEnabled=true</code>开启TLS通信，具体介绍见<a href="../../security/tls/">使用TLS通信</a>章节。然后再追加<code>protocol=http2</code>启用h2通信。示例如下：</li>
-</ul>
-<p><code>yaml
-  servicecomb:
+<li>
+<p>启用h2(Http2 + TLS)进行通信<br />
+  服务端在配置服务监听地址时，可以通过在地址后面追加<code>sslEnabled=true</code>开启TLS通信，具体介绍见<a href="../../security/tls/">使用TLS通信</a>章节。然后再追加<code>protocol=http2</code>启用h2通信。示例如下：</p>
+<pre><code>servicecomb:
     rest:
-      address: 0.0.0.0:8080?sslEnabled=true&amp;protocol=http2</code></p>
-<ul>
-<li>启用h2c(Http2 without TLS)进行通信<br />
-  服务端在配置服务监听地址时，可以通过在地址后面追加<code>protocol=http2</code>启用h2c通信。示例如下：</li>
-</ul>
-<p><code>yaml
-  servicecomb:
+      address: 0.0.0.0:8080?sslEnabled=true&amp;protocol=http2
+</code></pre>
+</li>
+<li>
+<p>启用h2c(Http2 without TLS)进行通信<br />
+  服务端在配置服务监听地址时，可以通过在地址后面追加<code>protocol=http2</code>启用h2c通信。示例如下：</p>
+<pre><code>servicecomb:
     rest:
-      address: 0.0.0.0:8080?protocol=http2</code></p>
-<ul>
-<li>客户端会通过从服务中心读取服务端地址中的配置来使用http2进行通信。 </li>
+      address: 0.0.0.0:8080?protocol=http2
+</code></pre>
+</li>
+<li>
+<p>客户端会通过从服务中心读取服务端地址中的配置来使用http2进行通信。 </p>
+</li>
 </ul>
-<p>具体实例可以参考 <a href="https://github.com/apache/servicecomb-java-chassis/blob/master/integration-tests/it-consumer/src/main/java/org/apache/servicecomb/it/ConsumerMain.java">http2-it-tests</a></p>
 <h2 id="http2-server">http2 server 端配置项</h2>
 <table>
 <thead>

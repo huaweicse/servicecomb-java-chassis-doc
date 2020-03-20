@@ -306,12 +306,13 @@
 
 <p>POM依赖：</p>
 <ul>
-<li>在pom.xml中增加依赖：</li>
+<li>在pom.xml中增加依赖：<pre><code>&lt;dependency&gt; 
+   &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
+   &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt; 
+ &lt;/dependency&gt;
+</code></pre>
+</li>
 </ul>
-<p><code>&lt;dependency&gt; 
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
-      &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt; 
-    &lt;/dependency&gt;</code></p>
 <h2 id="_3">配置黑白名单</h2>
 <p>基于公钥认证机制，ServiceComb提供了黑白名单功能。通过黑白名单，可以控制微服务允许其他哪些服务访问。目前支持通过配置服务属性来控制，配置项如下：</p>
 <pre><code>servicecomb:

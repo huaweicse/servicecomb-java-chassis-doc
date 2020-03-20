@@ -304,66 +304,74 @@
 <ul>
 <li>检查服务中心健康状态</li>
 </ul>
-<p><code>GET 127.0.0.1:30100/health</code></p>
+<pre><code>GET 127.0.0.1:30100/health
+</code></pre>
+
 <ul>
 <li>获取所有微服务信息</li>
 </ul>
-<p><code>GET 127.0.0.1:30100/registry/v3/microservices</code></p>
+<pre><code>GET 127.0.0.1:30100/registry/v3/microservices
+</code></pre>
+
 <ul>
-<li>获取指定id的微服务信息</li>
-</ul>
-<blockquote>
-<ol>
-<li>首先根据微服务信息获取serviceId</li>
-</ol>
-<p><code>GET 127.0.0.1:30100/registry/v3/existence?type=microservice&amp;appId={appId}&amp;serviceName={serviceName}&amp;version={version}</code></p>
-<ol>
-<li>根据上述接口返回的serviceId获取微服务完整信息</li>
-</ol>
-<p>GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}</p>
-</blockquote>
+<li>
+<p>获取指定id的微服务信息</p>
 <ul>
-<li>获取指定微服务的所有实例信息</li>
+<li>
+<p>首先根据微服务信息获取serviceId</p>
+<pre><code>GET 127.0.0.1:30100/registry/v3/existence?type=microservice&amp;appId={appId}&amp;serviceName={serviceName}&amp;version={version}
+</code></pre>
+</li>
+<li>
+<p>根据上述接口返回的serviceId获取微服务完整信息</p>
+<pre><code>GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}
+</code></pre>
+</li>
 </ul>
-<p>```
-   GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}/instances</p>
-<p>需要在header中添加："X-ConsumerId:{serviceId}"。
-  ```</p>
+</li>
+<li>
+<p>获取指定微服务的所有实例信息</p>
+<pre><code>GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}/instances
+</code></pre>
+</li>
+</ul>
+<p>需要在header中添加："X-ConsumerId:{serviceId}"。</p>
 <ul>
-<li>查找微服务实例信息</li>
+<li>查找微服务实例信息<pre><code>GET 127.0.0.1:30100/registry/v3/instances?appId={appId}&amp;serviceName={serviceName}&amp;version={version}
+</code></pre>
+</li>
 </ul>
-<p>```
-   GET 127.0.0.1:30100/registry/v3/instances?appId={appId}&amp;serviceName={serviceName}&amp;version={version}</p>
-<p>需要在header中添加: "X-ConsumerId:{serviceId}"。
-  ```</p>
+<p>需要在header中添加: "X-ConsumerId:{serviceId}"。</p>
 <h4 id="service-centerurlhttpjson">注意：在实际开发中请访问实际的service-center访问地址，并将上述url中{}的变量替换成具体值，http返回的数据均为json格式</h4>
 <h3 id="servicecomb"><strong>方法二：使用servicecomb开源代码接口</strong></h3>
 <p>在开发微服务应用，只需要调用servicecomb框架代码中的工具类RegistryUtil.java中提供的接口，即可获取服务中心的信息，接口描述如下：</p>
 <ul>
-<li>获取所有微服务信息  </li>
+<li>
+<p>获取所有微服务信息  </p>
+<pre><code>List&lt;Microservice&gt; getAllMicroservices();
+</code></pre>
+</li>
+<li>
+<p>获取微服务唯一标识  </p>
+<pre><code>String getMicroserviceId(String appId, String microserviceName, String versionRule);
+</code></pre>
+</li>
+<li>
+<p>根据微服务唯一标识查询微服务静态信息  </p>
+<pre><code>Microservice getMicroservice(String microserviceId);
+</code></pre>
+</li>
+<li>
+<p>根据多个微服务唯一标识查询所有微服务实例信息  </p>
+<pre><code>List&lt;MicroserviceInstance&gt; getMicroserviceInstance(String consumerId, String providerId);
+</code></pre>
+</li>
+<li>
+<p>按照app+interface+version查询实例endpoints信息  </p>
+<pre><code>List&lt;MicroserviceInstance&gt; findServiceInstance(String consumerId, String appId, String serviceName,String versionRule);
+</code></pre>
+</li>
 </ul>
-<p><code>java
-  List&lt;Microservice&gt; getAllMicroservices();</code></p>
-<ul>
-<li>获取微服务唯一标识  </li>
-</ul>
-<p><code>java
-  String getMicroserviceId(String appId, String microserviceName, String versionRule);</code></p>
-<ul>
-<li>根据微服务唯一标识查询微服务静态信息  </li>
-</ul>
-<p><code>java
-  Microservice getMicroservice(String microserviceId);</code></p>
-<ul>
-<li>根据多个微服务唯一标识查询所有微服务实例信息  </li>
-</ul>
-<p><code>java
-  List&lt;MicroserviceInstance&gt; getMicroserviceInstance(String consumerId, String providerId);</code></p>
-<ul>
-<li>按照app+interface+version查询实例endpoints信息  </li>
-</ul>
-<p><code>java
-  List&lt;MicroserviceInstance&gt; findServiceInstance(String consumerId, String appId, String serviceName,String versionRule);</code></p>
 <p>通过上述http接口可获取到服务中心的微服务和其实例的信息，从而通过confd动态更新nginx配置。</p>
               
             </div>
