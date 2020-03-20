@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>REST Transport Client 配置项 - ServiceComb Java Chassis 开发指南</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "REST Transport Client \u914d\u7f6e\u9879";
+    var mkdocs_page_input_path = "config-reference/rest-transport-client.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../start/catalog/">快速入门</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../build-provider/catalog/">开发服务提供者</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../build-consumer/catalog/">开发服务消费者</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../general-development/catalog/">通用功能开发</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Transports</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../transports/http2/">HTTP2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">管理服务配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/inject-config/">配置注入机制</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务能力开放</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../edge/open-service/">介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/nginx/">使用confd和Nginx做边缘服务</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../edge/zuul/">使用zuul做边缘服务</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">服务打包和运行</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">微服务安全</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../security/tls/">使用TLS通信</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">专题文章</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../featured-topics/using-inspector/">使用 inspector 模块查看契约</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../featured-topics/upgrading/">升级指导系列文章</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">处理链参考</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常用配置项参考</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">REST Transport Client 配置项</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#rest-transport-client">REST Transport Client 配置项</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">常见问题</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/faq/">FAQ</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../question-and-answer/interface-compatibility/">微服务接口兼容常见问题</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">ServiceComb Java Chassis 开发指南</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>常用配置项参考 &raquo;</li>
+        
+      
+    
+    <li>REST Transport Client 配置项</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="rest-transport-client">REST Transport Client 配置项</h1>
+<table>
+<thead>
+<tr>
+<th>配置项名称</th>
+<th>版本</th>
+<th>缺省值</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>servicecomb.rest.client.verticle-count</td>
+<td></td>
+<td>备注1</td>
+<td>备注2</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.thread-count</td>
+<td>废弃</td>
+<td></td>
+<td>同verticle-count</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.maxWaitQueueSize</td>
+<td></td>
+<td>-1</td>
+<td>HTTP HTTP2 等待队列大小</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.connection.compression</td>
+<td></td>
+<td>false</td>
+<td>HTTP HTTP2是否启用压缩</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.maxPoolSize</td>
+<td></td>
+<td>1</td>
+<td>HTTP2 客户端连接池大小</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.multiplexingLimit</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.idleTimeoutInSeconds</td>
+<td>2.0.1</td>
+<td>0</td>
+<td>HTTP2 连接闲置超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.useAlpnEnabled</td>
+<td></td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.connection.maxPoolSize</td>
+<td></td>
+<td>5</td>
+<td>HTTP 客户端连接池大小</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.connection.idleTimeoutInSeconds</td>
+<td></td>
+<td>30</td>
+<td>HTTP 连接闲置超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.connection.keepAlive</td>
+<td></td>
+<td>true</td>
+<td>HTTP 连接是否保活</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.maxHeaderSize</td>
+<td></td>
+<td>8192</td>
+<td>HTTP 最大头部限制</td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>:</p>
+<ol>
+<li>如果没有配置，或者配置的值小于8，为CPU的核数。 如果CPU核数小于8， 取8。</li>
+<li>java-chassis 默认采用 vert.x 的 HTTP Client 功能，这个配置项对应的是 verticle instances 数量。 verticle instances 数量
+   会影响并发资源分配。比如： 如果 verticle instances 为 2， maxPoolSize 为 5， 那么实际创建的连接数为 2*5=10。</li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../question-and-answer/question_answer/" class="btn btn-neutral float-right" title="Q & A">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../references-handlers/publickey/" class="btn btn-neutral" title="公钥认证"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../references-handlers/publickey/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../question-and-answer/question_answer/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
