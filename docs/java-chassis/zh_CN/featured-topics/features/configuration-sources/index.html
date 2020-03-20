@@ -544,7 +544,9 @@ PULL 和 PUSH）， 将配置的变化推送到微服务实例。 java-chassis �
 <ul>
 <li>使用 servicecomb-kie</li>
 </ul>
-<p><a href="https://github.com/apache/servicecomb-kie">servicecomb-kie</a> 是全新设计的配置中心。 从 2.0.0 版本开始， java-chassis 支持使用 servicecomb-kie。 
+<p><a href="https://github.com/apache/servicecomb-kie">servicecomb-kie</a> 是全新设计的配置中心。 
+从 2.0.0 版本开始， java-chassis 支持使用 servicecomb-kie。 
+从 2.0.1 版本开始， java-chassis 默认使用long polling 拉取 servicecomb-kie 配置，来节省间隔轮询带来的网络消耗。 
 servicecomb-kie 的安装指导可以参考官网文档。 在 java-chassis 中使用 servicecomb-kie， 需要引入下面的依赖：</p>
 <pre><code class="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;

@@ -622,6 +622,7 @@ servicecomb-kie 的安装指导可以参考官网文档。 在 java-chassis 中�
     serverUri: http://127.0.0.1:30110
     refresh_interval: 5000
     firstRefreshInterval: 5000
+    enableLongPolling: true
     domainName: default
 </code></pre>
 
@@ -644,11 +645,15 @@ servicecomb-kie 的安装指导可以参考官网文档。 在 java-chassis 中�
 </tr>
 <tr>
 <td>servicecomb.kie.refresh_interval</td>
-<td>pull模式下刷新配置项的时间间隔，单位为毫秒，默认值为3000</td>
+<td>interval pull模式下刷新配置项的时间间隔，单位为毫秒，默认值为3000</td>
 </tr>
 <tr>
 <td>servicecomb.kie.firstRefreshInterval</td>
-<td>pull模式下启动过程中首次刷新时间间隔，单位为毫秒，默认值为3000</td>
+<td>interval pull模式下启动过程中首次刷新时间间隔，单位为毫秒，默认值为3000</td>
+</tr>
+<tr>
+<td>servicecomb.kie.enableLongPolling</td>
+<td>long pulling模式是否开启，默认值为true</td>
 </tr>
 </tbody>
 </table>
