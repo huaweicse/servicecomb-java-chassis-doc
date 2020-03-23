@@ -76,6 +76,16 @@
             
     <li class="toctree-l3"><a href="#develop-the-first-microservice">Develop the first microservice</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l4" href="#preparement">Preparement</a></li>
+        
+            <li><a class="toctree-l4" href="#develop-a-helloworld-microservice">Develop a HelloWorld microservice</a></li>
+        
+            <li><a class="toctree-l4" href="#additional">Additional</a></li>
+        
+        </ul>
+    
 
     </ul>
                 </li>
@@ -496,7 +506,121 @@
             <div class="section">
               
                 <h1 id="develop-the-first-microservice">Develop the first microservice</h1>
-<p>Before you start, developers need to choose a familiar development method. There are currently 3 ways to choose:</p>
+<h2 id="preparement">Preparement</h2>
+<p>Before developing the first Java-Chassis microservice, please make sure that your local development environment is prepared. See more details about this in <a href="../development-environment/">Prepare the local development environment</a>.</p>
+<p>The Apache Service Center is needed in this show case. About using service center, please refer to <a href="http://servicecomb.apache.org/docs/products/service-center/install/">Install of ServiceCenter</a>.</p>
+<h2 id="develop-a-helloworld-microservice">Develop a HelloWorld microservice</h2>
+<h3 id="pom-configurations">pom configurations</h3>
+<p>First, please to create an empty maven project. It is suggested that the dependencies should be managed by <code>dependencyManagement</code> item, so that only the <code>solution-basic</code> is needed to be imported as dependency:</p>
+<pre><code class="xml">&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;java-chassis-dependencies&lt;/artifactId&gt;
+      &lt;version&gt;${java-chassis-dependencies.version}&lt;/version&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p><code>solution-basic</code> has contains almost all of the dependencies you need in the common cases.</p>
+<p>For the version 2.0.0 Java-Chassis, <code>maven-compiler-plugin</code> compilation plugin is also needed, which can make the method argument names preserved during the source project is build into a jar file.</p>
+<pre><code class="xml">&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+      &lt;version&gt;3.1&lt;/version&gt;
+      &lt;configuration&gt;
+        &lt;compilerArgument&gt;-parameters&lt;/compilerArgument&gt;
+        &lt;encoding&gt;UTF-8&lt;/encoding&gt;
+        &lt;source&gt;1.8&lt;/source&gt;
+        &lt;target&gt;1.8&lt;/target&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+
+<h3 id="add-microservice-configurations">add microservice configurations</h3>
+<p>By default, Java-Chassis read configurations from the file named <code>microservice.yaml</code> placed in <code>resources</code> directory.</p>
+<p>The content of the file is like below.</p>
+<pre><code class="yaml">APPLICATION_ID: sample    # this microservice belongs to the sample application
+service_description:
+  name: helloworld        # this microservice is named &quot;helloworld&quot;
+  version: 1.0.0
+servicecomb:
+  service:
+    registry:
+      address: http://127.0.0.1:30100  # this address of the service center
+  rest:
+    address: 0.0.0.0:8080
+</code></pre>
+
+<h3 id="main-class">Main class</h3>
+<p>Add a main class in the project:</p>
+<pre><code class="java">package org.apache.servicecomb.samples;
+
+import org.apache.servicecomb.foundation.common.utils.BeanUtils;
+
+public class AppMain {
+  public static void main(String[] args) {
+    BeanUtils.init();
+  }
+}
+</code></pre>
+
+<p>Invoking the <code>org.apache.servicecomb.foundation.common.utils.BeanUtils#init()</code> method will trigger the boot up procedure including configuration loading, Spring application context loading, microservice registration.</p>
+<h3 id="write-a-rest-service-interface">Write a REST service interface</h3>
+<p>Add a REST service interface class to declare the request you want to handle.</p>
+<pre><code class="java">package org.apache.servicecomb.samples.service;
+
+import org.apache.servicecomb.provider.rest.common.RestSchema;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RestSchema(schemaId = &quot;hello&quot;)
+@RequestMapping(&quot;/&quot;)
+public class HelloWorldService {
+  @GetMapping(&quot;/hello&quot;)
+  public String hello() {
+    return &quot;Hello world!&quot;;
+  }
+}
+</code></pre>
+
+<h3 id="add-log-configuration">Add log configuration</h3>
+<p>The <code>solution-basic</code> module introduces the <code>log4j2</code> module. To enable it, a configuration file is needed. This file should be placed in <code>resources\log4j2.xml</code> and the content is like below:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Configuration status=&quot;WARN&quot;&gt;
+  &lt;Appenders&gt;
+    &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+      &lt;PatternLayout pattern=&quot;%d{HH:mm:ss.SSS} [%t] %-5level %logger{36}[%L] - %msg%n&quot;/&gt;
+    &lt;/Console&gt;
+  &lt;/Appenders&gt;
+  &lt;Loggers&gt;
+    &lt;Root level=&quot;info&quot;&gt;
+      &lt;AppenderRef ref=&quot;Console&quot;/&gt;
+    &lt;/Root&gt;
+  &lt;/Loggers&gt;
+&lt;/Configuration&gt;
+</code></pre>
+
+<h3 id="start-the-microservice">Start the microservice</h3>
+<p>After completing the work above, the microservice can be started by running the <code>AppMain</code> class. Please visit the web page of local service center <code>http://127.0.0.1:30103/</code>. If the helloworld microservice instance is found like below, the microservice is started successfully.
+<img alt="" src="../first-sample-registered-in-sc.png" /></p>
+<p>If you visit the address <code>http://127.0.0.1:8080/hello</code>, you can see the response <code>"Hello world!"</code> from helloworld service. Now, your first Java-Chassis microservice is completed!.</p>
+<h2 id="additional">Additional</h2>
+<p>The introduction demo is developed in Spring MVC style.
+And there are currently 3 ways to choose:</p>
 <ul>
 <li>Spring MVC</li>
 <li>JaxRS</li>
