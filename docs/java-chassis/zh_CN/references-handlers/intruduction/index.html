@@ -207,7 +207,7 @@
         
             <li><a class="toctree-l4" href="#_2">处理链配置</a></li>
         
-            <li><a class="toctree-l4" href="#_3">开发处理链</a></li>
+            <li><a class="toctree-l4" href="#_3">开发新的处理链</a></li>
         
         </ul>
     
@@ -217,6 +217,10 @@
                 <li class="">
                     
     <a class="" href="../loadbalance/">负载均衡</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../bizkeeper/">隔离熔断容错</a>
                 </li>
                 <li class="">
                     
@@ -291,9 +295,9 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="_1">处理链参考</h2>
+                <h1 id="_1">处理链参考</h1>
 <p>处理链(Handlers)是ServiceComb的核心组成部分，它们构成服务运行管控的基础。ServiceComb通过处理链来处理负载均衡、熔断容错、流量控制等。</p>
-<h3 id="_2">处理链配置</h3>
+<h2 id="_2">处理链配置</h2>
 <p>处理链分为Consumer和Provider，分别配置如下：</p>
 <pre><code class="yaml">servicecomb:
   handler:
@@ -304,7 +308,8 @@
         default: qps-flowcontrol-provider
 </code></pre>
 
-<p>通过名字配置处理链，可以根据需要调整处理链的顺序，配置在前面的处理链先执行。</p>
+<p>通过名字配置处理链，可以根据需要调整处理链的顺序，配置在前面的处理链先执行。不同的处理链可能存在一定的逻辑关联，处理链的顺序
+不同，程序运行的效果会存在差异。</p>
 <p>上述配置指定目标微服务缺省处理链，开发者还可以对特定的微服务配置不同的处理链，比如：</p>
 <pre><code class="yaml">servicecomb:
   handler:
@@ -316,7 +321,7 @@
 </code></pre>
 
 <p>对于转发到authentication-server的请求，不经过auth处理链，转发到其他的微服务的请求，则经过auth处理链。</p>
-<h3 id="_3">开发处理链</h3>
+<h2 id="_3">开发新的处理链</h2>
 <p>开发者自定义处理链包含如下几个步骤。由于ServiceComb的核心组成就是处理链，开发者可以参考handlers目录的实现详细了解处理链。下面简单总结下几个关键步骤：</p>
 <ul>
 <li>实现Handler接口</li>
