@@ -278,19 +278,19 @@
             <div class="section">
               
                 <h2 id="_1">概念阐述</h2>
-<p>ServiceComb提供了基于Vert.x的access log 和 request log功能。当用户使用REST over Vertx通信方式时，可以通过简单的配置启用access log打印功能。当用户 client 端进行远程调用时，可以通过简单的配置启用request log打印功能</p>
+<p>ServiceComb 提供了基于 Vert.x 的 access log 和 request log 功能。当用户使用 REST over Vertx 通信方式时，可以通过简单的配置启用 access log 打印功能。当用户 client 端进行远程调用时，可以通过简单的配置启用 request log 打印功能</p>
 <h2 id="_2">场景描述</h2>
 <ol>
 <li>
-<p>用户在调试服务时可能需要开启access log。在使用REST over servlet通信方式的情况下，可以使用web容器的access log功能；而在使用REST over Vertx通信方式的情况下，可以使用ServiceComb提供的一套access log功能。</p>
+<p>用户在调试服务时可能需要开启 access log。在使用 REST over servlet 通信方式的情况下，可以使用 web容器 的 access log 功能；而在使用 REST over Vertx 通信方式的情况下，可以使用 ServiceComb 提供的一套 access log 功能。</p>
 </li>
 <li>
 <p>用户想要跟踪，记录客户端远程调用信息， 可以开启 request log。request log 同时支持记录 rest 和 highway 远程调用方式。</p>
 </li>
 </ol>
 <h2 id="_3">配置说明</h2>
-<h3 id="access-log-and-request-log">启用Access Log and Request Log</h3>
-<p>用户需要在microservice.yaml文件中增加配置以启用access log 和 request log，配置示例如下：</p>
+<h3 id="access-log-request-log">启用 Access Log &amp; Request Log</h3>
+<p>用户需要在 microservice.yaml 文件中增加配置以启用 access log 和 request log，配置示例如下：</p>
 <pre><code class="yaml">servicecomb:
   accesslog:
     enabled: true  ## server 端 启用access log
@@ -505,7 +505,7 @@
 </tr>
 </tbody>
 </table>
-<p><em><strong>Access log 与 Request log的日志元素对比</strong></em></p>
+<p><em><strong>Access log 与 Request log 的日志元素对比</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -705,7 +705,7 @@
 </tbody>
 </table>
 <h3 id="_5">日志输出文件配置</h3>
-<p>Access log的日志打印实现框架默认采用Log4j，并提供了一套默认的日志文件配置。用户可以在自己定义的log4j.properties文件中覆写这些配置。用户可配置的日志文件配置项见下表。</p>
+<p>Access log &amp; Request log 的日志打印实现框架默认采用 Log4j ，并提供了一套默认的日志文件配置。用户可以在自己定义的 log4j.properties 文件中覆写这些配置。用户可配置的日志文件配置项见下表。</p>
 <p><em><strong>日志文件配置项</strong></em></p>
 <table>
 <thead>
@@ -781,22 +781,22 @@
 </table>
 <blockquote>
 <p><em><strong>注意：</strong></em><br />
-由于ServiceComb的日志打印功能只依赖slf4j的接口，因此用户可以选择其他日志打印框架，选择其他日志打印框架时需要用户自行配置日志文件输出选项。</p>
+由于 ServiceComb 的日志打印功能只依赖 slf4j 的接口，因此用户可以选择其他日志打印框架，选择其他日志打印框架时需要用户自行配置日志文件输出选项。</p>
 </blockquote>
-<h3 id="logback">日志实现框架切换为logback</h3>
+<h3 id="logback">日志实现框架切换为 logback</h3>
 <blockquote>
-<p>针对采用logback作为日志打印框架的项目，需要将日志打印框架依赖从Log4j改为logback并添加部分配置以使access log功能正常生效。</p>
+<p>针对采用 logback 作为日志打印框架的项目，需要将日志打印框架依赖从 Log4j 改为 logback 并添加部分配置以使 log 功能正常生效。</p>
 </blockquote>
-<h4 id="1-log4j">1. 排除Log4j依赖</h4>
-<p>在将日志实现框架切换为logback之前，需要检查项目的依赖，从中排除掉Log4j相关的依赖项。在项目中运行maven命令<code>dependency:tree</code>，找出其中依赖了Log4j的ServiceComb组件，在其<code>&lt;dependency&gt;</code>依赖项中添加如下配置：</p>
+<h4 id="1-log4j">1. 排除 Log4j 依赖</h4>
+<p>在将日志实现框架切换为 logback 之前，需要检查项目的依赖，从中排除掉 Log4j 相关的依赖项。在项目中运行 maven 命令 <code>dependency:tree</code> ，找出其中依赖了Log4j的ServiceComb组件，在其<code>&lt;dependency&gt;</code>依赖项中添加如下配置：</p>
 <pre><code class="xml">&lt;exclusion&gt;
   &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
   &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
 &lt;/exclusion&gt;
 </code></pre>
 
-<h4 id="2-logback">2. 添加logback依赖</h4>
-<p>在pom文件中添加logback的依赖项：</p>
+<h4 id="2-logback">2. 添加 logback 依赖</h4>
+<p>在 pom 文件中添加 logback 的依赖项：</p>
 <pre><code class="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
   &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
@@ -811,8 +811,8 @@
 &lt;/dependency&gt;
 </code></pre>
 
-<h4 id="3-access-log-request-log-logger">3. 配置access log &amp; request log 组件的logger</h4>
-<p>由于ServiceComb提供的日志打印组件是获取名为<code>accesslog</code> &amp; <code>requestlog</code> 的logger来打印access log  和 request log ，因此将日志实现框架从Log4j切换为logback的关键就是提供一个名为<code>accesslog</code> &amp; <code>requestlog</code> 的 Logger，并为其配置好日志输出文件。以下是 <strong>access log</strong> &amp; <strong>request log</strong> 在logback配置文件中的配置示例（本示例仅展示access log &amp; request log相关的配置，其他日志配置均省略）：</p>
+<h4 id="3-access-log-request-log-logger">3. 配置 access log &amp; request log 组件的 logger</h4>
+<p>ServiceComb 提供的日志打印组件是获取名为 <code>accesslog</code> &amp; <code>requestlog</code> 的 logger 来打印 access log  和 request log ，因此将日志实现框架从 Log4j 切换为 logback 的关键就是提供一个名为 <code>accesslog</code> &amp; <code>requestlog</code> 的 Logger，并为其配置好日志输出文件。以下是 <strong>access log</strong> &amp; <strong>request log</strong> 在 logback 配置文件中的配置示例（本示例仅展示 access log &amp; request log相关的配置，其他日志配置均省略）：</p>
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;configuration&gt;
   &lt;!-- 用户可根据需要自定义appender --&gt;
@@ -849,8 +849,8 @@
 &lt;/configuration&gt;
 </code></pre>
 
-<h3 id="access-log-request-log">自定义扩展Access Log &amp; Request Log</h3>
-<p>用户可以利用ServiceComb提供的AccessLogItem扩展机制，定制自己的AccessLogItem， 我们把 Request Log 也当做一种 Access Log。</p>
+<h3 id="access-log-request-log_1">自定义扩展 Access Log &amp; Request Log</h3>
+<p>用户可以利用 ServiceComb 提供的 AccessLogItem 扩展机制，定制自己的 AccessLogItem， 我们把 Request Log 也当做一种 Access Log。</p>
 <h4 id="_6">相关类说明</h4>
 <ol>
 <li><strong>AccessLogItem</strong></li>
@@ -873,43 +873,45 @@
 <p><strong>Server 端</strong> 每收到一个请求，会触发一次 Access Log 日志打印。<strong>Client 端</strong> 每次对外远程调用结束，会触发一次 Request Log 日志打印。  </p>
 </li>
 <li>
-<p>每次日志打印，SDK 都会遍历有效的 <code>AccessLogItem</code> ，调用对应的方法获取此Item生成的Log片段，并将全部片段拼接成一条Log打印到日志文件中。 </p>
+<p>每次日志打印，SDK 都会遍历有效的 <code>AccessLogItem</code> ，调用对应的方法获取此 Item 生成的 Log片 段，并将全部片段拼接成一条 Log 打印到日志文件中。 </p>
 </li>
 </ul>
 </blockquote>
 <ol>
 <li><strong>VertxRestAccessLogItemMeta</strong></li>
 </ol>
-<p><code>java
-  // pattern占位符前缀
+<pre><code class="java">  // pattern占位符前缀
   protected String prefix;
   // pattern占位符后缀
   protected String suffix;
   // 优先级序号
   protected int order;
   // AccessLogItem构造器
-  protected AccessLogItemCreator&lt;RoutingContext&gt; accessLogItemCreator;</code></p>
-<p><code>VertxRestAccessLogItemMeta</code> 包含如上属性，它定义了ServiceComb如何解析pattern字符串以获得特定的AccessLogItem。</p>
+  protected AccessLogItemCreator&lt;RoutingContext&gt; accessLogItemCreator;
+</code></pre>
+
+<p><code>VertxRestAccessLogItemMeta</code> 包含如上属性，它定义了 ServiceComb 如何解析 pattern 字符串以获得特定的 AccessLogItem。</p>
 <ul>
 <li>
-<p>如果用户想要定义一个占位符为<code>%user-defined</code>的<code>AccessLogItem</code>，则需要声明一个<code>VertxRestAccessLogItemMeta</code>的子类，设置prefix="%user-defined"，suffix=null，当<code>AccessLogPatternParser</code>解析到"%user-defined"时，从此meta类中取得<code>AccessLogItemCreator</code>创建对应的<code>AccessLogItem</code>。<strong>注意</strong>：由于"%user-defined"占位符中没有变量部分，因此调用<code>AccessLogItemCreator</code>传入的配置参数为null。</p>
+<p>如果用户想要定义一个占位符为 <code>%user-defined</code> 的 <code>AccessLogItem</code> ，则需要声明一个 <code>VertxRestAccessLogItemMeta</code> 的子类，设置 prefix="%user-defined"，suffix=null，当 <code>AccessLogPatternParser</code> 解析到 "%user-defined" 时，从此 meta 类中取得 <code>AccessLogItemCreator</code> 创建对应的 <code>AccessLogItem</code>。<strong>注意</strong>：由于 "%user-defined" 占位符中没有变量部分，因此调用 <code>AccessLogItemCreator</code> 传入的配置参数为null。</p>
 </li>
 <li>
-<p>如果用户想要定义一个占位符为<code>%{VARNAME}user-defined</code>的<code>AccessLogItem</code>，则声明的<code>VertxRestAccessLogItemMeta</code>子类中，设置prefix="%{"，suffix="}user-defined"，当<code>AccessLogPatternParser</code>解析到"%{VARNAME}user-defined"时，会截取出"VARNAME"作为配置参数传入<code>AccessLogItemCreator</code>，创建一个<code>AccessLogItem</code>。</p>
+<p>如果用户想要定义一个占位符为 <code>%{VARNAME}user-defined</code> 的 <code>AccessLogItem</code>，则声明的 <code>VertxRestAccessLogItemMeta</code> 子类中，设置prefix="%{"，suffix="}user-defined"，当 <code>AccessLogPatternParser</code> 解析到 "%{VARNAME}user-defined"时，会截取出"VARNAME"作为配置参数传入<code>AccessLogItemCreator</code>，创建一个<code>AccessLogItem</code>。</p>
 </li>
 </ul>
-<p><code>VertxRestAccessLogItemMeta</code>有一个子类<code>CompositeVertxRestAccessLogItemMeta</code>，当用户需要定义多个AccessLogItem时，可以将多个<code>VertxRestAccessLogItemMeta</code>聚合到<code>CompositeVertxRestAccessLogItemMeta</code>中。Parser加载到类型为<code>CompositeVertxRestAccessLogItemMeta</code>的AccessLogItemMeta时，会调用其<code>getAccessLogItemMetas()</code>方法获得一组AccessLogItemMeta。<code>VertxRestAccessLogItemMeta</code>使用SPI机制加载，而<code>CompositeVertxRestAccessLogItemMeta</code>可以让用户只在SPI配置文件中配置一条记录就加载多条meta信息，给了用户更灵活的选择。</p>
+<p><code>VertxRestAccessLogItemMeta</code> 有一个子类 <code>CompositeVertxRestAccessLogItemMeta</code>，当用户需要定义多个 AccessLogItem 时，可以将多个 <code>VertxRestAccessLogItemMeta</code> 聚合到 <code>CompositeVertxRestAccessLogItemMeta</code> 中。Parser 加载到类型为 <code>CompositeVertxRestAccessLogItemMeta</code> 的AccessLogItemMeta时，会调用其 <code>getAccessLogItemMetas()</code> 方法获得一组 AccessLogItemMeta。<code>VertxRestAccessLogItemMeta</code> 使用SPI机制加载，而<code>CompositeVertxRestAccessLogItemMeta</code>可以让用户只在SPI配置文件中配置一条记录就加载多条meta信息，给了用户更灵活的选择。</p>
 <ol>
 <li><strong>AccessLogItemCreator</strong></li>
 </ol>
-<p><code>java
-  public interface AccessLogItemCreator&lt;T&gt; {
+<pre><code class="java">public interface AccessLogItemCreator&lt;T&gt; {
     // 接收配置值，返回一个AccessLogItem。如果AccessLogItem的占位符没有可变的配置值部分，则此方法会接收到null。
     AccessLogItem&lt;T&gt; createItem(String config);
-  }</code></p>
-<p>用户通过设置在自定义的<code>VertxRestAccessLogItemMeta</code>中的<code>AccessLogItemCreator</code>实例化自己的<code>AccessLogItem</code>。由于这是一个函数式接口，当<code>AccessLogItem</code>的初始化方式较简单时，可以直接使用Lambda表达式定义Creator，以简化开发。</p>
-<h4 id="accesslogitemmeta">AccessLogItemMeta的匹配规则</h4>
-<p>AccessLogItemMeta加载进Parser后，会进行一次排序。Parser解析pattern串时会从前到后匹配meta list，总的匹配规则如下：</p>
+}
+</code></pre>
+
+<p>用户通过设置在自定义的 <code>VertxRestAccessLogItemMeta</code> 中的 <code>AccessLogItemCreator</code> 实例化自己的 <code>AccessLogItem</code>。由于这是一个函数式接口，当 <code>AccessLogItem</code> 的初始化方式较简单时，可以直接使用 Lambda表达式定义Creator，以简化开发。</p>
+<h4 id="accesslogitemmeta">AccessLogItemMeta 的匹配规则</h4>
+<p>AccessLogItemMeta 加载进 Parser 后，会进行一次排序。Parser 解析 pattern 串时会从前到后匹配 meta list，总的匹配规则如下：</p>
 <ol>
 <li>
 <p>优先匹配高优先级的meta。</p>
@@ -918,15 +920,15 @@
 <p>优先匹配有后缀的meta，当匹配上多个有后缀meta时，取前后缀相距最小的一个。</p>
 </li>
 <li>
-<p>优先匹配占位符长的meta，例如有两个meta，"%abc"和"%a"，如果匹配中了"%abc"则直接返回，不再匹配"%a"。</p>
+<p>优先匹配占位符长的meta，例如有两个 meta，"%abc"和"%a"，如果匹配中了"%abc"则直接返回，不再匹配"%a"。</p>
 </li>
 </ol>
 <h4 id="_7">示例说明</h4>
 <ol>
-<li>扩展自定义AccessLogItem</li>
+<li>扩展自定义 AccessLogItem</li>
 </ol>
-<p>首先用户需要<code>AccessLogItem</code>接口实现自己的item：</p>
-<pre><code class="java">  public class UserDefinedAccessLogItem implements AccessLogItem&lt;RoutingContext&gt; {
+<p>首先用户需要 <code>AccessLogItem</code> 接口实现自己的 item：</p>
+<pre><code class="java">public class UserDefinedAccessLogItem implements AccessLogItem&lt;RoutingContext&gt; {
     private String config;
 
     public UserDefinedAccessLogItem(String config) {
@@ -948,34 +950,33 @@
         .append(&quot;-&quot;)
         .append(config);
     }
-  }
- ```
-
-2. 定义AccessLogItem的meta类
-
-  继承`VertxRestAccessLogItemMeta`或`CompositeVertxRestAccessLogItemMeta`类，定义AccessLogItem的前后缀等信息：
-
-```java
-public class UserDefinedCompositeExtendedAccessLogItemMeta extends CompositeVertxRestAccessLogItemMeta {
-private static final List&lt;VertxRestAccessLogItemMeta&gt; META_LIST = new ArrayList&lt;&gt;();
-
-static {
-  META_LIST.add(new VertxRestAccessLogItemMeta(&quot;%{&quot;, &quot;}user-defined&quot;, UserDefinedAccessLogItem::new));
 }
+</code></pre>
 
-@Override
-public List&lt;VertxRestAccessLogItemMeta&gt; getAccessLogItemMetas() {
-  return META_LIST;
-}
+<ol>
+<li>定义 <strong>AccessLogItem</strong> 的 meta 类</li>
+</ol>
+<p>继承 <code>VertxRestAccessLogItemMeta</code> 或 <code>CompositeVertxRestAccessLogItemMeta</code> 类，定义AccessLogItem的前后缀等信息：</p>
+<pre><code class="java">public class UserDefinedCompositeExtendedAccessLogItemMeta extends CompositeVertxRestAccessLogItemMeta {
+    private static final List&lt;VertxRestAccessLogItemMeta&gt; META_LIST = new ArrayList&lt;&gt;();
+
+    static {
+      META_LIST.add(new VertxRestAccessLogItemMeta(&quot;%{&quot;, &quot;}user-defined&quot;, UserDefinedAccessLogItem::new));
+    }
+
+    @Override
+    public List&lt;VertxRestAccessLogItemMeta&gt; getAccessLogItemMetas() {
+      return META_LIST;
+    }
 }
 </code></pre>
 
 <ol>
 <li>配置SPI加载文件</li>
 </ol>
-<p>在<code>resources/META-INF/services/</code>目录下定义一个名为"org.apache.servicecomb.transport.rest.vertx.accesslog.parser.VertxRestAccessLogItemMeta"的文件，将上一步中定义的meta类完整类名填写到该文件中，供Parser加载meta类。</p>
+<p>在 <code>resources/META-INF/services/</code> 目录下定义一个名为 "org.apache.servicecomb.transport.rest.vertx.accesslog.parser.VertxRestAccessLogItemMeta" 的文件，将上一步中定义的meta类完整类名填写到该文件中，供Parser加载meta类。</p>
 <ol>
-<li>配置 Access Log的 pattern</li>
+<li>配置 Access Log 的 pattern</li>
 </ol>
 <pre><code class="yaml"># 服务端配置
 servicecomb:

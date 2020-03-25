@@ -495,22 +495,28 @@ paths:
 </code></pre>
 
 <h4 id="consumer">Consumer端调用服务</h4>
+<p>consumer端RPC开发模式：</p>
 <ul>
-<li>consumer端RPC开发模式：</li>
-<li>Provider接口定义
-  <code>java
-    public interface HelloServiceIntf {
-      String sayHello(String name, int age);
-    }</code></li>
-<li>调用代码
-  <code>java
-    String result = helloService.sayHello("Bob", 22); // result的值为"Hello, your name is Bob, and age is 22"</code></li>
-<li>consumer端RestTemplate开发模式：
-  <code>java
-    String result = restTemplate.getForObject(
-      "cse://provider-service/hello/sayHello/Bob?age=22",
-      String.class); // 调用效果与RPC方式相同</code></li>
+<li>Provider接口定义</li>
 </ul>
+<pre><code class="java">public interface HelloServiceIntf {
+  String sayHello(String name, int age);
+}
+</code></pre>
+
+<ul>
+<li>调用代码</li>
+</ul>
+<pre><code class="java">String result = helloService.sayHello(&quot;Bob&quot;, 22); // result的值为&quot;Hello, your name is Bob, and age is 22&quot;
+</code></pre>
+
+<ul>
+<li>consumer端RestTemplate开发模式：</li>
+</ul>
+<pre><code class="java">String result = restTemplate.getForObject(
+  &quot;cse://provider-service/hello/sayHello/Bob?age=22&quot;,
+  String.class); // 调用效果与RPC方式相同
+</code></pre>
               
             </div>
           </div>
