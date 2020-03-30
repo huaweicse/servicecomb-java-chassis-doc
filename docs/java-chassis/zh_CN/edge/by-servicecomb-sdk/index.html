@@ -137,6 +137,8 @@
         
             <li><a class="toctree-l4" href="#_1">工作流程</a></li>
         
+            <li><a class="toctree-l4" href="#header">定制公共转发 Header</a></li>
+        
             <li><a class="toctree-l4" href="#_2">定制路由规则</a></li>
         
             <li><a class="toctree-l4" href="#_4">部署示例</a></li>
@@ -361,6 +363,19 @@ servicecomb:
   * 如果工作于reactive模式，则直接在Eventloop线程执行
   * 如果工作于线程池模式，则在线程池的线程中执行
 <img alt="" src="../../assets/workFlow.png" /></p>
+<h2 id="header">定制公共转发 Header</h2>
+<p>Edge Service 在转发请求的时候, 会默认过滤掉 <code>公共请求头</code> 。 也就是除了 <strong>Provider</strong> 端显示 声明需要的 <code>HEADER</code> 外， 其他的 header 在转发的时候都会丢失。用户可以通过配置相关参数保留 公共请求头。</p>
+<pre><code class="yaml">servicecomb:
+  edge:
+    filter:
+      addHeader:
+        # 开启 公共请求头保留功能。默认 false
+        enabled: true
+        # 要保留的公共请求头，以逗号隔开
+        allowedHeaders: external_1,external_2
+</code></pre>
+
+<p>如果对接了配置中心， 可以在配置中心动态修改 配置 <code>servicecomb.edge.filter.addHeader.enabled</code> 和 <code>servicecomb.edge.filter.addHeader.allowedHeaders</code> ， 配置动态生效。</p>
 <h2 id="_2">定制路由规则</h2>
 <p>使用Edge Service的核心工作是配置路由规则。场景不同，规则也不同。
 路由规则由一系列AbstractEdgeDispatcher组成。Edge Service提供了几个常见的Dispatcher，通过配置即可启用，如果这些Dispatcher不满足业务场景需要，还可以自定义。</p>
