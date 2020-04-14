@@ -234,6 +234,18 @@
 
     </ul>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../config-center-client/">Config Center Client 配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../service-center-client/">Service Center Client 配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../kie-client/">ServiceComb Kie Client 配置项</a>
+                </li>
     </ul>
 	    </li>
           
@@ -293,6 +305,10 @@
             <div class="section">
               
                 <h1 id="rest-transport-client">REST Transport Client 配置项</h1>
+<ul>
+<li>基本配置</li>
+</ul>
+<p>REST Trasnport Client 分为 HTTP 和 HTTP 2, 它们共享很多配置项。包含 <code>http2</code> 的配置项， 是 HTTP 2 独有的。</p>
 <table>
 <thead>
 <tr>
@@ -304,10 +320,16 @@
 </thead>
 <tbody>
 <tr>
+<td>servicecomb.rest.client.enabled</td>
+<td>2.0.2</td>
+<td>true</td>
+<td>是否启用Rest Transport Client, HTTP 1</td>
+</tr>
+<tr>
 <td>servicecomb.rest.client.verticle-count</td>
 <td></td>
-<td>备注1</td>
-<td>备注2</td>
+<td><a href="#note1">备注1</a></td>
+<td><a href="#note2">备注2</a></td>
 </tr>
 <tr>
 <td>servicecomb.rest.client.thread-count</td>
@@ -316,52 +338,34 @@
 <td>同verticle-count</td>
 </tr>
 <tr>
+<td>servicecomb.rest.client.connection.timeoutInMillis</td>
+<td>2.0.2</td>
+<td>1000</td>
+<td>连接超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.connection.idleTimeoutInSeconds</td>
+<td></td>
+<td>60</td>
+<td>HTTP 连接闲置超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.connection.compression</td>
+<td></td>
+<td>false</td>
+<td>是否启用压缩</td>
+</tr>
+<tr>
 <td>servicecomb.rest.client.maxWaitQueueSize</td>
 <td></td>
 <td>-1</td>
 <td>HTTP HTTP2 等待队列大小</td>
 </tr>
 <tr>
-<td>servicecomb.rest.client.connection.compression</td>
-<td></td>
-<td>false</td>
-<td>HTTP HTTP2是否启用压缩</td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.http2.maxPoolSize</td>
-<td></td>
-<td>1</td>
-<td>HTTP2 客户端连接池大小</td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.http2.multiplexingLimit</td>
-<td></td>
-<td>1</td>
-<td></td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.http2.idleTimeoutInSeconds</td>
-<td>2.0.1</td>
-<td>0</td>
-<td>HTTP2 连接闲置超时时间</td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.http2.useAlpnEnabled</td>
-<td></td>
-<td>true</td>
-<td></td>
-</tr>
-<tr>
 <td>servicecomb.rest.client.connection.maxPoolSize</td>
 <td></td>
 <td>5</td>
 <td>HTTP 客户端连接池大小</td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.connection.idleTimeoutInSeconds</td>
-<td></td>
-<td>30</td>
-<td>HTTP 连接闲置超时时间</td>
 </tr>
 <tr>
 <td>servicecomb.rest.client.connection.keepAlive</td>
@@ -375,15 +379,61 @@
 <td>8192</td>
 <td>HTTP 最大头部限制</td>
 </tr>
+<tr>
+<td>servicecomb.rest.client.http2.enabled</td>
+<td></td>
+<td>true</td>
+<td>是否启用Rest Transport Client，HTTP 2</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.useAlpnEnabled</td>
+<td></td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.multiplexingLimit</td>
+<td></td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.maxPoolSize</td>
+<td></td>
+<td>1</td>
+<td>HTTP2 客户端连接池大小</td>
+</tr>
+<tr>
+<td>servicecomb.rest.client.http2.idleTimeoutInSeconds</td>
+<td>2.0.1</td>
+<td>0</td>
+<td>HTTP2 连接闲置超时时间</td>
+</tr>
 </tbody>
 </table>
+<ul>
+<li>请求超时配置</li>
+</ul>
+<p>可以针对每个具体的接口设置超时，配置项 <code>request.${op-any-priority}.timeout</code> ， 单位是毫秒，默认 30000。 举例：</p>
+<pre><code>    servicecomb.request.timeout=30000
+    servicecomb.request.MyService.timeout=40000
+    servicecomb.request.MyService.MySchema.MyOperation.timeout=50000
+</code></pre>
+<ul>
+<li>SSL 配置</li>
+</ul>
+<p>参考 <a href="../../security/tls/">使用TLS通信</a>。 tag 为 <code>rest.consumer</code>。</p>
+<ul>
+<li>Proxy 配置</li>
+</ul>
+<p>不支持。</p>
 <p><strong>备注</strong>:</p>
 <ol>
 <li>
-<p>如果没有配置，为CPU的核数，如果CPU核数小于8，则取8。</p>
+<p><a name="note1"></a> 如果CPU数小于8，则取CPU数。如果CPU数大于等于8，则为8。</p>
 </li>
 <li>
-<p>java-chassis 默认采用 vert.x 的 HTTP Client 功能，这个配置项对应的是 verticle instances 数量。 verticle instances 数量
+<p><a name="note2"></a> java-chassis 默认采用 vert.x 的 HTTP Client 功能，这个配置项对应的是 verticle instances 数量。 verticle instances 数量
    会影响并发资源分配。比如： 如果 verticle instances 为 2， maxPoolSize 为 5， 那么实际创建的连接数为 2*5=10。</p>
 </li>
 </ol>
@@ -394,7 +444,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../question-and-answer/question_answer/" class="btn btn-neutral float-right" title="Q & A">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../config-center-client/" class="btn btn-neutral float-right" title="Config Center Client 配置项">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../references-handlers/publickey/" class="btn btn-neutral" title="公钥认证"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -426,7 +476,7 @@
         <span><a href="../../references-handlers/publickey/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../question-and-answer/question_answer/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../config-center-client/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

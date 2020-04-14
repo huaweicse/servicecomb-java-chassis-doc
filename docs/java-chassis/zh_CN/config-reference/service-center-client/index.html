@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Dai li she zhi - ServiceComb Java Chassis 开发指南</title>
+  <title>Service Center Client 配置项 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Dai li she zhi";
-    var mkdocs_page_input_path = "general-development/dai-li-she-zhi.md";
+    var mkdocs_page_name = "Service Center Client \u914d\u7f6e\u9879";
+    var mkdocs_page_input_path = "config-reference/service-center-client.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -80,7 +80,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../catalog/">通用功能开发</a>
+    <a class="" href="../../general-development/catalog/">通用功能开发</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -226,7 +226,25 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../config-reference/rest-transport-client/">REST Transport Client 配置项</a>
+    <a class="" href="../rest-transport-client/">REST Transport Client 配置项</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../config-center-client/">Config Center Client 配置项</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Service Center Client 配置项</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#service-center-client">Service Center Client 配置项</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../kie-client/">ServiceComb Kie Client 配置项</a>
                 </li>
     </ul>
 	    </li>
@@ -271,8 +289,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>常用配置项参考 &raquo;</li>
+        
+      
     
-    <li>Dai li she zhi</li>
+    <li>Service Center Client 配置项</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -282,34 +304,84 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="_1">背景</h2>
-<p>作为一名开发者，在公司开发环境，可能是通过公司代理网络接入到因特网。如果调试服务时还必须依赖网上资源，比如直接连接共有云服务中心，那么就必须配置代理。</p>
-<p>配置方式，在microservice.yaml文件增加proxy配置：</p>
-<pre><code class="yaml">servicecomb:
-  proxy:
-    enable: true            #是否开启代理
-    host: yourproxyaddress  #代理地址
-    port: 80                #代理端口
-    username: yourname      #用户名
-    passwd: yourpassword    #密码
-</code></pre>
-
-<p>有些用户需要通过加密保护密码信息。可以通过实现SPI扩展来实现。需要扩展的SPI接口名称为：org.apache.servicecomb.foundation.common.encrypt.Encryption，实现decode接口即可。</p>
-<p><strong>注意：当前仅支持连接服务中心、配置中心支持代理，如果对接其他三方服务，可以读取这个配置，自行配置代理，vertx httpclient支持代理设置，例如：</strong></p>
-<pre><code class="java">    HttpClientOptions httpClientOptions = new HttpClientOptions();
-    if (isProxyEnable()) {
-      ProxyOptions proxy = new ProxyOptions();
-      proxy.setHost(&quot;host&quot;);
-      proxy.setPort(port);
-      proxy.setUsername(&quot;username&quot;);
-      proxy.setPassword(&quot;passwd&quot;);
-      httpClientOptions.setProxyOptions(proxy);
-    }
-</code></pre>
+                <h1 id="service-center-client">Service Center Client 配置项</h1>
+<ul>
+<li>基本配置</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>配置项名称</th>
+<th>版本</th>
+<th>缺省值</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>servicecomb.service.registry.client.eventLoopPoolSize</td>
+<td></td>
+<td>4</td>
+<td>event loop 线程数</td>
+</tr>
+<tr>
+<td>servicecomb.service.registry.client.instances</td>
+<td></td>
+<td>1</td>
+<td>verticle instances 数量</td>
+</tr>
+<tr>
+<td>servicecomb.service.registry.client.httpVersion</td>
+<td></td>
+<td>1.1</td>
+<td>HTTP协议版本</td>
+</tr>
+<tr>
+<td>servicecomb.service.registry.client.timeout.connection</td>
+<td></td>
+<td>1000</td>
+<td>连接超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.service.registry.client.timeout.idle</td>
+<td></td>
+<td>60</td>
+<td>HTTP 连接闲置超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.service.registry.client.workerPoolSize</td>
+<td></td>
+<td>4</td>
+<td>work线程池大小，仅供 web socket 使用</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>请求超时配置</li>
+</ul>
+<p><code>servicecomb.service.registry.client.timeout.heartbeat</code> 设置心跳请求超时时间，默认为 3, 000 毫秒；
+  <code>servicecomb.service.registry.client.timeout.request</code> 设置其他请求超时时间，默认为 30, 000 毫秒。</p>
+<ul>
+<li>SSL 配置</li>
+</ul>
+<p>参考 <a href="../../security/tls/">使用TLS通信</a>。 tag 为 <code>sc.consumer</code>。</p>
+<ul>
+<li>Proxy 配置</li>
+</ul>
+<p>参考 <a href="../../general-development/proxy/">代理设置</a></p>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../kie-client/" class="btn btn-neutral float-right" title="ServiceComb Kie Client 配置项">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../config-center-client/" class="btn btn-neutral" title="Config Center Client 配置项"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -333,6 +405,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../config-center-client/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../kie-client/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
