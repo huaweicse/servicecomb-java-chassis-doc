@@ -134,11 +134,11 @@
     <a class="current" href="./">使用Edge Service做边缘服务</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#edge-service">使用Edge Service做边缘服务</a></li>
+    <li class="toctree-l3"><a href="#edge-service">使用 Edge Service 做边缘服务</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#edge-service_1">开发Edge Service服务</a></li>
+            <li><a class="toctree-l4" href="#edge-service_1">开发 Edge Service 服务</a></li>
         
             <li><a class="toctree-l4" href="#_1">工作流程</a></li>
         
@@ -322,11 +322,11 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="edge-service">使用Edge Service做边缘服务</h1>
-<p>Edge Service是ServiceComb提供的JAVA网关服务开发框架。Edge Service作为整个微服务系统对外的接口，向最终用户提供服务，接入RESTful请求，转发给内部微服务。Edge Service以开发框架的形式提供，开发者可以非常简单的搭建一个Edge Service服务，通过简单的配置就可以定义路由转发规则。同时Edge Service支持强大的扩展能力，服务映射、请求解析、加密解密、鉴权等逻辑都可以通过扩展实现。</p>
-<p>Edge Service本身也是一个微服务，需遵守所有微服务开发的规则。其本身可以部署为多实例，前端使用负载均衡装置进行负载分发；也可以部署为主备，直接接入用户请求。开发者可以根据Edge Service承载的逻辑和业务访问量、组网情况来规划。</p>
-<h2 id="edge-service_1">开发Edge Service服务</h2>
-<p>开发Edge Service和开发一个普通的微服务步骤差不多，开发者可以从导入<a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/demo/demo-edge">ServiceComb Edge Service Demo</a>入手。从头搭建项目包含如下几个步骤：</p>
+                <h1 id="edge-service">使用 Edge Service 做边缘服务</h1>
+<p>Edge Service 是ServiceComb 提供的JAVA网关服务开发框架。Edge Service作为整个微服务系统对外的接口，向最终用户提供服务，接入RESTful请求，转发给内部微服务。Edge Service以开发框架的形式提供，开发者可以非常简单的搭建一个Edge Service服务，通过简单的配置就可以定义路由转发规则。同时Edge Service支持强大的扩展能力，服务映射、请求解析、加密解密、鉴权等逻辑都可以通过扩展实现。</p>
+<p>Edge Service 本身也是一个微服务，需遵守所有微服务开发的规则。其本身可以部署为多实例，前端使用负载均衡装置进行负载分发；也可以部署为主备，直接接入用户请求。开发者可以根据Edge Service承载的逻辑和业务访问量、组网情况来规划。</p>
+<h2 id="edge-service_1">开发 Edge Service 服务</h2>
+<p>开发 Edge Service 和开发一个普通的微服务步骤差不多，开发者可以从导入<a href="https://github.com/apache/incubator-servicecomb-java-chassis/tree/master/demo/demo-edge">ServiceComb Edge Service Demo</a>入手。从头搭建项目包含如下几个步骤：</p>
 <ul>
 <li>配置依赖关系</li>
 </ul>
@@ -396,7 +396,7 @@ servicecomb:
 <h2 id="_2">定制路由规则</h2>
 <p>使用Edge Service的核心工作是配置路由规则。场景不同，规则也不同。
 路由规则由一系列AbstractEdgeDispatcher组成。Edge Service提供了几个常见的Dispatcher，通过配置即可启用，如果这些Dispatcher不满足业务场景需要，还可以自定义。</p>
-<h3 id="defaultedgedispatcher">使用DefaultEdgeDispatcher</h3>
+<h3 id="defaultedgedispatcher">使用 DefaultEdgeDispatcher</h3>
 <p>DefaultEdgeDispatcher是一个非常简单、容易管理的Dispatcher，使用这个Dispatcher，用户不用动态管理转发规则，应用于实际的业务场景非常方便，这个也是推荐的一种管理机制。它包含如下几个配置项：</p>
 <pre><code>servicecomb:
   http:
@@ -428,14 +428,15 @@ servicecomb:
 <p>Edge Service在转发operation1时，会自动使用1.0.0+的规则来过滤实例</p>
 <p>Edge Service在转发operation2时，会自动使用1.1.0+的规则来过滤实例</p>
 <p>以上过程用户不必做任何干预，全自动完成，以避免将新版本的operation转发到旧版本的实例中去。</p>
-<h3 id="urlmappededgedispatcher">使用URLMappedEdgeDispatcher</h3>
-<p>URLMappedEdgeDispatcher允许用户配置URL和微服务的映射关系。使用它可以非常灵活的定义哪些URL转发到哪些微服务。它包含如下几个配置项：</p>
-<pre><code>servicecomb:
+<h3 id="urlmappededgedispatcher">使用 URLMappedEdgeDispatcher</h3>
+<p>URLMappedEdgeDispatcher 允许用户配置URL和微服务的映射关系。使用它可以非常灵活的定义哪些URL转发到哪些微服务。它包含如下几个配置项：</p>
+<pre><code class="yaml">servicecomb:
   http:
     dispatcher:
       edge:
         url:
           enabled: true
+          pattern: /(.*) ## 默认值，一般不需要配置
           mappings:
             businessV1:
               prefixSegmentCount: 1
@@ -451,7 +452,25 @@ servicecomb:
 
 <p>businessV1配置项表示的含义是将请求路径为/usr/business/v1/.<em>的请求，转发到business这个微服务，并且只转发到版本号为1.0.0-2.0.0的实例（不含2.0.0）。转发的时候URL为/business/v1/.</em>。path使用的是JDK的正则表达式，可以查看Pattern类的说明。prefixSegmentCount表示前缀的URL Segment数量，前缀不包含在转发的URL路径中。有三种形式的versionRule可以指定。2.0.0-3.0.0表示版本范围，含2.0.0，但不含3.0.0；2.0.0+表示大于2.0.0的版本，含2.0.0；2.0.0表示只转发到2.0.0版本。2，2.0等价于2.0.0。</p>
 <p>从上面的配置可以看出，URLMappedEdgeDispatcher也支持客户端灰度。当然配置项会比DefaultEdgeDispatcher多。URLMappedEdgeDispatcher支持通过配置中心动态的修改配置，调整路由规则。</p>
-<h3 id="dispatcher">自定义Dispatcher</h3>
+<h3 id="commonhttpedgedispatcher">使用 CommonHttpEdgeDispatcher</h3>
+<p>CommonHttpEdgeDispatcher 能够将请求转发到监听 HTTP 或者 HTTP 2 协议的 Provider， 对于 Provider 的开发框架没有限制，也不
+要求 Provider 注册契约信息。 </p>
+<pre><code class="yaml">servicecomb:
+  http:
+    dispatcher:
+        http:
+          enabled: true
+          pattern: /(.*) ## 默认值，一般不需要配置
+          mappings:
+            businessV2:
+              prefixSegmentCount: 1
+              path: &quot;/http/business/v2/.*&quot;
+              microserviceName: business
+              versionRule: 2.0.0
+</code></pre>
+
+<p>CommonHttpEdgeDispatcher 配置项的含义和 URLMappedEdgeDispatcher 类似。</p>
+<h3 id="dispatcher">自定义 Dispatcher</h3>
 <p>自定义Dispatcher包含两个步骤：</p>
 <ol>
 <li>实现AbstractEdgeDispatcher</li>
@@ -492,8 +511,7 @@ servicecomb:
 <p>这里的servicecomb.executor.groupThreadPool是ServiceComb内置的默认线程池对应的spring bean的beanId；业务可以定制自己的线程池，并声明为一个bean，其beanId也可以配置到这里。</p>
 <p><img alt="" src="../../assets/threadPool.png" /></p>
 <h2 id="demo">DEMO功能说明</h2>
-<p>请参考github上的edge service demo：</p>
-<p><a href="https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge">https://github.com/ServiceComb/ServiceComb-Java-Chassis/tree/master/demo/demo-edge</a></p>
+<p>DEMO 源码请参考 <a href="https://github.com/apache/servicecomb-java-chassis/tree/master/demo/demo-edge">edge service demo</a></p>
 <p>该demo包含以下工程：</p>
 <ul>
 <li>authentication：微服务：鉴权服务器</li>
