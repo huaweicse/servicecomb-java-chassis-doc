@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>文件上传开发指导 - ServiceComb Java Chassis 开发指南</title>
+  <title>路由管理 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u6587\u4ef6\u4e0a\u4f20\u5f00\u53d1\u6307\u5bfc";
-    var mkdocs_page_input_path = "general-development/file-upload.md";
+    var mkdocs_page_name = "\u8def\u7531\u7ba1\u7406";
+    var mkdocs_page_input_path = "references-handlers/router.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -80,7 +80,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../catalog/">通用功能开发</a>
+    <a class="" href="../../general-development/catalog/">通用功能开发</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -203,23 +203,41 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+    <a class="" href="../intruduction/">处理链介绍</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+    <a class="" href="../loadbalance/">负载均衡</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">路由管理</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">路由管理</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_2">规则说明</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">匹配流程</a></li>
+        
+            <li><a class="toctree-l4" href="#_4">异常情况的处理</a></li>
+        
+            <li><a class="toctree-l4" href="#_5">负载均衡算法</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/router/">路由管理</a>
+    <a class="" href="../bizkeeper/">隔离熔断容错</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+    <a class="" href="../publickey/">公钥认证</a>
                 </li>
     </ul>
 	    </li>
@@ -287,8 +305,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>处理链参考 &raquo;</li>
+        
+      
     
-    <li>文件上传开发指导</li>
+    <li>路由管理</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -298,179 +320,93 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">文件上传开发指导</h1>
-<h2 id="_2">服务提供者开发</h2>
-<p>服务提供者可以采用Spring MVC 或者 Jax RS定义上传接口。</p>
-<ul>
-<li>采用Spring MVC</li>
-</ul>
-<pre><code class="java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;file&quot;) MultipartFile file)
-
-@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;file&quot;) Part file)
+                <h1 id="_1">路由管理</h1>
+<p>应用可以通过使用路由管理，来进行灰度发布实现版本的平滑过渡升级。路由管理通过动态配置下发完成。 </p>
+<p>使用路由管理，需要在项目中引入如下依赖：</p>
+<pre><code class="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;handler-router&lt;/artifactId&gt;
+&lt;/dependency&gt;
 </code></pre>
 
-<p>文件上传需要通过 @RequestPart 声明参数，参数类型支持 servlet 定义的 javax.servlet.http.Part 类型，也支持
-org.springframework.web.multipart.MultipartFile 类型，两种数据类型功能是一致的，MultipartFile 的底
-层也是Part。  两种数据类型可以混合使用，比如第一个参数是Part，第二个参数是MultipartFile。 除了通过
-定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
-<pre><code class="java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;MultipartFile&gt; files)
-
-@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;files&quot;) MultipartFile[] files)
-</code></pre>
-
-<p>可以通过@RequestAttribute获取其他额外信息。</p>
-<pre><code class="java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;MultipartFile&gt; files,
-     @RequestAttribute(&quot;message&quot;) String message)
-</code></pre>
-
-<p>Spring MVC方式定义上传接口还有其他很多方式，可以下载java-chassis源码，并查看UploadSpringmvcSchema里面的示例。</p>
-<ul>
-<li>采用Jax RS</li>
-</ul>
-<pre><code class="java">@Path(&quot;/fileUpload&quot;)
-@POST
-@Produces(MediaType.TEXT_PLAIN)
-public String fileUpload(@FormParam(name = &quot;file&quot;) Part file)
-</code></pre>
-
-<p>文件上传需要通过 @FormParam 声明参数，参数类型支持servlet定义的javax.servlet.http.Part类型。除了通过
-定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
-<pre><code class="java">@Path(&quot;/fileUpload&quot;)
-@POST
-@Produces(MediaType.TEXT_PLAIN)
-public String fileUpload(@FormParam(name = &quot;files&quot;) List&lt;Part&gt; files)
-
-@Path(&quot;/fileUpload&quot;)
-@POST
-@Produces(MediaType.TEXT_PLAIN)
-public String fileUpload(@FormParam(name = &quot;files&quot;) Part[] files)
-</code></pre>
-
-<p>可以通过@FormParam获取其他额外信息。</p>
-<pre><code class="java">@Path(&quot;/fileUpload&quot;)
-@POST
-@Produces(MediaType.TEXT_PLAIN)
-public String fileUpload(@FormParam(name = &quot;files&quot;) List&lt;Part&gt; files,
-    @FormParam(&quot;message&quot;) String message)
-</code></pre>
-
-<p>Jax RS 方式定义上传接口还有其他很多方式，可以下载java-chassis源码，并查看 UploadJaxrsSchema 里面的示例。</p>
-<ul>
-<li>业务开发注意事项</li>
-</ul>
-<p>通过MultipartFile或Part打开流后，记得关闭，否则上传的临时文件会无法删除，导致资源泄露和磁盘空间耗尽。</p>
-<h2 id="_3">开发服务消费者</h2>
-<p>可以使用透明 RPC </p>
-<pre><code class="java"> interface UploadIntf {
-   String upload(File file);
- }
-
- @RpcReference(microserviceName = &quot;name&quot;, schemaId = &quot;schema&quot;)
- UploadIntf uploadIntf;
-
- String result = uploadIntf.upload(file);
-</code></pre>
-
-<p>或者 RestTemplate 进行文件上传。 </p>
-<pre><code class="java">Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();
-map.put(&quot;file&quot;, new FileSystemResource(&quot;a file path!&quot;));
-map.put(&quot;param1&quot;, &quot;test&quot;);
-HttpHeaders headers = new HttpHeaders();
-headers.setContentType(org.springframework.http.MediaType.MULTIPART_FORM_DATA);
-HttpEntity&lt;Map&lt;String, Object&gt;&gt; entity = new HttpEntity&lt;&gt;(map, headers);
-
-String reseult = template.postForObject(url, entity, String.class);
-</code></pre>
-
-<p>服务消费者不区分服务提供者是 Spring MVC 或者 Jax RS。 在使用透明 RPC 或者 RestTemplate 的时候， 可以使用如下类型
-与服务提供者的文件对应： </p>
-<ul>
-<li>java.io.File</li>
-<li>javax.servlet.http.Part</li>
-<li>java.io.InputStream</li>
-<li>org.springframework.core.io.Resource</li>
-</ul>
-<p>使用InputStream时，因为是流的方式，此时没有客户端文件名的概念，服务提供者获取到的文件名为null。 
-如果既要使用内存数据，又想让producer可以获取客户端文件名，可以使用resource类型，继承
-org.springframework.core.io.ByteArrayResource，且需要实现 getFilename 方法。</p>
-<p>一样的，服务消费者还有其他灵活的使用方式，可以下载 java-chassis 代码查看调用示例。</p>
-<h2 id="_4">使用浏览器上传文件</h2>
-<p>浏览器通过Form的方式上传文件，下面是一个简单的HTML 和 JS 示例</p>
-<pre><code class="html">&lt;form id=&quot;upload_form&quot; method=&quot;POST&quot;&gt;
-    &lt;p&gt;
-        File Name: &lt;input type=&quot;file&quot; name=&quot;fileName&quot;/&gt;
-    &lt;/p&gt;
-    &lt;p&gt;
-        &lt;input type=&quot;button&quot; value=&quot;Upload&quot; onclick=&quot;uploadAction()&quot;&gt;
-    &lt;/p&gt;
-&lt;/form&gt;
-</code></pre>
-
-<p>事件处理：</p>
-<pre><code>function uploadAction() {
-     var formData = new FormData(document.getElementById(&quot;upload_form&quot;));
-
-     $.ajax({
-        type: 'POST',
-        url: &quot;/api/file-service/upload&quot;,
-        data: formData,
-        processData:false,
-        contentType:false,
-        success: function (data) {
-            console.log(data);
-            var error = document.getElementById(&quot;error&quot;);
-            error.textContent=&quot;Upload Successfully, file id=&quot; + data;
-            error.hidden=false;
-        },
-        error: function(data) {
-            console.log(data);
-            var error = document.getElementById(&quot;error&quot;);
-            error.textContent=&quot;Upload failed&quot;;
-            error.hidden=false;
-        },
-        async: true
-    });
-</code></pre>
-
-<h2 id="_5">配置参数说明</h2>
+<p>在配置文件中增加配置项：</p>
+<p>前提条件：配置servicecomb.handler.chain.Consumer.default，在处理链Consumer中配置loadbalance，<a href="../loadbalance/">loadbalance处理链介绍</a>。</p>
 <table>
 <thead>
 <tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">含义</th>
+<th>配置项名</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">servicecomb.uploads.directory</td>
-<td align="left">null</td>
-<td align="left"></td>
-<td align="left">上传的临时文件保存在哪个目录，<strong>默认值null表示不支持文件上传</strong></td>
+<td>servicecomb.routeRule.[targetService]</td>
+<td>目标服务的路由管理规则</td>
 </tr>
 <tr>
-<td align="left">servicecomb.uploads.maxSize</td>
-<td align="left">-1</td>
-<td align="left"></td>
-<td align="left">http body的最大允许大小，单位byte，默认值-1表示无限制</td>
+<td>servicecomb.routeRule.type</td>
+<td>填写'router'</td>
 </tr>
 </tbody>
 </table>
+<p>路由管理规则实例如下：</p>
+<pre><code class="yaml">servicecomb:
+    routeRule:  
+      provider: | #服务名
+        - precedence: 2 #优先级
+          match:        #匹配策略
+            headers:          #header匹配
+              region:            
+                regex: 'regoin[0-9]*'
+                caseInsensitive: false # 是否区分大小写，默认为false，区分大小写
+              type:         
+                exact: gray
+          route: #路由规则
+            - weight: 100 #权重值
+              tags:
+                version: {version1}
+                app: {appId}
+        - precedence: 1
+          route:
+            - weight: 20
+              tags:
+                version: 0.01
+                tags: tag
+            - weight: 80
+              tags:
+                version: 0.02
+</code></pre>
+
+<h4 id="_2">规则说明</h4>
+<ul>
+<li>匹配特定请求由match配置，匹配条件是headers。</li>
+<li>Header中的字段的匹配支持正则匹配、精准匹配。</li>
+<li>如果未定义match，则可匹配任何请求。</li>
+<li>转发权重定义在routeRule.{targetServiceName}.route下，由weight配置，weight数值表示百分数，需要满足加和等于100，不满足100的部分会用最新版本填充。</li>
+<li>服务分组定义在routeRule.{targetServiceName}.route下，由tags配置，配置内容有version和app。</li>
+<li>caseInsensitive 配置条件是否区分大小写，默认false区分大小写，true则不区分大小写。</li>
+<li>优先级数量越大优先级越高。</li>
+</ul>
+<h4 id="_3">匹配流程</h4>
+<p>对于上面的示例配置，所有访问provider服务的请求，首先尝试与优先级为2的第一个的match规则进行匹配header：header存在key为region的按照正则规则区分大小写匹配，存在key为type的进行字符串精准匹配。若匹配match成功则按照route的配置分配100%的流量到version和tags对应的实例。若匹配match失败则进入下个优先级为1的规则。不同规则优先级不能相等。</p>
+<h4 id="_4">异常情况的处理</h4>
+<p>如果因为规则配置错误，或者没有match到任何一条规则，流量会直接跳过灰度规则，相当于没有灰度发布配置。</p>
+<p>如果已经匹配了match，因为对应的version或者tags找不到实例，则剩余流量自动转发到目前的最新版本。</p>
+<h4 id="_5">负载均衡算法</h4>
+<p>借鉴了nginx，使用平滑加权轮询算法，流量会均匀的等比分配到对应的服务实例上。</p>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../bizkeeper/" class="btn btn-neutral float-right" title="隔离熔断容错">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../loadbalance/" class="btn btn-neutral" title="负载均衡"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -494,6 +430,10 @@ org.springframework.core.io.ByteArrayResource，且需要实现 getFilename 方�
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../loadbalance/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../bizkeeper/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
