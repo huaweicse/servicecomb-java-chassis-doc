@@ -301,16 +301,14 @@
                 <h1 id="_1">异常处理</h1>
 <h2 id="_2">异常分类及客户端如何判断异常类型</h2>
 <ul>
-<li>
-<p>业务异常：这类异常由业务接口定义。用户在获取到服务swagger定义的时候，就能够从定义中看到这类异常对
-  应的错误码，以及返回值类型。 下面的例子展现了业务定义异常。</p>
-<p>@Path("/errorCode")
-  @POST
-  @ApiResponses({
-      @ApiResponse(code = 200, response = MultiResponse200.class, message = ""),
-      @ApiResponse(code = 400, response = MultiResponse400.class, message = ""),
-      @ApiResponse(code = 500, response = MultiResponse500.class, message = "")})
-  public MultiResponse200 errorCode(MultiRequest request) {
+<li>业务异常：这类异常由业务接口定义。用户在获取到服务swagger定义的时候，就能够从定义中看到这类异常对
+  应的错误码，以及返回值类型。 下面的例子展现了业务定义异常。<pre><code>@Path("/errorCode")
+@POST
+@ApiResponses({
+  @ApiResponse(code = 200, response = MultiResponse200.class, message = ""),
+  @ApiResponse(code = 400, response = MultiResponse400.class, message = ""),
+  @ApiResponse(code = 500, response = MultiResponse500.class, message = "")})
+public MultiResponse200 errorCode(MultiRequest request) {
     if (request.getCode() == 400) {
       MultiResponse400 r = new MultiResponse400();
       r.setCode(400);
@@ -327,9 +325,12 @@
       r.setMessage("success result");
       return r;
     }
-  }</p>
+}
+</code></pre>
 </li>
 </ul>
+<p><strong><em>注意</em></strong>： 对于 2xx 错误码，可以返回具体的业务 model， 对于其他的错误码， 
+  必须抛出 InvocationException。 </p>
 <p>客户端代码可以按照如下方式处理异常。异常的类型是确定的，可以通过cast获取到异常类型。</p>
 <pre><code>    MultiRequest request = new MultiRequest();
 
