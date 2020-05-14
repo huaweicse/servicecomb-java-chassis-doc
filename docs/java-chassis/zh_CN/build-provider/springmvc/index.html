@@ -300,7 +300,8 @@
               
                 <h1 id="springmvc">用SpringMVC 开发微服务</h1>
 <h2 id="_1">概念阐述</h2>
-<p>ServiceComb支持SpringMVC注解，允许使用SpringMVC风格开发微服务。建议参照着项目 <a href="https://github.com/apache/servicecomb-java-chassis/tree/master/samples/springmvc-sample">SpringMVC</a> 进行详细阅读</p>
+<p>ServiceComb支持SpringMVC注解，允许使用SpringMVC风格开发微服务。建议参照着
+项目 <a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/springmvc-sample">SpringMVC</a> 进行详细阅读</p>
 <h2 id="_2">开发示例</h2>
 <h3 id="1-rpc">步骤1 定义服务接口（可选，方便使用RPC方式调用）</h3>
 <p>定义接口不是必须的，但是 一个好习惯，可以简化客户端使用RPC方式编写代码。</p>
@@ -344,7 +345,7 @@ public class SpringmvcHelloImpl implements Hello {
 </code></pre>
 
 <h3 id="4-provider">步骤4 启动provider 服务</h3>
-<p>下面的代码使用Log4j作为日志记录器。开发者可以方便使用其他日志框架。</p>
+<p>下面的代码使用Log4j作为日志记录器。开发者可以使用其他日志框架。</p>
 <pre><code class="java">public class SpringmvcProviderMain {
 
   public static void main(String[] args) throws Exception {
