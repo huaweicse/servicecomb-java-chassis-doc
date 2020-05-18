@@ -123,6 +123,8 @@
         
             <li><a class="toctree-l4" href="#_3">使用服务中心</a></li>
         
+            <li><a class="toctree-l4" href="#_4">本地注册发现</a></li>
+        
         </ul>
     
 
@@ -405,6 +407,50 @@
 </table>
 <p>servicecomb 与服务中心采用 HTTP 进行交互， HTTP client 相关配置可以参
 考 <a href="../../config-reference/service-center-client/">Service Center Client 配置项</a></p>
+<h2 id="_4">本地注册发现</h2>
+<p>servicecomb 提供了本地注册发现机制。服务注册时， <code>Microservice</code> 和 <code>MicroserviceInstance</code> 信息、契约信息
+都注册到微服务本地内存。 服务发现时，从配置文件(registry.yaml)中读取其他服务的 <code>Microservice</code> 和 
+<code>MicroserviceInstance</code> 信息，从目录 <code>microservices/{serviceName}/{schemaId}.yaml</code> 或者 
+<code>applications/{appId}/{serviceName}/{schemaId}.yaml</code> 读取微服务的契约
+信息。本地注册发现主要用于一些小规模，组网确定的场景使用。由于一个微服务只有一个存放契约的目录，不能存放
+多个版本的微服务契约，本地注册发现不支持灰度场景。</p>
+<ul>
+<li>registry.yaml 格式<pre><code>```yaml
+ms1:
+  - id: "001"
+    version: "1.0"
+    appid: exampleApp
+    environment: development
+    schemaIds:
+      - hello
+    instances:
+      - endpoints:
+          - rest://127.0.0.1:8080
+  - id: "002"
+    version: "2.0"
+    environment: development
+    appid: exampleApp
+    schemaIds:
+      - hello
+    instances:
+      - endpoints:
+          - rest://127.0.0.2:8080
+ms2:
+  - id: "003"
+    version: "1.0"
+    environment: development
+    appid: exampleApp
+    schemaIds:
+      - hello
+    instances:
+      - endpoints:
+          - rest://127.0.0.1:8081
+```
+</code></pre>
+</li>
+</ul>
+<p><code>registry.yaml</code> 指定了微服务的基本信息：应用ID (appId)， 微服务名称 (serviceName),
+  微服务版本(version)，环境(environment) 和契约；微服务实例基本信息：网络地址(endpoints)。</p>
               
             </div>
           </div>
