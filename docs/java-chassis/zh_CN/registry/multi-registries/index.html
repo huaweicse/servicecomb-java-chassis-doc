@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>微服务系统架构 - ServiceComb Java Chassis 开发指南</title>
+  <title>组合使用多个实现 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u5fae\u670d\u52a1\u7cfb\u7edf\u67b6\u6784";
-    var mkdocs_page_input_path = "start/architecture.md";
+    var mkdocs_page_name = "\u7ec4\u5408\u4f7f\u7528\u591a\u4e2a\u5b9e\u73b0";
+    var mkdocs_page_input_path = "registry/multi-registries.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -60,12 +60,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../catalog/">快速入门</a>
+    <a class="" href="../../start/catalog/">快速入门</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../design/">设计选型参考</a>
+    <a class="" href="../../start/design/">设计选型参考</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -112,11 +112,23 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../registry/introduction/">注册发现说明</a>
+    <a class="" href="../introduction/">注册发现说明</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../registry/multi-registries/">组合使用多个实现</a>
+    <a class="current" href="./">组合使用多个实现</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">组合使用多个实现</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_2">调用第三方服务</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -302,8 +314,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>管理注册发现 &raquo;</li>
+        
+      
     
-    <li>微服务系统架构</li>
+    <li>组合使用多个实现</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -313,84 +329,136 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">微服务系统架构</h1>
-<h2 id="_2"><img alt="" src="../architecture.png" />框架概述</h2>
-<h2 id="_3"><strong>主要设计意图</strong></h2>
-<p>1.编程模型和通信模型分离，不同的编程模型可以灵活组合不同的通信模型。应用开发者在开发阶段只关注接口开发，部署阶段灵活切换通信方式；支持legacy系统的切换，legacy系统只需要修改服务发布的配置文件（或者annotation），而不需要修改代码。</p>
-<p>现阶段支持SpringMVC、JAX-RS和透明RPC三种开发方式。</p>
-<p>2.内建API-first支持。通过契约规范化微服务开发，实现跨语言的通信，并支持配套的软件工具链（契约生成代码、代码生成契约等）开发，构建完整的开发生态。</p>
-<p>3.定义了常用的微服务运行模型，将微服务从发现到交互过程中的各种容错手段都封装起来。该运行模型支持自定义和扩展。</p>
-<h2 id="_4"><strong>模块说明</strong></h2>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">artifact id</th>
-<th align="left">是否可选</th>
-<th align="left">功能说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">编程模型</td>
-<td align="left">provider-pojo</td>
-<td align="left">是</td>
-<td align="left">提供RPC开发模式</td>
-</tr>
-<tr>
-<td align="left">编程模型</td>
-<td align="left">provider-jaxrs</td>
-<td align="left">是</td>
-<td align="left">提供JAX RS开发模式</td>
-</tr>
-<tr>
-<td align="left">编程模型</td>
-<td align="left">provider-springmvc</td>
-<td align="left">是</td>
-<td align="left">提供Spring MVC开发模式</td>
-</tr>
-<tr>
-<td align="left">通信模型</td>
-<td align="left">transport-rest-vertx</td>
-<td align="left">是</td>
-<td align="left">运行于HTTP之上的开发框架，不依赖WEB容器，应用打包为可执行jar</td>
-</tr>
-<tr>
-<td align="left">通信模型</td>
-<td align="left">transport-rest-servlet</td>
-<td align="left">是</td>
-<td align="left">运行于WEB容器的开发框架，应用打包为war包</td>
-</tr>
-<tr>
-<td align="left">通信模型</td>
-<td align="left">transport-highway</td>
-<td align="left">是</td>
-<td align="left">提供高性能的私有通信协议，仅用于java之间互通。</td>
-</tr>
-<tr>
-<td align="left">运行模型</td>
-<td align="left">handler-loadbalance</td>
-<td align="left">是</td>
-<td align="left">负载均衡模块。提供各种路由策略和配置方法。一般客户端使用。</td>
-</tr>
-<tr>
-<td align="left">运行模型</td>
-<td align="left">handler-bizkeeper</td>
-<td align="left">是</td>
-<td align="left">和服务治理相关的功能，比如隔离、熔断、容错。</td>
-</tr>
-<tr>
-<td align="left">运行模型</td>
-<td align="left">handler-tracing</td>
-<td align="left">是</td>
-<td align="left">调用链跟踪模块，对接监控系统，吐出打点数据。</td>
-</tr>
-</tbody>
-</table>
+                <h1 id="_1">组合使用多个实现</h1>
+<p>通过组合多个服务注册发现实现，能够满足很多特殊场景的开发要求。 </p>
+<p><strong><em>注意：</em></strong> 组合使用多个实现，必须使用 2.1.0 及其以上版本。 </p>
+<h2 id="_2">调用第三方服务</h2>
+<p>可以有非常多的方式调用第三方服务，比如采用第三方提供的Rest Client。 但是需要提供一种
+透明的方式，让调用第三方服务的客户端代码和调用 servicecomb 微服务的
+客户端代码风格完全一样，并且拥有所有 servicecomb 的客户端治理能力。</p>
+<p>在<a href="../../build-consumer/3rd-party-service-invoke/">调用第三方服务</a>里面介绍了servicecomb提供的一种
+调用第三方服务的使用方式，这种方式依赖于使用服务中心作为注册发现。 下面介绍一种组合使用服务中心和本地注册发现，
+实现调用第三方服务。 </p>
+<ul>
+<li>首先在项目中引入两种注册发现的实现</li>
+</ul>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;registry-local&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;registry-service-center&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<ul>
+<li>在 <code>registry.yaml</code> 中定义第三方的微服务信息</li>
+</ul>
+<pre><code class="yaml">thirdParty-service-center:
+  - id: &quot;001&quot;
+    version: &quot;4.0.0&quot;
+    appid: demo-multi-registries
+    schemaIds:
+      - ServiceCenterEndpoint
+    instances:
+      - endpoints:
+          - rest://localhost:30100
+</code></pre>
+
+<ul>
+<li>在 <code>microservices/thirdParty-service-center/ServiceCenterEndpoint.yaml</code> 中定义契约内容</li>
+</ul>
+<pre><code class="yaml">swagger: &quot;2.0&quot;
+info:
+  version: &quot;1.0.0&quot;
+  title: &quot;swagger definition for org.apache.servicecomb.demo.registry.ServiceCenterEndpoint&quot;
+  x-java-interface: &quot;gen.swagger.ServiceCenterEndpointIntf&quot;
+basePath: &quot;/v4/default/registry&quot;
+schemes:
+  - &quot;http&quot;
+consumes:
+  - &quot;application/json&quot;
+produces:
+  - &quot;application/json&quot;
+paths:
+  /instances:
+    get:
+      operationId: &quot;getInstances&quot;
+      parameters:
+        - name: &quot;appId&quot;
+          in: &quot;query&quot;
+          required: true
+          type: &quot;string&quot;
+        - name: &quot;serviceName&quot;
+          in: &quot;query&quot;
+          required: true
+          type: &quot;string&quot;
+        - name: &quot;global&quot;
+          in: &quot;query&quot;
+          required: true
+          type: &quot;string&quot;
+        - name: &quot;version&quot;
+          in: &quot;query&quot;
+          required: true
+          type: &quot;string&quot;
+        - name: &quot;x-domain-name&quot;
+          in: &quot;header&quot;
+          required: true
+          type: &quot;string&quot;
+      responses:
+        &quot;200&quot;:
+          description: &quot;response of 200&quot;
+          schema:
+            type: &quot;object&quot;
+</code></pre>
+
+<ul>
+<li>经过上面的准备，就可以像访问 servicecomb 的微服务一样访问第三方服务了。 比如采用 RPC 的方式访问这个
+ 服务的代码如下：</li>
+</ul>
+<pre><code class="java">public interface IServiceCenterEndpoint {
+  // java name can not be `x-domain-name`, so interfaces define all parameters.
+  @GetMapping(path = &quot;/instances&quot;)
+  Object getInstances(@RequestParam(name = &quot;appId&quot;) String appId,
+      @RequestParam(name = &quot;serviceName&quot;) String serviceName,
+      @RequestParam(name = &quot;global&quot;) String global,
+      @RequestParam(name = &quot;version&quot;) String version,
+      @RequestHeader(name = &quot;x-domain-name&quot;) String domain);
+}
+
+@Component
+public class ServiceCenterTestCase implements CategorizedTestCase {
+  @RpcReference(microserviceName = &quot;thirdParty-service-center&quot;, schemaId = &quot;ServiceCenterEndpoint&quot;)
+  IServiceCenterEndpoint serviceCenterEndpoint;
+
+  @Override
+  public void testRestTransport() throws Exception {
+    // invoke service-center(3rd-parties)
+    @SuppressWarnings(&quot;unchecked&quot;)
+    Map&lt;String, List&lt;?&gt;&gt; result = (Map&lt;String, List&lt;?&gt;&gt;) serviceCenterEndpoint.getInstances(
+        &quot;demo-multi-registries&quot;,
+        &quot;demo-multi-registries-server&quot;,
+        &quot;true&quot;,
+        &quot;0.0.2&quot;,
+        &quot;default&quot;);
+    TestMgr.check(result.get(&quot;instances&quot;).size(), 1);
+  }
+}
+</code></pre>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../config/general-config/" class="btn btn-neutral float-right" title="通用配置说明">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../introduction/" class="btn btn-neutral" title="注册发现说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -414,6 +482,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../config/general-config/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
