@@ -377,7 +377,11 @@ public ResponseEntity&lt;Resource&gt; resource() {
 <li>InputStream</li>
 </ul>
 <p>一样的， 使用 InputStream 需要 @ApiResponse 标识这是一个文件下载场景</p>
-<pre><code>return ResponseEntity
+<pre><code>@GetMapping(path = &quot;/inputStream&quot;)
+@ApiResponses({
+  @ApiResponse(code = 200, response = File.class, message = &quot;&quot;),
+})
+return ResponseEntity
     .ok()
     .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
     .header(HttpHeaders.CONTENT_DISPOSITION, &quot;attachment;filename=resource.txt&quot;)
