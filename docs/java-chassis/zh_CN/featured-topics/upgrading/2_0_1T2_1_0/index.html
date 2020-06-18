@@ -367,6 +367,28 @@ servicecomb.service.registry.enabled: true
 <p>如果直接使用了 <code>DiscoveryTreee</code> 接口，2.1. 将服务发现的接口移动到了 <code>org.apache.servicecomb.registry</code>，
 当出现编译错误的时候，重新 import 对应的新 package 类即可。 </p>
 <p>如果直接使用了 <code>ServiceRegistry</code> 接口， 2.1 将对应接口移动到了 <code>RegistrationManager</code>。</p>
+<h2 id="_2">参数校验的变化</h2>
+<p>参数校验失败，早期版本采用 <code>ResourceBundleMessageInterpolator</code> 来生成错误消息。 由于这个类依赖于
+<code>Expression Language</code> 库，而这个库 JAVA 慢慢的不再提供支持，从 2.1.0 版本开始，切换为 <code>ParameterMessageInterpolator</code>
+来生成错误消息。 然后系统删除来对于 <code>jakarta.el</code> 的依赖。 </p>
+<p>开发者仍然可以继续使用<code>ResourceBundleMessageInterpolator</code> 来生成错误消息。需要额外的做下面的配置：</p>
+<ul>
+<li>项目中引入依赖</li>
+</ul>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.glassfish&lt;/groupId&gt;
+      &lt;artifactId&gt;jakarta.el&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<ul>
+<li>增加配置项</li>
+</ul>
+<pre><code class="yaml">servicecomb:
+  filters:
+    validation:
+      useResourceBundleMessageInterpolator: true
+</code></pre>
               
             </div>
           </div>
