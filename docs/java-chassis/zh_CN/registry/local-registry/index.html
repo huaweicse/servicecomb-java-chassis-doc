@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>CORS机制 - ServiceComb Java Chassis 开发指南</title>
+  <title>本地注册发现 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "CORS\u673a\u5236";
-    var mkdocs_page_input_path = "general-development/CORS.md";
+    var mkdocs_page_name = "\u672c\u5730\u6ce8\u518c\u53d1\u73b0";
+    var mkdocs_page_input_path = "registry/local-registry.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -80,7 +80,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../catalog/">通用功能开发</a>
+    <a class="" href="../../general-development/catalog/">通用功能开发</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -112,19 +112,35 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../registry/introduction/">注册发现说明</a>
+    <a class="" href="../introduction/">注册发现说明</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">本地注册发现</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">本地注册发现</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_2">注册过程</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">发现过程</a></li>
+        
+            <li><a class="toctree-l4" href="#-">本地注册发现的应用 - 调用第三方服务</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../registry/local-registry/">本地注册发现</a>
+    <a class="" href="../distributed/">去中心化注册发现</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/multi-registries/">连接多个服务中心</a>
+    <a class="" href="../multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -314,8 +330,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>管理注册发现 &raquo;</li>
+        
+      
     
-    <li>CORS机制</li>
+    <li>本地注册发现</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -325,96 +345,145 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="cors">CORS机制</h1>
-<h2 id="_1">概念阐述</h2>
-<p>跨域资源共享(CORS, Cross-Origin Resource Sharing)允许Web服务器进行跨域访问控制，使浏览器可以更安全地进行跨域数据传输。</p>
-<h2 id="_2">场景描述</h2>
-<p>当用户需要从浏览器上跨域发送REST请求时就有可能要用到CORS机制，接收跨域请求的微服务需要开启CORS支持。</p>
-<h2 id="_3">配置说明</h2>
-<p>CORS功能在microservice.yaml文件中配置，配置项见下表所述。</p>
-<table>
-<thead>
-<tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
-<th align="left">注意</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">servicecomb.cors.enabled</td>
-<td align="left"><code>false</code></td>
-<td align="left"><code>true</code>/<code>false</code></td>
-<td align="left">否</td>
-<td align="left">是否开启CORS功能</td>
-<td align="left">-</td>
-</tr>
-<tr>
-<td align="left">servicecomb.cors.origin</td>
-<td align="left"><code>*</code></td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">Access-Control-Allow-Origin</td>
-<td align="left">-</td>
-</tr>
-<tr>
-<td align="left">servicecomb.cors.allowCredentials</td>
-<td align="left"><code>false</code></td>
-<td align="left"><code>true</code>/<code>false</code></td>
-<td align="left">否</td>
-<td align="left">Access-Control-Allow-Credentials</td>
-<td align="left">根据CORS标准，当Access-Control-Allow-Credentials设置为<code>true</code>时，Access-Control-Allow-Origin不可设置为"*"，否则将会抛出异常</td>
-</tr>
-<tr>
-<td align="left">servicecomb.cors.allowedHeader</td>
-<td align="left">无</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">Access-Control-Allow-Headers</td>
-<td align="left">多个值使用逗号分隔</td>
-</tr>
-<tr>
-<td align="left">servicecomb.cors.allowedMethod</td>
-<td align="left">无</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">Access-Control-Allow-Methods</td>
-<td align="left">多个值使用逗号分隔</td>
-</tr>
-<tr>
-<td align="left">servicecomb.cors.exposedHeader</td>
-<td align="left">无</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">Access-Control-Expose-Headers</td>
-<td align="left">多个值使用逗号分隔</td>
-</tr>
-<tr>
-<td align="left">servicecomb.cors.maxAge</td>
-<td align="left">无</td>
-<td align="left">(0,2147483647]，整型</td>
-<td align="left">否</td>
-<td align="left">Access-Control-Max-Age</td>
-<td align="left">单位是秒，如果用户不配置此项，则CORS应答中没有Access-Control-Max-Age</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_4">示例代码</h2>
-<pre><code class="yaml">servicecomb:
-  cors:
-    enabled: true
-    origin: &quot;*&quot;
-    allowCredentials: false
-    allowedMethod: PUT,DELETE
-    maxAge: 3600
+                <h1 id="_1">本地注册发现</h1>
+<p>本地注册发现是一种静态的服务发现机制。使用本地注册发现，需要在项目中引入如下依赖：</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;registry-local&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<p>本地服务发现可以在很多不同的场景使用，能够帮助开发者解决很多系统集成问题，比如和网关的集成，和第三方服务的集成。</p>
+<h2 id="_2">注册过程</h2>
+<p>和使用服务中心一样， 系统会自动完成注册。系统会从配置文件中读取本微服务的信息和实例信息，以及本微服务发布的
+契约信息，将信息注册到内存中。</p>
+<h2 id="_3">发现过程</h2>
+<p>发现过程也是从本地进行查找。因此系统需要配置本地的微服务信息和实例信息，以及契约信息。 提供了下面两种方式：</p>
+<ul>
+<li>使用配置文件的方式定义服务</li>
+</ul>
+<p>这种方式从配置文件(registry.yaml)中读取服务的 <code>Microservice</code> 和 
+  <code>MicroserviceInstance</code> 信息，从目录 <code>microservices/{serviceName}/{schemaId}.yaml</code> 或者 
+  <code>applications/{appId}/{serviceName}/{schemaId}.yaml</code> 读取微服务的契约
+   信息。</p>
+<p>registry.yaml 格式：</p>
+<pre><code>    ```yaml
+    ms1:
+      - id: "001"
+        version: "1.0"
+        appid: exampleApp
+        environment: development
+        schemaIds:
+          - hello
+        instances:
+          - endpoints:
+              - rest://127.0.0.1:8080
+      - id: "002"
+        version: "2.0"
+        environment: development
+        appid: exampleApp
+        schemaIds:
+          - hello
+        instances:
+          - endpoints:
+              - rest://127.0.0.2:8080
+    ms2:
+      - id: "003"
+        version: "1.0"
+        environment: development
+        appid: exampleApp
+        schemaIds:
+          - hello
+        instances:
+          - endpoints:
+              - rest://127.0.0.1:8081
+    ```
+</code></pre>
+<p><code>registry.yaml</code> 指定了微服务的基本信息：应用ID (appId)， 微服务名称 (serviceName),
+  微服务版本(version)，环境(environment) 和契约；微服务实例基本信息：网络地址(endpoints)。</p>
+<ul>
+<li>使用 <code>bean</code> 的方式定义服务<pre><code>```java
+  @Bean
+  public RegistryBean demoLocalRegistryServerBean2() {
+    List&lt;String&gt; endpoints = new ArrayList&lt;&gt;();
+    endpoints.add("rest://localhost:8080");
+    List&lt;Instance&gt; instances = new ArrayList&lt;&gt;();
+    instances.add(new Instance().setEndpoints(endpoints));
+
+    return new RegistryBean()
+        .setServiceName("demo-local-registry-server-bean2")
+        .setId("003")
+        .setVersion("0.0.3")
+        .setAppId("demo-local-registry")
+        .addSchemaInterface("CodeFirstEndpoint2", CodeFirstService.class)
+        .setInstances(new Instances().setInstances(instances));
+  }
+```
+</code></pre>
+</li>
+</ul>
+<p><code>RegistryBean</code> 的信息和 <code>registry.yaml</code> 的信息类似， 可以添加 <code>Schema Interface</code> 来添加
+  契约信息， 如果没有添加契约信息，这种方式也会从本地配置文件查找契约。 CodeFirstService 是一个接口，
+  和普通的 provider 接口定义类似：</p>
+<pre><code>    @Path("/register/url/codeFirst")
+    @Produces("application/json")
+    public interface CodeFirstService {
+      @GET
+      @Path("getName")
+      String getName(@QueryParam("name") String name);
+    }
+</code></pre>
+<h2 id="-">本地注册发现的应用 - 调用第三方服务</h2>
+<p>可以有非常多的方式调用第三方服务，比如采用第三方提供的 Rest Client。 但是需要提供一种
+透明的方式，让调用第三方服务的客户端代码和调用 servicecomb 微服务的
+客户端代码风格完全一样，并且拥有所有 servicecomb 的客户端治理能力。</p>
+<p>在<a href="../../build-consumer/3rd-party-service-invoke/">调用第三方服务</a>里面介绍了servicecomb提供的一种
+调用第三方服务的使用方式，这种方式依赖于使用服务中心作为注册发现。 可以看出使用本地服务发现能够非常方便的调用第三方服务。</p>
+<p>只需要在原来的项目中引入本地注册发现，按照上述两种方式之一定义第三方服务的信息。 定义完成后，可以像访问 servicecomb
+服务一样访问第三方服务，不用关心第三方服务是采用什么框架开发的。 下面代码片段来源于 demo，
+演示了通过 java chassis 的方式调用服务中心接口。</p>
+<pre><code class="java">public interface IServiceCenterEndpoint {
+  // java name can not be `x-domain-name`, so interfaces define all parameters.
+  @GetMapping(path = &quot;/instances&quot;)
+  Object getInstances(@RequestParam(name = &quot;appId&quot;) String appId,
+      @RequestParam(name = &quot;serviceName&quot;) String serviceName,
+      @RequestParam(name = &quot;global&quot;) String global,
+      @RequestParam(name = &quot;version&quot;) String version,
+      @RequestHeader(name = &quot;x-domain-name&quot;) String domain);
+}
+
+@Component
+public class ServiceCenterTestCase implements CategorizedTestCase {
+  @RpcReference(microserviceName = &quot;thirdParty-service-center&quot;, schemaId = &quot;ServiceCenterEndpoint&quot;)
+  IServiceCenterEndpoint serviceCenterEndpoint;
+
+  @Override
+  public void testRestTransport() throws Exception {
+    // invoke service-center(3rd-parties)
+    @SuppressWarnings(&quot;unchecked&quot;)
+    Map&lt;String, List&lt;?&gt;&gt; result = (Map&lt;String, List&lt;?&gt;&gt;) serviceCenterEndpoint.getInstances(
+        &quot;demo-multi-registries&quot;,
+        &quot;demo-multi-registries-server&quot;,
+        &quot;true&quot;,
+        &quot;0.0.2&quot;,
+        &quot;default&quot;);
+    TestMgr.check(result.get(&quot;instances&quot;).size(), 1);
+  }
+}
 </code></pre>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../distributed/" class="btn btn-neutral float-right" title="去中心化注册发现">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../introduction/" class="btn btn-neutral" title="注册发现说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -438,6 +507,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../distributed/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

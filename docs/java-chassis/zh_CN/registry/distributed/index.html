@@ -114,6 +114,10 @@
                     
     <a class="" href="../introduction/">注册发现说明</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../local-registry/">本地注册发现</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">去中心化注册发现</a>
@@ -125,7 +129,7 @@
         
             <li><a class="toctree-l4" href="#_2">本地注册发现 + 实例契约发现</a></li>
         
-            <li><a class="toctree-l4" href="#_3">广播注册发现 + 实例契约发现</a></li>
+            <li><a class="toctree-l4" href="#_3">组播注册发现 + 实例契约发现</a></li>
         
             <li><a class="toctree-l4" href="#_4">注意事项</a></li>
         
@@ -136,7 +140,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../multi-registries/">组合使用多个实现</a>
+    <a class="" href="../multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -346,7 +350,7 @@
 对于弹性扩缩容要求不高的场景。 servicecomb 提供了两种方式满足去中心化的注册发现。这两种方式涉及如下模块：</p>
 <ul>
 <li>本地注册发现: registry-local，通过本地配置文件注册发现</li>
-<li>广播注册发现: registry-zeroconfig, 采用广播的方式注册发现</li>
+<li>组播注册发现: registry-zeroconfig, 采用组播的方式注册发现</li>
 <li>实例契约发现: registry-schema-dicovery, 通过给实例发送请求，从实例查询契约</li>
 </ul>
 <h2 id="_2">本地注册发现 + 实例契约发现</h2>
@@ -380,8 +384,8 @@
           - rest://localhost:8888
 </code></pre>
 
-<h2 id="_3">广播注册发现 + 实例契约发现</h2>
-<p>广播注册发现采用UDP协议发现实例。使用这种方式只需要在项目中配置依赖：</p>
+<h2 id="_3">组播注册发现 + 实例契约发现</h2>
+<p>组播注册发现采用UDP协议发现实例。使用这种方式只需要在项目中配置依赖：</p>
 <pre><code class="xml">    &lt;dependency&gt;
       &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
       &lt;artifactId&gt;registry-schema-discovery&lt;/artifactId&gt;
@@ -403,10 +407,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../multi-registries/" class="btn btn-neutral float-right" title="组合使用多个实现">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../multi-registries/" class="btn btn-neutral float-right" title="连接多个服务中心">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../introduction/" class="btn btn-neutral" title="注册发现说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../local-registry/" class="btn btn-neutral" title="本地注册发现"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -432,7 +436,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../local-registry/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../multi-registries/" style="color: #fcfcfc">Next &raquo;</a></span>

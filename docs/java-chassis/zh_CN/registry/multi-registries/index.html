@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>组合使用多个实现 - ServiceComb Java Chassis 开发指南</title>
+  <title>连接多个服务中心 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u7ec4\u5408\u4f7f\u7528\u591a\u4e2a\u5b9e\u73b0";
+    var mkdocs_page_name = "\u8fde\u63a5\u591a\u4e2a\u670d\u52a1\u4e2d\u5fc3";
     var mkdocs_page_input_path = "registry/multi-registries.md";
     var mkdocs_page_url = null;
   </script>
@@ -116,22 +116,18 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../local-registry/">本地注册发现</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../distributed/">去中心化注册发现</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">组合使用多个实现</a>
+    <a class="current" href="./">连接多个服务中心</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#_1">组合使用多个实现</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#_2">调用第三方服务</a></li>
-        
-            <li><a class="toctree-l4" href="#_3">连接多个服务中心</a></li>
-        
-        </ul>
+    <li class="toctree-l3"><a href="#_1">连接多个服务中心</a></li>
     
 
     </ul>
@@ -329,7 +325,7 @@
         
       
     
-    <li>组合使用多个实现</li>
+    <li>连接多个服务中心</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -339,154 +335,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">组合使用多个实现</h1>
-<p>通过组合多个服务注册发现实现，能够满足很多特殊场景的开发要求。 </p>
-<p><strong><em>注意：</em></strong> 组合使用多个实现，必须使用 2.1.0 及其以上版本。 </p>
-<h2 id="_2">调用第三方服务</h2>
-<p>可以有非常多的方式调用第三方服务，比如采用第三方提供的Rest Client。 但是需要提供一种
-透明的方式，让调用第三方服务的客户端代码和调用 servicecomb 微服务的
-客户端代码风格完全一样，并且拥有所有 servicecomb 的客户端治理能力。</p>
-<p>在<a href="../../build-consumer/3rd-party-service-invoke/">调用第三方服务</a>里面介绍了servicecomb提供的一种
-调用第三方服务的使用方式，这种方式依赖于使用服务中心作为注册发现。 下面介绍一种组合使用服务中心和本地注册发现，
-实现调用第三方服务。 在本方案中，第三方调用是通过本地注册发现实现的，java chassis 微服务之间是通过服务中心
-实现的。可以看出，使用本地注册发现实现，比原来的第三方调用方案功能更加完善，开发更加灵活。</p>
-<ul>
-<li>首先在项目中引入两种注册发现的实现</li>
-</ul>
-<pre><code class="xml">    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;registry-local&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;registry-service-center&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-</code></pre>
-
-<ul>
-<li>在 <code>registry.yaml</code> 中定义第三方的微服务信息</li>
-</ul>
-<pre><code class="yaml">thirdParty-service-center:
-  - id: &quot;001&quot;
-    version: &quot;4.0.0&quot;
-    appid: demo-multi-registries
-    schemaIds:
-      - ServiceCenterEndpoint
-    instances:
-      - endpoints:
-          - rest://localhost:30100
-</code></pre>
-
-<ul>
-<li>
-<p>注册契约。 与开发服务接口一样， 调用第三方服务也可以采用 <code>Core First</code> 
-  或者 <code>Contrast First</code> 两种方式注册契约。 </p>
-<ul>
-<li>Code First 方式注册契约</li>
-</ul>
-<p>需要在服务启动完成后(<code>AFTER_REGISTRY</code>事件）， 调用接口完成契约注册。 </p>
-<pre><code>    @RequestMapping(path = "/v4/default/registry", produces = MediaType.APPLICATION_JSON)
-    public interface IServiceCenterEndpoint {
-      // java name can not be `x-domain-name`, so interfaces define all parameters.
-      @GetMapping(path = "/getInstances")
-      Object getInstances(@RequestParam(name = "appId") String appId,
-          @RequestParam(name = "serviceName") String serviceName,
-          @RequestParam(name = "global") String global,
-          @RequestParam(name = "version") String version,
-          @RequestHeader(name = "x-domain-name") String domain);
-    }
-
-     RegistrationManager.INSTANCE.getSwaggerLoader().registerSwagger(
-            "demo-multi-registries",
-            "thirdParty-service-center",
-            "ServiceCenterEndpoint", IServiceCenterEndpoint.class);
-</code></pre>
-<ul>
-<li>Contrast First 方式注册契约</li>
-</ul>
-<p>在 <code>microservices/thirdParty-service-center/ServiceCenterEndpoint.yaml</code> 中定义契约内容</p>
-<pre><code>    ```yaml
-    swagger: "2.0"
-    info:
-      version: "1.0.0"
-      title: "swagger definition for org.apache.servicecomb.demo.registry.ServiceCenterEndpoint"
-      x-java-interface: "gen.swagger.ServiceCenterEndpointIntf"
-    basePath: "/v4/default/registry"
-    schemes:
-      - "http"
-    consumes:
-      - "application/json"
-    produces:
-      - "application/json"
-    paths:
-      /instances:
-        get:
-          operationId: "getInstances"
-          parameters:
-            - name: "appId"
-              in: "query"
-              required: true
-              type: "string"
-            - name: "serviceName"
-              in: "query"
-              required: true
-              type: "string"
-            - name: "global"
-              in: "query"
-              required: true
-              type: "string"
-            - name: "version"
-              in: "query"
-              required: true
-              type: "string"
-            - name: "x-domain-name"
-              in: "header"
-              required: true
-              type: "string"
-          responses:
-            "200":
-              description: "response of 200"
-              schema:
-                type: "object"
-    ```
-</code></pre>
-</li>
-<li>
-<p>经过上面的准备，就可以像访问 servicecomb 的微服务一样访问第三方服务了。 比如采用 RPC 的方式访问这个
- 服务的代码如下：</p>
-</li>
-</ul>
-<pre><code class="java">public interface IServiceCenterEndpoint {
-  // java name can not be `x-domain-name`, so interfaces define all parameters.
-  @GetMapping(path = &quot;/instances&quot;)
-  Object getInstances(@RequestParam(name = &quot;appId&quot;) String appId,
-      @RequestParam(name = &quot;serviceName&quot;) String serviceName,
-      @RequestParam(name = &quot;global&quot;) String global,
-      @RequestParam(name = &quot;version&quot;) String version,
-      @RequestHeader(name = &quot;x-domain-name&quot;) String domain);
-}
-
-@Component
-public class ServiceCenterTestCase implements CategorizedTestCase {
-  @RpcReference(microserviceName = &quot;thirdParty-service-center&quot;, schemaId = &quot;ServiceCenterEndpoint&quot;)
-  IServiceCenterEndpoint serviceCenterEndpoint;
-
-  @Override
-  public void testRestTransport() throws Exception {
-    // invoke service-center(3rd-parties)
-    @SuppressWarnings(&quot;unchecked&quot;)
-    Map&lt;String, List&lt;?&gt;&gt; result = (Map&lt;String, List&lt;?&gt;&gt;) serviceCenterEndpoint.getInstances(
-        &quot;demo-multi-registries&quot;,
-        &quot;demo-multi-registries-server&quot;,
-        &quot;true&quot;,
-        &quot;0.0.2&quot;,
-        &quot;default&quot;);
-    TestMgr.check(result.get(&quot;instances&quot;).size(), 1);
-  }
-}
-</code></pre>
-
-<h2 id="_3">连接多个服务中心</h2>
+                <h1 id="_1">连接多个服务中心</h1>
 <p>有些应用场景需要连接多个服务中心。比如一个应用系统会在不同的 region 部署，其中一个 region 的服务需要访问
 另外一个 region 的服务， 这个时候，可以连接另外 region 的服务中心，发现服务信息。 </p>
 <p><strong><em>注意:</em></strong> 连接多个服务中心指的是不同的服务中心集群，不是指一个集群内部的多个服务中心实例。 </p>
