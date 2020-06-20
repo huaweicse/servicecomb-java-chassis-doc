@@ -345,28 +345,8 @@ public class ServerBServiceCenterConfiguration {
   @Bean(&quot;serverBServiceCenterConfig&quot;)
   public ServiceRegistryConfig serverBServiceCenterConfig() {
     ServiceRegistryConfig config = ServiceRegistryConfig.buildFromConfiguration();
-    String address = DynamicPropertyFactory.getInstance()
-        .getStringProperty(&quot;servicecomb.service.registry-serverB.address&quot;, null)
-        .get();
-    if (address == null) {
-      throw new IllegalStateException(&quot;service center address is required.&quot;);
-    }
-    String[] urls = address.split(&quot;,&quot;);
-    List&lt;String&gt; uriList = Arrays.asList(urls);
-    ArrayList&lt;IpPort&gt; ipPortList = new ArrayList&lt;&gt;();
-    uriList.forEach(anUriList -&gt; {
-      try {
-        URI uri = new URI(anUriList.trim());
-        if (&quot;https&quot;.equals(uri.getScheme())) {
-          config.setSsl(true);
-        }
-        ipPortList.add(NetUtils.parseIpPort(uri));
-      } catch (Exception e) {
-        throw new IllegalStateException(&quot;service center address is required.&quot;, e);
-      }
-    });
-    config.setIpPort(ipPortList);
-    return config;
+    return ServiceRegistryConfigCustomizer.from(config)
+        .addressListFromConfiguration(&quot;servicecomb.service.registry-serverB.address&quot;).get();
   }
 }
 </code></pre>
