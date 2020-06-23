@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>使用Edge Service做边缘服务 - ServiceComb Java Chassis 开发指南</title>
+  <title>使用 Edge Service 做网关 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f7f\u7528Edge Service\u505a\u8fb9\u7f18\u670d\u52a1";
+    var mkdocs_page_name = "\u4f7f\u7528 Edge Service \u505a\u7f51\u5173";
     var mkdocs_page_input_path = "edge/by-servicecomb-sdk.md";
     var mkdocs_page_url = null;
   </script>
@@ -154,10 +154,10 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">使用Edge Service做边缘服务</a>
+    <a class="current" href="./">使用 Edge Service 做网关</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#edge-service">使用 Edge Service 做边缘服务</a></li>
+    <li class="toctree-l3"><a href="#edge-service">使用 Edge Service 做网关</a></li>
     
         <ul>
         
@@ -182,11 +182,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../nginx/">使用confd和Nginx做边缘服务</a>
+    <a class="" href="../zuul/">使用 `zuul` 和 `spring cloud gateway` 做网关</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../zuul/">使用zuul做边缘服务</a>
+    <a class="" href="../nginx/">nginx 网关简单介绍</a>
                 </li>
     </ul>
 	    </li>
@@ -343,7 +343,7 @@
         
       
     
-    <li>使用Edge Service做边缘服务</li>
+    <li>使用 Edge Service 做网关</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -353,7 +353,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="edge-service">使用 Edge Service 做边缘服务</h1>
+                <h1 id="edge-service">使用 Edge Service 做网关</h1>
 <p>Edge Service 是ServiceComb 提供的JAVA网关服务开发框架。Edge Service作为整个微服务系统对外的接口，向最终用户提供服务，接入RESTful请求，转发给内部微服务。Edge Service以开发框架的形式提供，开发者可以非常简单的搭建一个Edge Service服务，通过简单的配置就可以定义路由转发规则。同时Edge Service支持强大的扩展能力，服务映射、请求解析、加密解密、鉴权等逻辑都可以通过扩展实现。</p>
 <p>Edge Service 本身也是一个微服务，需遵守所有微服务开发的规则。其本身可以部署为多实例，前端使用负载均衡装置进行负载分发；也可以部署为主备，直接接入用户请求。开发者可以根据Edge Service承载的逻辑和业务访问量、组网情况来规划。</p>
 <h2 id="edge-service_1">开发 Edge Service 服务</h2>
@@ -678,7 +678,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../nginx/" class="btn btn-neutral float-right" title="使用confd和Nginx做边缘服务">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../zuul/" class="btn btn-neutral float-right" title="使用 `zuul` 和 `spring cloud gateway` 做网关">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../open-service/" class="btn btn-neutral" title="介绍"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -710,7 +710,7 @@ edgeInvocation.setVersionRule(versionMapper.getOrCreate(pathVersion).getVersionR
         <span><a href="../open-service/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../nginx/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../zuul/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

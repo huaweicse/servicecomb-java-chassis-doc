@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>使用zuul做边缘服务 - ServiceComb Java Chassis 开发指南</title>
+  <title>使用 `zuul` 和 `spring cloud gateway` 做网关 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f7f\u7528zuul\u505a\u8fb9\u7f18\u670d\u52a1";
+    var mkdocs_page_name = "\u4f7f\u7528 `zuul` \u548c `spring cloud gateway` \u505a\u7f51\u5173";
     var mkdocs_page_input_path = "edge/zuul.md";
     var mkdocs_page_url = null;
   </script>
@@ -154,35 +154,21 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../nginx/">使用confd和Nginx做边缘服务</a>
+    <a class="" href="../by-servicecomb-sdk/">使用 Edge Service 做网关</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">使用zuul做边缘服务</a>
+    <a class="current" href="./">使用 `zuul` 和 `spring cloud gateway` 做网关</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#zuul">使用zuul做边缘服务</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#_1">概念阐述</a></li>
-        
-            <li><a class="toctree-l4" href="#_2">场景描述</a></li>
-        
-            <li><a class="toctree-l4" href="#_3">注意事项</a></li>
-        
-            <li><a class="toctree-l4" href="#zuul-proxy">启动Zuul Proxy</a></li>
-        
-            <li><a class="toctree-l4" href="#zuul-proxy_1">使用Zuul Proxy</a></li>
-        
-        </ul>
+    <li class="toctree-l3"><a href="#zuul-spring-cloud-gateway">使用 zuul 和 spring cloud gateway 做网关</a></li>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../nginx/">nginx 网关简单介绍</a>
                 </li>
     </ul>
 	    </li>
@@ -339,7 +325,7 @@
         
       
     
-    <li>使用zuul做边缘服务</li>
+    <li>使用 `zuul` 和 `spring cloud gateway` 做网关</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -349,11 +335,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="zuul">使用zuul做边缘服务</h1>
-<h2 id="_1">概念阐述</h2>
-<h3 id="api-gateway">API Gateway：</h3>
-<p>API Gateway是一个服务器，也可以说是进入系统的唯一节点。API Gateway封装内部系统的架构，并且提供API给各个客户端。</p>
-<h3 id="zuul_1">Zuul</h3>
+                <h1 id="zuul-spring-cloud-gateway">使用 <code>zuul</code> 和 <code>spring cloud gateway</code> 做网关</h1>
 <p>Zuul是Netflix的基于JVM的路由器和服务器端负载均衡器，可以使用Zuul进行以下操作：</p>
 <ul>
 <li>认证</li>
@@ -367,105 +349,11 @@
 <li>静态相响应处理</li>
 <li>主动/被动流量管理</li>
 </ul>
-<p>本小节主要介绍在SpringBoot应用中使用Zuul做API Gateway。关于Zuul的详细功能介绍请参考文档<a href="https://springcloud.cc/spring-cloud-dalston.html#_router_and_filter_zuul">路由器和过滤器：Zuul</a>。</p>
-<h2 id="_2">场景描述</h2>
-<p>Zuul做API Gateway，即建立一个Zuul Proxy应用，在该Proxy应用中统一定义所有的微服务访问入口，通过使用不同的前缀(stripped)来区分各个微服务。本小节通过建立一个ZuulProxy SpringBoot应用来演示Zuul的API Gateway功能。</p>
-<h2 id="_3">注意事项</h2>
-<p>本小节介绍的ZuulProxy和ZuulServer等demo都是基于SpringBoot和ServiceComb框架的应用，具体请参考<a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>。</p>
-<h2 id="zuul-proxy">启动Zuul Proxy</h2>
-<p>本节介绍如何启动一个zuul proxy应用作为API Gateway。步骤如下：</p>
-<ul>
-<li><strong>步骤 1</strong>在pom文件中添加依赖：</li>
-</ul>
-<pre><code class="xml">&lt;dependency&gt; 
-  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;  
-  &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt; 
-&lt;/dependency&gt;
-&lt;dependency&gt; 
-  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;  
-  &lt;artifactId&gt;spring-cloud-starter-ribbon&lt;/artifactId&gt; 
-&lt;/dependency&gt;&lt;dependency&gt; 
-  &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;  
-  &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt; 
-&lt;/dependency&gt;
-&lt;dependency&gt; 
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;  
-  &lt;artifactId&gt;spring-boot-starter-discovery&lt;/artifactId&gt; 
-&lt;/dependency&gt;
-</code></pre>
-
-<ul>
-<li><strong>步骤 2</strong>在SpringBoot主类添加注解：</li>
-</ul>
-<pre><code class="java">@SpringBootApplication
-@EnableServiceComb
-@EnableZuulProxy//新增注解
-public class ZuulMain{
-    public static void main(String[] args) throws Exception{
-　　    SpringApplication.run(ZuulMain.class, args);
-    }
-}
-</code></pre>
-
-<ul>
-<li><strong>步骤 3</strong>在application.yml文件中定义路由策略：</li>
-</ul>
-<pre><code class="yaml">server: 
-  port: 8754 #api gateway服务端口
-zuul: 
-  routes: #路由策略
-    discoveryServer: /myServer/** #路由规则
-</code></pre>
-
-<p>红色的配置项表示可以根据实际开发环境进行配置。关于zuul.routers的路由策略的详细定义规则，请参考官方文献：<a href="https://springcloud.cc/spring-cloud-dalston.html#_router_and_filter_zuul">路由器和过滤器：Zuul</a>，可更细粒度地对路由进行控制。</p>
-<ul>
-<li><strong>步骤 4</strong>在microservice.yaml定义微服务属性：</li>
-</ul>
-<pre><code class="yaml">APPLICATION_ID: discoverytest #服务ID
-service_description: 
-  name: discoveryGateway #服务名称
-  version: 0.0.2 #服务版本号
-servicecomb: 
-  service: 
-    registry: 
-      address:  http://127.0.0.1:30100            #服务注册中心地址
- rest: 
-   address: 0.0.0.0:8082                         #微服务端口，可不写
-</code></pre>
-
-<ul>
-<li><strong>步骤 5　</strong>Run ZuulMain Application</li>
-</ul>
-<h2 id="zuul-proxy_1">使用Zuul Proxy</h2>
-<p>在使用zuul做的API Gateway前，首先要启动在zuul.routers中定义的微服务提供者。</p>
-<p>开发服务提供者，开按流程请参考3 开发服务提供者。在微服务microservice.yaml文件中需注意以下两点：</p>
-<ul>
-<li>
-<p>APPLICATION_ID需要于zuul proxy中定义的保持一致。</p>
-</li>
-<li>
-<p>service_description.name需要于zuul.routers中相对应。</p>
-</li>
-</ul>
-<p>示例如下：</p>
-<pre><code class="yaml">APPLICATION_ID: discoverytest #与zuul proxy一致
-service_description: 
-  name: discoveryServer #服务名称，与zuul.routers对应
-  version: 0.0.2
-servicecomb: 
-  service: 
-    registry: 
-      address: http://127.0.0.1:30100                #服务注册中心地址
-rest: 
-  address: 0.0.0.0:8080
-</code></pre>
-
-<p>API Gateway的访问入口为：<a href="http://127.0.0.1:8754">http://127.0.0.1:8754</a>，所有在zuul.routers中定义的服务都可通过这个访问入口进行代理访问，访问规则如下：</p>
-<p><a href="http://127.0.0.1:8754/myServer/***">http://127.0.0.1:8754/myServer/***</a></p>
-<p>这表示，Http调用<a href="http://127.0.0.1:8754/myServer/***">http://127.0.0.1:8754/myServer/***</a>，会转到discoveryServer服务（例如："/myServer/101"跳转到discoveryServer 服务下的"/101"）</p>
-<blockquote>
-<p>如果在服务中心同时存在多个discoveryServer服务(版本不同),zuul默认采用Ribbon策略对请求进行转发。</p>
-</blockquote>
+<p>关于Zuul的详细功能介绍请参考<a href="https://springcloud.cc/spring-cloud-dalston.html#_router_and_filter_zuul">路由器和过滤器：Zuul</a>。</p>
+<p>spring cloud gateway 是 spring cloud 开发的新一代网关服务，详细介绍可以参考<a href="https://spring.io/projects/spring-cloud-gateway">sprig cloud gateway</a></p>
+<p>使用 <code>zuul</code> 和 <code>spring cloud gateway</code> 作为网关，核心需要解决的问题是从服务中心发现其他微服务实例，
+需要使用到 <a href="https://github.com/huaweicloud/spring-cloud-huawei">spring cloud huawei</a> 的组件，
+详细开发指南可以参考<a href="https://support.huaweicloud.com/devg-servicestage/cse_java_0059.html">1</a>, <a href="https://support.huaweicloud.com/devg-servicestage/cse_java_0064.html">2</a></p>
               
             </div>
           </div>
@@ -473,10 +361,10 @@ rest:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../packaging/standalone/" class="btn btn-neutral float-right" title="以standalone模式打包">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../nginx/" class="btn btn-neutral float-right" title="nginx 网关简单介绍">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../nginx/" class="btn btn-neutral" title="使用confd和Nginx做边缘服务"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../by-servicecomb-sdk/" class="btn btn-neutral" title="使用 Edge Service 做网关"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -502,10 +390,10 @@ rest:
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../nginx/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../by-servicecomb-sdk/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../packaging/standalone/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../nginx/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

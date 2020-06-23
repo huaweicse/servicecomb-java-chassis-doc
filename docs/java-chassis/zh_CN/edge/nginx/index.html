@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>使用confd和Nginx做边缘服务 - ServiceComb Java Chassis 开发指南</title>
+  <title>nginx 网关简单介绍 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f7f\u7528confd\u548cNginx\u505a\u8fb9\u7f18\u670d\u52a1";
+    var mkdocs_page_name = "nginx \u7f51\u5173\u7b80\u5355\u4ecb\u7ecd";
     var mkdocs_page_input_path = "edge/nginx.md";
     var mkdocs_page_url = null;
   </script>
@@ -154,14 +154,18 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../by-servicecomb-sdk/">使用Edge Service做边缘服务</a>
+    <a class="" href="../by-servicecomb-sdk/">使用 Edge Service 做网关</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../zuul/">使用 `zuul` 和 `spring cloud gateway` 做网关</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">使用confd和Nginx做边缘服务</a>
+    <a class="current" href="./">nginx 网关简单介绍</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#confdnginx">使用confd和Nginx做边缘服务</a></li>
+    <li class="toctree-l3"><a href="#nginx">nginx 网关简单介绍</a></li>
     
         <ul>
         
@@ -169,16 +173,10 @@
         
             <li><a class="toctree-l4" href="#_2">场景描述</a></li>
         
-            <li><a class="toctree-l4" href="#_3">对接服务中心</a></li>
-        
         </ul>
     
 
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../zuul/">使用zuul做边缘服务</a>
                 </li>
     </ul>
 	    </li>
@@ -335,7 +333,7 @@
         
       
     
-    <li>使用confd和Nginx做边缘服务</li>
+    <li>nginx 网关简单介绍</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -345,87 +343,90 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="confdnginx">使用confd和Nginx做边缘服务</h1>
+                <h1 id="nginx">nginx 网关简单介绍</h1>
 <h2 id="_1">概念阐述</h2>
 <h3 id="confd"><strong>confd</strong></h3>
-<p>confd是一个轻量级的配置管理工具，源码地址：<a href="https://github.com/kelseyhightower/confd">https://github.com/kelseyhightower/confd</a>，它可以将配置信息存储在etcd、consul、dynamodb、redis以及zookeeper等。confd定期会从这些存储节点pull最新的配置，然后重新加载服务，完成配置文件的更新。</p>
-<h3 id="nginx"><strong>Nginx</strong></h3>
-<p>Nginx (engine x)是一个高性能的HTTP和反向代理服务器，具有负载均衡的功能。详情请参考<a href="http://www.nginx.cn/doc/">http://www.nginx.cn/doc/</a>。本小节介绍的服务主要使用到的是Nginx的http代理功能。</p>
+<p>confd是一个轻量级的配置管理工具，源码地址：<a href="https://github.com/kelseyhightower/confd">https://github.com/kelseyhightower/confd</a>，
+它可以将配置信息存储在etcd、consul、dynamodb、redis以及zookeeper等。confd定期会从这些存储节点pull最
+新的配置，然后重新加载服务，完成配置文件的更新。</p>
+<h3 id="nginx_1"><strong>Nginx</strong></h3>
+<p>Nginx (engine x)是一个高性能的HTTP和反向代理服务器，具有负载均衡的功能。详情请
+参考<a href="http://www.nginx.cn/doc/">http://www.nginx.cn/doc/</a>。</p>
 <h2 id="_2">场景描述</h2>
-<p>本小节介绍的技术是使用nginx+confd做边缘服务，同时可以对接Java Chassis微服务框架中的服务中心，从服务中心中拉去服务信息通过confd动态更新nginx的配置。</p>
-<p>使用nginx+confd动态反向代理的实现步骤可参考文章<a href="http://www.cnblogs.com/Anker/p/6112022.html">http://www.cnblogs.com/Anker/p/6112022.html</a>，本节主要介绍confd如何对接Java Chassis框架的服务中心。</p>
-<h2 id="_3">对接服务中心</h2>
-<p>本节介绍的技术核心在于如何使得confd获取到服务中心的服务信息，服务中心开放了以下接口供外部调用：</p>
-<h3 id="http"><strong>方法一：http调用</strong></h3>
-<p>服务中心开放http接口均需要添加租户头部信息：“X-Tenant-Name:tenantName”，tenameName为租户名，默认为default，例如"X-Tenant-Name:default"。</p>
+<p>本小节简单介绍 Nginx 对接服务中心，从服务中心中获取服务信息并通过 confd 动态更新 Nginx 的配置。</p>
+<p>使用 nginx+confd 动态反向代理的实现步骤可参考文
+章<a href="http://www.cnblogs.com/Anker/p/6112022.html">http://www.cnblogs.com/Anker/p/6112022.html</a>。</p>
 <ul>
-<li>检查服务中心健康状态</li>
+<li>方法一：http调用</li>
 </ul>
-<pre><code>GET 127.0.0.1:30100/health
-</code></pre>
-
+<p>服务中心开放http接口均需要添加租户头部信息：“X-Tenant-Name:tenantName”，tenameName为租户名，默
+  认为default，例如"X-Tenant-Name:default"。</p>
 <ul>
-<li>获取所有微服务信息</li>
-</ul>
-<pre><code>GET 127.0.0.1:30100/registry/v3/microservices
+<li>
+<p>检查服务中心健康状态</p>
+<pre><code>    ```
+    GET 127.0.0.1:30100/health
+    ```
 </code></pre>
-
-<ul>
+</li>
+<li>
+<p>获取所有微服务信息</p>
+<pre><code>    ```
+    GET 127.0.0.1:30100/registry/v3/microservices
+    ```
+</code></pre>
+</li>
 <li>
 <p>获取指定id的微服务信息</p>
-<ul>
-<li>
 <p>首先根据微服务信息获取serviceId</p>
-<pre><code>GET 127.0.0.1:30100/registry/v3/existence?type=microservice&amp;appId={appId}&amp;serviceName={serviceName}&amp;version={version}
+<pre><code>    GET 127.0.0.1:30100/registry/v3/existence?type=microservice&amp;appId={appId}&amp;serviceName={serviceName}&amp;version={version}
 </code></pre>
-</li>
-<li>
 <p>根据上述接口返回的serviceId获取微服务完整信息</p>
-<pre><code>GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}
+<pre><code>    GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}
 </code></pre>
-</li>
-</ul>
 </li>
 <li>
 <p>获取指定微服务的所有实例信息</p>
-<pre><code>GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}/instances
+<pre><code>    GET 127.0.0.1:30100/registry/v3/microservices/{serviceId}/instances
 </code></pre>
-</li>
-</ul>
 <p>需要在header中添加："X-ConsumerId:{serviceId}"。</p>
-<ul>
-<li>查找微服务实例信息<pre><code>GET 127.0.0.1:30100/registry/v3/instances?appId={appId}&amp;serviceName={serviceName}&amp;version={version}
+</li>
+<li>
+<p>查找微服务实例信息</p>
+<pre><code>    GET 127.0.0.1:30100/registry/v3/instances?appId={appId}&amp;serviceName={serviceName}&amp;version={version}
 </code></pre>
+<p>需要在header中添加: "X-ConsumerId:{serviceId}"。</p>
+</li>
+<li>
+<p>方法二：使用servicecomb开源代码接口</p>
 </li>
 </ul>
-<p>需要在header中添加: "X-ConsumerId:{serviceId}"。</p>
-<h4 id="service-centerurlhttpjson">注意：在实际开发中请访问实际的service-center访问地址，并将上述url中{}的变量替换成具体值，http返回的数据均为json格式</h4>
-<h3 id="servicecomb"><strong>方法二：使用servicecomb开源代码接口</strong></h3>
-<p>在开发微服务应用，只需要调用servicecomb框架代码中的工具类RegistryUtil.java中提供的接口，即可获取服务中心的信息，接口描述如下：</p>
+<p>在开发微服务应用，只需要调用servicecomb框架代码中的工具类RegistryUtil.java中提供的接口，即可
+  获取服务中心的信息，接口描述如下：</p>
 <ul>
 <li>
 <p>获取所有微服务信息  </p>
-<pre><code>List&lt;Microservice&gt; getAllMicroservices();
+<pre><code>    List&lt;Microservice&gt; getAllMicroservices();
 </code></pre>
 </li>
 <li>
 <p>获取微服务唯一标识  </p>
-<pre><code>String getMicroserviceId(String appId, String microserviceName, String versionRule);
+<pre><code>    String getMicroserviceId(String appId, String microserviceName, String versionRule);
 </code></pre>
 </li>
 <li>
 <p>根据微服务唯一标识查询微服务静态信息  </p>
-<pre><code>Microservice getMicroservice(String microserviceId);
+<pre><code>    Microservice getMicroservice(String microserviceId);
 </code></pre>
 </li>
 <li>
 <p>根据多个微服务唯一标识查询所有微服务实例信息  </p>
-<pre><code>List&lt;MicroserviceInstance&gt; getMicroserviceInstance(String consumerId, String providerId);
+<pre><code>    List&lt;MicroserviceInstance&gt; getMicroserviceInstance(String consumerId, String providerId);
 </code></pre>
 </li>
 <li>
 <p>按照app+interface+version查询实例endpoints信息  </p>
-<pre><code>List&lt;MicroserviceInstance&gt; findServiceInstance(String consumerId, String appId, String serviceName,String versionRule);
+<pre><code>    List&lt;MicroserviceInstance&gt; findServiceInstance(String consumerId, String appId, String serviceName,String versionRule);
 </code></pre>
 </li>
 </ul>
@@ -437,10 +438,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../zuul/" class="btn btn-neutral float-right" title="使用zuul做边缘服务">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../packaging/standalone/" class="btn btn-neutral float-right" title="以standalone模式打包">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../by-servicecomb-sdk/" class="btn btn-neutral" title="使用Edge Service做边缘服务"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../zuul/" class="btn btn-neutral" title="使用 `zuul` 和 `spring cloud gateway` 做网关"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -466,10 +467,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../by-servicecomb-sdk/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../zuul/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../zuul/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../packaging/standalone/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
