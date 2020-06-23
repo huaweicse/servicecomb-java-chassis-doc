@@ -326,16 +326,16 @@
             <div class="section">
               
                 <h1 id="swagger">使用 Swagger 注解</h1>
-<h2 id="_1">概念阐述</h2>
-<p>Swagger提供了一套注解用于描述接口契约，用户使用注解，可以在代码中增加对于契约的描述信息。ServiceComb支持其中的部分注解。</p>
-<h2 id="_2">场景描述</h2>
-<p>通过使用注解描述接口契约，用户可以利用ServiceComb的Swagger契约生成功能自动生成符合要求的契约文件，而无须手工编写和修改契约，能够有效提高开发效率。</p>
-<h2 id="_3">配置说明</h2>
-<p>关于Swagger注解的含义，可以在<a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-1.5.X">Swagger注解文档</a>中找到官方说明。您可以对照该官方文档与本说明来了解如何在ServiceComb框架下使用注解指定Swagger契约的各项属性。</p>
-<p>在ServiceComb中，Swagger注解不是必须使用的。当用户使用SpringMVC和JAX-RS的注解来标注微服务方法时，ServiceComb可以根据这些注解的值推断出各微服务方法的契约信息。</p>
-<h3 id="api"><code>@Api</code></h3>
+<p>采用 Spring MVC 或者 JAX RS 注解已经能够描述大部分常用的契约信息，但是仍然不足以描述所有契约信息。可以混合
+使用 Swagger 注解，进一步补充契约信息，使得契约信息更加完整。当 Spring MVC 或者 JAR RS 注解描述的信息与
+Swagger 注解描述的信息重复时，以 Swagger 注解描述的信息为准，即 Swagger 注解具有更高的优先级。</p>
+<p>关于Swagger注解的含义，可以在<a href="swagger-annotation">Swagger注解文档</a>中找到官方说明。可以对
+照该官方文档与本说明来了解如何在ServiceComb框架下使用注解指定Swagger契约的各项属性。</p>
+<h2 id="api"><code>@Api</code></h2>
 <blockquote>
-<p><code>@Api</code>作用于类级别，在Swagger官方描述中是用于将一个Class标注为一个Swagger资源。但该注解在ServiceComb中不是必须的，ServiceComb可以根据<code>@RestSchema</code>和<code>@RpcSchema</code>确定需要从哪些类中解析出Swagger契约。</p>
+<p><code>@Api</code>作用于类级别，在Swagger官方描述中是用于将一个Class标注为一个Swagger资源。但该注解
+在ServiceComb中不是必须的，ServiceComb可以根据<code>@RestSchema</code>和<code>@RpcSchema</code>确定需要从哪些
+类中解析出Swagger契约。</p>
 </blockquote>
 <table>
 <thead>
@@ -363,7 +363,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="swaggerdefinition"><code>@SwaggerDefinition</code></h3>
+<h2 id="swaggerdefinition"><code>@SwaggerDefinition</code></h2>
 <blockquote>
 <p>作用于类级别，用于定义一个Swagger资源中的信息。</p>
 </blockquote>
@@ -438,7 +438,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="apioperation"><code>@ApiOperation</code></h3>
+<h2 id="apioperation"><code>@ApiOperation</code></h2>
 <blockquote>
 <p>作用于方法级别，用于描述一个Swagger operation。</p>
 </blockquote>
@@ -513,7 +513,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="apiimplicitparam"><code>@ApiImplicitParam</code></h3>
+<h2 id="apiimplicitparam"><code>@ApiImplicitParam</code></h2>
 <blockquote>
 <p>作用于方法级别，用于说明Swagger文档中operation的参数的属性。</p>
 <p><strong>注意</strong>：ServiceComb可以根据代码和SpringMVC、JAX-RS的注解自动推断出参数名称。如果<code>@ApiImplicitParam</code>配置的参数名称与自动推断的参数名不同，则则该注解配置的参数将被作为一个新的参数加入到注解所在的operation中；否则将覆盖同名参数的属性。</p>
@@ -589,7 +589,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="apiimplicitparams"><code>@ApiImplicitParams</code></h3>
+<h2 id="apiimplicitparams"><code>@ApiImplicitParams</code></h2>
 <blockquote>
 <p><code>@ApiImplicitParams</code>作用于方法、类级别，用于批量指定多个<code>@ApiImplicitParam</code>。</p>
 </blockquote>
@@ -609,7 +609,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="apiresponse"><code>@ApiResponse</code></h3>
+<h2 id="apiresponse"><code>@ApiResponse</code></h2>
 <blockquote>
 <p>用于描述返回消息的HTTP状态码所表达的含义。通常<code>@ApiOperation</code>可以表示一个正常情况返回消息的HTTP状态码，其他情形下的HTTP状态码由本注解描述。根据Swagger官方文档的描述，本注解不应该直接用于方法级别，而应该被包含在<code>@ApiResponses</code>中。</p>
 </blockquote>
@@ -649,7 +649,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="apiresponses"><code>@ApiResponses</code></h3>
+<h2 id="apiresponses"><code>@ApiResponses</code></h2>
 <blockquote>
 <p>作用于方法、类级别，用于指定和说明一组返回值。</p>
 </blockquote>

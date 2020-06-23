@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>使用隐式契约 - ServiceComb Java Chassis 开发指南</title>
+  <title>使用 Context 参数 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f7f\u7528\u9690\u5f0f\u5951\u7ea6";
-    var mkdocs_page_input_path = "build-provider/code-first.md";
+    var mkdocs_page_name = "\u4f7f\u7528 Context \u53c2\u6570";
+    var mkdocs_page_input_path = "build-provider/context-param.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -315,7 +315,7 @@
     
       
     
-    <li>使用隐式契约</li>
+    <li>使用 Context 参数</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -325,14 +325,74 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">使用隐式契约</h1>
-<h2 id="_2">概念阐述</h2>
-<p>隐式契约是指ServiceComb根据服务实现类自动生成的服务契约。</p>
-<h2 id="_3">场景描述</h2>
-<p>用户通过隐式契约功能，可以不预先定义契约和接口，直接定义实现类，在服务启动时，根据实现类自动生成契约，并注册到服务中心。</p>
-<h2 id="api">涉及API</h2>
-<p>隐式契约可用于Spring MVC、JAX-RS、透明RPC三种开发模式，具体使用参见3.4 用SpringMVC开发微服务、3.5 用JAX-RS开发微服务和3.6 用透明RPC开发微服务。</p>
-<p>使用透明RPC模式开发微服务时，由于从代码上无法分辨微服务开发人员期望如何定义契约，所以生成的契约全是POST方法，所有method的入参被包装为一个class，作为body参数传递，所以建议使用隐式契约开发provider时，选择SpringMVC或JAX-RS开发模式，可以得到完整的RESTful声明。</p>
+                <h1 id="context">使用 Context 参数</h1>
+<p>Context 参数指在接口声明中的特殊参数，这些参数信息不会出现在最终的契约信息中，开发者可以使用 Context 参数
+获取或者传递与运行时有关的信息。 </p>
+<ul>
+<li>HttpServletRequest</li>
+</ul>
+<p>HttpServletRequest 用于获取和HTTP请求有关的信息，比如 header 等。当 servicecomb 运行于 <code>Highway</code>
+  协议，或者运行于 <code>vert.x</code> 服务器之上的时候，仍然可以使用。 但是需要注意，和 JSP/Servlet 协议标准的实现
+  不同， 开发者无法通过 HttpServletRequest 操作流，只能够进行一些简单的获取 header 等操作。比如下面的例子，
+  获取 query 参数：</p>
+<pre><code>    ```java
+      @GetMapping(path = "/reduce")
+      @ApiImplicitParams({@ApiImplicitParam(name = "a", dataType = "integer", format = "int32", paramType = "query")})
+      public int reduce(HttpServletRequest request, @CookieValue(name = "b") int b) {
+        int a = Integer.parseInt(request.getParameter("a"));
+        return a - b;
+      }
+    ```
+</code></pre>
+<p>特别需要注意，如果请求不是直接到达 provider， 而是经过 servicecomb 的 Edge Service 转发到 provider，
+  上面的代码还必须使用 <code>@ApiImplicitParams</code> 显示的声明这个接口的实现通过 <code>HttpServletRequest</code> 读取了
+  query 参数 <code>a</code>， 如果不声明， Edge Service 做请求转发的时候，不会转发参数 <code>a</code>， 代码中读取的参数值为
+  null。</p>
+<p>还需要注意，servicecomb 不支持 <code>HttpServletResponse</code> Context 参数。</p>
+<ul>
+<li>InvocationContext</li>
+</ul>
+<p>InvocationContext 是 servicecomb 特有的上下文信息，可以在 <code>Handler</code>, <code>HttpServerFilter</code> 等
+  多种场景使用。 InvocationContext 包含 local 和 context 两种数据， local 数据只在本进程的模块间
+  传递， context 数据可以在微服务之间传递。 </p>
+<pre><code>    ```java
+      @ApiResponse(code = 202, response = User.class, message = "")
+      @ResponseHeaders({@ResponseHeader(name = "h1", response = String.class),
+          @ResponseHeader(name = "h2", response = String.class)})
+      @RequestMapping(path = "/cseResponseCorrect", method = RequestMethod.GET)
+      public Response cseResponseCorrect(InvocationContext c1) {
+        Response response = Response.createSuccess(Status.ACCEPTED, new User());
+        Headers headers = response.getHeaders();
+        headers.addHeader("h1", "h1v " + c1.getContext().get(Const.SRC_MICROSERVICE));
+
+        InvocationContext c2 = ContextUtils.getInvocationContext();
+        headers.addHeader("h2", "h2v " + c2.getContext().get(Const.SRC_MICROSERVICE));
+
+        return response;
+      }
+    ```
+</code></pre>
+<p>上面的代码显示了 InvocationContext 参数的用法， 这个用法和代码中通过 ContextUtils.getInvocationContext()
+  获取是等价的。</p>
+<p>InvocationContext 还可以在 consumer 端的 RPC 接口中使用， <a href="../../general-development/context/">使用Context传递控制消息</a> 描述了更多 InvocationContext 的使用
+  场景。</p>
+<ul>
+<li>Endpoint</li>
+</ul>
+<p>Endpoint 描述当前请求需要发往的实例地址。 这个 context 参数只能够在 consumer 端的 PRC 接口使用。当
+  微服务存在多个实例的时候，可以使用这种方式指定将请求发往哪个实例。 </p>
+<pre><code>    ```java
+    public interface SchemaDiscoveryService {
+      String getSchema(Endpoint endpoint, String schemaId);
+    }
+
+    SchemaDiscoveryService schemaDiscoveryService = Invoker
+              .createProxy(serviceName, SchemaDiscoveryService.SCHEMA_ID,
+                  SchemaDiscoveryService.class);
+
+    schemaDiscoveryService.getSchema(EndpointUtils.parse(endpoint), schemaId);
+    ```
+</code></pre>
               
             </div>
           </div>
