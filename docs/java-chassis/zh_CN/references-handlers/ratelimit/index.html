@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Consumer的通用配置项 - ServiceComb Java Chassis 开发指南</title>
+  <title>限流 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Consumer\u7684\u901a\u7528\u914d\u7f6e\u9879";
-    var mkdocs_page_input_path = "build-consumer/common-configuration.md";
+    var mkdocs_page_name = "\u9650\u6d41";
+    var mkdocs_page_input_path = "references-handlers/ratelimit.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -75,7 +75,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../catalog/">开发服务消费者</a>
+    <a class="" href="../../build-consumer/catalog/">开发服务消费者</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -135,23 +135,37 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
+    <a class="" href="../intruduction/">处理链介绍</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
+    <a class="" href="../loadbalance/">负载均衡</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">限流</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">限流</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#provider">Provider端使用限流</a></li>
+        
+            <li><a class="toctree-l4" href="#consumer">Consumer端使用限流</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/ratelimit/">限流</a>
+    <a class="" href="../router/">路由管理</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/router/">路由管理</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+    <a class="" href="../bizkeeper/">隔离熔断容错</a>
                 </li>
     </ul>
 	    </li>
@@ -185,7 +199,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
+    <a class="" href="../publickey/">公钥认证</a>
                 </li>
                 <li class="">
                     
@@ -318,8 +332,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>服务治理功能参考 &raquo;</li>
+        
+      
     
-    <li>Consumer的通用配置项</li>
+    <li>限流</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -329,45 +347,130 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="consumer">Consumer的通用配置项</h1>
+                <h1 id="_1">限流</h1>
+<h2 id="provider">Provider端使用限流</h2>
+<p>用户在provider端使用限流策略，可以限制指定微服务向其发送请求的频率，达到限制每秒钟最大请求数量的效果。</p>
+<h3 id="_2">注意事项</h3>
+<ol>
+<li>限流策略的控制并不是绝对精确的，可能会有少量误差。</li>
+<li>provider端的流量控制是业务层面的功能，不是安全意义上的流量控制，如需防止DDoS攻击，需要结合其他的一系列措施。</li>
+<li>流量控制是微服务级的，不是实例级的。例如一个consumer服务有三个实例，当对它们依赖的provider实例配置限流策略后，provider不会区分consumer的请求具体是由哪个实例发出的，而是汇总成微服务级的统计数据进行限流判断。</li>
+</ol>
+<h3 id="_3">配置说明</h3>
+<p>限流策略配置在microservice.yaml文件中，相关配置项见表<strong>QPS流控配置项说明</strong>。要开启服务提供者端的限流策略，还需要在处理链中配置服务端限流handler，并添加pom依赖。</p>
 <ul>
-<li>请求超时  </li>
-<li>配置项<br />
-    servicecomb.request.timeout  </li>
-<li>默认值<br />
-    30000，单位为毫秒    </li>
-<li>含义<br />
-    Consumer传输层开始发送时，开始计时，指定时间内未收到应答，则处理为请求超时    </li>
-<li>指定传输通道  </li>
-<li>配置项<br />
-    servicecomb.references.${目标微服务名}.transport<br />
-    servicecomb.references.transport<br />
-    同时支持全局和微服务级的两级控制</li>
-<li>默认值<br />
-    无</li>
-<li>含义<br />
-    如果目标微服务同时开放多种transport的访问能力时，而Consumer也同时部署了相应的多个transport，但是作为Consumer调用该微服务时，只想使用其中一种transport，则可以通过本配置项指定transport
-    如果不配置，则轮流使用多个transport  </li>
-<li>指定目标实例的版本规则</li>
-<li>配置项<br />
-    servicecomb.references.${目标服务名}.version-rule<br />
-    servicecomb.references.version-rule
-    同时支持全局和微服务级的两级控制  </li>
-<li>默认值<br />
-    latest</li>
-<li>含义<br />
-    目标实例的版本规则，支持以下规则：  <ul>
-<li>最新版本： latest  </li>
-<li>大于指定版本，比如：1.0.0+</li>
-<li>指定版本范围，比如：1.0.0-2.0.0，表示大于等于版本1.0.0，并且小于版本2.0.0</li>
-<li>精确版本，比如：1.0.0</li>
+<li>microservice.yaml配置示例如下：
+  <code>yaml
+  servicecomb:
+    handler:
+      chain:
+        Provider:
+          default: qps-flowcontrol-provider</code></li>
+<li>添加handler-flowcontrol-qps的pom依赖：
+  <code>xml
+  &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;handler-flowcontrol-qps&lt;/artifactId&gt;
+  &lt;/dependency&gt;</code></li>
 </ul>
-</li>
-</ul>
+<p><strong>QPS流控配置项说明</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">取值范围</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+<th align="left">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.flowcontrol.Provider.qps.enabled</td>
+<td align="left">true</td>
+<td align="left">true/false</td>
+<td align="left">否</td>
+<td align="left">是否启用Provider流控</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">servicecomb.flowcontrol.Provider.qps.limit.[ServiceName].[Schema].[operation]</td>
+<td align="left">2147483647（max int）</td>
+<td align="left">(0,2147483647]，整形</td>
+<td align="left">否</td>
+<td align="left">每秒钟允许的请求数</td>
+<td align="left">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
+</tr>
+<tr>
+<td align="left">servicecomb.flowcontrol.Provider.qps.global.limit</td>
+<td align="left">2147483647（max int）</td>
+<td align="left">(0,2147483647]，整形</td>
+<td align="left">否</td>
+<td align="left">provider接受请求流量的全局配置</td>
+<td align="left">没有具体的流控配置时，此配置生效</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：</strong>
+provider端限流策略配置中的<code>ServiceName</code>指的是调用该provider的consumer，而<code>schema</code>、<code>operation</code>指的是provider自身的。即provider端限流配置的含义是，限制指定consumer调用本provider的某个schema、operation的流量。</p>
+</blockquote>
+<h2 id="consumer">Consumer端使用限流</h2>
+<p>用户在consumer端使用限流策略，可以限制发往指定微服务的请求的频率。</p>
+<h3 id="_4">配置说明</h3>
+<p>限流策略配置在microservice.yaml文件中，相关配置项见下表。要开启服务消费者端的限流策略，还需要在处理链中配置消费端限流handler，配置示例如下：</p>
+<pre><code class="yaml">servicecomb:
+  handler:
+    chain:
+      Consumer:
+        default: qps-flowcontrol-consumer
+</code></pre>
+
+<p>QPS流控配置项说明</p>
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">取值范围</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+<th align="left">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.enabled</td>
+<td align="left">true</td>
+<td align="left">Boolean</td>
+<td align="left">否</td>
+<td align="left">是否启用Consumer流控</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
+<td align="left">2147483647  (max int)</td>
+<td align="left">(0,2147483647]，整形</td>
+<td align="left">否</td>
+<td align="left">每秒钟允许的请求数</td>
+<td align="left">支持microservice、schema、operation三个级别的配置</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../router/" class="btn btn-neutral float-right" title="路由管理">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../loadbalance/" class="btn btn-neutral" title="负载均衡"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -391,6 +494,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../loadbalance/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../router/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
