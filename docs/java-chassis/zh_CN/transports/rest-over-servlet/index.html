@@ -592,6 +592,24 @@ protected WebApplicationContext createWebApplicationContext(ApplicationContext p
 <td align="left">否</td>
 <td align="left">用于简化servlet+servlet mapping配置<br>只有在web.xml中未配置servlet+servlet mapping时，才使用此配置项，配置格式为：/* 或  /path/*，其中path可以是多次目录</td>
 </tr>
+<tr>
+<td align="left">servicecomb.uploads.maxSize</td>
+<td align="left">无</td>
+<td align="left">否</td>
+<td align="left">文件上传 form body 最大大小</td>
+</tr>
+<tr>
+<td align="left">servicecomb.uploads.maxFileSize</td>
+<td align="left">无</td>
+<td align="left">否</td>
+<td align="left">文件上传所有文件总的大小限制</td>
+</tr>
+<tr>
+<td align="left">servicecomb.uploads.fileSizeThreshold</td>
+<td align="left">无</td>
+<td align="left">否</td>
+<td align="left">文件上传，实际写入磁盘文件的最大大小</td>
+</tr>
 </tbody>
 </table>
               
