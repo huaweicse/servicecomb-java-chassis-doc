@@ -291,6 +291,9 @@
     <a class="current" href="./">FAQ</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#_1">常见问题</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -336,19 +339,103 @@
           <div role="main">
             <div class="section">
               
-                <ul>
-<li>
-<p><strong>Q: 用IntelliJ的免费版开发，有什么问题？</strong>   </p>
+                <h1 id="_1">常见问题</h1>
 <ul>
-<li>A: 没有问题，使用IntelliJ 开发，可参考 <a href="/cn/developers/setup-develop-environment/">Setup Developer Environment</a> 进行相应的环境配置。    </li>
+<li><a href="#Q2">Q: 契约生成会报错 Caused by: java.lang.Error: OperationId must be unique，不支持函数重载？</a>  </li>
+<li><a href="#Q3">Q: Map类型的key必须使用 String 类型？</a>  </li>
+<li><a href="#Q4">Q: 参数返回值不能使用接口？</a></li>
+<li><a href="#Q5">Q: 参数返回值不能使用泛型？</a></li>
+<li><a href="#Q6">Q: 实现类中 public 方法被发布为接口，但是并没有使用？</a></li>
 </ul>
-</li>
-<li>
-<p><strong>Q: 契约生成会报错Caused by: java.lang.Error: OperationId must be unique，不支持函数重载？</strong></p>
+<h2 id="Q2">Q: 契约生成会报错 Caused by: java.lang.Error: OperationId must be unique，不支持函数重载？</h2>
+
 <ul>
 <li>A: 支持函数重载，但是需要注意每个接口必须有唯一的operation id。可以加上<code>@ApiOperation</code>标签给重载的接口指定唯一的 operation id。</li>
 </ul>
-</li>
+<h2 id="Q3">Q: Map类型的 key 必须使用 String 类型？</h2>
+
+<ul>
+<li>A: 是的。java-chassis 遵循 <a href="https://swagger.io/docs/specification/data-models/dictionaries/">Open API 规范</a>, MAP
+  类型的 key 必须使用 String 类型。 业务可以结合实际情况，使用符合规范的类型。 如果必须使用其他类型，
+  可以考虑接口定义使用 Object 规避，客户端可以对返回值结果自行进行 json 转换。</li>
+</ul>
+<h2 id="Q4">Q: 参数返回值不能使用接口？</h2>
+
+<ul>
+<li>A: 是的。java-chassis 不允许参数、返回值的类型为 <code>Interface</code> 或者 <code>Abstract Class</code>。因为这些类型
+  无法正确的生成 swagger 描述。如果必须使用这些类型，可以考虑接口定义使用 Object 规避，客户端可以对返回值结果
+  自行进行 json 转换。</li>
+</ul>
+<h2 id="Q5">Q: 参数返回值不能使用泛型？</h2>
+
+<ul>
+<li>A: 可以使用泛型。但是必须明确泛型类型。比如：</li>
+</ul>
+<pre><code class="java">  @PostMapping(path = &quot;holderUser&quot;)
+  public Holder&lt;User&gt; holderUser(@RequestBody Holder&lt;User&gt; input) {
+    Assert.isInstanceOf(Holder.class, input);
+    Assert.isInstanceOf(User.class, input.value);
+    return input;
+  }
+
+  @GetMapping(path = &quot;/genericParams&quot;)
+  @ApiOperation(value = &quot;genericParams&quot;, nickname = &quot;genericParams&quot;)
+  public List&lt;List&lt;String&gt;&gt; genericParams(@RequestParam(&quot;code&quot;) int code, @RequestBody List&lt;List&lt;String&gt;&gt; names) {
+    return names;
+  }
+</code></pre>
+
+<p>未指定泛型类型是不允许的。比如：</p>
+<pre><code class="java">  @GetMapping(path = &quot;/genericParams&quot;)
+  @ApiOperation(value = &quot;genericParams&quot;, nickname = &quot;genericParams&quot;)
+  public List genericParams(@RequestParam(&quot;code&quot;) int code, @RequestBody List names) {
+    return names;
+  }
+</code></pre>
+
+<p>如果业务必须使用泛型，并且不能确定类型，可以考虑接口定义使用 Object 规避，客户端可以对返回值结果
+自行进行 json 转换。</p>
+<h2 id="Q6">Q: 实现类中 public 方法被发布为接口，但是并没有使用？</h2>
+
+<ul>
+<li>A: java chassis 会将所有 public 方法发布为接口。 如果有些接口不需要发布为接口，可以使用 @ApiOperation
+  标签声明不发布为接口。例子如下：</li>
+</ul>
+<pre><code class="java">  @ApiOperation(value = &quot;&quot;, hidden = true)
+  public void hidden() {
+
+  }
+</code></pre>
+
+<p>在迁移改造的过程中，比如将 HSF 和 Dubbo 的内部 RPC 接口改造为 java-chassis 的 RPC 接口，可能还有更加复杂
+的情况，比如：</p>
+<pre><code class="java">@HSFProvider(MyInterface.class)
+public MyService extends AbstractMyService implements MyInterface
+</code></pre>
+
+<p>如果直接改造为</p>
+<pre><code class="java">@RpcSchema(schemaId = &quot;MyService&quot;)
+public MyService extends AbstractMyService implements MyInterface
+</code></pre>
+
+<p>那么 <code>AbstractMyService</code> 的公共方法也会发布为 RPC 接口， 而 HSF 和 dubbo 则不会。 这种情况建议增加
+一个类，而将原来的接口声明为服务类来处理， 比如：</p>
+<pre><code class="java">@Service(&quot;MyService&quot;)
+public MyService extends AbstractMyService implements MyInterface
+
+@RpcSchema(schemaId = &quot;MyServiceImpl&quot;)
+public MyServiceImpl implements MyInterface {
+    @Autowired
+    @Qualifier(&quot;MyService&quot;)
+    MyInterface service;
+
+    public String hello(String name) {
+       return service.hello(name);
+    }
+}
+</code></pre>
+
+<ul>
 <li>
 <p><strong>Q: 使用<em>spring-boot-starter-provider</em>这个依赖时，在<em>application.yml</em>文件中声明的<code>spring.main.web-application</code>属性并没有生效？</strong></p>
 <ul>
