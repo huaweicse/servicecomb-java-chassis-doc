@@ -373,6 +373,53 @@
 </tr>
 </tbody>
 </table>
+<p>2.1.1版本流控配置变更：</p>
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">取值范围</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+<th align="left">注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.strategy</td>
+<td align="left">FixedWindow</td>
+<td align="left">FixedWindow/LeakyBucket/TokenBucket/自定义</td>
+<td align="left">否</td>
+<td align="left">流控策略</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.enabled</td>
+<td align="left">true</td>
+<td align="left">Boolean</td>
+<td align="left">否</td>
+<td align="left">是否启用Consumer流控</td>
+<td align="left">-</td>
+</tr>
+<tr>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
+<td align="left">2147483647  (max int)</td>
+<td align="left">(0,2147483647]，整形</td>
+<td align="left">否</td>
+<td align="left">每秒钟允许的请求数</td>
+<td align="left">支持microservice、schema、operation三个级别的配置</td>
+</tr>
+<tr>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.bucket.[ServiceName].[Schema].[operation]</td>
+<td align="left">两倍limit大小，不超过max int</td>
+<td align="left">(0,2147483647]，整形</td>
+<td align="left">否</td>
+<td align="left">令牌桶场景下桶的大小</td>
+<td align="left">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
