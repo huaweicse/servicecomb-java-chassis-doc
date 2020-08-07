@@ -505,10 +505,12 @@ servicecomb-kie 的安装指导可以参考官网文档。 在 java-chassis 中�
 </tr>
 </tbody>
 </table>
+<p><strong><em>说明：</em></strong> kie 的 yaml 和 properties 类型会映射为多个配置项， 其他类型，比如 json, text， 
+只会映射为一个配置项。开发者需要读取配置项自己解析内容。  </p>
 <ul>
 <li>使用 nacos</li>
 </ul>
-<p><a href="https://github.com/alibaba/nacos">nacos</a> 是 alibaba 提供的配置中心。 java-chassis 从 2.0.0 版本支持 nacos。 
+<p><a href="https://github.com/alibaba/nacos">nacos</a> 是 alibaba 提供的配置中心。 java-chassis 从 2.1.0 版本支持 nacos。 
 nacos的下载安装请参考官网介绍。 </p>
 <p>使用nacos，需要在项目中引入如下依赖：</p>
 <pre><code class="xml">&lt;dependency&gt;
@@ -520,9 +522,18 @@ nacos的下载安装请参考官网介绍。 </p>
 <p>然后在配置文件 microservice.yaml 中增加如下配置项：</p>
 <pre><code class="yaml">servicecomb:
   nacos:
-    serverUri: http://127.0.0.1:8848
-    group: DEFAULT_GROUP
-    dataId: example
+    serverAddr: http://127.0.0.1:8848
+    group: jaxrstest
+    dataId: jaxrsclient
+    namespace: public
+    # contentType 可以为 properties, yaml, raw. 
+    # raw： 只增加一个配置项 [group].[dataId]=value. nacos 的 JSON/TEXT/HTML等都对应这种类型
+    # properties： 增加多个配置项。 配置项前缀为 [group].[dataId]
+    # yaml： 增加多个配置项。 配置项前缀为 [group].[dataId]
+    contentType: properties 
+    # if true [group].[dataId] will added as properties/yaml 
+    # items prefix. Will not influence raw.
+    addPrefix: true 
 </code></pre>
 
 <ul>
