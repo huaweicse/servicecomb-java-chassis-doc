@@ -37,11 +37,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
+        
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
@@ -419,7 +415,7 @@
       errorThresholdPercentage: 0
       enableRequestThreshold: 5
       singleTestTime: 60000
-      continuousFailureThreshold: 5
+      continuousFailureThreshold: 2
 </code></pre>
 
 <p>隔离的统计周期是1分钟。按照上面的配置，在1分钟内，如果请求总数大于5，并且连续错误超过2次，那么就会将实例隔离。
