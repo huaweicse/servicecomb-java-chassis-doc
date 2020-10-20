@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>开发服务提供者 - ServiceComb Java Chassis 开发指南</title>
+  <title>Ipv6 configuration - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u5f00\u53d1\u670d\u52a1\u63d0\u4f9b\u8005";
-    var mkdocs_page_input_path = "build-provider/catalog.md";
+    var mkdocs_page_name = "Ipv6 configuration";
+    var mkdocs_page_input_path = "build-provider/ipv6-configuration.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -64,15 +64,9 @@
     <a class="" href="../../start/design/">设计选型参考</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">开发服务提供者</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#_1">开发服务提供者</a></li>
-    
-
-    </ul>
+    <a class="" href="../catalog/">开发服务提供者</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -321,7 +315,7 @@
     
       
     
-    <li>开发服务提供者</li>
+    <li>Ipv6 configuration</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -331,42 +325,38 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">开发服务提供者</h1>
-<ul>
-<li><a href="../definition/service-definition/">微服务定义</a></li>
-<li><a href="../define-contract/">理解服务契约</a></li>
-<li><a href="../jaxrs/">用JAX-RS开发微服务</a></li>
-<li><a href="../springmvc/">用SpringMVC开发微服务</a></li>
-<li><a href="../transparent-rpc/">用透明RPC开发微服务</a></li>
-<li><a href="../use-interface/">只发布interface的方法为服务接口</a></li>
-<li><a href="../context-param/">使用 Context 参数</a></li>
-<li><a href="../swagger-annotation/">使用Swagger注解</a></li>
-<li><a href="../interface-constraints/">接口定义和数据类型</a></li>
-<li><a href="../listen-address-and-publish-address/">服务监听地址和发布地址</a></li>
-<li><a href="../thread-pool/">线程池</a></li>
-<li><a href="../event-listener/">服务启动事件</a></li>
-<li>服务配置 <ul>
-<li><a href="../configuration/ratelimite-strategy/">限流策略</a></li>
-<li><a href="../configuration/parameter-validator/">参数效验</a></li>
-<li><a href="../bootup/">程序启动逻辑</a></li>
-</ul>
-</li>
-<li><a href="../ipv6-configuration/">IPV6配置和使用</a></li>
-<li><a href="../access-log-configuration/">Access Log配置</a></li>
-</ul>
+                <h2 id="_1">概念阐述</h2>
+<p>随着IPV6的普及，很多场景下微服务都需要支持IPV6地址，特别是物联网场景下，需要更多的地址。ServiceComb支持Ipv6地址监听、注册和调用，使用起来和默认的Ipv4几乎没有差别，只是配置略不同。</p>
+<h2 id="_2">配置</h2>
+<ol>
+<li>把监听地址改成ipv6    </li>
+</ol>
+<pre><code class="yaml">servicecomb:
+  rest:
+    address: '[::]:13092'
+</code></pre>
+
+<p>如果全网监听，ServiceComb JavaChassis 1.2.1以及之前的版本都需要再配置servicecomb.service.publishAddress，否则注册的还是ipv4地址。</p>
+<p>2、优秀实践，因为全网监听不太安全，一般建议监听到具体地址，可以使用脚本的方式获取IPV6地址，然后使用环境变量的方式配置地址，比如在启动脚本中使用如下脚本的方式获取网卡ipv6地址，这样就不用配置servicecomb.service.publishAddress，也不会有全网监听的问题。</p>
+<pre><code class="yaml">servicecomb:
+  rest:
+    address: '[${REST_ADDRESS}]:8080'
+</code></pre>
+
+<pre><code class="shell">#/bin/bash
+
+ethname=eth0  #需要监听的网卡名，一般都是eth0，如果是多网卡场景需要修改
+export REST_ADDRESS=`ifconfig $ethname | awk '/inet6 /{print $2}'`
+nohup java -jar yourapp.jar &gt; console.log 2&gt;&amp;1 &amp;
+</code></pre>
+
+<p>最后可以使用netstat -nltp|grep 8080查看监听地址是否正确，并且到服务中心检查注册的endpoint地址是否正确。    </p>
+<p>3、IPV6测试，确保curl支持ipv6，可以使用curl --help，检查是否有-6选项  <br />
+curl -v -6 -g --interface eth0 http://[实际ipv6地址]:8080/</p>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../build-consumer/catalog/" class="btn btn-neutral float-right" title="开发服务消费者">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../../start/design/" class="btn btn-neutral" title="设计选型参考"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -390,10 +380,6 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../start/design/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../../build-consumer/catalog/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
