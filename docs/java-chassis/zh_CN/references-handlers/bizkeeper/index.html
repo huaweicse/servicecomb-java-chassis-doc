@@ -488,8 +488,8 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td align="left">20</td>
 <td align="left">-</td>
 <td align="left">否</td>
-<td align="left">10s内统计错误发生次数阈值，超过阈值则触发熔断</td>
-<td align="left">由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。</td>
+<td align="left">10s内请求数需要大于等于这个参数值，才开始计算错误率和判断是否进行熔断。</td>
+<td align="left"></td>
 </tr>
 <tr>
 <td align="left">servicecomb.circuitBreaker.[type].[scope].errorThresholdPercentage</td>
@@ -497,7 +497,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <td align="left">-</td>
 <td align="left">否</td>
 <td align="left">错误率阈值，达到阈值则触发熔断</td>
-<td align="left"></td>
+<td align="left">由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。</td>
 </tr>
 <tr>
 <td align="left">servicecomb.fallback.[type].[scope].enabled</td>
