@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>通用功能开发 - ServiceComb Java Chassis 开发指南</title>
+  <title>配置日志 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u901a\u7528\u529f\u80fd\u5f00\u53d1";
-    var mkdocs_page_input_path = "general-development/catalog.md";
+    var mkdocs_page_name = "\u914d\u7f6e\u65e5\u5fd7";
+    var mkdocs_page_input_path = "general-development/config-logs.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -79,15 +79,9 @@
     <a class="" href="../../build-consumer/catalog/">开发服务消费者</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">通用功能开发</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#_1">通用功能开发</a></li>
-    
-
-    </ul>
+    <a class="" href="../catalog/">通用功能开发</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -326,7 +320,7 @@
     
       
     
-    <li>通用功能开发</li>
+    <li>配置日志</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -336,43 +330,46 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">通用功能开发</h1>
+                <h1 id="_1">配置日志</h1>
+<p>java chassis 系统内部全部采用 <code>slf4j</code> 记录日志。 <code>slf4j</code> 是一套日志 API 标准，具体实现可以由 <code>log4j</code>, <code>log4j2</code>, <code>logback</code> 等
+提供。 java chassis 默认没有提供实现的依赖， 开发者可以选项依赖适合自己的日志实现， 下面简单的介绍如何引入常见的实现。</p>
 <ul>
-<li><a href="../metrics/">应用性能监控（metrics）</a></li>
-<li><a href="../microservice-invocation-chain/">微服务调用链</a></li>
-<li><a href="../customized-tracing/">自定义调用链打点</a></li>
-<li><a href="../local-develop-test/">本地开发和测试</a></li>
-<li><a href="../http-filter/">Http Filter</a></li>
-<li><a href="../upload-download/">文件上传下载</a></li>
-<li><a href="../reactive/">Reactive</a></li>
-<li><a href="../dnsconfig/">DNS自定义配置</a></li>
-<li><a href="../proxy/">代理设置</a></li>
-<li><a href="../report-framework-version/">框架上报版本号</a></li>
-<li><a href="../cross-app-invocation/">跨应用调用</a></li>
-<li><a href="../secret-field/">定制序列化和反序列化方法</a></li>
-<li><a href="../context/">使用Context传递控制消息</a></li>
-<li><a href="../produceprocess/">返回值序列化扩展</a></li>
-<li><a href="../CORS/">跨域资源共享(CORS)配置</a></li>
-<li><a href="../AlarmEvent/">获取熔断与实例隔离告警事件信息</a></li>
-<li><a href="../shutdown/">优雅停机</a></li>
-<li><a href="../error-handling/">异常处理</a></li>
-<li><a href="../multienvironment/">微服务实例间多环境隔离</a></li>
-<li><a href="../thread-model/">线程模型</a></li>
-<li><a href="../config-logs/">配置日志</a>    </li>
+<li>log4j2</li>
 </ul>
+<p>使用 log4j2 需要在项目中提供如下依赖。</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+      &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<ul>
+<li>log4j</li>
+</ul>
+<p>使用 log4j 需要在项目中提供如下依赖。</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;log4j&lt;/groupId&gt;
+      &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+      &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<ul>
+<li>logback</li>
+</ul>
+<p>使用 logback 需要在项目中提供如下依赖。</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../transports/rest-over-servlet/" class="btn btn-neutral float-right" title="REST over Servlet">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../../build-consumer/catalog/" class="btn btn-neutral" title="开发服务消费者"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -396,10 +393,6 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../build-consumer/catalog/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../../transports/rest-over-servlet/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
