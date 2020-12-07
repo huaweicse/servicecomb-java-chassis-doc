@@ -529,59 +529,19 @@
 <h3 id="prerequisites"><strong>Prerequisites</strong></h3>
 <p>The JDK has been installed successfully.</p>
 <h3 id="installation-steps"><strong>installation steps</strong></h3>
-<p>a. Download the Maven installation package at the official address.</p>
-<p>b. (Optional) Download the Eclipse plugin m2eclipse at the official address. The latest Eclipse version comes with a Maven plugin, so you don't have to download this plugin.</p>
-<p>c. Unzip the Maven installation package to the native path.</p>
-<p>d. Set environment variables.</p>
 <ul>
-<li>
-<p>Set the M2_HOME environment variable to point to the Maven installation directory.</p>
-</li>
-<li>
-<p>Add %M2_HOME%\bin to the system path path.</p>
-</li>
+<li>Download the Maven installation package at the official address.</li>
+<li>Unzip the Maven installation package to the native path.</li>
+<li>Set environment variables：</li>
+<li>Set the M2_HOME environment variable to point to the Maven installation directory.</li>
+<li>Add %M2_HOME%\bin to the system path path.</li>
+<li>Verification</li>
 </ul>
-<p>e. (Optional) Set a local repository path to hold the plug-ins and dependent copies obtained from the remote repository.</p>
-<p>Here is the path D:\maven\repository. Find the settings.xml file in /conf and set localRepository to D:\maven\repository</p>
-<p>f. (Optional) In order to quickly download various dependencies, it is recommended to configure the maven repository settings.</p>
-<p>In <code>profiles</code> element, the content below should be added:</p>
-<pre><code class="xml">&lt;profile&gt;
-    &lt;id&gt;MyProfile&lt;/id&gt;
-    &lt;repositories&gt;
-        &lt;repository&gt;
-            &lt;id&gt;SDK&lt;/id&gt;
-            &lt;url&gt;https://repo.huaweicloud.com/repository/maven/huaweicloudsdk/&lt;/url&gt;
-            &lt;releases&gt;
-                &lt;enabled&gt;true&lt;/enabled&gt;
-            &lt;/releases&gt;
-            &lt;snapshots&gt;
-                &lt;enabled&gt;false&lt;/enabled&gt;
-            &lt;/snapshots&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
-&lt;/profile&gt;
+<p>Use the mvn -version command to verify that the installation is successful. The windows environment 
+  is echoed as follows:</p>
+<pre><code>    C:\&gt;mvn -version        
+    Apache Maven 3.3.9
 </code></pre>
-
-<p>In <code>mirrors</code> element, the content below should be added:</p>
-<pre><code class="xml">&lt;mirror&gt;
-    &lt;id&gt;RepoMirror&lt;/id&gt;
-    &lt;mirrorOf&gt;*,!SDK&lt;/mirrorOf&gt;
-    &lt;url&gt;https://repo.huaweicloud.com/repository/maven/&lt;/url&gt;
-&lt;/mirror&gt;
-</code></pre>
-
-<p>Add <code>activeProfiles</code> element as below:</p>
-<pre><code class="xml">&lt;activeProfiles&gt;
-    &lt;activeProfile&gt;MyProfile&lt;/activeProfile&gt;
-&lt;/activeProfiles&gt;
-</code></pre>
-
-<p>g. Verification</p>
-<p>Use the mvn -version command to verify that the installation is successful. The windows environment is echoed as follows:</p>
-<pre><code>C:\&gt;mvn -version        
- Apache Maven 3.3.9
-</code></pre>
-
 <h2 id="eclipse-installation">Eclipse installation</h2>
 <h3 id="prerequisites_1"><strong>Prerequisites</strong></h3>
 <p>a.JDK has been installed.</p>

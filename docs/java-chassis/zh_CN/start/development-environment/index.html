@@ -352,59 +352,18 @@
 <h3 id="_2"><strong>前提条件</strong></h3>
 <p>JDK已经安装成功。</p>
 <h3 id="_3"><strong>安装步骤</strong></h3>
-<p>a.在官方地址下载Maven安装包。</p>
-<p>b.（可选）在官方地址下载Eclipse插件m2eclipse。最新的Eclipse版本中带有Maven插件，则不用下载此插件</p>
-<p>c.解压Maven安装包到本机路径。</p>
-<p>d.设置环境变量。</p>
 <ul>
-<li>
-<p>设置M2_HOME环境变量，指向Maven安装目录。</p>
-</li>
-<li>
-<p>将%M2_HOME%\bin添加到系统路径path中。</p>
-</li>
+<li>在官方地址下载Maven安装包。</li>
+<li>解压Maven安装包到本机路径。</li>
+<li>设置环境变量:</li>
+<li>设置M2_HOME环境变量，指向Maven安装目录。</li>
+<li>将%M2_HOME%\bin添加到系统路径path中。</li>
+<li>结果验证</li>
 </ul>
-<p>e.（可选）设置本地仓库路径，用于保存从远程仓库获取的插件和依赖的副本。</p>
-<p>这里以路径D:\maven\repository为例。在/conf中找到settings.xml文件，设置localRepository为D:\maven\repository</p>
-<p>f. （可选）要想项目能够快速的下载各种依赖，建议配置一下maven仓库地址。</p>
-<p>在<code>profiles</code>中增加如下配置：</p>
-<pre><code class="xml">&lt;profile&gt;
-    &lt;id&gt;MyProfile&lt;/id&gt;
-    &lt;repositories&gt;
-        &lt;repository&gt;
-            &lt;id&gt;SDK&lt;/id&gt;
-            &lt;url&gt;https://repo.huaweicloud.com/repository/maven/huaweicloudsdk/&lt;/url&gt;
-            &lt;releases&gt;
-                &lt;enabled&gt;true&lt;/enabled&gt;
-            &lt;/releases&gt;
-            &lt;snapshots&gt;
-                &lt;enabled&gt;false&lt;/enabled&gt;
-            &lt;/snapshots&gt;
-        &lt;/repository&gt;
-    &lt;/repositories&gt;
-&lt;/profile&gt;
-</code></pre>
-
-<p>在<code>mirrors</code>节点中增加如下配置：</p>
-<pre><code class="xml">&lt;mirror&gt;
-    &lt;id&gt;RepoMirror&lt;/id&gt;
-    &lt;mirrorOf&gt;*,!SDK&lt;/mirrorOf&gt;
-    &lt;url&gt;https://repo.huaweicloud.com/repository/maven/&lt;/url&gt;
-&lt;/mirror&gt;
-</code></pre>
-
-<p>新增<code>activeProfiles</code>配置：</p>
-<pre><code class="xml">&lt;activeProfiles&gt;
-    &lt;activeProfile&gt;MyProfile&lt;/activeProfile&gt;
-&lt;/activeProfiles&gt;
-</code></pre>
-
-<p>g.结果验证</p>
 <p>使用mvn -version命令验证是否安装成功，windows环境下回显如下：</p>
-<pre><code>C:\&gt;mvn -version        
- Apache Maven 3.3.9
+<pre><code>    C:\&gt;mvn -version        
+    Apache Maven 3.3.9
 </code></pre>
-
 <h2 id="eclipse">Eclipse安装</h2>
 <h3 id="_4"><strong>前提条件</strong></h3>
 <p>a.JDK已经安装。</p>
