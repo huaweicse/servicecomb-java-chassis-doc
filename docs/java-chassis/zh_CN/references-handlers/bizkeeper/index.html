@@ -517,8 +517,8 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 </tr>
 <tr>
 <td align="left">servicecomb.fallbackpolicy.[type].[scope].policy</td>
-<td align="left">throwexception</td>
-<td align="left">returnull | throwexception</td>
+<td align="left">throwException</td>
+<td align="left">returnNull | throwexception</td>
 <td align="left">否</td>
 <td align="left">出错后的处理策略</td>
 <td align="left"></td>
@@ -551,7 +551,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
       enabled: true
   fallbackpolicy:
     Consumer:
-      policy: throwexception
+      policy: throwException
 </code></pre>
 
 <blockquote>

@@ -655,8 +655,8 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 </tr>
 <tr>
 <td align="left">servicecomb.fallbackpolicy.[type].policy</td>
-<td align="left">throwexception</td>
-<td align="left">returnnulll | throwexception</td>
+<td align="left">throwException</td>
+<td align="left">returnNull | throwException</td>
 <td align="left">No</td>
 <td align="left">The fallback policy when errors occurred.</td>
 <td align="left"></td>
@@ -684,7 +684,7 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
       enabled: true
   fallbackpolicy:
     Consumer:
-      policy: throwexception
+      policy: throwException
 </code></pre>
 
 <blockquote>
