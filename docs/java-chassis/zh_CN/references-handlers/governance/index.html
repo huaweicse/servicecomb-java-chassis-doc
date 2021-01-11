@@ -412,10 +412,14 @@
         - headers
           Authentication: 
             prefix: Basic
+      services: helloService
 </code></pre>
 
 <p>一个流量对应一个 Key， userLoginAction 为 Key 的名称。 一个流量可以定义多个标记规则，每个标记规则里面可以定义 <code>apiPath</code>,
 <code>method</code>, <code>headers</code> 匹配规则。 不同标记规则是或的关系，匹配规则是与的关系。</p>
+<p><code>services</code> 是治理规则公共属性，指出这个限流规则的生效范围。在应用系统设计的规程中，流量标记、治理规则对于所有微服务都是可见的，一个微服务只会启用
+<code>services</code> 包含自己的规则。这个属性可选，表示这条规则默认生效。可以使用 <code>example:1.0.0</code> 格式指明服务和版本，多个服务用逗号分隔，比如：
+<code>foo:1.0.0,bar</code>。</p>
 <ul>
 <li>算子</li>
 </ul>
@@ -429,25 +433,14 @@
      数据范围。在进行 = 和 != 判断时 ， 如果二者的差值小于1e-6就视为相等。例如模式串为: &gt;-10 会对大于-10以上的目标串匹配成功。</li>
 </ul>
 <p>流量标记可以在不同的应用层实现，比如在提供 REST 接口的服务端，可以通过 <code>HttpServletRequest</code> 获取流量信息。在 RestTemplate 调用的客户端，可以从
-<code>RestTemplate</code> 获取流量信息。不同的框架和应用层，提取信息的方式不一样。 实现层通过将特征映射到 <code>GovHttpRequest</code> 来屏蔽这些差异，使得在不同的框架，
+<code>RestTemplate</code> 获取流量信息。不同的框架和应用层，提取信息的方式不一样。 实现层通过将特征映射到 <code>GovernanceRequest</code> 来屏蔽这些差异，使得在不同的框架，
 不同的应用层都可以使用治理。</p>
-<pre><code class="java">public class GovHttpRequest {
-  private final String serviceName;
-
-  private final String version;
-
+<pre><code class="java">public class GovernanceRequest {
   private Map&lt;String, String&gt; headers;
 
   private String uri;
 
   private String method;
-
-  public GovHttpRequest(String serviceName, String version) {
-    Assert.notNull(serviceName, &quot;serviceName should not be null&quot;);
-    Assert.notNull(version, &quot;version should not be null&quot;);
-    this.serviceName = serviceName;
-    this.version = version;
-  }
 }
 </code></pre>
 
@@ -464,8 +457,6 @@
 <p>规则解释：限流规则借鉴了 <a href="https://github.com/resilience4j">Resilience4j</a> 的思想，其原理为： 每隔limitRefreshPeriod的时间会加入limitForPeriod个新许可，
 如果获取不到新的许可(已经触发限流)，当前线程会park，最多等待timeoutDuration的时间，默认单位为ms。在异步框架中，建议 timeoutDuration
 设置为0，否则可能阻塞事件派发线程。</p>
-<p>services 是治理规则公共属性，指出这个限流规则的生效范围。在应用系统设计的规程中，流量标记、治理规则对于所有微服务都是可见的，一个微服务只会启用
-services 包含自己的规则。这个属性可选，表示这条规则默认生效。</p>
 <h3 id="_7">重试</h3>
 <pre><code class="yaml">servicecomb:
   retry:
