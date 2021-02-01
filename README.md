@@ -1,4 +1,4 @@
-## 本项目是servicecomb-java-chassis开发指南。
+## 本项目是servicecomb-java-chassis开发指南。 
 
 * [访问地址](https://docs.servicecomb.io/java-chassis/)
 
