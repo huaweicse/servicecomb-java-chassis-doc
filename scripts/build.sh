@@ -51,6 +51,3 @@ ls -l ./docs/java-chassis/1.x
 echo "Starting preparing push docs"
 rm -r servicecomb-docs
 git add docs
-git commit -m "publish lastest document" -a
-git config --local user.email "bismy@qq.com"
-git config --local user.name "libuao68"
