@@ -66,6 +66,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../catalog/">开发服务提供者</a>
 	    </li>
           
@@ -112,15 +117,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +153,10 @@
                 <li class="">
                     
     <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -414,6 +423,11 @@
 <td align="left">servicecomb.executor.default.maxQueueSize-per-group</td>
 <td align="left">Integer.MAX_VALUE</td>
 <td align="left">每组线程池中任务队列的最大长度</td>
+</tr>
+<tr>
+<td align="left">servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td align="left">30000</td>
+<td align="left">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
 </tr>
 </tbody>
 </table>

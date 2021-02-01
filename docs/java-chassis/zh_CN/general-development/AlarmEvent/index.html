@@ -66,6 +66,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../../build-provider/definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../../build-provider/catalog/">开发服务提供者</a>
 	    </li>
           
@@ -112,15 +117,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +153,10 @@
                 <li class="">
                     
     <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -376,7 +385,7 @@
   </tr>
   <tr>
     <td>requestVolumeThreshold</td>
-    <td>10s内统计错误发生次数阈值，若超过此阈值则开始计算请求错误率，判断是否熔断</td>
+    <td>10s内请求数需要大于等于这个参数值，才开始计算错误率和判断是否进行熔断</td>
   </tr>
   <tr>
     <td>sleepWindowInMilliseconds</td>

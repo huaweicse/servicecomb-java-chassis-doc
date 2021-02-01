@@ -66,6 +66,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../catalog/">开发服务提供者</a>
 	    </li>
           
@@ -112,15 +117,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +153,10 @@
                 <li class="">
                     
     <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -333,7 +342,7 @@
 <li>code first</li>
 </ul>
 <p>开发者首先通过 JAVA 代码定义接口信息，servicecomb 会根据代码定义，生成以 yaml 文件描述的 OpenAPI
-  文档。 servicecomb 支持使用 <code>JAX-RS</code>, <code>Sprig MVC</code> 等  REST Annotation 描述接口信息，还可以通过
+  文档。 servicecomb 支持使用 <code>JAX-RS</code>, <code>Spring MVC</code> 等  REST Annotation 描述接口信息，还可以通过
   swagger API 补充其他接口信息。 在使用 <code>RPC</code> 方式定义接口的时候， 系统会按照默认的规则生成接口描述，
   也可以使用这些标签修饰接口信息，让契约信息更加容易阅读和理解。</p>
 <ul>

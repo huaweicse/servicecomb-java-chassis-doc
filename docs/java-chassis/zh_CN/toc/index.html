@@ -72,6 +72,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../build-provider/definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../build-provider/catalog/">开发服务提供者</a>
 	    </li>
           
@@ -118,15 +123,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -154,6 +159,10 @@
                 <li class="">
                     
     <a class="" href="../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -351,8 +360,8 @@
 <li><a href="../start/design/#h5">Java Chassis 与 Spring Cloud</a></li>
 </ul>
 </li>
-<li><a href="../build-provider/catalog/">开发服务提供者</a><ul>
 <li><a href="../build-provider/definition/service-definition/">微服务定义</a></li>
+<li><a href="../build-provider/catalog/">开发服务提供者</a><ul>
 <li><a href="../build-provider/define-contract/">理解服务契约</a></li>
 <li><a href="../build-provider/jaxrs/">用JAX-RS开发微服务</a></li>
 <li><a href="../build-provider/springmvc/">用SpringMVC开发微服务</a></li>
@@ -365,7 +374,6 @@
 <li><a href="../build-provider/thread-pool/">线程池</a></li>
 <li><a href="../build-provider/event-listener/">服务启动事件</a></li>
 <li>服务配置 <ul>
-<li><a href="../build-provider/configuration/ratelimite-strategy/">限流策略</a></li>
 <li><a href="../build-provider/configuration/parameter-validator/">参数效验</a></li>
 <li><a href="../build-provider/bootup/">程序启动逻辑</a></li>
 </ul>
@@ -377,12 +385,11 @@
 <li><a href="../build-consumer/catalog/">开发服务消费者</a><ul>
 <li><a href="../build-consumer/common-configuration/">消费者通用配置项</a></li>
 <li><a href="../build-consumer/using-resttemplate/">使用RestTemplate开发服务消费者</a></li>
-<li><a href="../build-consumer/using-AsyncRestTemplate/">使用AsynRestTemplate开发服务消费者</a></li>
+<li><a href="../build-consumer/using-AsyncRestTemplate/">使用AsyncRestTemplate开发服务消费者</a></li>
 <li><a href="../build-consumer/develop-consumer-using-rpc/">使用RPC方式开发服务消费者</a></li>
 <li><a href="../featured-topics/features/invoker/">泛化调用</a></li>
 <li><a href="../build-consumer/with-contract/">使用服务契约</a></li>
 <li>调用控制<ul>
-<li><a href="../build-consumer/flow-control/">限流策略</a></li>
 <li><a href="../build-consumer/fault-injection/">故障注入</a></li>
 </ul>
 </li>
@@ -404,12 +411,13 @@
 <li><a href="../general-development/secret-field/">定制序列化和反序列化方法</a></li>
 <li><a href="../general-development/context/">使用Context传递控制消息</a></li>
 <li><a href="../general-development/produceprocess/">返回值序列化扩展</a></li>
-<li><a href="../general-development/CORS/">CORS机制</a></li>
+<li><a href="../general-development/CORS/">跨域资源共享(CORS)配置</a></li>
 <li><a href="../general-development/AlarmEvent/">获取熔断与实例隔离告警事件信息</a></li>
 <li><a href="../general-development/shutdown/">优雅停机</a></li>
 <li><a href="../general-development/error-handling/">异常处理</a></li>
 <li><a href="../general-development/multienvironment/">微服务实例间多环境隔离</a></li>
 <li><a href="../general-development/thread-model/">线程模型</a></li>
+<li><a href="../general-development/config-logs/">配置日志</a></li>
 </ul>
 </li>
 <li>多样化的通信协议功能参考:<ul>
@@ -421,17 +429,18 @@
 </li>
 <li>多样化的服务注册与发现功能参考:<ul>
 <li><a href="../registry/introduction/">注册发现说明</a></li>
+<li><a href="../registry/service-center/">使用服务中心</a></li>
 <li><a href="../registry/local-registry/">本地注册发现</a></li>
 <li><a href="../registry/distributed/">去中心化注册发现</a></li>
-<li><a href="../registry/multi-registries/">连接多个服务中心</a></li>
 </ul>
 </li>
-<li>服务治理功能参考:: <ul>
+<li>服务治理功能参考:<ul>
 <li><a href="../references-handlers/intruduction/">处理链介绍</a></li>
 <li><a href="../references-handlers/loadbalance/">负载均衡</a></li>
 <li><a href="../references-handlers/ratelimit/">限流</a></li>
 <li><a href="../references-handlers/router/">路由管理</a></li>
 <li><a href="../references-handlers/bizkeeper/">隔离熔断容错</a></li>
+<li><a href="../references-handlers/governance/">基于动态配置的流量特征治理</a></li>
 </ul>
 </li>
 <li>网关功能参考:<ul>

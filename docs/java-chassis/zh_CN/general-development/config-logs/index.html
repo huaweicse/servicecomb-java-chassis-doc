@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>连接多个服务中心 - ServiceComb Java Chassis 开发指南</title>
+  <title>配置日志 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u8fde\u63a5\u591a\u4e2a\u670d\u52a1\u4e2d\u5fc3";
-    var mkdocs_page_input_path = "registry/multi-registries.md";
+    var mkdocs_page_name = "\u914d\u7f6e\u65e5\u5fd7";
+    var mkdocs_page_input_path = "general-development/config-logs.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -66,6 +66,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../../build-provider/definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../../build-provider/catalog/">开发服务提供者</a>
 	    </li>
           
@@ -76,7 +81,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../general-development/catalog/">通用功能开发</a>
+    <a class="" href="../catalog/">通用功能开发</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -108,25 +113,19 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../introduction/">注册发现说明</a>
+    <a class="" href="../../registry/introduction/">注册发现说明</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../local-registry/">本地注册发现</a>
+    <a class="" href="../../registry/service-center/">使用服务中心</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../distributed/">去中心化注册发现</a>
+    <a class="" href="../../registry/local-registry/">本地注册发现</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">连接多个服务中心</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#_1">连接多个服务中心</a></li>
-    
-
-    </ul>
+    <a class="" href="../../registry/distributed/">去中心化注册发现</a>
                 </li>
     </ul>
 	    </li>
@@ -154,6 +153,10 @@
                 <li class="">
                     
     <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -320,12 +323,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>多样化的服务注册与发现功能参考 &raquo;</li>
-        
-      
     
-    <li>连接多个服务中心</li>
+    <li>配置日志</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -335,46 +334,46 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">连接多个服务中心</h1>
-<p>有些应用场景需要连接多个服务中心。比如一个应用系统会在不同的 region 部署，其中一个 region 的服务需要访问
-另外一个 region 的服务， 这个时候，可以连接另外 region 的服务中心，发现服务信息。 </p>
-<p><strong><em>注意:</em></strong> 连接多个服务中心指的是不同的服务中心集群，不是指一个集群内部的多个服务中心实例。 </p>
-<p>连接多个服务中心比较简单， 只需要在项目里面定义新的服务中心的配置信息，通过 spring bean 的方式注入：</p>
-<pre><code class="java">@Configuration
-public class ServerBServiceCenterConfiguration {
-  @Bean(&quot;serverBServiceCenterConfig&quot;)
-  public ServiceRegistryConfig serverBServiceCenterConfig() {
-    ServiceRegistryConfig config = ServiceRegistryConfig.buildFromConfiguration();
-    return ServiceRegistryConfigCustomizer.from(config)
-        .addressListFromConfiguration(&quot;servicecomb.service.registry-serverB.address&quot;).get();
-  }
-}
+                <h1 id="_1">配置日志</h1>
+<p>java chassis 系统内部全部采用 <code>slf4j</code> 记录日志。 <code>slf4j</code> 是一套日志 API 标准，具体实现可以由 <code>log4j</code>, <code>log4j2</code>, <code>logback</code> 等
+提供。 java chassis 默认没有提供实现的依赖， 开发者可以选项依赖适合自己的日志实现， 下面简单的介绍如何引入常见的实现。</p>
+<ul>
+<li>log4j2</li>
+</ul>
+<p>使用 log4j2 需要在项目中提供如下依赖。</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.logging.log4j&lt;/groupId&gt;
+      &lt;artifactId&gt;log4j-slf4j-impl&lt;/artifactId&gt;
+    &lt;/dependency&gt;
 </code></pre>
 
-<p>上面的代码复用了缺省服务中心的配置信息，只修改了连接地址，代码指定了下面的配置项。如果需要自定义其他配置项，可以
-通过继承 ServiceRegistryConfig 来实现。</p>
-<pre><code class="yaml">servicecomb:
-  service:
-    registry:
-      address: http://127.0.0.1:30100
-    registry-serverB:
-      address: http://127.0.0.1:40100
+<ul>
+<li>log4j</li>
+</ul>
+<p>使用 log4j 需要在项目中提供如下依赖。</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;log4j&lt;/groupId&gt;
+      &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+      &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+    &lt;/dependency&gt;
 </code></pre>
 
-<p>启用多个服务中心以后，会在不同的服务中心查找服务的实例，并对信息进行合并。 </p>
+<ul>
+<li>logback</li>
+</ul>
+<p>使用 logback 需要在项目中提供如下依赖。</p>
+<pre><code class="xml">    &lt;dependency&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></pre>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../references-handlers/intruduction/" class="btn btn-neutral float-right" title="处理链介绍">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../distributed/" class="btn btn-neutral" title="去中心化注册发现"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -398,10 +397,6 @@ public class ServerBServiceCenterConfiguration {
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../distributed/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../../references-handlers/intruduction/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

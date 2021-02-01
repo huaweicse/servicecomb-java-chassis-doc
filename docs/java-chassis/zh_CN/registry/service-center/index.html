@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Flow control - ServiceComb Java Chassis 开发指南</title>
+  <title>使用服务中心 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Flow control";
-    var mkdocs_page_input_path = "build-consumer/flow-control.md";
+    var mkdocs_page_name = "\u4f7f\u7528\u670d\u52a1\u4e2d\u5fc3";
+    var mkdocs_page_input_path = "registry/service-center.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -66,12 +66,17 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../../build-provider/definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../../build-provider/catalog/">开发服务提供者</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../catalog/">开发服务消费者</a>
+    <a class="" href="../../build-consumer/catalog/">开发服务消费者</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -108,19 +113,33 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../registry/introduction/">注册发现说明</a>
+    <a class="" href="../introduction/">注册发现说明</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">使用服务中心</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">使用服务中心</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#rbac">使用 RBAC 认证</a></li>
+        
+            <li><a class="toctree-l4" href="#aksk">使用 AK/SK 认证</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../registry/local-registry/">本地注册发现</a>
+    <a class="" href="../local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/multi-registries/">连接多个服务中心</a>
+    <a class="" href="../distributed/">去中心化注册发现</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +167,10 @@
                 <li class="">
                     
     <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -314,8 +337,12 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>多样化的服务注册与发现功能参考 &raquo;</li>
+        
+      
     
-    <li>Flow control</li>
+    <li>使用服务中心</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -325,101 +352,175 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="_1">场景描述</h2>
-<p>用户在consumer端使用限流策略，可以限制发往指定微服务的请求的频率。</p>
-<h2 id="_2">注意事项</h2>
-<p>参考3.7.2-限流策略。</p>
-<h2 id="_3">配置说明</h2>
-<p>限流策略配置在microservice.yaml文件中，相关配置项见下表。要开启服务消费者端的限流策略，还需要在处理链中配置消费端限流handler，配置示例如下：</p>
-<pre><code class="yaml">servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: qps-flowcontrol-consumer
+                <h1 id="_1">使用服务中心</h1>
+<p>服务中心(servicecomb-service-center) 提供了完备的注册发现机制， 实现了所有 <code>Microservice</code> 和 <code>MicroserviceInstance</code> 信息的注册和发现，
+是 servicecomb 缺省使用的注册发现机制。 </p>
+<p>服务中心支持使用 <code>PULL</code> 和 <code>PUSH</code> 两种模式通知实例变化， 开发者可以配置服务中心集群地址、连接参数以及心跳管理等。</p>
+<ul>
+<li>表1-1 访问服务中心常用的配置项</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.service.registry.</p>address</td>
+<td align="left">http://127.0.0.1:30100</td>
+<td align="left">是</td>
+<td align="left">服务中心的地址信息，可以配置多个，用逗号分隔。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.service.registry.</p>instance.watch</td>
+<td align="left">true</td>
+<td align="left">否</td>
+<td align="left">是否采用PUSH模式监听实例变化。为false的时候表示使用PULL模式。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.service.registry.</p>autodiscovery</td>
+<td align="left">false</td>
+<td align="left">否</td>
+<td align="left">是否自动发现服务中心的地址。当需要配置部分地址，其他地址由配置的服务中心实例发现的时候，开启这个配置。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.service.registry.</p>instance.healthCheck.interval</td>
+<td align="left">30</td>
+<td align="left">否</td>
+<td align="left">心跳间隔。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.service.registry.</p>instance.healthCheck.times</td>
+<td align="left">3</td>
+<td align="left">否</td>
+<td align="left">允许的心跳失败次数。当连续第times+1次心跳仍然失败时则实例被sc下线。即interval * (times + 1)决定了实例被自动注销的时间。如果服务中心等待这么长的时间没有收取到心跳，会注销实例。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.service.registry.</p>instance.empty.protection</td>
+<td align="left">true</td>
+<td align="left">否</td>
+<td align="left">当从服务中心查询到的地址为空的时候，是否覆盖本地缓存。这个是一种可靠性保护机制，避免实例异常批量下线导致的请求失败。</td>
+</tr>
+</tbody>
+</table>
+<p>servicecomb 与服务中心采用 HTTP 进行交互， HTTP client 相关配置可以参
+考 <a href="../../config-reference/service-center-client/">Service Center Client 配置项</a></p>
+<p>使用服务中心需要确保下面的软件包引入：</p>
+<pre><code>  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;registry-service-center&lt;/artifactId&gt;
+  &lt;/dependency&gt;
 </code></pre>
 
-<p>QPS流控配置项说明</p>
-<table>
-<thead>
-<tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
-<th align="left">注意</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">servicecomb.flowcontrol.Consumer.qps.enabled</td>
-<td align="left">true</td>
-<td align="left">Boolean</td>
-<td align="left">否</td>
-<td align="left">是否启用Consumer流控</td>
-<td align="left">-</td>
-</tr>
-<tr>
-<td align="left">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
-<td align="left">2147483647  (max int)</td>
-<td align="left">(0,2147483647]，整形</td>
-<td align="left">否</td>
-<td align="left">每秒钟允许的请求数</td>
-<td align="left">支持microservice、schema、operation三个级别的配置</td>
-</tr>
-</tbody>
-</table>
-<p>2.1.1版本流控配置变更：</p>
-<table>
-<thead>
-<tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
-<th align="left">注意</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">servicecomb.flowcontrol.Consumer.qps.strategy</td>
-<td align="left">FixedWindow</td>
-<td align="left">FixedWindow/LeakyBucket/TokenBucket/自定义</td>
-<td align="left">否</td>
-<td align="left">流控策略</td>
-<td align="left">-</td>
-</tr>
-<tr>
-<td align="left">servicecomb.flowcontrol.Consumer.qps.enabled</td>
-<td align="left">true</td>
-<td align="left">Boolean</td>
-<td align="left">否</td>
-<td align="left">是否启用Consumer流控</td>
-<td align="left">-</td>
-</tr>
-<tr>
-<td align="left">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
-<td align="left">2147483647  (max int)</td>
-<td align="left">(0,2147483647]，整形</td>
-<td align="left">否</td>
-<td align="left">每秒钟允许的请求数</td>
-<td align="left">支持microservice、schema、operation三个级别的配置</td>
-</tr>
-<tr>
-<td align="left">servicecomb.flowcontrol.Consumer.qps.bucket.[ServiceName].[Schema].[operation]</td>
-<td align="left">两倍limit大小，不超过max int</td>
-<td align="left">(0,2147483647]，整形</td>
-<td align="left">否</td>
-<td align="left">令牌桶场景下桶的大小</td>
-<td align="left">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
-</tr>
-</tbody>
-</table>
+<p>也可以直接依赖：</p>
+<pre><code>  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+</code></pre>
+
+<h2 id="rbac">使用 RBAC 认证</h2>
+<p>服务中心支持<a href="https://service-center.readthedocs.io/en/latest/user-guides/rbac.html">RBAC认证</a>，服务中心开启RBAC认证之
+后，客户端调用服务中心接口都需要先获取token，保证服务的安全可信。 使用 RBAC 认证， 需要使用 2.1.3 及其以上的版本。 </p>
+<ul>
+<li>服务配置</li>
+</ul>
+<p>使用 RBAC 认证，需要在配置文件中增加如下配置项， 指定连接服务中心的用户名和密码：</p>
+<pre><code>    ```
+    servicecomb:
+      credentials:
+        account:
+          name: root   #服务中心支持的用户名
+          password: your-password  #用户名对应的密码
+        cipher: default #账号密码加解密用的算法实现类
+    ```
+</code></pre>
+<p>账号密码都是敏感信息，一般需要加密保存，使用的时候再解密，Java Chassis 提供了一个扩展机制，用户只需要实现接口
+  <code>org.apache.servicecomb.foundation.auth.Cipher</code>，并注册成Spring Bean，就会自动被使用，接口里面包含两个方法：</p>
+<pre><code>    ```java
+      String name();
+
+      char[] decrypt(char[] encrypted);
+    ```
+</code></pre>
+<p>name方法返回cipher的名称，对应 <code>servicecomb.credentials.cipher</code> 的配置，decrypt是解密接口，用户名、密码使用的时候都会调用这个方法进行解密。
+  下面给了一个最简单的base64编解码的实现示例，用户使用base64编码把账号密码配置到配置文件即可。</p>
+<p><strong><em>注意</em></strong>: base64 并不是安全加密算法，请勿在生产环境使用。 </p>
+<pre><code>    ```yaml
+    servicecomb:
+      credentials:
+        account:
+          name: cm9vdA==
+          password: eW91ci1wYXNzd29yZCA=
+        cipher: base64
+    ```
+
+    ```java
+    import java.util.Base64;
+
+    import org.apache.servicecomb.foundation.auth.Cipher;
+    import org.springframework.stereotype.Component;
+
+    /**
+     * Base64解码实现
+     */
+    @Component
+    public class Base64Cipher implements Cipher {
+      @Override
+      public String name() {
+        return "base64";
+      }
+
+      @Override
+      public char[] decrypt(char[] encrypted) {
+        return new String(Base64.getDecoder().decode(new String(encrypted))).toCharArray();
+      }
+    }
+    ```
+</code></pre>
+<h2 id="aksk">使用 AK/SK 认证</h2>
+<p>华为云微服务引擎专业版的服务中心需要使用 AK/SK 认证， 使用 AK/SK 认证， 需要使用 2.1.3 及其以上的版本。
+AK/SK 认证需要配置如下信息：</p>
+<pre><code class="yaml">servciecomb:
+  credentials:
+    akskEnabled: true
+    accessKey: your access key
+    secretKey: your secrete key
+    akskCustomCipher: default # 加密算法， 和 RBAC 一样
+    project: cn-south-1 # 项目名称，根据实际情况填写
+</code></pre>
+
+<p>secreteKey 支持加密存储， 扩展方式同 RBAC 。</p>
+<p>使用AK/SK 需要下面的软件包引入：</p>
+<pre><code>  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;servicestage&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+</code></pre>
+
+<p>也可以直接依赖：</p>
+<pre><code>  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+</code></pre>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../local-registry/" class="btn btn-neutral float-right" title="本地注册发现">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../introduction/" class="btn btn-neutral" title="注册发现说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -443,6 +544,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../local-registry/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

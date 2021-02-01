@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>使用AsynRestTemplate开发服务消费者 - ServiceComb Java Chassis 开发指南</title>
+  <title>使用AsyncRestTemplate开发服务消费者 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f7f\u7528AsynRestTemplate\u5f00\u53d1\u670d\u52a1\u6d88\u8d39\u8005";
+    var mkdocs_page_name = "\u4f7f\u7528AsyncRestTemplate\u5f00\u53d1\u670d\u52a1\u6d88\u8d39\u8005";
     var mkdocs_page_input_path = "build-consumer/using-AsyncRestTemplate.md";
     var mkdocs_page_url = null;
   </script>
@@ -62,6 +62,11 @@
             <li class="toctree-l1">
 		
     <a class="" href="../../start/design/">设计选型参考</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../build-provider/definition/service-definition/">微服务定义</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -112,15 +117,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +153,10 @@
                 <li class="">
                     
     <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -315,7 +324,7 @@
     
       
     
-    <li>使用AsynRestTemplate开发服务消费者</li>
+    <li>使用AsyncRestTemplate开发服务消费者</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -325,7 +334,23 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="asynresttemplate">使用AsynRestTemplate开发服务消费者</h1>
+                <h1 id="asyncresttemplate">使用AsyncRestTemplate开发服务消费者</h1>
+<p><strong><em>注意</em></strong>: AsyncRestTemplate 接口在新版本的 Spring 接口中已经废弃。 建议使用异步 RPC 接口访问， 例如：</p>
+<pre><code>interface Hello {
+  CompletableFuture&lt;String&gt; sayHi(String name);
+}
+
+@Component
+public class SomeBean {
+  ......
+
+  @RpcReference(microserviceName = &quot;helloService&quot;, schemaId = &quot;helloSchema&quot;)
+  private Hello hello;
+
+  ......
+}
+</code></pre>
+
 <h2 id="_1">概念阐述</h2>
 <p>AsyncRestTemplate 开发方式允许用户异步的进行服务调用。具体的业务流程和 RestTemplate 类似，只是这里以异步的形式进行服务的调用。</p>
 <h2 id="_2">示例代码</h2>

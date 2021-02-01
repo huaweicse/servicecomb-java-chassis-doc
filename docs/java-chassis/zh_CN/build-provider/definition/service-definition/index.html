@@ -64,6 +64,20 @@
     <a class="" href="../../../start/design/">设计选型参考</a>
 	    </li>
           
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">微服务定义</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">微服务定义</a></li>
+    
+
+    <li class="toctree-l2"><a href="#_2">场景描述</a></li>
+    
+
+    </ul>
+	    </li>
+          
             <li class="toctree-l1">
 		
     <a class="" href="../../catalog/">开发服务提供者</a>
@@ -112,15 +126,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +162,10 @@
                 <li class="">
                     
     <a class="" href="../../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -337,86 +355,149 @@
 <li>实例信息</li>
 </ul>
 <p>servicecomb 的实例信息在类 <code>MicroserviceInstance</code> 中定义。 它主要包含网络地址(endpoints) 信息。</p>
+<p>微服务的定义会用于微服务管理、微服务的发现、治理等多种场景。专题文章<a href="../../../general-development/multienvironment/">微服务实例间多环境隔离</a>介绍
+了微服务定义的一些常见应用场景。</p>
 <h1 id="_2">场景描述</h1>
 <p>开发一个微服务，需要在 <code>microservice.yaml</code> 文件中配置微服务的基本信息。 如果使用 spring boot，也可以在
-<code>application.yml</code> 文件中配置微服务的基本信息。 </p>
-<p><code>microservice.yaml</code> 文件在项目中的存放路径为 <code>src\main\resources\microservice.yaml</code>。</p>
-<p>表1-1配置项说明</p>
+<code>application.yml</code> 文件中配置微服务的基本信息。 <code>microservice.yaml</code> 文件在项目中的存放路径为 <code>src\main\resources\microservice.yaml</code>。
+微服务信息和实例信息属于基础元数据信息， 只能够在配置文件指定，无法通过配置中心指定。</p>
+<p><strong><em>表1-1 微服务信息配置项说明</em></strong></p>
 <table>
 <thead>
 <tr>
 <th align="left">配置项</th>
+<th align="left">版本</th>
 <th align="left">默认值</th>
-<th align="left">取值范围</th>
 <th align="left">是否必选</th>
 <th align="left">含义</th>
-<th align="left">注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">APPLICATION_ID</td>
-<td align="left">-</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.application</td>
+<td align="left">2.1.2</td>
+<td align="left">default</td>
 <td align="left">是</td>
 <td align="left">应用名</td>
-<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">service_description.name</td>
-<td align="left">-</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.name</td>
+<td align="left">2.1.2</td>
+<td align="left">defaultMicroservice</td>
 <td align="left">是</td>
-<td align="left">微服务名</td>
-<td align="left">应确保app内部唯一。微服务名支持数字、大小写字母和"-"、"_"、"."三个特殊字符，但是不能以特殊字符作为首尾字符，命名规范为：^[a-zA-Z0-9]+$&#124;^[a-zA-Z0-9][a-zA-Z0-9_-.]*[a-zA-Z0-9]$。</td>
+<td align="left">微服务名, 应确保应用内部唯一。微服务名支持数字、大小写字母和"-"、"_"、"."三个特殊字符，但是不能以特殊字符作为首尾字符，命名规范为：^[a-zA-Z0-9]+$&#124;^[a-zA-Z0-9][a-zA-Z0-9_-.]*[a-zA-Z0-9]$。</td>
 </tr>
 <tr>
-<td align="left">service_description.version</td>
-<td align="left">-</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.version</td>
+<td align="left">2.1.2</td>
+<td align="left">1.0.0.0</td>
 <td align="left">是</td>
 <td align="left">微服务版本号</td>
-<td align="left">-</td>
 </tr>
 <tr>
-<td align="left">service_description.description</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.role</td>
+<td align="left">2.1.2</td>
+<td align="left">FRONT</td>
+<td align="left">否</td>
+<td align="left">服务类型</td>
+</tr>
+<tr>
+<td align="left">servicecomb.service.description</td>
+<td align="left">2.1.2</td>
 <td align="left">-</td>
 <td align="left">否</td>
 <td align="left">微服务描述</td>
-<td align="left"></td>
 </tr>
 <tr>
-<td align="left">service_description.properties</td>
-<td align="left">-</td>
+<td align="left">ervicecomb.service.environment</td>
+<td align="left">2.1.2</td>
 <td align="left">-</td>
 <td align="left">否</td>
-<td align="left">微服务元数据配置（通过microservice.yaml文件进行配置）</td>
-<td align="left">-</td>
+<td align="left">运行环境，比如 development, production 等</td>
 </tr>
 <tr>
-<td align="left">service_description.propertyExtendedClass</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.propertyExtendedClass</td>
+<td align="left">2.1.2</td>
 <td align="left">-</td>
 <td align="left">否</td>
-<td align="left">微服务元数据配置（通过实现接口PropertyExtended进行配置）</td>
-<td align="left">接口返回的配置会覆盖配置文件中key相同的配置。</td>
+<td align="left">微服务元数据配置扩展信息， 接口返回的配置会覆盖配置文件中key相同的配置。</td>
 </tr>
 <tr>
-<td align="left">instance_description.properties</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.properties</td>
+<td align="left">2.1.2</td>
 <td align="left">-</td>
 <td align="left">否</td>
 <td align="left">服务实例元数据配置（通过microservice.yaml文件进行配置）</td>
-<td align="left"></td>
 </tr>
 <tr>
-<td align="left">instance_description.propertyExtendedClass</td>
-<td align="left">-</td>
+<td align="left">servicecomb.service.paths</td>
+<td align="left">2.1.2</td>
 <td align="left">-</td>
 <td align="left">否</td>
-<td align="left">微服务元数据配置（通过实现接口PropertyExtended进行配置）</td>
-<td align="left">同service_description.propertyExtendedClass</td>
+<td align="left">URL 前缀列表</td>
+</tr>
+<tr>
+<td align="left">APPLICATION_ID</td>
+<td align="left">2.1.2之前</td>
+<td align="left">default</td>
+<td align="left">是</td>
+<td align="left">应用名</td>
+</tr>
+<tr>
+<td align="left">service_description.name</td>
+<td align="left">2.1.2之前</td>
+<td align="left">defaultMicroservice</td>
+<td align="left">是</td>
+<td align="left">微服务名, 应确保应用内部唯一。微服务名支持数字、大小写字母和"-"、"_"、"."三个特殊字符，但是不能以特殊字符作为首尾字符，命名规范为：^[a-zA-Z0-9]+$&#124;^[a-zA-Z0-9][a-zA-Z0-9_-.]*[a-zA-Z0-9]$。</td>
+</tr>
+<tr>
+<td align="left">service_description.version</td>
+<td align="left">2.1.2之前</td>
+<td align="left">1.0.0.0</td>
+<td align="left">是</td>
+<td align="left">微服务版本号</td>
+</tr>
+<tr>
+<td align="left">service_description.role</td>
+<td align="left">2.1.2之前</td>
+<td align="left">FRONT</td>
+<td align="left">否</td>
+<td align="left">服务类型</td>
+</tr>
+<tr>
+<td align="left">service_description.description</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">微服务描述</td>
+</tr>
+<tr>
+<td align="left">service_description.environment</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">运行环境，比如 development, production 等</td>
+</tr>
+<tr>
+<td align="left">service_description.propertyExtendedClass</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">微服务元数据配置扩展信息， 接口返回的配置会覆盖配置文件中key相同的配置。</td>
+</tr>
+<tr>
+<td align="left">service_description.properties</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">服务元数据配置</td>
+</tr>
+<tr>
+<td align="left">service_description.paths</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">URL 前缀列表</td>
 </tr>
 </tbody>
 </table>
@@ -424,28 +505,108 @@
 <p>说明：</p>
 <ul>
 <li>服务的元数据会随服务一同注册到服务中心，如需修改，则要连同服务version一起变更。若想保持服务version不变，则需要通过服务管理中心统一变更元数据。</li>
-<li>虽然微服务名、契约名中可以使用"."字符，但是不推荐在命名中使用"."。这是由于ServiceComb使用的配置文件是yaml格式的，"."符号用于分割配置项名称，如果微服务名、契约名中也包含了"."可能会导致一些支持微服务、契约级别的配置无法正确被识别。</li>
+<li>虽然微服务名、契约名中可以使用"."字符，但是不推荐在命名中使用"."。这是由于ServiceComb使用的配置文件是yaml格式的，"."符号用于分割配置项名称，
+     如果微服务名、契约名中也包含了"."可能会导致一些支持微服务、契约级别的配置无法正确被识别。</li>
 </ul>
 </blockquote>
-<p>下面是一个微服务信息的配置示例：</p>
-<pre><code class="yaml">APPLICATION_ID: helloTest # 应用名
-service_description: # 服务描述
-  name: helloServer # 微服务名称
-  version: 0.0.1 # 服务版本号
-  properties: # 元数据
-    key1: value1
-    key2: value2
-  description: This is a description about the microservice # 微服务描述
-  propertyExtentedClass: org.apache.servicecomb.serviceregistry.MicroServicePropertyExtendedStub
-instance_description: #实例描述
-  properties: #元数据
-    key3: value3
-  propertyExtentedClass: org.apache.servicecomb.serviceregistry.MicroServicePropertyExtendedStub
+<p><strong><em>表1-2 微服务实例信息配置项说明</em></strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">配置项</th>
+<th align="left">版本</th>
+<th align="left">默认值</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">servicecomb.instance.properties</td>
+<td align="left">2.1.2</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">服务实例云数据配置</td>
+</tr>
+<tr>
+<td align="left">servicecomb.instance.propertyExtendedClass</td>
+<td align="left">2.1.2</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">微服务实例元数据配置扩展信息， 接口返回的配置会覆盖配置文件中key相同的配置。</td>
+</tr>
+<tr>
+<td align="left">servicecomb.instance.initialStatus</td>
+<td align="left">2.1.2</td>
+<td align="left">UP</td>
+<td align="left">否</td>
+<td align="left">实例初始状态</td>
+</tr>
+<tr>
+<td align="left">servicecomb.instance.properties.tags</td>
+<td align="left">2.1.2</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">标签</td>
+</tr>
+<tr>
+<td align="left">instance_description.properties</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">服务实例云数据配置</td>
+</tr>
+<tr>
+<td align="left">instance_description.propertyExtendedClass</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">微服务实例元数据配置扩展信息， 接口返回的配置会覆盖配置文件中key相同的配置。</td>
+</tr>
+<tr>
+<td align="left">instance_description.initialStatus</td>
+<td align="left">2.1.2之前</td>
+<td align="left">UP</td>
+<td align="left">否</td>
+<td align="left">实例初始状态</td>
+</tr>
+<tr>
+<td align="left">instance_description.properties.tags</td>
+<td align="left">2.1.2之前</td>
+<td align="left">-</td>
+<td align="left">否</td>
+<td align="left">标签</td>
+</tr>
+</tbody>
+</table>
+<p>下面是一个配置示例：</p>
+<pre><code class="yaml">servicecomb:
+  service:
+    application: helloTest # 应用名
+    name: helloServer # 微服务名称
+    version: 0.0.1 # 服务版本号
+    properties: # 元数据
+      key1: value1
+      key2: value2
+    description: This is a description about the microservice # 微服务描述
+  instance:
+    properties: #元数据
+      key3: value3
+    propertyExtentedClass: org.apache.servicecomb.serviceregistry.MicroServicePropertyExtendedStub
 </code></pre>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../catalog/" class="btn btn-neutral float-right" title="开发服务提供者">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../../start/design/" class="btn btn-neutral" title="设计选型参考"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -469,6 +630,10 @@ instance_description: #实例描述
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
+        <span><a href="../../../start/design/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../catalog/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

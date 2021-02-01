@@ -66,6 +66,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../../../build-provider/definition/service-definition/">微服务定义</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../../../build-provider/catalog/">开发服务提供者</a>
 	    </li>
           
@@ -112,15 +117,15 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../../registry/service-center/">使用服务中心</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../../registry/local-registry/">本地注册发现</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../../../registry/distributed/">去中心化注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../../registry/multi-registries/">连接多个服务中心</a>
                 </li>
     </ul>
 	    </li>
@@ -148,6 +153,10 @@
                 <li class="">
                     
     <a class="" href="../../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../references-handlers/governance/">基于动态配置的流量特征治理</a>
                 </li>
     </ul>
 	    </li>
@@ -353,11 +362,11 @@
        requestVolumeThreshold: 3
  fallbackpolicy:
    Provider:
-     policy: returnnull
+     policy: returnNull
 </code></pre>
 
 <p>也可以通过环境变量的方式动态修改配置文件的值，比如采用以下指令重新运行即可：</p>
-<pre><code class="bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.handler.chain.Provider.default=bizkeeper-provider -Dservicecomb.circuitBreaker.Provider.calculator.requestVolumeThreshold=3 -Dservicecomb.fallbackpolicy.Provider.policy=returnnull&quot;
+<pre><code class="bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.handler.chain.Provider.default=bizkeeper-provider -Dservicecomb.circuitBreaker.Provider.calculator.requestVolumeThreshold=3 -Dservicecomb.fallbackpolicy.Provider.policy=returnNull&quot;
 </code></pre>
 
 <h2 id="_4">验证</h2>
