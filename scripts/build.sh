@@ -23,10 +23,8 @@ echo "env CUR_DIR=$CUR_DIR"
 echo "Starting install software"
 npm install gitbook-cli -g
 sudo pip install mkdocs
-sudo pip install ./plugins/bing-search
-chmod +x scripts/travis.sh
-
 git clone https://github.com/apache/servicecomb-docs.git
+sudo pip install $CUR_DIR/servicecomb-docs/plugins/bing-search
 
 echo "Starting compile docs"
 cd $CUR_DIR/servicecomb-docs
@@ -44,7 +42,7 @@ echo "Starting coping docs"
 rm -r docs/java-chassis/zh_CN/*
 rm -r docs/java-chassis/en_US/*
 rm -r docs/saga/*
-rm -r service-center/*
+rm -r docs/service-center/*
 cp -r servicecomb-docs/docs/ ./
 ls -l ./docs
 ls -l ./docs/java-chassis
