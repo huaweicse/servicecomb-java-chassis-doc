@@ -169,6 +169,8 @@
         
             <li><a class="toctree-l4" href="#_4">规范参考</a></li>
         
+            <li><a class="toctree-l4" href="#_10">基于流量标记治理使用指南</a></li>
+        
         </ul>
     
 
@@ -506,7 +508,7 @@
 
 <p>规则解释：隔离仓规则借鉴了 <a href="https://github.com/resilience4j">Resilience4j</a> 的思想，其原理为：当最大并发数超过 maxConcurrentCalls，等待 maxWaitDuration
 竞争资源，如果获得资源，则继续处理，如果获取不到，则拒绝执行请求。在异步框架，建议 maxWaitDuration 设置为0，防止阻塞事件派发线程。</p>
-<h3 id="_10">基于流量标记治理使用指南</h3>
+<h2 id="_10">基于流量标记治理使用指南</h2>
 <ul>
 <li>Java Chassis</li>
 </ul>
