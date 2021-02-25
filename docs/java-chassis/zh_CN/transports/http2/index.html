@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>HTTP2 - ServiceComb Java Chassis 开发指南</title>
+  <title>REST over HTTP2 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "HTTP2";
+    var mkdocs_page_name = "REST over HTTP2";
     var mkdocs_page_input_path = "transports/http2.md";
     var mkdocs_page_url = null;
   </script>
@@ -90,22 +90,22 @@
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../introduction/">多协议介绍</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../rest-over-servlet/">REST over Servlet</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../rest-over-vertx/">REST over Vertx</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../highway-rpc/">Highway</a>
-                </li>
                 <li class=" current">
                     
-    <a class="current" href="./">HTTP2</a>
+    <a class="current" href="./">REST over HTTP2</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#http2">Http2</a></li>
+    <li class="toctree-l3"><a href="#rest-over-http2">REST over Http2</a></li>
     
         <ul>
         
@@ -115,12 +115,14 @@
         
             <li><a class="toctree-l4" href="#http2-server">http2 server 端配置项</a></li>
         
-            <li><a class="toctree-l4" href="#http2-client">http2 client 端配置项</a></li>
-        
         </ul>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../highway-rpc/">Highway</a>
                 </li>
     </ul>
 	    </li>
@@ -346,7 +348,7 @@
         
       
     
-    <li>HTTP2</li>
+    <li>REST over HTTP2</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -356,7 +358,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="http2">Http2</h1>
+                <h1 id="rest-over-http2">REST over Http2</h1>
 <h2 id="_1">场景描述</h2>
 <p>用户通过简单的配置即可启用Http2进行通信，提高性能。</p>
 <h2 id="_2">外部服务通信配置</h2>
@@ -405,41 +407,16 @@
 <td>一条连接中，同时支持的最大的stream并发量</td>
 <td>以server端的concurrentStreams和client端的multiplexingLimit较小值为准</td>
 </tr>
-</tbody>
-</table>
-<h2 id="http2-client">http2 client 端配置项</h2>
-<table>
-<thead>
 <tr>
-<th>配置项</th>
-<th>默认值</th>
-<th>含义</th>
-<th>注意</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>servicecomb.rest.client.http2.useAlpnEnabled</td>
-<td>true</td>
-<td>是否启用 ALPN</td>
+<td>servicecomb.Provider.requestWaitInPoolTimeout${op-priority}</td>
+<td>30000</td>
+<td>在同步线程中排队等待执行的超时时间，单位为毫秒</td>
 <td></td>
 </tr>
 <tr>
-<td>servicecomb.rest.client.http2.multiplexingLimit</td>
-<td>-1</td>
-<td>一条连接中，同时支持的最大的stream并发量，-1表示不限制</td>
-<td>以server端的concurrentStreams和client端的multiplexingLimit较小值为准</td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.http2.maxPoolSize</td>
-<td>1</td>
-<td>每个连接池中，对每一个IP：Port最多建立的连接数</td>
-<td></td>
-</tr>
-<tr>
-<td>servicecomb.rest.client.http2.idleTimeoutInSeconds</td>
-<td>0</td>
-<td>空闲连接的超时时间，超时后会关闭连接</td>
+<td>servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td>30000</td>
+<td>同servicecomb.Provider.requestWaitInPoolTimeout${op-priority}, 该配置项优先级更高。</td>
 <td></td>
 </tr>
 </tbody>
@@ -451,10 +428,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../registry/introduction/" class="btn btn-neutral float-right" title="注册发现说明">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../highway-rpc/" class="btn btn-neutral float-right" title="Highway">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../highway-rpc/" class="btn btn-neutral" title="Highway"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../rest-over-vertx/" class="btn btn-neutral" title="REST over Vertx"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -480,10 +457,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../highway-rpc/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../rest-over-vertx/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../registry/introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../highway-rpc/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

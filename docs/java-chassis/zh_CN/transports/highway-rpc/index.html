@@ -90,11 +90,19 @@
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../introduction/">多协议介绍</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../rest-over-servlet/">REST over Servlet</a>
                 </li>
                 <li class="">
                     
     <a class="" href="../rest-over-vertx/">REST over Vertx</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../http2/">REST over HTTP2</a>
                 </li>
                 <li class=" current">
                     
@@ -115,10 +123,6 @@
     
 
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../http2/">HTTP2</a>
                 </li>
     </ul>
 	    </li>
@@ -406,6 +410,16 @@
 <td align="left"><a href="../verticle-count/">verticle-count</a></td>
 <td align="left">highway client verticle实例数</td>
 </tr>
+<tr>
+<td align="left">servicecomb.Provider.requestWaitInPoolTimeout${op-priority}</td>
+<td align="left">30000</td>
+<td align="left">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
+</tr>
+<tr>
+<td align="left">servicecomb.highway.server.requestWaitInPoolTimeout</td>
+<td align="left">30000</td>
+<td align="left">同servicecomb.Provider.requestWaitInPoolTimeout${op-priority}, 该配置项优先级更高。</td>
+</tr>
 </tbody>
 </table>
 <h2 id="_3">示例代码</h2>
@@ -421,10 +435,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../http2/" class="btn btn-neutral float-right" title="HTTP2">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../registry/introduction/" class="btn btn-neutral float-right" title="注册发现说明">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../rest-over-vertx/" class="btn btn-neutral" title="REST over Vertx"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../http2/" class="btn btn-neutral" title="REST over HTTP2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -450,10 +464,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../rest-over-vertx/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../http2/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../http2/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../registry/introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

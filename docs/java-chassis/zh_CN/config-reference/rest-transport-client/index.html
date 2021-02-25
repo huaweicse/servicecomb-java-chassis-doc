@@ -90,6 +90,10 @@
     <ul class="subnav">
                 <li class="">
                     
+    <a class="" href="../../transports/introduction/">多协议介绍</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
                 </li>
                 <li class="">
@@ -98,11 +102,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../transports/highway-rpc/">Highway</a>
+    <a class="" href="../../transports/http2/">REST over HTTP2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../transports/http2/">HTTP2</a>
+    <a class="" href="../../transports/highway-rpc/">Highway</a>
                 </li>
     </ul>
 	    </li>
@@ -434,8 +438,8 @@
 <tr>
 <td>servicecomb.rest.client.http2.multiplexingLimit</td>
 <td></td>
-<td>1</td>
-<td></td>
+<td>-1</td>
+<td>一条连接中，同时支持的最大的stream并发量，-1表示不限制。最终以服务端的concurrentStreams和客户端的multiplexingLimit较小值为准。</td>
 </tr>
 <tr>
 <td>servicecomb.rest.client.http2.maxPoolSize</td>

@@ -88,6 +88,10 @@
 		
     <span class="caption-text">多样化的通信协议功能参考</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../introduction/">多协议介绍</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">REST over Servlet</a>
@@ -120,11 +124,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../highway-rpc/">Highway</a>
+    <a class="" href="../http2/">REST over HTTP2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../http2/">HTTP2</a>
+    <a class="" href="../highway-rpc/">Highway</a>
                 </li>
     </ul>
 	    </li>
@@ -361,7 +365,10 @@
             <div class="section">
               
                 <h1 id="rest-over-servlet">REST over Servlet</h1>
-<p>REST over Servlet对应使用web容器部署运行，需要新建一个servlet工程将微服务包装起来，打成war包，加载到web容器中启动运行。</p>
+<p>REST over Servlet的本质是将Java Chassis作为一个Servlet，部署到支持Servlet的Web容器中。 通常有两种使用场景：第一种是在
+独立的Web容器中部署运行，比如Tomcat；第二种是组合Spring Boot提供的Embedded Tomcat运行。 </p>
+<p>本章节主要介绍在独立的Web容器中部署运行。在Spring Boot提供的Embedded Tomcat中运行，请参考
+<a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>。</p>
 <h2 id="path">对外发布的Path</h2>
 <p>当微服务部署到web容器中时，相对于独立运行，会涉及到web root以及servlet url pattern对url的改变。<br />
 对于传统开发框架而言，需要consumer感知对方的完整url；比如web root为/mywebapp，url pattern为/rest，业务级path为/application，则consumer代码必须通过/mywebapp/rest/application来访问。<br />
@@ -568,7 +575,6 @@ protected WebApplicationContext createWebApplicationContext(ApplicationContext p
 <tr>
 <th align="left">配置项</th>
 <th align="left">默认值</th>
-<th align="left">是否必选</th>
 <th align="left">含义</th>
 </tr>
 </thead>
@@ -576,43 +582,41 @@ protected WebApplicationContext createWebApplicationContext(ApplicationContext p
 <tr>
 <td align="left">servicecomb.rest.address</td>
 <td align="left">0.0.0.0:8080</td>
-<td align="left">否</td>
 <td align="left">服务监听地址<br>必须配置为与web容器监听地址相同的地址</td>
 </tr>
 <tr>
 <td align="left">servicecomb.rest.server.timeout</td>
 <td align="left">-1</td>
-<td align="left">否</td>
 <td align="left">异步servlet超时时间, 单位为毫秒<br>建议保持默认值</td>
+</tr>
+<tr>
+<td align="left">servicecomb.Provider.requestWaitInPoolTimeout${op-priority}</td>
+<td align="left">30000</td>
+<td align="left">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
 </tr>
 <tr>
 <td align="left">servicecomb.rest.server.requestWaitInPoolTimeout</td>
 <td align="left">30000</td>
-<td align="left">否</td>
-<td align="left">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
+<td align="left">同servicecomb.Provider.requestWaitInPoolTimeout${op-priority}, 该配置项优先级更高。</td>
 </tr>
 <tr>
 <td align="left">servicecomb.rest.servlet.urlPattern</td>
 <td align="left">无</td>
-<td align="left">否</td>
 <td align="left">用于简化servlet+servlet mapping配置<br>只有在web.xml中未配置servlet+servlet mapping时，才使用此配置项，配置格式为：/* 或  /path/*，其中path可以是多次目录</td>
 </tr>
 <tr>
 <td align="left">servicecomb.uploads.maxSize</td>
 <td align="left">无</td>
-<td align="left">否</td>
 <td align="left">文件上传 form body 最大大小</td>
 </tr>
 <tr>
 <td align="left">servicecomb.uploads.maxFileSize</td>
 <td align="left">无</td>
-<td align="left">否</td>
 <td align="left">文件上传所有文件总的大小限制</td>
 </tr>
 <tr>
 <td align="left">servicecomb.uploads.fileSizeThreshold</td>
 <td align="left">无</td>
-<td align="left">否</td>
 <td align="left">文件上传，实际写入磁盘文件的最大大小</td>
 </tr>
 </tbody>
@@ -627,7 +631,7 @@ protected WebApplicationContext createWebApplicationContext(ApplicationContext p
         <a href="../rest-over-vertx/" class="btn btn-neutral float-right" title="REST over Vertx">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../general-development/catalog/" class="btn btn-neutral" title="通用功能开发"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../introduction/" class="btn btn-neutral" title="多协议介绍"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -653,7 +657,7 @@ protected WebApplicationContext createWebApplicationContext(ApplicationContext p
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../general-development/catalog/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../rest-over-vertx/" style="color: #fcfcfc">Next &raquo;</a></span>
