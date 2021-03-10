@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>路由管理 - ServiceComb Java Chassis 开发指南</title>
+  <title>灰度发布 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u8def\u7531\u7ba1\u7406";
+    var mkdocs_page_name = "\u7070\u5ea6\u53d1\u5e03";
     var mkdocs_page_input_path = "references-handlers/router.md";
     var mkdocs_page_url = null;
   </script>
@@ -136,6 +136,21 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">管理服务配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/read-config/">在程序中读取配置信息</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">服务治理功能参考</span>
     <ul class="subnav">
                 <li class="">
@@ -152,10 +167,10 @@
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">路由管理</a>
+    <a class="current" href="./">灰度发布</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#_1">路由管理</a></li>
+    <li class="toctree-l3"><a href="#_1">灰度发布</a></li>
     
         <ul>
         
@@ -164,8 +179,6 @@
             <li><a class="toctree-l4" href="#_3">匹配流程</a></li>
         
             <li><a class="toctree-l4" href="#_4">异常情况的处理</a></li>
-        
-            <li><a class="toctree-l4" href="#_5">负载均衡算法</a></li>
         
         </ul>
     
@@ -231,21 +244,6 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">管理服务配置</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../config/general-config/">通用配置说明</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config/inject-config/">配置注入机制</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
     <span class="caption-text">服务打包和运行</span>
     <ul class="subnav">
                 <li class="">
@@ -269,10 +267,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/using-inspector/">使用 inspector 模块查看契约</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
                 </li>
                 <li class="">
@@ -282,6 +276,10 @@
                 <li class="">
                     
     <a class="" href="../../featured-topics/upgrading/">升级指导系列文章</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../featured-topics/performance/">性能问题分析和调优</a>
                 </li>
     </ul>
 	    </li>
@@ -354,7 +352,7 @@
         
       
     
-    <li>路由管理</li>
+    <li>灰度发布</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -364,9 +362,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">路由管理</h1>
-<p>应用可以通过使用路由管理，来进行灰度发布实现版本的平滑过渡升级。路由管理通过动态配置下发完成。 </p>
-<p>使用路由管理，需要在项目中引入如下依赖：</p>
+                <h1 id="_1">灰度发布</h1>
+<p>使用灰度发布可以实现版本的零中断升级。假设微服务A当前是v1版本，v1版本存在一个实例，现在需要升级到到v2版本。首先配置一个灰度
+发布规则，将100%的流量指向v1版本；配置规则生效后，部署v2版本；v2版本启动完毕，配置10%的流量到v2版本；当v2版本
+运行稳定，配置100%的流量到v2版本；停止v1版本的实例。</p>
+<ul>
+<li>前提条件：灰度发布依赖负载均衡管理模块， 参考<a href="../loadbalance/">负载均衡</a> 。 </li>
+</ul>
+<p>使用灰度发布，需要在项目中引入如下依赖：</p>
 <pre><code class="xml">&lt;dependency&gt;
   &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
   &lt;artifactId&gt;handler-router&lt;/artifactId&gt;
@@ -374,7 +377,6 @@
 </code></pre>
 
 <p>在配置文件中增加配置项：</p>
-<p>前提条件：配置servicecomb.handler.chain.Consumer.default，在处理链Consumer中配置loadbalance，<a href="../loadbalance/">loadbalance处理链介绍</a>。</p>
 <table>
 <thead>
 <tr>
@@ -391,9 +393,18 @@
 <td>servicecomb.router.type</td>
 <td>填写'router'</td>
 </tr>
+<tr>
+<td>servicecomb.router.header</td>
+<td>从HTTP请求头中提取额外的可以用于匹配HTTP Header信息。 以逗号分隔的多个 Header 名称。</td>
+</tr>
 </tbody>
 </table>
-<p>路由管理规则实例如下：</p>
+<ul>
+<li>说明：路由规则里面的 headers 来源分为如下几部分：（1）servicecomb.router.header 配置的 Header 信息；（2）Invocation Arguments，即
+  业务接口的参数列表。关于Invocation Arguments和Swagger Arguments的差异，请参考 Invocation 类。 Invocation Arguments的优先级
+  高于 servicecomb.router.header。 </li>
+</ul>
+<p>灰度发布规则示例如下：</p>
 <pre><code class="yaml">servicecomb:
     routeRule:  
       provider: | #服务名
@@ -432,12 +443,12 @@
 <li>优先级数量越大优先级越高。</li>
 </ul>
 <h4 id="_3">匹配流程</h4>
-<p>对于上面的示例配置，所有访问provider服务的请求，首先尝试与优先级为2的第一个的match规则进行匹配header：header存在key为region的按照正则规则区分大小写匹配，存在key为type的进行字符串精准匹配。若匹配match成功则按照route的配置分配100%的流量到version和tags对应的实例。若匹配match失败则进入下个优先级为1的规则。不同规则优先级不能相等。</p>
+<p>对于上面的示例配置，所有访问provider服务的请求，首先尝试与优先级为2的第一个的match规则进行匹配
+header：header存在key为region的按照正则规则区分大小写匹配，存在key为type的进行字符串精准匹配。若匹配
+match成功则按照route的配置分配100%的流量到version和tags对应的实例。若匹配match失败则进入下个优先级为1的规则。不同规则优先级不能相等。</p>
 <h4 id="_4">异常情况的处理</h4>
 <p>如果因为规则配置错误，或者没有match到任何一条规则，流量会直接跳过灰度规则，相当于没有灰度发布配置。</p>
 <p>如果已经匹配了match，因为对应的version或者tags找不到实例，则剩余流量自动转发到目前的最新版本。</p>
-<h4 id="_5">负载均衡算法</h4>
-<p>借鉴了nginx，使用平滑加权轮询算法，流量会均匀的等比分配到对应的服务实例上。</p>
               
             </div>
           </div>

@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>配置注入机制 - ServiceComb Java Chassis 开发指南</title>
+  <title>性能问题分析和调优 - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u914d\u7f6e\u6ce8\u5165\u673a\u5236";
-    var mkdocs_page_input_path = "config/inject-config.md";
+    var mkdocs_page_name = "\u6027\u80fd\u95ee\u9898\u5206\u6790\u548c\u8c03\u4f18";
+    var mkdocs_page_input_path = "featured-topics/performance.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -136,6 +136,21 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">管理服务配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/read-config/">在程序中读取配置信息</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">服务治理功能参考</span>
     <ul class="subnav">
                 <li class="">
@@ -152,7 +167,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/router/">路由管理</a>
+    <a class="" href="../../references-handlers/router/">灰度发布</a>
                 </li>
                 <li class="">
                     
@@ -213,35 +228,6 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">管理服务配置</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../general-config/">通用配置说明</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">配置注入机制</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#_1">配置注入机制</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#_2">配置注入对象</a></li>
-        
-            <li><a class="toctree-l4" href="#_3">执行注入</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
     <span class="caption-text">服务打包和运行</span>
     <ul class="subnav">
                 <li class="">
@@ -265,19 +251,33 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/using-inspector/">使用 inspector 模块查看契约</a>
+    <a class="" href="../features/">新功能介绍系列文章</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
+    <a class="" href="../compatibility/">兼容问题和兼容性策略</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../featured-topics/compatibility/">兼容问题和兼容性策略</a>
+    <a class="" href="../upgrading/">升级指导系列文章</a>
                 </li>
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../featured-topics/upgrading/">升级指导系列文章</a>
+    <a class="current" href="./">性能问题分析和调优</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#_1">性能问题分析和调优</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#_2">性能问题分析</a></li>
+        
+            <li><a class="toctree-l4" href="#_3">性能常识</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -346,11 +346,11 @@
     
       
         
-          <li>管理服务配置 &raquo;</li>
+          <li>专题文章 &raquo;</li>
         
       
     
-    <li>配置注入机制</li>
+    <li>性能问题分析和调优</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -360,150 +360,59 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1">配置注入机制</h1>
-<p>配置注入提供了一种简单的管理大量复杂配置的机制，开发者不需要使用 DynamicPropertyFactory 逐个读取配置项，增加配置监听，
-而是定义一个简单的 JAVA Bean， 定义这个 Bean 的属性对应的配置项， 当配置信息变化的时候， Bean 的属性会自动刷新，极大
-的简化了用户管理大量复杂配置的复杂度。 </p>
-<p>Bean 属性对应的配置项名称支持通配符， 一个属性可以关联若干配置项，可以声明这些配置项的优先级。 Java对象可以是一个
-Java Bean，或是一个拥有public字段的类。</p>
-<h2 id="_2">配置注入对象</h2>
-<p>我们首先设计两个Java类用于注入配置属性，分别用来演示不使用注解和使用注解的场景。</p>
+                <h1 id="_1">性能问题分析和调优</h1>
+<p>性能优化是应用程序开发很重要的环节，也是比较复杂的过程。分析性能问题的关键是能够收集到尽可能多的信息，识别性能瓶颈。
+Java Chassis针对性能分析提供的最有用工具是<a href="../../general-development/metrics/">应用性能监控</a>。应用性能监控
+默认周期性收集系统性能数据，并将数据输出到日志文件。应用性能监控数据统计提供了非常高效的实现，建议应用程序默认打开。</p>
+<p>应用性能监控推荐下面的配置：</p>
+<pre><code class="yaml">servicecomb:
+  metrics:
+    window_time: 60000
+    invocation:
+      latencyDistribution: 0,1,10,100,1000
+    Consumer.invocation.slow:
+      enabled: true
+      msTime: 1000
+    Provider.invocation.slow:
+      enabled: true
+      msTime: 1000
+    publisher.defaultLog:
+      enabled: true
+      endpoints.client.detail.enabled: true
+</code></pre>
+
+<p>结合业务自己的日志系统，可以将性能统计日志存储到独立的日志文件，减少对业务日志查看的干扰。</p>
+<h2 id="_2">性能问题分析</h2>
+<p>性能问题一般以超时的方式表现出来，当出现性能问题的时候，建议收集如下日志：</p>
+<ol>
+<li>consumer调用出错日志（如果有的话，比如超时）；</li>
+<li>provider调用出错日志（如果有的话，比如丢弃请求）；</li>
+<li>consumer对应时间段的metrics日志，包括周期统计数据和慢调用日志；</li>
+<li>provider对应时间段的metrics日志，包括周期统计数据和慢调用日志；</li>
+</ol>
+<p>通常结合上面的日志，就能够初步识别出性能瓶颈的位置了。metrics日志重点反映的是Java Chassis各个处理环节的耗时，
+对于线程排队的场景，需要进一步识别业务的性能瓶颈。</p>
+<ol>
+<li>通过jstack采集堆栈信息。这个通常比较难于收集，需要在出现性能缓慢的时刻，抓取。建议每隔几秒钟，连续抓取3个以上堆栈，用于分析。</li>
+<li>对于涉及内存管理和垃圾回收的问题，需要收集GC的信息，和内存增长趋势。 </li>
+</ol>
+<p>收集性能数据是分析的第一步，理解性能数据需要熟悉Java Chassis的处理过程、线程池排队和执行原理、JVM线程堆栈和GC机制等，这里不详细
+描述，结合实际问题在过程中学习是更好的提升方式。 Java Chassis中通过<a href="https://github.com/apache/servicecomb-java-chassis/issues?q=is%3Aissue+is%3Aclosed+label%3Aperformance">performance标签</a>的问题和性能有关，可以作为业务性能问题
+分析的参考，碰到性能问题，也可以<a href="https://github.com/apache/servicecomb-java-chassis/issues">提交issue</a>，找社区寻求帮助，记得在issue中包含metrics信息。 </p>
+<h2 id="_3">性能常识</h2>
+<p>下面提供一些常见的数据，帮助识别性能瓶颈。这些数据并不是理论上精确的，仅供参考。 </p>
 <ul>
-<li>
-<p>使用注解</p>
-<pre><code>```Java
-  @InjectProperties(prefix = "jaxrstest.jaxrsclient")
-  public class Configuration {
-    /*
-     * 方法的 prefix 属性值 "override" 会覆盖标注在类定义的 @InjectProperties
-     * 注解的 prefix 属性值。
-     *
-     * keys属性可以为一个字符串数组，下标越小优先级越高。
-     *
-     * 这里会按照如下顺序的属性名称查找配置属性，直到找到已被配置的配置属性，则停止查找：
-     * 1) jaxrstest.jaxrsclient.override.high
-     * 2) jaxrstest.jaxrsclient.override.low
-     *
-     * 测试用例：
-     * jaxrstest.jaxrsclient.override.high: hello high
-     * jaxrstest.jaxrsclient.override.low: hello low
-     * 预期：
-     * hello high
-     */
-    @InjectProperty(prefix = "jaxrstest.jaxrsclient.override", keys = {"high", "low"})
-    public String strValue;
-
-    /**
-     * keys支持通配符，并在可以在将配置属性注入的时候指定通配符的代入对象。
-     *
-     * 测试用例：
-     * jaxrstest.jaxrsclient.k.value: 3
-     * 预期：
-     * 3
-     */
-    @InjectProperty(keys = "${key}.value")
-    public int intValue;
-
-    /**
-     * 通配符的代入对象可以是一个字符串List，优先级遵循数组元素下标越小优先级越高策略。
-     *
-     * 测试用例：
-     * jaxrstest.jaxrsclient.l1-1: 3.0
-     * jaxrstest.jaxrsclient.l1-2: 2.0
-     *
-     * 预期：
-     * 3.0
-     */
-    @InjectProperty(keys = "${full-list}")
-    public float floatValue;
-
-    /**
-     * keys属性也支持多个通配符，优先级如下：首先通配符的优先级从左到右递减，
-     * 然后如果通配符被代入List，遵循List中元素index越小优先级越高策略。
-     *
-     * 测试用例：
-     * jaxrstest.jaxrsclient.low-1.a.high-1.b: 1
-     * jaxrstest.jaxrsclient.low-1.a.high-2.b: 2
-     * jaxrstest.jaxrsclient.low-2.a.high-1.b: 3
-     * jaxrstest.jaxrsclient.low-2.a.high-2.b: 4
-     * 预期：
-     * 1
-     */
-    @InjectProperty(keys = "${low-list}.a.${high-list}.b")
-    public long longValue;
-
-    /**
-     * 可以通过注解的defaultValue属性指定默认值。如果字段未关联任何配置属性，
-     * 定义的默认值会生效，否则默认值会被覆盖。
-     *
-     * 测试用例：
-     * 预期：
-     * abc
-     */
-    @InjectProperty(defaultValue = "abc")
-    public String strDef;
-  }
-```
-</code></pre>
-</li>
-<li>
-<p>不使用注解</p>
-<pre><code>```Java
-public class ConfigNoAnnotation {
-    /*
-     * 如果未提供@InjectProperties和@InjectProperty注解，会默认使用字段名作为配置属性名。
-     * 注意类名不作为前缀起作用。
-     * 此处将配置属性 strValue 绑定到该字段
-    */
-  public String strValue;
-}
-```
-</code></pre>
-</li>
+<li>通过一次调用，可以收集到一个请求发出到收到响应的时延，这个时延称为平均时延。并发场景，平均时延并不是固定的，通常随着并发数
+  增大而增大。</li>
+<li>一个请求的平均时延在0.1ms~1ms之间，TPS可以达到1万~10万。 0.1ms的时延，是不带任何业务逻辑的开发框架时延，当平均时延
+  小于1ms的情况，进一步提升性能，需要考虑框架性能调优，还会涉及操作系统、网络等调优，比较复杂；大于1ms的情况，通常都需要
+  调优业务代码，框架不是性能瓶颈。</li>
+<li>一个请求的平均时延在1ms~10ms之间，TPS可以达到1千~1万。</li>
+<li>一个请求的平均时延在100ms~100ms之间，TPS可以达到1百~1千。</li>
+<li>有个简单的公式，可以估算最大TPS： <code>CPU核数 * (1000/平均时延)</code> &lt; TPS &lt; <code>线程数 * (1000/平均时延)</code>。 越是计算密集型的
+  任务，TPS越接近<code>CPU核数 * (1000/平均时延)</code>；空闲等待任务越多，越是接近<code>线程数 * (1000/平均时延)</code>。 压测的时候，如果并发
+  请求大于上述估算值，那么就会出现大量请求超时。 </li>
 </ul>
-<h2 id="_3">执行注入</h2>
-<ul>
-<li>使用注解的场景<pre><code>```Java
-ConfigWithAnnotation config = SCBEngine.getInstance().getPriorityPropertyManager()
-  .createConfigObject(Configuration.class,
-        "key", "k",
-        "low-list", Arrays.asList("low-1", "low-2"),
-        "high-list", Arrays.asList("high-1", "high-2"),
-        "full-list", Arrays.asList("l1-1", "l1-2")
-        );
-```
-</code></pre>
-</li>
-</ul>
-<p>Configuration对象的longValue字段按以下顺序查找已配置的属性:</p>
-<pre><code>    1.  root.low-1.a.high-1.b
-    2.  root.low-1.a.high-2.b
-    3.  root.low-2.a.high-1.b
-    4.  root.low-2.a.high-2.b
-</code></pre>
-<p>Configuration对象的floatValue字段按以下顺序查找已配置的属性:</p>
-<pre><code>    1.  root.l1-1
-    2.  root.l1-2
-</code></pre>
-<ul>
-<li>
-<p>不使用注解的场景</p>
-<pre><code>```Java
-ConfigNoAnnotation config = SCBEngine.getInstance()
-  .getPriorityPropertyManager().createConfigObject(ConfigNoAnnotation.class);
-```
-</code></pre>
-<p>ConfigNoAnnotation 对象的 strValue 字段会查找已配置的属性 strValue，没有前缀和优先级。</p>
-</li>
-</ul>
-<p><strong><em>注意事项:</em></strong> 2.1.0 之前的版本， 如果系统中存在大量调用createConfigObject的情况， 需要调用</p>
-<pre><code>    ```Java
-    priorityPropertyManager.unregisterConfigObject(config)
-    ```
-</code></pre>
-<p>进行显示回收。 2.1.0 及其之后的版本， 不需要调用这个接口，系统创建的对象是 WeakReference， 在未被
-业务引用以后，会自动回收。 </p>
-<p>更多关于配置注入的用法，建议下载 java-chassis 的源码， 查看 TestConfigObjectFactory 类里面的示例。</p>
               
             </div>
           </div>
@@ -511,10 +420,10 @@ ConfigNoAnnotation config = SCBEngine.getInstance()
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../packaging/standalone/" class="btn btn-neutral float-right" title="以standalone模式打包">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../config-reference/rest-transport-client/" class="btn btn-neutral float-right" title="REST Transport Client 配置项">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../general-config/" class="btn btn-neutral" title="通用配置说明"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../upgrading/" class="btn btn-neutral" title="升级指导系列文章"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -540,10 +449,10 @@ ConfigNoAnnotation config = SCBEngine.getInstance()
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../general-config/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../upgrading/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../packaging/standalone/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../config-reference/rest-transport-client/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

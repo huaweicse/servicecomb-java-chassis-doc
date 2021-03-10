@@ -142,6 +142,21 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">管理服务配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../config/read-config/">在程序中读取配置信息</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">服务治理功能参考</span>
     <ul class="subnav">
                 <li class="">
@@ -158,7 +173,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../references-handlers/router/">路由管理</a>
+    <a class="" href="../references-handlers/router/">灰度发布</a>
                 </li>
                 <li class="">
                     
@@ -219,21 +234,6 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">管理服务配置</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../config/general-config/">通用配置说明</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../config/inject-config/">配置注入机制</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
     <span class="caption-text">服务打包和运行</span>
     <ul class="subnav">
                 <li class="">
@@ -257,10 +257,6 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../featured-topics/using-inspector/">使用 inspector 模块查看契约</a>
-                </li>
-                <li class="">
-                    
     <a class="" href="../featured-topics/features/">新功能介绍系列文章</a>
                 </li>
                 <li class="">
@@ -270,6 +266,10 @@
                 <li class="">
                     
     <a class="" href="../featured-topics/upgrading/">升级指导系列文章</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../featured-topics/performance/">性能问题分析和调优</a>
                 </li>
     </ul>
 	    </li>
@@ -382,11 +382,8 @@
 <li><a href="../build-provider/listen-address-and-publish-address/">服务监听地址和发布地址</a></li>
 <li><a href="../build-provider/thread-pool/">线程池</a></li>
 <li><a href="../build-provider/event-listener/">服务启动事件</a></li>
-<li>服务配置 <ul>
-<li><a href="../build-provider/configuration/parameter-validator/">参数效验</a></li>
+<li><a href="../build-provider/parameter-validator/">参数效验</a></li>
 <li><a href="../build-provider/bootup/">程序启动逻辑</a></li>
-</ul>
-</li>
 <li><a href="../build-provider/ipv6-configuration/">IPV6配置和使用</a></li>
 <li><a href="../build-provider/access-log-configuration/">Access Log配置</a></li>
 </ul>
@@ -423,6 +420,7 @@
 <li><a href="../general-development/multienvironment/">微服务实例间多环境隔离</a></li>
 <li><a href="../general-development/thread-model/">线程模型</a></li>
 <li><a href="../general-development/config-logs/">配置日志</a></li>
+<li><a href="../general-development/using-inspector/">使用 inspector 模块查看契约</a>  </li>
 </ul>
 </li>
 <li>多样化的通信协议功能参考:<ul>
@@ -440,11 +438,16 @@
 <li><a href="../registry/distributed/">去中心化注册发现</a></li>
 </ul>
 </li>
+<li>管理服务配置:<ul>
+<li><a href="../config/general-config/">通用配置说明</a></li>
+<li><a href="../config/read-config/">在程序中读取配置信息</a></li>
+</ul>
+</li>
 <li>服务治理功能参考:<ul>
 <li><a href="../references-handlers/intruduction/">处理链介绍</a></li>
 <li><a href="../references-handlers/loadbalance/">负载均衡</a></li>
 <li><a href="../references-handlers/ratelimit/">限流</a></li>
-<li><a href="../references-handlers/router/">路由管理</a></li>
+<li><a href="../references-handlers/router/">灰度发布</a></li>
 <li><a href="../references-handlers/fault-injection/">故障注入</a></li>
 <li><a href="../references-handlers/bizkeeper/">隔离熔断容错</a></li>
 <li><a href="../references-handlers/governance/">基于动态配置的流量特征治理</a></li>
@@ -463,11 +466,6 @@
 <li><a href="../references-handlers/publickey/">公钥认证</a></li>
 </ul>
 </li>
-<li>管理服务配置:<ul>
-<li><a href="../config/general-config/">通用配置说明</a></li>
-<li><a href="../config/inject-config/">配置注入机制</a></li>
-</ul>
-</li>
 <li>服务打包和运行: <ul>
 <li><a href="../packaging/standalone/">以standalone模式打包</a></li>
 <li><a href="../packaging/web-container/">以WEB容器模式打包</a></li>
@@ -475,10 +473,10 @@
 </li>
 <li>专题文章:<ul>
 <li><a href="../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a></li>
-<li><a href="../featured-topics/using-inspector/">使用 inspector 模块查看契约</a></li>
 <li><a href="../featured-topics/compatibility/">兼容问题和兼容性策略</a></li>
 <li><a href="../featured-topics/features/">新功能介绍系列文章</a></li>
 <li><a href="../featured-topics/upgrading/">升级指导系列文章</a></li>
+<li><a href="../featured-topics/performance/">性能问题分析和调优</a></li>
 </ul>
 </li>
 <li>常用配置项参考:<ul>

@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>使用 inspector 模块查看契约 - ServiceComb Java Chassis 开发指南</title>
+  <title>Parameter validator - ServiceComb Java Chassis 开发指南</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,8 +17,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "\u4f7f\u7528 inspector \u6a21\u5757\u67e5\u770b\u5951\u7ea6";
-    var mkdocs_page_input_path = "featured-topics/using-inspector.md";
+    var mkdocs_page_name = "Parameter validator";
+    var mkdocs_page_input_path = "build-provider/parameter-validator.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -66,12 +66,12 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../build-provider/definition/service-definition/">微服务定义</a>
+    <a class="" href="../definition/service-definition/">微服务定义</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../build-provider/catalog/">开发服务提供者</a>
+    <a class="" href="../catalog/">开发服务提供者</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -136,6 +136,21 @@
           
             <li class="toctree-l1">
 		
+    <span class="caption-text">管理服务配置</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../config/general-config/">通用配置说明</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../config/read-config/">在程序中读取配置信息</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <span class="caption-text">服务治理功能参考</span>
     <ul class="subnav">
                 <li class="">
@@ -152,7 +167,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../references-handlers/router/">路由管理</a>
+    <a class="" href="../../references-handlers/router/">灰度发布</a>
                 </li>
                 <li class="">
                     
@@ -213,21 +228,6 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">管理服务配置</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../config/general-config/">通用配置说明</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config/inject-config/">配置注入机制</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
     <span class="caption-text">服务打包和运行</span>
     <ul class="subnav">
                 <li class="">
@@ -249,37 +249,21 @@
                     
     <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">使用 inspector 模块查看契约</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#inspector">使用 inspector 模块查看契约</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#inspector_1">启用inspector</a></li>
-        
-            <li><a class="toctree-l4" href="#inspector_2">使用inspector功能</a></li>
-        
-            <li><a class="toctree-l4" href="#inspector_3">保护 inspector 接口的访问控制</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../features/">新功能介绍系列文章</a>
+    <a class="" href="../../featured-topics/compatibility/">兼容问题和兼容性策略</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../compatibility/">兼容问题和兼容性策略</a>
+    <a class="" href="../../featured-topics/upgrading/">升级指导系列文章</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../upgrading/">升级指导系列文章</a>
+    <a class="" href="../../featured-topics/performance/">性能问题分析和调优</a>
                 </li>
     </ul>
 	    </li>
@@ -347,12 +331,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>专题文章 &raquo;</li>
-        
-      
     
-    <li>使用 inspector 模块查看契约</li>
+    <li>Parameter validator</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -362,59 +342,123 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="inspector">使用 inspector 模块查看契约</h1>
-<p>inspector 提供了用户查看、下载契约，生成文档和对API接口进行测试的功能。这个功能直接在微服务提供，用于弥补通过服务中心查看契约和对接口进行测试的不足。inspector功能后续会做进一步增强，除了管理契约，还可以观察微服务的内部状态，帮助定位一些常见问题。</p>
-<h2 id="inspector_1">启用inspector</h2>
-<p>在项目中启用inspector很简单，只需要在pom中增加如下依赖即可。 </p>
-<pre><code>&lt;dependency&gt;
+                <h2 id="_1">场景描述</h2>
+<p>用户在provider端使用参数效验，可以对相应的参数输入要求预先进行设置，在接口实际调用前进行效验处理，达到控制参数输入标准的效果。</p>
+<h2 id="_2">配置说明</h2>
+<ul>
+<li>
+<p>添加swagger-invocation-validator的pom依赖：</p>
+<pre><code>```xml
+&lt;dependency&gt;
   &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;inspector&lt;/artifactId&gt;
+  &lt;artifactId&gt;swagger-invocation-validator&lt;/artifactId&gt;
 &lt;/dependency&gt;
+```
 </code></pre>
-<p>如果项目中依赖了 solution-basic , 这个模块会自动包含进来。</p>
-<p>引入依然后启动微服务即可使用相关契约管理功能。下面假设微服务监听的端口为8080。</p>
-<h2 id="inspector_2">使用inspector功能</h2>
-<p>inspector提供了管理界面，集成了swagger编辑器。输入 http://localhost:8080/inspector/index.html 后，出现如下界面。</p>
-<p><strong><em>SWAGER编辑界面</em></strong></p>
-<p><img alt="" src="../../assets/inspector-01.png" /></p>
-<p>在SWAGGER编辑界面，可以对接口进行测试。</p>
-<p><strong><em>HTML界面</em></strong></p>
-<p><img alt="" src="../../assets/inspector-02.png" /></p>
-<p>HTML页面提供了更容易读写的格式，方便开发者查看接口说明。</p>
-<p>输入 http://localhost:8080/inspector/schemas 可以查询所有的schema列表</p>
-<pre><code class="json">[&quot;goodsRepositoryApi&quot;,&quot;goodsService&quot;,&quot;onlineMallApi&quot;,&quot;stockApi&quot;,&quot;goodsCategoryApi&quot;,&quot;goodsPriceApi&quot;]
+</li>
+<li>
+<p>在需要验证的代码上按照JSR 349规范添加验证器注解，如@NotNull，@Min，@Max等。</p>
+</li>
+</ul>
+<h2 id="_3">示例代码</h2>
+<ul>
+<li>接口参数验证</li>
+</ul>
+<pre><code class="java">@RestSchema(schemaId = &quot;validator&quot;)
+@Path(&quot;/validator&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+public class Validator {
+
+  @Path(&quot;/add&quot;)
+  @POST
+  public int add(@FormParam(&quot;a&quot;) int a, @Min(20) @FormParam(&quot;b&quot;) int b) {
+    return a + b;
+  }
+
+  @Path(&quot;/sayhi/{name}&quot;)
+  @PUT
+  public String sayHi(@Length(min = 3) @PathParam(&quot;name&quot;) String name) {
+    ContextUtils.getInvocationContext().setStatus(202);
+    return name + &quot; sayhi&quot;;
+  }
+
+  @Path(&quot;/sayhello&quot;)
+  @POST
+  public Student sayHello(@Valid Student student) {
+    student.setName(&quot;hello &quot; + student.getName());
+    student.setAge(student.getAge());
+    return student;
+  }
+}
 </code></pre>
 
-<p>输入 <code>http://localhost:8080/inspector/download/schemas?format=HTML</code> 可以下载文档。format支持HTML和SWAGGER两种格式。这个接口会下载所有契约文件，打包为zip格式。</p>
-<p>输入 <code>http://localhost:8080/inspector/schemas/goodsService?download=false&amp;format=HTML</code> 可以查看、下载单个契约文件。</p>
-<h2 id="inspector_3">保护 inspector 接口的访问控制</h2>
-<p>该功能被设计为辅助开发、设计、运维，第一次访问的时候加载很慢，不建议开放给最终用户大规模并发访问使用。 如果在生产环境带入
-这个功能，可以通过必要的隔离措施和访问控制，限制最终用户对于这个接口的访问。</p>
-<p>可以使用 java-chassis 提供的线程池隔离功能， 将这个服务放到独立的线程池，避免对其他服务的访问产生影响。具体操作步骤包括，</p>
-<p>定义线程池：</p>
-<pre><code>  &lt;bean id=&quot;servicecomb.samples.executor.groupThreadPool&quot; class=&quot;org.apache.servicecomb.core.executor.GroupExecutor&quot;
-    init-method=&quot;init&quot;/&gt;
+<ul>
+<li>bean类验证</li>
+</ul>
+<p>需要在传入的Student对象前加@Valid，如上图sayHello(@Valid Student student)方法。</p>
+<pre><code class="java">public class Student {
+  @NotNull
+  private String name;
+
+  @Max(20)
+  private int age;
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public int getAge() {
+    return age;
+  }
+}
 </code></pre>
 
-<p>启用线程池:</p>
-<pre><code class="json">servicecomb:
-  executors:
-   Provider:
-     inspector: servicecomb.samples.executor.groupThreadPool
-</code></pre>
+<h2 id="_4">自定义返回异常</h2>
+<ul>
+<li>默认的参数效验器ParameterValidator已经实现了接口ProducerInvokeExtension，按照JSR 349规范处理所需的参数验证。</li>
+</ul>
+<p>如果任何参数验证失败，缺省错误是BAD_REQUEST(400, "Bad Request")。</p>
+<p>返回错误支持自定义扩展，使用SPI机制。</p>
+<ul>
+<li>
+<p>可以通过实现接口ExceptionToProducerResponseConverter来自定义返回的错误信息，以ConstraintViolationExceptionToProducerResponseConverter为例。</p>
+</li>
+<li>
+<p>实现ExceptionToProducerResponseConverter接口，重写方法，其中getOrder方法的返回结果表示该验证器的优先级，值越小优先级越高。</p>
+<p>```java
+ public class ConstraintViolationExceptionToProducerResponseConverter
+     implements ExceptionToProducerResponseConverter<ConstraintViolationException> {
+   @Override
+   public Class<ConstraintViolationException> getExceptionClass() {
+     return ConstraintViolationException.class;
+   }</p>
+<p>@Override
+   public Response convert(SwaggerInvocation swaggerInvocation, ConstraintViolationException e) {
+     return Response.createFail(new InvocationException(Status.BAD_REQUEST, e.getConstraintViolations().toString()));
+   }</p>
+<p>@Override
+   public int getOrder() {
+     return -100;
+   }
+ }
+ ```</p>
+</li>
+<li>
+<p>在META-INF下的services文件夹增加一个文件，以所实现接口x.x.x.ExceptionToProducerResponseConverter(带包名)为名，以具体实现类x.x.x.ConstraintViolationExceptionToProducerResponseConverter(带包名)为内容。</p>
+</li>
+</ul>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../features/" class="btn btn-neutral float-right" title="新功能介绍系列文章">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/" class="btn btn-neutral" title="在Spring Boot中使用java chassis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -438,10 +482,6 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../features/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
