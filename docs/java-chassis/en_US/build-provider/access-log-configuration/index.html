@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>Access Log Configuration - ServiceComb Java Chassis Developers Guide</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -24,7 +25,7 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -35,6 +36,7 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> ServiceComb Java Chassis Developers Guide</a>
         <div role="search">
@@ -45,454 +47,210 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">Introduction</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Getting Started</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../start/terminology/">Glossary</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Getting Started</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../start/terminology/">Glossary</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../start/architecture/">Architecture</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../start/development-environment/">Development environment</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../start/first-sample/">Develop the first microservice</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Development Service Provider</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../definition/service-definition/">Service definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../define-contract/">Service contract definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../code-first/">Implicit API definition</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../swagger-annotation/">Use Swagger annotations</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../springmvc/">Develop with SpringMVC</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../jaxrs/">Develop with JAX-RS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../transparent-rpc/">Develop with Transparent RPC</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../interface-constraints/">Interface definition and data type</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../listen-address-and-publish-address/">Service listening address and publishing address</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../thread-pool/">Thread pool</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Service Configuration</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../configuration/ratelimite-strategy/">Rate Limiting Policy</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../../start/architecture/">Architecture</a>
+                <li class="toctree-l2"><a class="reference internal" href="../configuration/downgrade-strategy/">Fallback Policy</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../../start/development-environment/">Development environment</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../start/first-sample/">Develop the first microservice</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Development Service Provider</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../definition/service-definition/">Service definition</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../define-contract/">Service contract definition</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../code-first/">Implicit API definition</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../swagger-annotation/">Use Swagger annotations</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../springmvc/">Develop with SpringMVC</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../jaxrs/">Develop with JAX-RS</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../transparent-rpc/">Develop with Transparent RPC</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../interface-constraints/">Interface definition and data type</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../listen-address-and-publish-address/">Service listening address and publishing address</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../thread-pool/">Thread pool</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Service Configuration</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../configuration/ratelimite-strategy/">Rate Limiting Policy</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../configuration/downgrade-strategy/">Fallback Policy</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../configuration/parameter-validator/">Parameter Validator</a>
+                <li class="toctree-l2"><a class="reference internal" href="../configuration/parameter-validator/">Parameter Validator</a>
                 </li>
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../bootup/">Boot-up Process</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="./">Access Log Configuration</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#concepts">Concepts</a></li>
-    
-
-    <li class="toctree-l3"><a href="#scenario">Scenario</a></li>
-    
-
-    <li class="toctree-l3"><a href="#configuration">Configuration</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#enable-access-log">Enable Access Log</a></li>
-        
-            <li><a class="toctree-l4" href="#log-format-configuration">Log format configuration</a></li>
-        
-            <li><a class="toctree-l4" href="#output-file-configuration">Output file configuration</a></li>
-        
-            <li><a class="toctree-l4" href="#switch-to-logback">Switch to logback</a></li>
-        
-            <li><a class="toctree-l4" href="#extending-access-log">Extending Access Log</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#sample-code">Sample code</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#configurations-in-microserviceyaml">Configurations in microservice.yaml</a></li>
-        
-            <li><a class="toctree-l4" href="#configurations-in-log4jproperties">Configurations in log4j.properties</a></li>
-        
-        </ul>
-    
-
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../bootup/">Boot-up Process</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Access Log Configuration</a>
+    <ul class="current">
     </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Writing Service Consumer</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/common-configuration/">Consumer common configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/using-resttemplate/">Using Rest Template</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/using-AsyncRestTemplate/">Using AsyncRestTemplate</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/develop-consumer-using-rpc/">Using with RPC</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/with-contract/">Contract</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Invoke control</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../build-consumer/circuit-breaker/">Circuit Breaker</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../build-consumer/flow-control/">Flow Control</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../build-consumer/fault-injection/">Fault Injection</a>
                 </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Writing Service Consumer</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../build-consumer/common-configuration/">Consumer common configuration</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../build-consumer/using-resttemplate/">Using Rest Template</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../build-consumer/using-AsyncRestTemplate/">Using AsyncRestTemplate</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../build-consumer/develop-consumer-using-rpc/">Using with RPC</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../build-consumer/with-contract/">Contract</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">Invoke control</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../build-consumer/circuit-breaker/">Circuit Breaker</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../build-consumer/flow-control/">Flow Control</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../build-consumer/fault-injection/">Fault Injection</a>
-                </li>
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../build-consumer/3rd-party-service-invoke/">Invoke 3rd-party REST services</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Transports</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/highway-rpc/">Highway</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/http2/">HTTP2</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">General Development</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../general-development/visit-sc/">Access Service Center</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/metrics/">Metrics</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/microservice-invocation-chain/">Microservice invocation chain</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/customized-tracing/">Customized-Tracing</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/local-develop-test/">Local development and testing</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/http-filter/">Http Filter</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/file-upload/">File Uploading</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/file-download/">File Downloading</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/reactive/">Reactive Programing</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/dnsconfig/">DNS Custom Configuration</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/dai-li-she-zhi/">Proxy Settings</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/report-framework-version/">Report framework version</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/cross-app-invocation/">Cross-application invocation</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/secret-field/">Customized serialization and deserialization</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/context/">Using Context to pass control messages</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/produceprocess/">Return value serialization extension</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/CORS/">CORS mechanism</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/AlarmEvent/">Get fuse and instance isolation alarm event information</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/shutdown/">Shutdown gracefully</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/error-handling/">Handling exceptions</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/multienvironment/">Multi-environment isolation between microservice instances</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../general-development/thread-model/">Thread Model</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Configuration</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../config/general-config/">General config</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config/inject-config/">Configuration injection</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Service Capability Open</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../edge/open-service/">Intruductions</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../edge/by-servicecomb-sdk/">Using Edge Service</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../edge/nginx/">Using confd and Nginx as edge services</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../edge/zuul/">Use zuul as edge services</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Service Packing and Running</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../packaging/standalone/">Standalone mode</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../packaging/web-container/">WEB container mode</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Micro Service Security</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../security/tls/">Using TLS</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../security/rsa/">Using RSA certification</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Using java chassis in Spring Boot</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">Intruductions</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">spring boot starter for java-chassis</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA application development</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/web-application/">Web development method development</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/diff-between-java-web/">The difference between JAVA application method and Web development method</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">The difference in Spring MVC mode</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Handlers reference</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/intruduction/">Intruductions</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/loadbalance/">Load Balancing</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/publickey/">Public key authentication</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">FAQ</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../question-and-answer/question_answer/">Q & A</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../question-and-answer/faq/">FAQ</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../question-and-answer/interface-compatibility/">Micro Service Interface Compatibility FAQ</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/3rd-party-service-invoke/">Invoke 3rd-party REST services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Transports</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/highway-rpc/">Highway</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/http2/">HTTP2</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">General Development</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/visit-sc/">Access Service Center</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/metrics/">Metrics</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/microservice-invocation-chain/">Microservice invocation chain</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/customized-tracing/">Customized-Tracing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/local-develop-test/">Local development and testing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/http-filter/">Http Filter</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/file-upload/">File Uploading</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/file-download/">File Downloading</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/reactive/">Reactive Programing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/dnsconfig/">DNS Custom Configuration</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/dai-li-she-zhi/">Proxy Settings</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/report-framework-version/">Report framework version</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/cross-app-invocation/">Cross-application invocation</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/secret-field/">Customized serialization and deserialization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/context/">Using Context to pass control messages</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/produceprocess/">Return value serialization extension</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/CORS/">CORS mechanism</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/AlarmEvent/">Get fuse and instance isolation alarm event information</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/shutdown/">Shutdown gracefully</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/error-handling/">Handling exceptions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/multienvironment/">Multi-environment isolation between microservice instances</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/thread-model/">Thread Model</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Configuration</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config/general-config/">General config</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config/inject-config/">Configuration injection</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Service Capability Open</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/open-service/">Intruductions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/by-servicecomb-sdk/">Using Edge Service</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/nginx/">Using confd and Nginx as edge services</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/zuul/">Use zuul as edge services</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Service Packing and Running</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../packaging/standalone/">Standalone mode</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../packaging/web-container/">WEB container mode</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Micro Service Security</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../security/tls/">Using TLS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../security/rsa/">Using RSA certification</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Using java chassis in Spring Boot</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">Intruductions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/components-for-spring-boot/">spring boot starter for java-chassis</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/java-application/">JAVA application development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/web-application/">Web development method development</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/diff-between-java-web/">The difference between JAVA application method and Web development method</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/diff-spring-mvc/">The difference in Spring MVC mode</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Handlers reference</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/intruduction/">Intruductions</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/loadbalance/">Load Balancing</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/publickey/">Public key authentication</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">FAQ</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../question-and-answer/question_answer/">Q & A</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../question-and-answer/faq/">FAQ</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../question-and-answer/interface-compatibility/">Micro Service Interface Compatibility FAQ</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -521,6 +279,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -533,11 +292,10 @@
 <h2 id="configuration">Configuration</h2>
 <h3 id="enable-access-log">Enable Access Log</h3>
 <p>Add the following configurations in the microservice.yaml file to enable access log:</p>
-<pre><code class="yaml">servicecomb:
+<pre><code class="language-yaml">servicecomb:
   accesslog:
     enabled: true  ## Enable access log
 </code></pre>
-
 <p><em><strong>Access log Configuration Items</strong></em></p>
 <table>
 <thead>
@@ -781,15 +539,14 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
 </blockquote>
 <h4 id="1-remove-log4j-dependencies">1. Remove Log4j dependencies</h4>
 <p>Before switching to logback, check the dependencies of the project and remove Log4j related dependencies. Run the maven command <code>dependency:tree</code> in the project, find the ServiceComb components that depend on Log4j, and add the following configuration to its <code>&lt;dependency&gt;</code>:</p>
-<pre><code class="xml">&lt;exclusion&gt;
+<pre><code class="language-xml">&lt;exclusion&gt;
   &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
   &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
 &lt;/exclusion&gt;
 </code></pre>
-
 <h4 id="2-add-a-logback-dependency">2. Add a logback dependency</h4>
 <p>Add a dependency for the logback in the pom file:</p>
-<pre><code class="xml">&lt;dependency&gt;
+<pre><code class="language-xml">&lt;dependency&gt;
   &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
   &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
 &lt;/dependency&gt;
@@ -802,10 +559,9 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
   &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
 &lt;/dependency&gt;
 </code></pre>
-
 <h4 id="3-configure-the-logger-for-the-access-log-component">3. Configure the logger for the access log component</h4>
 <p>Since the log component provided by ServiceComb obtains the logger named <code>accesslog</code> for log printing, the key to log framework switching is to provide a file called <code>accesslog</code> and configure the output file for it. The following is a sample configuration of the access log for logback. It only shows the configurations related to the access log. Other log configurations are omitted:</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;configuration&gt;
   &lt;!-- Users can customize the appender by their requirement --&gt;
   &lt;appender name=&quot;ACCESSLOG&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
@@ -825,27 +581,25 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
   &lt;/logger&gt;
 &lt;/configuration&gt;
 </code></pre>
-
 <h3 id="extending-access-log">Extending Access Log</h3>
 <p>Users can customize their AccessLogItem by ServiceComb's AccessLogItem extension mechanism.</p>
 <h4 id="related-classes">Related classes</h4>
 <ol>
 <li><code>AccessLogItem</code></li>
 </ol>
-<pre><code class="java">  public interface AccessLogItem&lt;T&gt; {
+<pre><code class="language-java">  public interface AccessLogItem&lt;T&gt; {
     /**
      * Get specified content from accessLogParam, generate the access log and return
      */
     String getFormattedItem(AccessLogParam&lt;T&gt; accessLogParam);
   }
 </code></pre>
-
 <p>The definition of <code>AccessLogItem</code> is as shown above. When request triggers Access Log printing, ServiceComb's Access Log mechanism will traverse a valid <code>AccessLogItem</code>, call the <code>getFormattedItem</code> method to get the item's Access Log fragment, concatenate all the the fragments into an Access Log, and output it to the log file.</p>
 <p>The parameter <code>AccessLogParam&lt;T&gt;</code> contains the request start time, the end time, and the request context of type <code>T</code>. In the REST over Vert.x communication mode, the type <code>T</code> is the <code>RoutingContext</code> of Vert.x.</p>
 <ol>
 <li><code>VertxRestAccessLogItemMeta</code></li>
 </ol>
-<pre><code class="java">  // pattern placeholder prefix
+<pre><code class="language-java">  // pattern placeholder prefix
   protected String prefix;
   // pattern placeholder suffix
   protected String suffix;
@@ -854,7 +608,6 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
   // AccessLogItem constructor
   protected AccessLogItemCreator&lt;RoutingContext&gt; accessLogItemCreator;
 </code></pre>
-
 <p>The  <code>VertxRestAccessLogItemMeta</code> contains the properties listed above, it specifies how ServiceComb parse the pattern string to get specific AccessLogItem.</p>
 <ul>
 <li>
@@ -868,12 +621,11 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
 <ol>
 <li><code>AccessLogItemCreator</code></li>
 </ol>
-<pre><code class="java">  public interface AccessLogItemCreator&lt;T&gt; {
+<pre><code class="language-java">  public interface AccessLogItemCreator&lt;T&gt; {
     // Receive configuration values and return an AccessLogItem. The method receives a null if there is no variables in AccessLogItem placeholder
     AccessLogItem&lt;T&gt; createItem(String config);
   }
 </code></pre>
-
 <p>The user instantiates his AccessLogItem by setting the AccessLogItemCreator in the custom VertxRestAccessLogItemMeta. Since this is a functional interface, when the AccessLogItem is initialized in a simple way, you can directly define the Creator using a Lambda expression to simplify development.</p>
 <h4 id="matching-rules-of-accesslogitemmeta">Matching rules of AccessLogItemMeta</h4>
 <p>Once AccessLogItemMeta is loaded into the Parser, it will be sorted once. Parser will match the meta list from front to back when parsing the pattern string. The general matching rules are as follows:
@@ -885,7 +637,7 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
 <li>Extend AccessLogItem</li>
 </ol>
 <p>First, the user needs the AccessLogItem interface to implement their own item:</p>
-<pre><code class="java">  public class UserDefinedAccessLogItem implements AccessLogItem&lt;RoutingContext&gt; {
+<pre><code class="language-java">  public class UserDefinedAccessLogItem implements AccessLogItem&lt;RoutingContext&gt; {
     private String config;
 
     public UserDefinedAccessLogItem(String config) {
@@ -899,12 +651,11 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
     }
   }
 </code></pre>
-
 <ol>
 <li>Define AccessLogItem meta class</li>
 </ol>
 <p>Inherit the class <code>VertxRestAccessLogItemMeta</code> or <code>CompositeVertxRestAccessLogItemMeta</code>, define the prefix and suffix of the AccessLogItem:</p>
-<pre><code class="java">  public class UserDefinedCompositeExtendedAccessLogItemMeta extends CompositeVertxRestAccessLogItemMeta {
+<pre><code class="language-java">  public class UserDefinedCompositeExtendedAccessLogItemMeta extends CompositeVertxRestAccessLogItemMeta {
     private static final List&lt;VertxRestAccessLogItemMeta&gt; META_LIST = new ArrayList&lt;&gt;();
 
     static {
@@ -917,7 +668,6 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
     }
   }
 </code></pre>
-
 <ol>
 <li>Configure the SPI load file</li>
 </ol>
@@ -928,15 +678,14 @@ Since ServiceComb's log function relies only on the slf4j interface, users can s
 <p>The configuration pattern in the microservice.yaml file is assumed to be "%{test-config}user-defined". The running service triggers the Access Log to print. If the request start time is 1, Access Log will print "user- Defined-[test-config]-[1]".</p>
 <h2 id="sample-code">Sample code</h2>
 <h3 id="configurations-in-microserviceyaml">Configurations in microservice.yaml</h3>
-<pre><code class="yaml">## other configurations omitted
+<pre><code class="language-yaml">## other configurations omitted
 servicecomb:
   accesslog:
     enabled: true  ## Enable access log
     pattern: &quot;%h - - %t %r %s %B&quot;  ## Custom log format
 </code></pre>
-
 <h3 id="configurations-in-log4jproperties">Configurations in log4j.properties</h3>
-<pre><code class="properties"># access log configuration item
+<pre><code class="language-properties"># access log configuration item
 paas.logs.accesslog.dir=../logs/
 paas.logs.accesslog.file=access.log
 # access log File appender
@@ -966,7 +715,7 @@ log4j.appender.access.logPermission=rw-------
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -976,7 +725,7 @@ log4j.appender.access.logPermission=rw-------
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -990,6 +739,11 @@ log4j.appender.access.logPermission=rw-------
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

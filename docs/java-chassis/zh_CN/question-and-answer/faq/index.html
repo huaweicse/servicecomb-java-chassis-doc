@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../../img/favicon.ico">
   <title>FAQ - ServiceComb Java Chassis 开发指南</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -24,7 +25,7 @@
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
   <script src="../../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -35,290 +36,157 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href="../.." class="icon icon-home"> ServiceComb Java Chassis 开发指南</a>
         
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../toc/">目录</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../..">概述</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../start/catalog/">快速入门</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../start/design/">设计选型参考</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../build-provider/definition/service-definition/">微服务定义</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../build-provider/catalog/">开发服务提供者</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../build-consumer/catalog/">开发服务消费者</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../../general-development/catalog/">通用功能开发</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">多样化的通信协议功能参考</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../transports/introduction/">多协议介绍</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/rest-over-servlet/">REST over Servlet</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/rest-over-vertx/">REST over Vertx</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/http2/">REST over HTTP2</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../transports/highway-rpc/">Highway</a>
-                </li>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../toc/">目录</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">概述</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../start/catalog/">快速入门</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../start/design/">设计选型参考</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-provider/definition/service-definition/">微服务定义</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-provider/catalog/">开发服务提供者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/catalog/">开发服务消费者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../general-development/catalog/">通用功能开发</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">多样化的通信协议功能参考</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/introduction/">多协议介绍</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/rest-over-servlet/">REST over Servlet</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/rest-over-vertx/">REST over Vertx</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/http2/">REST over HTTP2</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../transports/highway-rpc/">Highway</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">多样化的服务注册与发现功能参考</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../registry/introduction/">注册发现说明</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../registry/service-center/">使用服务中心</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../registry/local-registry/">本地注册发现</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../registry/distributed/">去中心化注册发现</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">管理服务配置</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config/general-config/">通用配置说明</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config/read-config/">在程序中读取配置信息</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">服务治理功能参考</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/intruduction/">处理链介绍</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/loadbalance/">负载均衡</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/ratelimit/">限流</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/router/">灰度发布</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/fault-injection/">故障注入</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">网关功能参考</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/open-service/">介绍</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/by-servicecomb-sdk/">使用 Edge Service 做网关</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/zuul/">使用 `zuul` 和 `spring cloud gateway` 做网关</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../edge/nginx/">nginx 网关简单介绍</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">安全特性参考</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/publickey/">公钥认证</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../security/tls/">使用TLS通信</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">服务打包和运行</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../packaging/standalone/">以standalone模式打包</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../packaging/web-container/">以WEB容器模式打包</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">专题文章</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../featured-topics/features/">新功能介绍系列文章</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../featured-topics/compatibility/">兼容问题和兼容性策略</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../featured-topics/upgrading/">升级指导系列文章</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../featured-topics/performance/">性能问题分析和调优</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">常用配置项参考</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config-reference/rest-transport-client/">REST Transport Client 配置项</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config-reference/config-center-client/">Config Center Client 配置项</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config-reference/service-center-client/">Service Center Client 配置项</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../config-reference/kie-client/">ServiceComb Kie Client 配置项</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">常见问题</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">FAQ</a>
+    <ul class="current">
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">多样化的服务注册与发现功能参考</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../registry/introduction/">注册发现说明</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/service-center/">使用服务中心</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/local-registry/">本地注册发现</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../registry/distributed/">去中心化注册发现</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">管理服务配置</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../config/general-config/">通用配置说明</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config/read-config/">在程序中读取配置信息</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">服务治理功能参考</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/intruduction/">处理链介绍</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/loadbalance/">负载均衡</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/ratelimit/">限流</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/router/">灰度发布</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/fault-injection/">故障注入</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/bizkeeper/">隔离熔断容错</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/governance/">基于动态配置的流量特征治理</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">网关功能参考</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../edge/open-service/">介绍</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../edge/by-servicecomb-sdk/">使用 Edge Service 做网关</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../edge/zuul/">使用 `zuul` 和 `spring cloud gateway` 做网关</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../edge/nginx/">nginx 网关简单介绍</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">安全特性参考</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../references-handlers/publickey/">公钥认证</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../security/tls/">使用TLS通信</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../security/shi-yong-rsa-ren-zheng/">使用RSA认证</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">服务打包和运行</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../packaging/standalone/">以standalone模式打包</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../packaging/web-container/">以WEB容器模式打包</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">专题文章</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot/">在Spring Boot中使用java chassis</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../featured-topics/features/">新功能介绍系列文章</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../featured-topics/compatibility/">兼容问题和兼容性策略</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../featured-topics/upgrading/">升级指导系列文章</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../featured-topics/performance/">性能问题分析和调优</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">常用配置项参考</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../config-reference/rest-transport-client/">REST Transport Client 配置项</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config-reference/config-center-client/">Config Center Client 配置项</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config-reference/service-center-client/">Service Center Client 配置项</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../config-reference/kie-client/">ServiceComb Kie Client 配置项</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">常见问题</span>
-    <ul class="subnav">
-                <li class=" current">
-                    
-    <a class="current" href="./">FAQ</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#_1">常见问题</a></li>
-    
-
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../question_answer/">Q & A</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../interface-compatibility/">微服务接口兼容常见问题</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../question_answer/">Q & A</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../interface-compatibility/">微服务接口兼容常见问题</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -347,6 +215,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -367,7 +236,7 @@
 <li>A: 支持函数重载，但是需要注意每个接口必须有唯一的operation id。可以加上<code>@ApiOperation</code>标签给重载的接口指定唯一
   的 operation id (对应于 nickname 属性）。示例代码如下：</li>
 </ul>
-<pre><code class="java">  @Path(&quot;/sayHi&quot;)
+<pre><code class="language-java">  @Path(&quot;/sayHi&quot;)
   @GET
   @Produces(&quot;text/plain;charset=UTF-8&quot;)
   @ApiOperation(value = &quot;&quot;, nickname = &quot;sayHi&quot;)
@@ -383,7 +252,6 @@
     return name;
   }
 </code></pre>
-
 <h2 id="Q3">Q: Map类型的 key 必须使用 String 类型？</h2>
 
 <ul>
@@ -403,7 +271,7 @@
 <ul>
 <li>A: 可以使用泛型。但是必须明确泛型类型。比如：</li>
 </ul>
-<pre><code class="java">  @PostMapping(path = &quot;holderUser&quot;)
+<pre><code class="language-java">  @PostMapping(path = &quot;holderUser&quot;)
   public Holder&lt;User&gt; holderUser(@RequestBody Holder&lt;User&gt; input) {
     Assert.isInstanceOf(Holder.class, input);
     Assert.isInstanceOf(User.class, input.value);
@@ -416,15 +284,13 @@
     return names;
   }
 </code></pre>
-
 <p>未指定泛型类型是不允许的。比如：</p>
-<pre><code class="java">  @GetMapping(path = &quot;/genericParams&quot;)
+<pre><code class="language-java">  @GetMapping(path = &quot;/genericParams&quot;)
   @ApiOperation(value = &quot;genericParams&quot;, nickname = &quot;genericParams&quot;)
   public List genericParams(@RequestParam(&quot;code&quot;) int code, @RequestBody List names) {
     return names;
   }
 </code></pre>
-
 <p>如果业务必须使用泛型，并且不能确定类型，可以考虑接口定义使用 Object 规避，客户端可以对返回值结果
 自行进行 json 转换。</p>
 <h2 id="Q6">Q: 实现类中 public 方法全部被发布为接口，如何排除？</h2>
@@ -433,26 +299,23 @@
 <li>A: java chassis 会将所有 public 方法发布为接口。 如果有些接口不需要发布为接口，可以使用 @ApiOperation
   标签声明不发布为接口。例子如下：</li>
 </ul>
-<pre><code class="java">  @ApiOperation(value = &quot;&quot;, hidden = true)
+<pre><code class="language-java">  @ApiOperation(value = &quot;&quot;, hidden = true)
   public void hidden() {
 
   }
 </code></pre>
-
 <p>在迁移改造的过程中，比如将 HSF 和 Dubbo 的内部 RPC 接口改造为 java-chassis 的 RPC 接口，可能还有更加复杂
 的情况，比如：</p>
-<pre><code class="java">@HSFProvider(MyInterface.class)
+<pre><code class="language-java">@HSFProvider(MyInterface.class)
 public MyService extends AbstractMyService implements MyInterface
 </code></pre>
-
 <p>如果直接改造为</p>
-<pre><code class="java">@RpcSchema(schemaId = &quot;MyService&quot;)
+<pre><code class="language-java">@RpcSchema(schemaId = &quot;MyService&quot;)
 public MyService extends AbstractMyService implements MyInterface
 </code></pre>
-
 <p>那么 <code>AbstractMyService</code> 的公共方法也会发布为 RPC 接口， 而 HSF 和 dubbo 则不会。 这种情况建议增加
 一个类，而将原来的接口声明为服务类来处理， 比如：</p>
-<pre><code class="java">@Service(&quot;MyService&quot;)
+<pre><code class="language-java">@Service(&quot;MyService&quot;)
 public MyService extends AbstractMyService implements MyInterface
 
 @RpcSchema(schemaId = &quot;MyServiceImpl&quot;)
@@ -466,20 +329,18 @@ public MyServiceImpl implements MyInterface {
     }
 }
 </code></pre>
-
 <h2 id="Q7">Q: 如何自定义某个Java方法对应的REST接口里的HTTP Status Code？</h2>
 
 <ul>
 <li>A:  对于 2xx 的返回值，可以通过 @ApiResponse 实现，例如：</li>
 </ul>
-<pre><code class="java">@ApiResponse(code = 201, response = Integer.class, message = &quot;&quot;)
+<pre><code class="language-java">@ApiResponse(code = 201, response = Integer.class, message = &quot;&quot;)
 public int test(int x) {
   return 100;
 }
 </code></pre>
-
 <p>对于其他返回值，可以通过抛出自定义的 InvocationException 实现，例如：</p>
-<pre><code class="java">@Path(&quot;/errorCode&quot;)
+<pre><code class="language-java">@Path(&quot;/errorCode&quot;)
 @POST
 @ApiResponses({
   @ApiResponse(code = 200, response = MultiResponse200.class, message = &quot;&quot;),
@@ -504,7 +365,6 @@ public MultiResponse200 errorCode(MultiRequest request) {
     }
 }
 </code></pre>
-
 <ul>
 <li>
 <p><strong>Q: 如何定制自己微服务的日志配置?</strong></p>
@@ -739,7 +599,7 @@ public String sayHello(@RequestBody Person person,InvocationContext context){
     
   </div>
 
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -749,7 +609,7 @@ public String sayHello(@RequestBody Person person,InvocationContext context){
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -763,6 +623,11 @@ public String sayHello(@RequestBody Person person,InvocationContext context){
     <script>var base_url = '../..';</script>
     <script src="../../js/theme.js" defer></script>
       <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>
