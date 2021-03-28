@@ -234,8 +234,10 @@
 <li>启用线程池<br />
   假设新线程池bean id为custom-executor</li>
 <li>替换全局线程池：<code>servicecomb.executors.default: custom-executor</code></li>
-<li>指定schema专用的线程池: <code>servicecomb.executors.Provider.${schemaId}: custom-executor</code></li>
-<li>指定operation专用的线程池: <code>servicecomb.executors.Provider.${schemaId}.${operationId}: custom-executor</code></li>
+<li>指定schema专用的线程池: <code>servicecomb.executors.Provider.${microserviceId}.${schemaId}: custom-executor</code></li>
+<li>指定operation专用的线程池: <code>servicecomb.executors.Provider.${microserviceId}.${schemaId}.${operationId}: custom-executor</code></li>
+<li>指定microservice专用的线程池: <code>servicecomb.executors.Provider.${microserviceId}: custom-executor</code>
+    其中microserviceId为可选项，在edge service中用以区分不同的microservice</li>
 </ul>
 <h2 id="java-chassis">Java Chassis 内置线程池</h2>
 <p>Java Chassis提供了两个内置的线程池，<code>servicecomb.executor.groupThreadPool</code> 和 <code>servicecomb.executor.reactive</code>。 前者
