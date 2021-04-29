@@ -406,6 +406,32 @@
       Provider:
         default: governance-provider
 </code></pre>
+<p>Java Chassis是基于Open API的REST/RPC框架，在模型上和单纯的REST框架存在差异。Java Chassis提供两种模式匹配规则，
+第一种是基于REST的，第二种是基于RPC的。可以通过配置项：<code>servicecomb.governance.{operation}.matchType</code> 指定匹配规则，
+默认使用REST。比如：</p>
+<pre><code>servicecomb: 
+  governance: 
+    matchType: rest # 设置全局默认是rest匹配模式
+    GovernanceEndpoint.helloRpc: 
+      matchType: rpc # 设置服务端的接口helloRpc采用RPC匹配模式
+</code></pre>
+<p>在REST匹配模式下， apiPath使用url， 比如： </p>
+<pre><code>servicecomb: 
+  matchGroup: 
+    userLoginAction: | 
+      matches: 
+        - apiPath: 
+            exact: &quot;/user/login&quot; 
+</code></pre>
+<p>在RPC匹配模式下, apiPath使用operation, 比如： </p>
+<pre><code>servicecomb: 
+  matchGroup: 
+    userLoginAction: | 
+      matches: 
+        - apiPath: 
+            exact: &quot;UserSchema.login&quot;
+</code></pre>
+<p>对于服务端治理，比如限流，REST模式下从HTTP取header；对于客户端治理，比如重试，REST模式下从InvocationContext取header。</p>
 <ul>
 <li>Spring Cloud</li>
 </ul>
@@ -415,6 +441,19 @@
   &lt;groupId&gt;com.huaweicloud&lt;/groupId&gt;
   &lt;artifactId&gt;spring-cloud-starter-huawei-governance&lt;/artifactId&gt;
 &lt;/dependency&gt;
+</code></pre>
+<p>Spring Cloud是基于REST的框架，能比较好的符合流量特征治理的匹配语义，apiPath和headers分别对应HTTP协议的概念： </p>
+<pre><code>servicecomb: 
+  matchGroup: 
+    userLoginAction: | 
+      matches: 
+        - apiPath: 
+            exact: &quot;/user/login&quot; 
+           method: 
+             - POST 
+        - headers:
+            Authentication: 
+              prefix: Basic
 </code></pre>
 <ul>
 <li>Dubbo</li>
@@ -428,6 +467,21 @@
 </code></pre>
 <p>如果要使用重试，需要修改dubbo的Spring配置文件，将dubbo默认的ClusterInvoker修改为dubbo-servicecomb：</p>
 <pre><code class="language-xml">&lt;dubbo:consumer cluster=&quot;dubbo-servicecomb&quot;&gt;&lt;/dubbo:consumer&gt;
+</code></pre>
+<p>Dubbo是一个RPC框架，需要定义operation和apiPath的映射关系，比如，服务端限流、熔断、隔离仓场景：
+ <code>com.huaweicloud.it.order.OrderGovernanceService.hello</code> ；客户端重试场景：
+ <code>com.huaweicloud.it.order.OrderGovernanceService.retry</code> 。 headers使用Attachments，需要包含在Attachments里面的头才会参与匹配。 </p>
+<pre><code>servicecomb: 
+  matchGroup: 
+    userLoginAction: | 
+      matches: 
+        - apiPath: 
+            exact: &quot;com.huaweicloud.it.order.OrderGovernanceService.hello&quot; 
+          method: 
+            - POST 
+        - headers 
+            Authentication: 
+              prefix: Basic
 </code></pre>
 <ul>
 <li>自定义</li>
