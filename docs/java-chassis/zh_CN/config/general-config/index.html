@@ -277,10 +277,10 @@
 </tbody>
 </table>
 <ul>
-<li>applicatioin.yaml</li>
+<li>application.yaml</li>
 </ul>
-<p>在使用Spring Boot启动Java Chassis的场景下，可以使用Spring Boot提供的配置机制。通常会通过applicatioin.yaml等文件定义配置。在Spring Boot
-场景下，microservice.yaml的配置依然有效，优先级比applicatioin.yaml低。</p>
+<p>在使用Spring Boot启动Java Chassis的场景下，可以使用Spring Boot提供的配置机制。通常会通过application.yaml等文件定义配置。在Spring Boot
+场景下，microservice.yaml的配置依然有效，优先级比application.yaml低。</p>
 <h3 id="_4">环境变量</h3>
 <p>Linux的环境变量名不允许带<code>.</code>符号，因此某些配置项无法直接配置在环境变量里。可以将配置项key的<code>.</code>符号改为下划线<code>_</code>，将转换后的配置项配在环境变量里，ServiceComb-Java-Chassis可以自动将环境变量匹配到原配置项上。</p>
 <p>例如：对于microservice.yaml中配置的</p>
