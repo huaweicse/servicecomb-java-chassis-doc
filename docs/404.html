@@ -10,6 +10,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
+  <script>
+    function redirectToHome() {
+      var index = window.location.href.indexOf("/zh_CN/");
+      if(index > 0) {
+        index = index + "/zh_CN/".length;
+        window.location.href = window.location.href.substr(0, index);
+        return;
+      } 
+       
+      index = window.location.href.indexOf("/en_US/");
+      if(index > 0) {
+        index = index + "/en_US/".length;
+        window.location.href = window.location.href.substr(0, index);
+        return;
+      }
+      
+      window.location.href = "/";
+    }
+  </script>
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,11 +54,11 @@
 
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="/">ServiceComb Java Chassis 开发指南</a>
+        <a href="javascript:redirectToHome()">ServiceComb Java Chassis 开发指南</a>
       </nav>
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="/">文档主页</a> &raquo;</li>
+    <li><a href="javascript:redirectToHome()">文档主页</a> &raquo;</li>
   </ul>
   
   <hr/>
