@@ -341,8 +341,8 @@ ServiceComb provides a log4j extension that supports incremental configuration o
 <p>If at this time, the consumer wants to use a transport to access the producer, it can be configured in the microservice.yaml of the consumer process, specifying the name of the transport:</p>
 <pre><code>servicecomb:
   references:
-    &lt;service_name&gt;:
-      transport: highway
+    transport: 
+      &lt;service_name&gt;: highway
 </code></pre>
 <ul>
 <li>When a microservice producer only provided the endpoint of the highway</li>

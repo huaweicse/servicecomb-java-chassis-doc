@@ -280,8 +280,8 @@ ServiceComb不绑定日志器，只是使用了slf4j，用户可以自由选择l
 <p>如果，此时consumer想固定使用某个transport访问producer，可以在consumer进程的microservice.yaml中配置，指定transport的名称:</p>
 <pre><code>servicecomb:
   references:
-    &lt;service_name&gt;:
-      transport: highway
+    transport:
+      &lt;service_name&gt;: highway
 </code></pre>
 <ul>
 <li>
