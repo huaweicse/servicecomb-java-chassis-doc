@@ -218,14 +218,6 @@
 </code></pre>
 </li>
 </ol>
-<p>如果与prometheus集成，则还需要加入依赖</p>
-<pre><code>    ```
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;metrics-prometheus&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    ```
-</code></pre>
 <p>通过在 <code>microservice.yaml</code> 中增加下面的配置项，就可以将性能统计数据输出到日志文件中。</p>
 <pre><code>    ```
     servicecomb:
@@ -283,6 +275,64 @@
     }
     ```
 </code></pre>
+<h2 id="prometheus">集成Prometheus</h2>
+<p><a href="https://prometheus.io/">Prometheus</a> (普罗米修斯)是一个名字非常酷的开源监控系统。</p>
+<p>它支持多维度的指标数据模型，服务端通过HTTP协议定时拉取数据后，通过灵活的查询语言，实现监控的目的。</p>
+<p>servicecomb的应用性能监控功能支持对接Prometheus,首先需要在您的业务项目中加入如下依赖:</p>
+<pre><code>    ```
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;metrics-prometheus&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    ```
+</code></pre>
+<p>然后在 microservice.yaml 中增加下面的配置项:</p>
+<pre><code>    ```
+    servicecomb:
+        metrics:
+            prometheus:
+                address: 9696
+    ```
+</code></pre>
+<p>该配置项是设置普罗米修斯框架监听的端口,您只需使用浏览器访问对应的ip地址加该端口即http://ip:port/metrics 就可以获得如下格式的监控数据:</p>
+<pre><code>    ```
+    # HELP ServiceComb_Metrics ServiceComb Metrics
+    # TYPE ServiceComb_Metrics untyped
+    threadpool_rejectedCount{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} 0.0
+    threadpool_rejectedCount{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} 0.0
+    threadpool_taskCount{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} 0.0
+    threadpool_currentThreadsBusy{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} NaN
+    threadpool_taskCount{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} 0.0
+    threadpool_currentThreadsBusy{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} NaN
+    threadpool_poolSize{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} NaN
+    threadpool_poolSize{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} NaN
+    threadpool_completedTaskCount{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="connectCount",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="disconnectCount",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="connections",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="bytesRead",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="bytesWritten",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="requests",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="latency",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:7070",statistic="rejectByConnectionLimit",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="connectCount",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="disconnectCount",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="connections",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="bytesRead",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="bytesWritten",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="requests",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="latency",type="server",} 0.0
+    servicecomb_vertx_endpoints{appId="springmvctest",address="0.0.0.0:8080",statistic="rejectByConnectionLimit",type="server",} 0.0
+    threadpool_completedTaskCount{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} 0.0
+    threadpool_maxThreads{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} NaN
+    threadpool_maxThreads{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} NaN
+    threadpool_queueSize{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} NaN
+    threadpool_queueSize{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} NaN
+    threadpool_corePoolSize{appId="springmvctest",id="cse.executor.groupThreadPool-group0",} NaN
+    threadpool_corePoolSize{appId="springmvctest",id="cse.executor.groupThreadPool-group1",} NaN
+    ```
+</code></pre>
+<p>注:默认端口是9696，您也可以根据实际业务要求进行修改。</p>
 <h2 id="_2">配置说明</h2>
 <div class="metrics-cfg"></div>
 
