@@ -291,7 +291,7 @@
     servicecomb:
         metrics:
             prometheus:
-                address: 9696
+                address: ${ip}:${port}
     ```
 </code></pre>
 <p>该配置项是设置普罗米修斯框架监听的端口,您只需使用浏览器访问对应的ip地址加该端口即http://ip:port/metrics 就可以获得如下格式的监控数据:</p>
