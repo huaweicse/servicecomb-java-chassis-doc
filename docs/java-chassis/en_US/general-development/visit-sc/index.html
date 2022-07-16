@@ -274,104 +274,104 @@
 <table>
 <thead>
 <tr>
-<th align="left">Configuration Item</th>
-<th align="left">Reference / Default</th>
-<th align="left">Value Range</th>
-<th align="left">Required</th>
-<th align="left">Meaning</th>
+<th style="text-align: left;">Configuration Item</th>
+<th style="text-align: left;">Reference / Default</th>
+<th style="text-align: left;">Value Range</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">servicecomb.service.registry.address</td>
-<td align="left">http://127.0.0.1:30100</td>
-<td align="left"></td>
-<td align="left">Yes</td>
-<td align="left">Service center address information, you can configure multiple, separated by commas.</td>
+<td style="text-align: left;">servicecomb.service.registry.address</td>
+<td style="text-align: left;">http://127.0.0.1:30100</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Service center address information, you can configure multiple, separated by commas.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.instance. Watch</td>
-<td align="left">true</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">Whether to monitor instance changes in PUSH mode. When it is false, it means using PULL mode.</td>
+<td style="text-align: left;">servicecomb.service.registry.instance. Watch</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Whether to monitor instance changes in PUSH mode. When it is false, it means using PULL mode.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry. Autodiscovery</td>
-<td align="left">false</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">Whether to automatically discover the address of the service center. This configuration is enabled when a partial address needs to be configured, and other addresses are discovered by the configured service center instance.</td>
+<td style="text-align: left;">servicecomb.service.registry. Autodiscovery</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Whether to automatically discover the address of the service center. This configuration is enabled when a partial address needs to be configured, and other addresses are discovered by the configured service center instance.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.instance.healthCheck.interval</td>
-<td align="left">30</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">Heartbeat interval.</td>
+<td style="text-align: left;">servicecomb.service.registry.instance.healthCheck.interval</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Heartbeat interval.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.instance.healthCheck.times</td>
-<td align="left">3</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">Number of allowed heartbeat failures. If there is (times + 1) continuous heartbeat failures, this instance will be automatically logged off by service-center, i.e. interval * (times + 1) determines when the instance is automatically logged off. If the service center waits for such a long time and does not receive a heartbeat, the instance will be logged off.</td>
+<td style="text-align: left;">servicecomb.service.registry.instance.healthCheck.times</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Number of allowed heartbeat failures. If there is (times + 1) continuous heartbeat failures, this instance will be automatically logged off by service-center, i.e. interval * (times + 1) determines when the instance is automatically logged off. If the service center waits for such a long time and does not receive a heartbeat, the instance will be logged off.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.instance.empty.protection</td>
-<td align="left">true</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">When service center gives empty server list, will not remove local address cache when true.</td>
+<td style="text-align: left;">servicecomb.service.registry.instance.empty.protection</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">When service center gives empty server list, will not remove local address cache when true.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.timeout.connection</td>
-<td align="left">30000</td>
-<td align="left"></td>
-<td align="left">Connection timeout in milliseconds</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.service.registry.client.timeout.connection</td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Connection timeout in milliseconds</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.timeout.request</td>
-<td align="left">30000</td>
-<td align="left"></td>
-<td align="left">Request timeout in milliseconds</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.service.registry.client.timeout.request</td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Request timeout in milliseconds</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.timeout.idle</td>
-<td align="left">60</td>
-<td align="left"></td>
-<td align="left">Connection idle timeout in milliseconds</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.service.registry.client.timeout.idle</td>
+<td style="text-align: left;">60</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Connection idle timeout in milliseconds</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.timeout.heartbeat</td>
-<td align="left">3000</td>
-<td align="left"></td>
-<td align="left">Heartbeat request timeout in milliseconds</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.service.registry.client.timeout.heartbeat</td>
+<td style="text-align: left;">3000</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Heartbeat request timeout in milliseconds</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.instances</td>
-<td align="left">1</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">the account of verticle instances that Service Registry Client had been deployed</td>
+<td style="text-align: left;">servicecomb.service.registry.client.instances</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">the account of verticle instances that Service Registry Client had been deployed</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.eventLoopPoolSize</td>
-<td align="left">4</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">the size of Service Registry client Event Loop pool</td>
+<td style="text-align: left;">servicecomb.service.registry.client.eventLoopPoolSize</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">the size of Service Registry client Event Loop pool</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.client.workerPoolSize</td>
-<td align="left">4</td>
-<td align="left"></td>
-<td align="left">No</td>
-<td align="left">the size of Service Registry client worker pool</td>
+<td style="text-align: left;">servicecomb.service.registry.client.workerPoolSize</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">the size of Service Registry client worker pool</td>
 </tr>
 </tbody>
 </table>

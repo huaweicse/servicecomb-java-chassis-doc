@@ -315,102 +315,102 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled
 <table>
 <thead>
 <tr>
-<th align="left">Configuration Item</th>
-<th align="left">Default value</th>
-<th align="left">Value Range</th>
-<th align="left">Required</th>
-<th align="left">Description</th>
-<th align="left">Tips</th>
+<th style="text-align: left;">Configuration Item</th>
+<th style="text-align: left;">Default value</th>
+<th style="text-align: left;">Value Range</th>
+<th style="text-align: left;">Required</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Tips</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">servicecomb.isolation.[type].timeout.enabled</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">Enable timeout detection or not.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.isolation.[type].timeout.enabled</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Enable timeout detection or not.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.isolation.[type].timeoutInMilliseconds</td>
-<td align="left">30000</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">The timeout duration threshold.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.isolation.[type].timeoutInMilliseconds</td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The timeout duration threshold.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.isolation.[type].maxConcurrentRequests</td>
-<td align="left">10</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">The maximum number of concurrent requests.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.isolation.[type].maxConcurrentRequests</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The maximum number of concurrent requests.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].enabled</td>
-<td align="left">TRUE</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">Enable circuit breaking or not.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].enabled</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Enable circuit breaking or not.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].forceOpen</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">Force circuit breaker to be enabled regardless of the number of errors.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].forceOpen</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Force circuit breaker to be enabled regardless of the number of errors.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].forceClosed</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">Force circuit breaker to be disabled.</td>
-<td align="left">When forceOpen and forceClose are set at the same time, forceOpen will take effect.</td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].forceClosed</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Force circuit breaker to be disabled.</td>
+<td style="text-align: left;">When forceOpen and forceClose are set at the same time, forceOpen will take effect.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].sleepWindowInMilliseconds</td>
-<td align="left">15000</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">How long to recover from a circuit breaking.</td>
-<td align="left">After the recovery, the number of failures will be reset. Note: If the call fails immediately after a recover, the circuit breaker is triggered immediately again.</td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].sleepWindowInMilliseconds</td>
+<td style="text-align: left;">15000</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">How long to recover from a circuit breaking.</td>
+<td style="text-align: left;">After the recovery, the number of failures will be reset. Note: If the call fails immediately after a recover, the circuit breaker is triggered immediately again.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].requestVolumeThreshold</td>
-<td align="left">20</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">The threshold of failed requests within 10 seconds. If the threshold is reached, circuit breaker is triggered.</td>
-<td align="left">The 10 seconds duration is splitted evenly into 10 segments for error calculation. The calculation will start after 1 second. So circuit breakers are triggered after at least 1 second.</td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].requestVolumeThreshold</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The threshold of failed requests within 10 seconds. If the threshold is reached, circuit breaker is triggered.</td>
+<td style="text-align: left;">The 10 seconds duration is splitted evenly into 10 segments for error calculation. The calculation will start after 1 second. So circuit breakers are triggered after at least 1 second.</td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].errorThresholdPercentage</td>
-<td align="left">50</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">The threshold of error rate. If the threshold is reached, circuit breaker is triggered.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].errorThresholdPercentage</td>
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The threshold of error rate. If the threshold is reached, circuit breaker is triggered.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.fallback.[type].maxConcurrentRequests</td>
-<td align="left">10</td>
-<td align="left">-</td>
-<td align="left">No</td>
-<td align="left">The max number of concurrent fallback(specified by servicecomb.fallbackpolicy.policy) calls. When the threshold is reached, the fallback method is not called by return exception directly.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.fallback.[type].maxConcurrentRequests</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The max number of concurrent fallback(specified by servicecomb.fallbackpolicy.policy) calls. When the threshold is reached, the fallback method is not called by return exception directly.</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.fallbackpolicy.[type].policy</td>
-<td align="left">throwException</td>
-<td align="left">returnNull | throwException</td>
-<td align="left">No</td>
-<td align="left">The fallback policy when errors occurred.</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.fallbackpolicy.[type].policy</td>
+<td style="text-align: left;">throwException</td>
+<td style="text-align: left;">returnNull | throwException</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">The fallback policy when errors occurred.</td>
+<td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>

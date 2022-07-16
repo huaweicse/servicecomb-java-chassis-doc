@@ -298,116 +298,116 @@ public class MainServer {
 <table>
 <thead>
 <tr>
-<th align="left">Configuration Item</th>
-<th align="left">Default Value</th>
-<th align="left">Description</th>
+<th style="text-align: left;">Configuration Item</th>
+<th style="text-align: left;">Default Value</th>
+<th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">servicecomb.rest.address</td>
-<td align="left"></td>
-<td align="left">listening address, empty for not listen, just a rest client</td>
+<td style="text-align: left;">servicecomb.rest.address</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">listening address, empty for not listen, just a rest client</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.connection-limit</td>
-<td align="left">Integer.MAX_VALUE</td>
-<td align="left">Max allowed client connections</td>
+<td style="text-align: left;">servicecomb.rest.server.connection-limit</td>
+<td style="text-align: left;">Integer.MAX_VALUE</td>
+<td style="text-align: left;">Max allowed client connections</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.thread-count</td>
-<td align="left"><a href="../verticle-count/">verticle-count</a></td>
-<td align="left">rest server verticle instance count(Deprecated)</td>
+<td style="text-align: left;">servicecomb.rest.server.thread-count</td>
+<td style="text-align: left;"><a href="../verticle-count/">verticle-count</a></td>
+<td style="text-align: left;">rest server verticle instance count(Deprecated)</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.verticle-count</td>
-<td align="left"><a href="../verticle-count/">verticle-count</a></td>
-<td align="left">rest server verticle instance count</td>
+<td style="text-align: left;">servicecomb.rest.server.verticle-count</td>
+<td style="text-align: left;"><a href="../verticle-count/">verticle-count</a></td>
+<td style="text-align: left;">rest server verticle instance count</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.connection.idleTimeoutInSeconds</td>
-<td align="left">60</td>
-<td align="left">Timeout for server's idle connection, The idle connections will be closed</td>
+<td style="text-align: left;">servicecomb.rest.server.connection.idleTimeoutInSeconds</td>
+<td style="text-align: left;">60</td>
+<td style="text-align: left;">Timeout for server's idle connection, The idle connections will be closed</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.compression</td>
-<td align="left">false</td>
-<td align="left">Wether the server support compression</td>
+<td style="text-align: left;">servicecomb.rest.server.compression</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">Wether the server support compression</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.maxInitialLineLength</td>
-<td align="left">4096</td>
-<td align="left">The max initial line length of the request the server can process, unit is Byte</td>
+<td style="text-align: left;">servicecomb.rest.server.maxInitialLineLength</td>
+<td style="text-align: left;">4096</td>
+<td style="text-align: left;">The max initial line length of the request the server can process, unit is Byte</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.maxHeaderSize</td>
-<td align="left">32768</td>
-<td align="left">The max header size of the request the server can process, unit is Byte</td>
+<td style="text-align: left;">servicecomb.rest.server.maxHeaderSize</td>
+<td style="text-align: left;">32768</td>
+<td style="text-align: left;">The max header size of the request the server can process, unit is Byte</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.maxFormAttributeSize</td>
-<td align="left">2048</td>
-<td align="left">The max form attribute size of the request the server can process, unit is Byte</td>
+<td style="text-align: left;">servicecomb.rest.server.maxFormAttributeSize</td>
+<td style="text-align: left;">2048</td>
+<td style="text-align: left;">The max form attribute size of the request the server can process, unit is Byte</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.compressionLevel</td>
-<td align="left">6</td>
-<td align="left">The gzip/deflate compression level</td>
+<td style="text-align: left;">servicecomb.rest.server.compressionLevel</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">The gzip/deflate compression level</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.maxChunkSize</td>
-<td align="left">8192</td>
-<td align="left">The max HTTP chunk size, unit is Byte</td>
+<td style="text-align: left;">servicecomb.rest.server.maxChunkSize</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">The max HTTP chunk size, unit is Byte</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.decoderInitialBufferSize</td>
-<td align="left">128</td>
-<td align="left">The max initial buffer size for HttpObjectDecoder, unit is Byte</td>
+<td style="text-align: left;">servicecomb.rest.server.decoderInitialBufferSize</td>
+<td style="text-align: left;">128</td>
+<td style="text-align: left;">The max initial buffer size for HttpObjectDecoder, unit is Byte</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.http2ConnectionWindowSize</td>
-<td align="left">-1</td>
-<td align="left">HTTP/2 connection window size, unlimited</td>
+<td style="text-align: left;">servicecomb.rest.server.http2ConnectionWindowSize</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">HTTP/2 connection window size, unlimited</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.server.decompressionSupported</td>
-<td align="left">false</td>
-<td align="left">whether decompression is supported</td>
+<td style="text-align: left;">servicecomb.rest.server.decompressionSupported</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">whether decompression is supported</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.thread-count</td>
-<td align="left"><a href="../verticle-count/">verticle-count</a></td>
-<td align="left">rest client verticle instance count(Deprecated)</td>
+<td style="text-align: left;">servicecomb.rest.client.thread-count</td>
+<td style="text-align: left;"><a href="../verticle-count/">verticle-count</a></td>
+<td style="text-align: left;">rest client verticle instance count(Deprecated)</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.verticle-count</td>
-<td align="left"><a href="../verticle-count/">verticle-count</a></td>
-<td align="left">rest client verticle instance count</td>
+<td style="text-align: left;">servicecomb.rest.client.verticle-count</td>
+<td style="text-align: left;"><a href="../verticle-count/">verticle-count</a></td>
+<td style="text-align: left;">rest client verticle instance count</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.connection.maxPoolSize</td>
-<td align="left">5</td>
-<td align="left">The maximum number of connections in each connection pool for an IP:port combination</td>
+<td style="text-align: left;">servicecomb.rest.client.connection.maxPoolSize</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">The maximum number of connections in each connection pool for an IP:port combination</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.connection.idleTimeoutInSeconds</td>
-<td align="left">30</td>
-<td align="left">Timeout for client's idle connection, The idle connections will be closed</td>
+<td style="text-align: left;">servicecomb.rest.client.connection.idleTimeoutInSeconds</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">Timeout for client's idle connection, The idle connections will be closed</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.connection.keepAlive</td>
-<td align="left">true</td>
-<td align="left">Whether to use long connections</td>
+<td style="text-align: left;">servicecomb.rest.client.connection.keepAlive</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">Whether to use long connections</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.connection.compression</td>
-<td align="left">false</td>
-<td align="left">Wether the client support compression</td>
+<td style="text-align: left;">servicecomb.rest.client.connection.compression</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">Wether the client support compression</td>
 </tr>
 <tr>
-<td align="left">servicecomb.rest.client.maxHeaderSize</td>
-<td align="left">8192</td>
-<td align="left">The max header size of the response the client can process, unit is Byte</td>
+<td style="text-align: left;">servicecomb.rest.client.maxHeaderSize</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">The max header size of the response the client can process, unit is Byte</td>
 </tr>
 </tbody>
 </table>

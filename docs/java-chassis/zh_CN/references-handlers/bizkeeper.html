@@ -274,102 +274,102 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled # 接�
 <table>
 <thead>
 <tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
-<th align="left">注意</th>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">取值范围</th>
+<th style="text-align: left;">是否必选</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">servicecomb.isolation.[type].[scope].timeout.enabled</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">是否启用超时检测</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.isolation.[type].[scope].timeout.enabled</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否启用超时检测</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.isolation.[type].[scope].timeoutInMilliseconds</td>
-<td align="left">30000</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">超时时间阈值</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.isolation.[type].[scope].timeoutInMilliseconds</td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">超时时间阈值</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.isolation.[type].[scope].maxConcurrentRequests</td>
-<td align="left">1000</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">最大并发数阈值</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.isolation.[type].[scope].maxConcurrentRequests</td>
+<td style="text-align: left;">1000</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">最大并发数阈值</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].enabled</td>
-<td align="left">TRUE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">是否启用熔断措施</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].[scope].enabled</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否启用熔断措施</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].forceOpen</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">不管失败次数，都进行熔断</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].[scope].forceOpen</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">不管失败次数，都进行熔断</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].forceClosed</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">任何时候都不熔断</td>
-<td align="left">当与forceOpen同时配置时，forceOpen优先。</td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].[scope].forceClosed</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">任何时候都不熔断</td>
+<td style="text-align: left;">当与forceOpen同时配置时，forceOpen优先。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].sleepWindowInMilliseconds</td>
-<td align="left">15000</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">熔断后，多长时间恢复</td>
-<td align="left">恢复后，会重新计算失败情况。注意：如果恢复后的调用立即失败，那么会立即重新进入熔断。</td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].[scope].sleepWindowInMilliseconds</td>
+<td style="text-align: left;">15000</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">熔断后，多长时间恢复</td>
+<td style="text-align: left;">恢复后，会重新计算失败情况。注意：如果恢复后的调用立即失败，那么会立即重新进入熔断。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].requestVolumeThreshold</td>
-<td align="left">20</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">10s内请求数需要大于等于这个参数值，才开始计算错误率和判断是否进行熔断。</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].[scope].requestVolumeThreshold</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">10s内请求数需要大于等于这个参数值，才开始计算错误率和判断是否进行熔断。</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].errorThresholdPercentage</td>
-<td align="left">50</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">错误率阈值，达到阈值则触发熔断</td>
-<td align="left">由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。</td>
+<td style="text-align: left;">servicecomb.circuitBreaker.[type].[scope].errorThresholdPercentage</td>
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">错误率阈值，达到阈值则触发熔断</td>
+<td style="text-align: left;">由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.fallback.[type].[scope].maxConcurrentRequests</td>
-<td align="left">10</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">并发调用容错处理措施（servicecomb.fallbackpolicy.policy）的请求数，超过这个值则不再调用处理措施，直接返回异常</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.fallback.[type].[scope].maxConcurrentRequests</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">并发调用容错处理措施（servicecomb.fallbackpolicy.policy）的请求数，超过这个值则不再调用处理措施，直接返回异常</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">servicecomb.fallbackpolicy.[type].[scope].policy</td>
-<td align="left">throwException</td>
-<td align="left">returnNull | throwexception</td>
-<td align="left">否</td>
-<td align="left">出错后的处理策略</td>
-<td align="left"></td>
+<td style="text-align: left;">servicecomb.fallbackpolicy.[type].[scope].policy</td>
+<td style="text-align: left;">throwException</td>
+<td style="text-align: left;">returnNull | throwexception</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">出错后的处理策略</td>
+<td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
