@@ -208,13 +208,13 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>服务治理功能参考 &raquo;</li><li>限流</li>
+          <li>服务治理功能参考 &raquo;</li>
+      <li>限流</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -268,62 +268,62 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">配置项</th>
-<th style="text-align: left;">默认值</th>
-<th style="text-align: left;">取值范围</th>
-<th style="text-align: left;">是否必选</th>
-<th style="text-align: left;">含义</th>
-<th style="text-align: left;">注意</th>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">取值范围</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+<th align="left">注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Provider.qps.enabled</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: left;">true/false</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">是否启用Provider流控</td>
-<td style="text-align: left;">-</td>
+<td align="left">servicecomb.flowcontrol.Provider.qps.enabled</td>
+<td align="left">true</td>
+<td align="left">true/false</td>
+<td align="left">否</td>
+<td align="left">是否启用Provider流控</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.strategy</td>
-<td style="text-align: left;">FixedWindow</td>
-<td style="text-align: left;">FixedWindow/LeakyBucket/TokenBucket/自定义</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">流控策略</td>
-<td style="text-align: left;">-</td>
+<td align="left">servicecomb.flowcontrol.strategy</td>
+<td align="left">FixedWindow</td>
+<td align="left">FixedWindow/LeakyBucket/TokenBucket/自定义</td>
+<td align="left">否</td>
+<td align="left">流控策略</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Provider.qps.limit.[ServiceName].[Schema].[operation]</td>
-<td style="text-align: left;">2147483647（max int）</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">每秒钟允许的请求数</td>
-<td style="text-align: left;">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
+<td align="left">servicecomb.flowcontrol.Provider.qps.limit.[ServiceName].[Schema].[operation]</td>
+<td align="left">2147483647（max int）</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">每秒钟允许的请求数</td>
+<td align="left">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Provider.qps.global.limit</td>
-<td style="text-align: left;">2147483647（max int）</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">provider接受请求流量的全局配置</td>
-<td style="text-align: left;">没有具体的流控配置时，此配置生效</td>
+<td align="left">servicecomb.flowcontrol.Provider.qps.global.limit</td>
+<td align="left">2147483647（max int）</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">provider接受请求流量的全局配置</td>
+<td align="left">没有具体的流控配置时，此配置生效</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Provider.qps.bucket.[ServiceName].[Schema].[operation]</td>
-<td style="text-align: left;">两倍limit大小，不超过max int</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">令牌桶场景下桶的大小</td>
-<td style="text-align: left;">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
+<td align="left">servicecomb.flowcontrol.Provider.qps.bucket.[ServiceName].[Schema].[operation]</td>
+<td align="left">两倍limit大小，不超过max int</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">令牌桶场景下桶的大小</td>
+<td align="left">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Provider.qps.global.bucket</td>
-<td style="text-align: left;">两倍limit大小，不超过max int</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">令牌桶场景下provider桶的大小</td>
-<td style="text-align: left;">没有具体的流控配置时，此配置生效</td>
+<td align="left">servicecomb.flowcontrol.Provider.qps.global.bucket</td>
+<td align="left">两倍limit大小，不超过max int</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">令牌桶场景下provider桶的大小</td>
+<td align="left">没有具体的流控配置时，此配置生效</td>
 </tr>
 </tbody>
 </table>
@@ -349,62 +349,62 @@ provider端限流策略配置中的<code>ServiceName</code>指的是调用该pro
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">配置项</th>
-<th style="text-align: left;">默认值</th>
-<th style="text-align: left;">取值范围</th>
-<th style="text-align: left;">是否必选</th>
-<th style="text-align: left;">含义</th>
-<th style="text-align: left;">注意</th>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">取值范围</th>
+<th align="left">是否必选</th>
+<th align="left">含义</th>
+<th align="left">注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Consumer.qps.enabled</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: left;">Boolean</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">是否启用Consumer流控</td>
-<td style="text-align: left;">-</td>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.enabled</td>
+<td align="left">true</td>
+<td align="left">Boolean</td>
+<td align="left">否</td>
+<td align="left">是否启用Consumer流控</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.strategy</td>
-<td style="text-align: left;">FixedWindow</td>
-<td style="text-align: left;">FixedWindow/LeakyBucket/TokenBucket/自定义</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">流控策略</td>
-<td style="text-align: left;">-</td>
+<td align="left">servicecomb.flowcontrol.strategy</td>
+<td align="left">FixedWindow</td>
+<td align="left">FixedWindow/LeakyBucket/TokenBucket/自定义</td>
+<td align="left">否</td>
+<td align="left">流控策略</td>
+<td align="left">-</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Consumer.qps.global.limit</td>
-<td style="text-align: left;">2147483647（max int）</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">consumer发送请求流量的全局配置</td>
-<td style="text-align: left;">没有具体的流控配置时，此配置生效</td>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.global.limit</td>
+<td align="left">2147483647（max int）</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">consumer发送请求流量的全局配置</td>
+<td align="left">没有具体的流控配置时，此配置生效</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
-<td style="text-align: left;">2147483647  (max int)</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">每秒钟允许的请求数</td>
-<td style="text-align: left;">支持microservice、schema、operation三个级别的配置</td>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.limit.[ServiceName].[Schema].[operation]</td>
+<td align="left">2147483647  (max int)</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">每秒钟允许的请求数</td>
+<td align="left">支持microservice、schema、operation三个级别的配置</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Consumer.qps.global.bucket</td>
-<td style="text-align: left;">两倍limit大小，不超过max int</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">令牌桶场景下consumer桶的大小</td>
-<td style="text-align: left;">没有具体的流控配置时，此配置生效</td>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.global.bucket</td>
+<td align="left">两倍limit大小，不超过max int</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">令牌桶场景下consumer桶的大小</td>
+<td align="left">没有具体的流控配置时，此配置生效</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.flowcontrol.Consumer.qps.bucket.[ServiceName].[Schema].[operation]</td>
-<td style="text-align: left;">两倍limit大小，不超过max int</td>
-<td style="text-align: left;">(0,2147483647]，整型</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">令牌桶场景下桶的大小</td>
-<td style="text-align: left;">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
+<td align="left">servicecomb.flowcontrol.Consumer.qps.bucket.[ServiceName].[Schema].[operation]</td>
+<td align="left">两倍limit大小，不超过max int</td>
+<td align="left">(0,2147483647]，整型</td>
+<td align="left">否</td>
+<td align="left">令牌桶场景下桶的大小</td>
+<td align="left">支持microservice/schema/operation三个级别的配置，后者的优先级高于前者</td>
 </tr>
 </tbody>
 </table>

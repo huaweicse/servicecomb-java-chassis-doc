@@ -256,13 +256,13 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>General Development &raquo;</li><li>Metrics</li>
+          <li>General Development &raquo;</li>
+      <li>Metrics</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -297,56 +297,56 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Configuration Item</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
+<th align="left">Configuration Item</th>
+<th align="left">Default</th>
+<th align="left">Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.metrics.window_time</td>
-<td style="text-align: left;">60000</td>
-<td style="text-align: left;">Statistical period, in milliseconds<br>TPS, delay, etc. Periodic data, updated once per cycle, the value obtained in the cycle, actually the value of the previous cycle</td>
+<td align="left">servicecomb.metrics.window_time</td>
+<td align="left">60000</td>
+<td align="left">Statistical period, in milliseconds<br>TPS, delay, etc. Periodic data, updated once per cycle, the value obtained in the cycle, actually the value of the previous cycle</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics<br>.invocation.latencyDistribution</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">The latency distribution time period definition in milliseconds<br>for example:0,1,10,100,1000<br>indicates that the following latency scopes are defined: [0, 1),[1, 10),[10, 100),[100, 1000),[1000, )</td>
+<td align="left">servicecomb.metrics<br>.invocation.latencyDistribution</td>
+<td align="left"></td>
+<td align="left">The latency distribution time period definition in milliseconds<br>for example:0,1,10,100,1000<br>indicates that the following latency scopes are defined: [0, 1),[1, 10),[10, 100),[100, 1000),[1000, )</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics<br>.Consumer.invocation.slow.enabled</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Whether to enable slow call detection on the Consumer side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+<td align="left">servicecomb.metrics<br>.Consumer.invocation.slow.enabled</td>
+<td align="left">false</td>
+<td align="left">Whether to enable slow call detection on the Consumer side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics<br>.Consumer.invocation.slow.msTime</td>
-<td style="text-align: left;">1000</td>
-<td style="text-align: left;">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+<td align="left">servicecomb.metrics<br>.Consumer.invocation.slow.msTime</td>
+<td align="left">1000</td>
+<td align="left">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics<br>.Provider.invocation.slow.enabled</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Whether to enable slow call detection on the Provider side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+<td align="left">servicecomb.metrics<br>.Provider.invocation.slow.enabled</td>
+<td align="left">false</td>
+<td align="left">Whether to enable slow call detection on the Provider side<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics<br>.Provider.invocation.slow.msTime</td>
-<td style="text-align: left;">1000</td>
-<td style="text-align: left;">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
+<td align="left">servicecomb.metrics<br>.Provider.invocation.slow.msTime</td>
+<td align="left">1000</td>
+<td align="left">If the latency exceeds the configured value, the log will be output immediately, and the time consumption information of the stage called this time will be recorded.<br>Level 4 priority definitions can be supported by adding the suffix .${service}.${schema}.${operation}</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics<br>.prometheus.address</td>
-<td style="text-align: left;">0.0.0.0:9696</td>
-<td style="text-align: left;">prometheus listen address</td>
+<td align="left">servicecomb.metrics<br>.prometheus.address</td>
+<td align="left">0.0.0.0:9696</td>
+<td align="left">prometheus listen address</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics.publisher.defaultLog<br>.enabled</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Whether to output the default statistics log</td>
+<td align="left">servicecomb.metrics.publisher.defaultLog<br>.enabled</td>
+<td align="left">false</td>
+<td align="left">Whether to output the default statistics log</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.metrics.publisher.defaultLog<br>.endpoints.client.detail.enabled</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Whether to output each client endpoint statistics log, because it is related to the target ip:port number, there may be a lot of data, so the default is not output</td>
+<td align="left">servicecomb.metrics.publisher.defaultLog<br>.endpoints.client.detail.enabled</td>
+<td align="left">false</td>
+<td align="left">Whether to output each client endpoint statistics log, because it is related to the target ip:port number, there may be a lot of data, so the default is not output</td>
 </tr>
 </tbody>
 </table>

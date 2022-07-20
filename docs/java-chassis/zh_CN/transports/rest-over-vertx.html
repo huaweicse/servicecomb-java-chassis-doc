@@ -202,13 +202,13 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>多样化的通信协议功能参考 &raquo;</li><li>REST over Vertx</li>
+          <li>多样化的通信协议功能参考 &raquo;</li>
+      <li>REST over Vertx</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -233,96 +233,96 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">配置项</th>
-<th style="text-align: left;">默认值</th>
-<th style="text-align: left;">含义</th>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.rest.address</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">服务监听地址，不配置表示不监听</td>
+<td align="left">servicecomb.rest.address</td>
+<td align="left"></td>
+<td align="left">服务监听地址，不配置表示不监听</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.thread-count</td>
-<td style="text-align: left;"><a href="verticle-count.html">verticle-count</a></td>
-<td style="text-align: left;">rest server verticle实例数（Deprecated）</td>
+<td align="left">servicecomb.rest.server.thread-count</td>
+<td align="left"><a href="verticle-count.html">verticle-count</a></td>
+<td align="left">rest server verticle实例数（Deprecated）</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.verticle-count</td>
-<td style="text-align: left;"><a href="verticle-count.html">verticle-count</a></td>
-<td style="text-align: left;">rest server verticle实例数</td>
+<td align="left">servicecomb.rest.server.verticle-count</td>
+<td align="left"><a href="verticle-count.html">verticle-count</a></td>
+<td align="left">rest server verticle实例数</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.connection-limit</td>
-<td style="text-align: left;">Integer.MAX_VALUE</td>
-<td style="text-align: left;">允许客户端最大连接数</td>
+<td align="left">servicecomb.rest.server.connection-limit</td>
+<td align="left">Integer.MAX_VALUE</td>
+<td align="left">允许客户端最大连接数</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.connection.idleTimeoutInSeconds</td>
-<td style="text-align: left;">60</td>
-<td style="text-align: left;">服务端连接闲置超时时间，超时连接会被释放</td>
+<td align="left">servicecomb.rest.server.connection.idleTimeoutInSeconds</td>
+<td align="left">60</td>
+<td align="left">服务端连接闲置超时时间，超时连接会被释放</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.compression</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">服务端是否支持启用压缩</td>
+<td align="left">servicecomb.rest.server.compression</td>
+<td align="left">false</td>
+<td align="left">服务端是否支持启用压缩</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.maxInitialLineLength</td>
-<td style="text-align: left;">4096</td>
-<td style="text-align: left;">服务端接收请求的最大 initial line 长度，单位字节</td>
+<td align="left">servicecomb.rest.server.maxInitialLineLength</td>
+<td align="left">4096</td>
+<td align="left">服务端接收请求的最大 initial line 长度，单位字节</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.maxHeaderSize</td>
-<td style="text-align: left;">32768</td>
-<td style="text-align: left;">服务端接收请求的最大header长度，单位字节</td>
+<td align="left">servicecomb.rest.server.maxHeaderSize</td>
+<td align="left">32768</td>
+<td align="left">服务端接收请求的最大header长度，单位字节</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.maxFormAttributeSize</td>
-<td style="text-align: left;">8192</td>
-<td style="text-align: left;">服务端接收请求的最大 form 长度，单位为字节</td>
+<td align="left">servicecomb.rest.server.maxFormAttributeSize</td>
+<td align="left">8192</td>
+<td align="left">服务端接收请求的最大 form 长度，单位为字节</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.compressionLevel</td>
-<td style="text-align: left;">6</td>
-<td style="text-align: left;">服务端gzip/deflate压缩级别</td>
+<td align="left">servicecomb.rest.server.compressionLevel</td>
+<td align="left">6</td>
+<td align="left">服务端gzip/deflate压缩级别</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.maxChunkSize</td>
-<td style="text-align: left;">8192</td>
-<td style="text-align: left;">最大http chunk大小，单位为字节</td>
+<td align="left">servicecomb.rest.server.maxChunkSize</td>
+<td align="left">8192</td>
+<td align="left">最大http chunk大小，单位为字节</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.decoderInitialBufferSize</td>
-<td style="text-align: left;">128</td>
-<td style="text-align: left;">HttpObjectDecoder的最大初始缓冲区大小</td>
+<td align="left">servicecomb.rest.server.decoderInitialBufferSize</td>
+<td align="left">128</td>
+<td align="left">HttpObjectDecoder的最大初始缓冲区大小</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.http2ConnectionWindowSize</td>
-<td style="text-align: left;">-1</td>
-<td style="text-align: left;">允许HTTP/2连接数大小，无限制</td>
+<td align="left">servicecomb.rest.server.http2ConnectionWindowSize</td>
+<td align="left">-1</td>
+<td align="left">允许HTTP/2连接数大小，无限制</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.decompressionSupported</td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">是否支持解压缩</td>
+<td align="left">servicecomb.rest.server.decompressionSupported</td>
+<td align="left">false</td>
+<td align="left">是否支持解压缩</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.Provider.requestWaitInPoolTimeout${op-priority}</td>
-<td style="text-align: left;">30000</td>
-<td style="text-align: left;">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
+<td align="left">servicecomb.Provider.requestWaitInPoolTimeout${op-priority}</td>
+<td align="left">30000</td>
+<td align="left">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.requestWaitInPoolTimeout</td>
-<td style="text-align: left;">30000</td>
-<td style="text-align: left;">同servicecomb.Provider.requestWaitInPoolTimeout${op-priority}, 该配置项优先级更高。</td>
+<td align="left">servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td align="left">30000</td>
+<td align="left">同servicecomb.Provider.requestWaitInPoolTimeout${op-priority}, 该配置项优先级更高。</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.uploads.maxSize</td>
-<td style="text-align: left;">无限制</td>
-<td style="text-align: left;">最大 body 大小，这个配置项对文件上传，REST请求都生效</td>
+<td align="left">servicecomb.uploads.maxSize</td>
+<td align="left">无限制</td>
+<td align="left">最大 body 大小，这个配置项对文件上传，REST请求都生效</td>
 </tr>
 </tbody>
 </table>

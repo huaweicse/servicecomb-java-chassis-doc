@@ -191,13 +191,13 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html" class="icon icon-home" alt="Docs"></a> &raquo;</li><li>线程池</li>
+    <li><a href="../index.html" class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>线程池</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -236,21 +236,21 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">配置项</th>
-<th style="text-align: left;">默认值</th>
-<th style="text-align: left;">含义</th>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.group</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">创建几组线程池</td>
+<td align="left">servicecomb.executor.default.group</td>
+<td align="left">2</td>
+<td align="left">创建几组线程池</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.thread-per-group</td>
-<td style="text-align: left;">CPU数</td>
-<td style="text-align: left;">每组线程池的线程数</td>
+<td align="left">servicecomb.executor.default.thread-per-group</td>
+<td align="left">CPU数</td>
+<td align="left">每组线程池的线程数</td>
 </tr>
 </tbody>
 </table>
@@ -260,46 +260,46 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">配置项</th>
-<th style="text-align: left;">默认值</th>
-<th style="text-align: left;">含义</th>
+<th align="left">配置项</th>
+<th align="left">默认值</th>
+<th align="left">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.group</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">创建几组线程池</td>
+<td align="left">servicecomb.executor.default.group</td>
+<td align="left">2</td>
+<td align="left">创建几组线程池</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.thread-per-group</td>
-<td style="text-align: left;">100</td>
-<td style="text-align: left;">每组线程池的最大线程数<br>Deprecated，新名字：maxThreads-per-group</td>
+<td align="left">servicecomb.executor.default.thread-per-group</td>
+<td align="left">100</td>
+<td align="left">每组线程池的最大线程数<br>Deprecated，新名字：maxThreads-per-group</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.coreThreads-per-group</td>
-<td style="text-align: left;">25</td>
-<td style="text-align: left;">每组线程池的最小线程数<br>线程不会预创建，而是已经创建后，只有大于这个值的线程，才会因idle而销毁</td>
+<td align="left">servicecomb.executor.default.coreThreads-per-group</td>
+<td align="left">25</td>
+<td align="left">每组线程池的最小线程数<br>线程不会预创建，而是已经创建后，只有大于这个值的线程，才会因idle而销毁</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.maxThreads-per-group</td>
-<td style="text-align: left;">100</td>
-<td style="text-align: left;">每组线程池的最大线程数</td>
+<td align="left">servicecomb.executor.default.maxThreads-per-group</td>
+<td align="left">100</td>
+<td align="left">每组线程池的最大线程数</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.maxIdleSecond-per-group</td>
-<td style="text-align: left;">60</td>
-<td style="text-align: left;">每组线程池中超过coreThreads-per-group的线程，如果idle超时，则会销毁该线程</td>
+<td align="left">servicecomb.executor.default.maxIdleSecond-per-group</td>
+<td align="left">60</td>
+<td align="left">每组线程池中超过coreThreads-per-group的线程，如果idle超时，则会销毁该线程</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.executor.default.maxQueueSize-per-group</td>
-<td style="text-align: left;">Integer.MAX_VALUE</td>
-<td style="text-align: left;">每组线程池中任务队列的最大长度</td>
+<td align="left">servicecomb.executor.default.maxQueueSize-per-group</td>
+<td align="left">Integer.MAX_VALUE</td>
+<td align="left">每组线程池中任务队列的最大长度</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.rest.server.requestWaitInPoolTimeout</td>
-<td style="text-align: left;">30000</td>
-<td style="text-align: left;">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
+<td align="left">servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td align="left">30000</td>
+<td align="left">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
 </tr>
 </tbody>
 </table>
