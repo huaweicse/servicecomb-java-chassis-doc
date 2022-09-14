@@ -117,9 +117,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_7">配置路由规则</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_8">设置重试策略</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_9">自定义</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_8">自定义</a>
     </li>
     </ul>
                   </li>
@@ -131,7 +129,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="bizkeeper.html">隔离熔断容错</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="governance.html">基于动态配置的流量特征治理</a>
+                  <li class="toctree-l1"><a class="reference internal" href="governance.html">流量特征治理</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="fail-retry.html">快速失败和重试</a>
                   </li>
@@ -378,28 +376,7 @@
       sessionTimeoutInSeconds: 30 # 客户端闲置时间，超过限制后选择后面的服务器
       successiveFailedTimes: 5 # 客户端失败次数，超过后会切换服务器
 </code></pre>
-<h2 id="_8">设置重试策略</h2>
-<p>负载均衡模块还支持配置失败重试的策略。</p>
-<pre><code class="language-yaml">servicecomb:
-  loadbalance:
-    retryEnabled: false
-    retryOnNext: 0
-    retryOnSame: 0
-</code></pre>
-<p>缺省情况未启用重试。同时也支持对不同的服务设置特殊的策略：</p>
-<pre><code class="language-yaml">servicecomb:
-  loadbalance:
-    myservice：
-      retryEnabled: true
-      retryOnNext: 1
-      retryOnSame: 0
-</code></pre>
-<p>retryOnNext表示失败以后，根据负载均衡策略，重新选择一个实例重试（可能选择到同一个实例）。 retryOnSame表示仍然使用上次失败的实例进行重试。</p>
-<p><strong>注意事项:</strong></p>
-<p>​     1.并不是所有的异常都会触发重试。缺省的情况，只有网络异常，或者 503 错误码才会触发重试。 详细可以参考 <code>DefaultRetryExtensionsFactory</code> 的定义。</p>
-<p>​     2.retry的场景下，对于同步调用, 同步调用的主线程已经被挂起，无法再主线程中进行重试，重试也不能在网络线程（event-loop）中进行，未被保护的阻塞操作会导致网络线程挂起，因此当前的重试机制会另起一个retry-pool-thread进行重试，因此如果业务在扩展<code>HttpClientFilter</code>的时候，如果涉及到通过ThreadLocal获取线程上下文的时候，会存在获取不到的情况，针对这种场景，建议在获取的时候做个判断处理，或者针对涉及ThreadLocal获取线程上下文的业务场景，建议采取通过扩展Handler的机制，进行处理，并保证扩展的Handler在loadbalance之前执行。</p>
-<p>​     3.如果代码中引入了solution-basic依赖，重试默认开启，详细配置可以参考该依赖里面的<a href="https://github.com/apache/servicecomb-java-chassis/blob/master/solutions/solution-basic/src/main/resources/microservice.yaml">配置文件</a> 。</p>
-<h2 id="_9">自定义</h2>
+<h2 id="_8">自定义</h2>
 <p>负载均衡模块提供的功能已经非常强大，能够通过配置支持大部分应用场景。同时它也提供了强大的扩展能力，包括DiscoveryFilter、ServerListFilterExt、ExtensionsFactory（扩展IRule，RetryHandler等）。loadbalance模块本身包含了每一个扩展的实现，这里不再详细描述如何扩展，只简单描述步骤。开发者可以自行下载ServiceComb源码进行参考。</p>
 <ul>
 <li>DiscoveryFilter</li>
