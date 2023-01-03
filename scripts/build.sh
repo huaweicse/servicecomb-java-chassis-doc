@@ -24,7 +24,7 @@ echo "Starting install software"
 npm install gitbook-cli -g
 sudo pip install mkdocs
 git clone https://github.com/apache/servicecomb-docs.git
-sudo pip install $CUR_DIR/servicecomb-docs/plugins/bing-search
+sudo pip install mkdocs-material
 
 echo "Starting compile docs"
 cd $CUR_DIR/servicecomb-docs
@@ -44,9 +44,12 @@ rm -r docs/java-chassis/en_US/*
 rm -r docs/saga/*
 rm -r docs/service-center/*
 cp -r servicecomb-docs/docs/ ./
+
+# add some debug infos
 ls -l ./docs
 ls -l ./docs/java-chassis
 ls -l ./docs/java-chassis/1.x
+ls -l ./docs/java-chassis/2.x
 
 echo "Starting preparing push docs"
 rm -r servicecomb-docs

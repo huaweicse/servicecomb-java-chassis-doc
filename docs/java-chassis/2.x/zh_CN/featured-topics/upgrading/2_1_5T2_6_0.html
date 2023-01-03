@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>2.1.5 升级 2.6.0 指导 - ServiceComb Java Chassis 开发指南</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "2.1.5 \u5347\u7ea7 2.6.0 \u6307\u5bfc";
+        var mkdocs_page_input_path = "featured-topics/upgrading/2_1_5T2_6_0.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../index.html" class="icon icon-home"> ServiceComb Java Chassis 开发指南
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../toc.html">目录</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../index.html">概述</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../start/catalog.html">快速入门</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../start/design.html">设计选型参考</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../build-provider/definition/service-definition.html">微服务定义</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../build-provider/catalog.html">开发服务提供者</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../build-consumer/catalog.html">开发服务消费者</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../general-development/catalog.html">通用功能开发</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">多样化的通信协议功能参考</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../transports/introduction.html">多协议介绍</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../transports/rest-over-servlet.html">REST over Servlet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../transports/rest-over-vertx.html">REST over Vertx</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../transports/http2.html">REST over HTTP2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../transports/highway-rpc.html">Highway</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">多样化的服务注册与发现功能参考</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../registry/introduction.html">注册发现说明</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../registry/service-center.html">使用服务中心</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../registry/local-registry.html">本地注册发现</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../registry/distributed.html">去中心化注册发现</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">管理服务配置</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../config/general-config.html">通用配置说明</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../config/read-config.html">在程序中读取配置信息</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">服务治理功能参考</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/intruduction.html">处理链介绍</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/loadbalance.html">负载均衡</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/ratelimit.html">限流</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/router.html">灰度发布</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/fault-injection.html">故障注入</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/governance.html">流量特征治理</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/fail-retry.html">快速失败和重试</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">网关功能参考</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../edge/open-service.html">介绍</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../edge/by-servicecomb-sdk.html">使用 Edge Service 做网关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../edge/zuul.html">使用 `zuul` 和 `spring cloud gateway` 做网关</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../edge/nginx.html">nginx 网关简单介绍</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">安全特性参考</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../references-handlers/publickey.html">公钥认证</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../security/tls.html">使用TLS通信</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../security/shi-yong-rsa-ren-zheng.html">使用RSA认证</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">服务打包和运行</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../packaging/standalone.html">以standalone模式打包</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../packaging/web-container.html">以WEB容器模式打包</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">专题文章</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html">在Spring Boot中使用java chassis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../features.html">新功能介绍系列文章</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../compatibility.html">兼容问题和兼容性策略</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../upgrading.html">升级指导系列文章</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../performance.html">性能问题分析和调优</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">常用配置项参考</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../config-reference/rest-transport-client.html">REST Transport Client 配置项</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../config-reference/config-center-client.html">Config Center Client 配置项</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../config-reference/service-center-client.html">Service Center Client 配置项</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../config-reference/kie-client.html">ServiceComb Kie Client 配置项</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">常见问题</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../question-and-answer/faq.html">FAQ</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../question-and-answer/question_answer.html">Q & A</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../question-and-answer/interface-compatibility.html">微服务接口兼容常见问题</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ServiceComb Java Chassis 开发指南</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html" class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>2.1.5 升级 2.6.0 指导</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="215-260">2.1.5 升级 2.6.0 指导</h1>
+<h2 id="notblanknotempty">支持<code>@NotBlank</code>和<code>@NotEmpty</code></h2>
+<p>参考下面的例子。这个新的特性在一些特殊的情况下可能导致业务故障，比如业务错误的加上了这些标签，但是实际上不会做参数校验，现在变更为校验。 </p>
+<pre><code class="language-java">public class Teacher {
+
+  @NotBlank
+  private String name;
+
+  private String age;
+
+  // getters, setters
+}
+</code></pre>
+<h2 id="servicecombrestclientconnectionidletimeoutinseconds-30s"><code>servicecomb.rest.client.connection.idleTimeoutInSeconds</code> 缺省值修改为 30s</h2>
+<p>因为服务端HTTP连接的Idle Timeout时间设置通常是60s（包括Vert.x、Tomcat等），为了尽可能降低客户端使用已经关闭了连接
+的概率，调整了这个参数的默认值。如果业务系统中没有设置这个参数，并且有些场景将 <code>servicecomb.request.timeout</code> 设置
+为大于30s， 那么可能导致这些请求提前超时。 </p>
+<p>更多详细信息可以<a href="https://github.com/apache/servicecomb-java-chassis/issues/2603">参考案例</a>。</p>
+<h2 id="nettyvertx"><code>netty</code>和<code>vert.x</code> 升级</h2>
+<p>2.6.0目前使用了最新的 <code>netty</code> 和 <code>vert.x</code> 版本， 这两个软件最新版本做了较多的重构，需要保证版本匹配才能够正常工作。
+业务尽可能不要自行单独调整单个软件的版本，保持和java-chassis使用一致，否则容易导致一些兼容性问题。 未来的版本，两个软件
+的兼容情况应该会有所改善，建议业务升级后，及时调整这两个软件的废弃用法。 </p>
+<p>这两个软件升级目前已知的可能影响业务功能的点包括：</p>
+<ul>
+<li><code>servicecomb.rest.server.maxFormAttributeSize</code> 的缺省值为 8192。 java-chassis的缺省值使用了 <code>vert.x</code>
+  的缺省值。这个值在最近的几个版本中，发生过几次变更，从无限制变更为1024， 变更为2048，到现在的8192。 如果业务需要
+  依赖比较大的值，建议在配置文件设置适合应用场景的限制，不跟随这个缺省值。</li>
+</ul>
+<h2 id="spring-spring-boot"><code>Spring</code> 和 <code>Spring Boot</code> 升级</h2>
+<p>2.6.0目前使用了最新的 <code>Spring</code> 和 <code>Spring Boot</code> 版本，这个版本存在少量的变更，可能在某些特殊场景下影响业务功能。已知的情况包括：</p>
+<ul>
+<li>对URL进行了更加严格的校验，以符合HTTP协议标准。早期一些不符合标准的URL可能会报告错误。</li>
+<li><code>StringUtils</code>的<code>isEmpty</code>方法废弃了，这个方法容易造成误用，建议切换使用其他接口或者使用Commons Lang组件的接口。</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
