@@ -10,19 +10,19 @@
       
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.9">
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.10">
     
     
       
-        <title>隔离熔断容错 - ServiceComb Java Chassis 开发指南</title>
+        <title>2.8.x 升级 3.0.0 指导 - ServiceComb Java Chassis 开发指南</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -38,7 +38,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -63,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#28x-300" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +77,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="ServiceComb Java Chassis 开发指南" class="md-header__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
+    <a href="../../index.html" title="ServiceComb Java Chassis 开发指南" class="md-header__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              隔离熔断容错
+              2.8.x 升级 3.0.0 指导
             
           </span>
         </div>
@@ -163,7 +163,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="ServiceComb Java Chassis 开发指南" class="md-nav__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
+    <a href="../../index.html" title="ServiceComb Java Chassis 开发指南" class="md-nav__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -182,7 +182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../toc.html" class="md-nav__link">
+      <a href="../../toc.html" class="md-nav__link">
         目录
       </a>
     </li>
@@ -197,7 +197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../index.html" class="md-nav__link">
+      <a href="../../index.html" class="md-nav__link">
         概述
       </a>
     </li>
@@ -212,7 +212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../start/catalog.html" class="md-nav__link">
+      <a href="../../start/catalog.html" class="md-nav__link">
         快速入门
       </a>
     </li>
@@ -227,7 +227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../start/design.html" class="md-nav__link">
+      <a href="../../start/design.html" class="md-nav__link">
         设计选型参考
       </a>
     </li>
@@ -242,7 +242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../build-provider/definition/service-definition.html" class="md-nav__link">
+      <a href="../../build-provider/definition/service-definition.html" class="md-nav__link">
         微服务定义
       </a>
     </li>
@@ -257,7 +257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../build-provider/catalog.html" class="md-nav__link">
+      <a href="../../build-provider/catalog.html" class="md-nav__link">
         开发服务提供者
       </a>
     </li>
@@ -272,7 +272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../build-consumer/catalog.html" class="md-nav__link">
+      <a href="../../build-consumer/catalog.html" class="md-nav__link">
         开发服务消费者
       </a>
     </li>
@@ -287,7 +287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../general-development/catalog.html" class="md-nav__link">
+      <a href="../../general-development/catalog.html" class="md-nav__link">
         通用功能开发
       </a>
     </li>
@@ -329,7 +329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/introduction.html" class="md-nav__link">
+      <a href="../../transports/introduction.html" class="md-nav__link">
         多协议介绍
       </a>
     </li>
@@ -343,7 +343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/rest-over-servlet.html" class="md-nav__link">
+      <a href="../../transports/rest-over-servlet.html" class="md-nav__link">
         REST over Servlet
       </a>
     </li>
@@ -357,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/rest-over-vertx.html" class="md-nav__link">
+      <a href="../../transports/rest-over-vertx.html" class="md-nav__link">
         REST over Vertx
       </a>
     </li>
@@ -371,7 +371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/http2.html" class="md-nav__link">
+      <a href="../../transports/http2.html" class="md-nav__link">
         REST over HTTP2
       </a>
     </li>
@@ -385,7 +385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/highway-rpc.html" class="md-nav__link">
+      <a href="../../transports/highway-rpc.html" class="md-nav__link">
         Highway
       </a>
     </li>
@@ -434,7 +434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/introduction.html" class="md-nav__link">
+      <a href="../../registry/introduction.html" class="md-nav__link">
         注册发现说明
       </a>
     </li>
@@ -448,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/service-center.html" class="md-nav__link">
+      <a href="../../registry/service-center.html" class="md-nav__link">
         使用服务中心
       </a>
     </li>
@@ -462,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/local-registry.html" class="md-nav__link">
+      <a href="../../registry/local-registry.html" class="md-nav__link">
         本地注册发现
       </a>
     </li>
@@ -476,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/distributed.html" class="md-nav__link">
+      <a href="../../registry/distributed.html" class="md-nav__link">
         去中心化注册发现
       </a>
     </li>
@@ -525,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../config/general-config.html" class="md-nav__link">
+      <a href="../../config/general-config.html" class="md-nav__link">
         通用配置说明
       </a>
     </li>
@@ -539,7 +539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../config/read-config.html" class="md-nav__link">
+      <a href="../../config/read-config.html" class="md-nav__link">
         在程序中读取配置信息
       </a>
     </li>
@@ -588,7 +588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="intruduction.html" class="md-nav__link">
+      <a href="../../references-handlers/intruduction.html" class="md-nav__link">
         处理链介绍
       </a>
     </li>
@@ -602,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="loadbalance.html" class="md-nav__link">
+      <a href="../../references-handlers/loadbalance.html" class="md-nav__link">
         负载均衡
       </a>
     </li>
@@ -616,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ratelimit.html" class="md-nav__link">
+      <a href="../../references-handlers/ratelimit.html" class="md-nav__link">
         限流
       </a>
     </li>
@@ -630,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="router.html" class="md-nav__link">
+      <a href="../../references-handlers/router.html" class="md-nav__link">
         灰度发布
       </a>
     </li>
@@ -644,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fault-injection.html" class="md-nav__link">
+      <a href="../../references-handlers/fault-injection.html" class="md-nav__link">
         故障注入
       </a>
     </li>
@@ -658,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="governance.html" class="md-nav__link">
+      <a href="../../references-handlers/governance.html" class="md-nav__link">
         流量特征治理
       </a>
     </li>
@@ -672,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fail-retry.html" class="md-nav__link">
+      <a href="../../references-handlers/fail-retry.html" class="md-nav__link">
         快速失败和重试
       </a>
     </li>
@@ -721,7 +721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../edge/open-service.html" class="md-nav__link">
+      <a href="../../edge/open-service.html" class="md-nav__link">
         介绍
       </a>
     </li>
@@ -735,7 +735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../edge/by-servicecomb-sdk.html" class="md-nav__link">
+      <a href="../../edge/by-servicecomb-sdk.html" class="md-nav__link">
         使用 Edge Service 做网关
       </a>
     </li>
@@ -749,7 +749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../edge/zuul.html" class="md-nav__link">
+      <a href="../../edge/zuul.html" class="md-nav__link">
         使用 `zuul` 和 `spring cloud gateway` 做网关
       </a>
     </li>
@@ -763,7 +763,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../edge/nginx.html" class="md-nav__link">
+      <a href="../../edge/nginx.html" class="md-nav__link">
         nginx 网关简单介绍
       </a>
     </li>
@@ -812,7 +812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="publickey.html" class="md-nav__link">
+      <a href="../../references-handlers/publickey.html" class="md-nav__link">
         公钥认证
       </a>
     </li>
@@ -826,7 +826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/tls.html" class="md-nav__link">
+      <a href="../../security/tls.html" class="md-nav__link">
         使用TLS通信
       </a>
     </li>
@@ -840,7 +840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
+      <a href="../../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
         使用RSA认证
       </a>
     </li>
@@ -889,7 +889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../packaging/standalone.html" class="md-nav__link">
+      <a href="../../packaging/standalone.html" class="md-nav__link">
         以standalone模式打包
       </a>
     </li>
@@ -903,7 +903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../packaging/web-container.html" class="md-nav__link">
+      <a href="../../packaging/web-container.html" class="md-nav__link">
         以WEB容器模式打包
       </a>
     </li>
@@ -952,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html" class="md-nav__link">
+      <a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html" class="md-nav__link">
         在Spring Boot中使用java chassis
       </a>
     </li>
@@ -966,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../featured-topics/features.html" class="md-nav__link">
+      <a href="../features.html" class="md-nav__link">
         新功能介绍系列文章
       </a>
     </li>
@@ -980,7 +980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../featured-topics/compatibility.html" class="md-nav__link">
+      <a href="../compatibility.html" class="md-nav__link">
         兼容问题和兼容性策略
       </a>
     </li>
@@ -994,7 +994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../featured-topics/upgrading.html" class="md-nav__link">
+      <a href="../upgrading.html" class="md-nav__link">
         升级指导系列文章
       </a>
     </li>
@@ -1008,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../featured-topics/performance.html" class="md-nav__link">
+      <a href="../performance.html" class="md-nav__link">
         性能问题分析和调优
       </a>
     </li>
@@ -1057,7 +1057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../config-reference/rest-transport-client.html" class="md-nav__link">
+      <a href="../../config-reference/rest-transport-client.html" class="md-nav__link">
         REST Transport Client 配置项
       </a>
     </li>
@@ -1071,7 +1071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../config-reference/config-center-client.html" class="md-nav__link">
+      <a href="../../config-reference/config-center-client.html" class="md-nav__link">
         Config Center Client 配置项
       </a>
     </li>
@@ -1085,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../config-reference/service-center-client.html" class="md-nav__link">
+      <a href="../../config-reference/service-center-client.html" class="md-nav__link">
         Service Center Client 配置项
       </a>
     </li>
@@ -1099,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../config-reference/kie-client.html" class="md-nav__link">
+      <a href="../../config-reference/kie-client.html" class="md-nav__link">
         ServiceComb Kie Client 配置项
       </a>
     </li>
@@ -1148,7 +1148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../question-and-answer/faq.html" class="md-nav__link">
+      <a href="../../question-and-answer/faq.html" class="md-nav__link">
         FAQ
       </a>
     </li>
@@ -1162,7 +1162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../question-and-answer/question_answer.html" class="md-nav__link">
+      <a href="../../question-and-answer/question_answer.html" class="md-nav__link">
         Q & A
       </a>
     </li>
@@ -1176,7 +1176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../question-and-answer/interface-compatibility.html" class="md-nav__link">
+      <a href="../../question-and-answer/interface-compatibility.html" class="md-nav__link">
         微服务接口兼容常见问题
       </a>
     </li>
@@ -1217,15 +1217,70 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    概念阐述
+  <a href="#_1" class="md-nav__link">
+    依赖配置和启动类
+  </a>
+  
+    <nav class="md-nav" aria-label="依赖配置和启动类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-chassistransport" class="md-nav__link">
+    Java Chassis原生Transport
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-boot-servlet-transport" class="md-nav__link">
+    Spring Boot Servlet Transport
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#web-servlet-transport" class="md-nav__link">
+    独立WEB容器 Servlet Transport
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cse" class="md-nav__link">
+    配置项不在支持 cse 前缀
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    配置说明
+  <a href="#log4j-logback" class="md-nav__link">
+    移除 log4j , logback 的封装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bizkeeper" class="md-nav__link">
+    移除 bizkeeper 处理链
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    移除实例隔离功能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archetypes" class="md-nav__link">
+    提供新的 archetypes 插件
   </a>
   
 </li>
@@ -1246,202 +1301,81 @@
 
 
 
-<h1 id="_1">隔离熔断容错</h1>
-<p>bizkeeper 模块集成了 <a href="https://github.com/Netflix/Hystrix/wiki/Configuration">Hystrix</a> , 提供隔离、熔断和容错等服务故障保护能力。 Java
-Chassis 对 Hystrix 进行了封装， 只需要进行简单的配置即可启用这些功能。 </p>
-<p>在项目中引入如下 Handler 模块， </p>
-<pre><code class="language-xml"> &lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;handler-bizkeeper&lt;/artifactId&gt;
-  &lt;/dependency&gt;
-</code></pre>
-<p>并且增加 Handler 配置：</p>
-<pre><code class="language-yaml">servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: bizkeeper-consumer
-      Provider:
-        default: bizkeeper-provider
-</code></pre>
-<p><strong> 注意事项： </strong></p>
-<p>在实际微服务运维实践中，发现 Hystrix 存在如下一些问题， 开发者可以结合实际业务情况，谨慎的使用这个模块。 Java Chassis 的
-<a href="loadbalance.html">负载均衡</a> 也提供了实例隔离和错误重试能力， 加上内置的<a href="../build-provider/thread-pool.html">线程池隔离</a>， 能够
-实现大部分 Hystrix 核心治理能力。 </p>
+<h1 id="28x-300">2.8.x 升级 3.0.0 指导</h1>
+<p>3.0.0版本的重要更新：</p>
 <ul>
-<li>调用栈很深，在某些异常情况下，可能屏蔽底层异常，导致问题原因分析困难。</li>
-<li>超时机制、重试机制和线程池隔离机制和 Java Chassis 的一些内部机制的协作存在一些不友好的情况，需要特别注意合理的开启超时和重试。 默认情况下是禁用的。Java Chassis 只能使用信号量隔离机制。</li>
-<li>Hystrix 的引入对性能影响很大， 会有 20% 以上的框架性能损失。    </li>
-<li>Hystrix 项目目前已经停止维护。 该功能会在Java Chassis的3.x.x版本删除。 </li>
+<li>最小支持 JDK 17</li>
+<li>采用Spring Boot 3作为开发底座，底层实现依赖Spring Boot 3，不再提供Spring启动方式。</li>
 </ul>
-<h2 id="_2">概念阐述</h2>
-<p>服务故障保护指服务请求异常时，微服务所采用的异常处理策略， 根据处理机制和效果把它分解为三个技术概念：“隔离”、“熔断”、“容错”：</p>
-<ul>
-<li>“隔离”是一种异常检测机制，常用的检测方法是请求超时、流量过大等。一般的设置参数包括超时时间、同时并发请求个数等。</li>
-<li>“熔断”是一种异常反应机制，“熔断”依赖于“隔离”。熔断通常基于错误率来实现。一般的设置参数包括统计请求的个数、错误率等。</li>
-<li>“容错”是一种异常处理机制，“容错”依赖于“熔断”。熔断以后，会调用“容错”的方法。一般的设置参数包括调用容错方法的次数等。</li>
-</ul>
-<p>当前 ServiceComb 提供两种容错方式，分别为返回 null 值和抛出异常。</p>
-<p><strong><em> 注意 ： </em></strong> 在不同的上下文，“隔离”、“熔断”、“容错”、“降级” 等概念可能存在不一样的含义，发现这里的定义和其他地方存在不一样的
-的时候不用感到意外， 但是不用担心， 当服务出现故障的时候， 需要一定的措施进行应对， 对于措施和应对方式的理解胜于对于名词的理解。</p>
-<h2 id="_3">配置说明</h2>
-<p>配置项支持对所有接口生效，或者对某个微服务的某个具体方法生效。</p>
-<ul>
-<li>配置项生效范围<ul>
-<li>按照类型(type)：配置项能够针对Provider, Consumer进行配置</li>
-<li>按照范围(scope)：配置项能够针对服务进行配置, 也可以针对接口进行配置</li>
-</ul>
-</li>
-</ul>
-<p>本章节如果没有特殊说明，所有的配置项都支持按照下面的格式进行配置：</p>
-<pre><code>servicecomb.[namespace].[type].[scope].[property name]
-</code></pre>
-<p>type 指 Provider 或者 Consumser。 scope 指配置项生效范围， 针对特定的微服务的配置，需要增加 MicroServiceName, 针对接口配置的，需要指定接口名称，接口名
-称由 <code>schemaId</code> 和 <code>operationId</code> 组成。</p>
-<p>下面是一些配置示例：</p>
-<pre><code>servicecomb.isolation.Consumer.timeout.enabled # 全局配置
-servicecomb.isolation.Consumer.DemoService.timeout.enabled # 服务配置
-servicecomb.isolation.Consumer.DemoService.hello.sayHello.timeout.enabled # 接口配置
-servicecomb.isolation.Provider.timeout.enabled # 全局配置
-servicecomb.isolation.Provider.DemoService.timeout.enabled # 服务配置
-servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled # 接口配置
-</code></pre>
-<ul>
-<li>配置项列表</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
-<th align="left">注意</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">servicecomb.isolation.[type].[scope].timeout.enabled</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">是否启用超时检测</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.isolation.[type].[scope].timeoutInMilliseconds</td>
-<td align="left">30000</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">超时时间阈值</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.isolation.[type].[scope].maxConcurrentRequests</td>
-<td align="left">1000</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">最大并发数阈值</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].enabled</td>
-<td align="left">TRUE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">是否启用熔断措施</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].forceOpen</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">不管失败次数，都进行熔断</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].forceClosed</td>
-<td align="left">FALSE</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">任何时候都不熔断</td>
-<td align="left">当与forceOpen同时配置时，forceOpen优先。</td>
-</tr>
-<tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].sleepWindowInMilliseconds</td>
-<td align="left">15000</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">熔断后，多长时间恢复</td>
-<td align="left">恢复后，会重新计算失败情况。注意：如果恢复后的调用立即失败，那么会立即重新进入熔断。</td>
-</tr>
-<tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].requestVolumeThreshold</td>
-<td align="left">20</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">10s内请求数需要大于等于这个参数值，才开始计算错误率和判断是否进行熔断。</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.circuitBreaker.[type].[scope].errorThresholdPercentage</td>
-<td align="left">50</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">错误率阈值，达到阈值则触发熔断</td>
-<td align="left">由于10秒还会被划分为10个1秒的统计周期，经过1s中后才会开始计算错误率，因此从调用开始至少经过1s，才会发生熔断。</td>
-</tr>
-<tr>
-<td align="left">servicecomb.fallback.[type].[scope].maxConcurrentRequests</td>
-<td align="left">10</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">并发调用容错处理措施（servicecomb.fallbackpolicy.policy）的请求数，超过这个值则不再调用处理措施，直接返回异常</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">servicecomb.fallbackpolicy.[type].[scope].policy</td>
-<td align="left">throwException</td>
-<td align="left">returnNull | throwexception</td>
-<td align="left">否</td>
-<td align="left">出错后的处理策略</td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p><strong>注意</strong>：谨慎使用 <code>servicecomb.isolation.timeout.enabled=true</code> 。因为系统处理链都是异步执行，中间处理链的返回，会导致
-后面处理链的逻辑处理效果丢失。尽可能将 <code>servicecomb.isolation.timeout.enabled</code> 保持默认值false，并且正确设置网络层超时时
-间 <code>servicecomb.request.timeout=30000</code> 。 配置范围不支持 Schema 级别的配置。</p>
-<ul>
-<li>示例代码</li>
-</ul>
-<pre><code class="language-yaml">servicecomb:
-  handler:
-    chain:
-      Consumer:
-        default: bizkeeper-consumer
-  isolation:
-    Consumer:
-      timeout:
-        enabled: true
-      timeoutInMilliseconds: 30000
-  circuitBreaker:
-    Consumer:
-      enabled: true
-      sleepWindowInMilliseconds: 15000
-      requestVolumeThreshold: 20
-  fallback:
-    Consumer:
-      enabled: true
-  fallbackpolicy:
-    Consumer:
-      policy: throwException
-</code></pre>
+<p>本文档提供2.8.x升级到3.0.0的指导。</p>
+<h2 id="_1">依赖配置和启动类</h2>
+<h3 id="java-chassistransport">Java Chassis原生Transport</h3>
+<p>Java Chassis原生提供了 Rest Over Vert.x, Highway等原生Transport。Edge Service也使用原生Transport运行。</p>
 <blockquote>
-<p><strong>说明：</strong><br />
-降级策略需要启用服务治理能力，对应的服务提供者的handler是<code>bizkeeper-provider</code>，服务消费者的handler是<code>bizkeeper-consumer</code>。</p>
+<blockquote>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="spring-boot-servlet-transport">Spring Boot Servlet Transport</h3>
+<p>Java Chassis支持运行与Servlet容器，自身作为一个Servlet启动。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="web-servlet-transport">独立WEB容器 Servlet Transport</h3>
+<p>Java Chassis支持运行与Servlet容器，自身作为一个Servlet启动。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="cse">配置项不在支持 <code>cse</code> 前缀</h2>
+<p>Java Chassis 的所有配置项全部使用 <code>servicecomb</code> 作为前缀，比如：</p>
+<pre><code class="language-yaml">servicecomb:
+  service:
+    application: my-application
+    name: my-service
+</code></pre>
+<p>早期版本，也支持下面的配置：</p>
+<pre><code class="language-yaml">cse:
+  service:
+    application: my-application
+    name: my-service
+</code></pre>
+<p>3.0.0 版本不再提供 <code>cse</code> 前缀支持，需要将 <code>cse</code> 前缀修改为 <code>servicecomb</code>。 </p>
+<h2 id="log4j-logback">移除 log4j , logback 的封装</h2>
+<p>Java Chassis 系统内部全部采用 <code>slf4j</code> 记录日志， 不再提供 log4j 的封装功能， 删除了 Log4jUtils 等类。 如果使用了 Log4jUtils 类来初始化日志， 可以参考 <a href="../../general-development/config-logs.html">配置日志</a> 来设置系统日志。 </p>
+<h2 id="bizkeeper">移除 bizkeeper 处理链</h2>
+<p>Java Chassis 早期版本基于 <code>Hystrix</code> 提供了基于方法的服务治理能力，由于社区已经停止 <code>Hystrix</code> 维护，并且 <code>bizkeeper</code> 设计上不能很好的满足场景的故障模式保护， 3.0.0 版本删除了这个模块。 服务治理可以使用流量特征治理来实现，过载保护的最佳处理方案是配置客户端隔离仓。</p>
+<h2 id="_2">移除实例隔离功能</h2>
+<p>Java Chassis 3.0.0 不在支持下面的配置项：</p>
+<pre><code class="language-yaml">servicecomb:
+  loadbalance:
+    isolation:
+      enabled: false
+      errorThresholdPercentage: 0
+      enableRequestThreshold: 5
+      singleTestTime: 60000
+      continuousFailureThreshold: 5
+      maxSingleTestWindow: 60000 # 为了保证在并发情况下只有一个实例放通，会锁定放通实例。这个时间表示最大锁定时间。
+      minIsolationTime: 3000 # 最短隔离时间。并发情况下，实例隔离后进行中的请求可能快速刷新隔离状态，增加最短隔离时间。
+      recoverImmediatelyWhenSuccess：true # 放通实例，如果调用成功，立即清除统计状态，保证后续请求能够使用该实例。 2.1.3 新增。
+</code></pre>
+<p>单实例故障防护可以使用流量特征治理来实现，启用客户端熔断和客户端隔离仓。</p>
+<h2 id="archetypes">提供新的 archetypes 插件</h2>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+</blockquote>
 </blockquote>
 
 
@@ -1480,10 +1414,10 @@ servicecomb.isolation.Provider.DemoService.hello.sayHello.timeout.enabled # 接�
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

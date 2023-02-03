@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.10">
     
     
       
@@ -1230,13 +1230,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    模块说明
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1260,73 +1253,6 @@
 <p>现阶段支持SpringMVC、JAX-RS和透明RPC三种开发方式。</p>
 <p>2.内建API-first支持。通过契约规范化微服务开发，实现跨语言的通信，并支持配套的软件工具链（契约生成代码、代码生成契约等）开发，构建完整的开发生态。</p>
 <p>3.定义了常用的微服务运行模型，将微服务从发现到交互过程中的各种容错手段都封装起来。该运行模型支持自定义和扩展。</p>
-<h2 id="_4"><strong>模块说明</strong></h2>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">artifact id</th>
-<th align="left">是否可选</th>
-<th align="left">功能说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">编程模型</td>
-<td align="left">provider-pojo</td>
-<td align="left">是</td>
-<td align="left">提供RPC开发模式</td>
-</tr>
-<tr>
-<td align="left">编程模型</td>
-<td align="left">provider-jaxrs</td>
-<td align="left">是</td>
-<td align="left">提供JAX RS开发模式</td>
-</tr>
-<tr>
-<td align="left">编程模型</td>
-<td align="left">provider-springmvc</td>
-<td align="left">是</td>
-<td align="left">提供Spring MVC开发模式</td>
-</tr>
-<tr>
-<td align="left">通信模型</td>
-<td align="left">transport-rest-vertx</td>
-<td align="left">是</td>
-<td align="left">运行于HTTP之上的开发框架，不依赖WEB容器，应用打包为可执行jar</td>
-</tr>
-<tr>
-<td align="left">通信模型</td>
-<td align="left">transport-rest-servlet</td>
-<td align="left">是</td>
-<td align="left">运行于WEB容器的开发框架，应用打包为war包</td>
-</tr>
-<tr>
-<td align="left">通信模型</td>
-<td align="left">transport-highway</td>
-<td align="left">是</td>
-<td align="left">提供高性能的私有通信协议，仅用于java之间互通。</td>
-</tr>
-<tr>
-<td align="left">运行模型</td>
-<td align="left">handler-loadbalance</td>
-<td align="left">是</td>
-<td align="left">负载均衡模块。提供各种路由策略和配置方法。一般客户端使用。</td>
-</tr>
-<tr>
-<td align="left">运行模型</td>
-<td align="left">handler-bizkeeper</td>
-<td align="left">是</td>
-<td align="left">和服务治理相关的功能，比如隔离、熔断、容错。</td>
-</tr>
-<tr>
-<td align="left">运行模型</td>
-<td align="left">handler-tracing</td>
-<td align="left">是</td>
-<td align="left">调用链跟踪模块，对接监控系统，吐出打点数据。</td>
-</tr>
-</tbody>
-</table>
 
 
 
@@ -1367,7 +1293,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a00a7c5e.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>
