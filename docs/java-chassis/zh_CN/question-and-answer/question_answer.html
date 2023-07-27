@@ -15,7 +15,7 @@
         <link rel="next" href="interface-compatibility.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1236,7 +1236,7 @@
 
 
 <h1 id="javaresthttp-status-code">问题描述：如何自定义某个Java方法对应的REST接口里的HTTP Status Code？</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>对于正常的返回值，可以通过SwaggerAnnotation实现，例如：</p>
 <pre><code class="language-java">@ApiResponse(code = 300, response = String.class, message = &quot;&quot;)
 public int test(int x) {
@@ -1263,7 +1263,7 @@ public int test(int x) {
     }
 </code></pre>
 <h1 id="_1">问题描述： 如何定制自己微服务的日志配置</h1>
-<p><strong> 解决方法：</strong><br />
+<p>** 解决方法：**<br />
 ServiceComb不绑定日志器，只是使用了slf4j，用户可以自由选择log4j/log4j2/logback等等。ServiceComb提供了一个log4j的扩展，在标准log4j的基础上，支持log4j的properties文件的增量配置。</p>
 <ul>
 <li>默认以规则："classpath*:config/log4j.properties"加载配置文件</li>
@@ -1271,7 +1271,7 @@ ServiceComb不绑定日志器，只是使用了slf4j，用户可以自由选择l
 <li>如果要使用ServiceComb的log4j扩展，则需要调用Log4jUtils.init，否则完全按标准的日志器的规则使用。</li>
 </ul>
 <h1 id="transporttransport">问题描述： 当服务配置了多个transport的时候，在运行时是怎么选择使用哪个transport的？</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <ul>
 <li>
 <p>ServiceComb的consumer、transport、handler、producer之间是解耦的，各功能之间通过契约定义联合在一起工作的，即：<br />
@@ -1366,13 +1366,13 @@ ServiceComb不绑定日志器，只是使用了slf4j，用户可以自由选择l
             $ref: &quot;#/definitions/ReponseImpl&quot;
 </code></pre>
 <h1 id="_2">问题描述：微服务框架服务调用是否使用长连接</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>http使用的是长连接（有超时时间），highway方式使用的是长连接（一直保持）。</p>
 <h1 id="_3">问题描述：服务断连服务中心注册信息是否自动删除</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>服务中心心跳检测到服务实例不可用，只会移除服务实例信息，服务的静态数据不会移除。</p>
 <h1 id="_4">问题描述：微服务框架如何实现数据多个微服务间透传</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>透传数据塞入：</p>
 <pre><code class="language-java">CseHttpEntity&lt;xxxx.class&gt; httpEntity = new CseHttpEntity&lt;&gt;(xxx);
 //透传内容
@@ -1389,7 +1389,7 @@ public String sayHello(@RequestBody Person person,InvocationContext context){
 }
 </code></pre>
 <h1 id="_5">问题描述：微服务框架服务如何自定义返回状态码</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <pre><code class="language-java">@Override
 @RequestMapping(path = &quot;/sayhello&quot;,method = RequestMethod.POST)
 public String sayHello(@RequestBody Person person){
@@ -1400,25 +1400,25 @@ public String sayHello(@RequestBody Person person){
 }
 </code></pre>
 <h1 id="body-model">问题描述： body Model部分暴露</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>一个接口对应的body对象中，可能有一些属性是内部的，不想开放出去，生成schema的时候不要带出去，使用：</p>
 <pre><code class="language-java">@ApiModelProperty(hidden = true)
 </code></pre>
 <h1 id="consumer">问题描述：框架获取远端consumer的地址</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>如果使用http rest方式（使用transport-rest-vertx依赖）可以用下面这种方式获取：</p>
 <pre><code class="language-java">HttpServletRequest request = (HttpServletRequest) invocation.getHandlerContext().get(RestConst.REST_REQUEST);
 String host = request.getRemoteHost();
 </code></pre>
 <p>实际场景是拿最外层的地址，所以应该是LB传入到edgeservice，edgeService再放到context外下传递。</p>
 <h1 id="handler">问题描述：对handler描述</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>consumer默认的handler是simpleLB，没有配置的时候handler链会使用这个，如果配置了handler，里面一定要包含lb的handler，否则调用报错，需要在文档里面进行说明。</p>
 <h1 id="netty">问题描述：netty版本问题</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>netty3和netty4是完全不同的三方件，因为坐标跟package都不相同，所以可以共存，但是要注意小版本问题，小版本必须使用的版本。</p>
 <h1 id="_6">问题描述：服务超时设置</h1>
-<p><strong> 解决方法：</strong></p>
+<p>** 解决方法：**</p>
 <p>在微服务描述文件（microservice.yaml）中添加如下配置：</p>
 <pre><code>servicecomb:
   request:

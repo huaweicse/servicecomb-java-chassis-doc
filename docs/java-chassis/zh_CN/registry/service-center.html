@@ -15,7 +15,7 @@
         <link rel="next" href="local-registry.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1305,48 +1305,48 @@
 <table>
 <thead>
 <tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">是否必选</th>
+<th style="text-align: left;">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">servicecomb.service.registry.</p>address</td>
-<td align="left">http://127.0.0.1:30100</td>
-<td align="left">是</td>
-<td align="left">服务中心的地址信息，可以配置多个，用逗号分隔。</td>
+<td style="text-align: left;">servicecomb.service.registry.</p>address</td>
+<td style="text-align: left;">http://127.0.0.1:30100</td>
+<td style="text-align: left;">是</td>
+<td style="text-align: left;">服务中心的地址信息，可以配置多个，用逗号分隔。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.</p>instance.watch</td>
-<td align="left">true</td>
-<td align="left">否</td>
-<td align="left">是否采用PUSH模式监听实例变化。为false的时候表示使用PULL模式。</td>
+<td style="text-align: left;">servicecomb.service.registry.</p>instance.watch</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否采用PUSH模式监听实例变化。为false的时候表示使用PULL模式。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.</p>autodiscovery</td>
-<td align="left">false</td>
-<td align="left">否</td>
-<td align="left">是否自动发现服务中心的地址。当需要配置部分地址，其他地址由配置的服务中心实例发现的时候，开启这个配置。</td>
+<td style="text-align: left;">servicecomb.service.registry.</p>autodiscovery</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否自动发现服务中心的地址。当需要配置部分地址，其他地址由配置的服务中心实例发现的时候，开启这个配置。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.</p>instance.healthCheck.interval</td>
-<td align="left">30</td>
-<td align="left">否</td>
-<td align="left">心跳间隔。</td>
+<td style="text-align: left;">servicecomb.service.registry.</p>instance.healthCheck.interval</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">心跳间隔。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.</p>instance.healthCheck.times</td>
-<td align="left">3</td>
-<td align="left">否</td>
-<td align="left">允许的心跳失败次数。当连续第times+1次心跳仍然失败时则实例被sc下线。即interval * (times + 1)决定了实例被自动注销的时间。如果服务中心等待这么长的时间没有收取到心跳，会注销实例。</td>
+<td style="text-align: left;">servicecomb.service.registry.</p>instance.healthCheck.times</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">允许的心跳失败次数。当连续第times+1次心跳仍然失败时则实例被sc下线。即interval * (times + 1)决定了实例被自动注销的时间。如果服务中心等待这么长的时间没有收取到心跳，会注销实例。</td>
 </tr>
 <tr>
-<td align="left">servicecomb.service.registry.</p>instance.empty.protection</td>
-<td align="left">true</td>
-<td align="left">否</td>
-<td align="left">当从服务中心查询到的地址为空的时候，是否覆盖本地缓存。这个是一种可靠性保护机制，避免实例异常批量下线导致的请求失败。</td>
+<td style="text-align: left;">servicecomb.service.registry.</p>instance.empty.protection</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">当从服务中心查询到的地址为空的时候，是否覆盖本地缓存。这个是一种可靠性保护机制，避免实例异常批量下线导致的请求失败。</td>
 </tr>
 </tbody>
 </table>

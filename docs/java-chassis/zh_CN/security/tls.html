@@ -15,7 +15,7 @@
         <link rel="next" href="shi-yong-rsa-ren-zheng.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1355,46 +1355,46 @@
 <table>
 <thead>
 <tr>
-<th align="left">项目</th>
-<th align="left">tag</th>
+<th style="text-align: left;">项目</th>
+<th style="text-align: left;">tag</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">服务中心</td>
-<td align="left">sc.consumer</td>
+<td style="text-align: left;">服务中心</td>
+<td style="text-align: left;">sc.consumer</td>
 </tr>
 <tr>
-<td align="left">配置中心</td>
-<td align="left">cc.consumer</td>
+<td style="text-align: left;">配置中心</td>
+<td style="text-align: left;">cc.consumer</td>
 </tr>
 <tr>
-<td align="left">看板中心</td>
-<td align="left">mc.consumer</td>
+<td style="text-align: left;">看板中心</td>
+<td style="text-align: left;">mc.consumer</td>
 </tr>
 <tr>
-<td align="left">Rest服务端</td>
-<td align="left">rest.provider</td>
+<td style="text-align: left;">Rest服务端</td>
+<td style="text-align: left;">rest.provider</td>
 </tr>
 <tr>
-<td align="left">Highway服务端</td>
-<td align="left">highway.provider</td>
+<td style="text-align: left;">Highway服务端</td>
+<td style="text-align: left;">highway.provider</td>
 </tr>
 <tr>
-<td align="left">Rest客户端</td>
-<td align="left">rest.consumer</td>
+<td style="text-align: left;">Rest客户端</td>
+<td style="text-align: left;">rest.consumer</td>
 </tr>
 <tr>
-<td align="left">Highway客户端</td>
-<td align="left">highway.consumer</td>
+<td style="text-align: left;">Highway客户端</td>
+<td style="text-align: left;">highway.consumer</td>
 </tr>
 <tr>
-<td align="left">auth客户端</td>
-<td align="left">apiserver.consumer</td>
+<td style="text-align: left;">auth客户端</td>
+<td style="text-align: left;">apiserver.consumer</td>
 </tr>
 <tr>
-<td align="left">一般不需要配置tag，正常情况分为三类：1、连接内部服务 2、作为服务端 3、作为客户端 所以如果这三类要求的证书不一致，那么需要使用tag来区分</td>
-<td align="left"></td>
+<td style="text-align: left;">一般不需要配置tag，正常情况分为三类：1、连接内部服务 2、作为服务端 3、作为客户端 所以如果这三类要求的证书不一致，那么需要使用tag来区分</td>
+<td style="text-align: left;"></td>
 </tr>
 </tbody>
 </table>
@@ -1403,118 +1403,118 @@
 <table>
 <thead>
 <tr>
-<th align="left">配置项</th>
-<th align="left">默认值</th>
-<th align="left">取值范围</th>
-<th align="left">是否必选</th>
-<th align="left">含义</th>
-<th align="left">注意</th>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">取值范围</th>
+<th style="text-align: left;">是否必选</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">ssl.engine</td>
-<td align="left">jdk</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">ssl协议，提供jdk/openssl选择</td>
-<td align="left">默认为jdk</td>
+<td style="text-align: left;">ssl.engine</td>
+<td style="text-align: left;">jdk</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">ssl协议，提供jdk/openssl选择</td>
+<td style="text-align: left;">默认为jdk</td>
 </tr>
 <tr>
-<td align="left">ssl.protocols</td>
-<td align="left">TLSv1.2</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">协议列表</td>
-<td align="left">使用逗号分隔</td>
+<td style="text-align: left;">ssl.protocols</td>
+<td style="text-align: left;">TLSv1.2</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">协议列表</td>
+<td style="text-align: left;">使用逗号分隔</td>
 </tr>
 <tr>
-<td align="left">ssl.ciphers</td>
-<td align="left">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,<br/>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">算法列表</td>
-<td align="left">使用逗号分隔</td>
+<td style="text-align: left;">ssl.ciphers</td>
+<td style="text-align: left;">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,<br/>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">算法列表</td>
+<td style="text-align: left;">使用逗号分隔</td>
 </tr>
 <tr>
-<td align="left">ssl.authPeer</td>
-<td align="left">false</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">是否认证对端</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.authPeer</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否认证对端</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.checkCN.host</td>
-<td align="left">false</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">是否对证书的CN进行检查</td>
-<td align="left">该配置项只对Consumer端，并且使用http协议有效，即Consumser端使用rest通道有效。对于Provider端、highway通道等无效。检查CN的目的是防止服务器被钓鱼，参考标准定义：<a href="https://tools.ietf.org/html/rfc2818。">https://tools.ietf.org/html/rfc2818。</a></td>
+<td style="text-align: left;">ssl.checkCN.host</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否对证书的CN进行检查</td>
+<td style="text-align: left;">该配置项只对Consumer端，并且使用http协议有效，即Consumser端使用rest通道有效。对于Provider端、highway通道等无效。检查CN的目的是防止服务器被钓鱼，参考标准定义：<a href="https://tools.ietf.org/html/rfc2818。">https://tools.ietf.org/html/rfc2818。</a></td>
 </tr>
 <tr>
-<td align="left">ssl.trustStore</td>
-<td align="left">trust.jks</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">信任证书文件</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.trustStore</td>
+<td style="text-align: left;">trust.jks</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">信任证书文件</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.trustStoreType</td>
-<td align="left">JKS</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">信任证书类型</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.trustStoreType</td>
+<td style="text-align: left;">JKS</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">信任证书类型</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.trustStoreValue</td>
-<td align="left">-</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">信任证书密码</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.trustStoreValue</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">信任证书密码</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.keyStore</td>
-<td align="left">server.p12</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">身份证书文件</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.keyStore</td>
+<td style="text-align: left;">server.p12</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">身份证书文件</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.keyStoreType</td>
-<td align="left">PKCS12</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">身份证书类型</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.keyStoreType</td>
+<td style="text-align: left;">PKCS12</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">身份证书类型</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.keyStoreValue</td>
-<td align="left">-</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">身份证书密码</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.keyStoreValue</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">身份证书密码</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.crl</td>
-<td align="left">revoke.crl</td>
-<td align="left">-</td>
-<td align="left">否</td>
-<td align="left">吊销证书文件</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.crl</td>
+<td style="text-align: left;">revoke.crl</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">吊销证书文件</td>
+<td style="text-align: left;">-</td>
 </tr>
 <tr>
-<td align="left">ssl.sslCustomClass</td>
-<td align="left">-</td>
-<td align="left">org.apache.servicecomb.foundation.ssl.SSLCustom的实现类</td>
-<td align="left">否</td>
-<td align="left">SSLCustom类的实现，用于开发者转换密码、文件路径等。</td>
-<td align="left">-</td>
+<td style="text-align: left;">ssl.sslCustomClass</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">org.apache.servicecomb.foundation.ssl.SSLCustom的实现类</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">SSLCustom类的实现，用于开发者转换密码、文件路径等。</td>
+<td style="text-align: left;">-</td>
 </tr>
 </tbody>
 </table>

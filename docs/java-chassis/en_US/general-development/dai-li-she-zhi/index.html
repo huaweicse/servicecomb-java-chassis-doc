@@ -15,7 +15,7 @@
         <link rel="next" href="../report-framework-version/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1812,7 +1812,7 @@
     passwd: yourpassword #password
 </code></pre>
 <p>Configure password using encryption is supported by using SPI. The SPI intrface is org.apache.servicecomb.foundation.common.encrypt.Encryption. Users can implement customer decode interface.</p>
-<p><strong>Note: Currently only supports connection service center, configuration center support agent. If you connect other three-party services, you can read this configuration, configure the agent yourself, vertx httpclient supports proxy settings, for example: </strong></p>
+<p>**Note: Currently only supports connection service center, configuration center support agent. If you connect other three-party services, you can read this configuration, configure the agent yourself, vertx httpclient supports proxy settings, for example: **</p>
 <pre><code class="language-java">    HttpClientOptions httpClientOptions = new HttpClientOptions();
     If (isProxyEnable()) {
       ProxyOptions proxy = new ProxyOptions();

@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1219,7 +1219,7 @@
 <p><strong>网关：</strong>负责进行请求转发、用户认证以及其他内容，比如解决跨站访问、设置HTTP安全消息头等。通过设置防火墙，所有的请求都必须经过网关，这样就将内部服务与外部用户隔离起来，防止内部服务被非法访问。</p>
 <p><strong>文件管理：</strong>提供文件上传、删除等文件管理功能。</p>
 <p><strong>用户管理：</strong>提供认证、角色和权限管理等功能。</p>
-<p><strong>界面: </strong> 采用静态页面技术, html+js+css实现。界面可以作为一个单独的微服务，也可以直接放到网关服务里面。</p>
+<p>**界面: ** 采用静态页面技术, html+js+css实现。界面可以作为一个单独的微服务，也可以直接放到网关服务里面。</p>
 <p>为了可靠性，这些服务都应该支持分布式集群部署。因此在业务逻辑中涉及到并发和负载均衡的场景，都需要考虑无状态设计。可以给网关配置域名或者在上层再挂一个弹性负载均衡器，实现网关的多实例部署。</p>
 <p>微服务设计好以后，可以通过已有项目快速搭建项目架子。可以从：</p>
 <p><a href="https://github.com/apache/servicecomb-samples/tree/master/porter_lightweight">Porter应用</a> </p>

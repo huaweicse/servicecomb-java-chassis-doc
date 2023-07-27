@@ -15,7 +15,7 @@
         <link rel="next" href="../interface-compatibility/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1752,13 +1752,13 @@
   <h1>FAQ</h1>
 
 <ol>
-<li><strong>Q: What is the relationship between ServiceComb and SpringCloud, and what is ServiceComb specific application scenarios? </strong></li>
+<li>**Q: What is the relationship between ServiceComb and SpringCloud, and what is ServiceComb specific application scenarios? **</li>
 </ol>
 <p>A: ServiceComb is a set of microservice development frameworks based on large-scale IT system practices. It encapsulates a set of microservices running models based on best practices in development. These capabilities are completely transparent to users,it can be integrated and adjusted by configuration. In the operation and maintenance phase, microservices operation and maintenance have been fully considered, providing rich monitoring indicators and dynamic governance capabilities.
     B: ServiceComb's capabilities can be used as a separate development framework, in a scenario that requires a lightweight microservice solution, or on SpringCloud, working with other components provided by SpringCloud, in heavyweight The scene together with SpringCloud produces a '1+1&gt;2' effect.</p>
 <ol>
 <li>
-<p><strong>Q: Do we have a problem with IntelliJ's free version? </strong>
+<p>**Q: Do we have a problem with IntelliJ's free version? **
     A: No problem, use IntelliJ development, refer to [Setup Developer Environment] (/cn/developers/setup-develop-environment/) for the corresponding environment configuration.</p>
 </li>
 <li>
@@ -1770,7 +1770,7 @@
    * When using the same HTTP request method, e.g. GET, the method name need to be unique as it will become operation ID when swagger generates contracts.
    * Class and method name need to be public.</p>
 <ol>
-<li><strong>Q: Contract generation will report error: 'Caused by: java.lang.Error: OperationId must be unique', does not support function overriding? </strong></li>
+<li>**Q: Contract generation will report error: 'Caused by: java.lang.Error: OperationId must be unique', does not support function overriding? **</li>
 </ol>
 <p>A: We support function overriding, plus the <code>@ApiOperation</code> tag. There are examples in demo-pojo. Each interface must have a unique operation id.</p>
 <ol>
@@ -1793,7 +1793,7 @@
 </ol>
 <p>A: No, examples can refer to <a href="https://github.com/apache/incubator-servicecomb-java-chassis/blob/master/integration-tests/springmvc-tests/src/test/java/org/apache/servicecomb/demo/springmvc/tests/SpringMvcIntegrationTestBase.java">the implementation of integration-test</a> in java-chassis.</p>
 <ol>
-<li><strong>Q: After the microservice is started, the interface cannot be called correctly, or is there no error returned? </strong></li>
+<li>**Q: After the microservice is started, the interface cannot be called correctly, or is there no error returned? **</li>
 </ol>
 <p>A: Please check that the calling path is exactly the same as the path published in the Producer implementation code. The boot log on the Producer side can see the output of the map path, for example:
    
@@ -1801,10 +1801,10 @@
    
     For different programming styles (models) to implement Producer documentation and notes, please see: <a href="/cn/users/develop-with-jax-rs/">Jaxrs</a> <a href="/cn/users/develop-with-springmvc/">SpringMVC</a> <a href="/cn/users/develop-with-transparent-rpc/">Pojo</a> <a href="/cn/users/develop-with-spring-boot-starter/">Spring Boot</a> .
     
-10. <strong>Q: The port number under the microservice.yaml configuration file has been modified via eclipse. After starting the program, the port number does not work? </strong></p>
+10. **Q: The port number under the microservice.yaml configuration file has been modified via eclipse. After starting the program, the port number does not work? **</p>
 <p>A: You need to import the sample project alone. If you import the entire ServiceComb-Java-Chassis project, the IDE will not compile the sample because the sample directory is not in the ServiceComb-Java-Chassis module. There is no error message under eclipse. Prompt message. Therefore, eclipse starts the demo of the sample and will find that the modified port does not work.
     
-12. <strong> Q: How do I customize the HTTP status code in the REST interface for a Java method? </strong></p>
+12. ** Q: How do I customize the HTTP status code in the REST interface for a Java method? **</p>
 <p>A: For normal return values, you can do this with SwaggerAnnotation, for example:</p>
 <p><code>java
    @ApiResponse(code = 300, response = String.class, message = "")
@@ -1839,7 +1839,7 @@
     * Actually search all the <code>config/log4j.properties and config/log4j.*.properties</code> in the classpath, and cut out the <code>\*</code> from the searched file to perform alpha. Sort, then load in order, and the final synthesized file is used as the log4j configuration file.
     * If you want to use ServiceComb's log4j extension, you need to call Log4jUtils.init, otherwise it will be used according to the rules of the standard logger.</p>
 <ol>
-<li><strong>Q: When the service is configured with multiple transports, how do you choose which transport to use at runtime? </strong></li>
+<li>**Q: When the service is configured with multiple transports, how do you choose which transport to use at runtime? **</li>
 </ol>
 <p>A:
    * ServiceComb's consumer, transport, handler, and producer are decoupled, and each function works together through contract definitions, namely:
@@ -2097,7 +2097,7 @@
      request:
        timeout: 30000</code></p>
 <ol>
-<li><strong>Q: The URL address can be uniquely located. Why do you want to add a schema? </strong></li>
+<li>**Q: The URL address can be uniquely located. Why do you want to add a schema? **</li>
 </ol>
 <p>A:
     1. The schema is used to match the service contract. It is used to ensure that the server and the consumer contract are compatible. Each contract needs a unique ID and is stored in the service center.
@@ -2105,16 +2105,16 @@
     3. operation qualified name is the key of the governance, and the URL cannot be directly searched because of the existence of the path parameter, and the qualified name will not change. Governance does not distinguish between transmissions. If governance goes by URL, then when highway is called in, it has to construct the url according to the parameters, and then the regular expression matches, which is too tossing.
     4. http is just a transport channel, and there are other transport channels that do not need to be mapped to URLs.</p>
 <ol>
-<li><strong>Q: When the Rest client is invocating, it only takes the service name and URL, and does not need to specify the schema id. In fact, according to this URL, the specific contract can also be found. So what is the role of the specified schema id? </strong></li>
+<li>**Q: When the Rest client is invocating, it only takes the service name and URL, and does not need to specify the schema id. In fact, according to this URL, the specific contract can also be found. So what is the role of the specified schema id? **</li>
 </ol>
 <p>A: Since transparent rpc is an interface call and does not have a URL, the internal is actually normalized to the operation to describe, so that it can be uniquely mapped to the specific request processing in conjunction with the schema id.
     </p>
 <ol>
-<li><strong>Q: What is the concept of Transport? What is it used for? </strong></li>
+<li>**Q: What is the concept of Transport? What is it used for? **</li>
 </ol>
 <p>A: The Transport is responsible for codec, and transmission. The communication model has two kinds of Rest and Highway. The Highway corresponds to the private protocol, which uses protobuf encoding, and the Rest uses json. Highway and Rest are based on vertx, and vertx is based on netty.</p>
 <ol>
-<li><strong>Q: Is there be multiple appIDs and microservices in a service provider? What scenario will this happen? </strong></li>
+<li>**Q: Is there be multiple appIDs and microservices in a service provider? What scenario will this happen? **</li>
 </ol>
 <p>A: Yes, what is expressed here is a concept of merge. The microservice.yaml file, which may exist in both jars, disks, and command line arguments, specifies that they are merged by priority and are used for added flexibility. In the jar is the default value, in addition to the environment variables, command line parameters, configuration center coverage, providing multiple layers of customization.</p>
 <ul>
@@ -2122,40 +2122,40 @@
 </ul>
 <p>A: Take the rest, mainly responsible for registration, taking data and heartbeat, etc.; 'watch event' via websocket, watch event is to observe whether the service center instance information has changed.</p>
 <ul>
-<li><strong>Q: Is there a governance center like dubbo? </strong></li>
+<li>**Q: Is there a governance center like dubbo? **</li>
 </ul>
 <p>A: bizkeeper is a handler, one of the contents of governance. Governance can be extended by handlers.</p>
 <ul>
-<li><strong>Q: How to understand the service path? </strong></li>
+<li>**Q: How to understand the service path? **</li>
 </ul>
 <p>A: Each microservice has a servicePathManager, and each schema registers its own path.</p>
 <ul>
-<li><strong>Q: Can the browser directly access the microservice Endpoint? </strong></li>
+<li>**Q: Can the browser directly access the microservice Endpoint? **</li>
 </ul>
 <p>A: Yes, the restful microservice Endpoint can be used to access the service that provides the get method directly in the browser using HTTP plus service path. If it is to access the services provided by other Http methods, it is recommended to install and use.(https://www.sap.com/developer/tutorials/api-tools-postman-install.html)</p>
 <ul>
-<li><strong>Q: When the contract is generated, do you have to add the version number and language? </strong></li>
+<li>**Q: When the contract is generated, do you have to add the version number and language? **</li>
 </ul>
 <p>A: The contract belongs to the microservice. The microservice has a version, but the language should not be accompanied by the version number. Contractual requirements should be independent of language. The contract "no version", the version of the contract is embodied in the microservice, the instance can find the version of the microservice to which it belongs, and a certain contract can be found.</p>
 <ul>
-<li><strong>Q: The design code in ServiceRegistry is similar to Eureka? </strong></li>
+<li>**Q: The design code in ServiceRegistry is similar to Eureka? **</li>
 </ul>
 <p>A: Our first version was built on the basis of Spring Cloud. Later, when we found that it was not enough to use it, we gradually made our own set, so it was designed after fully referring to Eureka.</p>
 <ul>
-<li><strong>Q: Some rpc is netty calling redis implementation, what is the advantage over direct netty forwarding? </strong></li>
+<li>**Q: Some rpc is netty calling redis implementation, what is the advantage over direct netty forwarding? **</li>
 </ul>
 <p>A: Maybe I want to use Redis to solve the subscription release. But this is not a big deal. I tried it before, but later I changed it to ServiceComb.
     </p>
 <ul>
-<li><strong>Q: If you introduce the <code>transport-rest-servlet</code> and <code>transport-rest-vertx</code> dependencies at the same time, how does it decide which one to use? </strong></li>
+<li>**Q: If you introduce the <code>transport-rest-servlet</code> and <code>transport-rest-vertx</code> dependencies at the same time, how does it decide which one to use? **</li>
 </ul>
 <p>A: If the port is not occupied, use vertx; if it is occupied, use servlet.</p>
 <ul>
-<li><strong>Q: What is the scenario for qps flow control design? </strong></li>
+<li>**Q: What is the scenario for qps flow control design? **</li>
 </ul>
 <p>A: Rate limit has two main functions. First, it guarantees the service effect to some key services by restricting different consumers, and the second is to prevent the avalanche effect. The thickness of the water pipe can be determined according to the importance of the service. ServiceComb supports two types of current limiting methods, namely, consumer-side current limiting and server-side current limiting. The consumer-side current limiting can achieve relatively fine control.</p>
 <ul>
-<li><strong>Q: If the server is a chain call, that is, a-&gt;b-&gt;c, then does the QPS flow control cause flow pipe uneven and unbalanced? </strong></li>
+<li>**Q: If the server is a chain call, that is, a-&gt;b-&gt;c, then does the QPS flow control cause flow pipe uneven and unbalanced? **</li>
 </ul>
 <p>A: The general mode is to measure and then set. The qps settings are ultimately tuned in conjunction with the overall business needs, rather than setting them up on a single node.</p>
 <ul>
@@ -2167,7 +2167,7 @@
 </ul>
 <p>A: Check if the Service Center is older version, and if so, upgrade to the latest version.</p>
 <ul>
-<li><strong>Q: How to ignore the attributes specified in the contract DTO? </strong></li>
+<li>**Q: How to ignore the attributes specified in the contract DTO? **</li>
 </ul>
 <p>A: If you are using 'rest transport', because it is Json serialization, you can use @JsonIgnore annotations to mark attributes that need to be ignored; 'highway transport' is not currently supported. Note that you need to update the version of the microservice after the modification, for example:</p>
 <p><code>java
@@ -2189,7 +2189,7 @@
       System.out.println(args);
     }
   }</code></li>
-<li><strong>Q: The exception is thrown when the microservices runtime: <code>java.lang.Error:not support def type:calss io.swagger.models.properties BaseIntegerProperty</code>? </strong></li>
+<li>**Q: The exception is thrown when the microservices runtime: <code>java.lang.Error:not support def type:calss io.swagger.models.properties BaseIntegerProperty</code>? **</li>
 </ul>
 <p>A: Service Center can be upgraded to version 4.0.0+ to solve [Service Center latest version portal] (http://apache.org/dyn/closer.cgi/incubator/servicecomb/incubator-servicecomb-service-center /1.0.0-m1/).</p>
 <p><em>. </em><em>Q: Our API can not be accessed after microservices are up. It just returns </em>404 Not Found<em>. The codes we use is as follows:</em>*</p>

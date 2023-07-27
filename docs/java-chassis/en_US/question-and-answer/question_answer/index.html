@@ -15,7 +15,7 @@
         <link rel="next" href="../faq/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -1786,7 +1786,7 @@ public int test(int x) {
     }
 </code></pre>
 <h1 id="problem-how-to-customize-the-log-configuration-of-your-own-microservice">Problem: How to customize the log configuration of your own microservice</h1>
-<p><strong> Solution:</strong>
+<p>** Solution:**
 ServiceComb does not bind the logger, use slf4j, users can freely choose log4j/log4j2/logback and so on.
 ServiceComb provides a log4j extension that supports incremental configuration of log4j's properties files on a standard log4j basis.</p>
 <ul>
@@ -1795,7 +1795,7 @@ ServiceComb provides a log4j extension that supports incremental configuration o
 <li>If you want to use ServiceComb's log4j extension, you need to call Log4jUtils.init, otherwise it will be used according to the rules of the standard logger.</li>
 </ul>
 <h1 id="problem-when-the-service-is-configured-with-multiple-types-of-transport-what-are-the-mechanisms-for-servicecomb-choose-which-transport-to-use-at-runtime">Problem: When the service is configured with multiple types of transport, What are the mechanisms for ServiceComb choose which transport to use at runtime?</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <ul>
 <li>
 <p>ServiceComb's consumer, transport, handler, and producer are decoupled. The functions work together through contract definitions, that is, whether the consumer uses transparent rpc, or springmvc develops and uses a highway, or RESTful does not transmit on the network. Relationships and producers use transparent rpc, or jaxrs, or springmvc development, and there is no relationship between the receiver and the perception, business development methods and transmission methods.</p>
@@ -1880,13 +1880,13 @@ ServiceComb provides a log4j extension that supports incremental configuration o
             $ref: &quot;#/definitions/ReponseImpl&quot;
 </code></pre>
 <h1 id="problem-does-the-microservices-framework-service-call-use-long-live-connection">Problem: Does the microservices framework service call use long live connection?</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>Http uses a long connection (with a timeout), and the highway mode uses a long connection (always on).</p>
 <h1 id="problem-when-the-service-is-disconnected-from-the-service-center-will-the-registration-information-be-deleted-automatically">Problem: When the service is disconnected from the service center, will the registration information be deleted automatically?</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>The service center heartbeat detects that the service instance is unavailable, only the service instance information is removed, and the static data of the service is not removed.</p>
 <h1 id="problem-how-does-the-microservices-framework-achieve-transparent-transmission-of-data-between-multiple-microservices">Problem: How does the microservices framework achieve transparent transmission of data between multiple microservices?</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>Transmitting data into:</p>
 <pre><code class="language-java">CseHttpEntity&lt;xxxx.class&gt; httpEntity = new CseHttpEntity&lt;&gt;(xxx);
 //Transmission content
@@ -1903,7 +1903,7 @@ public String sayHello(@RequestBody Person person,InvocationContext context){
 }
 </code></pre>
 <h1 id="problem-how-the-microservices-framework-service-customizes-the-return-status-code">Problem: How the microservices framework service customizes the return status code</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <pre><code class="language-java">@Override
 @RequestMapping(path = &quot;/sayhello&quot;,method = RequestMethod.POST)
 public String sayHello(@RequestBody Person person){
@@ -1914,25 +1914,25 @@ public String sayHello(@RequestBody Person person){
 }
 </code></pre>
 <h1 id="problem-partial-exposure-of-body-model">Problem: Partial exposure of body Model</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>In the body object corresponding to an interface, there may be some attributes that are internal. Do not want to open it. Do not bring it out when generating the schema. Use:</p>
 <pre><code class="language-java">@ApiModelProperty(hidden = true)
 </code></pre>
 <h1 id="problem-the-framework-obtains-the-address-of-the-remote-consumer">Problem: The framework obtains the address of the remote consumer</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>If you use the http rest method (using the transport-rest-vertx dependency) you can get it in the following way:</p>
 <pre><code class="language-java">HttpServletRequest request = (HttpServletRequest) invocation.getHandlerContext().get(RestConst.REST_REQUEST);
 String host = request.getRemoteHost();
 </code></pre>
 <p>The actual scene is to take the external address, so it should be LB passed to edgeservice, and edgeService is then passed to the context and passed.</p>
 <h1 id="problem-description-of-the-handler">Problem: Description of the handler</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>Consumer default handler is simpleLB, and the handler chain will use this when there is no configuration, if the handler is configured, it must contain the lb handler. Otherwise the call error, need to be described in the document.</p>
 <h1 id="problem-netty-version-problem">Problem: Netty version problem</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>Netty3 and netty4 are completely different tripartites because the coordinates are not the same as the package, so they can coexist, but pay attention to the minor version problem, the version that the small version must use.</p>
 <h1 id="problem-service-timeout-settings">Problem: Service Timeout Settings</h1>
-<p><strong> Solution:</strong></p>
+<p>** Solution:**</p>
 <p>Add the following configuration to the microservice description file (microservice.yaml):</p>
 <pre><code>servicecomb:
   request:
