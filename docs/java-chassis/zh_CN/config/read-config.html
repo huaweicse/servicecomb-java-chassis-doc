@@ -12,7 +12,7 @@
         <link rel="prev" href="general-config.html">
       
       
-        <link rel="next" href="../references-handlers/intruduction.html">
+        <link rel="next" href="config-service.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -650,7 +650,7 @@
         
   
   <span class="md-ellipsis">
-    通用配置说明
+    服务配置介绍
   </span>
   
 
@@ -712,22 +712,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#archaius-api" class="md-nav__link">
-    使用 archaius API
+  <a href="#spring-boot" class="md-nav__link">
+    使用 Spring Boot 的配置机制读取配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dymamicproperties" class="md-nav__link">
+    使用 DymamicProperties 监听配置变化
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#java-chassis" class="md-nav__link">
-    使用Java Chassis配置注入机制
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spring-spring-boot" class="md-nav__link">
-    使用Spring 和 Spring Boot的配置机制读取配置
+    使用 Java Chassis 优先级配置
   </a>
   
 </li>
@@ -736,6 +736,26 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config-service.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    配置中心参考
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1636,22 +1656,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#archaius-api" class="md-nav__link">
-    使用 archaius API
+  <a href="#spring-boot" class="md-nav__link">
+    使用 Spring Boot 的配置机制读取配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dymamicproperties" class="md-nav__link">
+    使用 DymamicProperties 监听配置变化
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#java-chassis" class="md-nav__link">
-    使用Java Chassis配置注入机制
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spring-spring-boot" class="md-nav__link">
-    使用Spring 和 Spring Boot的配置机制读取配置
+    使用 Java Chassis 优先级配置
   </a>
   
 </li>
@@ -1674,26 +1694,37 @@
 <h1 id="_1">在程序中读取配置信息</h1>
 <p>Java Chassis支持使用一致的API获取配置，开发者不需要关注从哪里读取配置项的
 值，Java Chassis会自动从各处读取配置，并按照优先级进行合并以保证用户取到的是优先级最高的配置值。读取配置信息支持下面几种不同的方式。 </p>
-<h2 id="archaius-api">使用 archaius API</h2>
-<pre><code class="language-java">DynamicDoubleProperty myprop = DynamicPropertyFactory.getInstance()
-  .getDoubleProperty(&quot;trace.handler.sampler.percent&quot;, 0.1);
+<h2 id="spring-boot">使用 Spring Boot 的配置机制读取配置</h2>
+<p>Java Chassis的配置信息，可以通过Spring和Spring Boot的配置机制进行读取，比如 <code>@Value</code>、<code>@ConfigurationProperties</code>、 <code>Environment</code> 等。 Java Chassis
+将配置层次应用于Spring Environment中，Spring和Spring Boot读取配置的方式，也能够读取到<code>microservice.yaml</code>和动态配置的值。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>注意： <code>@Value</code>、<code>@ConfigurationProperties</code> 两种使用方式，在动态配置变化的时候，值不会变化。 使用 <code>Environment</code>, 在动态配置变化的时候，值会实时变化。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="dymamicproperties">使用 <code>DymamicProperties</code> 监听配置变化</h2>
+<p>注入 <code>DymamicProperties</code>， 通过其 API 读取配置和监听配置变化。 </p>
+<pre><code class="language-java">@RestSchema(schemaId = &quot;ProviderController&quot;)
+@RequestMapping(path = &quot;/&quot;)
+public class ProviderController {
+  private DynamicProperties dynamicProperties;
+
+  private String example;
+
+  @Autowired
+  public ProviderController(DynamicProperties dynamicProperties) {
+    this.dynamicProperties = dynamicProperties;
+    this.example = this.dynamicProperties.getStringProperty(&quot;basic.example&quot;,
+            value -&gt; this.example = value, &quot;not set&quot;);
+  }
+}
 </code></pre>
-<p>以上例子表示声明了一个key为<code>trace.handler.sampler.percent</code>的动态配置对象，默认值为<code>0.1</code>。</p>
-<p>关于配置项API的具体方法可参考<a href="https://netflix.github.io/archaius/archaius-core-javadoc/com/netflix/config/DynamicPropertyFactory.html">archaius API</a>。</p>
-<p>archaius API 支持callback处理配置变更：</p>
-<pre><code class="language-java"> myprop.addCallback(new Runnable() {
-      public void run() {
-          // 当配置项的值变化时，该回调方法会被调用
-          System.out.println(&quot;trace.handler.sampler.percent is changed!&quot;);
-      }
-  });
-</code></pre>
-<h2 id="java-chassis">使用Java Chassis配置注入机制</h2>
-<p>配置注入提供了一种简单的管理大量复杂配置的机制，开发者不需要使用 DynamicPropertyFactory 逐个读取配置项，增加配置监听，
-而是定义一个简单的 JAVA Bean， 定义这个 Bean 的属性对应的配置项， 当配置信息变化的时候， Bean 的属性会自动刷新，极大
+<h2 id="java-chassis">使用 Java Chassis 优先级配置</h2>
+<p>优先级配置提供了一种简单的管理大量复杂配置的机制，开发者定义一个简单的 JAVA Bean， 定义这个 Bean 的属性对应的配置项， 当配置信息变化的时候， Bean 的属性会自动刷新，极大
 的简化了用户管理大量复杂配置的复杂度。 </p>
-<p>Bean 属性对应的配置项名称支持通配符， 一个属性可以关联若干配置项，可以声明这些配置项的优先级。 Java对象可以是一个
-Java Bean，或是一个拥有public字段的类。</p>
+<p>Bean 属性对应的配置项名称支持通配符， 一个属性可以关联若干配置项，可以声明这些配置项的优先级。 Java对象可以是一个 Java Bean，或是一个拥有public字段的类。</p>
 <ul>
 <li>配置注入对象</li>
 </ul>
@@ -1815,17 +1846,7 @@ Java Bean，或是一个拥有public字段的类。</p>
     ```
 </code></pre>
 <p>ConfigNoAnnotation 对象的 strValue 字段会查找已配置的属性 strValue，没有前缀和优先级。</p>
-<p><strong><em>注意事项:</em></strong> 2.1.0 之前的版本， 如果系统中存在大量调用createConfigObject的情况， 需要调用</p>
-<pre><code>    ```Java
-    priorityPropertyManager.unregisterConfigObject(config)
-    ```
-</code></pre>
-<p>进行显示回收。 2.1.0 及其之后的版本， 不需要调用这个接口，系统创建的对象是 WeakReference， 在未被
-  业务引用以后，会自动回收。 </p>
 <p>更多关于配置注入的用法，建议下载 java-chassis 的源码， 查看 TestConfigObjectFactory 类里面的示例。</p>
-<h2 id="spring-spring-boot">使用Spring 和 Spring Boot的配置机制读取配置</h2>
-<p>Java Chassis的配置信息，也可以通过Spring和Spring Boot的配置机制进行读取，比如@Value、@ConfigurationProperties等。 Java Chassis
-将配置层次应用于Spring Environment中，Spring和Spring Boot读取配置的方式，也能够读取到<code>microservice.yaml</code>和动态配置的值。</p>
 
 
 

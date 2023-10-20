@@ -9,18 +9,22 @@
       
       
       
+        <link rel="prev" href="read-config.html">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+        <link rel="next" href="../references-handlers/intruduction.html">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
     
     
       
-        <title>2.1.0 升级 2.1.1指导 - ServiceComb Java Chassis 开发指南</title>
+        <title>配置中心参考 - ServiceComb Java Chassis 开发指南</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.35e1ed30.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
       
       
 
@@ -39,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -61,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#210-211" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +81,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../index.html" title="ServiceComb Java Chassis 开发指南" class="md-header__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
+    <a href="../index.html" title="ServiceComb Java Chassis 开发指南" class="md-header__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -97,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2.1.0 升级 2.1.1指导
+              配置中心参考
             
           </span>
         </div>
@@ -169,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../index.html" title="ServiceComb Java Chassis 开发指南" class="md-nav__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
+    <a href="../index.html" title="ServiceComb Java Chassis 开发指南" class="md-nav__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -186,7 +190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../index.html" class="md-nav__link">
+      <a href="../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -205,7 +209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/design.html" class="md-nav__link">
+      <a href="../start/design.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -224,7 +228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduce3.x.x.html" class="md-nav__link">
+      <a href="../introduce3.x.x.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -243,7 +247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/catalog.html" class="md-nav__link">
+      <a href="../start/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -262,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/definition/service-definition.html" class="md-nav__link">
+      <a href="../build-provider/definition/service-definition.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -281,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/catalog.html" class="md-nav__link">
+      <a href="../build-provider/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -300,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-consumer/catalog.html" class="md-nav__link">
+      <a href="../build-consumer/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -319,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/catalog.html" class="md-nav__link">
+      <a href="../general-development/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -374,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/introduction.html" class="md-nav__link">
+      <a href="../transports/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -394,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-servlet.html" class="md-nav__link">
+      <a href="../transports/rest-over-servlet.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -414,7 +418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-vertx.html" class="md-nav__link">
+      <a href="../transports/rest-over-vertx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -434,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/http2.html" class="md-nav__link">
+      <a href="../transports/http2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -454,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/highway-rpc.html" class="md-nav__link">
+      <a href="../transports/highway-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -517,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/introduction.html" class="md-nav__link">
+      <a href="../registry/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -537,7 +541,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/service-center.html" class="md-nav__link">
+      <a href="../registry/service-center.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -557,7 +561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/local-registry.html" class="md-nav__link">
+      <a href="../registry/local-registry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -577,7 +581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/distributed.html" class="md-nav__link">
+      <a href="../registry/distributed.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -602,18 +606,20 @@
       
   
   
+    
+  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
         
           
           <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
@@ -627,7 +633,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             管理服务配置
@@ -640,7 +646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/general-config.html" class="md-nav__link">
+      <a href="general-config.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -660,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/read-config.html" class="md-nav__link">
+      <a href="read-config.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -678,9 +684,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../config/config-service.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    配置中心参考
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="config-service.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -689,6 +715,54 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kie" class="md-nav__link">
+    使用 Kie
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nacos" class="md-nav__link">
+    使用 nacos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apollo" class="md-nav__link">
+    使用 Apollo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    华为云配置中心
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -743,7 +817,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/intruduction.html" class="md-nav__link">
+      <a href="../references-handlers/intruduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -763,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/loadbalance.html" class="md-nav__link">
+      <a href="../references-handlers/loadbalance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -783,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/ratelimit.html" class="md-nav__link">
+      <a href="../references-handlers/ratelimit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -803,7 +877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/router.html" class="md-nav__link">
+      <a href="../references-handlers/router.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/fault-injection.html" class="md-nav__link">
+      <a href="../references-handlers/fault-injection.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -843,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/governance.html" class="md-nav__link">
+      <a href="../references-handlers/governance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -863,7 +937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/fail-retry.html" class="md-nav__link">
+      <a href="../references-handlers/fail-retry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -926,7 +1000,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/open-service.html" class="md-nav__link">
+      <a href="../edge/open-service.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -946,7 +1020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/by-servicecomb-sdk.html" class="md-nav__link">
+      <a href="../edge/by-servicecomb-sdk.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -966,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/zuul.html" class="md-nav__link">
+      <a href="../edge/zuul.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -986,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/nginx.html" class="md-nav__link">
+      <a href="../edge/nginx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1049,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/publickey.html" class="md-nav__link">
+      <a href="../references-handlers/publickey.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/tls.html" class="md-nav__link">
+      <a href="../security/tls.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1089,7 +1163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
+      <a href="../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1152,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../packaging/standalone.html" class="md-nav__link">
+      <a href="../packaging/standalone.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1172,7 +1246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../packaging/web-container.html" class="md-nav__link">
+      <a href="../packaging/web-container.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1235,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html" class="md-nav__link">
+      <a href="../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1255,7 +1329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features.html" class="md-nav__link">
+      <a href="../featured-topics/features.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1275,7 +1349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../compatibility.html" class="md-nav__link">
+      <a href="../featured-topics/compatibility.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1295,7 +1369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upgrading.html" class="md-nav__link">
+      <a href="../featured-topics/upgrading.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1315,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../performance.html" class="md-nav__link">
+      <a href="../featured-topics/performance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1378,7 +1452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/rest-transport-client.html" class="md-nav__link">
+      <a href="../config-reference/rest-transport-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1398,7 +1472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/config-center-client.html" class="md-nav__link">
+      <a href="../config-reference/config-center-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1418,7 +1492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/service-center-client.html" class="md-nav__link">
+      <a href="../config-reference/service-center-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1438,7 +1512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/kie-client.html" class="md-nav__link">
+      <a href="../config-reference/kie-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1501,7 +1575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/faq.html" class="md-nav__link">
+      <a href="../question-and-answer/faq.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1521,7 +1595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/question_answer.html" class="md-nav__link">
+      <a href="../question-and-answer/question_answer.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1541,7 +1615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/interface-compatibility.html" class="md-nav__link">
+      <a href="../question-and-answer/interface-compatibility.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1589,15 +1663,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#zero-config" class="md-nav__link">
-    使用 zero config 服务发现的场景
+  <a href="#kie" class="md-nav__link">
+    使用 Kie
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#swagger-generator-spring-data-page" class="md-nav__link">
-    使用 swagger-generator-spring-data 扩展，支持 Page 接口参数的场景
+  <a href="#nacos" class="md-nav__link">
+    使用 nacos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apollo" class="md-nav__link">
+    使用 Apollo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    华为云配置中心
   </a>
   
 </li>
@@ -1617,16 +1705,156 @@
                   
 
 
-<h1 id="210-211">2.1.0 升级 2.1.1指导</h1>
-<h2 id="zero-config">使用 zero config 服务发现的场景</h2>
-<p>zero config 服务发现是 2.1.0 新增的功能， 2.1.1 对发现过程中交换的报文格式进行了优化。 如果使用了 zero config
-功能， 升级到 2.1.1 的时候，需要对相关服务也同时做升级， 否则无法发现实例。 </p>
-<h2 id="swagger-generator-spring-data-page">使用 <code>swagger-generator-spring-data</code> 扩展，支持 <code>Page</code> 接口参数的场景</h2>
-<p>由于 <code>spring-data</code> 不同的版本的接口差异很大， 这个模块支持的扩展对应的 <code>spring-data</code> 版本为 
-<code>2.1.9.RELEASE</code>， 并且对于 <code>Sort</code> 接口的序列化没完整支持。 开发者如果使用 <code>spring-data</code>
-的不同版本， 或者需要对 <code>spring-data</code> 的不同接口提供扩展支持， 需要在项目中引入需要的
-版本， 并参考 <code>swagger-generator-spring-data</code> 实现自己的扩展，而不是直接依赖于 
-<code>swagger-generator-spring-data</code>  模块。 </p>
+<h1 id="_1">配置中心参考</h1>
+<p>配置中心是微服务架构下一个非常重要的中间件，通过配置中心用户可以增加和删除配置信息，配置信息会通过不同的通知机制， 将配置的变化推送到微服务实例。 Java Chassis 允许用户使用不同的配置中心， 并支持多个配置中心共存。</p>
+<h2 id="kie">使用 Kie</h2>
+<ul>
+<li>下载安装</li>
+</ul>
+<p>可以通过 <a href="https://kie.readthedocs.io/en/latest/get-started.html">Kie官网</a> 下载和安装Kie。华为云提供了一个集成注册中心的本地版本，并提供了友好的界面，可以通过 <a href="https://support.huaweicloud.com/devg-cse/cse_04_0046.html">华为云</a> 下载和使用。 </p>
+<p><br/>
+* 开发使用</p>
+<p>在 java-chassis 中使用 Kie， 需要引入下面的依赖：</p>
+<pre><code>```xml
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;config-kie&lt;/artifactId&gt;
+&lt;/dependency&gt;
+```
+</code></pre>
+<p>然后在配置文件 microservice.yaml 中增加如下配置项：</p>
+<pre><code>```yaml
+servicecomb:
+  kie:
+    serverUri: http://127.0.0.1:30110
+```
+</code></pre>
+<p><br/>
+* 使用配置中心增加配置</p>
+<p>客户端默认会读取下面几个层次的配置：</p>
+<ul>
+<li>应用级配置：Label只包含environment、app，并且与微服务的环境、应用匹配的配置。</li>
+<li>服务级配置：Label只包含environment、app、service，并且与微服务的环境、应用、微服务名称匹配的配置。</li>
+<li>版本级配置：Label只包含environment、app、service、version，并且与微服务的环境、应用、微服务名称、版本匹配的配置。</li>
+<li>自定义配置：Label包含custom-label, 并且与 custom-value匹配的配置。 </li>
+</ul>
+<p>上述的配置级别，优先级从低到高。 Kie 的 yaml 和 properties 类型会映射为多个配置项， 其他类型，比如 json, text， 只会映射为一个配置项。开发者需要读取配置项自己解析内容。</p>
+<p><br/>
+* 配置项参考</p>
+<pre><code>|配置项名| 含义                      | 缺省值     |
+|------------------------|---------|---|
+|servicecomb.kie.serverUri| servicecomb-kie访问地址，格式为`http(s)://{ip}:{port}`，以`,`分隔多个地址 | 空       |
+|servicecomb.kie.enableLongPolling| Long Polling 模式是否开启                                       | true    |
+|servicecomb.kie.pollingWaitTime| Long Polling 模式下等待时间，单位为秒                                 | 10      |
+|servicecomb.kie.firstPullRequired| 启动的时候第一次查询配置失败，是否终止启动。                                    | true    |
+|servicecomb.kie.domainName| 区域名称                                                      | default |
+|servicecomb.kie.refresh_interval| Pull 模式下刷新配置项的时间间隔，单位为毫秒。                                 | 15000   |
+|servicecomb.kie.firstRefreshInterval| Pull 模式下启动过程中首次刷新时间间隔，单位为毫秒。                              | 3000    |
+|servicecomb.kie.enableAppConfig| 是否开启应用配置  | true    |
+|servicecomb.kie.enableServiceConfig| 是否开启服务配置     | true    |
+|servicecomb.kie.enableVersionConfig| 是否开启版本配置     | true    |
+|servicecomb.kie.enableVersionConfig| 是否开启自定义配置     | true    |
+|servicecomb.kie.customLabel| 自定义配置的Label     | public    |
+|servicecomb.kie.customLabelValue| 自定义配置的Value     | 空    |
+</code></pre>
+<h2 id="nacos">使用 nacos</h2>
+<p><a href="https://github.com/alibaba/nacos">nacos</a> 是 alibaba 提供的配置中心。 java-chassis 从 2.1.0 版本支持 nacos。
+nacos的下载安装请参考官网介绍。</p>
+<p>使用nacos，需要在项目中引入如下依赖：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;config-nacos&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>然后在配置文件 microservice.yaml 中增加如下配置项：</p>
+<pre><code class="language-yaml">servicecomb:
+  nacos:
+    serverAddr: http://127.0.0.1:8848
+    group: jaxrstest
+    dataId: jaxrsclient
+    namespace: public
+    # contentType 可以为 properties, yaml, raw. 
+    # raw： 只增加一个配置项 [group].[dataId]=value. nacos 的 JSON/TEXT/HTML等都对应这种类型
+    # properties： 增加多个配置项。 配置项前缀为 [group].[dataId]
+    # yaml： 增加多个配置项。 配置项前缀为 [group].[dataId]
+    contentType: properties 
+    # if true [group].[dataId] will added as properties/yaml 
+    # items prefix. Will not influence raw.
+    addPrefix: true 
+</code></pre>
+<h2 id="apollo">使用 Apollo</h2>
+<p><a href="https://github.com/ctripcorp/apollo">Apollo</a> 是携程框架部门研发的分布式配置中心。 Apollo的下载安装请参考官网介绍。</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;config-apollo&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>然后在配置文件 microservice.yaml 中增加如下配置项：</p>
+<pre><code class="language-yaml">apollo:
+  config:
+    serverUri: http://127.0.0.1:8070
+    serviceName: apollo-test
+    env: DEV
+    clusters: test-cluster
+    namespace: application
+    token: xxx
+    refreshInterval: 30
+    firstRefreshInterval: 0
+</code></pre>
+<h2 id="_2">华为云配置中心</h2>
+<p>华为云配置中心是华为云CSE产品的一个部件，java-chassis 最早使用它作为配置中心。 对接这个配置中心的代码在 config-cc 模块实现。</p>
+<p>可以从<a href="https://cse-bucket.obs.myhwclouds.com/LocalCSE/Local-CSE-1.0.3.zip">轻量化微服务引擎</a>下载本地使用的版本。也可以
+直接访问华为云 <a href="https://console.huaweicloud.com/servicestage">ServiceStage</a> 产品，使用在线的版本。</p>
+<p>使用华为云配置中心，需要在项目中引入如下依赖：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;config-cc&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>然后在配置文件 microservice.yaml 中增加如下配置项：</p>
+<pre><code class="language-yaml">servicecomb:
+  config:
+    client:
+      serverUri: http://127.0.0.1:30113
+      refreshMode: 0
+      refresh_interval: 5000
+      refreshPort: 30114
+</code></pre>
+<p>华为云配置中心的其他配置项含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>配置项名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>servicecomb.config.client.refreshMode</td>
+<td>应用配置的刷新方式，<code>0</code>为config-center主动push，<code>1</code>为client周期pull，默认为<code>0</code></td>
+</tr>
+<tr>
+<td>servicecomb.config.client.refreshPort</td>
+<td>config-center推送配置的端口</td>
+</tr>
+<tr>
+<td>servicecomb.config.client.tenantName</td>
+<td>应用的租户名称</td>
+</tr>
+<tr>
+<td>servicecomb.config.client.serverUri</td>
+<td>config-center访问地址，格式为<code>http(s)://{ip}:{port}</code>，以<code>,</code>分隔多个地址</td>
+</tr>
+<tr>
+<td>servicecomb.config.client.refresh_interval</td>
+<td>pull模式下刷新配置项的时间间隔，单位为毫秒，默认值为15000</td>
+</tr>
+<tr>
+<td>servicecomb.config.client.fileSource</td>
+<td>指定该配置项的内容为yaml文件，多个配置文件可以用<code>,</code>分隔</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1665,10 +1893,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
       
     
   </body>

@@ -256,14 +256,14 @@
       
         <li class="md-nav__item">
   <a href="#java-chassis_1" class="md-nav__link">
-    Java Chassis 的软件工程实践 
+    Java Chassis 软件工程实践 
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#java-chassis_2" class="md-nav__link">
-    Java Chassis 的运行时架构 
+    Java Chassis 运行时架构 
   </a>
   
 </li>
@@ -284,15 +284,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#java-chassis-jspservlet" class="md-nav__link">
-    Java Chassis 和 JSP/Servlet 标准
+  <a href="#java-chassis-servlet" class="md-nav__link">
+    Java Chassis 和 Servlet 标准
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#java-chassis-springspring-boot" class="md-nav__link">
-    Java Chassis 和 Spring、Spring Boot
+  <a href="#java-chassis-spring-boot" class="md-nav__link">
+    Java Chassis 和 Spring Boot
   </a>
   
 </li>
@@ -743,7 +743,7 @@
         
   
   <span class="md-ellipsis">
-    通用配置说明
+    服务配置介绍
   </span>
   
 
@@ -764,6 +764,26 @@
   
   <span class="md-ellipsis">
     在程序中读取配置信息
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config/config-service.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    配置中心参考
   </span>
   
 
@@ -1669,14 +1689,14 @@
       
         <li class="md-nav__item">
   <a href="#java-chassis_1" class="md-nav__link">
-    Java Chassis 的软件工程实践 
+    Java Chassis 软件工程实践 
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#java-chassis_2" class="md-nav__link">
-    Java Chassis 的运行时架构 
+    Java Chassis 运行时架构 
   </a>
   
 </li>
@@ -1697,15 +1717,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#java-chassis-jspservlet" class="md-nav__link">
-    Java Chassis 和 JSP/Servlet 标准
+  <a href="#java-chassis-servlet" class="md-nav__link">
+    Java Chassis 和 Servlet 标准
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#java-chassis-springspring-boot" class="md-nav__link">
-    Java Chassis 和 Spring、Spring Boot
+  <a href="#java-chassis-spring-boot" class="md-nav__link">
+    Java Chassis 和 Spring Boot
   </a>
   
 </li>
@@ -1737,7 +1757,7 @@
                   
 
 
-<h1 id="java-chassis">Java Chassis设计参考</h1>
+<h1 id="java-chassis">Java Chassis 设计参考</h1>
 <p>Java Chassis 结合大量微服务开发实践，实现<a href="https://microservices.io/patterns/microservice-chassis.html">微服务架构模式</a> ， 帮
 助开发者更加简单、快速的构建微服务应用。</p>
 <p>Java Chassis主要实现了如下微服务架构模式功能：</p>
@@ -1749,7 +1769,7 @@
 <li>分布式日志追踪。 提供 Open Tracing 支持。  </li>
 </ul>
 <p>此外还有性能监控、日志管理、健康检查等功能。 Java Chassis 采用优雅的设计模式，实现了上述所有的核心部件的功能，并且使得这些功能开箱即用。使用 Java Chassis , 开发者能够更加聚焦于业务功能开发，快速的构建商业可用的微服务应用。 </p>
-<h2 id="java-chassis_1">Java Chassis 的软件工程实践 <a name="h1"></a></h2>
+<h2 id="java-chassis_1">Java Chassis 软件工程实践 <a name="h1"></a></h2>
 <p>Java Chassis 在设计的时候， 不仅考虑了如何更好的使用微服务架构模式， 还把优秀的软件工程思想融合进来， 帮助开发者更好的管理信息
 资产， 提升软件工程管理能力。 </p>
 <p>下图简单的描述 “以契约为中心” 的核心概念。 </p>
@@ -1757,7 +1777,7 @@
 <p>可以通过 Invocation 获取到 Java Chassis 的契约等源数据信息， 是 Java Chassis 的一个核心对象。 </p>
 <p>可以阅读 <a href="https://bbs.huaweicloud.com/blogs/113640">基于CSE的微服务工程实践-以契约为中心</a> 了解契约如何应用的更多内容。 工程
 实践不是 Java Chassis 的强制约束， 开发者可以结合实际情况进行选择。 </p>
-<h2 id="java-chassis_2">Java Chassis 的运行时架构 <a name="h2"></a></h2>
+<h2 id="java-chassis_2">Java Chassis 运行时架构 <a name="h2"></a></h2>
 <p>为了支持软件工程实践， Java Chassis 的运行时架构是一个哑铃结构， 两端分别是“编程模型” 和 “通信模型”， 中间是“运行模型”。 </p>
 <p><img alt="" src="https://bbs-img.huaweicloud.com/blogs/img/images_162633886685280.png" /></p>
 <p>“编程模型” 面向开发者写服务接口的习惯， “通信模型” 面向微服务之间的高效编码和通信， “运行模型” 基于“契约”， 提供一种服务无关
@@ -1776,16 +1796,16 @@
 <h2 id="java-chassis_4">Java Chassis 微服务技术选型 <a name="h4"></a></h2>
 <p>Java 语言拥有庞大的技术体系和标准， 并且广泛的应用到业务的系统的各个方面。 和 Java Chassis 有紧密关系的技术包括 JSP/Servlet 标准
 和容器， Spring 和 Spring Boot 技术， 以及 Spring Boot 提供的 REST 开发框架 Spring MVC。 </p>
-<h3 id="java-chassis-jspservlet">Java Chassis 和 JSP/Servlet 标准</h3>
+<h3 id="java-chassis-servlet">Java Chassis 和 Servlet 标准</h3>
 <p>Java Chassis 基于 Vert.x 实现了 REST 和 HIGHWAY 等 RPC 协议的实现， 在性能要求高的核心业务场景， 使用这种轻量级的技术非常合适。 这种场景下， 没有完整的实现 JSP/Servlet 相关接口， 比如 HttpServletRequest, 
 HttpServletResponse 等。 <a href="https://github.com/apache/servicecomb-samples/tree/master/porter_lightweight">servicecomb-samples</a> 
 提供了一个完整的使用这种部署模式的例子。 <a href="https://bbs.huaweicloud.com/blogs/101875">基于CSE的微服务架构实践-轻量级架构技术选型</a> 提供了
 一些常见的组件的选型参考。 </p>
-<p>Java Chassis 支持 JSP/Servlet 标准的容器。 在这个场景下， Java Chassis 的核心部件就是一个 Servlet ， 在这个 Servlet 里面
+<p>Java Chassis 支持 Servlet 标准的容器。 在这个场景下， Java Chassis 的核心部件就是一个 Servlet ， 在这个 Servlet 里面
 实现了 Java Chassis 的核心 RPC 系统。 采用 JSP/Servlet 容器运行 Java Chassis, 业务请求首先经过容器的 HTTP 实现， 然后经过 Filter， 
 进入 Java Chassis 的 RestServlet ， 运行 Java Chassis 的运行时模型， 进入业务接口处理。 可以参考 
 <a href="../transports/rest-over-servlet.html">REST over Servlet</a> 了解如何在 Servlet 容器中加载 Java Chassis 的 Servlet。  </p>
-<h3 id="java-chassis-springspring-boot">Java Chassis 和 Spring、Spring Boot</h3>
+<h3 id="java-chassis-spring-boot">Java Chassis 和 Spring Boot</h3>
 <p>Java Chassis 建立在 Spring Boot技术之上，核心部件都通过Spring Boot技术提供实现和扩展。 </p>
 <p>Spring Boot 提供了多种运行环境支持， WebApplicationType.NONE, WebApplicationType.SERVLET, WebApplicationType.REACTIVE， 
  Java Chassis 可以集成 NONE, SERVLET 两种模式。 在 NONE 模式下集成 Java Chassis， 和 Spring Boot 自身的  REACTIVE 非常类似，
