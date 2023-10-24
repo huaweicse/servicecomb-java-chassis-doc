@@ -358,7 +358,7 @@
             
   
   <span class="md-ellipsis">
-    多样化的通信协议功能参考
+    多样化的通信协议功能
   </span>
   
 
@@ -368,7 +368,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
-            多样化的通信协议功能参考
+            多样化的通信协议功能
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -501,7 +501,7 @@
             
   
   <span class="md-ellipsis">
-    多样化的服务注册与发现功能参考
+    多样化的服务注册与发现功能
   </span>
   
 
@@ -511,7 +511,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
-            多样化的服务注册与发现功能参考
+            多样化的服务注册与发现功能
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -545,7 +545,27 @@
         
   
   <span class="md-ellipsis">
-    使用服务中心
+    使用service-center
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../registry/nacos.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    使用nacos
   </span>
   
 
@@ -626,7 +646,7 @@
             
   
   <span class="md-ellipsis">
-    管理服务配置
+    多样化的配置管理功能
   </span>
   
 
@@ -636,7 +656,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
-            管理服务配置
+            多样化的配置管理功能
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -753,8 +773,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    华为云配置中心
+  <a href="#cse10" class="md-nav__link">
+    华为云CSE1.0配置中心
   </a>
   
 </li>
@@ -1684,8 +1704,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    华为云配置中心
+  <a href="#cse10" class="md-nav__link">
+    华为云CSE1.0配置中心
   </a>
   
 </li>
@@ -1758,9 +1778,15 @@ servicecomb:
 |servicecomb.kie.customLabelValue| 自定义配置的Value     | 空    |
 </code></pre>
 <h2 id="nacos">使用 nacos</h2>
-<p><a href="https://github.com/alibaba/nacos">nacos</a> 是 alibaba 提供的配置中心。 java-chassis 从 2.1.0 版本支持 nacos。
-nacos的下载安装请参考官网介绍。</p>
-<p>使用nacos，需要在项目中引入如下依赖：</p>
+<ul>
+<li>下载安装</li>
+</ul>
+<p>可以通过 <a href="https://github.com/alibaba/nacos">nacos官网</a> 下载和安装 Nacos。</p>
+<p><br/></p>
+<ul>
+<li>开发使用
+使用nacos，需要在项目中引入如下依赖：</li>
+</ul>
 <pre><code class="language-xml">&lt;dependency&gt;
   &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
   &lt;artifactId&gt;config-nacos&lt;/artifactId&gt;
@@ -1770,18 +1796,79 @@ nacos的下载安装请参考官网介绍。</p>
 <pre><code class="language-yaml">servicecomb:
   nacos:
     serverAddr: http://127.0.0.1:8848
-    group: jaxrstest
-    dataId: jaxrsclient
-    namespace: public
-    # contentType 可以为 properties, yaml, raw. 
-    # raw： 只增加一个配置项 [group].[dataId]=value. nacos 的 JSON/TEXT/HTML等都对应这种类型
-    # properties： 增加多个配置项。 配置项前缀为 [group].[dataId]
-    # yaml： 增加多个配置项。 配置项前缀为 [group].[dataId]
-    contentType: properties 
-    # if true [group].[dataId] will added as properties/yaml 
-    # items prefix. Will not influence raw.
-    addPrefix: true 
 </code></pre>
+<p><br/></p>
+<ul>
+<li>使用配置中心增加配置</li>
+</ul>
+<p>Nacos的namespace对应于Java Chassis Environment, group对应于application。 客户端默认会读取下面几个层次的配置：</p>
+<pre><code>* 应用级配置：group为application名称，data-id为application名称，并且类型为yaml的配置。
+* 服务级配置：group为application名称，data-id为微服务名称，并且类型为yaml的配置。
+* 版本级配置：group为application名称，data-id为微服务名称+版本号，并且类型为yaml的配置， 比如: service-0.1
+* Profile级配置：group为application名称，data-id为微服务名称+Profile名称，并且类型为yaml的配置， 比如: service-dev
+* 自定义配置：可以通过配置项定义group、data-id、类型等信息，详情参考配置项。。
+</code></pre>
+<p>上述的配置级别，优先级从低到高。 </p>
+<p><br/></p>
+<ul>
+<li>配置项参考</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>配置项名</th>
+<th>含义</th>
+<th>缺省值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>servicecomb.nacos.serverAddr</td>
+<td>NACOS访问地址，格式为<code>http(s)://{ip}:{port}</code>，以<code>,</code>分隔多个地址</td>
+<td>空</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.group</td>
+<td>自定义group</td>
+<td>空</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.dataId</td>
+<td>自定义data-id</td>
+<td>空</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.addPrefix</td>
+<td>是否使用group+data-id作为配置项前缀</td>
+<td>false</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.contentType</td>
+<td>自定义类型</td>
+<td><em>yaml</em></td>
+</tr>
+<tr>
+<td>servicecomb.nacos.username</td>
+<td>连接Nacos的用户名</td>
+<td>空</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.password</td>
+<td>连接Nacos的密码</td>
+<td>空</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.accessKey</td>
+<td>连接Nacos的Access Key</td>
+<td>空</td>
+</tr>
+<tr>
+<td>servicecomb.nacos.secretKey</td>
+<td>连接Nacos的Secret Key</td>
+<td>空</td>
+</tr>
+</tbody>
+</table>
 <h2 id="apollo">使用 Apollo</h2>
 <p><a href="https://github.com/ctripcorp/apollo">Apollo</a> 是携程框架部门研发的分布式配置中心。 Apollo的下载安装请参考官网介绍。</p>
 <pre><code class="language-xml">&lt;dependency&gt;
@@ -1801,8 +1888,8 @@ nacos的下载安装请参考官网介绍。</p>
     refreshInterval: 30
     firstRefreshInterval: 0
 </code></pre>
-<h2 id="_2">华为云配置中心</h2>
-<p>华为云配置中心是华为云CSE产品的一个部件，java-chassis 最早使用它作为配置中心。 对接这个配置中心的代码在 config-cc 模块实现。</p>
+<h2 id="cse10">华为云CSE1.0配置中心</h2>
+<p>华为云CSE1.0配置中心是华为云CSE产品的一个部件，java-chassis 最早使用它作为配置中心。 对接这个配置中心的代码在 config-cc 模块实现。</p>
 <p>可以从<a href="https://cse-bucket.obs.myhwclouds.com/LocalCSE/Local-CSE-1.0.3.zip">轻量化微服务引擎</a>下载本地使用的版本。也可以
 直接访问华为云 <a href="https://console.huaweicloud.com/servicestage">ServiceStage</a> 产品，使用在线的版本。</p>
 <p>使用华为云配置中心，需要在项目中引入如下依赖：</p>

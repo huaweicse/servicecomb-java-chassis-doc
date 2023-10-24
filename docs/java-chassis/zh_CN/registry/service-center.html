@@ -12,7 +12,7 @@
         <link rel="prev" href="introduction.html">
       
       
-        <link rel="next" href="local-registry.html">
+        <link rel="next" href="nacos.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>使用服务中心 - ServiceComb Java Chassis 开发指南</title>
+        <title>使用service-center - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#service-center" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              使用服务中心
+              使用service-center
             
           </span>
         </div>
@@ -358,7 +358,7 @@
             
   
   <span class="md-ellipsis">
-    多样化的通信协议功能参考
+    多样化的通信协议功能
   </span>
   
 
@@ -368,7 +368,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
-            多样化的通信协议功能参考
+            多样化的通信协议功能
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -503,7 +503,7 @@
             
   
   <span class="md-ellipsis">
-    多样化的服务注册与发现功能参考
+    多样化的服务注册与发现功能
   </span>
   
 
@@ -513,7 +513,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
-            多样化的服务注册与发现功能参考
+            多样化的服务注册与发现功能
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -556,7 +556,7 @@
           
   
   <span class="md-ellipsis">
-    使用服务中心
+    使用service-center
   </span>
   
 
@@ -567,7 +567,7 @@
         
   
   <span class="md-ellipsis">
-    使用服务中心
+    使用service-center
   </span>
   
 
@@ -606,6 +606,26 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="nacos.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    使用nacos
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -680,7 +700,7 @@
             
   
   <span class="md-ellipsis">
-    管理服务配置
+    多样化的配置管理功能
   </span>
   
 
@@ -690,7 +710,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
-            管理服务配置
+            多样化的配置管理功能
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1677,9 +1697,8 @@
                   
 
 
-<h1 id="_1">使用服务中心</h1>
-<p>服务中心(servicecomb-service-center) 提供了完备的注册发现机制， 实现了所有 <code>Microservice</code> 和 <code>MicroserviceInstance</code> 信息的注册和发现，
-是 servicecomb 缺省使用的注册发现机制。 </p>
+<h1 id="service-center">使用 service-center</h1>
+<p>ServcieComb service-center 提供了完备的注册发现机制， 是 Java Chassis 缺省使用的注册发现机制。 </p>
 <p>服务中心支持使用 <code>PULL</code> 和 <code>PUSH</code> 两种模式通知实例变化， 开发者可以配置服务中心集群地址、连接参数以及心跳管理等。</p>
 <ul>
 <li>表1-1 访问服务中心常用的配置项</li>
@@ -1695,40 +1714,40 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">servicecomb.service.registry.</p>address</td>
+<td style="text-align: left;">servicecomb.registry.sc.enabled</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">是</td>
+<td style="text-align: left;">是否启用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.sc.address</td>
 <td style="text-align: left;">http://127.0.0.1:30100</td>
 <td style="text-align: left;">是</td>
 <td style="text-align: left;">服务中心的地址信息，可以配置多个，用逗号分隔。</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.service.registry.</p>instance.watch</td>
-<td style="text-align: left;">true</td>
+<td style="text-align: left;">servicecomb.registry.sc.watch</td>
+<td style="text-align: left;">false</td>
 <td style="text-align: left;">否</td>
 <td style="text-align: left;">是否采用PUSH模式监听实例变化。为false的时候表示使用PULL模式。</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.service.registry.</p>autodiscovery</td>
+<td style="text-align: left;">servicecomb.registry.sc.autodiscovery</td>
 <td style="text-align: left;">false</td>
 <td style="text-align: left;">否</td>
 <td style="text-align: left;">是否自动发现服务中心的地址。当需要配置部分地址，其他地址由配置的服务中心实例发现的时候，开启这个配置。</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.service.registry.</p>instance.healthCheck.interval</td>
+<td style="text-align: left;">servicecomb.registry.sc.healthCheckIntervalInSeconds</td>
 <td style="text-align: left;">30</td>
 <td style="text-align: left;">否</td>
 <td style="text-align: left;">心跳间隔。</td>
 </tr>
 <tr>
-<td style="text-align: left;">servicecomb.service.registry.</p>instance.healthCheck.times</td>
+<td style="text-align: left;">servicecomb.registry.sc.healthCheckTimes</td>
 <td style="text-align: left;">3</td>
 <td style="text-align: left;">否</td>
 <td style="text-align: left;">允许的心跳失败次数。当连续第times+1次心跳仍然失败时则实例被sc下线。即interval * (times + 1)决定了实例被自动注销的时间。如果服务中心等待这么长的时间没有收取到心跳，会注销实例。</td>
-</tr>
-<tr>
-<td style="text-align: left;">servicecomb.service.registry.</p>instance.empty.protection</td>
-<td style="text-align: left;">true</td>
-<td style="text-align: left;">否</td>
-<td style="text-align: left;">当从服务中心查询到的地址为空的时候，是否覆盖本地缓存。这个是一种可靠性保护机制，避免实例异常批量下线导致的请求失败。</td>
 </tr>
 </tbody>
 </table>
@@ -1738,12 +1757,6 @@
 <pre><code>  &lt;dependency&gt;
     &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
     &lt;artifactId&gt;registry-service-center&lt;/artifactId&gt;
-  &lt;/dependency&gt;
-</code></pre>
-<p>也可以直接依赖：</p>
-<pre><code>  &lt;dependency&gt;
-    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-    &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
   &lt;/dependency&gt;
 </code></pre>
 <h2 id="rbac">使用 RBAC 认证</h2>

@@ -9,18 +9,22 @@
       
       
       
+        <link rel="prev" href="service-center.html">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+        <link rel="next" href="local-registry.html">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.6">
     
     
       
-        <title>体质指数微服务应用开发 - ServiceComb Java Chassis 开发指南</title>
+        <title>使用nacos - ServiceComb Java Chassis 开发指南</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.35e1ed30.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35e1ed30.min.css">
       
       
 
@@ -39,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -61,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#nacos" class="md-skip">
           Skip to content
         </a>
       
@@ -77,7 +81,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../index.html" title="ServiceComb Java Chassis 开发指南" class="md-header__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
+    <a href="../index.html" title="ServiceComb Java Chassis 开发指南" class="md-header__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -97,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              体质指数微服务应用开发
+              使用nacos
             
           </span>
         </div>
@@ -169,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../index.html" title="ServiceComb Java Chassis 开发指南" class="md-nav__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
+    <a href="../index.html" title="ServiceComb Java Chassis 开发指南" class="md-nav__button md-logo" aria-label="ServiceComb Java Chassis 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -186,7 +190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../index.html" class="md-nav__link">
+      <a href="../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -205,7 +209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/design.html" class="md-nav__link">
+      <a href="../start/design.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -224,7 +228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduce3.x.x.html" class="md-nav__link">
+      <a href="../introduce3.x.x.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -243,7 +247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/catalog.html" class="md-nav__link">
+      <a href="../start/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -262,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/definition/service-definition.html" class="md-nav__link">
+      <a href="../build-provider/definition/service-definition.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -281,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/catalog.html" class="md-nav__link">
+      <a href="../build-provider/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -300,7 +304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-consumer/catalog.html" class="md-nav__link">
+      <a href="../build-consumer/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -319,7 +323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/catalog.html" class="md-nav__link">
+      <a href="../general-development/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -374,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/introduction.html" class="md-nav__link">
+      <a href="../transports/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -394,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-servlet.html" class="md-nav__link">
+      <a href="../transports/rest-over-servlet.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -414,7 +418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-vertx.html" class="md-nav__link">
+      <a href="../transports/rest-over-vertx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -434,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/http2.html" class="md-nav__link">
+      <a href="../transports/http2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -454,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/highway-rpc.html" class="md-nav__link">
+      <a href="../transports/highway-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -479,18 +483,20 @@
       
   
   
+    
+  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
@@ -504,7 +510,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             多样化的服务注册与发现功能
@@ -517,7 +523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/introduction.html" class="md-nav__link">
+      <a href="introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -537,7 +543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/service-center.html" class="md-nav__link">
+      <a href="service-center.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -555,9 +561,18 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../registry/nacos.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="nacos.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -566,6 +581,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -577,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/local-registry.html" class="md-nav__link">
+      <a href="local-registry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -597,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/distributed.html" class="md-nav__link">
+      <a href="distributed.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -660,7 +676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/general-config.html" class="md-nav__link">
+      <a href="../config/general-config.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -680,7 +696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/read-config.html" class="md-nav__link">
+      <a href="../config/read-config.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -700,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/config-service.html" class="md-nav__link">
+      <a href="../config/config-service.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -763,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/intruduction.html" class="md-nav__link">
+      <a href="../references-handlers/intruduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -783,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/loadbalance.html" class="md-nav__link">
+      <a href="../references-handlers/loadbalance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -803,7 +819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/ratelimit.html" class="md-nav__link">
+      <a href="../references-handlers/ratelimit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -823,7 +839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/router.html" class="md-nav__link">
+      <a href="../references-handlers/router.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -843,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/fault-injection.html" class="md-nav__link">
+      <a href="../references-handlers/fault-injection.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -863,7 +879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/governance.html" class="md-nav__link">
+      <a href="../references-handlers/governance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -883,7 +899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/fail-retry.html" class="md-nav__link">
+      <a href="../references-handlers/fail-retry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -946,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/open-service.html" class="md-nav__link">
+      <a href="../edge/open-service.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -966,7 +982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/by-servicecomb-sdk.html" class="md-nav__link">
+      <a href="../edge/by-servicecomb-sdk.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -986,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/zuul.html" class="md-nav__link">
+      <a href="../edge/zuul.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1006,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/nginx.html" class="md-nav__link">
+      <a href="../edge/nginx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1069,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/publickey.html" class="md-nav__link">
+      <a href="../references-handlers/publickey.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1089,7 +1105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/tls.html" class="md-nav__link">
+      <a href="../security/tls.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1109,7 +1125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
+      <a href="../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1172,7 +1188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../packaging/standalone.html" class="md-nav__link">
+      <a href="../packaging/standalone.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1192,7 +1208,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../packaging/web-container.html" class="md-nav__link">
+      <a href="../packaging/web-container.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1255,7 +1271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html" class="md-nav__link">
+      <a href="../using-java-chassis-in-spring-boot/using-java-chassis-in-spring-boot.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1275,7 +1291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features.html" class="md-nav__link">
+      <a href="../featured-topics/features.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1295,7 +1311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../compatibility.html" class="md-nav__link">
+      <a href="../featured-topics/compatibility.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1315,7 +1331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upgrading.html" class="md-nav__link">
+      <a href="../featured-topics/upgrading.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1335,7 +1351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../performance.html" class="md-nav__link">
+      <a href="../featured-topics/performance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1398,7 +1414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/rest-transport-client.html" class="md-nav__link">
+      <a href="../config-reference/rest-transport-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1418,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/config-center-client.html" class="md-nav__link">
+      <a href="../config-reference/config-center-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1438,7 +1454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/service-center-client.html" class="md-nav__link">
+      <a href="../config-reference/service-center-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1458,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/kie-client.html" class="md-nav__link">
+      <a href="../config-reference/kie-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1521,7 +1537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/faq.html" class="md-nav__link">
+      <a href="../question-and-answer/faq.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1541,7 +1557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/question_answer.html" class="md-nav__link">
+      <a href="../question-and-answer/question_answer.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1561,7 +1577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/interface-compatibility.html" class="md-nav__link">
+      <a href="../question-and-answer/interface-compatibility.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1602,95 +1618,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    快速开发微服务应用
-  </a>
-  
-    <nav class="md-nav" aria-label="快速开发微服务应用">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    体质指数计算器实现
-  </a>
-  
-    <nav class="md-nav" aria-label="体质指数计算器实现">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    具体运算实现
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    服务端点定义
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    服务启动入口
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    体质指数界面实现
-  </a>
-  
-    <nav class="md-nav" aria-label="体质指数界面实现">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    网关及路由规则
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    服务启动入口
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    下一步
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1704,198 +1631,78 @@
                   
 
 
-<h1 id="_1">体质指数微服务应用开发</h1>
-<p>在您进一步阅读之前，请确保您已阅读了<a href="quick-start.html">快速入门</a>，并已成功运行<strong>体质指数</strong>微服务。接下来将进入<strong>体质指数</strong>微服务应用的开发之旅。</p>
-<h2 id="_2">快速开发微服务应用</h2>
-<p>BMI主要由两个微服务组成：</p>
+<h1 id="nacos">使用 nacos</h1>
+<p>可以通过 <a href="https://github.com/alibaba/nacos">nacos官网</a> 下载和安装 Nacos。</p>
+<p>Nacos的namespace对应于环境Environment， group对应于application， service对应于微服务名称。 </p>
 <ul>
-<li>
-<p><strong>体质指数计算器</strong>：负责处理运算事务。</p>
-</li>
-<li>
-<p><strong>体质指数界面</strong>：提供用户界面及网关服务。</p>
-</li>
+<li>表1-1 访问Nacos常用的配置项</li>
 </ul>
-<p>在开始前，需要先在服务的父工程中添加以下依赖项：</p>
-<pre><code class="language-java">  &lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-        &lt;artifactId&gt;java-chassis-dependencies&lt;/artifactId&gt;
-        &lt;version&gt;${project.version}&lt;/version&gt;
-        &lt;type&gt;pom&lt;/type&gt;
-        &lt;scope&gt;import&lt;/scope&gt;
-      &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-  &lt;/dependencyManagement&gt;
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">是否必选</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.enabled</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">是</td>
+<td style="text-align: left;">是否启用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.serverAddr</td>
+<td style="text-align: left;">http://127.0.0.1:8848</td>
+<td style="text-align: left;">是</td>
+<td style="text-align: left;">服务中心的地址信息，可以配置多个，用逗号分隔。</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.metadata</td>
+<td style="text-align: left;">空</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">配置String的键值对。</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.username</td>
+<td style="text-align: left;">空</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">Nacos用户名</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.password</td>
+<td style="text-align: left;">空</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">Nacos密码</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.accessKey</td>
+<td style="text-align: left;">空</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">Nacos Access Key</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.secretKey</td>
+<td style="text-align: left;">空</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">Nacos Secret Key</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.nacos.clusterName</td>
+<td style="text-align: left;">DEFAULT</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">Nacos Cluster Name</td>
+</tr>
+</tbody>
+</table>
+<p>使用Nacos需要确保下面的软件包引入：</p>
+<pre><code>  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;registry-nacos&lt;/artifactId&gt;
+  &lt;/dependency&gt;
 </code></pre>
-<p><strong>注意</strong>: <code>java-chassis-dependencies</code> 这个依赖是以pom的形式导入来统一项目中的依赖项的版本管理。</p>
-<p>下面将对这两个微服务的实现进行介绍，其代码已托管于<a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/bmi">github</a>上。</p>
-<h3 id="_3">体质指数计算器实现</h3>
-<p>体质指数计算器提供运算服务，其实现分为三部分：</p>
-<ul>
-<li>
-<p>具体运算实现</p>
-</li>
-<li>
-<p>服务端点定义</p>
-</li>
-<li>
-<p>服务启动入口</p>
-</li>
-</ul>
-<h4 id="_4">具体运算实现</h4>
-<p>本模块负责计算体质指数，根据公式 <code>体质指数=体重 / 身高^2</code> 进行实现，代码如下：</p>
-<pre><code class="language-java">public interface CalculatorService {
-  double calculate(double height, double weight);
-}
-
-@Service
-public class CalculatorServiceImpl implements CalculatorService {
-  @Override
-  public double calculate(double height, double weight) {
-    if (height &lt;= 0 || weight &lt;= 0) {
-      throw new IllegalArgumentException(&quot;Arguments must be above 0&quot;);
-    }
-    double heightInMeter = height / 100;
-    return weight / (heightInMeter * heightInMeter);
-  }
-}
-</code></pre>
-<h4 id="_5">服务端点定义</h4>
-<p>服务端点用于生成服务契约，使得服务间能无缝进行通信。首先定义端点接口：</p>
-<pre><code class="language-java">public interface CalculatorEndpoint {
-  double calculate(double height, double weight);
-}
-</code></pre>
-<p>引入 <strong>ServiceComb</strong> 依赖：</p>
-<pre><code class="language-xml">    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;java-chassis-spring-boot-starter-servlet&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-</code></pre>
-<p>暴露运算服务的Restful端点：</p>
-<pre><code class="language-java">@RestSchema(schemaId = &quot;calculatorRestEndpoint&quot;)
-@RequestMapping(&quot;/&quot;)
-public class CalculatorRestEndpoint implements CalculatorEndpoint {
-
-  private final CalculatorService calculatorService;
-
-  @Autowired
-  public CalculatorRestEndpoint(CalculatorService calculatorService) {
-    this.calculatorService = calculatorService;
-  }
-
-  @Override
-  @GetMapping(&quot;/bmi&quot;)
-  public double calculate(double height, double weight) {
-    return calculatorService.calculate(height, weight);
-  }
-}
-</code></pre>
-<p>这里用<code>@RestSchema</code>注释端点后， <strong>ServiceComb</strong> 微服务框架会自动生成对应的服务端点契约，并根据
-如下的 <code>application.yml</code> 文件中的定义来配置端点端口，将契约和服务一起注册到服务注册中心。</p>
-<pre><code class="language-yaml">APPLICATION_ID: bmi
-service_description:
-  name: calculator
-  version: 0.0.1
-servicecomb:
-  service:
-    registry:
-      address: http://127.0.0.1:30100
-  rest:
-    address: 0.0.0.0:7777
-</code></pre>
-<p><strong><em>注意</em></strong>: <strong>ServiceComb</strong>默认的配置文件名称是<code>microservice.yaml</code>。 本应用采用 spring boot作为运行环境，因此遵循
-spring boot的规范，配置文件名称使用 <code>application.yml</code>。</p>
-<h4 id="_6">服务启动入口</h4>
-<p>服务启动入口中只需添加 <code>@EnableServiceComb</code> 的注解即可启用 <em>ServiceComb</em> 微服务框架，代码如下：</p>
-<pre><code class="language-java">@SpringBootApplication
-@EnableServiceComb
-public class CalculatorApplication {
-  public static void main(String[] args) {
-    SpringApplication.run(CalculatorApplication.class, args);
-  }
-}
-</code></pre>
-<h3 id="_7">体质指数界面实现</h3>
-<p>本模块负责提供用户界面及网关服务。其实现主要分为三部分：</p>
-<ul>
-<li>
-<p>前端界面</p>
-</li>
-<li>
-<p>网关及路由规则</p>
-</li>
-<li>
-<p>服务启动入口</p>
-</li>
-</ul>
-<p>其中，前端界面的组件使用了<a href="http://getbootstrap.com/">Bootstrap</a>来开发。</p>
-<h4 id="_8">网关及路由规则</h4>
-<p>网关服务使用 <strong>ServiceComb</strong> 提供的 <a href="http://localhost:8000/edge/by-servicecomb-sdk/">Edge Service</a> 来实现。</p>
-<p>引入依赖：</p>
-<pre><code class="language-xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;java-chassis-spring-boot-starter-standalone&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;edge-core&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>在 <code>application.yml</code> 文件中配置路由规则及服务端口信息：</p>
-<pre><code class="language-yaml">ervicecomb:
-  service:
-    registry:
-      address: http://127.0.0.1:30100
-  rest:
-    address: 0.0.0.0:8889
-
-  tracing:
-    enabled: false
-
-  http:
-    dispatcher:
-      edge:
-        default:
-          enabled: false
-          prefix: api
-          withVersion: false
-          prefixSegmentCount: 1
-        url:
-          enabled: true
-          mappings:
-            calculator:
-              prefixSegmentCount: 1
-              path: &quot;/calculator/.*&quot;
-              microserviceName: calculator
-              versionRule: 0.0.0+
-
-# This is web root for windows server, change this path according to where you put your source code
-gateway:
-  webroot: /code/servicecomb-samples/java-chassis-samples/bmi/webapp/src/main/resources/static
-</code></pre>
-<p>其中 <code>servicecomb.http.dispatcher.edge.default.enabled</code> 禁用了默认的路由规则， <code>servicecomb.http.dispatcher.edge.url.enabled</code>
-启用了基于URL映射的路由规则。 规则的含义表示将URL为 <code>/calculator/.*</code> 的请求转发到 <code>calculator</code>服务。</p>
-<p><code>gateway.webroot</code> 配置了静态页面所在的目录位置。 示例里面采用的是 Windows 目录环境，如果采用 Linux 环境，需要配置相对路径。</p>
-<p><code>StaticWebpageDispatcher</code> 扩展了 Edge Service 的转发规则， 使用了 vert.x 提供的 <code>StaticHandler</code> 发布静态页面。 Edge 
-Service 采用 SPI 的方式扩展 Dispatcher， 需要创建文件 <code>org.apache.servicecomb.transport.rest.vertx.VertxHttpDispatcher</code>。 </p>
-<h4 id="_9">服务启动入口</h4>
-<p>服务启动入口也只需要声明启用 <code>ServiceComb</code> 即可。</p>
-<pre><code class="language-java">@SpringBootApplication
-@EnableServiceComb
-public class GatewayApplication {
-  public static void main(String[] args) {
-    new SpringApplicationBuilder().web(WebApplicationType.NONE).sources(GatewayApplication.class).run(args);
-  }
-}
-</code></pre>
-<p>至此，<strong>体质指数</strong>应用已开发完毕，您可以通过<a href="quick-start.html">快速入门</a>中的步骤对其进行验证。</p>
-<h2 id="_10">下一步</h2>
-<ul>
-<li>阅读 <a href="quick-start-advance.html">微服务开发进阶</a></li>
-</ul>
 
 
 
@@ -1934,10 +1741,10 @@ public class GatewayApplication {
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
       
     
   </body>
