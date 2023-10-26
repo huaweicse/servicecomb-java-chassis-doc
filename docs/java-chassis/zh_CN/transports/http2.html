@@ -12,7 +12,7 @@
         <link rel="prev" href="rest-over-vertx.html">
       
       
-        <link rel="next" href="highway-rpc.html">
+        <link rel="next" href="rest-over-servlet-embedded.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>REST over HTTP2 - ServiceComb Java Chassis 开发指南</title>
+        <title>REST over HTTP2（Vert.x) - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rest-over-http2" class="md-skip">
+        <a href="#rest-over-http2vertx" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              REST over HTTP2
+              REST over HTTP2（Vert.x)
             
           </span>
         </div>
@@ -347,7 +347,7 @@
         
   
   <span class="md-ellipsis">
-    开发第一个微服务
+    开发第一个微服务应用
   </span>
   
 
@@ -426,7 +426,7 @@
             
   
   <span class="md-ellipsis">
-    在Spring Boot中使用Java Chassis
+    Spring Boot集成Java Chassis
   </span>
   
 
@@ -436,7 +436,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            在Spring Boot中使用Java Chassis
+            Spring Boot集成Java Chassis
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -450,7 +450,7 @@
         
   
   <span class="md-ellipsis">
-    Java Chassis与Spring Boot模式
+    Spring Boot集成Java Chassis介绍
   </span>
   
 
@@ -470,7 +470,7 @@
         
   
   <span class="md-ellipsis">
-    与 Spring Web MVC 开发习惯的差异
+    与Spring Web MVC开发习惯的差异
   </span>
   
 
@@ -627,31 +627,11 @@
   
   
     <li class="md-nav__item">
-      <a href="rest-over-servlet.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    REST over Servlet
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
       <a href="rest-over-vertx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    REST over Vertx
+    REST over HTTP（Vert.x)
   </span>
   
 
@@ -680,7 +660,7 @@
           
   
   <span class="md-ellipsis">
-    REST over HTTP2
+    REST over HTTP2（Vert.x)
   </span>
   
 
@@ -691,7 +671,7 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP2
+    REST over HTTP2（Vert.x)
   </span>
   
 
@@ -714,21 +694,14 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    场景描述
+    开发介绍
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    外部服务通信配置
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#http2-server" class="md-nav__link">
-    http2 server 端配置项
+    配置参考
   </a>
   
 </li>
@@ -737,6 +710,46 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rest-over-servlet-embedded.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST over Servlet(Spring Boot Embedded)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rest-over-servlet.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST over Servlet(WAR)
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -815,7 +828,7 @@
         
   
   <span class="md-ellipsis">
-    注册发现说明
+    注册发现介绍
   </span>
   
 
@@ -1884,21 +1897,14 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    场景描述
+    开发介绍
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    外部服务通信配置
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#http2-server" class="md-nav__link">
-    http2 server 端配置项
+    配置参考
   </a>
   
 </li>
@@ -1918,11 +1924,16 @@
                   
 
 
-<h1 id="rest-over-http2">REST over Http2</h1>
-<h2 id="_1">场景描述</h2>
-<p>用户通过简单的配置即可启用Http2进行通信，提高性能。</p>
-<h2 id="_2">外部服务通信配置</h2>
-<p>与外部服务通信相关的配置写在microservice.yaml文件中。</p>
+<h1 id="rest-over-http2vertx">REST over HTTP2（Vert.x)</h1>
+<h2 id="_1">开发介绍</h2>
+<p>参考 <a href="../spring-boot/introduction.html">Spring Boot集成Java Chassis介绍</a> ，高性能模式使用 REST over HTTP（Vert.x）。</p>
+<p>application.yaml 文件中的配置示例：</p>
+<pre><code class="language-yaml">servicecomb:
+  rest:
+    address: 0.0.0.0:8080?protocol=http2
+    server:
+      verticle-count: 8
+</code></pre>
 <ul>
 <li>
 <p>启用h2(Http2 + TLS)进行通信<br />
@@ -1944,7 +1955,7 @@
 <p>客户端会通过从服务中心读取服务端地址中的配置来使用http2进行通信。 </p>
 </li>
 </ul>
-<h2 id="http2-server">http2 server 端配置项</h2>
+<h2 id="_2">配置参考</h2>
 <table>
 <thead>
 <tr>

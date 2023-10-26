@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="rest-over-servlet.html">
+        <link rel="prev" href="introduction.html">
       
       
         <link rel="next" href="http2.html">
@@ -20,7 +20,7 @@
     
     
       
-        <title>REST over Vertx - ServiceComb Java Chassis 开发指南</title>
+        <title>REST over HTTP（Vert.x) - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rest-over-vertx" class="md-skip">
+        <a href="#rest-over-httpvertx" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              REST over Vertx
+              REST over HTTP（Vert.x)
             
           </span>
         </div>
@@ -347,7 +347,7 @@
         
   
   <span class="md-ellipsis">
-    开发第一个微服务
+    开发第一个微服务应用
   </span>
   
 
@@ -426,7 +426,7 @@
             
   
   <span class="md-ellipsis">
-    在Spring Boot中使用Java Chassis
+    Spring Boot集成Java Chassis
   </span>
   
 
@@ -436,7 +436,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            在Spring Boot中使用Java Chassis
+            Spring Boot集成Java Chassis
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -450,7 +450,7 @@
         
   
   <span class="md-ellipsis">
-    Java Chassis与Spring Boot模式
+    Spring Boot集成Java Chassis介绍
   </span>
   
 
@@ -470,7 +470,7 @@
         
   
   <span class="md-ellipsis">
-    与 Spring Web MVC 开发习惯的差异
+    与Spring Web MVC开发习惯的差异
   </span>
   
 
@@ -625,26 +625,6 @@
                 
   
   
-  
-    <li class="md-nav__item">
-      <a href="rest-over-servlet.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    REST over Servlet
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -660,7 +640,7 @@
           
   
   <span class="md-ellipsis">
-    REST over Vertx
+    REST over HTTP（Vert.x)
   </span>
   
 
@@ -671,7 +651,7 @@
         
   
   <span class="md-ellipsis">
-    REST over Vertx
+    REST over HTTP（Vert.x)
   </span>
   
 
@@ -694,27 +674,21 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    配置说明
-  </a>
-  
-    <nav class="md-nav" aria-label="配置说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    补充说明
+    开发介绍
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    配置参考
+  </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    示例代码
+    补充说明
   </a>
   
 </li>
@@ -738,7 +712,47 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP2
+    REST over HTTP2（Vert.x)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rest-over-servlet-embedded.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST over Servlet(Spring Boot Embedded)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rest-over-servlet.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST over Servlet(WAR)
   </span>
   
 
@@ -821,7 +835,7 @@
         
   
   <span class="md-ellipsis">
-    注册发现说明
+    注册发现介绍
   </span>
   
 
@@ -1890,27 +1904,21 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    配置说明
-  </a>
-  
-    <nav class="md-nav" aria-label="配置说明">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    补充说明
+    开发介绍
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    配置参考
+  </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    示例代码
+    补充说明
   </a>
   
 </li>
@@ -1930,24 +1938,19 @@
                   
 
 
-<h1 id="rest-over-vertx">REST over Vertx</h1>
-<h2 id="_1">配置说明</h2>
-<p>REST over Vertx通信通道对应使用standalone部署运行模式，可直接通过main函数拉起。main函数中需要初始化日志和加载服务配置，代码如下：</p>
-<pre><code class="language-java">public class MainServer {
-    public static void main(String[] args) throws Exception {
-        Log4jUtils.init();//日志初始化
-        BeanUtils.init(); // Spring bean初始化
-    }
-}
+<h1 id="rest-over-httpvertx">REST over HTTP（Vert.x)</h1>
+<h2 id="_1">开发介绍</h2>
+<p>参考 <a href="../spring-boot/introduction.html">Spring Boot集成Java Chassis介绍</a> ，高性能模式使用 REST over HTTP（Vert.x）。 </p>
+<p>application.yaml 文件中的配置示例：</p>
+<pre><code class="language-yaml">servicecomb:
+  rest:
+    address: 0.0.0.0:8080
+    server:
+      verticle-count: 8
 </code></pre>
-<p>使用REST over Vertx网络通道需要在maven pom文件中添加如下依赖：</p>
-<pre><code class="language-xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-    &lt;artifactId&gt;transport-rest-vertx&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>REST over Vertx通道在microservice.yaml文件中有以下配置项：</p>
-<p>表1-1 REST over Vertx配置项说明</p>
+<p>其中 <code>0.0.0.0:8080</code> 代表使用HTTP协议，并且监听8080端口。可以通过在地址后面追加<code>sslEnabled=true</code>使用HTTPS通信，具体介绍见<a href="../security/tls.html">使用TLS通信</a>章节。</p>
+<h2 id="_2">配置参考</h2>
+<p>REST over HTTP（Vert.x)有以下配置项：</p>
 <table>
 <thead>
 <tr>
@@ -2044,35 +2047,25 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_2">补充说明</h3>
+<h2 id="_3">补充说明</h2>
 <ul>
 <li>极限连接数计算 </li>
 </ul>
-<p>假设:<br />
-  * servicecomb.rest.client.verticle-count配置为8
-  * servicecomb.rest.client.connection.maxPoolSize配置为5
-  * 微服务A有10个实例  </p>
-<p>站在client的角度，在极限情况下：
-  * 一个client调用微服务A，最多会建立400条连接。（<code>8 * 5 * 10 = 400</code>）<br />
-  * 假设该client还需要调用微服务B，微服务B，也有10个实例，则最多再建立400条连接，共800条连接</p>
-<p>站在server的角度，在极限情况下：
-  * 一个client最多向一个server建立40条连接。(<code>8 * 5 = 40</code>)<br />
-  * <code>n</code>个client最多会向一个server建立<code>40 * n</code>条连接</p>
+<p>假设在微服务A调用B的情况下，微服务A和B各有10个实例，微服务A的配置为：</p>
+<ul>
+<li>servicecomb.rest.client.verticle-count配置为8</li>
+<li>servicecomb.rest.client.connection.maxPoolSize配置为5</li>
+<li>微服务B有10个实例  </li>
+</ul>
+<p>站在A的角度，在极限情况下：
+  * 一个实例最多会建立400条连接。（<code>8 * 5 * 10 = 400</code>）<br />
+  * 假设该A还需要调用微服务C，微服务C也有10个实例，则最多再建立400条连接，共800条连接</p>
+<p>站在B的角度，在极限情况下：
+  * 一个A的实例最多建立40条连接。(<code>8 * 5 = 40</code>)<br />
+  * 10个A的实例最多会向一个B建立<code>40 * 10 = 400</code>条连接</p>
 <p>为了提高性能，需要尽量使用更大的连接池，但是更大的连接池又可能会导致连接数暴涨，当微服务实例规模达到百级别时，有的进程可能需要管理
 几万条连接，业务需要根据实际业务规模进行合理的规划。在实例规模比较小的情况下，HTTP仍然是所有应用程序的最佳选择，它具备更好的兼容性
 和可靠性。当单个实例的连接数管理规模超过1万的时候，可以考虑切换为<a href="http2.html">http2</a>。</p>
-<h2 id="_3">示例代码</h2>
-<p>microservice.yaml文件中的配置示例：</p>
-<pre><code class="language-yaml">servicecomb:
-  rest:
-    address: 0.0.0.0:8080
-    server:
-      verticle-count: 8
-  references:
-    hello:
-      transport: rest
-      version-rule: 0.0.1
-</code></pre>
 
 
 

@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../build-consumer/catalog.html">
+        <link rel="prev" href="http2.html">
       
       
-        <link rel="next" href="../transports/introduction.html">
+        <link rel="next" href="rest-over-servlet.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>通用功能开发 - ServiceComb Java Chassis 开发指南</title>
+        <title>REST over Servlet(Spring Boot Embedded) - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#rest-over-servletspring-boot-embedded" class="md-skip">
           Skip to content
         </a>
       
@@ -101,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              通用功能开发
+              REST over Servlet(Spring Boot Embedded)
             
           </span>
         </div>
@@ -548,18 +548,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="catalog.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../general-development/catalog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -568,7 +559,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -577,18 +567,20 @@
       
   
   
+    
+  
   
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
@@ -602,7 +594,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             多样化的通信协议功能
@@ -615,7 +607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/introduction.html" class="md-nav__link">
+      <a href="introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -635,7 +627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/rest-over-vertx.html" class="md-nav__link">
+      <a href="rest-over-vertx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -655,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/http2.html" class="md-nav__link">
+      <a href="http2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -673,9 +665,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../transports/rest-over-servlet-embedded.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    REST over Servlet(Spring Boot Embedded)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="rest-over-servlet-embedded.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -684,6 +696,40 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    开发介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    配置参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -695,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/rest-over-servlet.html" class="md-nav__link">
+      <a href="rest-over-servlet.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -715,7 +761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../transports/highway-rpc.html" class="md-nav__link">
+      <a href="highway-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1843,6 +1889,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    开发介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    配置参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1856,30 +1924,43 @@
                   
 
 
-<h1 id="_1">通用功能开发</h1>
-<ul>
-<li><a href="metrics.html">应用性能监控（metrics）</a></li>
-<li><a href="microservice-invocation-chain.html">微服务调用链</a></li>
-<li><a href="customized-tracing.html">自定义调用链打点</a></li>
-<li><a href="local-develop-test.html">本地开发和测试</a></li>
-<li><a href="http-filter.html">Http Filter</a></li>
-<li><a href="upload-download.html">文件上传下载</a></li>
-<li><a href="reactive.html">Reactive</a></li>
-<li><a href="dnsconfig.html">DNS自定义配置</a></li>
-<li><a href="proxy.html">代理设置</a></li>
-<li><a href="report-framework-version.html">框架上报版本号</a></li>
-<li><a href="cross-app-invocation.html">跨应用调用</a></li>
-<li><a href="secret-field.html">定制序列化和反序列化方法</a></li>
-<li><a href="context.html">使用Context传递控制消息</a></li>
-<li><a href="produceprocess.html">返回值序列化扩展</a></li>
-<li><a href="CORS.html">跨域资源共享(CORS)配置</a></li>
-<li><a href="AlarmEvent.html">获取熔断与实例隔离告警事件信息</a></li>
-<li><a href="shutdown.html">优雅停机</a></li>
-<li><a href="error-handling.html">异常处理</a></li>
-<li><a href="multienvironment.html">微服务实例间多环境隔离</a></li>
-<li><a href="thread-model.html">线程模型</a></li>
-<li><a href="config-logs.html">配置日志</a>  </li>
-</ul>
+<h1 id="rest-over-servletspring-boot-embedded">REST over Servlet(Spring Boot Embedded)</h1>
+<h2 id="_1">开发介绍</h2>
+<p>参考 <a href="../spring-boot/introduction.html">Spring Boot集成Java Chassis介绍</a> ，Web开发模式使用 REST over Servlet(Spring Boot Embedded)。</p>
+<p>REST over Servlet的本质是将Java Chassis作为一个Servlet，部署到支持Servlet的Web容器中。 </p>
+<h2 id="_2">配置参考</h2>
+<p>使用Spring Boot Embedded场景，相关Web容器参数需要结合Spring Boot配置，这里不详细介绍。 只给出Java Chassis增加的配置。 </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">servicecomb.rest.address</td>
+<td style="text-align: left;">0.0.0.0:8080</td>
+<td style="text-align: left;">服务监听地址<br>必须配置为与web容器监听地址相同的地址</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.rest.server.timeout</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">异步servlet超时时间, 单位为毫秒<br>建议保持默认值</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.Provider.requestWaitInPoolTimeout${op-priority}</td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;">在同步线程中排队等待执行的超时时间，单位为毫秒</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.rest.server.requestWaitInPoolTimeout</td>
+<td style="text-align: left;">30000</td>
+<td style="text-align: left;">同servicecomb.Provider.requestWaitInPoolTimeout${op-priority}, 该配置项优先级更高。</td>
+</tr>
+</tbody>
+</table>
 
 
 

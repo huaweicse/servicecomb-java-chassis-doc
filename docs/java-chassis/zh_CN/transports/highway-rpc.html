@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="http2.html">
+        <link rel="prev" href="rest-over-servlet.html">
       
       
         <link rel="next" href="../registry/introduction.html">
@@ -347,7 +347,7 @@
         
   
   <span class="md-ellipsis">
-    开发第一个微服务
+    开发第一个微服务应用
   </span>
   
 
@@ -426,7 +426,7 @@
             
   
   <span class="md-ellipsis">
-    在Spring Boot中使用Java Chassis
+    Spring Boot集成Java Chassis
   </span>
   
 
@@ -436,7 +436,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
-            在Spring Boot中使用Java Chassis
+            Spring Boot集成Java Chassis
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -450,7 +450,7 @@
         
   
   <span class="md-ellipsis">
-    Java Chassis与Spring Boot模式
+    Spring Boot集成Java Chassis介绍
   </span>
   
 
@@ -470,7 +470,7 @@
         
   
   <span class="md-ellipsis">
-    与 Spring Web MVC 开发习惯的差异
+    与Spring Web MVC开发习惯的差异
   </span>
   
 
@@ -627,31 +627,11 @@
   
   
     <li class="md-nav__item">
-      <a href="rest-over-servlet.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    REST over Servlet
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
       <a href="rest-over-vertx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    REST over Vertx
+    REST over HTTP（Vert.x)
   </span>
   
 
@@ -671,7 +651,47 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP2
+    REST over HTTP2（Vert.x)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rest-over-servlet-embedded.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST over Servlet(Spring Boot Embedded)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rest-over-servlet.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST over Servlet(WAR)
   </span>
   
 
@@ -734,7 +754,7 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    概念阐述
+    开发说明
   </a>
   
 </li>
@@ -742,13 +762,6 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     配置说明
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    示例代码
   </a>
   
 </li>
@@ -815,7 +828,7 @@
         
   
   <span class="md-ellipsis">
-    注册发现说明
+    注册发现介绍
   </span>
   
 
@@ -1884,7 +1897,7 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    概念阐述
+    开发说明
   </a>
   
 </li>
@@ -1892,13 +1905,6 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     配置说明
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    示例代码
   </a>
   
 </li>
@@ -1919,17 +1925,15 @@
 
 
 <h1 id="highway">Highway</h1>
-<h2 id="_1">概念阐述</h2>
-<p>Highway是ServiceComb的高性能私有协议，用户可根据实际需求选择使用。</p>
-<h2 id="_2">配置说明</h2>
-<p>使用Highway网络通道需要在maven pom文件中添加如下依赖：</p>
-<pre><code class="language-xml"> &lt;dependency&gt;
-     &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-     &lt;artifactId&gt;transport-highway&lt;/artifactId&gt;
- &lt;/dependency&gt;
+<h2 id="_1">开发说明</h2>
+<p>Highway是Java Chassis的高性能私有TCP协议, Highway协议支持proto-buffer编码。参考 <a href="../spring-boot/introduction.html">Spring Boot集成Java Chassis介绍</a> ，建议在高性能模式使用Highway。</p>
+<p>application.yaml 文件中的配置示例：</p>
+<pre><code class="language-yaml">servicecomb:
+  highway:
+    address: 0.0.0.0:7070
 </code></pre>
-<p>Highway通道在microservice.yaml文件中的配置项如下表所示：</p>
-<p>表1-1Highway配置项说明</p>
+<p>其中 <code>0.0.0.0:7070</code> 代表使用Highway协议，并且监听7070端口。可以通过在地址后面追加<code>sslEnabled=true</code>使用HTTPS通信，具体介绍见<a href="../security/tls.html">使用TLS通信</a>章节。</p>
+<h2 id="_2">配置说明</h2>
 <table>
 <thead>
 <tr>
@@ -1981,12 +1985,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_3">示例代码</h2>
-<p>microservice.yaml文件中的配置示例：</p>
-<pre><code class="language-yaml">servicecomb:
-  highway:
-    address: 0.0.0.0:7070
-</code></pre>
 
 
 
