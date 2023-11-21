@@ -1845,9 +1845,9 @@
 <p>默认情况下会使用内置的一个简单的负载均衡的实现，不需要额外的配置。</p>
 <h2 id="_4">验证</h2>
 <p>对 <em>体质指数计算器</em> 微服务进行水平扩展，使其运行实例数为2，即新增一个运行实例：</p>
-<pre><code class="language-bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dserver.port=7779 -Dservicecomb.rest.address=0.0.0.0:7779&quot;
+<pre><code class="language-bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.rest.address=0.0.0.0:7779&quot;
 </code></pre>
-<p>为了便于区分不同的运行实例，在体质指数计算器的实现中新增了返回实例ID和运行时间的接口，详情可查看<a href="https://github.com/apache/servicecomb-java-chassis/tree/master/samples/bmi/calculator">体质指数计算器的完整实现代码</a>。而为了避免端口冲突，新的实例在另一个端口上运行。</p>
+<p>为了便于区分不同的运行实例，在体质指数计算器的实现中新增了返回实例ID和运行时间的接口。而为了避免端口冲突，新的实例在另一个端口上运行。</p>
 <p>此时点击 <em>Submit</em> 按钮就可以看到如下两个界面中的实例ID交替出现。</p>
 <p><img alt="负载均衡效果" src="load-balance-result.png" /></p>
 

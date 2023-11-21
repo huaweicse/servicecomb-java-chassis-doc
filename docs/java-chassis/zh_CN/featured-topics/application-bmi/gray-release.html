@@ -16,7 +16,7 @@
     
     
       
-        <title>分布式调用链追踪 - ServiceComb Java Chassis 开发指南</title>
+        <title>灰度发布 - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              分布式调用链追踪
+              灰度发布
             
           </span>
         </div>
@@ -1837,62 +1837,97 @@
                   
 
 
-<h1 id="_1">分布式调用链追踪</h1>
-<p>分布式调用链追踪用于有效地监控微服务的网络延时并可视化微服务中的数据流转。本指南将展示如何在 <em>体质指数</em> 应用中使用 <strong>ServiceComb</strong> 提供的分布式调用链追踪能力。</p>
+<h1 id="_1">灰度发布</h1>
+<p>灰度发布存在很多不同的应用场景，包括解决版本兼容性问题、A/B Test、平滑升级等。本指南将展示如何在 <em>体质指数</em> 应用中使用灰度发布能力。</p>
 <h2 id="_2">前言</h2>
 <p>在您进一步阅读之前，请确保您已阅读了<a href="quick-start-bmi.html">体质指数微服务应用开发</a>，并已成功运行体质指数微服务。</p>
 <h2 id="_3">启用</h2>
 <ul>
-<li>在 <em>体质指数计算器</em> 的 <code>pom.xml</code> 文件中添加依赖项：</li>
+<li>首先需要进行灰度发布策略设计。 在这个实例中，将体重 &gt;= 60 的请求转发到 0.0.2 版本， 将体重 &lt;60 的请求转发到 0.0.1 版本。 灰度发布策略一般使用请求头进行标记，
+  为了实现这个目的，使用 Java Chassis的Context Mapper机制，将符合请求特征的请求设置不一样的 header。 下面的配置会根据请求特性，设置 x-gray = 1， 或者
+  x-gray= 0 。 </li>
 </ul>
-<pre><code class="language-xml">   &lt;dependency&gt;
-     &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-     &lt;artifactId&gt;handler-tracing-zipkin&lt;/artifactId&gt;
-   &lt;/dependency&gt;
+<blockquote>
+<blockquote>
+<blockquote>
+<p>注意：流量特征治理的匹配规则都是 String - String 的键值对。使用 yaml 文件配置的时候，如果涉及数字和特殊字符，需要使用引号，否则会解析为其他类型出现错误。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="language-yaml">servicecomb:
+  matchGroup:
+    bmi-operation: |
+      matches:
+        - apiPath:
+            exact: &quot;/bmi&quot;
+    bmi-operation-heavy: |
+      matches:
+        - apiPath:
+            exact: &quot;/bmi&quot;
+          queries:
+            weight:
+              compare: &quot;&gt;=60&quot;
+    bmi-operation-thin: |
+      matches:
+        - apiPath:
+            exact: &quot;/bmi&quot;
+          queries:
+            weight:
+              compare: &quot;&lt;60&quot;
+  mapper:
+    bmi-operation-heavy: |
+      target:
+        x-gray: &quot;1&quot;
+    bmi-operation-thin: |
+      target:
+        x-gray: &quot;0&quot;
 </code></pre>
 <ul>
-<li>在 <em>体质指数计算器</em> 的 <code>application.yml</code> 文件中添加分布式追踪的处理链：</li>
+<li>在 <em>体质指数界面</em> 的 <code>application.yml</code> 文件中添加灰度发布策略：</li>
 </ul>
 <pre><code class="language-yaml">servicecomb:
- handler:
-   chain:
-     Provider:
-       default: tracing-provider
+  router:
+    type: router
+  globalRouteRule: |
+    - precedence: 2
+      match:
+        headers:
+          x-gray: 
+            exact: &quot;1&quot;
+      route:
+        - weight: 100
+          tags:
+            version: 0.0.2
+    - precedence: 1
+      match:
+        headers:
+          x-gray: 
+            exact: &quot;0&quot;
+      route:
+        - weight: 100
+          tags:
+            version: 0.0.1
 </code></pre>
-<ul>
-<li>在 <em>体质指数界面</em> 的 <code>pom.xml</code> 文件中添加依赖项：</li>
-</ul>
-<pre><code class="language-xml">   &lt;dependency&gt;
-     &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-     &lt;artifactId&gt;handler-tracing-zipkin&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-</code></pre>
-<p>体质指数应用中已配置好了上述配置项，您只需执行以下几步即可：</p>
-<ul>
-<li>使用 Docker 运行 <em>Zipkin</em> 分布式追踪服务：</li>
-</ul>
-<pre><code class="language-bash">docker run -d -p 9411:9411 openzipkin/zipkin
-</code></pre>
-<ul>
-<li>重启 <em>体质指数计算器</em> 微服务：</li>
-</ul>
-<pre><code class="language-bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.handler.chain.Provider.default=tracing-provider&quot;
-</code></pre>
-<ul>
-<li>重启 <em>体质指数界面</em> 微服务：</li>
-</ul>
-<pre><code class="language-bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.handler.chain.Consumer.default=loadbalance,tracing-consumer&quot;
-</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>注意：路由控制是在消费者方。</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <h2 id="_4">验证</h2>
+<p>对 <em>体质指数计算器</em> 微服务进行水平扩展，使其运行实例数为2，即新增一个运行实例。 该实例的版本号是 0.0.2. </p>
+<pre><code class="language-bash">mvn spring-boot:run -Dspring-boot.run.jvmArguments=&quot;-Dservicecomb.rest.address=0.0.0.0:7779 -Dservicecomb.service.version=0.0.2&quot;
+</code></pre>
 <ul>
 <li>
 <p>访问 <a>http://localhost:8889</a> ，在身高和体重栏处输入正数，并点击 <em>Submit</em> 按钮。</p>
 </li>
 <li>
-<p>访问 <a>http://localhost:9411</a> ，查看分布式调用追踪情况，可得下方界面。</p>
+<p>如果体重大于等于60， 请求始终转发到一个0.0.2版本实例；体重小于60， 请求会转发到0.0.1版本的实例。 </p>
 </li>
 </ul>
-<p><img alt="分布式追踪效果" src="distributed-tracing-result.png" /></p>
+<p><img alt="灰度发布结果" src="gray-release-result.png" /></p>
 
 
 

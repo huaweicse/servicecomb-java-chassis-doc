@@ -1922,20 +1922,21 @@
 </li>
 </ul>
 <p>在开始前，需要先在服务的父工程中添加以下依赖项：</p>
-<pre><code class="language-java">  &lt;dependencyManagement&gt;
-    &lt;dependencies&gt;
-      &lt;dependency&gt;
-        &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-        &lt;artifactId&gt;java-chassis-dependencies&lt;/artifactId&gt;
-        &lt;version&gt;${project.version}&lt;/version&gt;
-        &lt;type&gt;pom&lt;/type&gt;
-        &lt;scope&gt;import&lt;/scope&gt;
-      &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-  &lt;/dependencyManagement&gt;
+<pre><code class="language-xml">
+&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+      &lt;artifactId&gt;java-chassis-dependencies&lt;/artifactId&gt;
+      &lt;version&gt;${servicecomb.version}&lt;/version&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
 </code></pre>
 <p><strong>注意</strong>: <code>java-chassis-dependencies</code> 这个依赖是以pom的形式导入来统一项目中的依赖项的版本管理。</p>
-<p>下面将对这两个微服务的实现进行介绍，其代码已托管于<a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/bmi">github</a>上。</p>
+<p>下面将对这两个微服务的实现进行介绍，其代码已托管于<a href="https://github.com/apache/servicecomb-samples/tree/master/bmi">github</a>上。</p>
 <h3 id="_3">体质指数计算器实现</h3>
 <p>体质指数计算器提供运算服务，其实现分为三部分：</p>
 <ul>
@@ -1974,10 +1975,20 @@ public class CalculatorServiceImpl implements CalculatorService {
 }
 </code></pre>
 <p>引入 <strong>ServiceComb</strong> 依赖：</p>
-<pre><code class="language-xml">    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;java-chassis-spring-boot-starter-servlet&lt;/artifactId&gt;
-    &lt;/dependency&gt;
+<pre><code class="language-xml">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;registry-service-center&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;java-chassis-spring-boot-starter-standalone&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
 </code></pre>
 <p>暴露运算服务的Restful端点：</p>
 <pre><code class="language-java">@RestSchema(schemaId = &quot;calculatorRestEndpoint&quot;)
@@ -2000,28 +2011,31 @@ public class CalculatorRestEndpoint implements CalculatorEndpoint {
 </code></pre>
 <p>这里用<code>@RestSchema</code>注释端点后， <strong>ServiceComb</strong> 微服务框架会自动生成对应的服务端点契约，并根据
 如下的 <code>application.yml</code> 文件中的定义来配置端点端口，将契约和服务一起注册到服务注册中心。</p>
-<pre><code class="language-yaml">APPLICATION_ID: bmi
-service_description:
-  name: calculator
-  version: 0.0.1
-servicecomb:
-  service:
-    registry:
+<pre><code class="language-yaml">servicecomb:
+  registry:
+    sc:
       address: http://127.0.0.1:30100
+  service:
+    application: bmi
+    name: calculator
+    version: 0.0.1
+
   rest:
     address: 0.0.0.0:7777
 </code></pre>
-<p><strong><em>注意</em></strong>: <strong>ServiceComb</strong>默认的配置文件名称是<code>microservice.yaml</code>。 本应用采用 spring boot作为运行环境，因此遵循
-spring boot的规范，配置文件名称使用 <code>application.yml</code>。</p>
 <h4 id="_6">服务启动入口</h4>
-<p>服务启动入口中只需添加 <code>@EnableServiceComb</code> 的注解即可启用 <em>ServiceComb</em> 微服务框架，代码如下：</p>
+<p>服务启动入口按照<a href="../../spring-boot/introduction.html">高性能模式</a> 代码如下：</p>
 <pre><code class="language-java">@SpringBootApplication
-@EnableServiceComb
 public class CalculatorApplication {
   public static void main(String[] args) {
-    SpringApplication.run(CalculatorApplication.class, args);
+    try {
+      new SpringApplicationBuilder().web(WebApplicationType.NONE).sources(CalculatorApplication.class).run(args);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
+
 </code></pre>
 <h3 id="_7">体质指数界面实现</h3>
 <p>本模块负责提供用户界面及网关服务。其实现主要分为三部分：</p>
@@ -2038,22 +2052,39 @@ public class CalculatorApplication {
 </ul>
 <p>其中，前端界面的组件使用了<a href="http://getbootstrap.com/">Bootstrap</a>来开发。</p>
 <h4 id="_8">网关及路由规则</h4>
-<p>网关服务使用 <strong>ServiceComb</strong> 提供的 <a href="http://localhost:8000/edge/by-servicecomb-sdk/">Edge Service</a> 来实现。</p>
+<p>网关服务使用 <strong>ServiceComb</strong> 提供的 <a href="../../edge/by-servicecomb-sdk.html">Edge Service</a> 来实现。</p>
 <p>引入依赖：</p>
-<pre><code class="language-xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;java-chassis-spring-boot-starter-standalone&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-  &lt;artifactId&gt;edge-core&lt;/artifactId&gt;
-&lt;/dependency&gt;
+<pre><code class="language-xml">
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;registry-service-center&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;java-chassis-spring-boot-starter-standalone&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+    &lt;artifactId&gt;edge-core&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
 </code></pre>
 <p>在 <code>application.yml</code> 文件中配置路由规则及服务端口信息：</p>
-<pre><code class="language-yaml">ervicecomb:
-  service:
-    registry:
+<pre><code class="language-yaml">servicecomb:
+  registry:
+    sc:
       address: http://127.0.0.1:30100
+  service:
+    application: bmi
+    name: gateway
+    version: 0.0.1
+
   rest:
     address: 0.0.0.0:8889
 
@@ -2087,9 +2118,8 @@ gateway:
 <p><code>StaticWebpageDispatcher</code> 扩展了 Edge Service 的转发规则， 使用了 vert.x 提供的 <code>StaticHandler</code> 发布静态页面。 Edge 
 Service 采用 SPI 的方式扩展 Dispatcher， 需要创建文件 <code>org.apache.servicecomb.transport.rest.vertx.VertxHttpDispatcher</code>。 </p>
 <h4 id="_9">服务启动入口</h4>
-<p>服务启动入口也只需要声明启用 <code>ServiceComb</code> 即可。</p>
+<p>服务启动入口按照<a href="../../spring-boot/introduction.html">高性能模式</a> 代码如下：</p>
 <pre><code class="language-java">@SpringBootApplication
-@EnableServiceComb
 public class GatewayApplication {
   public static void main(String[] args) {
     new SpringApplicationBuilder().web(WebApplicationType.NONE).sources(GatewayApplication.class).run(args);
