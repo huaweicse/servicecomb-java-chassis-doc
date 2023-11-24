@@ -12,11 +12,11 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.10">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
     
     
       
-        <title>User service - ServiceComb Java Chassis 开发指南</title>
+        <title>使用MyBatis访问数据库 - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -61,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#mybatis" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              User service
+              使用MyBatis访问数据库
             
           </span>
         </div>
@@ -363,7 +363,7 @@
         
   
   <span class="md-ellipsis">
-    完整例子-bmi应用
+    BMI应用-使用服务治理
   </span>
   
 
@@ -383,7 +383,7 @@
         
   
   <span class="md-ellipsis">
-    完整例子-porter应用
+    PORTER应用-典型开发场景
   </span>
   
 
@@ -1802,6 +1802,7 @@
                   
 
 
+<h1 id="mybatis">使用MyBatis访问数据库</h1>
 <p>访问数据库可以使用第三方提供的组件。这里选择了MyBatis说明如何访问数据库。开发者也可以直接参考：</p>
 <p><a href="http://www.mybatis.org/spring/zh/index.html">http://www.mybatis.org/spring/zh/index.html</a></p>
 <p>这里给出一个快速集成参考。在本章中涉及到建表等数据库操作的时候，数据库选用MySQL。</p>
@@ -1824,15 +1825,20 @@ CREATE TABLE `T_USER` (
 insert into T_USER(ID, USER_NAME, PASSWORD, ROLE_NAME) values(1, "admin", "n4bQgYhMfWWaL+qgxVrQFaO/TxsrC4Is0V1sFbDwCgg=", "admin");
 insert into T_USER(ID, USER_NAME, PASSWORD, ROLE_NAME) values(2, "guest", "n4bQgYhMfWWaL+qgxVrQFaO/TxsrC4Is0V1sFbDwCgg=", "guest");
 </code></pre>
-<h1 id="mybatis">使用MyBatis</h1>
+<h1 id="mybatis_1">使用MyBatis</h1>
 <ul>
 <li>引用MyBatis的相关依赖</li>
 </ul>
 <p>依赖包含了MyBatis和Spring、DBCP2数据库连接池管理相关组件。这些组件都是使用Spring和MyBatis必须的。</p>
 <pre><code>&lt;dependency&gt;
-  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-  &lt;version&gt;3.4.5&lt;/version&gt;
+  &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;mysql&lt;/groupId&gt;
@@ -1841,11 +1847,6 @@ insert into T_USER(ID, USER_NAME, PASSWORD, ROLE_NAME) values(2, "guest", "n4bQg
 &lt;dependency&gt;
   &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
   &lt;artifactId&gt;commons-dbcp2&lt;/artifactId&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-  &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
-  &lt;version&gt;1.3.0&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;org.springframework&lt;/groupId&gt;
@@ -1868,36 +1869,38 @@ insert into T_USER(ID, USER_NAME, PASSWORD, ROLE_NAME) values(2, "guest", "n4bQg
 <ul>
 <li>配置数据源和SqlSessionFactory</li>
 </ul>
-<p>数据源使用DBCP2。SqlSessionFactory里面指定了dataSource和configLocation两个属性，并新增加了mybatis-config.xml文件，用于配置mapper文件的路径。 在本微服务场景中，只需要使用简单的数据库连接和简单事务管理，如果需要使用复杂的事务管理，还需要配置XA数据源和相关的事务管理器。 有关MyBatis的Configuration更加详细的信息可以参考：<a href="http://www.mybatis.org/mybatis-3/configuration.html">http://www.mybatis.org/mybatis-3/configuration.html</a> 。</p>
-<pre><code>&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp2.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;
-  &lt;property name=&quot;driverClassName&quot; value=&quot;${db.url:com.mysql.jdbc.Driver}&quot; /&gt;
-  &lt;property name=&quot;url&quot; value=&quot;${db.url:jdbc:mysql://localhost/porter_user_db}&quot; /&gt;
-  &lt;property name=&quot;username&quot; value=&quot;${db.username:root}&quot; /&gt;
-  &lt;property name=&quot;password&quot; value=&quot;${db.password:}&quot; /&gt;
-&lt;/bean&gt;
-
-&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-  &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
-  &lt;property name=&quot;configLocation&quot; value=&quot;classpath:/config/mybatis-config.xml&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
+<p>本例子使用Spring Data Source， 只需要在配置文件中加上配置信息：</p>
+<pre><code>spring:
+  datasource:
+    url: jdbc:mysql://localhost/porter_user_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
 </code></pre>
 <ul>
 <li>书写Mapper文件</li>
 </ul>
-<p>涉及到JAVA的Mapper定义UserMapper，XML中定义SQL与JAVA的映射关系UserMapper.xml。定义完成后，需要将内容配置到Mybatis的扫描路径和Spring的扫描路径中，涉及文件mybatis-config.xml和user.bean.xml。</p>
-<pre><code>### mybatis-config.xml
-&lt;configuration&gt;
-    &lt;mappers&gt;
-        &lt;mapper resource=&quot;config/UserMapper.xml&quot;/&gt;
-    &lt;/mappers&gt;
-&lt;/configuration&gt;
+<p>涉及到JAVA的Mapper定义UserMapper。</p>
+<pre><code>@Mapper
+public interface UserMapper {
+  @Insert(&quot;&quot;&quot;
+      insert into T_USER (ID, USER_NAME, PASSWORD, ROLE_NAME)
+        values(#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
+               #{password,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR})&quot;&quot;&quot;)
+  void createUser(UserInfo userInfo);
 
-### user.bean.xml
-&lt;bean id=&quot;userMapper&quot; class=&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;&gt;
-    &lt;property name=&quot;mapperInterface&quot;
-        value=&quot;org.apache.servicecomb.samples.porter.user.dao.UserMapper&quot; /&gt;
-    &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot; /&gt;
-&lt;/bean&gt;
+  @Select(&quot;&quot;&quot;
+      select ID, USER_NAME, PASSWORD, ROLE_NAME
+        from T_USER where USER_NAME = #{userName,jdbcType=VARCHAR}&quot;&quot;&quot;)
+  @Results({
+      @Result(property = &quot;id&quot;, column = &quot;ID&quot;),
+      @Result(property = &quot;userName&quot;, column = &quot;USER_NAME&quot;),
+      @Result(property = &quot;password&quot;, column = &quot;PASSWORD&quot;),
+      @Result(property = &quot;roleName&quot;, column = &quot;ROLE_NAME&quot;)
+  })
+  UserInfo getUserInfo(String userName);
+}
+
 </code></pre>
 <h2 id="_2">设计用户服务</h2>
 <p>经过上面的配置，数据库访问相关开发已经完成了。 结合User Story，可以先设计一个login的服务接口。 这个服务在UserServiceEndpoint里面进行定义。</p>

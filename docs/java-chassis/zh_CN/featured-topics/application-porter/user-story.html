@@ -12,11 +12,11 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.10">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
     
     
       
-        <title>User story - ServiceComb Java Chassis 开发指南</title>
+        <title>User Story - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -60,6 +60,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#user-story" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -92,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              User story
+              User Story
             
           </span>
         </div>
@@ -358,7 +363,7 @@
         
   
   <span class="md-ellipsis">
-    完整例子-bmi应用
+    BMI应用-使用服务治理
   </span>
   
 
@@ -378,7 +383,7 @@
         
   
   <span class="md-ellipsis">
-    完整例子-porter应用
+    PORTER应用-典型开发场景
   </span>
   
 
@@ -1781,6 +1786,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -1795,10 +1802,14 @@
                   
 
 
-  <h1>User story</h1>
-
-<p>开始前，给应用取一个名字porter。</p>
-<p><img alt="" src="usercase.png" /></p>
+<h1 id="user-story">User Story</h1>
+<p>开始前，给应用取一个名字 <code>porter</code>。 </p>
+<p><code>porter</code> 应用主要实现如下几个用户故事：</p>
+<ul>
+<li>输入用户名、密码登录系统。</li>
+<li>上传文件到系统中。系统会检查用户的权限，如果用户被授权，文件上传成功并返回文件标识；如果用户未被授权，则返回错误。</li>
+<li>删除文件。输入文件标识删除文件。删除文件也会检查用户是否被授权。</li>
+</ul>
 
 
 

@@ -12,11 +12,11 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.10">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
     
     
       
-        <title>File service - ServiceComb Java Chassis 开发指南</title>
+        <title>开发文件上传功能 - ServiceComb Java Chassis 开发指南</title>
       
     
     
@@ -60,6 +60,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -92,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              File service
+              开发文件上传功能
             
           </span>
         </div>
@@ -358,7 +363,7 @@
         
   
   <span class="md-ellipsis">
-    完整例子-bmi应用
+    BMI应用-使用服务治理
   </span>
   
 
@@ -378,7 +383,7 @@
         
   
   <span class="md-ellipsis">
-    完整例子-porter应用
+    PORTER应用-典型开发场景
   </span>
   
 
@@ -1781,6 +1786,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -1795,16 +1802,19 @@
                   
 
 
-  <h1>File service</h1>
-
-<p>文件上传功能、用户管理功能都只需要提供REST接口，在技术选型上，使用轻量级REST框架。开发新的微服务都涉及到配置微服务信息，写一个新的Main函数，这些公共步骤在文档前面已经描述，后续文档会省略这些内容。</p>
+<h1 id="_1">开发文件上传功能</h1>
+<p>文件上传功能、用户管理功能都只需要提供REST接口。</p>
 <ul>
 <li>增加依赖关系</li>
 </ul>
-<pre><code>    &lt;dependency&gt;
-      &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
-      &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
-    &lt;/dependency&gt;
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;solution-basic&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;java-chassis-spring-boot-starter-standalone&lt;/artifactId&gt;
+&lt;/dependency&gt;
 </code></pre>
 <ul>
 <li>定义服务接口</li>
@@ -1812,32 +1822,33 @@
 <p>服务接口定义上有3种选择：RPC、Spring MVC、JAX RS。 这里选择了Sping MVC，相比RPC需要额外增加Annotation，灵活性在于接口即可以通过RPC的方式在服务内部访问，也可以通过浏览器访问，期望前台js脚本开发者也能够对照生成的契约完成开发。</p>
 <pre><code>@RestSchema(schemaId = &quot;file&quot;)
 @RequestMapping(path = &quot;/&quot;)
-public class FileServiceEndpoint {
-    @Autowired
-    private FileService fileService;
+public class FileEndpoint {
+  @Autowired
+  private FileService fileService;
 
-    /**
-     * 上传文件接口，用户上传一个文件，返回文件ID。
-     */
-    @PostMapping(path = &quot;/upload&quot;, produces = MediaType.TEXT_PLAIN_VALUE)
-    public String uploadFile(@RequestPart(name = &quot;fileName&quot;) MultipartFile file) {
-        return fileService.uploadFile(file);
-    }
+  /**
+   * upload and return file id
+   */
+  @PostMapping(path = &quot;/upload&quot;, produces = MediaType.TEXT_PLAIN_VALUE)
+  public String uploadFile(@RequestPart(name = &quot;fileName&quot;) MultipartFile file) {
+      return fileService.uploadFile(file);
+  }
 
-    /**
-     * 删除文件接口。指定ID，返回删除成功还是失败.
-     */
-    @DeleteMapping(path = &quot;/delete&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean deleteFile(@RequestParam(name = &quot;id&quot;) String id) {
-        return fileService.deleteFile(id);
-    }
+  /**
+   * delete file by id
+   */
+  @DeleteMapping(path = &quot;/delete&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+  public boolean deleteFile(@RequestParam(name = &quot;id&quot;) String id) {
+      return fileService.deleteFile(id);
+  }
 }
+
 </code></pre>
 <p>为了实现不同方式的文件存储，将实现抽象出来FileService。为了简单，当前只提供了本地文件实现。这个实现限制了该服务无法进行多实例部署。可以考虑使用对象存储服务器、分布式文件系统等满足存储要求。</p>
 <ul>
 <li>设置临时目录</li>
 </ul>
-<p>需要在microservice.yaml中增加servicecomb.uploads.directory配置项，指定临时目录的路径。需要保证目录有写权限。默认情况下如果没设置临时目录，不允许启用上传功能。如果使用网关，网关也需要增加这个配置项。</p>
+<p>需要增加 <code>servicecomb.uploads.directory</code> 配置项，指定临时目录的路径。需要保证目录有写权限。默认情况下如果没设置临时目录，不允许启用上传功能。如果使用网关，网关也需要增加这个配置项。</p>
 <ul>
 <li>开发测试HTML，访问上传服务</li>
 </ul>
