@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.45e1311d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
       
       
 
@@ -2101,7 +2101,7 @@ Java Chassis针对性能分析提供的最有用工具是<a href="../general-dev
   小于1ms的情况，进一步提升性能，需要考虑框架性能调优，还会涉及操作系统、网络等调优，比较复杂；大于1ms的情况，通常都需要
   调优业务代码，框架不是性能瓶颈。</li>
 <li>一个请求的平均时延在1ms~10ms之间，TPS可以达到1千~1万。</li>
-<li>一个请求的平均时延在100ms~100ms之间，TPS可以达到1百~1千。</li>
+<li>一个请求的平均时延在10ms~100ms之间，TPS可以达到1百~1千。</li>
 <li>有个简单的公式，可以估算最大TPS： <code>CPU核数 * (1000/平均时延)</code> &lt; TPS &lt; <code>线程数 * (1000/平均时延)</code>。 越是计算密集型的
   任务，TPS越接近<code>CPU核数 * (1000/平均时延)</code>；空闲等待任务越多，越是接近<code>线程数 * (1000/平均时延)</code>。 压测的时候，如果并发
   请求大于上述估算值，那么就会出现大量请求超时。 </li>

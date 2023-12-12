@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.45e1311d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
       
       
 
@@ -1908,7 +1908,7 @@
 <p>WebApplicationType指定为NONE</p>
 <pre><code class="language-java">@SpringBootApplication
 public class ProviderApplication {
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     try {
       new SpringApplicationBuilder()
           .web(WebApplicationType.NONE)
@@ -1929,10 +1929,10 @@ public class ProviderApplication {
   &lt;artifactId&gt;java-chassis-spring-boot-starter-servlet&lt;/artifactId&gt;
 &lt;/dependency&gt;
 </code></pre>
-<p>WebApplicationType指定为NONE</p>
+<p>WebApplicationType指定为SERVLET</p>
 <pre><code class="language-java">@SpringBootApplication
 public class ProviderApplication {
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     try {
       new SpringApplicationBuilder()
           .web(WebApplicationType.SERVLET)
@@ -1944,7 +1944,8 @@ public class ProviderApplication {
   }
 }
 </code></pre>
-<p>两种开发方式都会启用Java Chassis的全量功能，高性能模式运行于独立的HTTP服务器（基于vert.x构建）上，性能上存在很大的优势。Web模式运行于Tomcat或者其他内置的Web服务器之上，作为一个Servlet接收请求，因此在开发过程中，可以使用Web容器提供的一些功能，比如提供页面服务，使用Filter等。当应用只需要提供REST服务，并且对性能要求很高的场景，建议高性能模式。</p>
+<p>两种开发方式都会启用Java Chassis的全量功能，高性能模式运行于独立的HTTP服务器（基于vert.x构建）上，性能上存在很大的优势。Web模式运行于Tomcat或者其他内置的Web服务器之上，作为一个Servlet接收请求，因此在开发过程中，可以使用Web容器提供的一些功能，比如提供页面服务，使用Filter等。</p>
+<p>当应用只需要提供REST服务，并且对性能要求高的场景，建议使用高性能模式。</p>
 
 
 
