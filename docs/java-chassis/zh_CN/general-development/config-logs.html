@@ -1568,6 +1568,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    配置日志
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="config-logs.html" class="md-nav__link md-nav__link--active">
         
   
@@ -1577,6 +1588,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trace-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      在日志系统中记录 trace id
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2825,6 +2864,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#trace-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      在日志系统中记录 trace id
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2861,21 +2917,6 @@
 &lt;/dependencies&gt;
 </code></pre>
 <ul>
-<li>log4j</li>
-</ul>
-<p>使用 log4j 需要在项目中提供如下依赖。</p>
-<pre><code class="language-xml">&lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;log4j&lt;/groupId&gt;
-      &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-      &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre>
-<ul>
 <li>logback</li>
 </ul>
 <p>使用 logback 需要在项目中提供如下依赖。</p>
@@ -2885,6 +2926,23 @@
       &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
+</code></pre>
+<p>微服务架构下，需要部署大量的微服务实例，调用情况复杂，给问题定位带来了很大的麻烦。 通过调用链系统能够很好的解决日志追踪的问题，但是对于日常的开发调试，部署调用链仍然显得复杂。 java-chassis 提供了一种简单的机制，允许业务在记录日志的时候，包含trace id。</p>
+<h2 id="trace-id">在日志系统中记录 trace id</h2>
+<p>可以在 log4j2 或者 logback 中使用 MDC 的方式记录 trace id。</p>
+<p>log4j2的配置如下：</p>
+<pre><code class="language-xml">  &lt;Appenders&gt;
+    &lt;Console name=&quot;Console&quot; target=&quot;SYSTEM_OUT&quot;&gt;
+      &lt;PatternLayout pattern=&quot;[%d][%t][%p][%c:%L][%X{SERVICECOMB_TRACE_ID}] %m%n&quot;/&gt;
+    &lt;/Console&gt;
+  &lt;/Appenders&gt;
+</code></pre>
+<p>logback的配置如下:</p>
+<pre><code class="language-xml">  &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+    &lt;encoder&gt;
+      &lt;pattern&gt;%d [%level] [%thread][%X{SERVICECOMB_TRACE_ID}] - %msg (%F:%L\)%n&lt;/pattern&gt;
+    &lt;/encoder&gt;
+  &lt;/appender&gt;
 </code></pre>
 
 
