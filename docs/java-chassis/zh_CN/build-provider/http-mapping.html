@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="jaxrs.html">
+        <link rel="prev" href="transparent-rpc.html">
       
       
-        <link rel="next" href="transparent-rpc.html">
+        <link rel="next" href="use-interface.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>用SpringMVC开发微服务 - Java Chassis 3 开发指南</title>
+        <title>HTTP参数映射参考 - Java Chassis 3 开发指南</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#spring-mvc" class="md-skip">
+        <a href="#http" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              用SpringMVC开发微服务
+              HTTP参数映射参考
             
           </span>
         </div>
@@ -563,30 +563,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    用SpringMVC开发微服务
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="springmvc.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="springmvc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -595,110 +575,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      开发步骤
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#servicecomb-spring-mvc" class="md-nav__link">
-    <span class="md-ellipsis">
-      ServiceComb支持的 Spring MVC 注解说明
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#http-header" class="md-nav__link">
-    <span class="md-ellipsis">
-      在响应中包含  HTTP header
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#string-body" class="md-nav__link">
-    <span class="md-ellipsis">
-      指定 String 类型 body 编码方式
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#querypojo" class="md-nav__link">
-    <span class="md-ellipsis">
-      Query参数聚合为POJO对象
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Query参数聚合为POJO对象">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      代码示例
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="代码示例">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#provider" class="md-nav__link">
-    <span class="md-ellipsis">
-      Provider端开发服务
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#consumer" class="md-nav__link">
-    <span class="md-ellipsis">
-      Consumer端调用服务
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -729,10 +605,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="http-mapping.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    HTTP参数映射参考
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="http-mapping.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -741,6 +637,173 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#http_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP请求参数映射
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP请求参数映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Path
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#header" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationx-www-form-urlencoded" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/x-www-form-urlencoded
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multipartform-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      multipart/form-data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationprotobuf" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/protobuf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationtext" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/text
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP响应参数映射
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP响应参数映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#header_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      状态码 和 Header
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationjson_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationprotobuf_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/protobuf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationtext_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2967,74 +3030,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#http_1" class="md-nav__link">
     <span class="md-ellipsis">
-      开发步骤
+      HTTP请求参数映射
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#servicecomb-spring-mvc" class="md-nav__link">
-    <span class="md-ellipsis">
-      ServiceComb支持的 Spring MVC 注解说明
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#http-header" class="md-nav__link">
-    <span class="md-ellipsis">
-      在响应中包含  HTTP header
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#string-body" class="md-nav__link">
-    <span class="md-ellipsis">
-      指定 String 类型 body 编码方式
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#querypojo" class="md-nav__link">
-    <span class="md-ellipsis">
-      Query参数聚合为POJO对象
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Query参数聚合为POJO对象">
+    <nav class="md-nav" aria-label="HTTP请求参数映射">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#query" class="md-nav__link">
     <span class="md-ellipsis">
-      代码示例
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="代码示例">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#provider" class="md-nav__link">
-    <span class="md-ellipsis">
-      Provider端开发服务
+      Query
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#consumer" class="md-nav__link">
+  <a href="#path" class="md-nav__link">
     <span class="md-ellipsis">
-      Consumer端调用服务
+      Path
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#header" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationx-www-form-urlencoded" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/x-www-form-urlencoded
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multipartform-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      multipart/form-data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationprotobuf" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/protobuf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationtext" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/text
     </span>
   </a>
   
@@ -3042,6 +3113,61 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP响应参数映射
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTP响应参数映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#header_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      状态码 和 Header
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationjson_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationprotobuf_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/protobuf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applicationtext_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      application/text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他
+    </span>
+  </a>
   
 </li>
         
@@ -3065,379 +3191,405 @@
                   
 
 
-<h1 id="spring-mvc">用 Spring MVC 开发微服务</h1>
-<p>Spring MVC 是 spring-web 项目定义的一套注解，开发者可以使用这套注解定义 REST 接口。 servicecomb 也
-支持使用这套标签定义 REST 接口。需要注意的是，servicecomb 只是使用这些注解，而注解的实现是项目自行开发的，
-实现的功能集合是 Spring MVC 注解的子集。可以阅读文章后面的内容了解具体的标签集合和使用约束。</p>
-<p><a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/springmvc-sample">SpringMVC Sample</a> 提供了一些基础的代码示例，可以下载使用。</p>
-<h2 id="_1">开发步骤</h2>
-<p>下面简单介绍使用 Spring MVC 开发 REST 服务的一些简单步骤。</p>
+<h1 id="http">HTTP参数映射参考</h1>
+<p>HTTP协议是一个文本传输协议，RESTFul框架核心部分，就是将语言对象与HTTP协议的组成部件映射起来，提供远程过程调用(RPC)能力。 HTTP的请求响应可以简化描述为：</p>
 <ul>
-<li>定义服务接口（可选）</li>
+<li>请求</li>
 </ul>
-<p>定义接口是一个好习惯， 它不是必须的。</p>
-<pre><code>    ```java
-    public interface Hello {
-        String sayHi(String name);
-        String sayHello(Person person);
-    }
-    ```
-</code></pre>
-<ul>
-<li>实现服务接口</li>
-</ul>
-<p>在服务的实现类上打上注解 <code>@RestSchema</code>，指定 <code>schemaId</code>。 注意 <code>schemaId</code> 需要保证微服务范围内唯一。</p>
-<pre><code>    ```java
-    @RestSchema(schemaId = "springmvcHello")
-    @RequestMapping(path = "/springmvchello", produces = MediaType.APPLICATION_JSON)
-    public class SpringmvcHelloImpl implements Hello {
-        @Override
-        @RequestMapping(path = "/sayhi", method = RequestMethod.POST)
-        public String sayHi(@RequestParam(name = "name") String name) {
-            return "Hello " + name;
-        }
+<pre><code class="language-text">GET /apps HTTP/1.1
 
-        @Override
-        @RequestMapping(path = "/sayhello", method = RequestMethod.POST)
-        public String sayHello(@RequestBody Person person) {
-            return "Hello person " + person.getName();
-        }
-    }
-    ```
-</code></pre>
-<h2 id="servicecomb-spring-mvc">ServiceComb支持的 Spring MVC 注解说明</h2>
-<p>servicecomb 支持使用 Spring MVC 提供的注解 <code>org.springframework.web.bind.annotation</code> 来声
-明REST接口，但是两者是独立的实现，而且有不一样的设计目标。servicecomb 的目标是提供跨语言、支持多通信协议的
-框架，因此去掉了Spring MVC中一些对跨语言支持不是很好的特性，也不支持特定运行框架强相关的特性，比
-如直接访问Servlet协议定义的<code>HttpServletRequest</code>。servicecomb 没有实现<code>@Controller</code>相关功
-能, 只实现了<code>@RestController</code>，即通过MVC模式进行页面渲染等功能都是不支持的。</p>
-<p>下面是一些具体差异。</p>
-<ul>
-<li>常用标签支持</li>
-</ul>
-<p>下面是CSE对于Spring MVC常用标签的支持情况。</p>
-<p><strong><em>表1-1 Spring MVC注解情况说明</em></strong></p>
-<table>
-<thead>
-<tr>
-<th>标签名称</th>
-<th style="text-align: center;">是否支持</th>
-<th style="text-align: left;">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RequestMapping</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;">不允许制定多个Path，一个接口只允许一个Path，必须显示的声明 method 属性，只能定义唯一一个 method</td>
-</tr>
-<tr>
-<td>GetMapping</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>PutMapping</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>PostMapping</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>DeleteMapping</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>PatchMapping</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>RequestParam</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;">注意含义与Spring MVC不同。Java Chassis 表示 query 参数。</td>
-</tr>
-<tr>
-<td>CookieValue</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>PathVariable</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>RequestHeader</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>RequestBody</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;">目前支持application/json，plain/text</td>
-</tr>
-<tr>
-<td>RequestPart</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;">用于文件上传的场景，对应的标签还有Part、MultipartFile</td>
-</tr>
-<tr>
-<td>ResponseBody</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;">返回值缺省都是在body返回</td>
-</tr>
-<tr>
-<td>ResponseStatus</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;">可以通过ApiResponse指定返回的错误码</td>
-</tr>
-<tr>
-<td>RequestAttribute</td>
-<td style="text-align: center;">是</td>
-<td style="text-align: left;">注意含义与Spring MVC不同。Java Chassis 表示 form 参数。</td>
-</tr>
-<tr>
-<td>SessionAttribute</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;">Servlet协议相关的标签</td>
-</tr>
-<tr>
-<td>MatrixVariable</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>ModelAttribute</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>ControllerAdvice</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>CrossOrigin</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>ExceptionHandler</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td>InitBinder</td>
-<td style="text-align: center;">否</td>
-<td style="text-align: left;"></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>服务声明方式</li>
-</ul>
-<p>Spring MVC使用<code>@RestController</code>声明服务，而ServiceComb使用<code>@RestSchema</code>声明服务，并且需
-  要显式地使用<code>@RequestMapping</code>声明服务路径，以区分该服务是采用Spring MVC的标签还是使用JAX RS的标签。</p>
-<pre><code>    ```
-    @RestSchema(schemaId = "springmvcHello")
-    @RequestMapping(path = "/springmvchello", produces = MediaType.APPLICATION_JSON)
-    public class SpringmvcHelloImpl implements Hello {
-      ......
-    }
-    ```
-</code></pre>
-<p>servicecomb 也支持 <code>@RestController</code> 声明，等价于 <code>@RestSchma(schemaId="服务的class名称")</code>，这个
-  功能可以简化用户将老的应用改造为 servicecomb 。 建议用户使用<code>@RestSchema</code>显式声明schemaId，在管理
-  接口基本的配置项的时候，更加直观。</p>
-<p><strong>注意</strong>：如果不希望Java-Chassis扫描<code>@RestController</code>注解作为REST接口类处理，需要增加配置
-  <code>servicecomb.provider.rest.scanRestController=false</code> 以关闭此功能。</p>
-<ul>
-<li>数据类型支持</li>
-</ul>
-<p>Spring 技术实现的 Spring MVC，可以在服务定义中使用多种数据类型，只要这种数据类型能够被json序列化和
-  反序列化。比如：</p>
-<pre><code>    ```
-    // 抽象类型
-    public void postData(@RequestBody Object data)
-    // 接口定义
-    public void postData(@RequestBody IPerson interfaceData)
-    // 没指定类型的泛型
-    public void postData(@RequestBody Map rawData)
-    ```
-</code></pre>
-<p>Spring 技术早期都是基于 JSP/Servlet 协议标准的，还可以使用相关的 context 参数，比如：</p>
-<pre><code>    ```
-    // 具体协议相关的类型
-    public void postData(HttpServletRequest rquest, HttpServletResponse response)
-    ```
-</code></pre>
-<p>servicecomb 对于数据类型存在一定的限制，不允许使用接口、抽象类等数据类型定义参数，虽然 servicecomb
-  支持使用 Object 这个特殊的类型来处理类型无法确定的情况，但是建议尽可能少使用，使用 Object 作为类型，
-  运行时的类型不确定，可能给客户端代码的书写带来一定麻烦。</p>
-<p>servicecomb 也支持一些 context 参数， 参考<a href="context-param.html">使用 Context 参数</a> 。但是由于 servicecomb 默认的运行环境并不是 JSP/Servlet 协议
-  环境，因此不能直接使用 <code>HttpServletRequest</code> 和 <code>HttpServletResponse</code>。 </p>
-<p>ServiceComb在数据类型的支持方面的更多说明，请参考： <a href="interface-constraints.html">接口定义和数据类型</a></p>
-<ul>
-<li>其他</li>
-</ul>
-<p>更多开发过程中碰到的问题，可以参考<a href="https://bbs.huaweicloud.com/blogs/8b8d8584e70d11e8bd5a7ca23e93a891">案例</a>。开发过程中存在疑问，也可以在这里进行提问。</p>
-<h2 id="http-header">在响应中包含  HTTP header</h2>
-<p>可以有多种方式在响应中包含 HTTP header， 下面代码展示了使用 ResponseEntity 包含 HTTP header。 需要注意
-使用 @ResponseHeaders 声明返回的 header 信息。 包含了 @ResponseHeaders 以后， 接口生成的契约中，也可以
-看到对应的 header 参数。</p>
-<pre><code class="language-java">  @ResponseHeaders({@ResponseHeader(name = &quot;h1&quot;, response = String.class),
-      @ResponseHeader(name = &quot;h2&quot;, response = String.class)})
-  @RequestMapping(path = &quot;/responseEntity&quot;, method = RequestMethod.POST)
-  public ResponseEntity&lt;Date&gt; responseEntity(InvocationContext c1, 
-        @RequestAttribute(&quot;date&quot;) Date date) {
-    HttpHeaders headers = new HttpHeaders();
-    headers.add(&quot;h1&quot;, &quot;h1v &quot; + c1.getContext().get(Const.SRC_MICROSERVICE));
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: application/x-www-form-urlencoded
 
-    InvocationContext c2 = ContextUtils.getInvocationContext();
-    headers.add(&quot;h2&quot;, &quot;h2v &quot; + c2.getContext().get(Const.SRC_MICROSERVICE));
+queryParamExample1=example1&amp;queryParamExample2=example2
+</code></pre>
+<ul>
+<li>响应</li>
+</ul>
+<pre><code class="language-text">Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
 
-    return new ResponseEntity&lt;&gt;(date, headers, HttpStatus.ACCEPTED);
-  }
+queryParamExample1=example1&amp;queryParamExample2=example2
 </code></pre>
-<p>也可以使用 Response 对象返回 HTTP header，示例代码如下：</p>
-<pre><code class="language-java">  @ApiResponse(code = 202, response = User.class, message = &quot;&quot;)
-  @ResponseHeaders({@ResponseHeader(name = &quot;h1&quot;, response = String.class),
-      @ResponseHeader(name = &quot;h2&quot;, response = String.class)})
-  @RequestMapping(path = &quot;/cseResponse&quot;, method = RequestMethod.GET)
-  public Response cseResponse(InvocationContext c1) {
-    Response response = Response.createSuccess(Status.ACCEPTED, new User());
-    Headers headers = response.getHeaders();
-    headers.addHeader(&quot;h1&quot;, &quot;h1v &quot; + c1.getContext().get(Const.SRC_MICROSERVICE));
+<h2 id="http_1">HTTP请求参数映射</h2>
+<h3 id="query">Query</h3>
+<p>Query参数属于HTTP协议URL的一部分，比如:</p>
+<pre><code class="language-text">GET /apps?queryParamExample1=example1&amp;queryParamExample2=example2 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+</code></pre>
+<p>定义了Query参数 <code>queryParamExample1</code> 和 <code>queryParamExample2</code>。</p>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@GetMapping(&quot;&quot;)
+public String queryExample(@RequestParam(&quot;queryParamExample1&quot;) String example1,
+    @RequestParam(&quot;queryParamExample2&quot;) String example2)
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@GET
+@Path(&quot;&quot;)
+public String queryJAXRSExample(@QueryParam(&quot;queryParamExample1&quot;) String example1,
+    @QueryParam(&quot;queryParamExample2&quot;) String example2)
+</code></pre>
+<h3 id="path">Path</h3>
+<p>Path参数属于HTTP协议URL的一部分，比如:</p>
+<pre><code class="language-text">GET /apps/pathParamExample1/pathParamExample2 HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+</code></pre>
+<p>定义了Path参数 <code>pathParamExample1</code> 和 <code>pathParamExample2</code>。</p>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@GetMapping(&quot;/{pathParamExample1}/{pathParamExample2}&quot;)
+public String pathSpringMVCExample(@PathVariable(&quot;pathParamExample1&quot;) String example1,
+    @PathVariable(&quot;pathParamExample2&quot;) String example2)
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@GET
+@Path(&quot;/{pathParamExample1}/{pathParamExample2}&quot;)
+public String pathJAXRSExample(@PathParam(&quot;pathParamExample1&quot;) String example1,
+    @PathParam(&quot;pathParamExample2&quot;) String example2) 
+</code></pre>
+<h3 id="header">Header</h3>
+<p>Header对应于HTTP协议请求头，比如:</p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+headerParamExample1: example1
+headerParamExample2: example2
+</code></pre>
+<p>定义了Header参数 <code>headerParamExample1</code> 和 <code>headerParamExample2</code>。</p>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@GetMapping(&quot;&quot;)
+public String headerSpringMVCExample(@RequestHeader(&quot;headerParamExample1&quot;) String example1,
+    @RequestHeader(&quot;headerParamExample2&quot;) String example2)
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@GET
+@Path(&quot;&quot;)
+public String headerJAXRSExample(@HeaderParam(&quot;headerParamExample1&quot;) String example1,
+    @HeaderParam(&quot;headerParamExample2&quot;) String example2)
+</code></pre>
+<h3 id="applicationx-www-form-urlencoded">application/x-www-form-urlencoded</h3>
+<p>当 HTTP 消息体是 <code>application/x-www-form-urlencoded</code>， 可以使用 Form 参数。 </p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: application/x-www-form-urlencoded
 
-    InvocationContext c2 = ContextUtils.getInvocationContext();
-    headers.addHeader(&quot;h2&quot;, &quot;h2v &quot; + c2.getContext().get(Const.SRC_MICROSERVICE));
+queryParamExample1=example1&amp;queryParamExample2=example2
+</code></pre>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@GetMapping(path = &quot;formSpringMVCExample&quot;, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+public String formSpringMVCExample(@RequestAttribute(&quot;formParamExample1&quot;) String example1,
+    @RequestAttribute(&quot;formParamExample2&quot;) String example2)
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>原生 Spring MVC 的 RequestAttribute 表示 HTTP 的 Attribute， 使用 RequestParam 表示 form 参数，这会导致代码生成契约的时候产生歧义。 Java Chassis 3 推荐使用 RequestAttribute 表示Form参数。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@GET
+@Path(&quot;formJAXRSExample&quot;)
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+public String formJAXRSExample(@FormParam(&quot;formParamExample1&quot;) String example1,
+    @FormParam(&quot;formParamExample2&quot;) String example2)
+</code></pre>
+<h3 id="multipartform-data">multipart/form-data</h3>
+<p>当 HTTP 消息体是 <code>multipart/form-data</code>， 表示文件上传。</p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: multipart/form-data; boundary=----boundary-example----
 
-    return response;
-  }
+----boundary-example----
+Content-Disposition: form-data; name=&quot;multiPartParamExample1&quot;
+
+contents of multiPartParamExample1
+----boundary-example----
+Content-Disposition: form-data; name=&quot;multiPartParamExample2&quot;
+
+contents of multiPartParamExample2
+----boundary-example----
 </code></pre>
-<p>这个示例代码还通过 @ApiResponse 指定了返回 202 错误码及其类型， 这个响应值会在契约体现。</p>
-<p><strong><em>注意</em></strong>: HIGHWAY 协议不支持指定返回错误码和类型。需要同时使用 HIGHWAY 和 REST 访问的接口，
-请勿使用。  </p>
-<h2 id="string-body">指定 String 类型 body 编码方式</h2>
-<p>使用 REST 通信的服务， 一般采用 json 进行编解码。 String 类型的数据， 编码为 json 的时候，存在
-双引号。 比如 <code>abc</code> 编码以后为 <code>"abc"</code> 。 但是 Spring 自身的实现， 将 String 类型的数据，编码
-为不带双引号。 为了保持 Spring 原始实现的方式兼容， servicecomb 提供了 <code>RawJsonRequestBody</code> 接收
-不带双引号的参数。 </p>
-<pre><code class="language-java">  @ResponseBody
-  public String testRawJsonAnnotation(@RawJsonRequestBody String jsonInput) {
-    return jsonInput;
-  }
-</code></pre>
-<p>或者使用 MediaType.TEXT_PLAIN_VALUE, 不使用 MediaType.APPLICATION_JSON_VALUE</p>
-<pre><code class="language-java">  @RequestMapping(path = &quot;/textPlain&quot;, method = RequestMethod.POST, 
-      consumes = MediaType.TEXT_PLAIN_VALUE)
-  public String textPlain(@RequestBody String body) {
-    return body;
-  }
-</code></pre>
-<p>如果响应不期望带双引号，可以使用 <code>produces = MediaType.TEXT_PLAIN_VALUE</code></p>
-<pre><code class="language-java"> @RequestMapping(path = &quot;/sayhi/compressed/{name}/v2&quot;, 
-    method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-  public String sayHiForCompressed(@PathVariable(name = &quot;name&quot;) String name) {
-     return name;
-  }
-</code></pre>
-<h2 id="querypojo">Query参数聚合为POJO对象</h2>
-<p>SpringBoot支持将Java业务接口中的多个query参数聚合为一个POJO类，SpringBoot原生用法示例如下：</p>
-<pre><code class="language-java">@RequestMapping(&quot;/hello&quot;)
-public class HelloService {
-  @RequestMapping(value = &quot;/sayHello&quot;, method = RequestMethod.GET)
-  public String sayHello(Person person) {
-    System.out.println(&quot;sayHello is called, person = [&quot; + person + &quot;]&quot;);
-    return &quot;Hello, your name is &quot; + person.getName() + &quot;, and age is &quot; + person.getAge();
-  }
-}
-</code></pre>
-<p>其中，作为参数的<code>Person</code>类是一个标准的JavaBean，包含属性<code>name</code>和<code>age</code>。当服务接收到的请求时，SpringBoot会将query参数<code>name</code>和<code>age</code>聚合为Person对象传入业务接口。</p>
-<p>ServiceComb的SpringMVC开发模式现在也支持类似的用法，该用法的要求如下：</p>
-<ol>
-<li>POJO参数上不能有Spring的参数注解，否则ServiceComb不会将其作为聚合的query参数对象处理。</li>
-<li>仅支持聚合query参数</li>
-<li>POJO参数类中的属性名与query参数名需要保持一致</li>
-<li>POJO参数中不支持复杂的属性，如其他POJO对象、List等。用户可以在这些复杂类型打上<code>@JsonIgnore</code>注解来让ServiceComb忽略这些复杂属性。</li>
-<li>consumer端不支持query参数聚合为POJO对象，调用服务时依然要按照契约发送请求。即provider端被聚合的POJO参数在契约中会被展开成一系列的query参数，consumer端需要在provider接口方法中依次定义这些query参数（RPC开发模式），或在发送请求时填入这些query参数（RestTemplate开发模式）。</li>
-</ol>
-<h3 id="_2">代码示例</h3>
-<h4 id="provider">Provider端开发服务</h4>
-<ul>
-<li>Provider端业务接口代码：</li>
-</ul>
-<pre><code class="language-java">  @RestSchema(schemaId = &quot;helloService&quot;)
-  @RequestMapping(&quot;/hello&quot;)
-  public class HelloService {
-    @RequestMapping(value = &quot;/sayHello&quot;, method = RequestMethod.GET)
-    public String sayHello(Person person) {
-      System.out.println(&quot;sayHello is called, person = [&quot; + person + &quot;]&quot;);
-      return &quot;Hello, your name is &quot; + person.getName() + &quot;, and age is &quot; + person.getAge();
-    }
-  }
+<blockquote>
+<blockquote>
+<blockquote>
+<p>multipart/form-data 也可以表示 Form 参数， 和 application/x-www-form-urlencoded 用法一样。为了避免混淆和简洁，建议multipart/form-data用于文件上传场景。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="language-java">@PostMapping(path = &quot;multiPartSpringMVCExample&quot;, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String multiPartSpringMVCExample(@RequestPart(&quot;multiPartParamExample1&quot;) MultipartFile example1,
+    @RequestPart(&quot;multiPartParamExample2&quot;) MultipartFile example2)
 </code></pre>
 <ul>
-<li>POJO参数对象定义：</li>
+<li>JAX-RS</li>
 </ul>
-<pre><code class="language-java">  public class Person {
-    private String name;
-    private int age;
-    @JsonIgnore  // 复杂属性需要标记@JsonIgnore，否则启动时会报错
-    private List&lt;Person&gt; children;
-  }
+<pre><code class="language-java">@POST
+@Path(&quot;multiPartJAXRSExample&quot;)
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public String multiPartJAXRSExample(@FormParam(&quot;multiPartParamExample1&quot;) Part example1,
+    @FormParam(&quot;multiPartParamExample2&quot;) Part example2)
+</code></pre>
+<h3 id="applicationjson">application/json</h3>
+<p>当 HTTP 消息体是 <code>application/json</code>， 使用json进行对象序列化。</p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: application/json
+
+{&quot;name&quot;: &quot;wang&quot;, &quot;age&quot;: 20}
 </code></pre>
 <ul>
-<li>接口契约：</li>
+<li>Spring MVC</li>
 </ul>
-<pre><code class="language-yaml"># 忽略契约的其他部分
-basePath: &quot;/hello&quot;
-paths:
-  /sayHello:
-    get:
-      operationId: &quot;sayHello&quot;
-      parameters:
-        # Person类的name属性和age属性作为契约中的query参数
-      - name: &quot;name&quot;
-        in: &quot;query&quot;
-        required: false
-        type: &quot;string&quot;
-      - name: &quot;age&quot;
-        in: &quot;query&quot;
-        required: false
-        type: &quot;integer&quot;
-        format: &quot;int32&quot;
-      responses:
-        200:
-          description: &quot;response of 200&quot;
-          schema:
-            type: &quot;string&quot;
+<pre><code class="language-java">@PostMapping(path = &quot;jsonSpringMVCExample&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+public String jsonSpringMVCExample(@RequestBody Person person) 
 </code></pre>
-<h4 id="consumer">Consumer端调用服务</h4>
-<p>consumer端RPC开发模式：</p>
 <ul>
-<li>Provider接口定义</li>
+<li>JAX-RS</li>
 </ul>
-<pre><code class="language-java">public interface HelloServiceIntf {
-  String sayHello(String name, int age);
+<pre><code class="language-java">@POST
+@Path(&quot;jsonJAXRSExample&quot;)
+@Consumes(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
+public String jsonJAXRSExample(Person person)
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>JAX-RS没有声明标签的时候表示Body参数。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="applicationprotobuf">application/protobuf</h3>
+<p>当 HTTP 消息体是 <code>application/protobuf</code>， 使用protobuf进行对象序列化。</p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: application/protobuf
+
+proto-buffer-binary-data
+</code></pre>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@PostMapping(path = &quot;protobufSpringMVCExample&quot;, consumes = SwaggerConst.PROTOBUF_TYPE)
+public String protobufSpringMVCExample(@RequestBody Person person)
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@POST
+@Path(&quot;protobufJAXRSExample&quot;)
+@Consumes(SwaggerConst.PROTOBUF_TYPE)
+public String protobufJAXRSExample(Person person)
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>JAX-RS没有声明标签的时候表示Body参数。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="applicationtext">application/text</h3>
+<p>当 HTTP 消息体是 <code>application/text</code>， 使用json进行对象序列化。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>application/text 和 application/json 在对象序列化上都采用 json，对于大多数场景两者是等价的。只有当对象类型为 String 的时候， 存在差异：application/text 的 String 序列化后的文本没有双引号；application/json 的 String 序列化后的文本有双引号；</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: application/text
+
+{&quot;name&quot;: &quot;wang&quot;, &quot;age&quot;: 20}
+</code></pre>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@PostMapping(path = &quot;textSpringMVCExample&quot;, consumes = MediaType.TEXT_PLAIN_VALUE)
+public String textSpringMVCExample(@RequestBody Person person)
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@POST
+@Path(&quot;textJAXRSExample&quot;)
+@Consumes(MediaType.TEXT_PLAIN)
+public String textJAXRSExample(Person person) 
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>JAX-RS没有声明标签的时候表示Body参数。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="http_2">HTTP响应参数映射</h2>
+<h3 id="header_1">状态码 和 Header</h3>
+<p>在没有特殊声明的情况下，正常响应的状态码是 <code>200</code>，也可以声明其他状态码。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Java Chassis 2xx 状态码表示正常响应，会进行对象序列化。 可以使用 <code>@ApiResponse</code> 自定义状态码，所有 2xx 状态码声明的对象类型必须一样。 其他状态码表示异常，会对 <code>InvocationException</code> 进行序列化，不要求对象类型一样。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@PostMapping(path = &quot;statusHeaderSpringMVCExample&quot;)
+@ApiResponses(value = {
+    @ApiResponse(
+        responseCode = &quot;200&quot;,
+        content = @Content(schema = @Schema(implementation = Person.class)),
+        headers = {
+            @Header(name = &quot;h1&quot;, schema = @Schema(implementation = String.class)),
+            @Header(name = &quot;h2&quot;, schema = @Schema(implementation = String.class))}),
+    @ApiResponse(
+        responseCode = &quot;202&quot;,
+        content = @Content(schema = @Schema(implementation = Person.class)),
+        headers = {
+            @Header(name = &quot;h1&quot;, schema = @Schema(implementation = String.class)),
+            @Header(name = &quot;h2&quot;, schema = @Schema(implementation = String.class))}),
+    @ApiResponse(
+        responseCode = &quot;400&quot;,
+        content = @Content(schema = @Schema(implementation = MultiResponse400.class)),
+        headers = {
+            @Header(name = &quot;h1&quot;, schema = @Schema(implementation = String.class)),
+            @Header(name = &quot;h2&quot;, schema = @Schema(implementation = String.class))})})
+public ResponseEntity&lt;Person&gt; statusHeaderSpringMVCExample(@RequestBody Person person) {
+    return ResponseEntity.status(200).header(&quot;h1&quot;, &quot;h1&quot;)
+    .header(&quot;h2&quot;, &quot;h2&quot;).body(person);
 }
 </code></pre>
 <ul>
-<li>调用代码</li>
+<li>JAX-RS</li>
 </ul>
-<pre><code class="language-java">String result = helloService.sayHello(&quot;Bob&quot;, 22); // result的值为&quot;Hello, your name is Bob, and age is 22&quot;
+<pre><code class="language-java">@PostMapping(path = &quot;statusHeaderJAXRSExample&quot;)
+@ApiResponses(value = {
+    @ApiResponse(
+        responseCode = &quot;200&quot;,
+        content = @Content(schema = @Schema(implementation = Person.class)),
+        headers = {
+            @Header(name = &quot;h1&quot;, schema = @Schema(implementation = String.class)),
+            @Header(name = &quot;h2&quot;, schema = @Schema(implementation = String.class))}),
+    @ApiResponse(
+        responseCode = &quot;202&quot;,
+        content = @Content(schema = @Schema(implementation = Person.class)),
+        headers = {
+            @Header(name = &quot;h1&quot;, schema = @Schema(implementation = String.class)),
+            @Header(name = &quot;h2&quot;, schema = @Schema(implementation = String.class))}),
+    @ApiResponse(
+        responseCode = &quot;400&quot;,
+        content = @Content(schema = @Schema(implementation = MultiResponse400.class)),
+        headers = {
+            @Header(name = &quot;h1&quot;, schema = @Schema(implementation = String.class)),
+            @Header(name = &quot;h2&quot;, schema = @Schema(implementation = String.class))})})
+public Response statusHeaderJAXRSExample(@RequestBody Person person) {
+    return Response.status(200).entity(new Person()).header(&quot;h1&quot;, &quot;h1&quot;)
+    .header(&quot;h2&quot;, &quot;h2&quot;).build();
+}
+</code></pre>
+<h3 id="applicationjson_1">application/json</h3>
+<p>响应类型根据 <code>Accept</code> 来确定，默认是 application/json。 也可以声明接口只支持 application/json 响应。 </p>
+<pre><code class="language-java">@PostMapping(path = &quot;produceJsonSpringMVCExample&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
+public Person produceJsonSpringMVCExample()
 </code></pre>
 <ul>
-<li>consumer端RestTemplate开发模式：</li>
+<li>JAX-RS</li>
 </ul>
-<pre><code class="language-java">String result = restTemplate.getForObject(
-  &quot;cse://provider-service/hello/sayHello?name=Bob&amp;age=22&quot;,
-  String.class); // 调用效果与RPC方式相同
+<pre><code class="language-java">@POST
+@Path(&quot;produceJsonJAXRSExample&quot;)
+@Produces(MediaType.APPLICATION_JSON)
+public Person produceJsonJAXRSExample() 
+</code></pre>
+<h3 id="applicationprotobuf_1">application/protobuf</h3>
+<p>响应类型根据 <code>Accept</code> 来确定，默认是 application/json。 也可以声明接口只支持 application/protobuf 响应。</p>
+<pre><code class="language-java">@PostMapping(path = &quot;produceProtobufSpringMVCExample&quot;, produces = SwaggerConst.PROTOBUF_TYPE)
+public Person produceProtobufSpringMVCExample()
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@POST
+@Path(&quot;produceProtobufJAXRSExample&quot;)
+@Produces(SwaggerConst.PROTOBUF_TYPE)
+public Person produceProtobufJAXRSExample() 
+</code></pre>
+<h3 id="applicationtext_1">application/text</h3>
+<p>响应类型根据 <code>Accept</code> 来确定，默认是 application/json。 也可以声明接口只支持 application/text 响应。</p>
+<pre><code class="language-java">@PostMapping(path = &quot;produceTextSpringMVCExample&quot;, produces = MediaType.TEXT_PLAIN_VALUE)
+public Person produceTextSpringMVCExample()
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@POST
+@Path(&quot;produceTextJAXRSExample&quot;)
+@Produces(MediaType.TEXT_PLAIN)
+public Person produceTextJAXRSExample() 
+</code></pre>
+<h3 id="_1">其他</h3>
+<p>Java Chassis提供了通用的 <code>文件下载</code> 支持。 如果返回值类型为 <code>File</code>、<code>Resource</code>、<code>InputStream</code>、<code>Part</code> 等，则被认为是 <code>文件下载</code>。 </p>
+<ul>
+<li>Spring MVC</li>
+</ul>
+<pre><code class="language-java">@GetMapping(path = &quot;/downloadSpringMVCExample&quot;)
+public Part downloadSpringMVCExample(String content) throws IOException {
+    File file = createTempFile(content);
+    return new FilePart(null, file)
+        .setDeleteAfterFinished(true)
+        .setSubmittedFileName(&quot;test.txt&quot;)
+        .contentType(&quot;application/octet-stream&quot;);
+}
+</code></pre>
+<p>上述接口会返回如下响应头:</p>
+<pre><code class="language-text">Content-Disposition: attachment;filename=file.txt;filename*=utf-8’’file.txt
+Content-Encoding: gzip
+Content-Type: application/octet-stream
+Transfer-Encoding: chunked
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@GET
+@Path(&quot;/downloadSpringMVCExample&quot;)
+public Part downloadSpringMVCExample(String content) throws IOException {
+    File file = createTempFile(content);
+    return new FilePart(null, file)
+        .setDeleteAfterFinished(true)
+        .setSubmittedFileName(&quot;test.txt&quot;)
+        .contentType(&quot;application/octet-stream&quot;);
+}
+</code></pre>
+<p>上述接口会返回如下响应头:</p>
+<pre><code class="language-text">Content-Disposition: attachment;filename=file.txt;filename*=utf-8’’file.txt
+Content-Encoding: gzip
+Content-Type: application/octet-stream
+Transfer-Encoding: chunked
 </code></pre>
 
 
