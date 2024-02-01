@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="transparent-rpc.html">
+        <link rel="prev" href="basics.html">
       
       
-        <link rel="next" href="use-interface.html">
+        <link rel="next" href="jaxrs.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -542,69 +542,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="jaxrs.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    用JAX-RS开发微服务
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="springmvc.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    用SpringMVC开发微服务
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="transparent-rpc.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    用透明RPC开发微服务
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -700,15 +637,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#multipartform-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      multipart/form-data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#applicationjson" class="md-nav__link">
     <span class="md-ellipsis">
       application/json
@@ -730,6 +658,15 @@
   <a href="#applicationtext" class="md-nav__link">
     <span class="md-ellipsis">
       application/text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multipartform-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件上传：multipart/form-data
     </span>
   </a>
   
@@ -789,7 +726,7 @@
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      其他
+      文件下载
     </span>
   </a>
   
@@ -804,6 +741,69 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="jaxrs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用JAX-RS开发微服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="springmvc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用SpringMVC开发微服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="transparent-rpc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    用透明RPC开发微服务
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3076,15 +3076,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#multipartform-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      multipart/form-data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#applicationjson" class="md-nav__link">
     <span class="md-ellipsis">
       application/json
@@ -3106,6 +3097,15 @@
   <a href="#applicationtext" class="md-nav__link">
     <span class="md-ellipsis">
       application/text
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multipartform-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件上传：multipart/form-data
     </span>
   </a>
   
@@ -3165,7 +3165,7 @@
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      其他
+      文件下载
     </span>
   </a>
   
@@ -3313,43 +3313,6 @@ public String formSpringMVCExample(@RequestAttribute(&quot;formParamExample1&quo
 public String formJAXRSExample(@FormParam(&quot;formParamExample1&quot;) String example1,
     @FormParam(&quot;formParamExample2&quot;) String example2)
 </code></pre>
-<h3 id="multipartform-data">multipart/form-data</h3>
-<p>当 HTTP 消息体是 <code>multipart/form-data</code>， 表示文件上传。</p>
-<pre><code class="language-text">GET /apps HTTP/1.1
-Host: 127.0.0.1:8080
-Accept-Language: zh
-Content-Type: multipart/form-data; boundary=----boundary-example----
-
-----boundary-example----
-Content-Disposition: form-data; name=&quot;multiPartParamExample1&quot;
-
-contents of multiPartParamExample1
-----boundary-example----
-Content-Disposition: form-data; name=&quot;multiPartParamExample2&quot;
-
-contents of multiPartParamExample2
-----boundary-example----
-</code></pre>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>multipart/form-data 也可以表示 Form 参数， 和 application/x-www-form-urlencoded 用法一样。为了避免混淆和简洁，建议multipart/form-data用于文件上传场景。 </p>
-</blockquote>
-</blockquote>
-</blockquote>
-<pre><code class="language-java">@PostMapping(path = &quot;multiPartSpringMVCExample&quot;, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String multiPartSpringMVCExample(@RequestPart(&quot;multiPartParamExample1&quot;) MultipartFile example1,
-    @RequestPart(&quot;multiPartParamExample2&quot;) MultipartFile example2)
-</code></pre>
-<ul>
-<li>JAX-RS</li>
-</ul>
-<pre><code class="language-java">@POST
-@Path(&quot;multiPartJAXRSExample&quot;)
-@Consumes(MediaType.MULTIPART_FORM_DATA)
-public String multiPartJAXRSExample(@FormParam(&quot;multiPartParamExample1&quot;) Part example1,
-    @FormParam(&quot;multiPartParamExample2&quot;) Part example2)
-</code></pre>
 <h3 id="applicationjson">application/json</h3>
 <p>当 HTTP 消息体是 <code>application/json</code>， 使用json进行对象序列化。</p>
 <pre><code class="language-text">GET /apps HTTP/1.1
@@ -3447,6 +3410,43 @@ public String textJAXRSExample(Person person)
 </blockquote>
 </blockquote>
 </blockquote>
+<h3 id="multipartform-data">文件上传：multipart/form-data</h3>
+<p>当 HTTP 消息体是 <code>multipart/form-data</code>， 表示文件上传。</p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: multipart/form-data; boundary=----boundary-example----
+
+----boundary-example----
+Content-Disposition: form-data; name=&quot;multiPartParamExample1&quot;
+
+contents of multiPartParamExample1
+----boundary-example----
+Content-Disposition: form-data; name=&quot;multiPartParamExample2&quot;
+
+contents of multiPartParamExample2
+----boundary-example----
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>multipart/form-data 也可以表示 Form 参数， 和 application/x-www-form-urlencoded 用法一样。为了避免混淆和简洁，建议multipart/form-data用于文件上传场景。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code class="language-java">@PostMapping(path = &quot;multiPartSpringMVCExample&quot;, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String multiPartSpringMVCExample(@RequestPart(&quot;multiPartParamExample1&quot;) MultipartFile example1,
+    @RequestPart(&quot;multiPartParamExample2&quot;) MultipartFile example2)
+</code></pre>
+<ul>
+<li>JAX-RS</li>
+</ul>
+<pre><code class="language-java">@POST
+@Path(&quot;multiPartJAXRSExample&quot;)
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public String multiPartJAXRSExample(@FormParam(&quot;multiPartParamExample1&quot;) Part example1,
+    @FormParam(&quot;multiPartParamExample2&quot;) Part example2)
+</code></pre>
 <h2 id="http_2">HTTP响应参数映射</h2>
 <h3 id="header_1">状态码 和 Header</h3>
 <p>在没有特殊声明的情况下，正常响应的状态码是 <code>200</code>，也可以声明其他状态码。</p>
@@ -3515,6 +3515,9 @@ public Response statusHeaderJAXRSExample(@RequestBody Person person) {
 </code></pre>
 <h3 id="applicationjson_1">application/json</h3>
 <p>响应类型根据 <code>Accept</code> 来确定，默认是 application/json。 也可以声明接口只支持 application/json 响应。 </p>
+<ul>
+<li>Spring MVC</li>
+</ul>
 <pre><code class="language-java">@PostMapping(path = &quot;produceJsonSpringMVCExample&quot;, produces = MediaType.APPLICATION_JSON_VALUE)
 public Person produceJsonSpringMVCExample()
 </code></pre>
@@ -3528,6 +3531,9 @@ public Person produceJsonJAXRSExample()
 </code></pre>
 <h3 id="applicationprotobuf_1">application/protobuf</h3>
 <p>响应类型根据 <code>Accept</code> 来确定，默认是 application/json。 也可以声明接口只支持 application/protobuf 响应。</p>
+<ul>
+<li>Spring MVC</li>
+</ul>
 <pre><code class="language-java">@PostMapping(path = &quot;produceProtobufSpringMVCExample&quot;, produces = SwaggerConst.PROTOBUF_TYPE)
 public Person produceProtobufSpringMVCExample()
 </code></pre>
@@ -3541,6 +3547,9 @@ public Person produceProtobufJAXRSExample()
 </code></pre>
 <h3 id="applicationtext_1">application/text</h3>
 <p>响应类型根据 <code>Accept</code> 来确定，默认是 application/json。 也可以声明接口只支持 application/text 响应。</p>
+<ul>
+<li>Spring MVC</li>
+</ul>
 <pre><code class="language-java">@PostMapping(path = &quot;produceTextSpringMVCExample&quot;, produces = MediaType.TEXT_PLAIN_VALUE)
 public Person produceTextSpringMVCExample()
 </code></pre>
@@ -3552,8 +3561,8 @@ public Person produceTextSpringMVCExample()
 @Produces(MediaType.TEXT_PLAIN)
 public Person produceTextJAXRSExample() 
 </code></pre>
-<h3 id="_1">其他</h3>
-<p>Java Chassis提供了通用的 <code>文件下载</code> 支持。 如果返回值类型为 <code>File</code>、<code>Resource</code>、<code>InputStream</code>、<code>Part</code> 等，则被认为是 <code>文件下载</code>。 </p>
+<h3 id="_1">文件下载</h3>
+<p>Java Chassis提供了通用的 <code>文件下载</code> 支持。 如果返回值类型为 <code>File</code>、<code>Resource</code>、<code>InputStream</code>、<code>Part</code> 等，则被认为是 <code>文件下载</code>。 文件MIME类型和文件名可以使用 <code>Part</code> 的 API 指定。</p>
 <ul>
 <li>Spring MVC</li>
 </ul>
@@ -3562,12 +3571,12 @@ public Part downloadSpringMVCExample(String content) throws IOException {
     File file = createTempFile(content);
     return new FilePart(null, file)
         .setDeleteAfterFinished(true)
-        .setSubmittedFileName(&quot;test.txt&quot;)
+        .setSubmittedFileName(&quot;test.bin&quot;)
         .contentType(&quot;application/octet-stream&quot;);
 }
 </code></pre>
 <p>上述接口会返回如下响应头:</p>
-<pre><code class="language-text">Content-Disposition: attachment;filename=file.txt;filename*=utf-8’’file.txt
+<pre><code class="language-text">Content-Disposition: attachment;filename=test.bin;filename*=utf-8’’test.bin
 Content-Encoding: gzip
 Content-Type: application/octet-stream
 Transfer-Encoding: chunked
@@ -3581,12 +3590,12 @@ public Part downloadSpringMVCExample(String content) throws IOException {
     File file = createTempFile(content);
     return new FilePart(null, file)
         .setDeleteAfterFinished(true)
-        .setSubmittedFileName(&quot;test.txt&quot;)
+        .setSubmittedFileName(&quot;test.bin&quot;)
         .contentType(&quot;application/octet-stream&quot;);
 }
 </code></pre>
 <p>上述接口会返回如下响应头:</p>
-<pre><code class="language-text">Content-Disposition: attachment;filename=file.txt;filename*=utf-8’’file.txt
+<pre><code class="language-text">Content-Disposition: attachment;filename=test.bin;filename*=utf-8’’test.bin
 Content-Encoding: gzip
 Content-Type: application/octet-stream
 Transfer-Encoding: chunked
