@@ -1440,7 +1440,7 @@
         
   
   <span class="md-ellipsis">
-    跨域资源共享(CORS配置
+    跨域资源共享(CORS)
   </span>
   
 
@@ -2858,23 +2858,42 @@
 
 
 <h1 id="_1">文件上传开发指导</h1>
+<p>当 HTTP 消息体是 <code>multipart/form-data</code>， 表示文件上传。</p>
+<pre><code class="language-text">GET /apps HTTP/1.1
+Host: 127.0.0.1:8080
+Accept-Language: zh
+Content-Type: multipart/form-data; boundary=----boundary-example----
+
+----boundary-example----
+Content-Disposition: form-data; name=&quot;multiPartParamExample1&quot;
+
+contents of multiPartParamExample1
+----boundary-example----
+Content-Disposition: form-data; name=&quot;multiPartParamExample2&quot;
+
+contents of multiPartParamExample2
+----boundary-example----
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>multipart/form-data 也可以表示 Form 参数， 和 application/x-www-form-urlencoded 用法一样。为了避免混淆和简洁，建议multipart/form-data专用于文件上传场景。</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <h2 id="_2">服务提供者开发</h2>
 <p>服务提供者可以采用Spring MVC 或者 Jax RS定义上传接口。</p>
 <ul>
 <li>采用Spring MVC</li>
 </ul>
-<pre><code class="language-java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;file&quot;) MultipartFile file)
-
-@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;file&quot;) Part file)
+<pre><code class="language-java">@PostMapping(path = &quot;multiPartSpringMVCExample&quot;, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String multiPartSpringMVCExample(@RequestPart(&quot;multiPartParamExample1&quot;) MultipartFile example1,
+@RequestPart(&quot;multiPartParamExample2&quot;) MultipartFile example2)
 </code></pre>
 <p>文件上传需要通过 @RequestPart 声明参数，参数类型支持 servlet 定义的 javax.servlet.http.Part 类型，也支持
 org.springframework.web.multipart.MultipartFile 类型，两种数据类型功能是一致的，MultipartFile 的底
-层也是Part。  两种数据类型可以混合使用，比如第一个参数是Part，第二个参数是MultipartFile。 除了通过
-定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
+层也是Part。 两种数据类型可以混合使用，比如第一个参数是Part，第二个参数是MultipartFile。 </p>
+<p>除了通过定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
 <pre><code class="language-java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
   consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;MultipartFile&gt; files)
@@ -2883,23 +2902,37 @@ public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;Multipa
   consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 public String fileUpload(@RequestPart(name = &quot;files&quot;) MultipartFile[] files)
 </code></pre>
-<p>可以通过@RequestAttribute获取其他额外信息。</p>
-<pre><code class="language-java">@PostMapping(path = &quot;/fileUpload&quot;, produces = MediaType.TEXT_PLAIN_VALUE, 
-  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public String fileUpload(@RequestPart(name = &quot;files&quot;)  List&lt;MultipartFile&gt; files,
+<blockquote>
+<blockquote>
+<blockquote>
+<p>说明： 使用 List 或者数组，在HTTP参数映射中，多个文件对应于同名的 form 内容，这不是一个好的 API 设计实践。建议非必要不使用 List 或者数组作为文件上传参数。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>可以通过 <code>@RequestAttribute</code> 获取其他额外信息。</p>
+<pre><code class="language-java">@PostMapping(path = &quot;multiPartSpringMVCExample&quot;, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+public String multiPartSpringMVCExample(@RequestPart(&quot;multiPartParamExample1&quot;) MultipartFile example1,
+@RequestPart(&quot;multiPartParamExample2&quot;) MultipartFile example2,
      @RequestAttribute(&quot;message&quot;) String message)
 </code></pre>
-<p>Spring MVC方式定义上传接口还有其他很多方式，可以下载java-chassis源码，并查看UploadSpringmvcSchema里面的示例。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>说明：<code>@RequestAttribute</code> 读取 form 内容， 并将 form 内容转换为 String 类型。 由于 <code>multipart/form-data</code> 的 Content-Type 可能存在多样性， 建议文件上传场景不使用 <code>@RequestAttribute</code>， 而是使用 <code>@RequestHeader</code> 传递额外信息。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
 <ul>
 <li>采用Jax RS</li>
 </ul>
-<pre><code class="language-java">@Path(&quot;/fileUpload&quot;)
-@POST
-@Produces(MediaType.TEXT_PLAIN)
-public String fileUpload(@FormParam(name = &quot;file&quot;) Part file)
+<pre><code class="language-java">@POST
+@Path(&quot;multiPartJAXRSExample&quot;)
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public String multiPartJAXRSExample(@FormParam(&quot;multiPartParamExample1&quot;) Part example1,
+@FormParam(&quot;multiPartParamExample2&quot;) Part example2)
 </code></pre>
-<p>文件上传需要通过 @FormParam 声明参数，参数类型支持servlet定义的javax.servlet.http.Part类型。除了通过
-定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
+<p>文件上传需要通过 @FormParam 声明参数，参数类型支持servlet定义的javax.servlet.http.Part类型。</p>
+<p>除了通过定义多个参数的方式上传多个文件，也可以通过List或者数组的方式声明上传多个文件。</p>
 <pre><code class="language-java">@Path(&quot;/fileUpload&quot;)
 @POST
 @Produces(MediaType.TEXT_PLAIN)
@@ -2910,14 +2943,28 @@ public String fileUpload(@FormParam(name = &quot;files&quot;) List&lt;Part&gt; f
 @Produces(MediaType.TEXT_PLAIN)
 public String fileUpload(@FormParam(name = &quot;files&quot;) Part[] files)
 </code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>说明： 使用 List 或者数组，在HTTP参数映射中，多个文件对应于同名的 form 内容。 尽管在非浏览器场景，使用 List 或者数组会带来便利，但是对于浏览器上传场景则不利于理解。建议非必要不使用 List 或者数组作为文件上传参数。</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <p>可以通过@FormParam获取其他额外信息。</p>
-<pre><code class="language-java">@Path(&quot;/fileUpload&quot;)
-@POST
-@Produces(MediaType.TEXT_PLAIN)
-public String fileUpload(@FormParam(name = &quot;files&quot;) List&lt;Part&gt; files,
+<pre><code class="language-java">@POST
+@Path(&quot;multiPartJAXRSExample&quot;)
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+public String multiPartJAXRSExample(@FormParam(&quot;multiPartParamExample1&quot;) Part example1,
+@FormParam(&quot;multiPartParamExample2&quot;) Part example2,
     @FormParam(&quot;message&quot;) String message)
 </code></pre>
-<p>Jax RS 方式定义上传接口还有其他很多方式，可以下载java-chassis源码，并查看 UploadJaxrsSchema 里面的示例。</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>说明：<code>@FormParam</code> 读取 form 内容， 并将 form 内容转换为 String 类型。 由于 <code>multipart/form-data</code> 的 Content-Type 可能存在多样性， 建议文件上传场景不使用 <code>@FormParam</code>， 而是使用 <code>@RequestHeader</code> 传递额外信息。</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <ul>
 <li>业务开发注意事项</li>
 </ul>
@@ -2943,18 +2990,14 @@ HttpEntity&lt;Map&lt;String, Object&gt;&gt; entity = new HttpEntity&lt;&gt;(map,
 
 String reseult = template.postForObject(url, entity, String.class);
 </code></pre>
-<p>服务消费者不区分服务提供者是 Spring MVC 或者 Jax RS。 在使用透明 RPC 或者 RestTemplate 的时候， 可以使用如下类型
-与服务提供者的文件对应： </p>
+<p>服务消费者不区分服务提供者是 Spring MVC 或者 Jax RS。 在使用透明 RPC 或者 RestTemplate 的时候， 可以使用如下类型与服务提供者的文件对应： </p>
 <ul>
 <li>java.io.File</li>
 <li>javax.servlet.http.Part</li>
 <li>java.io.InputStream</li>
 <li>org.springframework.core.io.Resource</li>
 </ul>
-<p>使用InputStream时，因为是流的方式，此时没有客户端文件名的概念，服务提供者获取到的文件名为null。 
-如果既要使用内存数据，又想让producer可以获取客户端文件名，可以使用resource类型，继承
-org.springframework.core.io.ByteArrayResource，且需要实现 getFilename 方法。</p>
-<p>一样的，服务消费者还有其他灵活的使用方式，可以下载 java-chassis 代码查看调用示例。</p>
+<p>使用InputStream时，因为是流的方式，此时没有客户端文件名的概念，服务提供者获取到的文件名为null。 如果既要使用内存数据，又想让producer可以获取客户端文件名，可以使用resource类型，继承org.springframework.core.io.ByteArrayResource，且需要实现 getFilename 方法。</p>
 <h2 id="_4">使用浏览器上传文件</h2>
 <p>浏览器通过Form的方式上传文件，下面是一个简单的HTML 和 JS 示例</p>
 <pre><code class="language-html">&lt;form id=&quot;upload_form&quot; method=&quot;POST&quot;&gt;
