@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="common-configuration.html">
+        <link rel="prev" href="basics.html">
       
       
         <link rel="next" href="develop-consumer-using-rpc.html">
@@ -20,7 +20,7 @@
     
     
       
-        <title>使用RestTemplate开发服务消费者 - Java Chassis 3 开发指南</title>
+        <title>Restful风格 - 使用 RestOperations - Java Chassis 3 开发指南</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#resttemplate" class="md-skip">
+        <a href="#restful-restoperations" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              使用RestTemplate开发服务消费者
+              Restful风格 - 使用 RestOperations
             
           </span>
         </div>
@@ -938,11 +938,11 @@
   
   
     <li class="md-nav__item">
-      <a href="common-configuration.html" class="md-nav__link">
+      <a href="basics.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    消费者通用配置项
+    基础概念
   </span>
   
 
@@ -972,7 +972,7 @@
           
   
   <span class="md-ellipsis">
-    使用RestTemplate开发服务消费者
+    Restful风格 - 使用 RestOperations
   </span>
   
 
@@ -983,7 +983,7 @@
         
   
   <span class="md-ellipsis">
-    使用RestTemplate开发服务消费者
+    Restful风格 - 使用 RestOperations
   </span>
   
 
@@ -1051,7 +1051,7 @@
         
   
   <span class="md-ellipsis">
-    使用RPC方式开发服务消费者
+    RPC风格
   </span>
   
 
@@ -1068,32 +1068,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../featured-topics/features/invoker.html" class="md-nav__link">
+      <a href="invoker.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     泛化调用
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="with-contract.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    使用服务契约
   </span>
   
 
@@ -1723,7 +1702,7 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP(Vert.x
+    REST over HTTP(Vert.x)
   </span>
   
 
@@ -1744,7 +1723,7 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP2(Vert.x
+    REST over HTTP2(Vert.x)
   </span>
   
 
@@ -1765,7 +1744,7 @@
         
   
   <span class="md-ellipsis">
-    REST over Servlet(Spring Boot Embedded
+    REST over Servlet(Spring Boot Embedded)
   </span>
   
 
@@ -1786,7 +1765,7 @@
         
   
   <span class="md-ellipsis">
-    REST over Servlet(WAR
+    REST over Servlet(WAR)
   </span>
   
 
@@ -2921,62 +2900,46 @@
                   
 
 
-<h1 id="resttemplate">使用RestTemplate开发服务消费者</h1>
+<h1 id="restful-restoperations">Restful风格 - 使用 RestOperations</h1>
 <h2 id="_1">概念阐述</h2>
-<p>RestTemplate是Spring提供的RESTful访问接口，ServiceComb提供该接口的实现类用于服务的调用。</p>
+<p>RestOperations是Spring提供的RESTful访问接口，ServiceComb提供该接口的实现类用于服务的调用。</p>
 <h2 id="_2">场景描述</h2>
-<p>用户使用ServiceComb提供的RestTemplate实例，可以使用自定义的URL进行服务调用，而不用关心服务的具体地址。</p>
+<p>用户使用ServiceComb提供的RestOperations实例，可以使用自定义的URL进行服务调用，而不用关心服务的具体地址。</p>
 <h2 id="_3">示例代码</h2>
-<p>RestTemplate实例通过调用<code>RestTemplateBuilder.create()</code>方法获取，再使用该实例通过自定义的URL进行服务调用，代码如下：</p>
+<p>RestOperations实例通过调用<code>RestTemplateBuilder.create()</code>方法获取，再使用该实例通过自定义的URL进行服务调用，代码如下：</p>
 <ul>
 <li>Spring MVC 客户端示例代码：</li>
 </ul>
-<pre><code class="language-java">@Component
-public class SpringmvcConsumerMain {
-    private static RestTemplate restTemplate = RestTemplateBuilder.create();
+<pre><code class="language-java">public class SpringmvcConsumerExample {
+    private static RestOperations restTemplate = RestTemplateBuilder.create();
 
-    public static void main(String[] args) throws Exception {
-        init();
+    public static void test() throws Exception {
         Person person = new Person();
         person.setName(&quot;ServiceComb/Java Chassis&quot;);
         String sayHiResult = restTemplate
-                .postForObject(&quot;cse://springmvc/springmvchello/sayhi?name=Java Chassis&quot;, null, String.class);
+                .postForObject(&quot;servicecomb://springmvc/springmvchello/sayhi?name=Java Chassis&quot;, null, String.class);
         String sayHelloResult = restTemplate
-                .postForObject(&quot;cse://springmvc/springmvchello/sayhello&quot;, person, String.class);
+                .postForObject(&quot;servicecomb://springmvc/springmvchello/sayhello&quot;, person, String.class);
         System.out.println(&quot;RestTemplate consumer sayhi services: &quot; + sayHiResult);
         System.out.println(&quot;RestTemplate consumer sayhello services: &quot; + sayHelloResult);
-    }
-
-    public static void init() throws Exception {
-        Log4jUtils.init();
-        BeanUtils.init();
     }
 }
 </code></pre>
 <ul>
 <li>JAX RS 客户端示例代码：</li>
 </ul>
-<pre><code class="language-java">
-@Component
-public class JaxrsConsumerMain {
-
-    public static void main(String[] args) throws Exception {
-        init();
+<pre><code class="language-java">public class JaxrsConsumerMain {
+    public static void test() throws Exception {
         //其他都类似spring MVC示例的客户端代码，注意如果服务端只接收 GET 请求，要使用方法 getForObject()
         RestTemplate restTemplate = RestTemplateBuilder.create();
-        String result = restTemplate.getForObject(&quot;cse://jaxrs/jaxrshello/saybye&quot;, String.class);
-    }
-
-    public static void init() throws Exception {
-        Log4jUtils.init();
-        BeanUtils.init();
+        String result = restTemplate.getForObject(&quot;servicecomb://jaxrs/jaxrshello/saybye&quot;, String.class);
     }
 }
 </code></pre>
 <blockquote>
 <p>说明：</p>
 <ul>
-<li>URL格式为：<code>cse://microserviceName/path?querystring</code>。以<a href="../build-provider/springmvc.html">用SpringMVC开发微服务</a>中定义的服务提供者为例，其微服务名称是<code>springmvc</code>，basePath是<code>/springmvchello</code>，那么URL中的microserviceName=<code>springmvc</code>，请求sayhi时的path=<code>springmvchello/sayhi</code>，所以示例代码中请求sayhi的URL是<code>cse://springmvc/springmvchello/sayhi?name=Java Chassis</code>。具体代码示例如下 ：</li>
+<li>URL格式为：<code>servicecomb://microserviceName/path?querystring</code>。以<a href="../build-provider/springmvc.html">用SpringMVC开发微服务</a>中定义的服务提供者为例，其微服务名称是<code>springmvc</code>，basePath是<code>/springmvchello</code>，那么URL中的microserviceName=<code>springmvc</code>，请求sayhi时的path=<code>springmvchello/sayhi</code>，所以示例代码中请求sayhi的URL是<code>servicecomb://springmvc/springmvchello/sayhi?name=Java Chassis</code>。具体代码示例如下 ：</li>
 </ul>
 </blockquote>
 <pre><code class="language-java">@RestSchema(schemaId = &quot;springmvcHello&quot;)
@@ -2996,33 +2959,6 @@ public class SpringmvcHelloImpl implements Hello {
     }
 }
 </code></pre>
-<blockquote>
-<p>下述代码是示例项目  <a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/springmvc-sample"> SpringMVC </a>的 springmvc-provider 模块 中 resources 目录下 microservice.yaml</p>
-</blockquote>
-<pre><code class="language-yaml">servicecomb:
-  service:
-    application: springmvc-sample
-    name: springmvc
-    version: 0.0.1
-
-    registry:
-      # Default using local service center
-      address: http://localhost:30100
-      # address: https://cse.cn-south-1.myhuaweicloud.com
-      instance:
-        watch: false
-  kie:
-    serverUri: http://localhost:30110
-
-  rest:
-    address: 0.0.0.0:8080
-
-</code></pre>
-<blockquote>
-<ul>
-<li>使用上述这种URL格式，ServiceComb框架会在内部进行服务发现、熔断容错等处理并最终将请求发送到服务提供者。</li>
-</ul>
-</blockquote>
 
 
 

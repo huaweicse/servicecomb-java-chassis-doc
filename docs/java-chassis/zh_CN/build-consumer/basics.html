@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../../build-consumer/develop-consumer-using-rpc.html">
+        <link rel="prev" href="../build-provider/access-log-configuration.html">
       
       
-        <link rel="next" href="../../build-consumer/with-contract.html">
+        <link rel="next" href="using-resttemplate.html">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.10">
     
     
       
-        <title>泛化调用 - Java Chassis 3 开发指南</title>
+        <title>基础概念 - Java Chassis 3 开发指南</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
       
       
 
@@ -43,7 +43,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../index.html" title="Java Chassis 3 开发指南" class="md-header__button md-logo" aria-label="Java Chassis 3 开发指南" data-md-component="logo">
+    <a href="../index.html" title="Java Chassis 3 开发指南" class="md-header__button md-logo" aria-label="Java Chassis 3 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              泛化调用
+              基础概念
             
           </span>
         </div>
@@ -173,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../index.html" title="Java Chassis 3 开发指南" class="md-nav__button md-logo" aria-label="Java Chassis 3 开发指南" data-md-component="logo">
+    <a href="../index.html" title="Java Chassis 3 开发指南" class="md-nav__button md-logo" aria-label="Java Chassis 3 开发指南" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -191,7 +191,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../index.html" class="md-nav__link">
+      <a href="../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -211,7 +211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/design.html" class="md-nav__link">
+      <a href="../start/design.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -231,7 +231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../introduce3.x.x.html" class="md-nav__link">
+      <a href="../introduce3.x.x.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -286,7 +286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/development-environment.html" class="md-nav__link">
+      <a href="../start/development-environment.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -307,7 +307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../start/first-sample.html" class="md-nav__link">
+      <a href="../start/first-sample.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -328,7 +328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../application-bmi.html" class="md-nav__link">
+      <a href="../featured-topics/application-bmi.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -349,7 +349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../application-porter.html" class="md-nav__link">
+      <a href="../featured-topics/application-porter.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -377,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/definition/service-definition.html" class="md-nav__link">
+      <a href="../build-provider/definition/service-definition.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -432,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../spring-boot/introduction.html" class="md-nav__link">
+      <a href="../spring-boot/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -453,7 +453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../spring-boot/diff-spring-mvc.html" class="md-nav__link">
+      <a href="../spring-boot/diff-spring-mvc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -516,7 +516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/basics.html" class="md-nav__link">
+      <a href="../build-provider/basics.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -537,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/http-mapping.html" class="md-nav__link">
+      <a href="../build-provider/http-mapping.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -558,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/jaxrs.html" class="md-nav__link">
+      <a href="../build-provider/jaxrs.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -579,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/springmvc.html" class="md-nav__link">
+      <a href="../build-provider/springmvc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -600,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/transparent-rpc.html" class="md-nav__link">
+      <a href="../build-provider/transparent-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -621,7 +621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/use-interface.html" class="md-nav__link">
+      <a href="../build-provider/use-interface.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -642,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/reactive.html" class="md-nav__link">
+      <a href="../build-provider/reactive.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -663,7 +663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/context-param.html" class="md-nav__link">
+      <a href="../build-provider/context-param.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -684,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/multi-code.html" class="md-nav__link">
+      <a href="../build-provider/multi-code.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -705,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/swagger-annotation.html" class="md-nav__link">
+      <a href="../build-provider/swagger-annotation.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -726,7 +726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/interface-constraints.html" class="md-nav__link">
+      <a href="../build-provider/interface-constraints.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -747,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/listen-address-and-publish-address.html" class="md-nav__link">
+      <a href="../build-provider/listen-address-and-publish-address.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -768,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/thread-pool.html" class="md-nav__link">
+      <a href="../build-provider/thread-pool.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -789,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/event-listener.html" class="md-nav__link">
+      <a href="../build-provider/event-listener.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -810,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/parameter-validator.html" class="md-nav__link">
+      <a href="../build-provider/parameter-validator.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -831,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/bootup.html" class="md-nav__link">
+      <a href="../build-provider/bootup.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -852,7 +852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/ipv6-configuration.html" class="md-nav__link">
+      <a href="../build-provider/ipv6-configuration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -873,7 +873,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-provider/access-log-configuration.html" class="md-nav__link">
+      <a href="../build-provider/access-log-configuration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -935,69 +935,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../../build-consumer/common-configuration.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    消费者通用配置项
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../build-consumer/using-resttemplate.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    使用RestTemplate开发服务消费者
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../build-consumer/develop-consumer-using-rpc.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    使用RPC方式开发服务消费者
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1014,18 +951,18 @@
           
   
   <span class="md-ellipsis">
-    泛化调用
+    基础概念
   </span>
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="invoker.html" class="md-nav__link md-nav__link--active">
+      <a href="basics.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    泛化调用
+    基础概念
   </span>
   
 
@@ -1047,18 +984,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#restful-restoperations" class="md-nav__link">
     <span class="md-ellipsis">
-      使用泛化调用
+      Restful风格 - 使用 RestOperations
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reactive-api" class="md-nav__link">
+  <a href="#rpc" class="md-nav__link">
     <span class="md-ellipsis">
-      采用 reactive API
+      RPC风格
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-invokerutils" class="md-nav__link">
+    <span class="md-ellipsis">
+      泛化调用 - InvokerUtils
     </span>
   </a>
   
@@ -1080,11 +1026,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-consumer/with-contract.html" class="md-nav__link">
+      <a href="using-resttemplate.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    使用服务契约
+    Restful风格 - 使用 RestOperations
   </span>
   
 
@@ -1101,7 +1047,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../build-consumer/3rd-party-service-invoke.html" class="md-nav__link">
+      <a href="develop-consumer-using-rpc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RPC风格
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="invoker.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    泛化调用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3rd-party-service-invoke.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1164,7 +1152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/intruduction.html" class="md-nav__link">
+      <a href="../references-handlers/intruduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1227,7 +1215,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/metrics.html" class="md-nav__link">
+      <a href="../general-development/metrics.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1248,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/microservice-invocation-chain.html" class="md-nav__link">
+      <a href="../general-development/microservice-invocation-chain.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1269,7 +1257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/customized-tracing.html" class="md-nav__link">
+      <a href="../general-development/customized-tracing.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1290,7 +1278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/local-develop-test.html" class="md-nav__link">
+      <a href="../general-development/local-develop-test.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1311,7 +1299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/upload-download.html" class="md-nav__link">
+      <a href="../general-development/upload-download.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1332,7 +1320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/reactive.html" class="md-nav__link">
+      <a href="../general-development/reactive.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1353,7 +1341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/dnsconfig.html" class="md-nav__link">
+      <a href="../general-development/dnsconfig.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1374,7 +1362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/proxy.html" class="md-nav__link">
+      <a href="../general-development/proxy.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1395,7 +1383,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/report-framework-version.html" class="md-nav__link">
+      <a href="../general-development/report-framework-version.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1416,7 +1404,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/cross-app-invocation.html" class="md-nav__link">
+      <a href="../general-development/cross-app-invocation.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1437,7 +1425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/secret-field.html" class="md-nav__link">
+      <a href="../general-development/secret-field.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1458,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/context.html" class="md-nav__link">
+      <a href="../general-development/context.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1479,7 +1467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/produceprocess.html" class="md-nav__link">
+      <a href="../general-development/produceprocess.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1500,7 +1488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/CORS.html" class="md-nav__link">
+      <a href="../general-development/CORS.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1521,7 +1509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/AlarmEvent.html" class="md-nav__link">
+      <a href="../general-development/AlarmEvent.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1542,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/shutdown.html" class="md-nav__link">
+      <a href="../general-development/shutdown.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1563,7 +1551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/error-handling.html" class="md-nav__link">
+      <a href="../general-development/error-handling.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1584,7 +1572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/multienvironment.html" class="md-nav__link">
+      <a href="../general-development/multienvironment.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1605,7 +1593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/thread-model.html" class="md-nav__link">
+      <a href="../general-development/thread-model.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1626,7 +1614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../general-development/config-logs.html" class="md-nav__link">
+      <a href="../general-development/config-logs.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1689,7 +1677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/introduction.html" class="md-nav__link">
+      <a href="../transports/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1710,11 +1698,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-vertx.html" class="md-nav__link">
+      <a href="../transports/rest-over-vertx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    REST over HTTP(Vert.x
+    REST over HTTP(Vert.x)
   </span>
   
 
@@ -1731,11 +1719,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/http2.html" class="md-nav__link">
+      <a href="../transports/http2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    REST over HTTP2(Vert.x
+    REST over HTTP2(Vert.x)
   </span>
   
 
@@ -1752,11 +1740,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-servlet-embedded.html" class="md-nav__link">
+      <a href="../transports/rest-over-servlet-embedded.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    REST over Servlet(Spring Boot Embedded
+    REST over Servlet(Spring Boot Embedded)
   </span>
   
 
@@ -1773,11 +1761,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/rest-over-servlet.html" class="md-nav__link">
+      <a href="../transports/rest-over-servlet.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    REST over Servlet(WAR
+    REST over Servlet(WAR)
   </span>
   
 
@@ -1794,7 +1782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transports/highway-rpc.html" class="md-nav__link">
+      <a href="../transports/highway-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1857,7 +1845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/introduction.html" class="md-nav__link">
+      <a href="../registry/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1878,7 +1866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/service-center.html" class="md-nav__link">
+      <a href="../registry/service-center.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1899,7 +1887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/nacos.html" class="md-nav__link">
+      <a href="../registry/nacos.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1920,7 +1908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/local-registry.html" class="md-nav__link">
+      <a href="../registry/local-registry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1941,7 +1929,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../registry/distributed.html" class="md-nav__link">
+      <a href="../registry/distributed.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2004,7 +1992,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/general-config.html" class="md-nav__link">
+      <a href="../config/general-config.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2025,7 +2013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/read-config.html" class="md-nav__link">
+      <a href="../config/read-config.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2046,7 +2034,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/config-service.html" class="md-nav__link">
+      <a href="../config/config-service.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2109,7 +2097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/loadbalance.html" class="md-nav__link">
+      <a href="../references-handlers/loadbalance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2130,7 +2118,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/ratelimit.html" class="md-nav__link">
+      <a href="../references-handlers/ratelimit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2151,7 +2139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/router.html" class="md-nav__link">
+      <a href="../references-handlers/router.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2172,7 +2160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/fault-injection.html" class="md-nav__link">
+      <a href="../references-handlers/fault-injection.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2193,7 +2181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/governance.html" class="md-nav__link">
+      <a href="../references-handlers/governance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2214,7 +2202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/fail-retry.html" class="md-nav__link">
+      <a href="../references-handlers/fail-retry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2277,7 +2265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/open-service.html" class="md-nav__link">
+      <a href="../edge/open-service.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2298,7 +2286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/by-servicecomb-sdk.html" class="md-nav__link">
+      <a href="../edge/by-servicecomb-sdk.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2319,7 +2307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/zuul.html" class="md-nav__link">
+      <a href="../edge/zuul.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2340,7 +2328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../edge/nginx.html" class="md-nav__link">
+      <a href="../edge/nginx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2403,7 +2391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references-handlers/publickey.html" class="md-nav__link">
+      <a href="../references-handlers/publickey.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2424,7 +2412,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/tls.html" class="md-nav__link">
+      <a href="../security/tls.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2445,7 +2433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
+      <a href="../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2508,7 +2496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../features.html" class="md-nav__link">
+      <a href="../featured-topics/features.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2529,7 +2517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../secrets.html" class="md-nav__link">
+      <a href="../featured-topics/secrets.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2550,7 +2538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upgrading.html" class="md-nav__link">
+      <a href="../featured-topics/upgrading.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2571,7 +2559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../compatibility.html" class="md-nav__link">
+      <a href="../featured-topics/compatibility.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2592,7 +2580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../performance.html" class="md-nav__link">
+      <a href="../featured-topics/performance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2655,7 +2643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/rest-transport-client.html" class="md-nav__link">
+      <a href="../config-reference/rest-transport-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2676,7 +2664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/config-center-client.html" class="md-nav__link">
+      <a href="../config-reference/config-center-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2697,7 +2685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/service-center-client.html" class="md-nav__link">
+      <a href="../config-reference/service-center-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2718,7 +2706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config-reference/kie-client.html" class="md-nav__link">
+      <a href="../config-reference/kie-client.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2781,7 +2769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/faq.html" class="md-nav__link">
+      <a href="../question-and-answer/faq.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2802,7 +2790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/question_answer.html" class="md-nav__link">
+      <a href="../question-and-answer/question_answer.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2823,7 +2811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../question-and-answer/interface-compatibility.html" class="md-nav__link">
+      <a href="../question-and-answer/interface-compatibility.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2871,18 +2859,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#restful-restoperations" class="md-nav__link">
     <span class="md-ellipsis">
-      使用泛化调用
+      Restful风格 - 使用 RestOperations
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reactive-api" class="md-nav__link">
+  <a href="#rpc" class="md-nav__link">
     <span class="md-ellipsis">
-      采用 reactive API
+      RPC风格
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-invokerutils" class="md-nav__link">
+    <span class="md-ellipsis">
+      泛化调用 - InvokerUtils
     </span>
   </a>
   
@@ -2903,97 +2900,85 @@
                   
 
 
-<h1 id="_1">特性介绍： 泛化调用</h1>
-<p>泛化调用指在不知道 Provider 接口定义信息的情况下，访问 Provider 提供的服务。 与泛化调用对应的方式包括透明 RPC（POJO）和 
-RestTemplate。 透明 RPC 需要提供 Provider 对应的接口， RestTemplate 需要提供 Provider 对应的 URL 和 数据 Model 。 泛化
-调用需要提供 Provider 的服务元数据： 微服务名称， 版本， Schema ID， Operation ID, 契约参数等信息。 </p>
-<h2 id="_2">使用泛化调用</h2>
-<p>假设 Provider 采用透明 RPC 的方式提供了如下服务：</p>
-<pre><code class="language-java">@RpcSchema(schemaId = &quot;InvokerEndpoint&quot;)
-public class InvokerEndpoint {
-  public ServerModel model(ServerModel request) {
-    return request;
-  }
-}
-
-public class ServerModel {
-  private String name;
-  private int code;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public int getCode() {
-    return code;
-  }
-
-  public void setCode(int code) {
-    this.code = code;
-  }
+<h1 id="_1">基础概念</h1>
+<p>Java Chassis 是以 OpenAPI 为基础的微服务开发框架。一个微服务提供的功能，可以通过 OpenAPI 进行描述。 微服务消费者和提供者完全解耦，开发消费者无需知道提供者的开发方式，只需要知道提供者的OpenAPI信息。 </p>
+<p>本章节介绍基于<a href="../build-provider/basics.html">开发服务提供者-基础概念</a>提供的 <code>HelloWorld</code> 契约, 描述如何开发服务消费者。</p>
+<pre><code class="language-yaml">openapi: 3.0.1
+info:
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /helloWorld:
+    post:
+      operationId: helloWorld
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          application/protobuf:
+            schema:
+              type: string
+          text/plain:
+            schema:
+              type: string
+        x-name: name
+      responses:
+        &quot;200&quot;:
+          description: response of 200
+          content:
+            application/json:
+              schema:
+                type: string
+            application/protobuf:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+components: {}
+</code></pre>
+<h2 id="restful-restoperations">Restful风格 - 使用 RestOperations</h2>
+<pre><code class="language-java">RestOperations restOperation = 
+    RestTemplateBuilder.create();
+String result = restOperation
+    .postForObject(&quot;servicecomb://provider-service/helloWorld&quot;, 
+    &quot;World&quot;, String.class);
+Assertions.assertTrue(&quot;Hello World&quot;, result);
+</code></pre>
+<p>使用Restful风格开发消费者，需要关注Open API的Path、参数位置（Body、Header等）、参数类型以及响应类型，并且使用RestOperations的相关接口和参数一一对应。 其中 <code>servicecomb://provider-service</code> 表示目标微服务，使用目标微服务的服务名称。 </p>
+<h2 id="rpc">RPC风格</h2>
+<p>RPC风格是一种语言有关的开发方法，更加贴近语言的使用习惯。访问服务提供者的服务，就像调用本地的API一样。 </p>
+<p>使用RPC风格，首先需要声明一个 <code>interface</code> 与提供者的服务对应。 </p>
+<pre><code class="language-java">interface HelloWorldService {
+  String helloWorld(String name);
 }
 </code></pre>
-<p>可以采用 InvokerUtils 访问这个服务：</p>
+<p>声明 <code>interface</code> 会使用到 Open API 的 <code>operationId</code>、 参数名称和参数类型、响应类型。 只需要保证方法名等于<code>operationId</code>， 参数名称等于Open API里面的参数名称（对于body，使用扩展属性x-name）。 </p>
+<p>使用起来就非常简单了：</p>
+<pre><code class="language-java">@RpcReference(schemaId = &quot;HelloWorld&quot;, 
+    microserviceName = &quot;provider-service&quot;)
+private HelloWorldService helloWorldService;
+
+String result = helloWorldService.helloWorld(&quot;World&quot;);
+Assertions.assertTrue(&quot;Hello World&quot;, result);
+</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>在具体的开发实践中，开发Provider定义interface（API），然后Consumer依赖Provider发布的包，直接使用Provider的接口也是非常常见的。如果已经习惯这种使用方式，可以继续使用。 在讨论完全解耦和API依赖的好处的时候，存在非常复杂和细节的差异。完全解耦的形式，可以给独立开发带来很大的灵活性，能够提高并行开发的效率。 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="-invokerutils">泛化调用 - InvokerUtils</h2>
 <pre><code class="language-java">Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
-ClientModel model = new ClientModel();
-model.setCode(200);
-model.setName(&quot;hello&quot;);
-args.put(&quot;request&quot;, model);
-
-ClientModel modelResult = InvokerUtils.syncInvoke(&quot;pojo&quot;, &quot;InvokerEndpoint&quot;, &quot;model&quot;, args, ClientModel.class);
-TestMgr.check(model.getCode(), modelResult.getCode());
-TestMgr.check(model.getName(), modelResult.getName());
-
-public class ClientModel {
-  private String name;
-  private int code;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public int getCode() {
-    return code;
-  }
-
-  public void setCode(int code) {
-    this.code = code;
-  }
-}
+args.put(&quot;name&quot;, &quot;World&quot;);
+String result = InvokerUtils.syncInvoke(&quot;provider-service&quot;,
+    &quot;HelloWorld&quot;, &quot;helloWorld&quot;, args, String.class));
+Assertions.assertTrue(&quot;Hello World&quot;, result);
 </code></pre>
-<p>可以看出，在泛化调用的情况下， Provider 和 Consumer 可以使用不一样 package 的 Model。 Consumer 还可以不使用任何 Model, 而采用
-Map 的方式访问：</p>
-<pre><code class="language-java">Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
-Map model = new HashMap();
-model.put(&quot;code&quot;, 20);
-model.put(&quot;name&quot;, &quot;hello&quot;);
-args.put(&quot;request&quot;, model);
-
-ClientModel modelResult = InvokerUtils.syncInvoke(&quot;pojo&quot;, &quot;InvokerEndpoint&quot;, &quot;model&quot;, args, ClientModel.class);
-TestMgr.check(model.get(&quot;code&quot;), modelResult.getCode());
-TestMgr.check(model.get(&quot;name&quot;), modelResult.getName());
-</code></pre>
-<p>需要特别说明的是参数 <code>swaggerArguments</code> ， 这个参数是和 Provider 接口生成的契约对应的， 不关注 Provider 是采用透明 RPC， 还是
-采用 Spring MVC ， 或者 JAX RS 开发的服务。 需要注意 <code>swaggerArguments</code> 可能和 Provider 的接口定义的参数列表不一样，比如透明
-RPC 开发模式下多个参数的场景， Spring MVC 的 Bean Param 的场景等等。 </p>
-<h2 id="reactive-api">采用 reactive API</h2>
-<pre><code class="language-java">CountDownLatch countDownLatch = new CountDownLatch(1);
-InvokerUtils.reactiveInvoke(&quot;pojo&quot;, &quot;InvokerEndpoint&quot;, &quot;model&quot;, args, ClientModel.class, response -&gt; {
-  ClientModel reactiveResult = response.getResult();
-  TestMgr.check(model.getCode(), reactiveResult.getCode());
-  TestMgr.check(model.getName(), reactiveResult.getName());
-  countDownLatch.countDown();
-});
-countDownLatch.await();
-</code></pre>
+<p>泛化调用使用服务名、契约名称、<code>operationId</code>、 参数直接请求服务提供者，对应到 Open API 的<code>operationId</code>、参数名称和参数类型、响应类型。</p>
 
 
 
@@ -3040,10 +3025,10 @@ countDownLatch.await();
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.8fd75fb4.min.js"></script>
+      <script src="../assets/javascripts/bundle.8fd75fb4.min.js"></script>
       
     
   </body>

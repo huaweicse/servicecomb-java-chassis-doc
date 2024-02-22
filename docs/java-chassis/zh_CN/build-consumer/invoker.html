@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../build-provider/access-log-configuration.html">
+        <link rel="prev" href="develop-consumer-using-rpc.html">
       
       
-        <link rel="next" href="using-resttemplate.html">
+        <link rel="next" href="3rd-party-service-invoke.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>消费者通用配置项 - Java Chassis 3 开发指南</title>
+        <title>泛化调用 - Java Chassis 3 开发指南</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#consumer" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              消费者通用配置项
+              泛化调用
             
           </span>
         </div>
@@ -935,28 +935,18 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="common-configuration.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="basics.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    消费者通用配置项
+    基础概念
   </span>
   
 
       </a>
-      
     </li>
   
 
@@ -973,7 +963,7 @@
         
   
   <span class="md-ellipsis">
-    使用RestTemplate开发服务消费者
+    Restful风格 - 使用 RestOperations
   </span>
   
 
@@ -994,7 +984,7 @@
         
   
   <span class="md-ellipsis">
-    使用RPC方式开发服务消费者
+    RPC风格
   </span>
   
 
@@ -1008,10 +998,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../featured-topics/features/invoker.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    泛化调用
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="invoker.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1020,27 +1030,44 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="with-contract.html" class="md-nav__link">
+      
         
-  
-  <span class="md-ellipsis">
-    使用服务契约
-  </span>
-  
 
-      </a>
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用泛化调用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactive-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      采用 reactive API
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1666,7 +1693,7 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP(Vert.x
+    REST over HTTP(Vert.x)
   </span>
   
 
@@ -1687,7 +1714,7 @@
         
   
   <span class="md-ellipsis">
-    REST over HTTP2(Vert.x
+    REST over HTTP2(Vert.x)
   </span>
   
 
@@ -1708,7 +1735,7 @@
         
   
   <span class="md-ellipsis">
-    REST over Servlet(Spring Boot Embedded
+    REST over Servlet(Spring Boot Embedded)
   </span>
   
 
@@ -1729,7 +1756,7 @@
         
   
   <span class="md-ellipsis">
-    REST over Servlet(WAR
+    REST over Servlet(WAR)
   </span>
   
 
@@ -2816,6 +2843,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用泛化调用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reactive-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      采用 reactive API
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2829,41 +2882,96 @@
                   
 
 
-<h1 id="consumer">Consumer的通用配置项</h1>
-<ul>
-<li>请求超时  </li>
-<li>配置项<br />
-    servicecomb.request.timeout  </li>
-<li>默认值<br />
-    30000，单位为毫秒    </li>
-<li>含义<br />
-    Consumer传输层开始发送时，开始计时，指定时间内未收到应答，则处理为请求超时    </li>
-<li>指定传输通道  </li>
-<li>配置项<br />
-    servicecomb.references.${目标微服务名}.transport<br />
-    servicecomb.references.transport<br />
-    同时支持全局和微服务级的两级控制</li>
-<li>默认值<br />
-    无</li>
-<li>含义<br />
-    如果目标微服务同时开放多种transport的访问能力时，而Consumer也同时部署了相应的多个transport，但是作为Consumer调用该微服务时，只想使用其中一种transport，则可以通过本配置项指定transport
-    如果不配置，则轮流使用多个transport  </li>
-<li>指定目标实例的版本规则</li>
-<li>配置项<br />
-    servicecomb.references.${目标服务名}.version-rule<br />
-    servicecomb.references.version-rule
-    同时支持全局和微服务级的两级控制  </li>
-<li>默认值<br />
-    latest</li>
-<li>含义<br />
-    目标实例的版本规则，支持以下规则：  <ul>
-<li>最新版本： latest  </li>
-<li>大于指定版本，比如：1.0.0+</li>
-<li>指定版本范围，比如：1.0.0-2.0.0，表示大于等于版本1.0.0，并且小于版本2.0.0</li>
-<li>精确版本，比如：1.0.0</li>
-</ul>
-</li>
-</ul>
+<h1 id="_1">泛化调用</h1>
+<p>泛化调用指在不知道 Provider 接口定义信息的情况下，访问 Provider 提供的服务。 泛化
+调用需要提供 Provider 的服务元数据： 微服务名称， 版本， Schema ID， Operation ID, 契约参数等信息。 </p>
+<h2 id="_2">使用泛化调用</h2>
+<p>假设 Provider 采用透明 RPC 的方式提供了如下服务：</p>
+<pre><code class="language-java">@RpcSchema(schemaId = &quot;InvokerEndpoint&quot;)
+public class InvokerEndpoint {
+  public ServerModel model(ServerModel request) {
+    return request;
+  }
+}
+
+public class ServerModel {
+  private String name;
+  private int code;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getCode() {
+    return code;
+  }
+
+  public void setCode(int code) {
+    this.code = code;
+  }
+}
+</code></pre>
+<p>可以采用 InvokerUtils 访问这个服务：</p>
+<pre><code class="language-java">Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
+ClientModel model = new ClientModel();
+model.setCode(200);
+model.setName(&quot;hello&quot;);
+args.put(&quot;request&quot;, model);
+
+ClientModel modelResult = InvokerUtils.syncInvoke(&quot;pojo&quot;, &quot;InvokerEndpoint&quot;, &quot;model&quot;, args, ClientModel.class);
+TestMgr.check(model.getCode(), modelResult.getCode());
+TestMgr.check(model.getName(), modelResult.getName());
+
+public class ClientModel {
+  private String name;
+  private int code;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getCode() {
+    return code;
+  }
+
+  public void setCode(int code) {
+    this.code = code;
+  }
+}
+</code></pre>
+<p>可以看出，在泛化调用的情况下， Provider 和 Consumer 可以使用不一样 package 的 Model。 Consumer 还可以不使用任何 Model, 而采用
+Map 的方式访问：</p>
+<pre><code class="language-java">Map&lt;String, Object&gt; args = new HashMap&lt;&gt;();
+Map model = new HashMap();
+model.put(&quot;code&quot;, 20);
+model.put(&quot;name&quot;, &quot;hello&quot;);
+args.put(&quot;request&quot;, model);
+
+ClientModel modelResult = InvokerUtils.syncInvoke(&quot;pojo&quot;, &quot;InvokerEndpoint&quot;, &quot;model&quot;, args, ClientModel.class);
+TestMgr.check(model.get(&quot;code&quot;), modelResult.getCode());
+TestMgr.check(model.get(&quot;name&quot;), modelResult.getName());
+</code></pre>
+<p>需要特别说明的是参数 <code>swaggerArguments</code> ， 这个参数是和 Provider 接口生成的契约对应的， 不关注 Provider 是采用透明 RPC， 还是
+采用 Spring MVC ， 或者 JAX RS 开发的服务。 需要注意 <code>swaggerArguments</code> 可能和 Provider 的接口定义的参数列表不一样，比如透明
+RPC 开发模式下多个参数的场景， Spring MVC 的 Bean Param 的场景等等。 </p>
+<h2 id="reactive-api">采用 reactive API</h2>
+<pre><code class="language-java">CountDownLatch countDownLatch = new CountDownLatch(1);
+InvokerUtils.reactiveInvoke(&quot;pojo&quot;, &quot;InvokerEndpoint&quot;, &quot;model&quot;, args, ClientModel.class, response -&gt; {
+  ClientModel reactiveResult = response.getResult();
+  TestMgr.check(model.getCode(), reactiveResult.getCode());
+  TestMgr.check(model.getName(), reactiveResult.getName());
+  countDownLatch.countDown();
+});
+countDownLatch.await();
+</code></pre>
 
 
 
