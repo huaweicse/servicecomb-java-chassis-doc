@@ -3294,11 +3294,20 @@ public class ProviderApplication {
 }
 </code></pre>
 <h3 id="_6">编写服务</h3>
+<p>本例子采用契约优先的开发方法。</p>
+<p>首先定义服务接口：</p>
+<pre><code class="language-java">@RequestMapping(path = &quot;/provider&quot;)
+public interface ProviderService {
+  @GetMapping(&quot;/sayHello&quot;)
+  String sayHello(@RequestParam(&quot;name&quot;) String name);
+
+  @GetMapping(&quot;/exampleConfig&quot;)
+  String exampleConfig();
+}
+</code></pre>
 <p>在工程中添加一个REST接口类用于接收请求：</p>
-<pre><code class="language-java">
-@RestSchema(schemaId = &quot;ProviderController&quot;)
-@RequestMapping(path = &quot;/&quot;)
-public class ProviderController {
+<pre><code class="language-java">@RestSchema(schemaId = &quot;ProviderController&quot;, schemaInterface = ProviderService.class)
+public class ProviderController implements ProviderService {
   private DynamicProperties dynamicProperties;
 
   private String example;
@@ -3310,13 +3319,12 @@ public class ProviderController {
         value -&gt; this.example = value, &quot;not set&quot;);
   }
 
-  // a very simple service to echo the request parameter
-  @GetMapping(&quot;/sayHello&quot;)
-  public String sayHello(@RequestParam(&quot;name&quot;) String name) {
+  @Override
+  public String sayHello(String name) {
     return &quot;Hello &quot; + name;
   }
 
-  @GetMapping(&quot;/exampleConfig&quot;)
+  @Override
   public String exampleConfig() {
     return example;
   }
@@ -3340,28 +3348,31 @@ public class ProviderController {
 &lt;/Configuration&gt;
 </code></pre>
 <h3 id="_8">调用服务</h3>
-<p>在 Consumer 里面，演示了如何调用 Provider 的服务。 首先声明一个 PRC 接口， 该接口的方法名称、参数名称需要和服务端保持一致。</p>
-<pre><code class="language-java">public interface ProviderService {
-  String sayHello(String name);
-
-  String exampleConfig();
+<p>在 Consumer 里面，演示了如何调用 Provider 的服务。 首先声明一个 PRC 接口的 Bean。</p>
+<pre><code class="language-java">@Configuration
+public class ProviderServiceConfiguration {
+  @Bean
+  public ProviderService providerService() {
+    return Invoker.createProxy(&quot;provider&quot;, &quot;ProviderController&quot;, ProviderService.class);
+  }
 }
 </code></pre>
-<p>使用 @RpcReference 声明 RPC 接口的远程引用， 然后可以像调用本地方法一样，访问 Provider 的服务。</p>
-<pre><code class="language-java">
-@RestSchema(schemaId = &quot;ConsumerController&quot;)
-@RequestMapping(path = &quot;/&quot;)
-public class ConsumerController {
-  @RpcReference(schemaId = &quot;ProviderController&quot;, microserviceName = &quot;provider&quot;)
+<p>使用 @Autowired 声明 RPC 接口的远程引用， 然后可以像调用本地方法一样，访问 Provider 的服务。</p>
+<pre><code class="language-java">@RestSchema(schemaId = &quot;ConsumerController&quot;, schemaInterface = ConsumerService.class)
+public class ConsumerController implements ConsumerService {
   private ProviderService providerService;
 
-  // consumer service which delegate the implementation to provider service.
-  @GetMapping(&quot;/sayHello&quot;)
-  public String sayHello(@RequestParam(&quot;name&quot;) String name) {
+  @Autowired
+  public void setProviderService(ProviderService providerService) {
+    this.providerService = providerService;
+  }
+
+  @Override
+  public String sayHello(String name) {
     return providerService.sayHello(name);
   }
 
-  @GetMapping(&quot;/exampleConfig&quot;)
+  @Override
   public String exampleConfig() {
     return providerService.exampleConfig();
   }
