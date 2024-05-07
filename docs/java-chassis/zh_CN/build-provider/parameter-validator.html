@@ -3029,7 +3029,7 @@ public class Validator {
 <ul>
 <li>bean类验证</li>
 </ul>
-<p>需要在传入的Student对象前加@Valid，如上图sayHello(@Valid Student student)方法。</p>
+<p>需要在传入的Student对象前加 <code>@Valid</code>，如上图 <code>sayHello(@Valid Student student)</code> 方法。</p>
 <pre><code class="language-java">public class Student {
   @NotNull
   private String name;
@@ -3055,39 +3055,46 @@ public class Validator {
 }
 </code></pre>
 <h2 id="_4">自定义返回异常</h2>
-<ul>
-<li>默认的参数效验器ParameterValidator已经实现了接口ProducerInvokeExtension，按照JSR 349规范处理所需的参数验证。</li>
-</ul>
-<p>如果任何参数验证失败，缺省错误是BAD_REQUEST(400, "Bad Request")。</p>
-<p>返回错误支持自定义扩展，使用SPI机制。</p>
-<ul>
-<li>
-<p>可以通过实现接口ExceptionToProducerResponseConverter来自定义返回的错误信息，以ConstraintViolationExceptionToProducerResponseConverter为例。</p>
-</li>
-<li>
-<p>实现ExceptionToProducerResponseConverter接口，重写方法，其中getOrder方法的返回结果表示该验证器的优先级，值越小优先级越高。</p>
-<p>```java
- public class ConstraintViolationExceptionToProducerResponseConverter
-     implements ExceptionToProducerResponseConverter<ConstraintViolationException> {
-   @Override
-   public Class<ConstraintViolationException> getExceptionClass() {
-     return ConstraintViolationException.class;
-   }</p>
-<p>@Override
-   public Response convert(SwaggerInvocation swaggerInvocation, ConstraintViolationException e) {
-     return Response.createFail(new InvocationException(Status.BAD_REQUEST, e.getConstraintViolations().toString()));
-   }</p>
-<p>@Override
-   public int getOrder() {
-     return -100;
-   }
- }
- ```</p>
-</li>
-<li>
-<p>在META-INF下的services文件夹增加一个文件，以所实现接口x.x.x.ExceptionToProducerResponseConverter(带包名)为名，以具体实现类x.x.x.ConstraintViolationExceptionToProducerResponseConverter(带包名)为内容。</p>
-</li>
-</ul>
+<p>默认的参数效验器ParameterValidator已经实现了接口ProducerInvokeExtension，按照JSR 349规范处理所需的参数验证。如果任何参数验证失败，缺省错误是 <code>BAD_REQUEST(400, "Bad Request")</code> 。 返回错误支持自定义扩展，使用SPI机制。</p>
+<p>可以通过实现接口<code>ExceptionConverter</code>来自定义返回的错误信息，以<code>ConstraintViolationExceptionConverter</code>为例。</p>
+<ol>
+<li>实现ExceptionConverter接口，重写方法，其中getOrder方法的返回结果表示该验证器的优先级，值越小优先级越高。</li>
+</ol>
+<pre><code class="language-java">public class ConstraintViolationExceptionConverter implements ExceptionConverter&lt;ConstraintViolationException&gt; {
+  public static final int ORDER = Short.MAX_VALUE;
+
+  public static final String KEY_CODE = &quot;servicecomb.filters.validate.code&quot;;
+
+  public ConstraintViolationExceptionConverter() {
+  }
+
+  @Override
+  public int getOrder() {
+    return ORDER;
+  }
+
+  @Override
+  public boolean canConvert(Throwable throwable) {
+    return throwable instanceof ConstraintViolationException;
+  }
+
+  @Override
+  public InvocationException convert(Invocation invocation, ConstraintViolationException throwable,
+          StatusType genericStatus) {
+    List&lt;ValidateDetail&gt; details = throwable.getConstraintViolations().stream()
+            .map(violation -&gt; new ValidateDetail(violation.getPropertyPath().toString(), violation.getMessage()))
+            .collect(Collectors.toList());
+
+    CommonExceptionData exceptionData = new CommonExceptionData(SCBEngine.getInstance().getEnvironment().
+            getProperty(KEY_CODE, String.class, DEFAULT_VALIDATE), &quot;invalid parameters.&quot;);
+    exceptionData.putDynamic(&quot;validateDetail&quot;, details);
+    return new InvocationException(BAD_REQUEST, exceptionData);
+  }
+}
+</code></pre>
+<ol>
+<li>在META-INF下的services文件夹增加一个文件 <code>org.apache.servicecomb.core.exception.ExceptionConverter</code>，内容为: <code>org.apache.servicecomb.core.exception.converter.ConstraintViolationExceptionConverter</code>。</li>
+</ol>
 
 
 
