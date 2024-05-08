@@ -3001,12 +3001,14 @@
       ${environment}:
         ${application}:
           ${service}:
-            ${tag}:
-              exampleText: exampleTextValue
-              exampleYaml.yaml: exampleYamlValue
-              exampleYaml.yml: exampleYamlValue
-              exampleProperties.properties: examplePropertiesValue
+            ${version}:
+              ${tag}:
+                exampleText: exampleTextValue
+                exampleYaml.yaml: exampleYamlValue
+                exampleYaml.yml: exampleYamlValue
+                exampleProperties.properties: examplePropertiesValue
 </code></pre>
+<p>配置文件的类型根据KEY的后缀确定。目前会解析 <code>.yaml</code>、<code>.yml</code>、<code>.properties</code>后缀，其他情况钧视为普通的key-value对。</p>
 <ul>
 <li>配置项参考</li>
 </ul>
@@ -3049,6 +3051,12 @@
 <td>60000</td>
 <td>否</td>
 <td>会话超时时间</td>
+</tr>
+<tr>
+<td>servicecomb.config.zk.instance-tag</td>
+<td>空</td>
+<td>否</td>
+<td>实例的TAG信息，用于TAG级别的配置查询</td>
 </tr>
 </tbody>
 </table>
