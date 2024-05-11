@@ -1013,27 +1013,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../build-consumer/3rd-party-service-invoke.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    调用第三方REST服务
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -3078,18 +3057,27 @@
 </blockquote>
 <p>该规则默认关闭，如果需要开启，可以通过<code>servicecomb.loadbalance.filter.priorityInstanceProperty.enabled</code>配置打开。该功能在<code>PriorityInstancePropertyDiscoveryFilter</code>中实现。</p>
 <h2 id="_5">配置路由规则</h2>
-<p>开发者可以通过配置项指定负载均衡策略。</p>
+<p>可以通过配置项指定负载均衡策略。</p>
 <pre><code class="language-yaml">servicecomb:
   loadbalance:
     strategy:
       name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
 </code></pre>
-<p>开发者可以针对不同的微服务配置不一样的策略，只需要给配置项增加服务名，例如：</p>
+<p>可以针对不同的微服务配置不一样的策略，只需要给配置项增加服务名，例如：</p>
 <pre><code class="language-yaml">servicecomb:
   loadbalance:
     myservice:
       strategy:
         name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
+</code></pre>
+<p>还可以针对不同的契约和操作配置不一样的策略，例如：</p>
+<pre><code class="language-yaml">servicecomb:
+  loadbalance:
+    myservice:
+      myschema:
+        myoperation:
+          strategy:
+            name: RoundRobin # Support RoundRobin,Random,WeightedResponse,SessionStickiness
 </code></pre>
 <p>每种策略还有一些专属配置项，也支持针对不同微服务进行配置。</p>
 <ul>
@@ -3102,12 +3090,12 @@
       successiveFailedTimes: 5 # 客户端失败次数，超过后会切换服务器
 </code></pre>
 <h2 id="_6">自定义</h2>
-<p>负载均衡模块提供的功能已经非常强大，能够通过配置支持大部分应用场景。同时它也提供了强大的扩展能力，包括DiscoveryFilter、ServerListFilterExt、ExtensionsFactory（扩展IRule，RetryHandler等）。loadbalance模块本身包含了每一个扩展的实现，这里不再详细描述如何扩展，只简单描述步骤。开发者可以自行下载ServiceComb源码进行参考。</p>
+<p>负载均衡模块提供的功能已经非常强大，能够通过配置支持大部分应用场景。同时它也提供了强大的扩展能力，包括DiscoveryFilter、ServerListFilterExt、ExtensionsFactory（扩展RuleExt等）。负载均衡模块本身包含了每一个扩展的实现，这里不再详细描述如何扩展，只简单描述步骤。开发者可以自行下载Java Chassis源码进行参考。</p>
 <ul>
 <li>DiscoveryFilter</li>
 <li>实现DiscoveryFilter接口</li>
 <li>
-<p>配置SPI：增加META-INF/services/org.apache.servicecomb.serviceregistry.discovery.DiscoveryFilter文件，内容为实现类的全名</p>
+<p>声明为Bean</p>
 </li>
 <li>
 <p>ServerListFilterExt</p>
@@ -3115,12 +3103,13 @@
 <li>实现ServerListFilterExt接口</li>
 <li>配置SPI：增加META-INF/services/org.apache.servicecomb.loadbalance.ServerListFilterExt文件，内容为实现类的全名</li>
 <li>
-<p>注意：这个开发说明适用于1.0.0及其以后的版本，早期的版本开发方式不同。</p>
+<p>注意：建议尽可能使用DiscoveryFilter，这个接口主要为了兼容。</p>
 </li>
 <li>
 <p>ExtensionsFactory</p>
 </li>
-<li>实现ExtensionsFactory，并使用@Component将其发布为一个spring bean。</li>
+<li>实现ExtensionsFactory接口</li>
+<li>声明为Bean</li>
 </ul>
 
 
