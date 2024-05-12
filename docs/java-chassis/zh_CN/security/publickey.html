@@ -12,7 +12,7 @@
         <link rel="prev" href="../edge/nginx.html">
       
       
-        <link rel="next" href="../security/tls.html">
+        <link rel="next" href="tls.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>公钥认证 - Java Chassis 3 开发指南</title>
+        <title>微服务间认证 - Java Chassis 3 开发指南</title>
       
     
     
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              公钥认证
+              微服务间认证
             
           </span>
         </div>
@@ -1062,7 +1062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="intruduction.html" class="md-nav__link">
+      <a href="../references-handlers/intruduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2112,7 +2112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="rule-governance.html" class="md-nav__link">
+      <a href="../references-handlers/rule-governance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2133,7 +2133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="governance-best-practise.html" class="md-nav__link">
+      <a href="../references-handlers/governance-best-practise.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2154,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="loadbalance.html" class="md-nav__link">
+      <a href="../references-handlers/loadbalance.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2175,7 +2175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ratelimit.html" class="md-nav__link">
+      <a href="../references-handlers/ratelimit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2196,7 +2196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="router.html" class="md-nav__link">
+      <a href="../references-handlers/router.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2217,7 +2217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fault-injection.html" class="md-nav__link">
+      <a href="../references-handlers/fault-injection.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2238,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="fail-retry.html" class="md-nav__link">
+      <a href="../references-handlers/fail-retry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2442,7 +2442,7 @@
           
   
   <span class="md-ellipsis">
-    公钥认证
+    微服务间认证
   </span>
   
 
@@ -2453,7 +2453,7 @@
         
   
   <span class="md-ellipsis">
-    公钥认证
+    微服务间认证
   </span>
   
 
@@ -2486,7 +2486,16 @@
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      配置黑白名单
+      启用微服务间认证功能
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      配置认证规则(黑白名单)
     </span>
   </a>
   
@@ -2508,32 +2517,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../security/tls.html" class="md-nav__link">
+      <a href="tls.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     使用TLS通信
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../security/shi-yong-rsa-ren-zheng.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    使用RSA认证
   </span>
   
 
@@ -2903,7 +2891,16 @@
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      配置黑白名单
+      启用微服务间认证功能
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      配置认证规则(黑白名单)
     </span>
   </a>
   
@@ -2924,16 +2921,36 @@
                   
 
 
-<h1 id="_1">公钥认证</h1>
+<h1 id="_1">微服务间认证</h1>
 <h2 id="_2">场景描述</h2>
-<p>公钥认证是ServiceComb提供的一种简单高效的微服务之间认证机制，它的安全性建立在微服务与服务中心之间的交互是可信的基础之上，即微服务和服务中心之间必须先启用认证机制。它的基本流程如下：</p>
+<p>微服务间认证是 <code>Java Chassis</code> 提供的一种简单高效的微服务之间认证机制，它的安全性建立在微服务与注册中心之间的交互是可信的基础之上，即微服务和注册中心之间必须先启用认证机制。它的基本流程如下：</p>
 <ol>
-<li>微服务启动的时候，生成秘钥对，并将公钥注册到服务中心。</li>
+<li>微服务启动的时候，生成秘钥对，并将公钥注册到注册中心。</li>
 <li>消费者访问提供者之前，使用自己的私钥对消息进行签名。</li>
-<li>提供者从服务中心获取消费者公钥，对签名的消息进行校验。</li>
+<li>提供者从注册中心获取消费者公钥，对签名的消息进行校验。</li>
 </ol>
-<h2 id="_3">配置黑白名单</h2>
-<p>基于公钥认证机制，ServiceComb提供了黑白名单功能。通过黑白名单，可以控制微服务允许其他哪些服务访问。目前支持通过配置服务属性来控制，配置项如下：</p>
+<h2 id="_3">启用微服务间认证功能</h2>
+<p>微服务间认证需要同时在消费者和提供者启用公钥认证（如果已经间接引入依赖，则无需添加）。 </p>
+<ul>
+<li>消费者配置</li>
+</ul>
+<p>在pom.xml中增加依赖：</p>
+<pre><code>&lt;dependency&gt; 
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
+  &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt; 
+&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>提供者配置</li>
+</ul>
+<p>在pom.xml中增加依赖：</p>
+<pre><code>&lt;dependency&gt; 
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt; 
+  &lt;artifactId&gt;handler-publickey-auth&lt;/artifactId&gt; 
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="_4">配置认证规则(黑白名单)</h2>
+<p>基于公钥认证机制， <code>Java Chassis</code> 提供了黑白名单功能。通过黑白名单，可以控制微服务允许其他哪些服务访问。目前支持通过配置服务属性来控制，配置项如下：</p>
 <pre><code>servicecomb:
   publicKey:
     accessControl:
@@ -2944,9 +2961,9 @@
         list01:
           category: property ## property, fixed value
           propertyName: serviceName ## property name
-# property value match expression. 
-# only supports prefix match and postfix match and exactly match. 
-# e.g. hacker*, *hacker, hacker
+          # property value match expression. 
+          # only supports prefix match and postfix match and exactly match. 
+          # e.g. hacker*, *hacker, hacker
           rule: hacker 
       white:
         list02:
@@ -2959,8 +2976,7 @@
 <p>判断当前请求是否需要鉴权逻辑：</p>
 <p>1、判断当前请求path是否能够匹配excludePathPatterns设置规则，如果匹配，则不需要鉴权；</p>
 <p>2、excludePathPatterns未满足条件，再判断includePathPatterns是否设置规则，如果未设置则所有请求均需要进行鉴权；如果有设置规则，则判断当前请求path是否能够匹配设置规则，如果匹配则需要鉴权，如果不匹配则不需要鉴权。</p>
-<p>微服务黑名单判断规则：不允许微服务名称为hacker的访问；白名单，允许微服务名称为cust前缀的服务访问。</p>
-<p>ServiceComb提供了<a href="https://github.com/apache/servicecomb-samples/tree/master/java-chassis-samples/trust-sample">trust-sample</a>来演示黑白名单功能。</p>
+<p>微服务黑名单判断规则：不允许微服务名称为hacker的访问；白名单，允许微服务名称为 <code>cust</code> 前缀的服务访问。</p>
 
 
 
