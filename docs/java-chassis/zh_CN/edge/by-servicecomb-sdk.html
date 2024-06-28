@@ -3167,7 +3167,7 @@ public class GatewayApplication {
 <p>注意：本节内容适用于3.1.2及其以上版本</p>
 </blockquote>
 <h2 id="_2">工作模式</h2>
-<p>Edge Service默认工作于高性能的reactive模式:</p>
+<p>Edge Service工作于高性能的reactive模式:</p>
 <p><img alt="" src="../assets/reactive.png" /></p>
 <p>此模式要求工作于Edge Service转发流程中的业务代码不能有任何的阻塞操作，包括不限于：</p>
 <ul>
@@ -3187,6 +3187,9 @@ public class GatewayApplication {
 <p>Edge Service的底层是基于netty的vertx，以上约束即是netty的reactive模式约束。</p>
 <h2 id="edge-service_2">扩展Edge Service的功能</h2>
 <p>Edge Service和普通的微服务一样，通过 <code>EdgeFilter</code> 来扩展其处理功能。 流量特征治理等功能在Edge Service也是开箱即用的。 通过扩展 <code>EdgeFilter</code>， 还可以实现认证鉴权等功能。 </p>
+<blockquote>
+<p>Edge Service的功能扩展务必满足上诉reactive工作模式要求，否则在高并发请求的条件下，非常容易造成服务不可用。对于不可避免的阻塞操作，可以放到独立的自定义线程池中执行，执行完毕再返回reactive工作模式。 </p>
+</blockquote>
 
 
 
