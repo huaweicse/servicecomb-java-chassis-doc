@@ -2099,7 +2099,7 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      按照数据中心信息进行路由转发
+      按照数据中心信息进行亲和路由
     </span>
   </a>
   
@@ -3319,7 +3319,7 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      按照数据中心信息进行路由转发
+      按照数据中心信息进行亲和路由
     </span>
   </a>
   
@@ -3379,22 +3379,33 @@
 <h1 id="_1">负载均衡</h1>
 <p>Java Chassis提供了强大的负载均衡能力, 在实例数非常多的场景，也能提供很好的性能。负载均衡的核心数据结构是 <code>DiscoveryTree</code>，<code>DiscoveryTree</code> 包含了一系列 <code>DiscoveryFilter</code>。  下图展示了负载均衡的处理过程：</p>
 <p><img alt="" src="discovery-tree.png" /></p>
-<h2 id="_2">按照数据中心信息进行路由转发</h2>
-<p>服务提供者和消费者都可以通过在microservice.yaml中声明自己的数据中心信息：</p>
+<h2 id="_2">按照数据中心信息进行亲和路由</h2>
+<p>服务提供者和消费者都可以通过配置项声明自己的数据中心信息：</p>
 <pre><code class="language-yaml">servicecomb:
   datacenter:
     name: mydatacenter
     region: my-Region
     availableZone: my-Zone
 </code></pre>
-<p>消费者通过比较自己的数据中心信息和提供者的信息，优先将请求转发到region和availableZone都相同的实例；如果不存在，则转发到region相同的实例；如果仍然不存在，则转发到其他实例。</p>
-<p>这里的region和availableZone是一般性的概念，用户可以自行确定其业务含义以便应用于资源隔离的场景中。可以参见<a href="../build-provider/definition/isolate-relationship.html">微服务实例之间的逻辑隔离关系</a>，了解更多其他实例发现相关的隔离机制。</p>
+<p>消费者通过比较自己的数据中心信息和提供者的信息，优先将请求转发到region和availableZone都相同的实例；如果不存在，则转发到region相同的实例；如果仍然不存在，则转发到其他实例。这种路由方式一般称为数据中心亲和路由。</p>
 <p>该规则默认启用，如果不需要使用，可以通过 <code>servicecomb.loadbalance.filter.zoneaware.enabled</code> 进行关闭。数据中心信息隔离功能在 <code>ZoneAwareDiscoveryFilter</code> 实现。</p>
+<pre><code class="language-yaml">servicecomb:
+  loadbalance:
+    filter:
+      zoneaware:
+        enabled: true
+        ratio: 30
+        ratioCeiling: 70
+</code></pre>
+<p><code>ratio</code> 和 <code>ratioCeiling</code> 分别控制分组实例个数的最小比例和最大比例。如果实例个数小于最小比例或者大于最大比例，那么该分组不启用数据中心亲和路由。它们通常用于防止亲和路由造成实例负载过高的问题。</p>
+<blockquote>
+<p>这两个配置项在3.2.1及其以后版本提供。</p>
+</blockquote>
 <h2 id="_3">根据实例属性进行路由转发</h2>
 <p>微服务可以指定实例的属性。实例属性可以在microservice.yaml中指定，也可以通过服务中心的API进行修改。</p>
-<pre><code class="language-yaml">instance_description:
-  properties:
-    tags:
+<pre><code class="language-yaml">servicecomb:
+  service:
+    properties:
       tag_key: tag_value
 </code></pre>
 <p>消费者可以指定消费具备某些属性的实例，不访问其他实例</p>
@@ -3403,18 +3414,18 @@
     provider:   # 这里表示配置对名为&quot;provider&quot;的服务生效，如果是跨应用调用，则还需要加上AppID，如&quot;AppIDOfProvider:provider&quot;
       transactionControl:
         options:
-          tags:
-            tag_key: expected_tag_value
+          tag_key: expected_tag_value
 </code></pre>
-<p>上面的配置表示只访问myservice所有实例中<code>tag_key</code>属性为<code>expected_tag_value</code>的实例。</p>
+<p>上面的配置表示只访问<code>provider</code>所有实例中<code>tag_key</code>属性为<code>expected_tag_value</code>的实例。</p>
 <p>该规则需要给每个服务单独配置，未配置表示不启用该规则，不支持对于所有服务的全局配置。</p>
 <p>该规则默认启用，如果不需要使用，可以通过<code>servicecomb.loadbalance.filter.instanceProperty.enabled</code>进行关闭。根据实例属性进行路由转发功能在<code>InstancePropertyDiscoveryFilter</code>实现。</p>
 <h2 id="_4">根据实例属性值的层级进行路由转发</h2>
 <p>实例属性优先级匹配可以看做是针对实例属性匹配的一种逻辑扩展。</p>
 <p>微服务的实例属性可以定义为具备优先级的格式，通过<code>.</code>符号进行分割。</p>
-<pre><code class="language-yaml">instance_description:
-  properties:
-    KEY: a.b.c
+<pre><code class="language-yaml">servicecomb:
+  service:
+    properties:
+      KEY: a.b.c
 </code></pre>
 <p>消费者需要指定用于优先级匹配的实例属性key，默认的key为<code>environment</code>。</p>
 <pre><code class="language-yaml">servicecomb:
