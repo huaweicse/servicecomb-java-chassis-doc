@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="zookeeper.html">
+      
+      
+        <link rel="next" href="local-registry.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>Diao yong kong zhi - Java Chassis 3 开发指南</title>
+        <title>使用Etcd - Java Chassis 3 开发指南</title>
       
     
     
@@ -57,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#etcd" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -89,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Diao yong kong zhi
+              使用Etcd
             
           </span>
         </div>
@@ -885,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="basics.html" class="md-nav__link">
+      <a href="../build-consumer/basics.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -906,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="using-resttemplate.html" class="md-nav__link">
+      <a href="../build-consumer/using-resttemplate.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -927,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="develop-consumer-using-rpc.html" class="md-nav__link">
+      <a href="../build-consumer/develop-consumer-using-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -948,7 +957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="invoker.html" class="md-nav__link">
+      <a href="../build-consumer/invoker.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1603,17 +1612,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
         
           
           <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
@@ -1627,7 +1638,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             多样化的服务注册与发现功能
@@ -1641,7 +1652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/introduction.html" class="md-nav__link">
+      <a href="introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1662,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/service-center.html" class="md-nav__link">
+      <a href="service-center.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1683,7 +1694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/nacos.html" class="md-nav__link">
+      <a href="nacos.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1704,7 +1715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/zookeeper.html" class="md-nav__link">
+      <a href="zookeeper.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1722,10 +1733,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../registry/etcd.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    使用Etcd
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="etcd.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1734,6 +1765,203 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      etcd使用认证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd使用认证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 启用 etcd 认证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 启用 etcd 认证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 启动 etcd 服务
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 添加用户
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 为用户分配角色
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 为用户分配角色">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 创建角色
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 分配权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 关联用户和角色
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 启用认证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 使用认证进行操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 其他用户与角色管理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 其他用户与角色管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#root" class="md-nav__link">
+    <span class="md-ellipsis">
+      添加用户 root
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootrole" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建角色 rootrole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootrole_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      分配读写权限给 rootrole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-rootrole" class="md-nav__link">
+    <span class="md-ellipsis">
+      将 root 用户关联到 rootrole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      启用认证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用认证操作
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1746,7 +1974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/local-registry.html" class="md-nav__link">
+      <a href="local-registry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1767,7 +1995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/distributed.html" class="md-nav__link">
+      <a href="distributed.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3400,6 +3628,193 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etcd_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      etcd使用认证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="etcd使用认证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 启用 etcd 认证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 启用 etcd 认证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 启动 etcd 服务
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 添加用户
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 为用户分配角色
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 为用户分配角色">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 创建角色
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 分配权限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 关联用户和角色
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 启用认证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 使用认证进行操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 其他用户与角色管理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 其他用户与角色管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#root" class="md-nav__link">
+    <span class="md-ellipsis">
+      添加用户 root
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootrole" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建角色 rootrole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootrole_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      分配读写权限给 rootrole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-rootrole" class="md-nav__link">
+    <span class="md-ellipsis">
+      将 root 用户关联到 rootrole
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      启用认证
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用认证操作
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -3414,9 +3829,121 @@
                   
 
 
-  <h1>Diao yong kong zhi</h1>
-
-
+<h1 id="etcd">使用 etcd</h1>
+<p>可以通过 <a href="https://etcd.io/docs/v3.5/install/">Etcd官网</a> 下载和安装 Etcd。</p>
+<p>使用Etcd需要确保下面的软件包引入：</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;registry-etcd&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li>表1-1 访问Etcd常用的配置项</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">是否必选</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">servicecomb.registry.etcd.enabled</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">是</td>
+<td style="text-align: left;">是否启用。</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.etcd.connectString</td>
+<td style="text-align: left;">http://127.0.0.1:2379</td>
+<td style="text-align: left;">是</td>
+<td style="text-align: left;">etcd的地址信息，可以配置多个，用逗号分隔。</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.etcd.authenticationInfo</td>
+<td style="text-align: left;">空</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">etcd认证，配置用户名密码信息，比如: user:password</td>
+</tr>
+<tr>
+<td style="text-align: left;">servicecomb.registry.etcd.enableSwaggerRegistration</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">否</td>
+<td style="text-align: left;">是否注册契约</td>
+</tr>
+</tbody>
+</table>
+<h2 id="etcd_1">etcd使用认证</h2>
+<p>在 etcd 中启用和配置认证需要进行以下步骤：</p>
+<h4 id="1-etcd">1. 启用 etcd 认证</h4>
+<p>首先需要确保 etcd 已经正常运行，然后按以下步骤启用认证功能：</p>
+<h5 id="11-etcd">1.1 启动 etcd 服务</h5>
+<p>确保 etcd 服务已启动，监听所需的端口（如 2379 和 2380）。可以使用 etcdctl 进行操作。</p>
+<hr />
+<h4 id="2">2. 添加用户</h4>
+<p>使用 etcdctl 添加一个用户并设置密码。例如，添加一个用户 root：</p>
+<p>etcdctl user add root</p>
+<p>执行上述命令后，会提示输入并确认密码。</p>
+<hr />
+<h4 id="3">3. 为用户分配角色</h4>
+<p>为用户分配一个角色，可以是已有角色，也可以新建一个。以下是新建角色并分配权限的示例：</p>
+<h5 id="31">3.1 创建角色</h5>
+<p>etcdctl role add rootrole</p>
+<h5 id="32">3.2 分配权限</h5>
+<p>为 rootrole 分配对所有键的读写权限：</p>
+<p>etcdctl role grant-permission rootrole readwrite /</p>
+<h5 id="33">3.3 关联用户和角色</h5>
+<p>将用户 root 与角色 rootrole 关联：</p>
+<p>etcdctl user grant-role root rootrole</p>
+<hr />
+<h4 id="4">4. 启用认证</h4>
+<p>完成用户和角色的配置后，启用 etcd 认证：</p>
+<p>etcdctl auth enable</p>
+<p>注意：启用认证后，所有的 etcd 操作都需要进行认证，包括通过 API 或客户端命令。</p>
+<hr />
+<h4 id="5">5. 使用认证进行操作</h4>
+<p>认证启用后，所有 etcdctl 命令都需要指定用户名和密码。例如：</p>
+<p>etcdctl --user=root:yourpassword put foo bar
+etcdctl --user=root:yourpassword get foo</p>
+<hr />
+<h4 id="6">6. 其他用户与角色管理</h4>
+<p>添加新用户</p>
+<p>etcdctl user add newuser</p>
+<p>创建新角色</p>
+<p>etcdctl role add newrole</p>
+<p>分配权限给新角色</p>
+<p>etcdctl role grant-permission newrole readwrite /example-prefix</p>
+<p>将用户与角色关联</p>
+<p>etcdctl user grant-role newuser newrole</p>
+<ol>
+<li>
+<p>注意事项</p>
+</li>
+<li>
+<p>安全性：为保证安全，避免在生产中使用默认用户 root，可以创建其他用户并分配特定权限。</p>
+</li>
+<li>TLS 加密：推荐在启用认证的同时启用 TLS，以加密数据传输。</li>
+<li>高可用场景：如果使用 etcd 集群，确保所有节点的认证配置保持一致。</li>
+</ol>
+<p>示例配置 (全流程)</p>
+<p>以下是完整操作流程的一个示例：</p>
+<h6 id="root">添加用户 root</h6>
+<p>etcdctl user add root</p>
+<h6 id="rootrole">创建角色 rootrole</h6>
+<p>etcdctl role add rootrole</p>
+<h6 id="rootrole_1">分配读写权限给 rootrole</h6>
+<p>etcdctl role grant-permission rootrole readwrite /</p>
+<h6 id="root-rootrole">将 root 用户关联到 rootrole</h6>
+<p>etcdctl user grant-role root rootrole</p>
+<h6 id="_1">启用认证</h6>
+<p>etcdctl auth enable</p>
+<h6 id="_2">使用认证操作</h6>
+<p>etcdctl --user=root:yourpassword put foo bar
+etcdctl --user=root:yourpassword get foo</p>
 
 
 
