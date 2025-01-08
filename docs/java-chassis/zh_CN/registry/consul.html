@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="multi-code.html">
+        <link rel="prev" href="distributed.html">
       
       
-        <link rel="next" href="listen-address-and-publish-address.html">
+        <link rel="next" href="../config/general-config.html">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>接口定义和数据类型 - Java Chassis 3 开发指南</title>
+        <title>使用Consul - Java Chassis 3 开发指南</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#consul" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              接口定义和数据类型
+              使用Consul
             
           </span>
         </div>
@@ -377,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="definition/service-definition.html" class="md-nav__link">
+      <a href="../build-provider/definition/service-definition.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -478,19 +478,17 @@
       
   
   
-    
   
   
-  
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -504,7 +502,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             开发服务提供者
@@ -518,7 +516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="basics.html" class="md-nav__link">
+      <a href="../build-provider/basics.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -539,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="http-mapping.html" class="md-nav__link">
+      <a href="../build-provider/http-mapping.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -560,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="jaxrs.html" class="md-nav__link">
+      <a href="../build-provider/jaxrs.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -581,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="springmvc.html" class="md-nav__link">
+      <a href="../build-provider/springmvc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -602,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="transparent-rpc.html" class="md-nav__link">
+      <a href="../build-provider/transparent-rpc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -623,7 +621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="swagger-annotation.html" class="md-nav__link">
+      <a href="../build-provider/swagger-annotation.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -644,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="use-interface.html" class="md-nav__link">
+      <a href="../build-provider/use-interface.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -665,7 +663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reactive.html" class="md-nav__link">
+      <a href="../build-provider/reactive.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -686,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="context-param.html" class="md-nav__link">
+      <a href="../build-provider/context-param.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -707,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="multi-code.html" class="md-nav__link">
+      <a href="../build-provider/multi-code.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -725,30 +723,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    接口定义和数据类型
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="interface-constraints.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../build-provider/interface-constraints.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -757,95 +735,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      接口定义的最佳实践和类型约束
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#code-first" class="md-nav__link">
-    <span class="md-ellipsis">
-      从 code first 角度理解夸平台数据类型的约束
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="从 code first 角度理解夸平台数据类型的约束">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      关于数据结构和接口变更
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      协议上的差异
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      泛型支持
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      其他常见问题
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rest" class="md-nav__link">
-    <span class="md-ellipsis">
-      REST 通信类型扩展
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -858,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="listen-address-and-publish-address.html" class="md-nav__link">
+      <a href="../build-provider/listen-address-and-publish-address.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -879,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="thread-pool.html" class="md-nav__link">
+      <a href="../build-provider/thread-pool.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -900,7 +789,7 @@
   
   
     <li class="md-nav__item">
-      <a href="event-listener.html" class="md-nav__link">
+      <a href="../build-provider/event-listener.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -921,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="parameter-validator.html" class="md-nav__link">
+      <a href="../build-provider/parameter-validator.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ipv6-configuration.html" class="md-nav__link">
+      <a href="../build-provider/ipv6-configuration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1723,17 +1612,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
         
           
           <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
@@ -1747,7 +1638,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             多样化的服务注册与发现功能
@@ -1761,7 +1652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/introduction.html" class="md-nav__link">
+      <a href="introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1782,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/service-center.html" class="md-nav__link">
+      <a href="service-center.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1803,7 +1694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/nacos.html" class="md-nav__link">
+      <a href="nacos.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1824,7 +1715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/zookeeper.html" class="md-nav__link">
+      <a href="zookeeper.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1845,7 +1736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/etcd.html" class="md-nav__link">
+      <a href="etcd.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1866,7 +1757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/local-registry.html" class="md-nav__link">
+      <a href="local-registry.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1887,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../registry/distributed.html" class="md-nav__link">
+      <a href="distributed.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1905,10 +1796,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../registry/consul.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    使用Consul
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="consul.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1917,6 +1828,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#consulacl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consul开启ACL
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2643,7 +2583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="access-log-configuration.html" class="md-nav__link">
+      <a href="../build-provider/access-log-configuration.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3572,69 +3512,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#consulacl" class="md-nav__link">
     <span class="md-ellipsis">
-      接口定义的最佳实践和类型约束
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#code-first" class="md-nav__link">
-    <span class="md-ellipsis">
-      从 code first 角度理解夸平台数据类型的约束
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="从 code first 角度理解夸平台数据类型的约束">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      关于数据结构和接口变更
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      协议上的差异
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      泛型支持
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      其他常见问题
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rest" class="md-nav__link">
-    <span class="md-ellipsis">
-      REST 通信类型扩展
+      Consul开启ACL
     </span>
   </a>
   
@@ -3655,534 +3535,96 @@
                   
 
 
-<h1 id="_1">接口定义和数据类型</h1>
-<p>不论采用 <code>JAX-RS</code>、<code>Spring MVC</code>，还是采用 <code>透明RPC</code> 开发，都涉及接口的返回值和参数。java-chassis 
-采用的是一种平台无关的数据序列化方式，当 <code>Transport</code> 为 <code>REST</code> 的时候，序列化方式为 <code>json</code>，当
-<code>Transport</code> 为 <code>Highway</code> 的时候，序列化方式为 <code>protobuffer</code>。 平台无关的数据序列化方式有个基本
-特征：作为 <code>Consumer</code>， 从序列化的数据中，无法获取任何和 <code>Consuemr</code> 开发语言有关的类型信息。 平台无关
-特性给接口定义的数据类型提供了更严格的要求，符合这些要求的接口定义，一方面运行更加高效，另外一方面更加方便的
-动态调整 <code>Transport</code>， 而无需对代码做出修改。 </p>
-<p>对于 <code>REST</code>， 虽然 <code>json</code> 本身不包含特定平台的类型信息，但是 <code>JAVA</code> 可以通过在反序列化的时候，指定目标
-类型，所以对于 <code>REST</code>， 可以更加灵活的使用不同的类型。 </p>
-<p>本章节主要介绍为了实现最大的夸平台和高性能，开发者定义接口的最佳实践。同时介绍在使用 <code>REST</code> 的情况下，如何
-更加灵活的支持不同的类型。 </p>
-<h2 id="_2">接口定义的最佳实践和类型约束</h2>
-<p>java-chassis 的所有接口定义，都可以生成符合 <code>OpenAPI</code> 的 <code>swagger</code> 接口描述，当使用 <code>Highway</code> 协议时，
-<code>swagger</code> 文件还会在内部被转换为等价的 <code>proto</code> 文件。 接口定义的最佳实践需要满足 <code>OpenAPI</code> 和 <code>proto</code>的
-数据类型要求。 </p>
+<h1 id="consul">使用 consul</h1>
+<p>可以通过 <a href="https://developer.hashicorp.com/consul/install?product_intent=consul">Consul官网</a> 下载和安装 Consul。</p>
+<p>使用Consul需要确保下面的软件包引入：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.apache.servicecomb&lt;/groupId&gt;
+  &lt;artifactId&gt;registry-consul&lt;/artifactId&gt;
+  &lt;version&gt;x.x.x&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
 <ul>
-<li><code>OpenAPI</code> 定义了如下一些基本类型：</li>
+<li>表1-1 访问consul常用的配置项</li>
 </ul>
-<p>下面列举一些常见的类型说明，详细参考 <a href="https://swagger.io/docs/specification/data-models/data-types/">OpenAPI文档</a>。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">type</th>
-<th style="text-align: left;">format</th>
-<th style="text-align: left;">java</th>
-<th style="text-align: left;">说明</th>
+<th style="text-align: left;">配置项</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">是否必选</th>
+<th style="text-align: left;">含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">-</td>
-<td style="text-align: left;">String</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">date</td>
-<td style="text-align: left;">java.util.Date, java.time.LocalDate</td>
-<td style="text-align: left;">推荐使用 LocalDate</td>
-</tr>
-<tr>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">date-time</td>
-<td style="text-align: left;">java.util.Date, java.time.LocalDateTime</td>
-<td style="text-align: left;">推荐使用 LocalDateTime</td>
-</tr>
-<tr>
-<td style="text-align: left;">number</td>
-<td style="text-align: left;">-</td>
-<td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">number</td>
-<td style="text-align: left;">float</td>
-<td style="text-align: left;">float</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">number</td>
-<td style="text-align: left;">double</td>
-<td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">integer</td>
-<td style="text-align: left;">-</td>
-<td style="text-align: left;">integer</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">integer</td>
-<td style="text-align: left;">int32</td>
-<td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">integer</td>
-<td style="text-align: left;">int64</td>
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">boolean</td>
-<td style="text-align: left;">-</td>
-<td style="text-align: left;">boolean</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">array</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ArrayList</td>
-<td style="text-align: left;">必须指定类型</td>
-</tr>
-<tr>
-<td style="text-align: left;">object</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">由上面的属性构成的对象类型。包括字典（HashMap），字典的 key 必须为 string</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">参数类型</th>
-<th style="text-align: left;">通信协议</th>
-<th style="text-align: left;">编码方式</th>
-<th style="text-align: left;">是否支持</th>
-<th style="text-align: left;">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Query</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">servicecomb.registry.consul.enabled</td>
+<td style="text-align: left;">true</td>
 <td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean, array</td>
+<td style="text-align: left;">是否启用consul</td>
 </tr>
 <tr>
-<td style="text-align: left;">Path</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">servicecomb.registry.consul.host</td>
+<td style="text-align: left;">localhost</td>
 <td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
+<td style="text-align: left;">consul的ip</td>
 </tr>
 <tr>
-<td style="text-align: left;">Header</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">servicecomb.registry.consul.port</td>
+<td style="text-align: left;">8500</td>
 <td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
+<td style="text-align: left;">是否注册契约</td>
 </tr>
 <tr>
-<td style="text-align: left;">Cookie</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">TEXT</td>
+<td style="text-align: left;">servicecomb.registry.consul.disdovery.enabled</td>
+<td style="text-align: left;">true</td>
 <td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
+<td style="text-align: left;">是否启用服务发现</td>
 </tr>
 <tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">application/x-www-form-urlencoded</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
-</tr>
-<tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">multipart/form-data</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
-</tr>
-<tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">application/json</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HTTP/HTTP2</td>
-<td style="text-align: left;">application/protobuf</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">Query</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">TEXT</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean, array</td>
-</tr>
-<tr>
-<td style="text-align: left;">Path</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">TEXT</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
-</tr>
-<tr>
-<td style="text-align: left;">Header</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">TEXT</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
-</tr>
-<tr>
-<td style="text-align: left;">Cookie</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">TEXT</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;">支持string, number, boolean</td>
-</tr>
-<tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">application/x-www-form-urlencoded</td>
+<td style="text-align: left;">servicecomb.registry.consul.disdovery.acl-token</td>
+<td style="text-align: left;">null</td>
 <td style="text-align: left;">否</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">当服务端启用ACL认证后,必须设置该值</td>
 </tr>
 <tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">multipart/form-data</td>
+<td style="text-align: left;">servicecomb.registry.consul.disdovery.tags</td>
+<td style="text-align: left;">空数组</td>
 <td style="text-align: left;">否</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">服务的标签</td>
 </tr>
 <tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">application/json</td>
+<td style="text-align: left;">servicecomb.registry.consul.disdovery.watch-seconds</td>
+<td style="text-align: left;">8</td>
 <td style="text-align: left;">是</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">Body</td>
-<td style="text-align: left;">HIGHWAY</td>
-<td style="text-align: left;">application/protobuf</td>
-<td style="text-align: left;">是</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">监听服务变化的时间频率,在1-9之间,单位秒</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><code>proto</code> 定义了如下一些基本类型：</li>
-</ul>
-<p>下面列举一些常见的类型说明，详细参考 <a href="https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types">Proto Buffer类型说明</a>。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">type</th>
-<th style="text-align: left;">java</th>
-<th style="text-align: left;">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">double</td>
-<td style="text-align: left;">double</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">float</td>
-<td style="text-align: left;">float</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">int32</td>
-<td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">int64</td>
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">uint32</td>
-<td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">uint64</td>
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">sint32</td>
-<td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">sint64</td>
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">fixed32</td>
-<td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">fixed64</td>
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">sfixed32</td>
-<td style="text-align: left;">int</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">sfixed64</td>
-<td style="text-align: left;">long</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">bool</td>
-<td style="text-align: left;">boolean</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">String</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">bytes</td>
-<td style="text-align: left;">ByteString</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr>
-<td style="text-align: left;">map</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">字典类型</td>
-</tr>
-</tbody>
-</table>
-<p><code>OpenAPI</code> 的 <code>date</code> format 在 <code>proto</code> 里面采用 <code>long</code> 表示。 java-chassis 的开发实践分为 <code>code first</code>
-和 <code>contrast first</code> 两种模式， 如果采用 <code>contrast first</code> 模式，先写 <code>swagger</code>， 然后通过 <code>swagger</code> 生成
-代码， 这种方式生成的数据类型都是符合最佳实践的。 如果采用 <code>code first</code>， 要考虑哪些类型是最佳实践，可以从思考定义
-的 JAVA 类型，对应的 <code>swagger</code> 是什么样子的。 当然这样思考，对于不熟悉 <code>swagger</code> 或者 <code>proto</code> 的开发者
-还是显得复杂。 下面从 <code>code first</code> 的角度描述使用哪些类型是最佳实践。 </p>
-<h2 id="code-first">从 <code>code first</code> 角度理解夸平台数据类型的约束</h2>
-<p>开发者不能在接口定义的时候使用如下类型：</p>
-<ul>
-<li>
-<p>抽象的数据结构: java.lang.Object, net.sf.json.JsonObject 等。 使用这些类型 java-chassis 启动
-  不会报错，功能也是正常的。但不是最佳实践，也会对性能有一定影响。 </p>
-</li>
-<li>
-<p>接口或者抽象类</p>
-<pre><code>```java
-public interface IPerson {//...}
-public abstract class AbstractPerson  {//...}
-```
-</code></pre>
-</li>
-<li>
-<p>上述类型的集合类型或者没有指定具体类型的集合，比如：<code>List&lt;IPerson&gt;, Map&lt;String, PersonHolder&lt;?&gt;&gt;, List, Map</code>等。 <code>List&lt;String&gt;, List&lt;Person&gt;</code> 这些具体类型是支持的。</p>
-</li>
-<li>
-<p>包含上述类型作为属性的类型</p>
-<pre><code>```java
-public class GroupOfPerson {IPerson master //...}
-```
-</code></pre>
-</li>
-</ul>
-<p>不用担心记不住这些约束，程序会在启动的时候检查不支持的类型，并给与错误提示。</p>
-<p>总之，数据结构需要能够使用简单的数据类型进行描述，一目了然就是最好的。这个在不同的语言，不同的协议里面都支持的很
-好，长期来看，可以大大减少开发者联调沟通和后期重构的成本。</p>
-<h3 id="_3">关于数据结构和接口变更</h3>
-<p>接口名称、参数类型、参数顺序、返回值类型变更都属于接口变更。ServiceComb启动的时候，会根据版本号检测接口变化，
-接口变化要求修改版本号。ServiceComb识别接口是否变化是通过代码生成的契约内容，有些不规范的接口定义可能导致在
-代码没有变化的情况下，生成的契约不同。比如：</p>
-<pre><code>public void get(Person p)
-class Person {
-  private String value;
-  private boolean isOk;
-  public String getName() {return value}
-  public boolean isOk() {return isOK}
-}
-</code></pre>
-<p>这个接口通过access method定义了"name"和"ok"两个属性，和实际的字段"value"和"isOk"不同。这种情况可能导
-致每次启动生成的契约不一样。需要将代码调整为符合JAVA Bean规范的定义。</p>
-<pre><code>public void get(Person p)
-class Person {
-  private String name;
-  private boolean ok;
-  public String getName() {return name}
-  public boolean isOk() {return ok}
-}
-</code></pre>
-<p>或者通过JSON标注，显示的指明字段顺序。比如：</p>
-<pre><code>public void get(Person p)
-@JsonPropertyOrder({&quot;name&quot;, &quot;ok&quot;})
-class Person {
-  private String value;
-  private boolean isOk;
-  public String getName() {return value}
-  public boolean isOk() {return isOK}
-}
-</code></pre>
-<p>考虑到接口变更的影响，建议在进行对外接口定义的时候，尽可能不要使用第三方软件提供的类作为接口参数，而是使
-用自定义的POJO类。一方面升级三方件的时候，可能感知不到接口变化；另外一方面，如果出现问题，无法通过
-修改第三方代码进行规避。比如：java.lang.Timestamp, org.joda.time.JodaTime等。</p>
-<h2 id="_4">协议上的差异</h2>
-<p>尽管 ServiceComb-Java-Chassis 实现了不同协议之间开发方式的透明，受限于底层协议的限制，不同的协议存在少量差异。</p>
-<ul>
-<li>
-<p>map，key只支持 string</p>
-</li>
-<li>
-<p>highway (protobuf限制)  </p>
+<h2 id="consulacl">Consul开启ACL</h2>
+<p>开启Consul ACL的步骤如下：</p>
 <ol>
-<li>不支持在网络上传递null，包括Collection、array中的元素，map的value  </li>
-<li>长度为0的数组、list，不会在网络上传递，接收端解码出来就是默认值</li>
+<li>在各个节点，新建目录，如:config</li>
+<li>在config目录下新建 XXX.hcl</li>
+<li>在XXX.hcl中添加acl的配置</li>
 </ol>
-</li>
-<li>
-<p>springmvc  </p>
-<ol>
-<li>不支持 Date 作为 path、query 参数。 因为springmvc 直接将 Date 做 toString 放在path、query中，与
-   swagger的标准不匹配。</li>
-</ol>
-</li>
-</ul>
-<h2 id="_5">泛型支持</h2>
-<p>ServiceComb-Java-Chassis 支持REST传输方式下的泛型请求参数和返回值。例如使用一个泛型的数据类型:</p>
-<pre><code class="language-java">public class Generic&lt;T&gt;{
-  public T value;
+<pre><code>acl = {
+  enabled = true
+  default_policy = &quot;deny&quot;
+  enable_token_persistence = true
 }
 </code></pre>
-<p>其中的泛型属性T可以是一个实体类、java.util.Date、枚举，也可以嵌套泛型数据类型。</p>
-<p>当用户使用隐式契约功能自动生成微服务契约时，需要在provider接口方法的返回消息中明确指定泛型类型，以保
-证 ServiceComb-Java-Chassis 生成的契约中包含足够的接口信息。例如，当provider端接口方法代码为</p>
-<pre><code class="language-java">public Holder&lt;List&lt;Person&gt;&gt; getHolderListArea() {
-  Holder&lt;List&lt;Person&gt;&gt; response = new Holder&lt;&gt;();
-  // ommited
-  return response;
-}
-</code></pre>
-<p>时， ServiceComb-Java-Chassis 能够识别出泛型返回对象的确切信息，以保证consumer端接收到的应答消息能够被
-正确地反序列化。而如果provider端接口方法的代码为</p>
-<pre><code class="language-java">public Holder getHolderListArea() {
-  Holder&lt;List&lt;Person&gt;&gt; response = new Holder&lt;&gt;();
-  // ommited
-  return response;
-}
-</code></pre>
-<p>时，由于契约中缺少List元素的类型信息，就会出现consumer端无法正确反序列化应答的情况，比如consumer接收
-到的参数类型可能会变为<code>Holder&lt;List&lt;Map&lt;String,String&gt;&gt;&gt;</code>，<code>Person</code>对象退化为Map类型。</p>
-<blockquote>
-<p><strong><em>说明:</em></strong> <br />
-虽然 ServiceComb-Java-Chassis 支持REST泛型参数，但是我们更加推荐用户使用实体类作为参数，以获得
-更加明确的接口语义。</p>
-</blockquote>
-<h2 id="_6">其他常见问题</h2>
 <ul>
-<li>使用 RestTemplate 传递 raw json</li>
+<li>参数说明</li>
 </ul>
-<p>假设服务端定义了接口</p>
-<pre><code>Person test(Person input)
+<pre><code>enaled=true 代表开启ACL
+default_policy=&quot;deny&quot; 默认为allow，如果需要自定义权限，需要将其设置为deny
+ebale_token_persistence=true 开启token持久化，将token持久化到磁盘上
 </code></pre>
-<p>用户期望使用RestTemplate自行拼接json字符串，然后进行传递:</p>
-<pre><code>      String personStr = JsonUtils.writeValueAsString(input);
-      result = template.postForObject(cseUrlPrefix + &quot;sayhello&quot;, personStr, Person.class);
-</code></pre>
-<p>ServiceComb不推荐开发者这样使用，里面的处理逻辑存在大量歧义。如果必须使用，需要满足几个约束：Person
-必须包含带String类型的构造函数；provider/consumer都必须存在这个Person类型。</p>
-<h2 id="rest"><code>REST</code> 通信类型扩展</h2>
-<p>默认情况下， 如果在接口中使用 <code>interface</code> 或者 <code>abstract class</code> 作为参数或者返回值， java-chassis
-启动会报告错误。 java-chassis 提供了类型扩展机制， 使得程序中可以支持各种类型。 </p>
-<p>***注意: *** 使用扩展机制的接口，只能够在 <code>REST</code> 通信模式下使用。</p>
-<p>以支持 <code>spring-data</code> 的 <code>Page</code> 接口作为返回值为例， 首先需要通过 <code>SPI</code> 的机制实现 <code>jackson</code> 的类型扩展：</p>
-<pre><code class="language-java">public class SpringDataModule extends SimpleModule implements SPIOrder {
-  private static final long serialVersionUID = 1L;
-
-  @JsonDeserialize(as = PageImpl.class)
-  @JsonPropertyOrder(alphabetic = true)
-  public static class PageMixin&lt;T&gt; {
-    @JsonCreator
-    public PageMixin(@JsonProperty(value = &quot;content&quot;) List&lt;T&gt; content,
-        @JsonProperty(&quot;pageable&quot;) Pageable pageable,
-        @JsonProperty(&quot;total&quot;) long total) {
-    }
-  }
-
-  @JsonDeserialize(as = PageRequest.class)
-  @JsonPropertyOrder(alphabetic = true)
-  public static class PageableMixin {
-    @JsonCreator
-    public PageableMixin(@JsonProperty(value = &quot;pageNumber&quot;) int page,
-        @JsonProperty(&quot;pageSize&quot;) int size, @JsonProperty(value = &quot;sort&quot;) Sort sort) {
-    }
-  }
-
-  @JsonPropertyOrder(alphabetic = true)
-  @JsonDeserialize(as = Sort.class)
-  public static class SortMixin {
-    // Notice:
-    // spring data model changed from version to version
-    // for the tested version, sort is not consistency in serialization and deserialization
-    @JsonCreator
-    public SortMixin(String... properties) {
-    }
-  }
-
-  public SpringDataModule() {
-    super(&quot;springData&quot;);
-
-    setMixInAnnotation(Page.class, PageMixin.class);
-    setMixInAnnotation(Pageable.class, PageableMixin.class);
-    setMixInAnnotation(Sort.class, SortMixin.class);
-
-    setMixInAnnotation(PageImpl.class, PageMixin.class);
-    setMixInAnnotation(PageRequest.class, PageableMixin.class);
-  }
-
-  @Override
-  public Object getTypeId() {
-    return getModuleName();
-  }
-
-  @Override
-  public int getOrder() {
-    return Short.MAX_VALUE;
-  }
-}
-</code></pre>
-<p>再实现 <code>SPI</code> 告诉 java-chassis 跳过类型检查：</p>
-<pre><code class="language-java">public class SpringDataConcreteTypeRegister implements ConcreteTypeRegister {
-  @Override
-  public void register(Set&lt;Type&gt; types) {
-    types.add(Page.class);
-    types.add(Pageable.class);
-  }
-}
-</code></pre>
-<p>经过这两个步骤（步骤中没描述开发SPI 需要增加 services 文件的内容）， 就能够实现任意类型的支持。 需要注意，这些扩展，必须
-同时包含在 <code>Consumer</code>, <code>Provider</code>, <code>edge service</code> 中，因为这种处理方式是依赖于平台类型的非夸平台特性。 </p>
-<p>上述例子的详细代码可以参考 java-chassis 的源代码， generator-spring-data 模块。 </p>
+<ol>
+<li>服务器端的启动命令添加 -config-data=config目录的绝对或相对路径 的启动参数</li>
+<li>详细步骤可以参考：https://www.cnblogs.com/yucongblog/p/17833634.html</li>
+</ol>
 
 
 
