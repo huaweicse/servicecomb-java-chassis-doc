@@ -17,39 +17,34 @@
 ## ---------------------------------------------------------------------------
 #bin/sh
 echo "start building servicecomb-docs."
+echo "Python version:"
+python --version
+
 CUR_DIR=$PWD
 echo "env CUR_DIR=$CUR_DIR"
 
 echo "Starting install software"
-npm install gitbook-cli -g
-sudo pip install mkdocs
+sudo pip install mkdocs==1.6.1
+sudo pip install mkdocs-material==9.5.31
+
 git clone https://github.com/apache/servicecomb-docs.git
-sudo pip install mkdocs-material
 
 echo "Starting compile docs"
-cd $CUR_DIR/servicecomb-docs
-gitbook build saga-reference docs/saga
-gitbook build service-center-reference docs/service-center
-
 cd $CUR_DIR/servicecomb-docs/java-chassis-reference/zh_CN
 mkdocs build -d ../../docs/java-chassis/zh_CN
-cd $CUR_DIR/servicecomb-docs/java-chassis-reference/en_US
-mkdocs build -d ../../docs/java-chassis/en_US
-cd $CUR_DIR
-
 
 echo "Starting coping docs"
+cd $CUR_DIR
 rm -r docs/java-chassis/zh_CN/*
-rm -r docs/java-chassis/en_US/*
-rm -r docs/saga/*
-rm -r docs/service-center/*
-cp -r servicecomb-docs/docs/ ./
+cp -r servicecomb-docs/docs/java-chassis/zh_CN ./docs/java-chassis/
 
 # add some debug infos
+echo "ls -l ./docs"
 ls -l ./docs
+echo "ls -l ./docs/java-chassis"
 ls -l ./docs/java-chassis
-ls -l ./docs/java-chassis/1.x
-ls -l ./docs/java-chassis/2.x
+echo "ls -l ./docs/java-chassis/zh_CN"
+ls -l ./docs/java-chassis/zh_CN
 
 echo "Starting preparing push docs"
 rm -r servicecomb-docs
