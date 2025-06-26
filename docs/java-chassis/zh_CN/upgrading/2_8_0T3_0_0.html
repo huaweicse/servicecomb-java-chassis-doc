@@ -4102,7 +4102,7 @@
 <h2 id="asyncresttemplate">不在支持 AsyncRestTemplate</h2>
 <p>Spring 6 删除了 AsyncRestTemplate 支持， Java Chassis 3.0.0 也删除了支持。 相关代码需要使用 <code>CompletableFuture</code> 异步代码替换。 </p>
 <h2 id="log4j-logback">移除 log4j , logback 的封装</h2>
-<p>Java Chassis 系统内部全部采用 <code>slf4j</code> 记录日志， 不再提供 log4j 的封装功能， 删除了 Log4jUtils 等类。 如果使用了 Log4jUtils 类来初始化日志， 可以参考 <a href="../../general-development/config-logs.md">配置日志</a> 来设置系统日志。 </p>
+<p>Java Chassis 系统内部全部采用 <code>slf4j</code> 记录日志， 不再提供 log4j 的封装功能， 删除了 Log4jUtils 等类。 如果使用了 Log4jUtils 类来初始化日志， 可以参考 <a href="../general-development/config-logs.html">配置日志</a> 来设置系统日志。 </p>
 <h2 id="bizkeeper">移除 bizkeeper 处理链</h2>
 <p>Java Chassis 早期版本基于 <code>Hystrix</code> 提供了基于方法的服务治理能力，由于社区已经停止 <code>Hystrix</code> 维护，并且 <code>bizkeeper</code> 设计上不能很好的满足场景的故障模式保护， 3.0.0 版本删除了这个模块。 服务治理可以使用流量特征治理来实现，过载保护的最佳处理方案是配置客户端隔离仓。</p>
 <h2 id="_5">移除实例隔离功能</h2>
