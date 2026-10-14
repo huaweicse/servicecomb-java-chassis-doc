@@ -3550,8 +3550,8 @@ ServiceComb框架支持在开发态进行微服务的快速调试，通过将env
 但是如果有consumer已经调用了重启之前的服务，那么consumer端也需要重启才能获取最新provider的schema；比如A-&gt;B，B接口进行了修改并且重启，那么A这个时候还是使用B之前的schema，调用可能会出错，以免出现未知异常，A也需要重启。  </p>
 <h3 id="_11">配置说明：</h3>
 <p>仅支持以下枚举值：development,testing,acceptance,production，不配置的情况下缺省值为""（空）。<br />
-<em> 方法1：通过JVM启动参数-Dservice_description.environment=development（枚举值）进行设置；<br />
-</em> 方法2：通过microservice.yaml配置文件来指定：</p>
+* 方法1：通过JVM启动参数-Dservice_description.environment=development（枚举值）进行设置；<br />
+* 方法2：通过microservice.yaml配置文件来指定：</p>
 <pre><code class="language-yaml">  service_description:
     environment: development
 </code></pre>
